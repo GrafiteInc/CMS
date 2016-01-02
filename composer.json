@@ -5,7 +5,7 @@
     "require": {
         "illuminate/support": "5.*",
         "devfactory/minify": "1.0.*",
-        "mlantz/laracogs": "^1.*"
+        "mlantz/laracogs": "^1.0"
     },
     "autoload": {},
     "minimum-stability": "dev",

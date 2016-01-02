@@ -25,7 +25,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="{{ url() }}">Home</a>
+                    <a class="navbar-brand" href="{{ url('') }}">Home</a>
                     <ul class="nav navbar-nav">
                         <li><a href="{{ url('blog') }}">Blog</a></li>
                         <li><a href="{{ url('page') }}">Pages</a></li>
@@ -49,7 +49,7 @@
     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
     <script type="text/javascript">
-        var _url = '{!! url() !!}';
+        var _url = '{!! url('') !!}';
     </script>
     @yield('javascript')
 </html>

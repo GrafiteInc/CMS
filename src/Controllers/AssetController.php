@@ -5,12 +5,12 @@ namespace Mlantz\Quarx\Controllers;
 use App;
 use Image;
 use Quarx;
-use Input;
 use Response;
 use Exception;
 use CryptoService;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Filesystem\Filesystem;
+use Illuminate\Support\Facades\Request;
 
 class AssetController extends QuarxController
 {
@@ -111,7 +111,7 @@ class AssetController extends QuarxController
         try {
             $path = CryptoService::decrypt($encPath);
 
-            if (Input::get('isModule') === 'true') {
+            if (Request::get('isModule') === 'true') {
                 $filePath = $path;
             } else {
                 $filePath = __DIR__.'/../Assets/'.$path;

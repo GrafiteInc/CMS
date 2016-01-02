@@ -1,0 +1,19 @@
+{
+    "name": "mlantz/quarx",
+    "description": "An CMS for Laravel Apps",
+    "license": "MIT",
+    "require": {
+        "illuminate/support": "5.*",
+        "easypost/easypost-php": "^2.1",
+        "devfactory/minify": "1.0.*",
+        "mlantz/laracogs": "^1.*"
+    },
+    "autoload": {},
+    "scripts": {
+        "post-install-cmd": [],
+        "post-update-cmd": [],
+        "post-create-project-cmd": []
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

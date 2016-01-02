@@ -1,0 +1,88 @@
+@extends('quarx::layouts.dashboard')
+
+@section('content')
+
+    <div class="modal fade" id="deleteModal" tabindex="-3" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="deleteModalLabel">Delete _camel_case_</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure want to delete this _camel_case_?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <a id="deleteBtn" type="button" class="btn btn-warning" href="#">Confirm Delete</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <a class="btn btn-primary pull-right" href="{!! route('quarx._lower_casePlural_.create') !!}">Add New</a>
+        <div class="pull-right raw-margin-right-24">
+            {!! Form::open(['url' => 'quarx/_lower_casePlural_/search']) !!}
+            <input class="form-control form-inline pull-right" name="search" placeholder="Search">
+            {!! Form::close() !!}
+        </div>
+        <h1 class="page-header">_camel_casePlural_</h1>
+    </div>
+
+    @include('_lower_casePlural_::_lower_casePlural_.breadcrumbs', ['location' => []])
+
+    @if (isset($term))
+    <div class="row">
+        <div class="well text-center">You searched for "{{ $term }}"</div>
+    </div>
+    @endif
+
+    <div class="row">
+        @if ($_lower_casePlural_->isEmpty())
+            <div class="well text-center">No _camel_casePlural_ found.</div>
+        @else
+            <table class="table table-striped">
+                <thead>
+                    <th>Name</th>
+                    <th width="50px">Action</th>
+                </thead>
+                <tbody>
+
+                @foreach($_lower_casePlural_ as $_lower_casePlural_)
+                    <tr>
+                        <td>
+                            <a href="{!! route('quarx._lower_casePlural_.edit', [CryptoService::encrypt($_lower_casePlural_->id)]) !!}">{!! $_lower_casePlural_->name !!}</a>
+                        </td>
+                        <td>
+                            <a href="{!! route('quarx._lower_casePlural_.edit', [CryptoService::encrypt($_lower_casePlural_->id)]) !!}"><i class="text-info glyphicon glyphicon-edit"></i></a>
+                            <a href="#" onclick="confirmDelete('{!! route('quarx._lower_casePlural_.delete', [CryptoService::encrypt($_lower_casePlural_->id)]) !!}')"><i class="text-danger glyphicon glyphicon-remove"></i></a>
+                        </td>
+                    </tr>
+                @endforeach
+                </tbody>
+            </table>
+        @endif
+    </div>
+
+    <div class="text-center">
+        {!! $pagination !!}
+    </div>
+
+@endsection
+
+@section('javascript')
+
+    @parent
+    <script type="text/javascript">
+
+        function confirmDelete (url) {
+            $('#deleteBtn').attr('href', url);
+            $('#deleteModal').modal('toggle');
+        }
+
+    </script>
+
+@endsection
+
+

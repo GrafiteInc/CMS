@@ -1,0 +1,238 @@
+/*
+|--------------------------------------------------------------------------
+| Gondolyn Custom Styles
+|--------------------------------------------------------------------------
+*/
+
+html, body {
+    width: 100%;
+    min-height: 100%;
+    overflow-x: hidden;
+}
+
+.text-centered {
+    text-align: center;
+}
+
+.gondolyn-footer {
+    height: 50px;
+    background-color: #333;
+}
+
+.gondolyn-footer p, .gondolyn-footer a {
+    line-height: 50px;
+    color: #FFF;
+}
+
+.gondolyn-footer a:hover {
+    color: #FFF;
+}
+
+.scrollable {
+    overflow: scroll;
+}
+
+.tab-link {
+    margin-top: 8px;
+}
+
+.header-input {
+    width: 240px !important;
+}
+
+/*
+|--------------------------------------------------------------------------
+| Notifications
+|--------------------------------------------------------------------------
+*/
+
+.gondolyn-notification {
+    width: 260px;
+    min-height: 30px;
+    position: fixed;
+    z-index: 10000;
+    right: -300px;
+    top: 24px;
+    display: none;
+    padding: 8px 8px 0 8px;
+}
+
+.gondolyn-notify {
+    float: left;
+    margin-left: 10px;
+    width: 200px;
+}
+
+.gondolyn-notify-closer {
+    width: 20px;
+    margin-left: 10px;
+    float: left;
+    line-height: 20px;
+}
+
+.gondolyn-notify-closer-icon {
+    cursor: pointer;
+}
+
+/*
+|--------------------------------------------------------------------------
+| Modal
+|--------------------------------------------------------------------------
+*/
+
+.gondolyn-modal {
+    width: 100%;
+    height: 100%;
+    opacity: 0.9;
+    background-color: rgba(0,0,0,0.9);
+    position: absolute;
+    z-index: 100000;
+    display: none;
+}
+
+/*
+|--------------------------------------------------------------------------
+| Login
+|--------------------------------------------------------------------------
+*/
+
+.gondolyn-login {
+    position: absolute;
+    z-index: 1000001;
+    top: 0;
+    left: 50%;
+    width: 612px;
+    margin: -260px -306px;
+    -webkit-transition: -webkit-transform 0.5s ease-in;
+    -moz-transition: -moz-transform 0.5s ease-in;
+    -o-transition: -o-transform 0.5s ease-in;
+    transition: transform 0.5s ease-in;
+}
+
+    .gondolyn-login a {
+        font-weight: bold;
+        color: #222 !important;
+    }
+
+.gondolyn-login-animate {
+    -webkit-transform: translate(0, 360px);
+    -moz-transform: translate(0, 360px);
+    -ms-transform: translate(0, 360px);
+    -o-transform: translate(0, 360px);
+    transform: translate(0, 360px);
+}
+.gondolyn-login-icon-wrapper {
+    display: inline-block;
+    width: 96px;
+    height: 96px;
+    border-radius: 96px;
+    border: 8px solid #FFF;
+    text-align: center;
+}
+
+    span.gondolyn-login-icon {
+        display: block;
+        line-height: 82px !important;
+        font-size: 36px;
+        color: #FFF;
+    }
+
+    span.gondolyn-login-text {
+        display: block;
+        margin-top: 8px;
+        font-size: 24px;
+        color: #FFF;
+    }
+
+        .gondolyn-login a:hover {
+            text-decoration: none;
+        }
+
+    .gondolyn-profile {
+        border-radius: 150px;
+        height: 300px;
+        width: 300px;
+        margin: 0 auto;
+        background-size: cover;
+        background-position: center center;
+    }
+
+/*
+|--------------------------------------------------------------------------
+| User Manager
+|--------------------------------------------------------------------------
+*/
+
+.user-row {
+    height: 48px;
+}
+
+    .user-row a, .user-row p{
+        line-height: 48px;
+        padding-left: 8px;
+    }
+
+.user-row:nth-child(odd) {
+    background: #EEE;
+}
+
+/*
+|--------------------------------------------------------------------------
+| Globals
+|--------------------------------------------------------------------------
+*/
+
+textarea {
+    resize: vertical;
+}
+
+.table-input {
+    border: none;
+    background-color: transparent;
+}
+
+    .table-input:focus {
+        outline: 0;
+        border-bottom: 1px solid #BBB;
+    }
+
+/*
+|--------------------------------------------------------------------------
+| Twitter Typeahead
+|--------------------------------------------------------------------------
+*/
+
+span.twitter-typeahead {
+    width: 100%;
+}
+
+.tt-menu {
+    background-color: #FFF;
+    border: 1px solid #DDD;
+}
+
+    .tt-suggestion {
+        min-width: 200px;
+        padding: 8px;
+    }
+        .tt-suggestion:hover {
+            cursor: pointer;
+            background-color: #222;
+            color: #FFF;
+        }
+
+        .tt-suggestion:focus {
+            text-decoration: underline;
+        }
+
+.navbar-header .back-link a, .navbar-header .back-link a:hover  {
+    color: #EEE;
+}
+
+.navbar-nav {
+    margin-right: 14px !important;
+}
+
+.list-row {
+    margin-top: 12px;
+}

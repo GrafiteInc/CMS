@@ -1,0 +1,24 @@
+@extends('quarx::layouts.dashboard')
+
+@section('content')
+
+    <div class="row">
+        <a class="btn btn-primary pull-right" href="{!! route('quarx._lower_casePlural_.create') !!}">Add New</a>
+        <h1 class="page-header">_camel_casePlural_</h1>
+    </div>
+
+    @include('_lower_casePlural_::_lower_casePlural_.breadcrumbs', ['location' => ['edit']])
+
+    {!! Form::model($_lower_case_, ['route' => ['quarx._lower_casePlural_.update', CryptoService::encrypt($_lower_case_->id)], 'method' => 'patch']) !!}
+
+        {!! FormMaker::fromObject($_lower_case_, FormMaker::getTableColumns('_lower_casePlural_')) !!}
+
+        <div class="form-group text-right">
+            {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
+        </div>
+
+    {!! Form::close() !!}
+
+@endsection
+
+

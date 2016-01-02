@@ -1,0 +1,13 @@
+.dropzone {
+    border: dotted;
+    margin-bottom: 24px;
+}
+
+.dz-message {
+    margin-top: 3em !important;
+}
+
+.bootstrap-tagsinput .tag {
+    font-size: 100% !important;
+    padding: 0.6em !important;
+}

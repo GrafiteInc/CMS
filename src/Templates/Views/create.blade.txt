@@ -1,0 +1,22 @@
+@extends('quarx::layouts.dashboard')
+
+@section('content')
+
+    <div class="row">
+        <a class="btn btn-primary pull-right" href="{!! route('quarx._lower_casePlural_.create') !!}">Add New</a>
+        <h1 class="page-header">_camel_casePlural_</h1>
+    </div>
+
+    @include('_lower_casePlural_::_lower_casePlural_.breadcrumbs', ['location' => ['create']])
+
+    {!! Form::open(['route' => 'quarx._lower_casePlural_.store', '_lower_casePlural_' => true, 'id' => 'fileDetailsForm']); !!}
+
+        {!! FormMaker::fromTable('_lower_casePlural_', Quarx::moduleConfig('_lower_casePlural_', '_lower_casePlural_')) !!}
+
+        <div class="form-group text-right">
+            {!! Form::submit('Save', ['class' => 'btn btn-primary', 'id' => 'saveFilesBtn']) !!}
+        </div>
+
+    {!! Form::close() !!}
+
+@endsection

@@ -1,0 +1,38 @@
+/*
+|--------------------------------------------------------------------------
+| Quarx Styles
+|--------------------------------------------------------------------------
+*/
+
+.image-listing {
+    max-height: 300px;
+}
+
+.panel {
+    height: 320px;
+}
+
+    .panel .thumbnail {
+        overflow: hidden;
+        text-align: center;
+        height: 200px;
+    }
+
+    .panel .img {
+        width: 100%;
+        height: 100%;
+        background-size: cover;
+        background-position: center center;
+    }
+
+.table-form {
+    width: calc(100% - 30px);
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+.bootstrap-tagsinput .tag {
+    font-size: 100% !important;
+    padding: 0.6em !important;
+}
+

@@ -7,7 +7,11 @@
         "devfactory/minify": "1.0.*",
         "mlantz/laracogs": "^0.5"
     },
-    "autoload": {},
+    "autoload": {
+        "psr-4": {
+            "Mlantz\\Quarx\\": "src/"
+        }
+    },
     "minimum-stability": "dev",
     "prefer-stable": true
 }

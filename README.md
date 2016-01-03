@@ -29,7 +29,9 @@ php artisan vendor:publish --provider="Mlantz\Quarx\QuarxProvider"
 * Then add to the Kernal:
 
 ```php
-'quarx' => \App\Http\Middleware\Quarx::class,
+'quarx' => [
+    \App\Http\Middleware\Quarx::class,
+],
 ```
 
 ## Quarx Access

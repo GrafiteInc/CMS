@@ -61,7 +61,7 @@ class Module extends Command
             '_path_tests_'               => $moduleDirectory.'/Tests',
             '_path_request_'             => $moduleDirectory.'/Requests',
             '_path_routes_'              => $moduleDirectory.'/routes.php',
-            'routes_prefix'              => "<?php \n\n Route::group(['namespace' => 'Quarx\Modules\\".ucfirst(str_plural($table))."\Controllers', 'prefix' => 'quarx', 'middleware' => 'quarx'], function () { \n\n",
+            'routes_prefix'              => "<?php \n\n Route::group(['namespace' => 'Quarx\Modules\\".ucfirst(str_plural($table))."\Controllers', 'prefix' => 'quarx', 'middleware' => ['web', 'quarx']], function () { \n\n",
             'routes_suffix'              => "\n\n });",
             '_namespace_services_'       => 'Quarx\Modules\\'.ucfirst(str_plural($table)).'\Services',
             '_namespace_facade_'         => 'Quarx\Modules\\'.ucfirst(str_plural($table)).'\Facades',

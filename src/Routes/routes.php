@@ -152,20 +152,6 @@
 
             Route::resource('files', 'FilesController');
 
-            /*
-            |--------------------------------------------------------------------------
-            | File Categories
-            |--------------------------------------------------------------------------
-            */
-
-            Route::post('files/categories/create', 'FileCategoriesController@create');
-            Route::post('files/categories/update', 'FileCategoriesController@update');
-            Route::get('files/categories/edit/{id}', 'FileCategoriesController@edit');
-            Route::get('files/categories/delete/{id}', 'FileCategoriesController@destroy');
-            Route::get('files/categories/options', 'FileCategoriesController@options');
-            Route::get('files/categories/listing', 'FileCategoriesController@listing');
-            Route::get('files/categories/all', 'FileCategoriesController@index');
-
         });
 
     });

@@ -5,6 +5,7 @@ namespace Mlantz\Quarx\Services;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\View;
 use Mlantz\Quarx\Facades\CryptoServiceFacade;
 use Mlantz\Quarx\Repositories\MenuRepository;
 use Mlantz\Quarx\Repositories\LinksRepository;
@@ -147,6 +148,35 @@ class QuarxService implements QuarxServiceInterface
     public static function widget($uuid)
     {
         return WidgetsRepository::getWidgetByUUID($uuid);
+    }
+
+    /**
+     * Add these views to the packages
+     *
+     * @param string $dir
+     */
+    public static function addToPackages($dir)
+    {
+        $packageViews = Config::get('quarx.package-menus');
+        $packageViews = array_push($packageViews, $dir);
+
+        return Config::set('quarx.package-menus', $packageViews);
+    }
+
+    /**
+     * Quarx package Menus
+     * @return string
+     */
+    public static function packageMenus()
+    {
+        $packageMenus = '';
+        $packageViews = Config::get('quarx.package-menus');
+
+        foreach ($packageViews as $view) {
+            $packageMenus .= View::make($view);
+        }
+
+        return $packageMenus;
     }
 
     /**

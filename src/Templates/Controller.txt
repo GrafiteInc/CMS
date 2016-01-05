@@ -63,10 +63,12 @@ class _camel_case_Controller extends Controller
         $result = $this->service->create($request->except('_token'));
 
         if ($result) {
-            return redirect('quarx/_lower_casePlural_/'.CryptoService::encrypt($result->id).'/edit')->with('message', 'Successfully created');
+            Quarx::notification('Successfully created', 'success');
+            return redirect('quarx/_lower_casePlural_/'.CryptoService::encrypt($result->id).'/edit');
         }
 
-        return redirect('quarx/_lower_casePlural_')->with('message', 'Failed to create');
+        Quarx::notification('Failed to create', 'warning');
+        return redirect('quarx/_lower_casePlural_');
     }
 
     /**
@@ -105,10 +107,12 @@ class _camel_case_Controller extends Controller
         $result = $this->service->update(CryptoService::decrypt($id), $request->except(['_token', '_method']));
 
         if ($result) {
-            return back()->with('message', 'Successfully updated');
+            Quarx::notification('Successfully updated', 'success');
+            return back();
         }
 
-        return back()->with('message', 'Failed to update');
+        Quarx::notification('Failed to update', 'warning');
+        return back();
     }
 
     /**
@@ -122,9 +126,11 @@ class _camel_case_Controller extends Controller
         $result = $this->service->destroy(CryptoService::decrypt($id));
 
         if ($result) {
-            return redirect('quarx/_lower_casePlural_')->with('message', 'Successfully deleted');
+            Quarx::notification('Successfully deleted', 'success');
+            return redirect('quarx/_lower_casePlural_');
         }
 
-        return redirect('quarx/_lower_casePlural_')->with('message', 'Failed to delete');
+        Quarx::notification('Failed to delete', 'warning');
+        return redirect('quarx/_lower_casePlural_');
     }
 }

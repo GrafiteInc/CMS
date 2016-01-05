@@ -8,5 +8,6 @@
     <li><a href="{!! url('quarx/widgets') !!}"><span class="fa fa-gear"></span> Widgets</a></li>
     <li><a href="{!! url('quarx/faqs') !!}"><span class="fa fa-question"></span> FAQs</a></li>
     {!! ModuleService::menus() !!}
+    {!! Quarx::packageMenus() !!}
     <li><a href="{!! url('quarx/help') !!}"><span class="fa fa-info-circle"></span> Help</a></li>
 </ul>

@@ -157,8 +157,17 @@ class QuarxService implements QuarxServiceInterface
      */
     public static function addToPackages($dir)
     {
+        $files = glob($dir.'/*');
+
         $packageViews = Config::get('quarx.package-menus');
-        $packageViews = array_push($packageViews, $dir);
+
+        if (is_null($packageViews)) {
+            $packageViews = [];
+        }
+
+        foreach ($files as $view) {
+            array_push($packageViews, $view);
+        }
 
         return Config::set('quarx.package-menus', $packageViews);
     }
@@ -170,13 +179,11 @@ class QuarxService implements QuarxServiceInterface
     public static function packageMenus()
     {
         $packageMenus = '';
-        $packageViews = Config::get('quarx.package-menus');
+        $packageViews = Config::get('quarx.package-menus', []);
 
         foreach ($packageViews as $view) {
-            $packageMenus .= View::make($view);
+            include($view);
         }
-
-        return $packageMenus;
     }
 
     /**

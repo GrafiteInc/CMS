@@ -38,7 +38,7 @@ RedactorPlugins.imagemanager = function()
                         var thumbtitle = '';
                         if (typeof val.title !== 'undefined') thumbtitle = val.title;
 
-                        var img = $('<img data-img-name="'+ val.location +'" src="' + val.location + '" rel="' + val.location + '" title="' + thumbtitle + '" style="width: 100px; height: 75px; cursor: pointer;" />');
+                        var img = $('<div class="raw25 pull-left thumbnail-box"><img class="img-responsive" data-img-name="'+ val.location +'" src="' + val.location + '" rel="' + val.location + '" title="' + thumbtitle + '" style="cursor: pointer;" /></div>');
                         $('#redactor-image-manager-box').append(img);
                         $(img).click($.proxy(this.imagemanager.insert, this));
 

@@ -90,6 +90,7 @@
         {!! Minify::javascript(Quarx::asset('packages/redactor/fontfamily.js', 'application/javascript')) !!}
         {!! Minify::javascript(Quarx::asset('packages/redactor/fontsize.js', 'application/javascript')) !!}
         {!! Minify::javascript(Quarx::asset('packages/redactor/imagemanager.js', 'application/javascript')) !!}
+        {!! Minify::javascript(Quarx::asset('packages/redactor/stockimagemanager.js', 'application/javascript')) !!}
         {!! Minify::javascript(Quarx::asset('packages/redactor/specialchar.js', 'application/javascript')) !!}
         {!! Minify::javascript(Quarx::asset('packages/redactor/table.js', 'application/javascript')) !!}
         {!! Minify::javascript(Quarx::asset('packages/redactor/video.js', 'application/javascript')) !!}

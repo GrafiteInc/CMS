@@ -7,6 +7,8 @@
 
         <title>Quarx</title>
 
+        <link rel="icon" type="image/ico" href="{!! Quarx::asset('images/favicon-cogs.ico', 'image/ico') !!}">
+
         <!-- Bootstrap -->
         {!! Minify::stylesheet('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css') !!}
         {!! Minify::stylesheet('https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css') !!}

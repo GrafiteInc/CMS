@@ -10,7 +10,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <span class="navbar-brand">Quarx</span>
+        <span class="navbar-brand"><span class="fa fa-cogs"></span> Quarx</span>
     </div>
     <div class="collapse navbar-collapse navbar-right" id="mainNavbar">
         <ul class="nav navbar-nav">

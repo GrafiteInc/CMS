@@ -15,7 +15,7 @@ var _redactorConfig = {
     deniedTags: ['script'],
     imageManagerJson: _url+'/quarx/api/images/list',
     fileManagerJson: _url+'/quarx/api/files/list',
-    stockImageManagerJson: 'http://freepixelstock.com/api/1.0/stock',
+    stockImageManagerJson: 'https://freepixelstock.com/api/1.0/stock',
     plugins: ['table','video','imagemanager', 'stockimagemanager', 'filemanager', 'specialchar'],
     buttons: ['html', 'formatting', 'bold', 'italic', 'underline', 'deleted', 'unorderedlist', 'orderedlist',
           'outdent', 'indent', 'image', 'filemanager', 'stockimagemanager', 'video', 'link', 'alignment', 'horizontalrule'], // + 'underline'

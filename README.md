@@ -26,12 +26,10 @@ php artisan quarx:migrate
 php artisan vendor:publish --provider="Mlantz\Quarx\QuarxProvider"
 ```
 
-* Then add to the Kernal:
+* Then add to the Kernel Route Middleware:
 
 ```php
-'quarx' => [
-    \App\Http\Middleware\Quarx::class,
-],
+'quarx' => \App\Http\Middleware\Quarx::class,
 ```
 
 ## Quarx Access

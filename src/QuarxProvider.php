@@ -35,10 +35,12 @@ class QuarxProvider extends ServiceProvider
         $this->app->register(\Mlantz\Quarx\Providers\QuarxRouteProvider::class);
         $this->app->register(\Mlantz\Quarx\Providers\QuarxModuleProvider::class);
         $this->app->register(\Devfactory\Minify\MinifyServiceProvider::class);
+        $this->app->register(\Spatie\LaravelAnalytics\LaravelAnalyticsServiceProvider::class);
 
         $loader = AliasLoader::getInstance();
 
         $loader->alias('Minify', \Devfactory\Minify\Facades\MinifyFacade::class);
+        $loader->alias('LaravelAnalytics', \Spatie\LaravelAnalytics\LaravelAnalyticsFacade::class);
 
         View::addNamespace('quarx', __DIR__.'/Views');
         View::addNamespace('quarx-frontend', base_path('resources/views/quarx'));

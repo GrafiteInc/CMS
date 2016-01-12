@@ -71,8 +71,7 @@ class WidgetsRepository
      */
     public static function getWidgetByUUID($uuid)
     {
-        $widget = Widgets::where('uuid', $uuid)->first();
-        return $widget->content;
+        return Widgets::where('uuid', $uuid)->first();
     }
 
     /**

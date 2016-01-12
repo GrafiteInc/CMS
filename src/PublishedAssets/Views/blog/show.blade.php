@@ -6,3 +6,7 @@
     {!! $blog->entry !!}
 
 @endsection
+
+@section('quarx')
+    {!! Quarx::editBtn('blog', $blog->id) !!}
+@endsection

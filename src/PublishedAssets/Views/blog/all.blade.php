@@ -21,3 +21,7 @@
     </div>
 
 @endsection
+
+@section('quarx')
+    {!! Quarx::editBtn('pages') !!}
+@endsection

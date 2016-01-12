@@ -45,13 +45,3 @@ function _setDashboard () {
         });
     }
 }
-
-/*
-|--------------------------------------------------------------------------
-| Charts
-|--------------------------------------------------------------------------
-*/
-
-var ctx = $("#dashboardChart").get(0).getContext("2d");
-var myNewChart = new Chart(ctx).Line(_chartData, options);
-

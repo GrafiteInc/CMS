@@ -35,7 +35,7 @@ class Quarx
      */
     public function handle($request, Closure $next)
     {
-        if ($this->auth->user()) {
+        if (Gate::allows('quarx', $this->auth->user())) {
             return $next($request);
         }
 

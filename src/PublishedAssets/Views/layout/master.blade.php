@@ -29,6 +29,7 @@
                     <ul class="nav navbar-nav">
                         <li><a href="{{ url('blog') }}">Blog</a></li>
                         <li><a href="{{ url('page') }}">Pages</a></li>
+                        <li><a href="{{ url('faqs') }}">FAQs</a></li>
                     </ul>
                 </div>
             </div>
@@ -41,6 +42,13 @@
          <div class="container-fluid navbar-fixed-bottom">
             <p>&copy; {{ date('Y') }}</p>
         </div>
+
+        @can('quarx', Auth::user())
+            <div class="container">
+                <a class="btn btn-default pull-left" href="{{ url('quarx/dashboard') }}">Quarx</a>
+                @yield('quarx')
+            </div>
+        @endcan
 
     </body>
 

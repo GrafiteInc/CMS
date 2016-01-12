@@ -9,3 +9,7 @@
     @endforeach
 
 @endsection
+
+@section('quarx')
+    {!! Quarx::editBtn('pages') !!}
+@endsection

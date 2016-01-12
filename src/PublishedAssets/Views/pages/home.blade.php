@@ -6,3 +6,7 @@
     {!! $page->entry !!}
 
 @endsection
+
+@section('quarx')
+    {!! Quarx::editBtn('pages', $page->id) !!}
+@endsection

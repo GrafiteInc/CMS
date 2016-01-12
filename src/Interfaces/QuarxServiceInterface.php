@@ -4,5 +4,5 @@ namespace Mlantz\Quarx\Interfaces;
 
 interface QuarxServiceInterface
 {
-    public static function convertToURL($string);
+    public function convertToURL($string);
 }

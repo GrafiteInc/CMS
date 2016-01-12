@@ -18,6 +18,6 @@ class DashboardController extends QuarxController
             $visitStats['pageViews'][] = $view['pageViews'];
         }
 
-        return view('quarx::dashboard.main', ['visitStats' => $visitStats]);
+        return view('quarx::dashboard.analytics', ['visitStats' => $visitStats]);
     }
 }

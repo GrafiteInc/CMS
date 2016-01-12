@@ -2,10 +2,13 @@
 
 namespace Mlantz\Quarx\Services;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\URL;
-use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Facades\Session;
 use Mlantz\Quarx\Facades\CryptoServiceFacade;
 use Mlantz\Quarx\Repositories\MenuRepository;
 use Mlantz\Quarx\Repositories\LinksRepository;
@@ -21,7 +24,7 @@ class QuarxService implements QuarxServiceInterface
      * @param  string $type   Notification type
      * @return void
      */
-    public static function notification($string, $type = null)
+    public function notification($string, $type = null)
     {
         if (is_null($type)) {
             $type = 'info';
@@ -38,7 +41,7 @@ class QuarxService implements QuarxServiceInterface
      * @param  string $contentType Asset type
      * @return string
      */
-    public static function asset($path, $contentType = 'null', $fullURL = true)
+    public function asset($path, $contentType = 'null', $fullURL = true)
     {
         if ( ! $fullURL) {
             return base_path(__DIR__.'/../Assets/'.$path);
@@ -55,7 +58,7 @@ class QuarxService implements QuarxServiceInterface
      * @param  string $contentType Content type
      * @return string
      */
-    public static function moduleAsset($module, $path, $contentType = 'null')
+    public function moduleAsset($module, $path, $contentType = 'null')
     {
         $path = base_path(Config::get('quarx.module-directory').'/'.ucfirst($module).'/Assets/'.$path);
         return url('quarx/asset/'.CryptoServiceFacade::encrypt($path).'/'.CryptoServiceFacade::encrypt($contentType).'/?isModule=true');
@@ -69,7 +72,7 @@ class QuarxService implements QuarxServiceInterface
      * @param  string $contentType Content type
      * @return string
      */
-    public static function moduleConfig($module, $path)
+    public function moduleConfig($module, $path)
     {
         $configArray = @include(base_path(Config::get('quarx.module-directory').'/'.ucfirst($module).'/config.php'));
         return QuarxService::assignArrayByPath($configArray, $path);
@@ -80,7 +83,7 @@ class QuarxService implements QuarxServiceInterface
      * @param  array $locations Locations array
      * @return string
      */
-    public static function breadcrumbs($locations)
+    public function breadcrumbs($locations)
     {
         $trail = '';
 
@@ -102,7 +105,7 @@ class QuarxService implements QuarxServiceInterface
      * @param  string $key Config key
      * @return mixed
      */
-    public static function config($key)
+    public function config($key)
     {
         $splitKey = explode('.', $key);
 
@@ -119,7 +122,7 @@ class QuarxService implements QuarxServiceInterface
      * @param  string $path  Array as path string
      * @return mixed
      */
-    public static function assignArrayByPath(&$arr, $path)
+    public function assignArrayByPath(&$arr, $path)
     {
         $keys = explode('.', $path);
 
@@ -135,7 +138,7 @@ class QuarxService implements QuarxServiceInterface
      * @param  string $string
      * @return string
      */
-    public static function convertToURL($string)
+    public function convertToURL($string)
     {
         return preg_replace('/[^A-Za-z0-9\-]/', '', str_replace(' ', '-', strtolower($string)));
     }
@@ -145,9 +148,15 @@ class QuarxService implements QuarxServiceInterface
      * @param  string $uuid
      * @return widget
      */
-    public static function widget($uuid)
+    public function widget($uuid)
     {
-        return WidgetsRepository::getWidgetByUUID($uuid);
+        $widget = WidgetsRepository::getWidgetByUUID($uuid);
+
+        if (Gate::allows('quarx', Auth::user())) {
+            $widget->content .= '<a href="'. url('quarx/widgets/'.CryptoServiceFacade::encrypt($widget->id).'/edit') .'" class="btn btn-default"><span class="fa fa-edit"></span> Edit</a>';
+        }
+
+        return $widget->content;
     }
 
     /**
@@ -155,7 +164,7 @@ class QuarxService implements QuarxServiceInterface
      *
      * @param string $dir
      */
-    public static function addToPackages($dir)
+    public function addToPackages($dir)
     {
         $files = glob($dir.'/*');
 
@@ -176,7 +185,7 @@ class QuarxService implements QuarxServiceInterface
      * Quarx package Menus
      * @return string
      */
-    public static function packageMenus()
+    public function packageMenus()
     {
         $packageMenus = '';
         $packageViews = Config::get('quarx.package-menus', []);
@@ -192,7 +201,7 @@ class QuarxService implements QuarxServiceInterface
      * @param  View $view
      * @return string
      */
-    public static function menu($uuid, $view = null)
+    public function menu($uuid, $view = null)
     {
         $pageRepo = new PagesRepository;
         $menu = MenuRepository::getMenuByUUID($uuid)->first();
@@ -217,6 +226,23 @@ class QuarxService implements QuarxServiceInterface
             $response = view($view, ['links' => $links, 'linksAsHtml' => $response]);
         }
 
+        if (Gate::allows('quarx', Auth::user())) {
+            $response .= '<a href="'. url('quarx/menus/'.CryptoServiceFacade::encrypt($menu->id).'/edit') .'" class="btn btn-default"><span class="fa fa-edit"></span> Edit</a>';
+        }
+
         return $response;
+    }
+
+    public function editBtn($type = null, $id = null)
+    {
+        if (Gate::allows('quarx', Auth::user())) {
+            if (! is_null($id)) {
+                return '<a href="'. url('quarx/'.$type.'/'.CryptoServiceFacade::encrypt($id).'/edit') .'" class="btn btn-default pull-right"><span class="fa fa-edit"></span> Edit</a>';
+            } else {
+                return '<a href="'. url('quarx/'.$type) .'" class="btn btn-default pull-right"><span class="fa fa-edit"></span> Edit</a>';
+            }
+        }
+
+        return '';
     }
 }

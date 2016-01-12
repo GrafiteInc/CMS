@@ -9,7 +9,12 @@
             <div class="well">
                 {!! $faq->answer !!}
             </div>
+            {!! Quarx::editBtn('faqs', $faq->id) !!}
         </div>
     @endforeach
 
+@endsection
+
+@section('quarx')
+    {!! Quarx::editBtn('faqs') !!}
 @endsection

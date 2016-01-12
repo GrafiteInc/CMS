@@ -7,6 +7,7 @@ use Mlantz\Quarx\Services\PageService;
 use Illuminate\Support\ServiceProvider;
 use Mlantz\Quarx\Services\CryptoService;
 use Mlantz\Quarx\Services\ModuleService;
+use Mlantz\Quarx\Services\QuarxService;
 
 class QuarxServiceProvider extends ServiceProvider
 {
@@ -19,7 +20,7 @@ class QuarxServiceProvider extends ServiceProvider
     {
         $loader = AliasLoader::getInstance();
 
-        $loader->alias("Quarx", \Mlantz\Quarx\Services\QuarxService::class);
+        $loader->alias("Quarx", \Mlantz\Quarx\Facades\QuarxServiceFacade::class);
         $loader->alias("PageService", \Mlantz\Quarx\Facades\PageServiceFacade::class);
         $loader->alias("CryptoService", \Mlantz\Quarx\Facades\CryptoServiceFacade::class);
         $loader->alias('ModuleService', \Mlantz\Quarx\Facades\ModuleServiceFacade::class);
@@ -33,6 +34,10 @@ class QuarxServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        $this->app->bind('QuarxService', function($app) {
+            return new QuarxService();
+        });
+
         $this->app->bind('PageService', function($app) {
             return new PageService();
         });

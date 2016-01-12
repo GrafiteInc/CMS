@@ -5,7 +5,7 @@ namespace Mlantz\Quarx\Repositories;
 use Mlantz\Quarx\Models\Pages;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Config;
-use Mlantz\Quarx\Services\QuarxService;
+use Quarx;
 
 class PagesRepository
 {
@@ -53,7 +53,7 @@ class PagesRepository
      */
     public function store($input)
     {
-        $input['url'] = QuarxService::convertToURL($input['url']);
+        $input['url'] = Quarx::convertToURL($input['url']);
         $input['is_published'] = (isset($input['is_published'])) ? (bool) $input['is_published'] : 0;
         return Pages::create($input);
     }
@@ -92,7 +92,7 @@ class PagesRepository
      */
     public function update($pages, $input)
     {
-        $input['url'] = QuarxService::convertToURL($input['url']);
+        $input['url'] = Quarx::convertToURL($input['url']);
         $input['is_published'] = (isset($input['is_published'])) ? (bool) $input['is_published'] : 0;
 
         $pages->fill($input);

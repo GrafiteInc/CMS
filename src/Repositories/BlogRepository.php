@@ -2,6 +2,7 @@
 
 namespace Mlantz\Quarx\Repositories;
 
+use Quarx;
 use Mlantz\Quarx\Models\Blog;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Schema;
@@ -75,6 +76,7 @@ class BlogRepository
      */
     public function store($input)
     {
+        $input['url'] = Quarx::convertToURL($input['url']);
         $input['is_published'] = (isset($input['is_published'])) ? (bool) $input['is_published'] : 0;
         return Blog::create($input);
     }
@@ -125,6 +127,7 @@ class BlogRepository
      */
     public function update($blog, $input)
     {
+        $input['url'] = Quarx::convertToURL($input['url']);
         $input['is_published'] = (isset($input['is_published'])) ? (bool) $input['is_published'] : 0;
         $blog->fill($input);
         $blog->save();

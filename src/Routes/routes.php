@@ -20,6 +20,7 @@
 
         Route::group(['prefix' => 'quarx/api'], function() {
             Route::get('images/list', 'ImagesController@apiList');
+            Route::post('images/store', 'ImagesController@apiStore');
         });
 
         /*

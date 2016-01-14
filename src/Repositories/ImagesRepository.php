@@ -3,6 +3,7 @@
 namespace Mlantz\Quarx\Repositories;
 
 use Config;
+use Quarx;
 use Mlantz\Quarx\Models\Images;
 use Mlantz\Quarx\Services\FileService;
 use Illuminate\Support\Facades\Schema;
@@ -64,6 +65,28 @@ class ImagesRepository
      *
      * @return Images
      */
+    public function apiStore($input)
+    {
+        $savedFile = FileService::saveClone($input['location'], 'images/');
+
+        if (! $savedFile) {
+            return false;
+        }
+
+        $input['is_published'] = 1;
+        $input['location'] = $savedFile['name'];
+        $input['original_name'] = $savedFile['original'];
+
+        return Images::create($input);
+    }
+
+    /**
+     * Stores Images into database
+     *
+     * @param array $input
+     *
+     * @return Images
+     */
     public function store($input)
     {
         $savedFile = FileService::saveFile($input['location'], 'images/');
@@ -107,7 +130,7 @@ class ImagesRepository
      */
     public function update($images, $input)
     {
-        if (isset($input['location'])) {
+        if (isset($input['location']) && ! empty($input['location'])) {
             $savedFile = FileService::saveFile($input['location'], 'images/');
 
             if (! $savedFile) {

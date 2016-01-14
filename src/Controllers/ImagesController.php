@@ -5,6 +5,7 @@ namespace Mlantz\Quarx\Controllers;
 use Quarx;
 use Config;
 use Storage;
+use FileService;
 use CryptoService;
 use App\Http\Requests;
 use Illuminate\Http\Request;
@@ -38,7 +39,7 @@ class ImagesController extends QuarxController
         $input = $request->all();
 
         $result = $this->imagesRepository->search($input);
-        $images = $result[0];
+        $images = $result[0]->sortByDesc('created_at');
         $attributes = $result[1];
         $pagination = $result[2];
 
@@ -86,22 +87,6 @@ class ImagesController extends QuarxController
         }
 
         return redirect(route('quarx.images.index'));
-    }
-
-    /**
-     * Display the specified Images.
-     *
-     * @return Response
-     */
-    public function apiList(Request $request)
-    {
-        if (Config::get('quarx.apiKey') != $request->header('quarx')) {
-            return QuarxResponseService::apiResponse('error', []);
-        }
-
-        $images = $this->imagesRepository->apiPrepared();
-
-        return QuarxResponseService::apiResponse('success', $images);
     }
 
     /**
@@ -180,6 +165,42 @@ class ImagesController extends QuarxController
         Quarx::notification('Image deleted successfully.', 'success');
 
         return redirect(route('quarx.images.index'));
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Api
+    |--------------------------------------------------------------------------
+    */
+
+    /**
+     * Display the specified Images.
+     *
+     * @return Response
+     */
+    public function apiList(Request $request)
+    {
+        if (Config::get('quarx.apiKey') != $request->header('quarx')) {
+            return QuarxResponseService::apiResponse('error', []);
+        }
+
+        $images = $this->imagesRepository->apiPrepared();
+
+        return QuarxResponseService::apiResponse('success', $images);
+    }
+
+    /**
+     * Store a newly created Images in storage.
+     *
+     * @param CreateImagesRequest $request
+     *
+     * @return Response
+     */
+    public function apiStore(Request $request)
+    {
+        $image = $this->imagesRepository->apiStore($request->all());
+        $image->location = FileService::fileAsPublicAsset($image->location);
+        return QuarxResponseService::apiResponse('success', $image);
     }
 
 }

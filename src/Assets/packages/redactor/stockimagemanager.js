@@ -96,9 +96,29 @@ RedactorPlugins.stockimagemanager = function()
         },
         insert: function(e)
         {
-            e.preventDefault();
-            this.insert.html('<img src="' + $(e.target).attr('data-url') + '" />', false);
-            this.modal.close();
+            var _imageURL = '';
+            var _this = this;
+            $.ajax({
+                type: 'POST',
+                dataType: "json",
+                cache: false,
+                headers: {
+                    ApiKey: 'tOJRcQXeCesSMprwbtU5'
+                },
+                data: {
+                    _token: _token,
+                    location: $(e.target).attr('data-url')
+                },
+                url: _url + '/quarx/api/images/store',
+                error: function(data){
+                    console.log(data)
+                },
+                success: $.proxy(function(data) {
+                    e.preventDefault();
+                    _this.insert.html('<img src="' + data.data.location + '" />', false);
+                    _this.modal.close();
+                }, this)
+            });
         }
     };
 };

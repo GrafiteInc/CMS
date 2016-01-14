@@ -61,7 +61,7 @@ class FileRepository
             $fileInput['size'] = $_file['size'];
             $fileInput['order'] = 0;
             $fileInput['user'] = Auth::id();
-            $fileInput['published'] = (isset($input['published'])) ? 1 : 0;
+            $fileInput['is_published'] = (isset($input['is_published'])) ? 1 : 0;
             $result = Files::create($fileInput);
         }
 
@@ -107,7 +107,7 @@ class FileRepository
             $fileInput = $input;
         }
 
-        $fileInput['published'] = (isset($input['published'])) ? 1 : 0;
+        $fileInput['is_published'] = (isset($input['is_published'])) ? 1 : 0;
 
         $files->fill($fileInput);
         $files->save();

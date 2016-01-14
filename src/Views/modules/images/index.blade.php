@@ -37,7 +37,11 @@
                     <div class="img" style="background-image: url('{!! FileService::filePreview($image->location) !!}')"></div>
                 </div>
                 <div class="well pull-down">
-                    <p>{!! $image->name !!}</p>
+                    @if (! empty($image->name))
+                    <p>{!! str_limit($image->name, 35) !!}</p>
+                    @else
+                    <p>{!! str_limit($image->original_name, 35) !!}</p>
+                    @endif
                     <p class="raw-margin-bottom-24">
                         @if ($image->is_published)
                             <span class="pull-left fa fa-check"></span>

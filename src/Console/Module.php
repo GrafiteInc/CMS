@@ -107,7 +107,7 @@ class Module extends Command
         if ($this->option('migration')) {
             Artisan::call('make:migration', [
                 'name' => 'create_'.str_plural(strtolower($table)).'_table',
-                '--path' => 'quarx/modules/'.ucfirst(str_plural($table)).'/Migrations',
+                '--path' => 'quarx/modules/'.ucfirst(str_plural($table)).'/Publishes/database/migrations',
                 '--table' => str_plural(strtolower($table)),
                 '--create' => true,
             ]);

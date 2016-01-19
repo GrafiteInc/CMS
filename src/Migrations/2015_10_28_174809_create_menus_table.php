@@ -13,15 +13,13 @@ class CreateMenusTable extends Migration
      */
     public function up()
     {
-        if (! Schema::hasTable('menus')) {
-            Schema::create('menus', function(Blueprint $table)
-            {
-                $table->increments('id');
-                $table->string('name');
-                $table->string('uuid');
-                $table->timestamps();
-            });
-        }
+        Schema::create('menus', function(Blueprint $table)
+        {
+            $table->increments('id');
+            $table->string('name');
+            $table->string('uuid');
+            $table->nullableTimestamps();
+        });
     }
 
     /**

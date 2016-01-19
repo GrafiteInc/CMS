@@ -12,7 +12,7 @@
 
         {!! Form::model($files, ['route' => ['quarx.files.update', CryptoService::encrypt($files->id)], 'files' => true, 'method' => 'patch']) !!}
 
-            {!! FormMaker::fromObject($files, Quarx::config('forms.file-edit')) !!}
+            {!! FormMaker::fromObject($files, Config::get('quarx.forms.file-edit')) !!}
 
             <div class="form-group text-right">
                 {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}

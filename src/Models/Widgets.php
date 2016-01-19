@@ -11,8 +11,6 @@ class Widgets extends Model
 
     public $primaryKey = "id";
 
-    public $timestamps = true;
-
     public $fillable = [
         "name",
         "uuid",

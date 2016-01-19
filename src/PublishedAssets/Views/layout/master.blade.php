@@ -30,6 +30,7 @@
                         <li><a href="{{ url('blog') }}">Blog</a></li>
                         <li><a href="{{ url('page') }}">Pages</a></li>
                         <li><a href="{{ url('faqs') }}">FAQs</a></li>
+                        <li><a href="{{ url('events') }}">Events</a></li>
                     </ul>
                 </div>
             </div>

@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFAQSTable extends Migration
+class CreateFaqsTable extends Migration
 {
 
     /**
@@ -13,16 +13,14 @@ class CreateFAQSTable extends Migration
      */
     public function up()
     {
-        if (! Schema::hasTable('faqs')) {
-            Schema::create('faqs', function(Blueprint $table)
-            {
-                $table->increments('id');
-                $table->string('question');
-                $table->text('answer');
-                $table->boolean('is_published')->default(0);
-                $table->timestamps();
-            });
-        };
+        Schema::create('faqs', function(Blueprint $table)
+        {
+            $table->increments('id');
+            $table->string('question');
+            $table->text('answer');
+            $table->boolean('is_published')->default(0);
+            $table->nullableTimestamps();
+        });
     }
 
     /**

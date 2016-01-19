@@ -13,18 +13,16 @@ class CreateBlogsTable extends Migration
      */
     public function up()
     {
-        if (! Schema::hasTable('blogs')) {
-            Schema::create('blogs', function(Blueprint $table)
-            {
-                $table->increments('id');
-                $table->string('title');
-                $table->text('entry')->nullable();
-                $table->string('tags')->nullable();
-                $table->integer('is_published')->default(0);
-                $table->string('url');
-                $table->timestamps();
-            });
-        };
+        Schema::create('blogs', function(Blueprint $table)
+        {
+            $table->increments('id');
+            $table->string('title');
+            $table->text('entry')->nullable();
+            $table->string('tags')->nullable();
+            $table->boolean('is_published')->default(0);
+            $table->string('url');
+            $table->nullableTimestamps();
+        });
     }
 
     /**

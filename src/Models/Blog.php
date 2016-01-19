@@ -11,8 +11,6 @@ class Blog extends Model
 
     public $primaryKey = "id";
 
-    public $timestamps = true;
-
     public $fillable = [
         "title",
         "tags",

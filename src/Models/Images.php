@@ -11,8 +11,6 @@ class Images extends Model
 
     public $primaryKey = "id";
 
-    public $timestamps = true;
-
     public $fillable = [
         "location",
         "name",

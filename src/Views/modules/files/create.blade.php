@@ -20,7 +20,7 @@
 
         {!! Form::open(['route' => 'quarx.files.store', 'files' => true, 'id' => 'fileDetailsForm']); !!}
 
-            {!! FormMaker::fromTable('files', Quarx::config('forms.files')) !!}
+            {!! FormMaker::fromTable('files', Config::get('quarx.forms.files')) !!}
 
             <div class="form-group text-right">
                 {!! Form::submit('Save', ['class' => 'btn btn-primary', 'id' => 'saveFilesBtn']) !!}

@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateImagesTable extends Migration
+class CreateEventsTable extends Migration
 {
 
     /**
@@ -13,14 +13,13 @@ class CreateImagesTable extends Migration
      */
     public function up()
     {
-        Schema::create('images', function(Blueprint $table)
+        Schema::create('events', function(Blueprint $table)
         {
             $table->increments('id');
-            $table->string('location');
-            $table->string('name')->nullable();
-            $table->string('original_name');
-            $table->string('alt_tag')->nullable();
-            $table->string('title_tag')->nullable();
+            $table->date('start_date');
+            $table->date('end_date');
+            $table->string('title');
+            $table->text('details');
             $table->boolean('is_published')->default(0);
             $table->nullableTimestamps();
         });
@@ -33,7 +32,7 @@ class CreateImagesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('images');
+        Schema::drop('events');
     }
 
 }

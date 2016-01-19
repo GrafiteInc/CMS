@@ -10,7 +10,7 @@
 
         {!! Form::open(['route' => 'quarx.images.store', 'files' => true]) !!}
 
-            {!! FormMaker::fromTable('images', Quarx::config('forms.images')) !!}
+            {!! FormMaker::fromTable('images', Config::get('quarx.forms.images')) !!}
 
             <div class="form-group text-right">
                 {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}

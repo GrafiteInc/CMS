@@ -5,16 +5,18 @@ namespace Mlantz\Quarx\Models;
 use Illuminate\Database\Eloquent\Model;
 
 
-class FAQ extends Model
+class Event extends Model
 {
 
-    public $table = "faqs";
+    public $table = "events";
 
     public $primaryKey = "id";
 
     public $fillable = [
-        "question",
-        "answer",
+        "start_date",
+        "end_date",
+        "title",
+        "details",
         "is_published"
     ];
 

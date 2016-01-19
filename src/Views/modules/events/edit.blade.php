@@ -3,14 +3,14 @@
 @section('content')
 
         <div class="row">
-            <h1 class="page-header">FAQS</h1>
+            <h1 class="page-header">Events</h1>
         </div>
 
-        @include('quarx::modules.faqs.breadcrumbs', ['location' => ['edit']])
+        @include('quarx::modules.events.breadcrumbs', ['location' => ['edit']])
 
-        {!! Form::model($faq, ['route' => ['quarx.faqs.update', CryptoService::encrypt($faq->id)], 'method' => 'patch']) !!}
+        {!! Form::model($event, ['route' => ['quarx.events.update', CryptoService::encrypt($event->id)], 'method' => 'patch']) !!}
 
-            {!! FormMaker::fromObject($faq, Config::get('quarx.forms.faqs')) !!}
+            {!! FormMaker::fromObject($event, Config::get('quarx.forms.event')) !!}
 
             <div class="form-group text-right">
                 <a href="{!! URL::previous() !!}" class="btn btn-default raw-left">Cancel</a>

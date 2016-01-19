@@ -10,7 +10,7 @@
 
     {!! Form::model($menu, ['route' => ['quarx.menus.update', CryptoService::encrypt($menu->id)], 'method' => 'patch']) !!}
 
-        {!! FormMaker::fromObject($menu, FormMaker::getTableColumns('menus')) !!}
+        {!! FormMaker::fromObject($menu, Config::get('quarx.forms.menu')) !!}
 
         <div class="form-group text-right">
             <a href="{!! URL::previous() !!}" class="btn btn-default raw-left">Cancel</a>

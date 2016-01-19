@@ -13,18 +13,16 @@ class CreateLinksTable extends Migration
      */
     public function up()
     {
-        if (! Schema::hasTable('links')) {
-            Schema::create('links', function(Blueprint $table)
-            {
-                $table->increments('id');
-                $table->string('name');
-                $table->boolean('external')->default(0);
-                $table->integer('page_id');
-                $table->integer('menu_id');
-                $table->string('external_url')->nullable();
-                $table->timestamps();
-            });
-        }
+        Schema::create('links', function(Blueprint $table)
+        {
+            $table->increments('id');
+            $table->string('name');
+            $table->boolean('external')->default(0);
+            $table->integer('page_id');
+            $table->integer('menu_id');
+            $table->string('external_url')->nullable();
+            $table->nullableTimestamps();
+        });
     }
 
     /**

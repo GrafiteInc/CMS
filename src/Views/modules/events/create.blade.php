@@ -1,15 +1,16 @@
 @extends('quarx::layouts.dashboard')
 
 @section('content')
+
     <div class="row">
-        <h1 class="page-header">Widgets</h1>
+        <h1 class="page-header">Events</h1>
     </div>
 
-    @include('quarx::modules.widgets.breadcrumbs', ['location' => ['edit']])
+    @include('quarx::modules.events.breadcrumbs', ['location' => ['create']])
 
-    {!! Form::model($widgets, ['route' => ['quarx.widgets.update', CryptoService::encrypt($widgets->id)], 'method' => 'patch']) !!}
+    {!! Form::open(['route' => 'quarx.events.store']) !!}
 
-        {!! FormMaker::fromObject($widgets, Config::get('quarx.forms.widget')) !!}
+        {!! FormMaker::fromTable('events', Config::get('quarx.forms.event')) !!}
 
         <div class="form-group text-right">
             <a href="{!! URL::previous() !!}" class="btn btn-default raw-left">Cancel</a>
@@ -17,4 +18,5 @@
         </div>
 
     {!! Form::close() !!}
+
 @endsection

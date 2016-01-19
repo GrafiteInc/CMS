@@ -18,6 +18,7 @@ class QuarxProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/PublishedAssets/views'         => base_path('resources/views/quarx'),
             __DIR__.'/PublishedAssets/Controllers'   => app_path('Http/Controllers/Quarx'),
+            __DIR__.'/Migrations'                    => base_path('database/migrations'),
             __DIR__.'/PublishedAssets/Middleware'    => app_path('Http/Middleware'),
             __DIR__.'/PublishedAssets/Routes'        => app_path('Http'),
             __DIR__.'/PublishedAssets/Config'        => base_path('config'),
@@ -54,7 +55,6 @@ class QuarxProvider extends ServiceProvider
         $this->commands([
             \Mlantz\Quarx\Console\Publish::class,
             \Mlantz\Quarx\Console\Module::class,
-            \Mlantz\Quarx\Console\Migrate::class,
         ]);
     }
 }

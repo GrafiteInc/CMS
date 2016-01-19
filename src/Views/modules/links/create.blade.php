@@ -10,7 +10,16 @@
 
     {!! Form::open(['route' => 'quarx.links.store']) !!}
 
-        {!! FormMaker::fromTable('links', Quarx::config('forms.link')) !!}
+        {!! FormMaker::fromTable('links', Config::get('quarx.forms.link')) !!}
+
+        <div class="form-group">
+            <label for="Page_id">Page</label>
+            <select class="form-control" id="Page_id" name="page_id">
+                @foreach (PageService::getPagesAsOptions() as $key => $value)
+                    <option value="{!! $value !!}">{!! $key !!}</option>
+                @endforeach
+            </select>
+        </div>
 
         <div class="form-group text-right">
             <a href="{!! URL::previous() !!}" class="btn btn-default raw-left">Cancel</a>

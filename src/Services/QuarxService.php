@@ -102,6 +102,7 @@ class QuarxService implements QuarxServiceInterface
 
     /**
      * Get Module Config
+     *
      * @param  string $key Config key
      * @return mixed
      */
@@ -109,7 +110,7 @@ class QuarxService implements QuarxServiceInterface
     {
         $splitKey = explode('.', $key);
 
-        $moduleConfig = include(__DIR__.'/../Config/'.$splitKey[0].'.php');
+        $moduleConfig = include(__DIR__.'/../PublishedAssets/Config/'.$splitKey[0].'.php');
 
         $strippedKey = preg_replace('/'.$splitKey[1].'./', '', preg_replace('/'.$splitKey[0].'./', '', $key, 1), 1);
 

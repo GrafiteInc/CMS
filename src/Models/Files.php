@@ -10,8 +10,6 @@ class Files extends Model
 
     public $primaryKey = "id";
 
-    public $timestamps = true;
-
     public $fillable = [
         "name",
         "location",

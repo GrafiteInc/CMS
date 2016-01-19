@@ -37,6 +37,7 @@ RedactorPlugins.stockimagemanager = function()
             if (typeof _page == 'undefined') {
                 _page = 1;
             };
+            $('#stockimagemanager-container').html('loading...');
             $.ajax({
                 dataType: "json",
                 cache: false,

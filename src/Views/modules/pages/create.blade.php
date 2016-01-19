@@ -10,7 +10,7 @@
 
         {!! Form::open(['route' => 'quarx.pages.store']) !!}
 
-            {!! FormMaker::fromTable('pages', Quarx::config('forms.page')) !!}
+            {!! FormMaker::fromTable('pages', Config::get('quarx.forms.page')) !!}
 
             <div class="form-group text-right">
                 <a href="{!! URL::previous() !!}" class="btn btn-default raw-left">Cancel</a>

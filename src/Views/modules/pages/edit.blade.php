@@ -10,7 +10,7 @@
 
         {!! Form::model($pages, ['route' => ['quarx.pages.update', CryptoService::encrypt($pages->id)], 'method' => 'patch']) !!}
 
-            {!! FormMaker::fromObject($pages, Quarx::config('forms.page')) !!}
+            {!! FormMaker::fromObject($pages, Config::get('quarx.forms.page')) !!}
 
             <div class="form-group text-right">
                 <a href="{!! URL::previous() !!}" class="btn btn-default raw-left">Cancel</a>

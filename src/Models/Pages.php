@@ -11,8 +11,6 @@ class Pages extends Model
 
     public $primaryKey = "id";
 
-    public $timestamps = true;
-
     public $fillable = [
         "title",
         "url",

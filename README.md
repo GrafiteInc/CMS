@@ -14,16 +14,16 @@ composer require mlantz/quarx
 Mlantz\Quarx\QuarxProvider::class
 ```
 
-* Then migrate:
-
-```bash
-php artisan quarx:migrate
-```
-
 * Then run the vendor publish:
 
 ```bash
 php artisan vendor:publish --provider="Mlantz\Quarx\QuarxProvider"
+```
+
+* Then migrate:
+
+```bash
+php artisan migrate
 ```
 
 * Then add to the Kernel Route Middleware:

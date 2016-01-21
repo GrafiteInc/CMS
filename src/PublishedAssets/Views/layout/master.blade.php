@@ -10,6 +10,7 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
         <style type="text/css">
             body { padding-top: 70px; padding-bottom: 70px; }
+            .menu a { display: block; float: left; margin: 24px; }
         </style>
         @yield('stylesheets')
     </head>
@@ -37,6 +38,10 @@
         </div>
 
         <div class="container">
+            <div class="menu row">
+                {!! Quarx::menu('main') !!}
+            </div>
+
             @yield('content')
         </div>
 

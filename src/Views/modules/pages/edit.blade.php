@@ -8,7 +8,7 @@
             @else
             <a class="btn btn-default pull-right raw-margin-left-8" href="{!! URL::to('quarx/preview/page/'.CryptoService::encrypt($page->id)) !!}">Preview</a>
             @endif
-            <a class="btn btn-default pull-right raw-margin-left-8" href="{!! URL::to('quarx/rollback/page/'.CryptoService::encrypt($page->id)) !!}">Rollback</a>
+            <a class="btn btn-warning pull-right raw-margin-left-8" href="{!! URL::to('quarx/rollback/page/'.CryptoService::encrypt($page->id)) !!}">Rollback</a>
             <h1 class="page-header">Pages</h1>
         </div>
 

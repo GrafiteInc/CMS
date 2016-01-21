@@ -63,5 +63,5 @@
 @endsection
 
 @section('quarx')
-    {!! Quarx::editBtn('pages') !!}
+    {!! Quarx::editBtn('events') !!}
 @endsection

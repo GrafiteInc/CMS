@@ -12,7 +12,7 @@
         {!! FormMaker::fromObject($widgets, Config::get('quarx.forms.widget')) !!}
 
         <div class="form-group text-right">
-            <a href="{!! URL::previous() !!}" class="btn btn-default raw-left">Cancel</a>
+            <a href="{!! URL::to('quarx/widgets') !!}" class="btn btn-default raw-left">Cancel</a>
             {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
         </div>
 

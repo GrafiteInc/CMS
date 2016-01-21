@@ -10,7 +10,7 @@
                         <h4 class="modal-title" id="deleteModalLabel">Delete Blog</h4>
                     </div>
                     <div class="modal-body">
-                        <p>Are you sure want to delete this Blog?</p>
+                        <p>Are you sure want to delete this blog?</p>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -37,7 +37,7 @@
             @endif
 
             @if($blogs->count() === 0)
-                <div class="well text-center">No Blogs found.</div>
+                <div class="well text-center">No blogs found.</div>
             @else
                 <table class="table table-striped">
                     <thead>

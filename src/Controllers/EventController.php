@@ -87,7 +87,7 @@ class EventController extends QuarxController
             Quarx::notification('Event could not be saved.', 'warning');
         }
 
-        return redirect(route('quarx.events.index'));
+        return redirect(route('quarx.events.edit', [CryptoService::encrypt($event->id)]));
     }
 
     /**

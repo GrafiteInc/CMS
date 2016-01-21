@@ -33,6 +33,7 @@ class QuarxProvider extends ServiceProvider
     public function register()
     {
         $this->app->register(\Mlantz\Quarx\Providers\QuarxServiceProvider::class);
+        $this->app->register(\Mlantz\Quarx\Providers\QuarxEventServiceProvider::class);
         $this->app->register(\Mlantz\Quarx\Providers\QuarxRouteProvider::class);
         $this->app->register(\Mlantz\Quarx\Providers\QuarxModuleProvider::class);
         $this->app->register(\Devfactory\Minify\MinifyServiceProvider::class);

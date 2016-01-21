@@ -10,7 +10,7 @@
                         <h4 class="modal-title" id="deleteModalLabel">Delete Pages</h4>
                     </div>
                     <div class="modal-body">
-                        <p>Are you sure want to delete this Pages?</p>
+                        <p>Are you sure want to delete this page?</p>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -35,7 +35,7 @@
             <div class="well text-center">Searched for "{!! $term !!}".</div>
             @endif
             @if($pages->count() === 0)
-                <div class="well text-center">No Pages found.</div>
+                <div class="well text-center">No pages found.</div>
             @else
                 <table class="table table-striped">
                     <thead>

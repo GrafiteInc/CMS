@@ -21,7 +21,7 @@
             {!! FormMaker::fromObject($images, Config::get('quarx.forms.images')) !!}
 
             <div class="form-group text-right">
-                <a class="btn btn-default pull-left" href="{!! URL::to(URL::previous()) !!}">Cancel</a>
+                <a href="{!! URL::to('quarx/images') !!}" class="btn btn-default raw-left">Cancel</a>
                 {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
             </div>
 

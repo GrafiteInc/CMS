@@ -86,7 +86,7 @@ class BlogController extends QuarxController
             Quarx::notification('Blog could not be saved.', 'warning');
         }
 
-        return redirect(route('quarx.blog.index'));
+        return redirect(route('quarx.blog.edit', [CryptoService::encrypt($blog->id)]));
     }
 
     /**

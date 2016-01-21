@@ -35,7 +35,7 @@
             <div class="well text-center">Searched for "{!! $term !!}".</div>
             @endif
             @if($menus->count() === 0)
-                <div class="well text-center">No Menus found.</div>
+                <div class="well text-center">No menus found.</div>
             @else
                 <table class="table table-striped">
                     <thead>

@@ -40,7 +40,7 @@
 
     <div class="row">
         @if ($_lower_casePlural_->isEmpty())
-            <div class="well text-center">No _camel_casePlural_ found.</div>
+            <div class="well text-center">No _lower_casePlural_ found.</div>
         @else
             <table class="table table-striped">
                 <thead>

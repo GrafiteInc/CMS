@@ -6,7 +6,7 @@
                 <h4 class="modal-title" id="deleteModalLabel">Delete File</h4>
             </div>
             <div class="modal-body">
-                <p>Are you sure want to delete this File?</p>
+                <p>Are you sure want to delete this file?</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

@@ -35,7 +35,7 @@
         <div class="well text-center">Searched for "{!! $term !!}".</div>
         @endif
         @if($widgets->count() === 0)
-            <div class="well text-center">No Widgets found.</div>
+            <div class="well text-center">No widgets found.</div>
         @else
             <table class="table table-striped">
                 <thead>

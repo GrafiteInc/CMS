@@ -6,14 +6,12 @@
 
         @include('quarx::modules.files.menu', ['createBtn' => true])
 
-        @include('quarx::modules.files.breadcrumbs', ['location' => []])
-
         <div class="row">
             @if (isset($term))
                 <div class="well text-center">Searched for "{!! $term !!}".</div>
             @endif
             @if ($files->count() === 0)
-                <div class="well text-center">No Files found.</div>
+                <div class="well text-center">No files found.</div>
             @else
                 <table class="table table-striped">
                     <thead>
@@ -29,7 +27,7 @@
                                 <a href="{!! FileService::fileAsDownload($file->name, $file->location) !!}"><span class="fa fa-download"></span></a>
                                 <a href="{!! route('quarx.files.edit', [CryptoService::encrypt($file->id)]) !!}">{!! $file->name !!}</a>
                             </td>
-                            <td class="raw-m-hide">@if ($file->published) <span class="fa fa-check"></span> @endif</td>
+                            <td class="raw-m-hide">@if ($file->is_published) <span class="fa fa-check"></span> @endif</td>
                             <td>
                                 <a href="{!! route('quarx.files.edit', [CryptoService::encrypt($file->id)]) !!}"><i class="text-info glyphicon glyphicon-edit"></i></a>
                                 <a href="#" onclick="confirmDelete('{!! route('quarx.files.delete', [CryptoService::encrypt($file->id)]) !!}')"><i class="text-danger glyphicon glyphicon-remove"></i></a>

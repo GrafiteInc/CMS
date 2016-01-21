@@ -13,7 +13,7 @@
             {!! FormMaker::fromTable('pages', Config::get('quarx.forms.page')) !!}
 
             <div class="form-group text-right">
-                <a href="{!! URL::previous() !!}" class="btn btn-default raw-left">Cancel</a>
+                <a href="{!! URL::to('quarx/pages') !!}" class="btn btn-default raw-left">Cancel</a>
                 {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
             </div>
 

@@ -2,10 +2,9 @@
 
 namespace Mlantz\Quarx\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Mlantz\Quarx\Models\QuarxModel;
 
-
-class Event extends Model
+class Event extends QuarxModel
 {
 
     public $table = "events";

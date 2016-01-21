@@ -14,6 +14,7 @@
         {!! FormMaker::fromTable('_lower_casePlural_', Quarx::moduleConfig('_lower_casePlural_', '_lower_casePlural_')) !!}
 
         <div class="form-group text-right">
+            <a href="{!! URL::to('quarx/_lower_casePlural_') !!}" class="btn btn-default raw-left">Cancel</a>
             {!! Form::submit('Save', ['class' => 'btn btn-primary', 'id' => 'saveFilesBtn']) !!}
         </div>
 

@@ -17,7 +17,7 @@ class Files extends Model
         "mime",
         "size",
         "details",
-        "published",
+        "is_published",
         "user",
         "order"
     ];

@@ -86,7 +86,7 @@ class ImagesController extends QuarxController
             Quarx::notification($e->getMessage() ?: 'Image could not be saved.', 'danger');
         }
 
-        return redirect(route('quarx.images.index'));
+        return redirect(route('quarx.images.edit', [CryptoService::encrypt($images->id)]));
     }
 
     /**

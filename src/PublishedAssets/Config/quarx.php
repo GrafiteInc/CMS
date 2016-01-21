@@ -32,6 +32,7 @@ return [
         'pages',
         'widgets',
         'events',
+        'faqs',
     ],
 
     'forms' => [
@@ -151,8 +152,9 @@ return [
         ],
 
         'files' => [
-            'published'      => [
+            'is_published'      => [
                 'type' => 'checkbox',
+                'value' => 1
             ],
             'tags'       => [
                 'custom' => 'data-role="tagsinput"'
@@ -164,8 +166,9 @@ return [
 
         'file-edit' => [
             'name'       => [],
-            'published'      => [
+            'is_published'      => [
                 'type' => 'checkbox',
+                'value' => 1
             ],
             'tags'       => [
                 'custom' => 'data-role="tagsinput"'

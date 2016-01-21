@@ -14,6 +14,7 @@
         {!! FormMaker::fromObject($_lower_case_, FormMaker::getTableColumns('_lower_casePlural_')) !!}
 
         <div class="form-group text-right">
+            <a href="{!! URL::to('quarx/_lower_casePlural_') !!}" class="btn btn-default raw-left">Cancel</a>
             {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
         </div>
 

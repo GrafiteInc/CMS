@@ -35,7 +35,7 @@
         <div class="well text-center">Searched for "{!! $term !!}".</div>
         @endif
         @if($events->count() === 0)
-            <div class="well text-center">No Events found.</div>
+            <div class="well text-center">No events found.</div>
         @else
             <table class="table table-striped">
                 <thead>

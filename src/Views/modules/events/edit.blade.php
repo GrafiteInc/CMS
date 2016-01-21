@@ -3,6 +3,12 @@
 @section('content')
 
         <div class="row">
+            @if ($event->is_published)
+            <a class="btn btn-default pull-right raw-margin-left-8" href="{!! URL::to('events/event/'.$event->id) !!}">Live</a>
+            @else
+            <a class="btn btn-default pull-right raw-margin-left-8" href="{!! URL::to('quarx/preview/event/'.CryptoService::encrypt($event->id)) !!}">Preview</a>
+            @endif
+            <a class="btn btn-default pull-right raw-margin-left-8" href="{!! URL::to('quarx/rollback/event/'.CryptoService::encrypt($event->id)) !!}">Rollback</a>
             <h1 class="page-header">Events</h1>
         </div>
 

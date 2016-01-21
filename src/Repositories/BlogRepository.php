@@ -4,6 +4,7 @@ namespace Mlantz\Quarx\Repositories;
 
 use Quarx;
 use Mlantz\Quarx\Models\Blog;
+use Mlantz\Quarx\Models\Archive;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Schema;
 

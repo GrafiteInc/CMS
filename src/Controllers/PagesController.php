@@ -88,7 +88,7 @@ class PagesController extends QuarxController
             Quarx::notification('Page could not be saved.', 'warning');
         }
 
-        return redirect(route('quarx.pages.index'));
+        return redirect(route('quarx.pages.edit', [CryptoService::encrypt($pages->id)]));
     }
 
     /**
@@ -100,14 +100,14 @@ class PagesController extends QuarxController
     public function edit($id)
     {
         $id = CryptoService::decrypt($id);
-        $pages = $this->pagesRepository->findPagesById($id);
+        $page = $this->pagesRepository->findPagesById($id);
 
-        if (empty($pages)) {
+        if (empty($page)) {
             Quarx::notification('Page not found', 'warning');
             return redirect(route('quarx.pages.index'));
         }
 
-        return view('quarx::modules.pages.edit')->with('pages', $pages);
+        return view('quarx::modules.pages.edit')->with('page', $page);
     }
 
     /**

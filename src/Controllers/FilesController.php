@@ -96,7 +96,7 @@ class FilesController extends QuarxController
 
         Quarx::notification('File saved successfully.', 'success');
 
-        return redirect(route('quarx.files.index'));
+        return redirect(route('quarx.files.edit', [CryptoService::encrypt($files->id)]));
     }
 
     /**

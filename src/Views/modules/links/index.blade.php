@@ -18,7 +18,7 @@
         </div>
 
         @if($links->count() === 0)
-            <div class="well text-center">No Links found.</div>
+            <div class="well text-center">No links found.</div>
         @else
             <table class="table table-striped">
                 <thead>

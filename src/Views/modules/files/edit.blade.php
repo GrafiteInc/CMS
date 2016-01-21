@@ -15,6 +15,7 @@
             {!! FormMaker::fromObject($files, Config::get('quarx.forms.file-edit')) !!}
 
             <div class="form-group text-right">
+                <a href="{!! URL::to('quarx/files') !!}" class="btn btn-default raw-left">Cancel</a>
                 {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
             </div>
 

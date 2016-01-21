@@ -87,7 +87,7 @@ class FAQController extends QuarxController
             Quarx::notification('FAQ could not be saved.', 'warning');
         }
 
-        return redirect(route('quarx.faqs.index'));
+        return redirect(route('quarx.faqs.edit', [CryptoService::encrypt($faq->id)]));
     }
 
     /**

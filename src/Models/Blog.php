@@ -2,9 +2,9 @@
 
 namespace Mlantz\Quarx\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Mlantz\Quarx\Models\QuarxModel;
 
-class Blog extends Model
+class Blog extends QuarxModel
 {
 
     public $table = "blogs";

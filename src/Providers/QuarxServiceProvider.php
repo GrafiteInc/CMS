@@ -11,6 +11,22 @@ use Mlantz\Quarx\Services\QuarxService;
 
 class QuarxServiceProvider extends ServiceProvider
 {
+
+     /**
+     * The event listener mappings for the application.
+     *
+     * @var array
+     */
+    protected $listen = [
+        'eloquent.saving: Mlantz\Quarx\Models\Blog' => [
+            'Mlantz\Quarx\Models\Blog@beforeSaved',
+        ],
+
+        'eloquent.saved: Mlantz\Quarx\Models\Blog' => [
+            'Mlantz\Quarx\Models\Blog@afterSaved',
+        ],
+    ];
+
     /**
      * Alias the services in the boot
      *

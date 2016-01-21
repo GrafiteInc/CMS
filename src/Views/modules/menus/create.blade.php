@@ -12,7 +12,7 @@
         {!! FormMaker::fromTable('menus', Config::get('quarx.forms.menu')) !!}
 
         <div class="form-group text-right">
-            <a href="{!! URL::previous() !!}" class="btn btn-default raw-left">Cancel</a>
+            <a href="{!! URL::to('quarx/menus') !!}" class="btn btn-default raw-left">Cancel</a>
             {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
         </div>
 

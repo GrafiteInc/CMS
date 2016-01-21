@@ -84,7 +84,7 @@ class WidgetsController extends QuarxController
 
         Quarx::notification('Widgets saved successfully.', 'success');
 
-        return redirect(route('quarx.widgets.index'));
+        return redirect(route('quarx.widgets.edit', [CryptoService::encrypt($widgets->id)]));
     }
 
     /**

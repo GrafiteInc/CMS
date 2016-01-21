@@ -27,7 +27,7 @@
 
     <div class="row">
         @if($images->isEmpty())
-            <div class="well text-center">No Images found.</div>
+            <div class="well text-center">No images found.</div>
         @else
 
             @foreach($images as $image)

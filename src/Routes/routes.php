@@ -38,6 +38,15 @@
 
             /*
             |--------------------------------------------------------------------------
+            | Common Features
+            |--------------------------------------------------------------------------
+            */
+
+            Route::get('preview/{entity}/{entityId}', 'QuarxFeatureController@preview');
+            Route::get('rollback/{entity}/{entityId}', 'QuarxFeatureController@rollback');
+
+            /*
+            |--------------------------------------------------------------------------
             | Menus
             |--------------------------------------------------------------------------
             */
@@ -86,6 +95,7 @@
 
             Route::resource('blog', 'BlogController');
             Route::post('blog/search', 'BlogController@search');
+            Route::patch('blog/publish/{id}', 'BlogController@publish');
 
             Route::get('blog/{id}/delete', [
                 'as' => 'quarx.blog.delete',

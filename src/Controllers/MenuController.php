@@ -93,7 +93,7 @@ class MenuController extends QuarxController
             Quarx::notification($e->getMessage() ?: 'Menu could not be saved.', 'danger');
         }
 
-        return redirect(route('quarx.menus.index'));
+        return redirect(route('quarx.menus.edit', [CryptoService::encrypt($menu->id)]));
     }
 
     /**

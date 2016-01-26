@@ -1,8 +1,8 @@
 <?php
 
-namespace Mlantz\Quarx\Models;
+namespace Yab\Quarx\Models;
 
-use Mlantz\Quarx\Models\QuarxModel;
+use Yab\Quarx\Models\QuarxModel;
 
 class Pages extends QuarxModel
 {

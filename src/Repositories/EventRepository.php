@@ -1,9 +1,9 @@
 <?php
 
-namespace Mlantz\Quarx\Repositories;
+namespace Yab\Quarx\Repositories;
 
 use Carbon\Carbon;
-use Mlantz\Quarx\Models\Event;
+use Yab\Quarx\Models\Event;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Schema;
 

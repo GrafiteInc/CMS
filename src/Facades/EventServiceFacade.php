@@ -1,6 +1,6 @@
 <?php
 
-namespace Mlantz\Quarx\Facades;
+namespace Yab\Quarx\Facades;
 
 use Illuminate\Support\Facades\Facade;
 

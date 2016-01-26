@@ -1,6 +1,6 @@
 <?php
 
-namespace Mlantz\Quarx\Providers;
+namespace Yab\Quarx\Providers;
 
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Config;
@@ -15,7 +15,7 @@ class QuarxRouteProvider extends ServiceProvider
      *
      * @var string
      */
-    protected $namespace = 'Mlantz\Quarx\Controllers';
+    protected $namespace = 'Yab\Quarx\Controllers';
 
     /**
      * Define your route model bindings, pattern filters, etc.

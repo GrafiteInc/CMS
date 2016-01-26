@@ -1,6 +1,6 @@
 <?php
 
-namespace Mlantz\Quarx;
+namespace Yab\Quarx;
 
 use Illuminate\Support\Facades\View;
 use Illuminate\Foundation\AliasLoader;
@@ -32,10 +32,10 @@ class QuarxProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->register(\Mlantz\Quarx\Providers\QuarxServiceProvider::class);
-        $this->app->register(\Mlantz\Quarx\Providers\QuarxEventServiceProvider::class);
-        $this->app->register(\Mlantz\Quarx\Providers\QuarxRouteProvider::class);
-        $this->app->register(\Mlantz\Quarx\Providers\QuarxModuleProvider::class);
+        $this->app->register(\Yab\Quarx\Providers\QuarxServiceProvider::class);
+        $this->app->register(\Yab\Quarx\Providers\QuarxEventServiceProvider::class);
+        $this->app->register(\Yab\Quarx\Providers\QuarxRouteProvider::class);
+        $this->app->register(\Yab\Quarx\Providers\QuarxModuleProvider::class);
         $this->app->register(\Devfactory\Minify\MinifyServiceProvider::class);
         $this->app->register(\Spatie\LaravelAnalytics\LaravelAnalyticsServiceProvider::class);
 
@@ -54,8 +54,8 @@ class QuarxProvider extends ServiceProvider
         */
 
         $this->commands([
-            \Mlantz\Quarx\Console\Publish::class,
-            \Mlantz\Quarx\Console\Module::class,
+            \Yab\Quarx\Console\Publish::class,
+            \Yab\Quarx\Console\Module::class,
         ]);
     }
 }

@@ -1,10 +1,10 @@
 <?php
 
-namespace Mlantz\Quarx\Providers;
+namespace Yab\Quarx\Providers;
 
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\View;
-use Mlantz\Quarx\Services\FileService;
+use Yab\Quarx\Services\FileService;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\ServiceProvider;
 

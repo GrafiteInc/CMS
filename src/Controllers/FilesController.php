@@ -1,6 +1,6 @@
 <?php
 
-namespace Mlantz\Quarx\Controllers;
+namespace Yab\Quarx\Controllers;
 
 use Input;
 use Quarx;
@@ -11,14 +11,14 @@ use Redirect;
 use CryptoService;
 use App\Http\Requests;
 use Illuminate\Http\Request;
-use Mlantz\Quarx\Models\Files;
-use Mlantz\Quarx\Models\Categories;
-use Mlantz\Quarx\Services\FileService;
-use Mlantz\Quarx\Services\ValidationService;
-use Mlantz\Quarx\Requests\CreateFileRequest;
-use Mlantz\Quarx\Repositories\FileRepository;
-use Mlantz\Quarx\Controllers\QuarxController;
-use Mlantz\Quarx\Services\QuarxResponseService;
+use Yab\Quarx\Models\Files;
+use Yab\Quarx\Models\Categories;
+use Yab\Quarx\Services\FileService;
+use Yab\Quarx\Services\ValidationService;
+use Yab\Quarx\Requests\CreateFileRequest;
+use Yab\Quarx\Repositories\FileRepository;
+use Yab\Quarx\Controllers\QuarxController;
+use Yab\Quarx\Services\QuarxResponseService;
 
 class FilesController extends QuarxController
 {

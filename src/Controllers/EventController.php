@@ -1,15 +1,15 @@
 <?php
 
-namespace Mlantz\Quarx\Controllers;
+namespace Yab\Quarx\Controllers;
 
 use Quarx;
 use CryptoService;
 use App\Http\Requests;
 use Illuminate\Http\Request;
-use Mlantz\Quarx\Models\Event;
-use Mlantz\Quarx\Requests\CreateEventRequest;
-use Mlantz\Quarx\Services\ValidationService;
-use Mlantz\Quarx\Repositories\EventRepository;
+use Yab\Quarx\Models\Event;
+use Yab\Quarx\Requests\CreateEventRequest;
+use Yab\Quarx\Services\ValidationService;
+use Yab\Quarx\Repositories\EventRepository;
 
 class EventController extends QuarxController
 {

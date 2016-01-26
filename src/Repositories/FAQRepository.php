@@ -1,8 +1,8 @@
 <?php
 
-namespace Mlantz\Quarx\Repositories;
+namespace Yab\Quarx\Repositories;
 
-use Mlantz\Quarx\Models\FAQ;
+use Yab\Quarx\Models\FAQ;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Schema;
 

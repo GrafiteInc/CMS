@@ -1,9 +1,9 @@
 <?php
 
-namespace Mlantz\Quarx\Models;
+namespace Yab\Quarx\Models;
 
 use Log;
-use Mlantz\Quarx\Models\Archive;
+use Yab\Quarx\Models\Archive;
 use Illuminate\Database\Eloquent\Model;
 
 class QuarxModel extends Model

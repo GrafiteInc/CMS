@@ -6,7 +6,7 @@
 |--------------------------------------------------------------------------
 */
 
-$factory->define(\Mlantz\Quarx\Models\Images::class, function (Faker\Generator $faker) {
+$factory->define(\Yab\Quarx\Models\Images::class, function (Faker\Generator $faker) {
     return [
         'id' => 1,
         'title' => 'dumb',

@@ -1,6 +1,6 @@
 <?php
 
-namespace Mlantz\Quarx\Models;
+namespace Yab\Quarx\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -28,7 +28,7 @@ class Files extends Model
 
     public function category()
     {
-        return $this->belongsTo(\Mlantz\Quarx\Models\Categories::class, 'file_category_id');
+        return $this->belongsTo(\Yab\Quarx\Models\Categories::class, 'file_category_id');
     }
 
 }

@@ -13,7 +13,7 @@ class FaqTest extends TestCase
         $this->login('admin');
         $this->migrateUp('quarx');
 
-        factory(\Mlantz\Quarx\Models\FAQ::class)->create();
+        factory(\Yab\Quarx\Models\FAQ::class)->create();
     }
 
     /*

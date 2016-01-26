@@ -1,16 +1,26 @@
 {
-    "name": "mlantz/quarx",
+    "name": "yab/quarx",
     "description": "A CMS for Laravel Apps",
     "license": "MIT",
+    "authors": [
+        {
+            "name": "Matt Lantz",
+            "email": "matt@yabhq.com"
+        },
+        {
+            "name": "Chris Blackwell",
+            "email": "chris@yabhq.com"
+        }
+    ],
     "require": {
         "illuminate/support": "5.*",
         "devfactory/minify": "1.0.*",
-        "mlantz/laracogs": "^0.5",
+        "yab/laracogs": "^1.0.0",
         "spatie/laravel-analytics": "^1.3"
     },
     "autoload": {
         "psr-4": {
-            "Mlantz\\Quarx\\": "src/"
+            "Yab\\Quarx\\": "src/"
         }
     },
     "minimum-stability": "dev",

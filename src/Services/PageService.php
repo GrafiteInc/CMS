@@ -1,9 +1,9 @@
 <?php
 
-namespace Mlantz\Quarx\Services;
+namespace Yab\Quarx\Services;
 
 use Illuminate\Support\Facades\Auth;
-use Mlantz\Quarx\Repositories\PagesRepository;
+use Yab\Quarx\Repositories\PagesRepository;
 
 class PageService
 {

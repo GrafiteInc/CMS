@@ -1,9 +1,9 @@
 <?php
 
-namespace Mlantz\Quarx\Repositories;
+namespace Yab\Quarx\Repositories;
 
-use Mlantz\Quarx\Services\Quarx;
-use Mlantz\Quarx\Models\Widgets;
+use Yab\Quarx\Services\Quarx;
+use Yab\Quarx\Models\Widgets;
 use Illuminate\Support\Facades\Schema;
 
 class WidgetsRepository

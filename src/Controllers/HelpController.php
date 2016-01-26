@@ -1,6 +1,6 @@
 <?php
 
-namespace Mlantz\Quarx\Controllers;
+namespace Yab\Quarx\Controllers;
 
 class HelpController extends QuarxController
 {

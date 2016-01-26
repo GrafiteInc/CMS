@@ -12,7 +12,7 @@ class MenuTest extends TestCase
 
         $this->login('admin');
         $this->migrateUp('quarx');
-        factory(\Mlantz\Quarx\Models\Menu::class)->create();
+        factory(\Yab\Quarx\Models\Menu::class)->create();
     }
 
     /*
@@ -49,7 +49,7 @@ class MenuTest extends TestCase
 
     public function testStore()
     {
-        $menu = factory(\Mlantz\Quarx\Models\Menu::class)->make([ 'id' => 2 ]);
+        $menu = factory(\Yab\Quarx\Models\Menu::class)->make([ 'id' => 2 ]);
         $response = $this->call('POST', '/quarx/menus', $menu['attributes']);
 
         $this->assertEquals(302, $response->getStatusCode());

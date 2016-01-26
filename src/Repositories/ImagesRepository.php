@@ -1,11 +1,11 @@
 <?php
 
-namespace Mlantz\Quarx\Repositories;
+namespace Yab\Quarx\Repositories;
 
 use Config;
 use Quarx;
-use Mlantz\Quarx\Models\Images;
-use Mlantz\Quarx\Services\FileService;
+use Yab\Quarx\Models\Images;
+use Yab\Quarx\Services\FileService;
 use Illuminate\Support\Facades\Schema;
 
 class ImagesRepository

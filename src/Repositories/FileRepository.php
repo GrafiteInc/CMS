@@ -1,13 +1,13 @@
 <?php
 
-namespace Mlantz\Quarx\Repositories;
+namespace Yab\Quarx\Repositories;
 
 use Auth;
 use Config;
 use Request;
 use CryptoService;
-use Mlantz\Quarx\Models\Files;
-use Mlantz\Quarx\Services\FileService;
+use Yab\Quarx\Models\Files;
+use Yab\Quarx\Services\FileService;
 use Illuminate\Support\Facades\Schema;
 
 class FileRepository

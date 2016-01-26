@@ -1,9 +1,9 @@
 <?php
 
-namespace Mlantz\Quarx\Repositories;
+namespace Yab\Quarx\Repositories;
 
 use CryptoService;
-use Mlantz\Quarx\Models\Links;
+use Yab\Quarx\Models\Links;
 use Illuminate\Support\Facades\Schema;
 
 class LinksRepository

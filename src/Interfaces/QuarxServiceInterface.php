@@ -1,6 +1,6 @@
 <?php
 
-namespace Mlantz\Quarx\Interfaces;
+namespace Yab\Quarx\Interfaces;
 
 interface QuarxServiceInterface
 {

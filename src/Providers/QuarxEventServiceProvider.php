@@ -1,6 +1,6 @@
 <?php
 
-namespace Mlantz\Quarx\Providers;
+namespace Yab\Quarx\Providers;
 
 use Illuminate\Contracts\Events\Dispatcher as DispatcherContract;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -13,14 +13,14 @@ class QuarxEventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'eloquent.saved: Mlantz\Quarx\Models\Blog' => [
-            'Mlantz\Quarx\Models\Blog@afterSaved',
+        'eloquent.saved: Yab\Quarx\Models\Blog' => [
+            'Yab\Quarx\Models\Blog@afterSaved',
         ],
-        'eloquent.saved: Mlantz\Quarx\Models\Pages' => [
-            'Mlantz\Quarx\Models\Pages@afterSaved',
+        'eloquent.saved: Yab\Quarx\Models\Pages' => [
+            'Yab\Quarx\Models\Pages@afterSaved',
         ],
-        'eloquent.saved: Mlantz\Quarx\Models\Event' => [
-            'Mlantz\Quarx\Models\Event@afterSaved',
+        'eloquent.saved: Yab\Quarx\Models\Event' => [
+            'Yab\Quarx\Models\Event@afterSaved',
         ],
     ];
 

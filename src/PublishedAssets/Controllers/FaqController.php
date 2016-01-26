@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Quarx;
 
 use App\Http\Controllers\Controller;
-use Mlantz\Quarx\Repositories\FaqRepository;
+use Yab\Quarx\Repositories\FaqRepository;
 
 class FaqController extends Controller
 {

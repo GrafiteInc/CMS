@@ -1,11 +1,11 @@
 <?php
 
-namespace Mlantz\Quarx\Console;
+namespace Yab\Quarx\Console;
 
 use Config;
 use Artisan;
 use Illuminate\Console\Command;
-use Mlantz\Laracogs\Generators\CrudGenerator;
+use Yab\Laracogs\Generators\CrudGenerator;
 
 class Module extends Command
 {

@@ -12,8 +12,8 @@ class LinksTest extends TestCase
 
         $this->login('admin');
         $this->migrateUp('quarx');
-        factory(\Mlantz\Quarx\Models\Links::class)->create();
-        factory(\Mlantz\Quarx\Models\Links::class)->make([ 'id' => 1 ]);
+        factory(\Yab\Quarx\Models\Links::class)->create();
+        factory(\Yab\Quarx\Models\Links::class)->make([ 'id' => 1 ]);
     }
 
     /*
@@ -43,7 +43,7 @@ class LinksTest extends TestCase
 
     public function testStore()
     {
-        $link = factory(\Mlantz\Quarx\Models\Links::class)->make([ 'id' => 89 ]);
+        $link = factory(\Yab\Quarx\Models\Links::class)->make([ 'id' => 89 ]);
         $response = $this->call('POST', '/quarx/links', $link['attributes']);
 
         $this->assertEquals(302, $response->getStatusCode());

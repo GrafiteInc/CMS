@@ -1,13 +1,13 @@
 <?php
 
-namespace Mlantz\Quarx\Providers;
+namespace Yab\Quarx\Providers;
 
 use Illuminate\Foundation\AliasLoader;
-use Mlantz\Quarx\Services\PageService;
+use Yab\Quarx\Services\PageService;
 use Illuminate\Support\ServiceProvider;
-use Mlantz\Quarx\Services\CryptoService;
-use Mlantz\Quarx\Services\ModuleService;
-use Mlantz\Quarx\Services\QuarxService;
+use Yab\Quarx\Services\CryptoService;
+use Yab\Quarx\Services\ModuleService;
+use Yab\Quarx\Services\QuarxService;
 
 class QuarxServiceProvider extends ServiceProvider
 {
@@ -18,12 +18,12 @@ class QuarxServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'eloquent.saving: Mlantz\Quarx\Models\Blog' => [
-            'Mlantz\Quarx\Models\Blog@beforeSaved',
+        'eloquent.saving: Yab\Quarx\Models\Blog' => [
+            'Yab\Quarx\Models\Blog@beforeSaved',
         ],
 
-        'eloquent.saved: Mlantz\Quarx\Models\Blog' => [
-            'Mlantz\Quarx\Models\Blog@afterSaved',
+        'eloquent.saved: Yab\Quarx\Models\Blog' => [
+            'Yab\Quarx\Models\Blog@afterSaved',
         ],
     ];
 
@@ -36,11 +36,11 @@ class QuarxServiceProvider extends ServiceProvider
     {
         $loader = AliasLoader::getInstance();
 
-        $loader->alias("Quarx", \Mlantz\Quarx\Facades\QuarxServiceFacade::class);
-        $loader->alias("PageService", \Mlantz\Quarx\Facades\PageServiceFacade::class);
-        $loader->alias("CryptoService", \Mlantz\Quarx\Facades\CryptoServiceFacade::class);
-        $loader->alias('ModuleService', \Mlantz\Quarx\Facades\ModuleServiceFacade::class);
-        $loader->alias('FileService', \Mlantz\Quarx\Services\FileService::class);
+        $loader->alias("Quarx", \Yab\Quarx\Facades\QuarxServiceFacade::class);
+        $loader->alias("PageService", \Yab\Quarx\Facades\PageServiceFacade::class);
+        $loader->alias("CryptoService", \Yab\Quarx\Facades\CryptoServiceFacade::class);
+        $loader->alias('ModuleService', \Yab\Quarx\Facades\ModuleServiceFacade::class);
+        $loader->alias('FileService', \Yab\Quarx\Services\FileService::class);
     }
 
     /**

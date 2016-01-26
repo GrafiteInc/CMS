@@ -1,9 +1,9 @@
 <?php
 
-namespace Mlantz\Quarx\Requests;
+namespace Yab\Quarx\Requests;
 
 use App\Http\Requests\Request;
-use Mlantz\Quarx\Models\FAQ;
+use Yab\Quarx\Models\FAQ;
 
 class CreateFAQRequest extends Request
 {

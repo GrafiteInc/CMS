@@ -1,6 +1,6 @@
 <?php
 
-namespace Mlantz\Quarx\Models;
+namespace Yab\Quarx\Models;
 
 use Illuminate\Database\Eloquent\Model;
 

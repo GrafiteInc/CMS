@@ -1,6 +1,6 @@
 <?php
 
-namespace Mlantz\Quarx\Console;
+namespace Yab\Quarx\Console;
 
 use Illuminate\Support\Str;
 use Illuminate\Support\Schema;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Mlantz\Quarx\Controllers;
+namespace Yab\Quarx\Controllers;
 
 use Quarx;
 use Config;
@@ -9,12 +9,12 @@ use FileService;
 use CryptoService;
 use App\Http\Requests;
 use Illuminate\Http\Request;
-use Mlantz\Quarx\Models\Images;
-use Mlantz\Quarx\Services\ValidationService;
-use Mlantz\Quarx\Controllers\QuarxController;
-use Mlantz\Quarx\Requests\CreateImagesRequest;
-use Mlantz\Quarx\Services\QuarxResponseService;
-use Mlantz\Quarx\Repositories\ImagesRepository;
+use Yab\Quarx\Models\Images;
+use Yab\Quarx\Services\ValidationService;
+use Yab\Quarx\Controllers\QuarxController;
+use Yab\Quarx\Requests\CreateImagesRequest;
+use Yab\Quarx\Services\QuarxResponseService;
+use Yab\Quarx\Repositories\ImagesRepository;
 
 class ImagesController extends QuarxController
 {

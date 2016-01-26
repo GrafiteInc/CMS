@@ -1,10 +1,10 @@
 <?php
 
-namespace Mlantz\Quarx\Repositories;
+namespace Yab\Quarx\Repositories;
 
 use Quarx;
-use Mlantz\Quarx\Models\Blog;
-use Mlantz\Quarx\Models\Archive;
+use Yab\Quarx\Models\Blog;
+use Yab\Quarx\Models\Archive;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Schema;
 

@@ -1,21 +1,21 @@
 <?php
 
-namespace Mlantz\Quarx\Controllers;
+namespace Yab\Quarx\Controllers;
 
 use URL;
 use View;
 use Quarx;
 use CryptoService;
-use Mlantz\Quarx\Models\Archive;
+use Yab\Quarx\Models\Archive;
 
 class QuarxFeatureController extends QuarxController
 {
     public function rollback($entity, $id)
     {
-        $modelString = 'Mlantz\Quarx\Models\\'.ucfirst($entity);
+        $modelString = 'Yab\Quarx\Models\\'.ucfirst($entity);
 
         if (! class_exists($modelString)) {
-            $modelString = 'Mlantz\Quarx\Models\\'.ucfirst($entity).'s';
+            $modelString = 'Yab\Quarx\Models\\'.ucfirst($entity).'s';
         }
 
         $model = new $modelString;
@@ -38,10 +38,10 @@ class QuarxFeatureController extends QuarxController
 
     public function preview($entity, $id)
     {
-        $modelString = 'Mlantz\Quarx\Models\\'.ucfirst($entity);
+        $modelString = 'Yab\Quarx\Models\\'.ucfirst($entity);
 
         if (! class_exists($modelString)) {
-            $modelString = 'Mlantz\Quarx\Models\\'.ucfirst($entity).'s';
+            $modelString = 'Yab\Quarx\Models\\'.ucfirst($entity).'s';
         }
 
         $model = new $modelString;

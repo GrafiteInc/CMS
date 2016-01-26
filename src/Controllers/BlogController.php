@@ -1,14 +1,14 @@
 <?php
 
-namespace Mlantz\Quarx\Controllers;
+namespace Yab\Quarx\Controllers;
 
 use Quarx;
 use CryptoService;
 use Illuminate\Http\Request;
-use Mlantz\Quarx\Models\Blog;
-use Mlantz\Quarx\Services\ValidationService;
-use Mlantz\Quarx\Requests\CreateBlogRequest;
-use Mlantz\Quarx\Repositories\BlogRepository;
+use Yab\Quarx\Models\Blog;
+use Yab\Quarx\Services\ValidationService;
+use Yab\Quarx\Requests\CreateBlogRequest;
+use Yab\Quarx\Repositories\BlogRepository;
 
 class BlogController extends QuarxController
 {

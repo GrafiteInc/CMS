@@ -1,15 +1,15 @@
 <?php
 
-namespace Mlantz\Quarx\Controllers;
+namespace Yab\Quarx\Controllers;
 
 use Quarx;
 use CryptoService;
 use App\Http\Requests;
 use Illuminate\Http\Request;
-use Mlantz\Quarx\Models\FAQ;
-use Mlantz\Quarx\Requests\CreateFAQRequest;
-use Mlantz\Quarx\Services\ValidationService;
-use Mlantz\Quarx\Repositories\FAQRepository;
+use Yab\Quarx\Models\FAQ;
+use Yab\Quarx\Requests\CreateFAQRequest;
+use Yab\Quarx\Services\ValidationService;
+use Yab\Quarx\Repositories\FAQRepository;
 
 class FAQController extends QuarxController
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Mlantz\Quarx\Services;
+namespace Yab\Quarx\Services;
 
 class CryptoService
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace Mlantz\Quarx\Repositories;
+namespace Yab\Quarx\Repositories;
 
-use Mlantz\Quarx\Models\Menu;
+use Yab\Quarx\Models\Menu;
 use Illuminate\Support\Facades\Schema;
 
 class MenuRepository

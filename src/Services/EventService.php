@@ -1,11 +1,11 @@
 <?php
 
-namespace Mlantz\Quarx\Services;
+namespace Yab\Quarx\Services;
 
 use Carbon\Carbon;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Auth;
-use Mlantz\Quarx\Repositories\EventRepository;
+use Yab\Quarx\Repositories\EventRepository;
 
 class EventService
 {

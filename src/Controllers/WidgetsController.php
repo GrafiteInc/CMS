@@ -1,15 +1,15 @@
 <?php
 
-namespace Mlantz\Quarx\Controllers;
+namespace Yab\Quarx\Controllers;
 
 use Quarx;
 use CryptoService;
 use App\Http\Requests;
 use Illuminate\Http\Request;
-use Mlantz\Quarx\Models\Widgets;
-use Mlantz\Quarx\Services\ValidationService;
-use Mlantz\Quarx\Requests\CreateWidgetsRequest;
-use Mlantz\Quarx\Repositories\WidgetsRepository;
+use Yab\Quarx\Models\Widgets;
+use Yab\Quarx\Services\ValidationService;
+use Yab\Quarx\Requests\CreateWidgetsRequest;
+use Yab\Quarx\Repositories\WidgetsRepository;
 
 class WidgetsController extends QuarxController
 {

@@ -13,7 +13,7 @@ class ImagesTest extends TestCase
         $this->login('admin');
         $this->migrateUp('quarx');
 
-        factory(\Mlantz\Quarx\Models\Blog::class)->create();
+        factory(\Yab\Quarx\Models\Blog::class)->create();
     }
 
     /*
@@ -50,7 +50,7 @@ class ImagesTest extends TestCase
 
     public function testStore()
     {
-        $blog = (array) factory(\Mlantz\Quarx\Models\Blog::class)->make([ 'id' => 2 ]);
+        $blog = (array) factory(\Yab\Quarx\Models\Blog::class)->make([ 'id' => 2 ]);
         $response = $this->call('POST', 'quarx/blog', $blog);
 
         $this->assertEquals(302, $response->getStatusCode());
@@ -59,7 +59,7 @@ class ImagesTest extends TestCase
 
     public function testUpdate()
     {
-        $blog = (array) factory(\Mlantz\Quarx\Models\Blog::class)->make([ 'id' => 3, 'title' => 'dumber' ]);
+        $blog = (array) factory(\Yab\Quarx\Models\Blog::class)->make([ 'id' => 3, 'title' => 'dumber' ]);
         $response = $this->call('PATCH', 'quarx/blog/'.Crypto::encrypt(3), $blog);
 
         $this->assertEquals(302, $response->getStatusCode());

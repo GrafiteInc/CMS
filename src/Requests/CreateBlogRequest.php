@@ -1,9 +1,9 @@
 <?php
 
-namespace Mlantz\Quarx\Requests;
+namespace Yab\Quarx\Requests;
 
 use App\Http\Requests\Request;
-use Mlantz\Quarx\Models\Blog;
+use Yab\Quarx\Models\Blog;
 
 class CreateBlogRequest extends Request
 {

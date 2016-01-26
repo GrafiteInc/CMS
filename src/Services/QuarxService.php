@@ -1,6 +1,6 @@
 <?php
 
-namespace Mlantz\Quarx\Services;
+namespace Yab\Quarx\Services;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\URL;
@@ -9,12 +9,12 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Session;
-use Mlantz\Quarx\Facades\CryptoServiceFacade;
-use Mlantz\Quarx\Repositories\MenuRepository;
-use Mlantz\Quarx\Repositories\LinksRepository;
-use Mlantz\Quarx\Repositories\PagesRepository;
-use Mlantz\Quarx\Repositories\WidgetsRepository;
-use Mlantz\Quarx\Interfaces\QuarxServiceInterface;
+use Yab\Quarx\Facades\CryptoServiceFacade;
+use Yab\Quarx\Repositories\MenuRepository;
+use Yab\Quarx\Repositories\LinksRepository;
+use Yab\Quarx\Repositories\PagesRepository;
+use Yab\Quarx\Repositories\WidgetsRepository;
+use Yab\Quarx\Interfaces\QuarxServiceInterface;
 
 class QuarxService implements QuarxServiceInterface
 {

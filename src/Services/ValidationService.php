@@ -1,6 +1,6 @@
 <?php
 
-namespace Mlantz\Quarx\Services;
+namespace Yab\Quarx\Services;
 
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Session;

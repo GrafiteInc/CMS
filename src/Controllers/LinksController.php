@@ -1,16 +1,16 @@
 <?php
 
-namespace Mlantz\Quarx\Controllers;
+namespace Yab\Quarx\Controllers;
 
 use Quarx;
 use CryptoService;
 use App\Http\Requests;
 use Illuminate\Http\Request;
-use Mlantz\Quarx\Models\Links;
+use Yab\Quarx\Models\Links;
 use Illuminate\Support\Facades\URL;
-use Mlantz\Quarx\Services\ValidationService;
-use Mlantz\Quarx\Requests\CreateLinksRequest;
-use Mlantz\Quarx\Repositories\LinksRepository;
+use Yab\Quarx\Services\ValidationService;
+use Yab\Quarx\Requests\CreateLinksRequest;
+use Yab\Quarx\Repositories\LinksRepository;
 
 class LinksController extends QuarxController
 {

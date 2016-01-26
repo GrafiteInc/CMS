@@ -13,7 +13,7 @@ class WidgetsTest extends TestCase
         $this->login('admin');
         $this->migrateUp('quarx');
 
-        factory(\Mlantz\Quarx\Models\Widgets::class)->create();
+        factory(\Yab\Quarx\Models\Widgets::class)->create();
     }
 
     /*
@@ -50,7 +50,7 @@ class WidgetsTest extends TestCase
 
     public function testStore()
     {
-        $widgets = factory(\Mlantz\Quarx\Models\Widgets::class)->make([ 'id' => 4 ]);
+        $widgets = factory(\Yab\Quarx\Models\Widgets::class)->make([ 'id' => 4 ]);
         $response = $this->call('POST', 'quarx/widgets', $widgets['attributes']);
 
         $this->assertEquals(302, $response->getStatusCode());
@@ -59,7 +59,7 @@ class WidgetsTest extends TestCase
 
     public function testUpdate()
     {
-        $widgets = (array) factory(\Mlantz\Quarx\Models\Widgets::class)->make([ 'id' => 3, 'answer' => 'dumber question' ]);
+        $widgets = (array) factory(\Yab\Quarx\Models\Widgets::class)->make([ 'id' => 3, 'answer' => 'dumber question' ]);
         $response = $this->call('PATCH', 'quarx/widgets/'.Crypto::encrypt(3), $widgets);
 
         $this->assertEquals(302, $response->getStatusCode());

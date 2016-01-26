@@ -1,16 +1,16 @@
 <?php
 
-namespace Mlantz\Quarx\Controllers;
+namespace Yab\Quarx\Controllers;
 
 use Quarx;
 use CryptoService;
 use App\Http\Requests;
 use Illuminate\Http\Request;
-use Mlantz\Quarx\Models\Menu;
-use Mlantz\Quarx\Requests\CreateMenuRequest;
-use Mlantz\Quarx\Services\ValidationService;
-use Mlantz\Quarx\Repositories\MenuRepository;
-use Mlantz\Quarx\Repositories\LinksRepository;
+use Yab\Quarx\Models\Menu;
+use Yab\Quarx\Requests\CreateMenuRequest;
+use Yab\Quarx\Services\ValidationService;
+use Yab\Quarx\Repositories\MenuRepository;
+use Yab\Quarx\Repositories\LinksRepository;
 
 class MenuController extends QuarxController
 {

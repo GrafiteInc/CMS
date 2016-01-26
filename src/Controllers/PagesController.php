@@ -1,16 +1,16 @@
 <?php
 
-namespace Mlantz\Quarx\Controllers;
+namespace Yab\Quarx\Controllers;
 
 use Quarx;
 use Response;
 use CryptoService;
 use App\Http\Requests;
 use Illuminate\Http\Request;
-use Mlantz\Quarx\Models\Pages;
-use Mlantz\Quarx\Services\ValidationService;
-use Mlantz\Quarx\Requests\CreatePagesRequest;
-use Mlantz\Quarx\Repositories\PagesRepository;
+use Yab\Quarx\Models\Pages;
+use Yab\Quarx\Services\ValidationService;
+use Yab\Quarx\Requests\CreatePagesRequest;
+use Yab\Quarx\Repositories\PagesRepository;
 
 class PagesController extends QuarxController
 {

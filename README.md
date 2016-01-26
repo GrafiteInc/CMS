@@ -5,19 +5,19 @@
 * Run the following command:
 
 ```bash
-composer require mlantz/quarx
+composer require yab/quarx
 ```
 
 * Add the following to your Providers:
 
 ```php
-Mlantz\Quarx\QuarxProvider::class
+Yab\Quarx\QuarxProvider::class
 ```
 
 * Then run the vendor publish:
 
 ```bash
-php artisan vendor:publish --provider="Mlantz\Quarx\QuarxProvider"
+php artisan vendor:publish --provider="Yab\Quarx\QuarxProvider"
 ```
 
 * Then migrate:

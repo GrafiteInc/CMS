@@ -633,7 +633,7 @@
                 {
                     if (tag == 'quote') tag = 'blockquote';
 
-                    var formatTags = ['p', 'pre', 'blockquote', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
+                    var formatTags = ['p', 'pre', 'blockquote', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'sup', 'sub', 'small'];
                     if ($.inArray(tag, formatTags) == -1) return;
 
                     this.block.isRemoveInline = (tag == 'pre' || tag.search(/h[1-6]/i) != -1);
@@ -7552,17 +7552,17 @@
                                 sup:
                                 {
                                     title: 'Superscript',
-                                    func: 'block.format'
+                                    func: 'inline.format'
                                 },
                                 sub:
                                 {
                                     title: 'Subscript',
-                                    func: 'block.format'
+                                    func: 'inline.format'
                                 },
                                 small:
                                 {
                                     title: 'Small text',
-                                    func: 'block.format'
+                                    func: 'inline.format'
                                 }
                             }
                         },

@@ -49,7 +49,7 @@ class FAQRepository
     {
         $query = FAQ::orderBy('created_at', 'desc');
 
-        $columns = Schema::getColumnListing('f_a_q_s');
+        $columns = Schema::getColumnListing('faqs');
 
         foreach ($columns as $attribute) {
             $query->orWhere($attribute, 'LIKE', '%'.$input['term'].'%');

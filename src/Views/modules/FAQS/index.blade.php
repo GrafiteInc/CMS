@@ -23,7 +23,7 @@
     <div class="row">
         <a class="btn btn-primary pull-right" href="{!! route('quarx.faqs.create') !!}">Add New</a>
         <div class="raw-m-hide pull-right">
-            {!! Form::open(['url' => 'faqs/search']) !!}
+            {!! Form::open(['url' => 'quarx/faqs/search']) !!}
             <input class="form-control header-input pull-right raw-margin-right-24" name="term" placeholder="Search">
             {!! Form::close() !!}
         </div>

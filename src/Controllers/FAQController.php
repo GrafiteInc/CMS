@@ -7,7 +7,7 @@ use CryptoService;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 use Yab\Quarx\Models\FAQ;
-use Yab\Quarx\Requests\CreateFAQRequest;
+use Yab\Quarx\Requests\FAQRequest;
 use Yab\Quarx\Services\ValidationService;
 use Yab\Quarx\Repositories\FAQRepository;
 
@@ -68,7 +68,7 @@ class FAQController extends QuarxController
     /**
      * Store a newly created FAQ in storage.
      *
-     * @param CreateFAQRequest $request
+     * @param FAQRequest $request
      *
      * @return Response
      */
@@ -113,11 +113,11 @@ class FAQController extends QuarxController
      * Update the specified FAQ in storage.
      *
      * @param  int    $id
-     * @param CreateFAQRequest $request
+     * @param FAQRequest $request
      *
      * @return Response
      */
-    public function update($id, CreateFAQRequest $request)
+    public function update($id, FAQRequest $request)
     {
         $id = CryptoService::decrypt($id);
         $faq = $this->faqRepository->findFAQById($id);

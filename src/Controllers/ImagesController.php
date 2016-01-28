@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 use Yab\Quarx\Models\Images;
 use Yab\Quarx\Services\ValidationService;
 use Yab\Quarx\Controllers\QuarxController;
-use Yab\Quarx\Requests\CreateImagesRequest;
+use Yab\Quarx\Requests\ImagesRequest;
 use Yab\Quarx\Services\QuarxResponseService;
 use Yab\Quarx\Repositories\ImagesRepository;
 
@@ -62,7 +62,7 @@ class ImagesController extends QuarxController
     /**
      * Store a newly created Images in storage.
      *
-     * @param CreateImagesRequest $request
+     * @param ImagesRequest $request
      *
      * @return Response
      */
@@ -112,11 +112,11 @@ class ImagesController extends QuarxController
      * Update the specified Images in storage.
      *
      * @param  int    $id
-     * @param CreateImagesRequest $request
+     * @param ImagesRequest $request
      *
      * @return Response
      */
-    public function update($id, CreateImagesRequest $request)
+    public function update($id, ImagesRequest $request)
     {
         try {
             $id = CryptoService::decrypt($id);
@@ -192,7 +192,7 @@ class ImagesController extends QuarxController
     /**
      * Store a newly created Images in storage.
      *
-     * @param CreateImagesRequest $request
+     * @param ImagesRequest $request
      *
      * @return Response
      */

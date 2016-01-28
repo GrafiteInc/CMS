@@ -7,7 +7,7 @@ use CryptoService;
 use Illuminate\Http\Request;
 use Yab\Quarx\Models\Blog;
 use Yab\Quarx\Services\ValidationService;
-use Yab\Quarx\Requests\CreateBlogRequest;
+use Yab\Quarx\Requests\BlogRequest;
 use Yab\Quarx\Repositories\BlogRepository;
 
 class BlogController extends QuarxController
@@ -67,7 +67,7 @@ class BlogController extends QuarxController
     /**
      * Store a newly created Blog in storage.
      *
-     * @param CreateBlogRequest $request
+     * @param BlogRequest $request
      *
      * @return Response
      */
@@ -112,11 +112,11 @@ class BlogController extends QuarxController
      * Update the specified Blog in storage.
      *
      * @param  int    $id
-     * @param CreateBlogRequest $request
+     * @param BlogRequest $request
      *
      * @return Response
      */
-    public function update($id, CreateBlogRequest $request)
+    public function update($id, BlogRequest $request)
     {
         $id = CryptoService::decrypt($id);
         $blog = $this->blogRepository->findBlogById($id);

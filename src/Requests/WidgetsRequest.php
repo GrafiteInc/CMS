@@ -2,10 +2,10 @@
 
 namespace Yab\Quarx\Requests;
 
-use App\Http\Requests\Request;
-use Yab\Quarx\Models\Blog;
+use Yab\Quarx\Models\Pages;
+use Illuminate\Foundation\Http\FormRequest;
 
-class CreateBlogRequest extends Request
+class WidgetsRequest extends FormRequest
 {
 
     /**
@@ -25,7 +25,7 @@ class CreateBlogRequest extends Request
      */
     public function rules()
     {
-        return Blog::$rules;
+        return Pages::$rules;
     }
 
 }

@@ -2,10 +2,10 @@
 
 namespace Yab\Quarx\Requests;
 
-use App\Http\Requests\Request;
 use Yab\Quarx\Models\Links;
+use Illuminate\Foundation\Http\FormRequest;
 
-class CreateLinksRequest extends Request
+class LinksRequest extends FormRequest
 {
 
     /**

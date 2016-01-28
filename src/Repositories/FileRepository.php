@@ -23,11 +23,22 @@ class FileRepository
         return Files::orderBy('created_at', 'desc')->all();
     }
 
+    /**
+     * Paginated Files
+     *
+     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     */
     public function paginated()
     {
         return Files::orderBy('created_at', 'desc')->paginate(Config::get('quarx.pagination', 25));
     }
 
+    /**
+     * Search for files
+     *
+     * @param  string $input
+     * @return array
+     */
     public function search($input)
     {
         $query = Files::orderBy('created_at', 'desc');
@@ -60,16 +71,12 @@ class FileRepository
             $fileInput['mime'] = $_file['mime'];
             $fileInput['size'] = $_file['size'];
             $fileInput['order'] = 0;
-            $fileInput['user'] = Auth::id();
+            $fileInput['user'] = $input['user'] ?: Auth::id();
             $fileInput['is_published'] = (isset($input['is_published'])) ? (bool) $input['is_published'] : 0;
             $result = Files::create($fileInput);
         }
 
-        if ($result) {
-            return true;
-        }
-
-        return false;
+        return $result;
     }
 
     /**

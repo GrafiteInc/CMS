@@ -9,7 +9,7 @@ use App\Http\Requests;
 use Illuminate\Http\Request;
 use Yab\Quarx\Models\Pages;
 use Yab\Quarx\Services\ValidationService;
-use Yab\Quarx\Requests\CreatePagesRequest;
+use Yab\Quarx\Requests\PagesRequest;
 use Yab\Quarx\Repositories\PagesRepository;
 
 class PagesController extends QuarxController
@@ -69,7 +69,7 @@ class PagesController extends QuarxController
     /**
      * Store a newly created Pages in storage.
      *
-     * @param CreatePagesRequest $request
+     * @param PagesRequest $request
      *
      * @return Response
      */
@@ -114,11 +114,11 @@ class PagesController extends QuarxController
      * Update the specified Pages in storage.
      *
      * @param  int    $id
-     * @param CreatePagesRequest $request
+     * @param PagesRequest $request
      *
      * @return Response
      */
-    public function update($id, CreatePagesRequest $request)
+    public function update($id, PagesRequest $request)
     {
         $id = CryptoService::decrypt($id);
         $pages = $this->pagesRepository->findPagesById($id);

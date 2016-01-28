@@ -7,7 +7,7 @@ use CryptoService;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 use Yab\Quarx\Models\Menu;
-use Yab\Quarx\Requests\CreateMenuRequest;
+use Yab\Quarx\Requests\MenuRequest;
 use Yab\Quarx\Services\ValidationService;
 use Yab\Quarx\Repositories\MenuRepository;
 use Yab\Quarx\Repositories\LinksRepository;
@@ -70,7 +70,7 @@ class MenuController extends QuarxController
     /**
      * Store a newly created Menu in storage.
      *
-     * @param CreateMenuRequest $request
+     * @param MenuRequest $request
      *
      * @return Response
      */
@@ -120,11 +120,11 @@ class MenuController extends QuarxController
      * Update the specified Menu in storage.
      *
      * @param  int    $id
-     * @param CreateMenuRequest $request
+     * @param MenuRequest $request
      *
      * @return Response
      */
-    public function update($id, CreateMenuRequest $request)
+    public function update($id, MenuRequest $request)
     {
         try {
             $id = CryptoService::decrypt($id);

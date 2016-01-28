@@ -1,18 +1,13 @@
 <?php
 
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-
-class PagesTest extends TestCase
+class PagesTest extends AppTest
 {
-    use WithoutMiddleware;
 
     public function setUp()
     {
         parent::setUp();
-
-        $this->login('admin');
-        $this->migrateUp('quarx');
-
+        $this->withoutMiddleware();
+        $this->withoutEvents();
         factory(\Yab\Quarx\Models\Pages::class)->create();
     }
 
@@ -37,9 +32,9 @@ class PagesTest extends TestCase
 
     public function testEdit()
     {
-        $response = $this->call('GET', 'quarx/pages/'.Crypto::encrypt(1).'/edit');
+        $response = $this->call('GET', 'quarx/pages/'.CryptoService::encrypt(1).'/edit');
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertViewHas('pages');
+        $this->assertViewHas('page');
     }
 
     /*
@@ -50,17 +45,25 @@ class PagesTest extends TestCase
 
     public function testStore()
     {
-        $pages = factory(\Yab\Quarx\Models\Pages::class)->make([ 'id' => 4 ]);
+        $pages = factory(\Yab\Quarx\Models\Pages::class)->make([ 'id' => 2 ]);
         $response = $this->call('POST', 'quarx/pages', $pages['attributes']);
 
         $this->assertEquals(302, $response->getStatusCode());
-        $this->assertRedirectedTo('/quarx/pages');
+        $this->assertRedirectedTo('/quarx/pages/'.CryptoService::encrypt(2).'/edit');
+    }
+
+    public function testSearch()
+    {
+        $response = $this->call('POST', 'quarx/pages/search', ['term' => 'wtf']);
+
+        $this->assertViewHas('pages');
+        $this->assertEquals(200, $response->getStatusCode());
     }
 
     public function testUpdate()
     {
         $pages = (array) factory(\Yab\Quarx\Models\Blog::class)->make([ 'id' => 3, 'title' => 'dumber' ]);
-        $response = $this->call('PATCH', 'quarx/pages/'.Crypto::encrypt(3), $pages);
+        $response = $this->call('PATCH', 'quarx/pages/'.CryptoService::encrypt(3), $pages);
 
         $this->assertEquals(302, $response->getStatusCode());
         $this->assertRedirectedTo('/quarx/pages');
@@ -68,7 +71,7 @@ class PagesTest extends TestCase
 
     public function testDelete()
     {
-        $response = $this->call('GET', 'quarx/pages/'.Crypto::encrypt(1).'/delete');
+        $response = $this->call('GET', 'quarx/pages/'.CryptoService::encrypt(1).'/delete');
         $this->assertEquals(302, $response->getStatusCode());
         $this->assertRedirectedTo('quarx/pages');
     }

@@ -2,10 +2,10 @@
 
 namespace Yab\Quarx\Requests;
 
-use App\Http\Requests\Request;
 use Yab\Quarx\Models\Pages;
+use Illuminate\Foundation\Http\FormRequest;
 
-class CreateWidgetsRequest extends Request
+class PagesRequest extends FormRequest
 {
 
     /**

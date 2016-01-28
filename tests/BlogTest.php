@@ -1,19 +1,13 @@
 <?php
 
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-
-class ImagesTest extends TestCase
+class BlogTest extends AppTest
 {
-    use WithoutMiddleware;
 
     public function setUp()
     {
         parent::setUp();
-
-        $this->login('admin');
-        $this->migrateUp('quarx');
-
-        factory(\Yab\Quarx\Models\Blog::class)->create();
+        $this->withoutMiddleware();
+        $this->withoutEvents();
     }
 
     /*
@@ -37,7 +31,8 @@ class ImagesTest extends TestCase
 
     public function testEdit()
     {
-        $response = $this->call('GET', 'quarx/blog/'.Crypto::encrypt(1).'/edit');
+        factory(\Yab\Quarx\Models\Blog::class)->create();
+        $response = $this->call('GET', 'quarx/blog/'.CryptoService::encrypt(1).'/edit');
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertViewHas('blog');
     }
@@ -50,20 +45,35 @@ class ImagesTest extends TestCase
 
     public function testStore()
     {
-        $blog = (array) factory(\Yab\Quarx\Models\Blog::class)->make([ 'id' => 2 ]);
+        $blog = [ 'title' => 'dumber', 'url' => 'dumber', 'entry' => 'okie dokie' ];
         $response = $this->call('POST', 'quarx/blog', $blog);
 
+        $this->seeInDatabase('blogs', ['id' => 1]);
         $this->assertEquals(302, $response->getStatusCode());
-        $this->assertRedirectedTo('/');
+        $this->assertRedirectedTo('/quarx/blog/'.CryptoService::encrypt(1).'/edit');
+    }
+
+    public function testSearch()
+    {
+        $response = $this->call('POST', 'quarx/blog/search', ['term' => 'wtf']);
+
+        $this->assertViewHas('blogs');
+        $this->assertEquals(200, $response->getStatusCode());
     }
 
     public function testUpdate()
     {
-        $blog = (array) factory(\Yab\Quarx\Models\Blog::class)->make([ 'id' => 3, 'title' => 'dumber' ]);
-        $response = $this->call('PATCH', 'quarx/blog/'.Crypto::encrypt(3), $blog);
+        $blog = [ 'title' => 'dumber', 'url' => 'dumber', 'entry' => 'okie dokie' ];
+        $this->call('POST', 'quarx/blog', $blog);
 
+        $response = $this->call('PATCH', 'quarx/blog/'.CryptoService::encrypt(1), [
+            'title' => 'dumber and dumber',
+            'url' => 'dumber-and-dumber',
+        ]);
+
+        $this->seeInDatabase('blogs', ['title' => 'dumber and dumber']);
         $this->assertEquals(302, $response->getStatusCode());
-        $this->assertRedirectedTo('/');
+        $this->assertRedirectedTo('quarx/blog/'.CryptoService::encrypt(1).'/edit');
     }
 
     public function testDelete()

@@ -12,21 +12,6 @@ use Yab\Quarx\Services\QuarxService;
 class QuarxServiceProvider extends ServiceProvider
 {
 
-     /**
-     * The event listener mappings for the application.
-     *
-     * @var array
-     */
-    protected $listen = [
-        'eloquent.saving: Yab\Quarx\Models\Blog' => [
-            'Yab\Quarx\Models\Blog@beforeSaved',
-        ],
-
-        'eloquent.saved: Yab\Quarx\Models\Blog' => [
-            'Yab\Quarx\Models\Blog@afterSaved',
-        ],
-    ];
-
     /**
      * Alias the services in the boot
      *

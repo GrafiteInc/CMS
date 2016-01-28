@@ -2,10 +2,10 @@
 
 namespace Yab\Quarx\Requests;
 
-use App\Http\Requests\Request;
-use Yab\Quarx\Models\Pages;
+use Yab\Quarx\Models\Event;
+use Illuminate\Foundation\Http\FormRequest;
 
-class CreatePagesRequest extends Request
+class EventRequest extends FormRequest
 {
 
     /**
@@ -25,7 +25,7 @@ class CreatePagesRequest extends Request
      */
     public function rules()
     {
-        return Pages::$rules;
+        return Event::$rules;
     }
 
 }

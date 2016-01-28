@@ -2,10 +2,11 @@
 
 namespace Yab\Quarx\Requests;
 
-use App\Http\Requests\Request;
 use Yab\Quarx\Models\Files;
+use Illuminate\Foundation\Http\FormRequest;
 
-class CreateFileRequest extends Request {
+class FileRequest extends FormRequest
+{
 
     /**
      * Determine if the user is authorized to make this request.

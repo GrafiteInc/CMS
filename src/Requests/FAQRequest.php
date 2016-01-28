@@ -2,10 +2,10 @@
 
 namespace Yab\Quarx\Requests;
 
-use App\Http\Requests\Request;
-use Yab\Quarx\Models\Menu;
+use Yab\Quarx\Models\FAQ;
+use Illuminate\Foundation\Http\FormRequest;
 
-class CreateMenuRequest extends Request
+class FAQRequest extends FormRequest
 {
 
     /**
@@ -25,7 +25,7 @@ class CreateMenuRequest extends Request
      */
     public function rules()
     {
-        return Menu::$rules;
+        return FAQ::$rules;
     }
 
 }

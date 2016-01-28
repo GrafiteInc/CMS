@@ -2,10 +2,10 @@
 
 namespace Yab\Quarx\Requests;
 
-use App\Http\Requests\Request;
 use Yab\Quarx\Models\Images;
+use Illuminate\Foundation\Http\FormRequest;
 
-class CreateImagesRequest extends Request
+class ImagesRequest extends FormRequest
 {
 
     /**

@@ -8,7 +8,7 @@ use App\Http\Requests;
 use Illuminate\Http\Request;
 use Yab\Quarx\Models\Widgets;
 use Yab\Quarx\Services\ValidationService;
-use Yab\Quarx\Requests\CreateWidgetsRequest;
+use Yab\Quarx\Requests\WidgetsRequest;
 use Yab\Quarx\Repositories\WidgetsRepository;
 
 class WidgetsController extends QuarxController
@@ -68,7 +68,7 @@ class WidgetsController extends QuarxController
     /**
      * Store a newly created Widgets in storage.
      *
-     * @param CreateWidgetsRequest $request
+     * @param WidgetsRequest $request
      *
      * @return Response
      */
@@ -110,11 +110,11 @@ class WidgetsController extends QuarxController
      * Update the specified Widgets in storage.
      *
      * @param  int    $id
-     * @param CreateWidgetsRequest $request
+     * @param WidgetsRequest $request
      *
      * @return Response
      */
-    public function update($id, CreateWidgetsRequest $request)
+    public function update($id, WidgetsRequest $request)
     {
         $id = CryptoService::decrypt($id);
         $widgets = $this->widgetsRepository->findWidgetsById($id);

@@ -15,7 +15,7 @@ use Yab\Quarx\Models\Files;
 use Yab\Quarx\Models\Categories;
 use Yab\Quarx\Services\FileService;
 use Yab\Quarx\Services\ValidationService;
-use Yab\Quarx\Requests\CreateFileRequest;
+use Yab\Quarx\Requests\FileRequest;
 use Yab\Quarx\Repositories\FileRepository;
 use Yab\Quarx\Controllers\QuarxController;
 use Yab\Quarx\Services\QuarxResponseService;
@@ -80,7 +80,7 @@ class FilesController extends QuarxController
     /**
      * Store a newly created Files in storage.
      *
-     * @param CreateFileRequest $request
+     * @param FileRequest $request
      *
      * @return Response
      */
@@ -89,20 +89,20 @@ class FilesController extends QuarxController
         $validation = ValidationService::check(Files::$rules);
 
         if ( ! $validation['errors']) {
-            $files = $this->fileRepository->store($request->all());
+            $file = $this->fileRepository->store($request->all());
         } else {
             return $validation['redirect'];
         }
 
         Quarx::notification('File saved successfully.', 'success');
 
-        return redirect(route('quarx.files.edit', [CryptoService::encrypt($files->id)]));
+        return redirect(route('quarx.files.edit', [CryptoService::encrypt($file->id)]));
     }
 
     /**
      * Store a newly created Files in storage.
      *
-     * @param CreateFileRequest $request
+     * @param FileRequest $request
      *
      * @return Response
      */
@@ -169,11 +169,11 @@ class FilesController extends QuarxController
      * Update the specified Files in storage.
      *
      * @param  int    $id
-     * @param CreateFileRequest $request
+     * @param FileRequest $request
      *
      * @return Response
      */
-    public function update($id, CreateFileRequest $request)
+    public function update($id, FileRequest $request)
     {
         $id = CryptoService::decrypt($id);
         $files = $this->fileRepository->findFilesById($id);

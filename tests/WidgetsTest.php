@@ -1,18 +1,12 @@
 <?php
 
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-
-class WidgetsTest extends TestCase
+class WidgetsTest extends AppTest
 {
-    use WithoutMiddleware;
-
     public function setUp()
     {
         parent::setUp();
-
-        $this->login('admin');
-        $this->migrateUp('quarx');
-
+        $this->withoutMiddleware();
+        $this->withoutEvents();
         factory(\Yab\Quarx\Models\Widgets::class)->create();
     }
 
@@ -37,7 +31,7 @@ class WidgetsTest extends TestCase
 
     public function testEdit()
     {
-        $response = $this->call('GET', 'quarx/widgets/'.Crypto::encrypt(1).'/edit');
+        $response = $this->call('GET', 'quarx/widgets/'.CryptoService::encrypt(1).'/edit');
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertViewHas('widgets');
     }
@@ -50,17 +44,17 @@ class WidgetsTest extends TestCase
 
     public function testStore()
     {
-        $widgets = factory(\Yab\Quarx\Models\Widgets::class)->make([ 'id' => 4 ]);
+        $widgets = factory(\Yab\Quarx\Models\Widgets::class)->make([ 'id' => 2 ]);
         $response = $this->call('POST', 'quarx/widgets', $widgets['attributes']);
 
         $this->assertEquals(302, $response->getStatusCode());
-        $this->assertRedirectedTo('/quarx/widgets');
+        $this->assertRedirectedTo('/quarx/widgets/'.CryptoService::encrypt(2).'/edit');
     }
 
     public function testUpdate()
     {
         $widgets = (array) factory(\Yab\Quarx\Models\Widgets::class)->make([ 'id' => 3, 'answer' => 'dumber question' ]);
-        $response = $this->call('PATCH', 'quarx/widgets/'.Crypto::encrypt(3), $widgets);
+        $response = $this->call('PATCH', 'quarx/widgets/'.CryptoService::encrypt(3), $widgets);
 
         $this->assertEquals(302, $response->getStatusCode());
         $this->assertRedirectedTo('/quarx/widgets');
@@ -68,7 +62,7 @@ class WidgetsTest extends TestCase
 
     public function testDelete()
     {
-        $response = $this->call('GET', 'quarx/widgets/'.Crypto::encrypt(1).'/delete');
+        $response = $this->call('GET', 'quarx/widgets/'.CryptoService::encrypt(1).'/delete');
         $this->assertEquals(302, $response->getStatusCode());
         $this->assertRedirectedTo('quarx/widgets');
     }

@@ -2,10 +2,10 @@
 
 namespace Yab\Quarx\Requests;
 
-use App\Http\Requests\Request;
-use Yab\Quarx\Models\Event;
+use Yab\Quarx\Models\Blog;
+use Illuminate\Foundation\Http\FormRequest;
 
-class CreateEventRequest extends Request
+class BlogRequest extends FormRequest
 {
 
     /**
@@ -25,7 +25,7 @@ class CreateEventRequest extends Request
      */
     public function rules()
     {
-        return Event::$rules;
+        return Blog::$rules;
     }
 
 }

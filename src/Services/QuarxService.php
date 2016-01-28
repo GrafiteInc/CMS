@@ -43,6 +43,7 @@ class QuarxService implements QuarxServiceInterface
      */
     public function asset($path, $contentType = 'null', $fullURL = true)
     {
+
         if ( ! $fullURL) {
             return base_path(__DIR__.'/../Assets/'.$path);
         }

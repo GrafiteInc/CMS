@@ -1,18 +1,13 @@
 <?php
 
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-
-class FaqTest extends TestCase
+class FaqTest extends AppTest
 {
-    use WithoutMiddleware;
 
     public function setUp()
     {
         parent::setUp();
-
-        $this->login('admin');
-        $this->migrateUp('quarx');
-
+        $this->withoutMiddleware();
+        $this->withoutEvents();
         factory(\Yab\Quarx\Models\FAQ::class)->create();
     }
 
@@ -37,7 +32,7 @@ class FaqTest extends TestCase
 
     public function testEdit()
     {
-        $response = $this->call('GET', 'quarx/faqs/'.Crypto::encrypt(1).'/edit');
+        $response = $this->call('GET', 'quarx/faqs/'.CryptoService::encrypt(1).'/edit');
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertViewHas('faq');
     }
@@ -56,25 +51,35 @@ class FaqTest extends TestCase
             'is_published' => ''
         ]);
 
+        $this->seeInDatabase('faqs', ['id' => 1]);
         $this->assertEquals(302, $response->getStatusCode());
-        $this->assertRedirectedTo('quarx/faqs');
+        $this->assertRedirectedTo('quarx/faqs/'.CryptoService::encrypt(2).'/edit');
+    }
+
+    public function testSearch()
+    {
+        $response = $this->call('POST', 'quarx/faqs/search', ['term' => 'wtf']);
+
+        $this->assertViewHas('faqs');
+        $this->assertEquals(200, $response->getStatusCode());
     }
 
     public function testUpdate()
     {
-        $response = $this->call('PATCH', 'quarx/faqs/'.Crypto::encrypt(1), [
+        $response = $this->call('PATCH', 'quarx/faqs/'.CryptoService::encrypt(1), [
             'question' => 'who is this',
             'answer' => 'I am your worst nightmare!',
             'is_published' => 'on'
         ]);
 
+        $this->seeInDatabase('faqs', ['question' => 'who is this']);
         $this->assertEquals(302, $response->getStatusCode());
-        $this->assertRedirectedTo('quarx/faqs/'.Crypto::encrypt(1).'/edit');
+        $this->assertRedirectedTo('quarx/faqs/'.CryptoService::encrypt(1).'/edit');
     }
 
     public function testDelete()
     {
-        $response = $this->call('GET', 'quarx/faqs/'.Crypto::encrypt(1).'/delete');
+        $response = $this->call('GET', 'quarx/faqs/'.CryptoService::encrypt(1).'/delete');
         $this->assertEquals(302, $response->getStatusCode());
         $this->assertRedirectedTo('quarx/faqs');
     }

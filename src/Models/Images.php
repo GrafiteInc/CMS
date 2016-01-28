@@ -21,7 +21,7 @@ class Images extends Model
     ];
 
     public static $rules = [
-        'location' => 'mimes:jpeg,bmp,png,gif'
+        'location' => 'mimes:jpeg,jpg,bmp,png,gif'
     ];
 
 }

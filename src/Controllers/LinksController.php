@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 use Yab\Quarx\Models\Links;
 use Illuminate\Support\Facades\URL;
 use Yab\Quarx\Services\ValidationService;
-use Yab\Quarx\Requests\CreateLinksRequest;
+use Yab\Quarx\Requests\LinksRequest;
 use Yab\Quarx\Repositories\LinksRepository;
 
 class LinksController extends QuarxController
@@ -51,7 +51,7 @@ class LinksController extends QuarxController
     /**
      * Store a newly created Links in storage.
      *
-     * @param CreateLinksRequest $request
+     * @param LinksRequest $request
      *
      * @return Response
      */
@@ -100,11 +100,11 @@ class LinksController extends QuarxController
      * Update the specified Links in storage.
      *
      * @param  int    $id
-     * @param CreateLinksRequest $request
+     * @param LinksRequest $request
      *
      * @return Response
      */
-    public function update($id, CreateLinksRequest $request)
+    public function update($id, LinksRequest $request)
     {
         try {
             $id = CryptoService::decrypt($id);

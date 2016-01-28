@@ -7,7 +7,7 @@ use CryptoService;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 use Yab\Quarx\Models\Event;
-use Yab\Quarx\Requests\CreateEventRequest;
+use Yab\Quarx\Requests\EventRequest;
 use Yab\Quarx\Services\ValidationService;
 use Yab\Quarx\Repositories\EventRepository;
 
@@ -68,7 +68,7 @@ class EventController extends QuarxController
     /**
      * Store a newly created Event in storage.
      *
-     * @param CreateEventRequest $request
+     * @param EventRequest $request
      *
      * @return Response
      */
@@ -113,11 +113,11 @@ class EventController extends QuarxController
      * Update the specified Event in storage.
      *
      * @param  int    $id
-     * @param CreateEventRequest $request
+     * @param EventRequest $request
      *
      * @return Response
      */
-    public function update($id, CreateEventRequest $request)
+    public function update($id, EventRequest $request)
     {
         $id = CryptoService::decrypt($id);
         $event = $this->eventRepository->findEventById($id);

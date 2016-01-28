@@ -61,6 +61,9 @@ class AppTest extends Orchestra\Testbench\TestCase
             '--database' => 'testbench',
             '--realpath' => realpath(__DIR__.'/../src/Migrations'),
         ]);
+        $this->artisan('vendor:publish', [
+            '--provider' => 'Yab\Quarx\QuarxProvider',
+        ]);
         $this->withoutMiddleware();
         $this->withoutEvents();
     }

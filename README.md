@@ -1,5 +1,7 @@
 # Quarx - A CMS for Laravel apps
 
+[![Codeship](https://img.shields.io/codeship/8bf4be00-a7c3-0133-9b26-721682b6b155.svg)](https://github.com/YABhq/Quarx)
+
 Quarx is a full fledged CMS that can be added to any Laravel application. It provides you with full control of things like: pages, menus, links, widgets, blogs, events, faqs etc.
 
 Quarx comes with a module builder for all your custom CMS needs, as well as a module publishing tools. So if you decide to reuse some modules on future projects you can easily publish thier assets seamlessly. If you wish to make your Quarx module into a PHP package, then you will need to have it publish its assets to the `quarx/modules` directory.

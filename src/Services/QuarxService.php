@@ -235,6 +235,27 @@ class QuarxService implements QuarxServiceInterface
         return $response;
     }
 
+    public function defaultModules()
+    {
+        return [
+            'blog',
+            'menus',
+            'files',
+            'images',
+            'pages',
+            'widgets',
+            'events',
+            'faqs',
+        ];
+    }
+
+    /**
+     * Edit button
+     *
+     * @param  string $type
+     * @param  int $id
+     * @return string
+     */
     public function editBtn($type = null, $id = null)
     {
         if (Gate::allows('quarx', Auth::user())) {

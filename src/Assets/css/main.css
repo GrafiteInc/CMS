@@ -245,3 +245,7 @@ span.twitter-typeahead {
     vertical-align: middle;
     text-align: center;
 }
+
+.overflow-hidden {
+    overflow: hidden;
+}

@@ -44,6 +44,7 @@
 
             var _token = '{!! Session::token() !!}';
             var _url = '{!! url("/") !!}';
+            var _pixabayKey = '{!! env('PIXABAY', '') !!}';
 
         </script>
     </head>

@@ -36,7 +36,7 @@
                 <div class="thumbnail">
                     <div class="img" style="background-image: url('{!! FileService::filePreview($image->location) !!}')"></div>
                 </div>
-                <div class="well pull-down">
+                <div class="well pull-down overflow-hidden">
                     @if (! empty($image->name))
                     <p>{!! str_limit($image->name, 35) !!}</p>
                     @else

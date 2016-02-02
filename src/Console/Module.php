@@ -36,9 +36,16 @@ class Module extends Command
 
         $moduleDirectory = base_path('quarx/modules/'.ucfirst(str_plural($table)));
 
+        if (! is_dir(base_path('quarx'))) {
+            mkdir(base_path('quarx'));
+            mkdir(base_path('quarx/modules'));
+        }
+
         mkdir($moduleDirectory);
         mkdir($moduleDirectory.'/Assets');
         mkdir($moduleDirectory.'/Publishes');
+        mkdir($moduleDirectory.'/Publishes/database');
+        mkdir($moduleDirectory.'/Publishes/database/migrations');
         mkdir($moduleDirectory.'/Facades');
         mkdir($moduleDirectory.'/Controllers');
         mkdir($moduleDirectory.'/Migrations');

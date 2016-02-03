@@ -27,9 +27,13 @@ class PagesController extends Controller
     {
         $page = $this->pagesRepository->findPagesByURL('home');
 
-        if (empty($page)) abort(404);
+        $view = view('quarx-frontend::pages.home');
 
-        return view('quarx-frontend::pages.home')->with('page', $page);
+        if (is_null($page)) {
+            return $view;
+        }
+
+        return $view->with('page', $page);
     }
 
     /**
@@ -41,7 +45,9 @@ class PagesController extends Controller
     {
         $pages = $this->pagesRepository->published();
 
-        if (empty($pages)) abort(404);
+        if (empty($pages)) {
+            abort(404);
+        }
 
         return view('quarx-frontend::pages.all')->with('pages', $pages);
     }
@@ -57,9 +63,10 @@ class PagesController extends Controller
     {
         $page = $this->pagesRepository->findPagesByURL($url);
 
-        if (empty($page)) abort(404);
+        if (empty($page)) {
+            abort(404);
+        }
 
-        return view('quarx-frontend::pages.show')->with('page', $page);
+        return view('quarx-frontend::pages.'.$page->template)->with('page', $page);
     }
-
 }

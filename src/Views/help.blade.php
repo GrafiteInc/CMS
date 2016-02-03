@@ -60,8 +60,14 @@ Quarx::widget('uuid') // Renders the widget
 Quarx::menu('uuid', 'css-class') // Renders the menu
 </pre>
 
-<p>These can be used in various ways. The menu can also have a class added to it for easier rendering.</p>
-        </div>
+<p>and</p>
+
+<pre>
+Quarx::images('tag') // Outputs an array of images with matching tags if no tag defined all images are returned
+</pre>
+
+        <h2>Custom Templates</h2>
+        <p>By default the homepage has its own template but you can add any by following these details: To create custom templates for different purposes simply make a view in the <code>resources/views/quarx/pages</code> directory that looks similar to: <code>xxxx-template.blade.php</code>. This means you still have full control of blade templating but your pages can easily swap out views.</p>
     </div>
 
 @stop

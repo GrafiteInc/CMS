@@ -13,6 +13,7 @@ class Pages extends QuarxModel
 
     public $fillable = [
         "title",
+        "template",
         "url",
         "entry",
         "seo_description",
@@ -24,5 +25,4 @@ class Pages extends QuarxModel
     public static $rules = [
 
     ];
-
 }

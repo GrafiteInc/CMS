@@ -16,6 +16,15 @@
 
         {!! Form::model($page, ['route' => ['quarx.pages.update', CryptoService::encrypt($page->id)], 'method' => 'patch']) !!}
 
+            <div class="form-group">
+                <label for="Template">Template</label>
+                <select class="form-control" id="Template" name="template">
+                    @foreach (PageService::getTemplatesAsOptions() as $template)
+                        <option @if($template === $page->template) selected  @endif value="{!! $template !!}">{!! ucfirst(str_replace('-template', '', $template)) !!}</option>
+                    @endforeach
+                </select>
+            </div>
+
             {!! FormMaker::fromObject($page, Config::get('quarx.forms.page')) !!}
 
             <div class="form-group text-right">

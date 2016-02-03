@@ -25,10 +25,27 @@ class PageService
         return $pages;
     }
 
+    public function getTemplatesAsOptions()
+    {
+        $availableTemplates = ['show'];
+        $templates = glob(base_path('resources/views/quarx/pages/*'));
+
+        foreach ($templates as $template) {
+            $template = str_replace(base_path('resources/views/quarx/pages/'), '', $template);
+            if (stristr($template, 'template')) {
+                $template = str_replace('-template.blade.php', '', $template);
+                if (! stristr($template, '.php')) {
+                    $availableTemplates[] = $template.'-template';
+                }
+            }
+        }
+
+        return $availableTemplates;
+    }
+
     public function pageName($id)
     {
         $page = $this->pageRepo->findPagesById($id);
         return $page->title;
     }
-
 }

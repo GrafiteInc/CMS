@@ -2,6 +2,7 @@
 
 namespace Yab\Quarx\Models;
 
+use FileService;
 use Illuminate\Database\Eloquent\Model;
 
 class Images extends Model
@@ -18,10 +19,28 @@ class Images extends Model
         "alt_tag",
         "title_tag",
         "is_published",
+        'tags'
     ];
 
     public static $rules = [
         'location' => 'mimes:jpeg,jpg,bmp,png,gif'
     ];
 
+    public function toArray()
+    {
+        $array = parent::toArray();
+        $array['url'] = $this->url;
+        return $array;
+    }
+
+    /**
+     * Get the images url location
+     *
+     * @param  string  $value
+     * @return string
+     */
+    public function getUrlAttribute()
+    {
+        return FileService::fileAsPublicAsset($this->location);
+    }
 }

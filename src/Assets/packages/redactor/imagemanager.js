@@ -36,9 +36,9 @@ RedactorPlugins.imagemanager = function()
                     {
                         // title
                         var thumbtitle = '';
-                        if (typeof val.title !== 'undefined') thumbtitle = val.title;
+                        if (typeof val.title_tag != 'undefined') thumbtitle = val.title_tag;
 
-                        var img = $('<div class="raw25 pull-left thumbnail-box"><img class="img-responsive" data-img-name="'+ val.location +'" src="' + val.location + '" rel="' + val.location + '" title="' + thumbtitle + '" style="cursor: pointer;" /></div>');
+                        var img = $('<div class="raw25 pull-left thumbnail-box"><img class="img-responsive" data-img-name="'+ val.url +'" src="' + val.url + '" rel="' + val.url + '" title="' + thumbtitle + '" style="cursor: pointer;" /></div>');
                         $('#redactor-image-manager-box').append(img);
                         $(img).click($.proxy(this.imagemanager.insert, this));
 
@@ -59,7 +59,8 @@ RedactorPlugins.imagemanager = function()
         },
         insert: function(e)
         {
-            this.image.insert('<img src="' + $(e.target).attr('rel') + '" alt="' + $(e.target).attr('title') + '">');
+            console.log(e.target)
+            this.image.insert('<img src="' + $(e.target).attr('rel') + '" alt="' + $(e.target).attr('title') + '" title="' + $(e.target).attr('title') + '">');
         }
     };
 };

@@ -71,7 +71,7 @@ class ImagesController extends QuarxController
         try {
             $validation = ValidationService::check([ 'location' => 'required' ]);
 
-            if ( ! $validation['errors']) {
+            if (! $validation['errors']) {
                 $images = $this->imagesRepository->store($request->all());
                 Quarx::notification('Image saved successfully.', 'success');
 
@@ -138,7 +138,7 @@ class ImagesController extends QuarxController
             Quarx::notification($e->getMessage() ?: 'Image could not be saved.', 'danger');
         }
 
-        return redirect(route('quarx.images.index'));
+        return redirect(route('quarx.images.edit', CryptoService::encrypt($id)));
     }
 
     /**
@@ -202,5 +202,4 @@ class ImagesController extends QuarxController
         $image->location = FileService::fileAsPublicAsset($image->location);
         return QuarxResponseService::apiResponse('success', $image);
     }
-
 }

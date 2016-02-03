@@ -74,6 +74,10 @@ return [
                 'type' => 'string',
                 'alt_name' => 'Title Tag',
             ],
+            'tags'       => [
+                'type' => 'string',
+                'class' => 'tags'
+            ],
             'is_published' => [
                 'type' => 'checkbox',
                 'alt_name' => 'Published'

@@ -21,6 +21,21 @@ class ImagesRepository
         return Images::orderBy('created_at', 'desc')->all();
     }
 
+    public function paginated()
+    {
+        return Images::orderBy('created_at', 'desc')->paginate(Config::get('quarx.pagination', 25));
+    }
+
+    public function publishedAndPaginated()
+    {
+        return Images::orderBy('created_at', 'desc')->where('is_published', 1)->paginate(Config::get('quarx.pagination', 25));
+    }
+
+    public function published()
+    {
+        return Images::where('is_published', 1)->orderBy('created_at', 'desc')->paginate(Config::get('quarx.pagination', 25));
+    }
+
     /**
      * Returns all Images for the API
      *
@@ -28,15 +43,52 @@ class ImagesRepository
      */
     public function apiPrepared()
     {
-        $images = Images::orderBy('created_at', 'desc')->get();
+        return Images::orderBy('created_at', 'desc')->where('is_published', 1)->get();
+    }
 
-        foreach ($images as $image) {
-            $image->location = FileService::fileAsPublicAsset($image->location);
+    /**
+     * Returns all Images for the API
+     *
+     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     */
+    public function getImagesByTag($tag)
+    {
+        $images = Images::orderBy('created_at', 'desc')->where('is_published', 1);
+
+        if (! is_null($tag)) {
+            $images->where('tags', 'LIKE', "%".$tag."%");
         }
 
         return $images;
     }
 
+    /**
+     * Returns all Images tags
+     *
+     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     */
+    public function allTags()
+    {
+        $tags = [];
+        $images = Images::orderBy('created_at', 'desc')->where('is_published', 1)->get();
+
+        foreach ($images as $image) {
+            foreach (explode(',', $image->tags) as $tag) {
+                if ($tag > '') {
+                    array_push($tags, $tag);
+                }
+            }
+        }
+
+        return array_unique($tags);
+    }
+
+    /**
+     * Search the images
+     *
+     * @param  string $input
+     * @return Collection
+     */
     public function search($input)
     {
         $query = Images::orderBy('created_at', 'desc')->paginate(Config::get('quarx.pagination', 25));
@@ -44,12 +96,11 @@ class ImagesRepository
         $columns = Schema::getColumnListing('images');
         $attributes = array();
 
-        foreach($columns as $attribute){
-            if(isset($input[$attribute]))
-            {
+        foreach ($columns as $attribute) {
+            if (isset($input[$attribute])) {
                 $query->where($attribute, $input[$attribute]);
                 $attributes[$attribute] =  $input[$attribute];
-            }else{
+            } else {
                 $attributes[$attribute] =  null;
             }
         };

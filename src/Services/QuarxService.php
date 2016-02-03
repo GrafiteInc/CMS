@@ -2,6 +2,7 @@
 
 namespace Yab\Quarx\Services;
 
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Gate;
@@ -18,6 +19,11 @@ use Yab\Quarx\Interfaces\QuarxServiceInterface;
 
 class QuarxService implements QuarxServiceInterface
 {
+    public function __construct()
+    {
+        $this->imageRepo = App::make('Yab\Quarx\Repositories\ImagesRepository');
+    }
+
     /**
      * Generates a notification for the app
      * @param  string $string Notification string
@@ -44,7 +50,7 @@ class QuarxService implements QuarxServiceInterface
     public function asset($path, $contentType = 'null', $fullURL = true)
     {
 
-        if ( ! $fullURL) {
+        if (! $fullURL) {
             return base_path(__DIR__.'/../Assets/'.$path);
         }
 
@@ -147,6 +153,7 @@ class QuarxService implements QuarxServiceInterface
 
     /**
      * Get a widget
+     *
      * @param  string $uuid
      * @return widget
      */
@@ -159,6 +166,27 @@ class QuarxService implements QuarxServiceInterface
         }
 
         return $widget->content;
+    }
+
+    /**
+     * Get images
+     *
+     * @param  string $tag
+     * @return collection
+     */
+    public function images($tag = null)
+    {
+        $images = [];
+
+        if (is_array($tag)) {
+            foreach ($tag as $tagName) {
+                array_merge($images, $this->imageRepo->getImagesByTag($tag));
+            }
+        } else {
+            array_merge($images, $this->imageRepo->getImagesByTag($tag));
+        }
+
+        return $images;
     }
 
     /**
@@ -185,6 +213,7 @@ class QuarxService implements QuarxServiceInterface
 
     /**
      * Quarx package Menus
+     *
      * @return string
      */
     public function packageMenus()

@@ -3237,6 +3237,10 @@
 
                     $('#redactor-image-title').val($image.attr('alt'));
 
+                    if ($image.attr('style').indexOf('width: 100%;') >= 0) {
+                        $('#redactor-image-full-screen-width').attr('checked', true);
+                    };
+
                     if (!this.opts.imageLink) $('.redactor-image-link-option').hide();
                     else
                     {
@@ -3295,6 +3299,14 @@
                     var $link = $image.closest('a');
 
                     $image.attr('alt', $('#redactor-image-title').val());
+                    if ($('#redactor-image-full-screen-width').is(':checked')) {
+                        $image.css({
+                            width: '100%',
+                            height: 'auto'
+                        });
+                    } else {
+                        $image.attr('style', $image.attr('style').replace('width: 100%; height: auto;', ''));
+                    }
 
                     this.image.setFloating($image);
 
@@ -5737,6 +5749,8 @@
                                 + '<option value="center">' + this.lang.get('center') + '</option>'
                                 + '<option value="right">' + this.lang.get('right') + '</option>'
                             + '</select>'
+                            + '<label>Full Screen Width</label>'
+                            + '<input type="checkbox" id="redactor-image-full-screen-width" />'
                         + '</section>',
 
                         image: String()

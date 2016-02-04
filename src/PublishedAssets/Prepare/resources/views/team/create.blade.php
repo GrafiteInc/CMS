@@ -10,8 +10,10 @@
                     @include('partials.navigation')
                 </div>
 
-                @include('partials.errors')
-                @include('partials.message')
+                <div class="col-md-12">
+                    @include('partials.errors')
+                    @include('partials.message')
+                </div>
 
                 <div class="col-md-4 col-md-offset-4">
                     {!! Form::open(['route' => 'teams.store']) !!}

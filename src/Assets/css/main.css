@@ -249,3 +249,7 @@ span.twitter-typeahead {
 .overflow-hidden {
     overflow: hidden;
 }
+
+.quarx-errors li {
+    list-style: none;
+}

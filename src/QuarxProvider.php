@@ -54,6 +54,7 @@ class QuarxProvider extends ServiceProvider
         */
 
         $this->commands([
+            \Yab\Quarx\Console\Prepare::class,
             \Yab\Quarx\Console\Publish::class,
             \Yab\Quarx\Console\Module::class,
         ]);

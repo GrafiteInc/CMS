@@ -1,6 +1,6 @@
 <?php
 
-    Route::group(['middleware' => 'web'], function() {
+    Route::group(['middleware' => 'web'], function () {
 
         /*
         |--------------------------------------------------------------------------
@@ -18,7 +18,7 @@
         |--------------------------------------------------------------------------
         */
 
-        Route::group(['prefix' => 'quarx/api'], function() {
+        Route::group(['prefix' => 'quarx/api'], function () {
             Route::get('images/list', 'ImagesController@apiList');
             Route::post('images/store', 'ImagesController@apiStore');
         });
@@ -29,156 +29,156 @@
         |--------------------------------------------------------------------------
         */
 
-        Route::group(['prefix' => 'quarx', 'middleware' => ['auth', 'quarx']], function(){
+        Route::group(['prefix' => 'quarx'], function () {
 
             Route::get('asset/{path}/{contentType}', "AssetController@asset");
 
-            Route::get('dashboard', 'DashboardController@main');
-            Route::get('help', 'HelpController@main');
+            Route::group(['middleware' => ['auth', 'quarx']], function () {
 
-            /*
-            |--------------------------------------------------------------------------
-            | Common Features
-            |--------------------------------------------------------------------------
-            */
+                Route::get('dashboard', 'DashboardController@main');
+                Route::get('help', 'HelpController@main');
 
-            Route::get('preview/{entity}/{entityId}', 'QuarxFeatureController@preview');
-            Route::get('rollback/{entity}/{entityId}', 'QuarxFeatureController@rollback');
+                /*
+                |--------------------------------------------------------------------------
+                | Common Features
+                |--------------------------------------------------------------------------
+                */
 
-            /*
-            |--------------------------------------------------------------------------
-            | Menus
-            |--------------------------------------------------------------------------
-            */
+                    Route::get('preview/{entity}/{entityId}', 'QuarxFeatureController@preview');
+                    Route::get('rollback/{entity}/{entityId}', 'QuarxFeatureController@rollback');
 
-            Route::resource('menus', 'MenuController');
-            Route::post('menus/search', 'MenuController@search');
+                /*
+                |--------------------------------------------------------------------------
+                | Menus
+                |--------------------------------------------------------------------------
+                */
 
-            Route::get('menus/{id}/delete', [
-                'as' => 'quarx.menus.delete',
-                'uses' => 'MenuController@destroy',
-            ]);
+                    Route::resource('menus', 'MenuController');
+                    Route::post('menus/search', 'MenuController@search');
 
-            /*
-            |--------------------------------------------------------------------------
-            | Links
-            |--------------------------------------------------------------------------
-            */
+                    Route::get('menus/{id}/delete', [
+                    'as' => 'quarx.menus.delete',
+                    'uses' => 'MenuController@destroy',
+                    ]);
 
-            Route::resource('links', 'LinksController', ['except' => ['index', 'show']]);
+                /*
+                |--------------------------------------------------------------------------
+                | Links
+                |--------------------------------------------------------------------------
+                */
 
-            Route::post('links/search', 'LinksController@search');
+                    Route::resource('links', 'LinksController', ['except' => ['index', 'show']]);
 
-            Route::get('links/{id}/delete', [
-                'as' => 'quarx.links.delete',
-                'uses' => 'LinksController@destroy',
-            ]);
+                    Route::post('links/search', 'LinksController@search');
 
-            /*
-            |--------------------------------------------------------------------------
-            | Images
-            |--------------------------------------------------------------------------
-            */
+                    Route::get('links/{id}/delete', [
+                    'as' => 'quarx.links.delete',
+                    'uses' => 'LinksController@destroy',
+                    ]);
 
-            Route::resource('images', 'ImagesController');
+                /*
+                |--------------------------------------------------------------------------
+                | Images
+                |--------------------------------------------------------------------------
+                */
 
-            Route::get('images/{id}/delete', [
-                'as' => 'quarx.images.delete',
-                'uses' => 'ImagesController@destroy',
-            ]);
+                    Route::resource('images', 'ImagesController');
 
-            /*
-            |--------------------------------------------------------------------------
-            | Blog
-            |--------------------------------------------------------------------------
-            */
+                    Route::get('images/{id}/delete', [
+                    'as' => 'quarx.images.delete',
+                    'uses' => 'ImagesController@destroy',
+                    ]);
 
-            Route::resource('blog', 'BlogController');
-            Route::post('blog/search', 'BlogController@search');
-            Route::patch('blog/publish/{id}', 'BlogController@publish');
+                /*
+                |--------------------------------------------------------------------------
+                | Blog
+                |--------------------------------------------------------------------------
+                */
 
-            Route::get('blog/{id}/delete', [
-                'as' => 'quarx.blog.delete',
-                'uses' => 'BlogController@destroy',
-            ]);
+                    Route::resource('blog', 'BlogController');
+                    Route::post('blog/search', 'BlogController@search');
+                    Route::patch('blog/publish/{id}', 'BlogController@publish');
 
-            /*
-            |--------------------------------------------------------------------------
-            | Pages
-            |--------------------------------------------------------------------------
-            */
+                    Route::get('blog/{id}/delete', [
+                    'as' => 'quarx.blog.delete',
+                    'uses' => 'BlogController@destroy',
+                    ]);
 
-            Route::resource('pages', 'PagesController');
-            Route::post('pages/search', 'PagesController@search');
+                /*
+                |--------------------------------------------------------------------------
+                | Pages
+                |--------------------------------------------------------------------------
+                */
 
-            Route::get('pages/{id}/delete', [
-                'as' => 'quarx.pages.delete',
-                'uses' => 'PagesController@destroy',
-            ]);
+                    Route::resource('pages', 'PagesController');
+                    Route::post('pages/search', 'PagesController@search');
 
-            /*
-            |--------------------------------------------------------------------------
-            | Widgets
-            |--------------------------------------------------------------------------
-            */
+                    Route::get('pages/{id}/delete', [
+                    'as' => 'quarx.pages.delete',
+                    'uses' => 'PagesController@destroy',
+                    ]);
 
-            Route::resource('widgets', 'WidgetsController');
-            Route::post('widgets/search', 'WidgetsController@search');
+                /*
+                |--------------------------------------------------------------------------
+                | Widgets
+                |--------------------------------------------------------------------------
+                */
 
-            Route::get('widgets/{id}/delete', [
-                'as' => 'quarx.widgets.delete',
-                'uses' => 'WidgetsController@destroy',
-            ]);
+                    Route::resource('widgets', 'WidgetsController');
+                    Route::post('widgets/search', 'WidgetsController@search');
 
-            /*
-            |--------------------------------------------------------------------------
-            | FAQs
-            |--------------------------------------------------------------------------
-            */
+                    Route::get('widgets/{id}/delete', [
+                    'as' => 'quarx.widgets.delete',
+                    'uses' => 'WidgetsController@destroy',
+                    ]);
 
-            Route::resource('faqs', 'FAQController');
-            Route::post('faqs/search', 'FAQController@search');
+                /*
+                |--------------------------------------------------------------------------
+                | FAQs
+                |--------------------------------------------------------------------------
+                */
 
-            Route::get('faqs/{id}/delete', [
-                'as' => 'quarx.faqs.delete',
-                'uses' => 'FAQController@destroy',
-            ]);
+                    Route::resource('faqs', 'FAQController');
+                    Route::post('faqs/search', 'FAQController@search');
 
-            /*
-            |--------------------------------------------------------------------------
-            | Events
-            |--------------------------------------------------------------------------
-            */
+                    Route::get('faqs/{id}/delete', [
+                    'as' => 'quarx.faqs.delete',
+                    'uses' => 'FAQController@destroy',
+                    ]);
 
-            Route::resource('events', 'EventController');
-            Route::post('events/search', 'EventController@search');
+                /*
+                |--------------------------------------------------------------------------
+                | Events
+                |--------------------------------------------------------------------------
+                */
 
-            Route::get('events/{id}/delete', [
-                'as' => 'quarx.events.delete',
-                'uses' => 'EventController@destroy',
-            ]);
+                    Route::resource('events', 'EventController');
+                    Route::post('events/search', 'EventController@search');
 
-            /*
-            |--------------------------------------------------------------------------
-            | Files
-            |--------------------------------------------------------------------------
-            */
+                    Route::get('events/{id}/delete', [
+                    'as' => 'quarx.events.delete',
+                    'uses' => 'EventController@destroy',
+                    ]);
 
-            Route::get('api/files/list', 'FilesController@apiList');
+                /*
+                |--------------------------------------------------------------------------
+                | Files
+                |--------------------------------------------------------------------------
+                */
 
-            Route::get('files/{id}/delete', [
-                'as' => 'quarx.files.delete',
-                'uses' => 'FilesController@destroy',
-            ]);
+                    Route::get('api/files/list', 'FilesController@apiList');
 
-            Route::get('files/remove/{id}', 'FilesController@remove');
-            Route::post('files/upload', 'FilesController@upload');
-            Route::post('files/search', 'FilesController@search');
+                    Route::get('files/{id}/delete', [
+                    'as' => 'quarx.files.delete',
+                    'uses' => 'FilesController@destroy',
+                    ]);
 
-            Route::resource('files', 'FilesController');
+                    Route::get('files/remove/{id}', 'FilesController@remove');
+                    Route::post('files/upload', 'FilesController@upload');
+                    Route::post('files/search', 'FilesController@search');
 
+                    Route::resource('files', 'FilesController');
+
+            });
         });
-
     });
-
-

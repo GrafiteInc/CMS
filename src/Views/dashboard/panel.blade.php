@@ -11,4 +11,5 @@
     {!! ModuleService::menus() !!}
     {!! Quarx::packageMenus() !!}
     <li><a href="{!! url('quarx/help') !!}"><span class="fa fa-info-circle"></span> Help</a></li>
+    <li><a href="{!! url('dashboard') !!}"><span class="fa fa-arrow-left"></span> Site Dashboard</a></li>
 </ul>

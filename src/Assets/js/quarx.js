@@ -32,6 +32,7 @@ $(function() {
     $(window).resize(function(){
         _setDashboard();
     });
+
     _setDashboard();
 });
 
@@ -41,7 +42,7 @@ $(function() {
 |--------------------------------------------------------------------------
 */
 
-function gondolynNotify(message, _type) {
+function quarxNotify(message, _type) {
     $(".gondolyn-notification").css("display", "block");
     $(".gondolyn-notification").addClass(_type);
 

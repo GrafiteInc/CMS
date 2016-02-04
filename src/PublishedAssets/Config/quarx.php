@@ -15,6 +15,8 @@ return [
     'appAdminEmail' => '',
     'appAdminName' => '',
 
+    'registrationAvailable' => false,
+
     'theme' => 'united', // cosmo, cyborg, darkly, flatly, hero, journal, lumen, paper, readable, sandstone, simplex, slate, united, yeti
 
     'maxFileUploadSize' => 6291456, // 6MB

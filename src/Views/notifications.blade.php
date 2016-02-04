@@ -4,5 +4,5 @@
     $notificationType = Session::get("notificationType");
 
     if ($notification) {
-        echo 'gondolynNotify("'.$notification.'", "'.$notificationType.'");';
+        echo 'quarxNotify("'.$notification.'", "'.$notificationType.'");';
     }

@@ -80,6 +80,4 @@ class AppTest extends Orchestra\Testbench\TestCase
         $response = $this->call('GET', '/quarx/dashboard');
         $this->assertEquals(200, $response->getStatusCode());
     }
-
 }
-

@@ -51,7 +51,7 @@ class ImagesRepository
      *
      * @return \Illuminate\Database\Eloquent\Collection|static[]
      */
-    public function getImagesByTag($tag)
+    public function getImagesByTag($tag = null)
     {
         $images = Images::orderBy('created_at', 'desc')->where('is_published', 1);
 

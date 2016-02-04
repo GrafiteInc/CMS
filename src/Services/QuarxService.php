@@ -180,10 +180,12 @@ class QuarxService implements QuarxServiceInterface
 
         if (is_array($tag)) {
             foreach ($tag as $tagName) {
-                array_merge($images, $this->imageRepo->getImagesByTag($tag));
+                $images = array_merge($images, $this->imageRepo->getImagesByTag($tag)->get()->toArray());
             }
+        } elseif (is_null($tag)) {
+            $images = array_merge($images, $this->imageRepo->getImagesByTag()->get()->toArray());
         } else {
-            array_merge($images, $this->imageRepo->getImagesByTag($tag));
+            $images = array_merge($images, $this->imageRepo->getImagesByTag($tag)->get()->toArray());
         }
 
         return $images;

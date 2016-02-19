@@ -16,7 +16,7 @@ class QuarxProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__.'/PublishedAssets/views'         => base_path('resources/views/quarx'),
+            __DIR__.'/PublishedAssets/Views'         => base_path('resources/views/quarx'),
             __DIR__.'/PublishedAssets/Controllers'   => app_path('Http/Controllers/Quarx'),
             __DIR__.'/Migrations'                    => base_path('database/migrations'),
             __DIR__.'/PublishedAssets/Middleware'    => app_path('Http/Middleware'),

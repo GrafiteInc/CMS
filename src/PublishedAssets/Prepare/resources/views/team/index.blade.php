@@ -31,7 +31,7 @@
                             <table class="table table-striped">
                                 <thead>
                                     <th>Name</th>
-                                    <th width="100px" class="text-right">Action</th>
+                                    <th width="200px" class="text-right">Action</th>
                                 </thead>
                                 <tbody>
                                 @foreach($teams as $team)

@@ -6,6 +6,10 @@
     background-color: #333;
 }
 
+.raw-m-hide {
+    display: none;
+}
+
 .raw-m-hide-important {
     display: none !important;
 }

@@ -34,7 +34,9 @@
 
             <div class="col-md-3 panel raw-margin-top-24">
                 <div class="thumbnail">
-                    <div class="img" style="background-image: url('{!! FileService::filePreview($image->location) !!}')"></div>
+                    <a href="{!! route('quarx.images.edit', [CryptoService::encrypt($image->id)]) !!}">
+                        <div class="img" style="background-image: url('{!! FileService::filePreview($image->location) !!}')"></div>
+                    </a>
                 </div>
                 <div class="well pull-down overflow-hidden">
                     @if (! empty($image->name))

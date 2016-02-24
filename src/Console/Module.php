@@ -76,6 +76,7 @@ class Module extends Command
             '_namespace_model_'          => 'Quarx\Modules\\'.ucfirst(str_plural($table)).'\Models',
             '_namespace_controller_'     => 'Quarx\Modules\\'.ucfirst(str_plural($table)).'\Controllers',
             '_namespace_request_'        => 'Quarx\Modules\\'.ucfirst(str_plural($table)).'\Requests',
+            '_table_name_'               => str_plural(strtolower($table)),
             '_lower_case_'               => strtolower($table),
             '_lower_casePlural_'         => str_plural(strtolower($table)),
             '_camel_case_'               => ucfirst(camel_case($table)),

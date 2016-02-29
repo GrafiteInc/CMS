@@ -1,6 +1,1 @@
-src/Assets/packages/* linguist-vendored
-src/Assets/js/* linguist-vendored
-src/Assets/js/menu.js linguist-vendored=false
-src/Assets/js/quarx-script.js linguist-vendored=false
-src/Assets/js/quarx.js linguist-vendored=false
-src/Assets/js/files-module.js linguist-vendored=false
+src/Assets/* linguist-vendored

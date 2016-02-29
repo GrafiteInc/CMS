@@ -1,11 +1,6 @@
-src/Assets/js/bootstrap-tagsinput.min.js linguist-vendored
-src/Assets/js/bootstrap.js linguist-vendored
-src/Assets/js/bootstrap.min.js linguist-vendored
-src/Assets/js/chart.min.js linguist-vendored
-src/Assets/js/dashboard-chart.js linguist-vendored
-src/Assets/js/dashboard.js linguist-vendored
-src/Assets/js/dropzone-custom.js linguist-vendored
-src/Assets/js/dropzone.js linguist-vendored
-src/Assets/js/jquery.min.js linguist-vendored
-src/Assets/js/typeahead.bundle.js linguist-vendored
 src/Assets/packages/* linguist-vendored
+src/Assets/js/* linguist-vendored
+src/Assets/js/menu.js linguist-vendored=false
+src/Assets/js/quarx-script.js linguist-vendored=false
+src/Assets/js/quarx.js linguist-vendored=false
+src/Assets/js/files-module.js linguist-vendored=false

@@ -71,7 +71,7 @@ class FileRepository
             $fileInput['mime'] = $_file['mime'];
             $fileInput['size'] = $_file['size'];
             $fileInput['order'] = 0;
-            $fileInput['user'] = $input['user'] ?: Auth::id();
+            $fileInput['user'] = (isset($input['user'])) ? $input['user'] : Auth::id();
             $fileInput['is_published'] = (isset($input['is_published'])) ? (bool) $input['is_published'] : 0;
             $result = Files::create($fileInput);
         }

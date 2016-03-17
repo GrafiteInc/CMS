@@ -4,7 +4,7 @@
 
 <div class="container raw-margin-bottom-24">
     <div class="row">
-        <h1 class="text-center">Account Password</h1>
+        <h1 class="text-center">Password</h1>
         <div class="col-md-12 text-center">
             @include('partials.navigation')
         </div>
@@ -14,7 +14,7 @@
             @include('partials.errors')
             @include('partials.message')
 
-            <form method="POST" action="/account/password">
+            <form method="POST" action="/user/password">
                 {!! csrf_field() !!}
 
                 <div class="col-md-12 raw-margin-top-24">

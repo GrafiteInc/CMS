@@ -4,7 +4,7 @@
 
 <div class="container raw-margin-bottom-24">
     <div class="row">
-        <h1 class="text-center">Account Settings</h1>
+        <h1 class="text-center">Settings</h1>
         <div class="col-md-12 text-center">
             @include('partials.navigation')
         </div>
@@ -13,27 +13,27 @@
             @include('partials.errors')
             @include('partials.message')
 
-            <form method="POST" action="/account/settings">
+            <form method="POST" action="/user/settings">
                 {!! csrf_field() !!}
 
                 <div class="col-md-12 raw-margin-top-24">
                     <label>Email</label>
-                    <input class="form-control" type="email" name="email" value="{{ $account->email }}">
+                    <input class="form-control" type="email" name="email" value="{{ $user->email }}">
                 </div>
 
                 <div class="col-md-12 raw-margin-top-24">
                    <label> Name</label>
-                    <input class="form-control" type="name" name="name" value="{{ $account->name }}">
+                    <input class="form-control" type="name" name="name" value="{{ $user->name }}">
                 </div>
 
-                @include('account.account')
+                @include('user.meta')
 
-                @if ($account->roles->first()->name === 'admin' || $account->id == 1)
+                @if ($user->roles->first()->name === 'admin' || $user->id == 1)
                     <div class="col-md-12 raw-margin-top-24">
                        <label> Role</label>
                         <select class="form-control" name="role">
                             @foreach(App\Repositories\Role\Role::all() as $role)
-                                <option @if($account->roles->first()->id === $role->id) selected @endif value="{{ $role->name }}">{{ $role->label }}</option>
+                                <option @if($user->roles->first()->id === $role->id) selected @endif value="{{ $role->name }}">{{ $role->label }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -42,7 +42,7 @@
                 <div class="col-md-12 raw-margin-top-24">
                     <a class="btn btn-default pull-left" href="{{ URL::previous() }}">Cancel</a>
                     <button class="btn btn-primary pull-right" type="submit">Save</button>
-                    <a class="btn btn-info pull-right raw-margin-right-16" href="/account/password">Change Password</a><br>
+                    <a class="btn btn-info pull-right raw-margin-right-16" href="/user/password">Change Password</a><br>
                 </div>
             </form>
 

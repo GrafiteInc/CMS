@@ -5,9 +5,9 @@
         @if (Auth::user()->can('quarx'))
             <a class="btn btn-default" href="/quarx/dashboard">Quarx CMS</a>
         @endif
-        <a class="btn btn-default" href="/account/settings">Account Settings</a>
+        <a class="btn btn-default" href="/user/settings">Settings</a>
         @if (Auth::user()->can('admin'))
-            <a class="btn btn-default" href="/admin/accounts">Account Admin</a>
+            <a class="btn btn-default" href="/admin/users">Admin</a>
         @endif
         <a class="btn btn-default" href="/teams">Team Manager</a>
     </div>

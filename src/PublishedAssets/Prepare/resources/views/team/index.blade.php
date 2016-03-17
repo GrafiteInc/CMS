@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <div class="container raw-margin-top-48">
+    <div class="container">
         <div class="row">
             <div class="col-md-12">
                 <h1 class="text-center">Team Manager</h1>
@@ -38,8 +38,8 @@
                                     <tr>
                                         <td>{{ $team->name }}</td>
                                         <td>
-                                            <a class="btn btn-danger pull-right btn-sm" href="{!! route('teams.delete', [$team->id]) !!}" onclick="return confirm('Are you sure you want to delete this team?')"><i class="fa fa-trash"></i> Delete</a>
-                                            <a class="btn btn-warning pull-right btn-sm raw-margin-right-16" href="{!! route('teams.edit', [$team->id]) !!}"><i class="fa fa-pencil"></i> Edit</a>
+                                            <a class="btn btn-danger pull-right btn-xs" href="{!! route('teams.delete', [$team->id]) !!}" onclick="return confirm('Are you sure you want to delete this team?')"><i class="fa fa-trash"></i> Delete</a>
+                                            <a class="btn btn-warning pull-right btn-xs raw-margin-right-16" href="{!! route('teams.edit', [$team->id]) !!}"><i class="fa fa-pencil"></i> Edit</a>
                                         </td>
                                     </tr>
                                 @endforeach

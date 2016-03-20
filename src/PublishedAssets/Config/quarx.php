@@ -10,6 +10,8 @@ return [
 
     'frontend-namespace' => '\App\Http\Controllers\Quarx',
 
+    'frontend-theme' => 'default',
+
     'module-directory' => 'quarx/modules',
 
     'appAdminEmail' => '',
@@ -17,7 +19,7 @@ return [
 
     'registrationAvailable' => false,
 
-    'theme' => 'united', // cosmo, cyborg, darkly, flatly, hero, journal, lumen, paper, readable, sandstone, simplex, slate, united, yeti
+    'backend-theme' => 'united', // cosmo, cyborg, darkly, flatly, hero, journal, lumen, paper, readable, sandstone, simplex, slate, united, yeti
 
     'maxFileUploadSize' => 6291456, // 6MB
 

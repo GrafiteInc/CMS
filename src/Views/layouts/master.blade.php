@@ -24,7 +24,7 @@
         {!! Minify::stylesheet(Quarx::asset('css/device-mobile.css', 'text/css'), ["media" => 'screen and (max-width: 696px)']) !!}
 
         <!-- Bootstrap Theme -->
-        {!! Minify::stylesheet(Quarx::asset('themes/bootstrap-'.Config::get('quarx.theme', 'united').'.css', 'text/css')) !!}
+        {!! Minify::stylesheet(Quarx::asset('themes/bootstrap-'.Config::get('quarx.backend-theme', 'united').'.css', 'text/css')) !!}
 
         {!! Minify::stylesheet(Quarx::asset('css/quarx-style.css', 'text/css')) !!}
         {!! Minify::stylesheet(Quarx::asset('packages/redactor/redactor.css', 'text/css')) !!}

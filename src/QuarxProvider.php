@@ -3,6 +3,7 @@
 namespace Yab\Quarx;
 
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\ServiceProvider;
 
@@ -16,12 +17,12 @@ class QuarxProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__.'/PublishedAssets/Views'         => base_path('resources/views/quarx'),
-            __DIR__.'/PublishedAssets/Controllers'   => app_path('Http/Controllers/Quarx'),
-            __DIR__.'/Migrations'                    => base_path('database/migrations'),
-            __DIR__.'/PublishedAssets/Middleware'    => app_path('Http/Middleware'),
-            __DIR__.'/PublishedAssets/Routes'        => app_path('Http'),
-            __DIR__.'/PublishedAssets/Config'        => base_path('config'),
+            __DIR__.'/PublishedAssets/Views/themes'         => base_path('resources/views/quarx/themes'),
+            __DIR__.'/PublishedAssets/Controllers'          => app_path('Http/Controllers/Quarx'),
+            __DIR__.'/Migrations'                           => base_path('database/migrations'),
+            __DIR__.'/PublishedAssets/Middleware'           => app_path('Http/Middleware'),
+            __DIR__.'/PublishedAssets/Routes'               => app_path('Http'),
+            __DIR__.'/PublishedAssets/Config'               => base_path('config'),
         ]);
     }
 
@@ -44,8 +45,10 @@ class QuarxProvider extends ServiceProvider
         $loader->alias('Minify', \Devfactory\Minify\Facades\MinifyFacade::class);
         $loader->alias('LaravelAnalytics', \Spatie\LaravelAnalytics\LaravelAnalyticsFacade::class);
 
+        $theme = Config::get('quarx.frontend-theme', 'default');
+
         View::addNamespace('quarx', __DIR__.'/Views');
-        View::addNamespace('quarx-frontend', base_path('resources/views/quarx'));
+        View::addNamespace('quarx-frontend', base_path('resources/views/quarx/themes/'.$theme));
 
         /*
         |--------------------------------------------------------------------------
@@ -54,6 +57,7 @@ class QuarxProvider extends ServiceProvider
         */
 
         $this->commands([
+            \Yab\Quarx\Console\Theme::class,
             \Yab\Quarx\Console\Prepare::class,
             \Yab\Quarx\Console\Publish::class,
             \Yab\Quarx\Console\Module::class,

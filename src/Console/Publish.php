@@ -19,8 +19,6 @@ class Publish extends Command
      */
     protected $name = 'quarx:publish';
 
-    protected $files;
-
     /**
      * The console command description.
      *

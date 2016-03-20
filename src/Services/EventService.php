@@ -5,6 +5,7 @@ namespace Yab\Quarx\Services;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Config;
 use Yab\Quarx\Repositories\EventRepository;
 
 class EventService
@@ -134,6 +135,24 @@ class EventService
         $links .= '<a class="next '.$class.'" href="'.URL::to('events/'.$nextMonth).'">Next Month</a>';
 
         return $links;
+    }
+
+    public function getTemplatesAsOptions()
+    {
+        $availableTemplates = ['show'];
+        $templates = glob(base_path('resources/views/quarx/themes/'.Config::get('quarx.frontend-theme').'/events/*'));
+
+        foreach ($templates as $template) {
+            $template = str_replace(base_path('resources/views/quarx/themes/'.Config::get('quarx.frontend-theme').'/events/'), '', $template);
+            if (stristr($template, 'template')) {
+                $template = str_replace('-template.blade.php', '', $template);
+                if (! stristr($template, '.php')) {
+                    $availableTemplates[] = $template.'-template';
+                }
+            }
+        }
+
+        return $availableTemplates;
     }
 
 

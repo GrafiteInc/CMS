@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\Config;
 
 class BlogService
 {
-
     public function getTemplatesAsOptions()
     {
         $availableTemplates = ['show'];

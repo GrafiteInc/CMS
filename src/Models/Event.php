@@ -15,6 +15,7 @@ class Event extends QuarxModel
         "start_date",
         "end_date",
         "title",
+        "template",
         "details",
         "is_published"
     ];

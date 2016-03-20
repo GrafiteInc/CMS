@@ -81,7 +81,7 @@ class EventsController extends Controller
 
         if (empty($event)) abort(404);
 
-        return view('quarx-frontend::events.show')->with('event', $event);
+        return view('quarx-frontend::events.'.$event->template)->with('event', $event);
     }
 
 }

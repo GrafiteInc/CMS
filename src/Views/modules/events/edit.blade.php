@@ -16,6 +16,15 @@
 
         {!! Form::model($event, ['route' => ['quarx.events.update', CryptoService::encrypt($event->id)], 'method' => 'patch']) !!}
 
+            <div class="form-group">
+                <label for="Template">Template</label>
+                <select class="form-control" id="Template" name="template">
+                    @foreach (EventService::getTemplatesAsOptions() as $template)
+                        <option @if($template === $event->template) selected  @endif value="{!! $template !!}">{!! ucfirst(str_replace('-template', '', $template)) !!}</option>
+                    @endforeach
+                </select>
+            </div>
+
             {!! FormMaker::fromObject($event, Config::get('quarx.forms.event')) !!}
 
             <div class="form-group text-right">

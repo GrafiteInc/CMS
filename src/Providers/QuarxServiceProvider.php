@@ -2,13 +2,15 @@
 
 namespace Yab\Quarx\Providers;
 
-use Illuminate\Foundation\AliasLoader;
+use App;
 use Yab\Quarx\Services\PageService;
-use Illuminate\Support\ServiceProvider;
+use Yab\Quarx\Services\BlogService;
+use Yab\Quarx\Services\EventService;
+use Yab\Quarx\Services\QuarxService;
 use Yab\Quarx\Services\CryptoService;
 use Yab\Quarx\Services\ModuleService;
-use Yab\Quarx\Services\BlogService;
-use Yab\Quarx\Services\QuarxService;
+use Illuminate\Foundation\AliasLoader;
+use Illuminate\Support\ServiceProvider;
 
 class QuarxServiceProvider extends ServiceProvider
 {
@@ -24,6 +26,7 @@ class QuarxServiceProvider extends ServiceProvider
 
         $loader->alias("Quarx", \Yab\Quarx\Facades\QuarxServiceFacade::class);
         $loader->alias("PageService", \Yab\Quarx\Facades\PageServiceFacade::class);
+        $loader->alias("EventService", \Yab\Quarx\Facades\EventServiceFacade::class);
         $loader->alias("CryptoService", \Yab\Quarx\Facades\CryptoServiceFacade::class);
         $loader->alias('ModuleService', \Yab\Quarx\Facades\ModuleServiceFacade::class);
         $loader->alias('BlogService', \Yab\Quarx\Facades\BlogServiceFacade::class);
@@ -43,6 +46,10 @@ class QuarxServiceProvider extends ServiceProvider
 
         $this->app->bind('PageService', function($app) {
             return new PageService();
+        });
+
+        $this->app->bind('EventService', function($app) {
+            return App::make(EventService::class);
         });
 
         $this->app->bind('CryptoService', function($app) {

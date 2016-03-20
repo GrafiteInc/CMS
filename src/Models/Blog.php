@@ -6,7 +6,6 @@ use Yab\Quarx\Models\QuarxModel;
 
 class Blog extends QuarxModel
 {
-
     public $table = "blogs";
 
     public $primaryKey = "id";
@@ -15,6 +14,7 @@ class Blog extends QuarxModel
         "title",
         "tags",
         "entry",
+        "template",
         "is_published",
         "url"
     ];

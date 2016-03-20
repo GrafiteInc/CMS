@@ -7,6 +7,7 @@ use Yab\Quarx\Services\PageService;
 use Illuminate\Support\ServiceProvider;
 use Yab\Quarx\Services\CryptoService;
 use Yab\Quarx\Services\ModuleService;
+use Yab\Quarx\Services\BlogService;
 use Yab\Quarx\Services\QuarxService;
 
 class QuarxServiceProvider extends ServiceProvider
@@ -25,6 +26,7 @@ class QuarxServiceProvider extends ServiceProvider
         $loader->alias("PageService", \Yab\Quarx\Facades\PageServiceFacade::class);
         $loader->alias("CryptoService", \Yab\Quarx\Facades\CryptoServiceFacade::class);
         $loader->alias('ModuleService', \Yab\Quarx\Facades\ModuleServiceFacade::class);
+        $loader->alias('BlogService', \Yab\Quarx\Facades\BlogServiceFacade::class);
         $loader->alias('FileService', \Yab\Quarx\Services\FileService::class);
     }
 
@@ -49,6 +51,10 @@ class QuarxServiceProvider extends ServiceProvider
 
         $this->app->bind('ModuleService', function($app) {
             return new ModuleService();
+        });
+
+        $this->app->bind('BlogService', function($app) {
+            return new BlogService();
         });
     }
 }

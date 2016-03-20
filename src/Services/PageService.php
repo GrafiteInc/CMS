@@ -3,6 +3,7 @@
 namespace Yab\Quarx\Services;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Config;
 use Yab\Quarx\Repositories\PagesRepository;
 
 class PageService
@@ -28,10 +29,10 @@ class PageService
     public function getTemplatesAsOptions()
     {
         $availableTemplates = ['show'];
-        $templates = glob(base_path('resources/views/quarx/pages/*'));
+        $templates = glob(base_path('resources/views/quarx/themes/'.Config::get('quarx.frontend-theme').'/pages/*'));
 
         foreach ($templates as $template) {
-            $template = str_replace(base_path('resources/views/quarx/pages/'), '', $template);
+            $template = str_replace(base_path('resources/views/quarx/themes/'.Config::get('quarx.frontend-theme').'/pages/'), '', $template);
             if (stristr($template, 'template')) {
                 $template = str_replace('-template.blade.php', '', $template);
                 if (! stristr($template, '.php')) {

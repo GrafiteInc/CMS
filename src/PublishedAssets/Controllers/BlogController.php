@@ -67,7 +67,7 @@ class BlogController extends Controller
 
         if (empty($blog)) abort(404);
 
-        return view('quarx-frontend::blog.show')->with('blog', $blog);
+        return view('quarx-frontend::blog.'.$blog->template)->with('blog', $blog);
     }
 
 }

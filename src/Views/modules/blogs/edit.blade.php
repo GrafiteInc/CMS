@@ -16,6 +16,15 @@
 
     {!! Form::model($blog, ['route' => ['quarx.blog.update', CryptoService::encrypt($blog->id)], 'method' => 'patch']) !!}
 
+        <div class="form-group">
+            <label for="Template">Template</label>
+            <select class="form-control" id="Template" name="template">
+                @foreach (BlogService::getTemplatesAsOptions() as $template)
+                    <option @if($template === $blog->template) selected  @endif value="{!! $template !!}">{!! ucfirst(str_replace('-template', '', $template)) !!}</option>
+                @endforeach
+            </select>
+        </div>
+
         {!! FormMaker::fromObject($blog, Config::get('quarx.forms.blog')) !!}
 
         <div class="form-group text-right">

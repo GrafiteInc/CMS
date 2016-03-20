@@ -2,8 +2,11 @@
 
 @section('content')
 
-    <h1>Template Example</h1>
-    <h1>{!! $page->title !!}</h1>
+    <div class="jumbotron">
+        <h1>Featured Page</h1>
+        <h2>{{ $page->title }}</h2>
+    </div>
+
     {!! $page->entry !!}
 
 @endsection

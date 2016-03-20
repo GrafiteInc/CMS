@@ -47,7 +47,7 @@
 
                 @foreach($faqs as $faq)
                     <tr>
-                        <td>{!! $faq->question !!}</td>
+                        <td><a href="{!! route('quarx.faqs.edit', [CryptoService::encrypt($faq->id)]) !!}">{!! $faq->question !!}</a></td>
                         <td class="raw-m-hide">
                             @if ($faq->is_published)
                                 <span class="fa fa-check"></span>

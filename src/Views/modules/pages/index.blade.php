@@ -48,7 +48,7 @@
 
                     @foreach($pages as $pages)
                         <tr>
-                            <td>{!! $pages->title !!}</td>
+                            <td><a href="{!! route('quarx.pages.edit', [CryptoService::encrypt($pages->id)]) !!}">{!! $pages->title !!}</a></td>
                             <td class="raw-m-hide">{!! $pages->url !!}</td>
                             <td class="raw-m-hide">
                                 @if ($pages->is_published)

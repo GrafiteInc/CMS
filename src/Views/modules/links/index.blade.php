@@ -30,7 +30,7 @@
 
                 @foreach($links as $links)
                     <tr>
-                        <td>{!! $links->name !!}</td>
+                        <td><a href="{!! route('quarx.links.edit', [CryptoService::encrypt($links->id)]) !!}">{!! $links->name !!}</a></td>
                         @if ($links->external)
                         <td class="raw-m-hide">{!! $links->external_url !!}</td>
                         @else

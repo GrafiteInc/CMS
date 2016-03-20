@@ -50,7 +50,7 @@
 
                     @foreach($blogs as $blog)
                         <tr>
-                            <td>{!! $blog->title !!}</td>
+                            <td><a href="{!! route('quarx.blog.edit', [CryptoService::encrypt($blog->id)]) !!}">{!! $blog->title !!}</a></td>
                             <td class="raw-m-hide">{!! $blog->url !!}</td>
                             <td class="raw-m-hide">@if ($blog->is_published) <span class="fa fa-check"></span> @endif </td>
                             <td>

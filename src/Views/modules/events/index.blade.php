@@ -49,7 +49,7 @@
 
                 @foreach($events as $event)
                     <tr>
-                        <td>{!! $event->title !!}</td>
+                        <td><a href="{!! route('quarx.events.edit', [CryptoService::encrypt($event->id)]) !!}">{!! $event->title !!}</a></td>
                         <td>{!! date('M jS, Y', strtotime($event->start_date)) !!}</td>
                         <td>{!! date('M jS, Y', strtotime($event->end_date)) !!}</td>
                         <td class="raw-m-hide">

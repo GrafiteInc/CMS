@@ -47,7 +47,7 @@
 
                     @foreach($menus as $menu)
                         <tr>
-                            <td>{!! $menu->name !!}</td>
+                            <td><a href="{!! route('quarx.menus.edit', [CryptoService::encrypt($menu->id)]) !!}">{!! $menu->name !!}</a></td>
                             <td class="raw-m-hide">{!! $menu->uuid !!}</td>
                             <td>
                                 <a href="{!! route('quarx.menus.edit', [CryptoService::encrypt($menu->id)]) !!}"><i class="text-info glyphicon glyphicon-edit"></i></a>

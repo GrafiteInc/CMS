@@ -48,7 +48,7 @@
                 @foreach($widgets as $widgets)
                     <tr>
                         <td>{!! $widgets->name !!}</td>
-                        <td class="raw-m-hide">{!! $widgets->uuid !!}</td>
+                        <td class="raw-m-hide"><a href="{!! route('quarx.widgets.edit', [CryptoService::encrypt($widgets->id)]) !!}">{!! $widgets->uuid !!}</a></td>
                         <td>
                             <a href="{!! route('quarx.widgets.edit', [CryptoService::encrypt($widgets->id)]) !!}"><i class="text-info glyphicon glyphicon-edit"></i></a>
                             <a href="#" onclick="confirmDelete('{!! route('quarx.widgets.delete', [CryptoService::encrypt($widgets->id)]) !!}')"><i class="text-danger glyphicon glyphicon-remove"></i></a>

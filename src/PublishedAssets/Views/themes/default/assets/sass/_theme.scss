@@ -3,6 +3,7 @@
 | Packages
 |--------------------------------------------------------------------------
 */
+
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 
 /*
@@ -10,4 +11,5 @@
 | Base
 |--------------------------------------------------------------------------
 */
-@import "resources/views/themes/default/assets/sass/_base.scss";
+
+@import "resources/views/quarx/themes/default/assets/sass/_base.scss";

@@ -41,7 +41,7 @@ class Theme extends Command
         $files = $fileSystem->allFiles(__DIR__.'/../PublishedAssets/Theme');
         $this->line("\n");
         foreach ($files as $file) {
-            $this->line(str_replace(__DIR__.'/../PublishedAssets/Theme/', '', str_replace('template', strtolower($name), $file)));
+            $this->line(str_replace(__DIR__.'/../PublishedAssets/Theme/', '', str_replace('themeTemplate', strtolower($name), $file)));
         }
 
         $this->info("\n\nThese files will be generated\n");
@@ -51,7 +51,7 @@ class Theme extends Command
         if ($result) {
             foreach ($files as $file) {
                 $newFileName = str_replace(__DIR__.'/../PublishedAssets/Theme', '', $file);
-                $newFileName = str_replace('template', strtolower($name), $newFileName);
+                $newFileName = str_replace('themeTemplate', strtolower($name), $newFileName);
                 $this->line("Copying ".$newFileName."...");
                 if (is_dir($file)) {
                     $fileSystem->copyDirectory($file, base_path($newFileName));
@@ -62,8 +62,12 @@ class Theme extends Command
             }
 
             $sass = file_get_contents(base_path('resources/views/quarx/themes/'.strtolower($name).'/assets/sass/_theme.scss'));
-            $repairs = str_replace('template', strtolower($name), $sass);
-            file_put_contents(base_path('resources/views/quarx/themes/'.strtolower($name).'/assets/sass/_theme.scss'), $repairs);
+            $sassRepairs = str_replace('themeTemplate', strtolower($name), $sass);
+            file_put_contents(base_path('resources/views/quarx/themes/'.strtolower($name).'/assets/sass/_theme.scss'), $sassRepairs);
+
+            $layout = file_get_contents(base_path('resources/views/quarx/themes/'.strtolower($name).'/layout/master.blade.php'));
+            $layoutRepairs = str_replace('themeTemplate', strtolower($name), $layout);
+            file_put_contents(base_path('resources/views/quarx/themes/'.strtolower($name).'/layout/master.blade.php'), $layoutRepairs);
 
             $this->info("Finished generating your theme");
             $this->line("\n");

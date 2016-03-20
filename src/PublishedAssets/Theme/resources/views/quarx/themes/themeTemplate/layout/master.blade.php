@@ -13,7 +13,7 @@
 
     <body>
 
-        @include('quarx.themes.default.partials.navigation')
+        @include('quarx.themes.themeTemplate.partials.navigation')
 
         <div class="site-wrapper">
             <div class="container">

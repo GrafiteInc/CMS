@@ -291,9 +291,9 @@ class QuarxService implements QuarxServiceInterface
     {
         if (Gate::allows('quarx', Auth::user())) {
             if (! is_null($id)) {
-                return '<a href="'. url('quarx/'.$type.'/'.CryptoServiceFacade::encrypt($id).'/edit') .'" class="btn btn-default pull-right"><span class="fa fa-edit"></span> Edit</a>';
+                return '<a href="'. url('quarx/'.$type.'/'.CryptoServiceFacade::encrypt($id).'/edit') .'" class="btn btn-xs btn-default pull-right"><span class="fa fa-pencil"></span> Edit</a>';
             } else {
-                return '<a href="'. url('quarx/'.$type) .'" class="btn btn-default pull-right"><span class="fa fa-edit"></span> Edit</a>';
+                return '<a href="'. url('quarx/'.$type) .'" class="btn btn-xs btn-default pull-right"><span class="fa fa-pencil"></span> Edit</a>';
             }
         }
 

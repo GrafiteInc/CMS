@@ -162,7 +162,7 @@ class QuarxService implements QuarxServiceInterface
         $widget = WidgetsRepository::getWidgetByUUID($uuid);
 
         if (Gate::allows('quarx', Auth::user())) {
-            $widget->content .= '<a href="'. url('quarx/widgets/'.CryptoServiceFacade::encrypt($widget->id).'/edit') .'" class="btn btn-default"><span class="fa fa-edit"></span> Edit</a>';
+            $widget->content .= '<a href="'. url('quarx/widgets/'.CryptoServiceFacade::encrypt($widget->id).'/edit') .'" style="margin-left: 8px;" class="btn btn-xs btn-default"><span class="fa fa-pencil"></span> Edit</a>';
         }
 
         return $widget->content;
@@ -260,7 +260,7 @@ class QuarxService implements QuarxServiceInterface
         }
 
         if (Gate::allows('quarx', Auth::user())) {
-            $response .= '<a href="'. url('quarx/menus/'.CryptoServiceFacade::encrypt($menu->id).'/edit') .'" class="btn btn-default"><span class="fa fa-edit"></span> Edit</a>';
+            $response .= '<a href="'. url('quarx/menus/'.CryptoServiceFacade::encrypt($menu->id).'/edit') .'" style="margin-left: 8px;" class="btn btn-xs btn-default"><span class="fa fa-pencil"></span> Edit</a>';
         }
 
         return $response;

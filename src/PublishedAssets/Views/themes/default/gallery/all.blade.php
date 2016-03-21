@@ -2,6 +2,8 @@
 
 @section('content')
 
+<div class="container">
+
     <h1>Gallery</h1>
 
     <div class="col-md-8">
@@ -14,6 +16,8 @@
             <a href="{{ url('gallery/'.$tag) }}" class="btn btn-default">{{ $tag }}</a>
         @endforeach
     </div>
+
+</div>
 
 @endsection
 

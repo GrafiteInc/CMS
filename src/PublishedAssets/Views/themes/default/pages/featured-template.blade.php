@@ -2,12 +2,16 @@
 
 @section('content')
 
+<div class="container">
+
     <div class="jumbotron">
         <h1>Featured Page</h1>
         <h2>{{ $page->title }}</h2>
     </div>
 
     {!! $page->entry !!}
+
+</div>
 
 @endsection
 

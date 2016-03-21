@@ -1,6 +1,9 @@
 @extends('quarx-frontend::layout.master')
 
 @section('content')
+
+<div class="container">
+
     <h1>FAQs</h1>
 
     @foreach($faqs as $faq)
@@ -12,6 +15,8 @@
             {!! Quarx::editBtn('faqs', $faq->id) !!}
         </div>
     @endforeach
+
+</div>
 
 @endsection
 

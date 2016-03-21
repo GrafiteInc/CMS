@@ -11,14 +11,14 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
 use Illuminate\Filesystem\Filesystem;
 
-class Theme extends Command
+class ThemeGenerate extends Command
 {
     /**
      * The console command name.
      *
      * @var string
      */
-    protected $signature = 'quarx:theme {name}';
+    protected $signature = 'theme:generate {name}';
 
     /**
      * The console command description.

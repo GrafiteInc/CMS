@@ -2,9 +2,12 @@
 
 namespace Yab\Quarx;
 
+use Quarx;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\View;
-use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Foundation\AliasLoader;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\ServiceProvider;
 
 class QuarxProvider extends ServiceProvider
@@ -17,13 +20,29 @@ class QuarxProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__.'/PublishedAssets/Views/themes'         => base_path('resources/views/quarx/themes'),
+            __DIR__.'/PublishedAssets/Views/themes'         => base_path('resources/themes'),
             __DIR__.'/PublishedAssets/Controllers'          => app_path('Http/Controllers/Quarx'),
             __DIR__.'/Migrations'                           => base_path('database/migrations'),
             __DIR__.'/PublishedAssets/Middleware'           => app_path('Http/Middleware'),
             __DIR__.'/PublishedAssets/Routes'               => app_path('Http'),
             __DIR__.'/PublishedAssets/Config'               => base_path('config'),
         ]);
+
+        $theme = Config::get('quarx.frontend-theme', 'default');
+
+        View::addNamespace('quarx', __DIR__.'/Views');
+        View::addLocation(base_path('resources/themes/'.$theme));
+        View::addNamespace('quarx-frontend', base_path('resources/themes/'.$theme));
+
+        Blade::directive('theme', function($expression) {
+            if (Str::startsWith($expression, '(')) {
+                $expression = substr($expression, 1, -1);
+            }
+
+            $theme = Config::get('quarx.frontend-theme');
+            $view = '"quarx-frontend::'.str_replace('"', '', str_replace("'", "", $expression)).'"';
+            return "<?php echo \$__env->make($view, array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>";
+        });
     }
 
     /**
@@ -45,11 +64,6 @@ class QuarxProvider extends ServiceProvider
         $loader->alias('Minify', \Devfactory\Minify\Facades\MinifyFacade::class);
         $loader->alias('LaravelAnalytics', \Spatie\LaravelAnalytics\LaravelAnalyticsFacade::class);
 
-        $theme = Config::get('quarx.frontend-theme', 'default');
-
-        View::addNamespace('quarx', __DIR__.'/Views');
-        View::addNamespace('quarx-frontend', base_path('resources/views/quarx/themes/'.$theme));
-
         /*
         |--------------------------------------------------------------------------
         | Register the Commands
@@ -57,7 +71,8 @@ class QuarxProvider extends ServiceProvider
         */
 
         $this->commands([
-            \Yab\Quarx\Console\Theme::class,
+            \Yab\Quarx\Console\ThemeGenerate::class,
+            \Yab\Quarx\Console\ThemePublish::class,
             \Yab\Quarx\Console\Prepare::class,
             \Yab\Quarx\Console\Publish::class,
             \Yab\Quarx\Console\Module::class,

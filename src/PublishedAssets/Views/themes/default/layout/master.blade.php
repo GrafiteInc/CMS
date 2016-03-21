@@ -13,10 +13,10 @@
 
     <body>
 
-        @include('quarx.themes.default.partials.navigation')
+        @theme('partials.navigation')
 
-        <div class="site-wrapper">
-            <div class="container">
+        <div class="site-wrapper @if(Request::is('/')) homepage @endif">
+            <div class="container-fluid">
                 <div class="menu row">
                     {!! Quarx::menu('main') !!}
                 </div>

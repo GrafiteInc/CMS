@@ -2,6 +2,8 @@
 
 @section('content')
 
+<div class="container">
+
     <h1>Blog</h1>
 
     <div class="row">
@@ -19,6 +21,8 @@
             @endforeach
         </div>
     </div>
+
+</div>
 
 @endsection
 

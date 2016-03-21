@@ -2,8 +2,12 @@
 
 @section('content')
 
+<div class="container">
+
     <h1>{!! $blog->title !!} - <span>{!! $blog->updated_at !!}</span></h1>
     {!! $blog->entry !!}
+
+</div>
 
 @endsection
 

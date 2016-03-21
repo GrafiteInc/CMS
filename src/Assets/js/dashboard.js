@@ -22,15 +22,21 @@ function _setDashboard () {
             left: '-300px',
         });
 
-        if ($('.sidebar-menu-btn').length === 0) {
-            $(".page-header").prepend('<span class="sidebar-menu-btn fa fa-bars raw-margin-right-16"></span>');
-        }
-
-        $('.sidebar-menu-btn').unbind().bind('click', function(){
-            $('.overlay').fadeIn()
+        $('.sidebar-menu-btn .nav-open').unbind().bind('click', function(){
+            $('.overlay').fadeIn();
             $('.sidebar').animate({
                 left: 0
             }, 'fast');
+            $('.sidebar-menu-btn .nav-open').hide();
+            $('.sidebar-menu-btn .nav-close').show();
+        });
+        $('.sidebar-menu-btn .nav-close').unbind().bind('click', function(){
+            $('.overlay').fadeOut();
+            $('.sidebar').animate({
+                left: '-'+$(window).width()+'px',
+            }, 'fast');
+            $('.sidebar-menu-btn .nav-close').hide();
+            $('.sidebar-menu-btn .nav-open').show();
         });
         $('.overlay').unbind().bind('click', function(){
             $('.overlay').fadeOut();

@@ -13,3 +13,22 @@
 .raw-m-hide-important {
     display: none !important;
 }
+
+.sidebar-menu-btn {
+    float: left !important;
+    margin-left: 16px;
+}
+
+.navbar-brand {
+    position: relative;
+    margin-left: -45px;
+    left: 25%;
+}
+
+.nav-open {
+    display: inline;
+}
+
+.nav-close {
+    display: none;
+}

@@ -36,3 +36,6 @@
     padding: 0.6em !important;
 }
 
+.navbar-toggle span {
+    color: #FFF;
+}

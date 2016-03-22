@@ -38,6 +38,9 @@ class Module extends Command
 
         if (! is_dir(base_path('quarx'))) {
             mkdir(base_path('quarx'));
+        }
+
+        if (! is_dir(base_path('quarx/modules'))) {
             mkdir(base_path('quarx/modules'));
         }
 
@@ -48,7 +51,6 @@ class Module extends Command
         mkdir($moduleDirectory.'/Publishes/database/migrations');
         mkdir($moduleDirectory.'/Facades');
         mkdir($moduleDirectory.'/Controllers');
-        mkdir($moduleDirectory.'/Migrations');
         mkdir($moduleDirectory.'/Services');
         mkdir($moduleDirectory.'/Repositories');
         mkdir($moduleDirectory.'/Models');

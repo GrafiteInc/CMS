@@ -7,7 +7,7 @@
             <h1 class="page-header text-center">Help</h1>
 
             <h2>Published Assets</h2>
-            <p>Quarx publishes views and controllers within your application. This allows you to control everything you want. You will find the controllers in: <code>app/Http/Controllers/Quarx</code> and the views in: <code>resources/views/quarx</code>. There is also the quarx config which is added to your app's config directory.</p>
+            <p>Quarx publishes views and controllers within your application. This allows you to control everything you want. You will find the controllers in: <code>app/Http/Controllers/Quarx</code> and the views in: <code>resources/themes</code>. There is also the quarx config which is added to your app's config directory.</p>
             <p>Quarx will also be able to generate cutom modules which you can find in the following directory: <code>quarx/modules</code></p>
             <p>To generate these files simple run:</p>
 <pre>
@@ -57,7 +57,7 @@ Quarx::widget('uuid') // Renders the widget
 <p>and</p>
 
 <pre>
-Quarx::menu('uuid', 'css-class') // Renders the menu
+Quarx::menu('uuid', 'custom-view-path') // Renders the menu
 </pre>
 
 <p>and</p>
@@ -67,7 +67,15 @@ Quarx::images('tag') // Outputs an array of images with matching tags if no tag 
 </pre>
 
         <h2>Custom Templates</h2>
-        <p>By default the homepage has its own template but you can add any by following these details: To create custom templates for different purposes simply make a view in the <code>resources/views/quarx/pages</code> directory that looks similar to: <code>xxxx-template.blade.php</code>. This means you still have full control of blade templating but your pages can easily swap out views.</p>
+        <p>By default the homepage has its own template but you can add any by following these details: To create custom templates for different purposes simply make a view in the <code>resources/themes/pages</code> directory that looks similar to: <code>xxxx-template.blade.php</code>. This means you still have full control of blade templating but your pages can easily swap out views.</p>
+
+        <h2>Custom Themes</h2>
+        <p>By default the Quarx has the default theme. You can override this in the <code>config/quarx.php</code> file. The theme has the namespace of: <code>quarx-frontend::</code>, and has some Blade directives such as:</p>
+
+<pre>
+&#64;theme('path')
+</pre>
+        <p>You can generate new themes and publish thier public assets. Consult the <a target="_blank" href="http://quarx.info/themes">documentation</a> for more information about themes.</p>
     </div>
 
 @stop

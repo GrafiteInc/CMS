@@ -186,7 +186,9 @@ class ImagesController extends QuarxController
         $id = CryptoService::decrypt($id);
         $image = $this->imagesRepository->findImagesById($id);
 
-        Storage::delete($image->location);
+        if (is_file(storage_path($image->location))) {
+            @Storage::delete($image->location);
+        }
 
         if (empty($image)) {
             Quarx::notification('Image not found', 'warning');

@@ -63,6 +63,7 @@ class AppTest extends Orchestra\Testbench\TestCase
         ]);
         $this->artisan('vendor:publish', [
             '--provider' => 'Yab\Quarx\QuarxProvider',
+            '--force' => true
         ]);
         $this->withoutMiddleware();
         $this->withoutEvents();

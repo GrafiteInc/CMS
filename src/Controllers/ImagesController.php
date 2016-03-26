@@ -70,12 +70,18 @@ class ImagesController extends QuarxController
     {
         try {
             $validation = ValidationService::check([ 'location' => 'required' ]);
-
             if (! $validation['errors']) {
-                $images = $this->imagesRepository->store($request->all());
+                foreach ($request->input('location') as $image) {
+                    $imageSaved = $this->imagesRepository->store([
+                        'location' => $image,
+                        'is_published' => $request->input('is_published'),
+                        'tags' => $request->input('tags'),
+                    ]);
+                }
+
                 Quarx::notification('Image saved successfully.', 'success');
 
-                if (! $images) {
+                if (! $imageSaved) {
                     Quarx::notification('Image was not saved.', 'danger');
                 }
             } else {
@@ -86,7 +92,34 @@ class ImagesController extends QuarxController
             Quarx::notification($e->getMessage() ?: 'Image could not be saved.', 'danger');
         }
 
-        return redirect(route('quarx.images.edit', [CryptoService::encrypt($images->id)]));
+        return redirect(route('quarx.images.index'));
+    }
+
+    /**
+     * Store a newly created Files in storage.
+     *
+     * @param FileRequest $request
+     *
+     * @return Response
+     */
+    public function upload(Request $request)
+    {
+        $validation = ValidationService::check([
+            "location" => ['required'],
+        ]);
+
+        if ( ! $validation['errors']) {
+            $file = $request->file('location');
+            $fileSaved = FileService::saveFile($file, 'images/');
+            $fileSaved['name'] = CryptoService::encrypt($fileSaved['name']);
+            $fileSaved['mime'] = $file->getClientMimeType();
+            $fileSaved['size'] = $file->getClientSize();
+            $response = QuarxResponseService::apiResponse("success", $fileSaved);
+        } else {
+            $response = QuarxResponseService::apiErrorResponse($validation['errors'], $validation['inputs']);
+        }
+
+        return $response;
     }
 
     /**

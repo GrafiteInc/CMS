@@ -4,6 +4,7 @@ namespace Yab\Quarx\Repositories;
 
 use Config;
 use Quarx;
+use CryptoService;
 use Yab\Quarx\Models\Images;
 use Yab\Quarx\Services\FileService;
 use Illuminate\Support\Facades\Schema;
@@ -140,7 +141,7 @@ class ImagesRepository
      */
     public function store($input)
     {
-        $savedFile = FileService::saveFile($input['location'], 'images/');
+        $savedFile = $input['location'];
 
         if (! $savedFile) {
             Quarx::notification('Image could not be saved.', 'danger');
@@ -153,7 +154,7 @@ class ImagesRepository
             $input['is_published'] = 1;
         }
 
-        $input['location'] = $savedFile['name'];
+        $input['location'] = CryptoService::decrypt($savedFile['name']);
         $input['original_name'] = $savedFile['original'];
 
         return Images::create($input);

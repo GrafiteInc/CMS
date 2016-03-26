@@ -34,7 +34,6 @@
 @section('javascript')
 
     @parent
-    {!! Minify::javascript(Quarx::asset('js/bootstrap-tagsinput.min.js', 'application/javascript')) !!}
     {!! Minify::javascript(Quarx::asset('packages/dropzone/dropzone.js', 'application/javascript')) !!}
     {!! Minify::javascript(Quarx::asset('js/files-module.js', 'application/javascript')) !!}
     {!! Minify::javascript(Quarx::asset('js/dropzone-custom.js', 'application/javascript')) !!}

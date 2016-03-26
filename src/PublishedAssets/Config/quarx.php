@@ -63,6 +63,16 @@ return [
         ],
 
         'images' => [
+            'is_published'      => [
+                'type' => 'checkbox',
+                'value' => 1
+            ],
+            'tags'       => [
+                'custom' => 'data-role="tagsinput"'
+            ],
+        ],
+
+        'images-edit' => [
             'location'       => [
                 'type' => 'file',
                 'alt_name' => 'File'

@@ -84,6 +84,8 @@
 
                     Route::resource('images', 'ImagesController');
 
+                    Route::post('images/upload', 'ImagesController@upload');
+
                     Route::get('images/{id}/delete', [
                     'as' => 'quarx.images.delete',
                     'uses' => 'ImagesController@destroy',

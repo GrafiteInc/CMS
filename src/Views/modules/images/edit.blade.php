@@ -19,7 +19,7 @@
 
         {!! Form::model($images, ['route' => ['quarx.images.update', CryptoService::encrypt($images->id)], 'method' => 'patch', 'files' => true]) !!}
 
-            {!! FormMaker::fromObject($images, Config::get('quarx.forms.images')) !!}
+            {!! FormMaker::fromObject($images, Config::get('quarx.forms.images-edit')) !!}
 
             <div class="form-group text-right">
                 <a href="{!! URL::to('quarx/images') !!}" class="btn btn-default raw-left">Cancel</a>

@@ -8,5 +8,5 @@
 @endsection
 
 @section('quarx')
-    {!! Quarx::editBtn('blog', $blog->id) !!}
+    @edit('blog', $blog->id)
 @endsection

@@ -23,5 +23,5 @@
 @endsection
 
 @section('quarx')
-    {!! Quarx::editBtn('blog') !!}
+    @edit('blog')
 @endsection

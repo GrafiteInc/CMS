@@ -18,5 +18,5 @@
 @endsection
 
 @section('quarx')
-    {!! Quarx::editBtn('images') !!}
+    @edit('images')
 @endsection

@@ -13,5 +13,5 @@
 @endsection
 
 @section('quarx')
-    {!! Quarx::editBtn('events', $event->id) !!}
+    @edit('events', $event->id)
 @endsection

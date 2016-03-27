@@ -18,12 +18,14 @@
         <div class="site-wrapper">
             <div class="container">
                 <div class="menu row">
-                    {!! Quarx::menu('main') !!}
+                    @menu('main')
                 </div>
 
                 @yield('content')
             </div>
         </div>
+
+        @widget('widget')
 
         <div class="footer container-fluid navbar-fixed-bottom">
             <p class="pull-left">&copy; {{ date('Y') }}</p>

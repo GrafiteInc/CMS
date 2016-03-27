@@ -12,5 +12,5 @@
 @endsection
 
 @section('quarx')
-    {!! Quarx::editBtn('pages', $page->id) !!}
+    @edit('pages', $page->id)
 @endsection

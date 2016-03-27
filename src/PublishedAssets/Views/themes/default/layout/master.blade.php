@@ -18,7 +18,7 @@
         <div class="site-wrapper @if(Request::is('/')) homepage @endif">
             <div class="container-fluid">
                 <div class="menu row">
-                    {!! Quarx::menu('main') !!}
+                    @menu('main')
                 </div>
 
                 @yield('content')

@@ -34,6 +34,12 @@ class QuarxProvider extends ServiceProvider
         View::addLocation(base_path('resources/themes/'.$theme));
         View::addNamespace('quarx-frontend', base_path('resources/themes/'.$theme));
 
+        /*
+        |--------------------------------------------------------------------------
+        | Blade Directives
+        |--------------------------------------------------------------------------
+        */
+
         Blade::directive('theme', function($expression) {
             if (Str::startsWith($expression, '(')) {
                 $expression = substr($expression, 1, -1);
@@ -42,6 +48,22 @@ class QuarxProvider extends ServiceProvider
             $theme = Config::get('quarx.frontend-theme');
             $view = '"quarx-frontend::'.str_replace('"', '', str_replace("'", "", $expression)).'"';
             return "<?php echo \$__env->make($view, array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>";
+        });
+
+        Blade::directive('menu', function($expression) {
+            return "<?php echo Quarx::menu$expression; ?>";
+        });
+
+        Blade::directive('widget', function($expression) {
+            return "<?php echo Quarx::widget$expression; ?>";
+        });
+
+        Blade::directive('images', function($expression) {
+            return "<?php echo Quarx::images$expression; ?>";
+        });
+
+        Blade::directive('edit', function($expression) {
+            return "<?php echo Quarx::editBtn$expression; ?>";
         });
     }
 

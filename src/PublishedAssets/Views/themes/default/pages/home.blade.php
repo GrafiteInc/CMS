@@ -24,7 +24,7 @@
                     <h3>Custom Templates</h3>
                     <p>By default the homepage has its own template but you can add any by following these details:</p>
                     <p>To create custom templates for different purposes simply make a view in <br>
-                        the <code>resources/themes/default/{module-name}</code> directory that looks similar to: `xxxx-template.blade.php`. <br>
+                        the <code>resources/themes/{theme-name}/{module-name}</code> directory that looks similar to: `xxxx-template.blade.php`. <br>
                         This means you still have full control of blade templating but your pages can easily swap out views.</p>
                     <h3>Custom Themes</h3>
                     <p>You can easily generate a theme template via the command: <code>php artisan theme:generate {name}</code> </p>

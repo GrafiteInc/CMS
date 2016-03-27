@@ -29,10 +29,10 @@ class PageService
     public function getTemplatesAsOptions()
     {
         $availableTemplates = ['show'];
-        $templates = glob(base_path('resources/views/quarx/themes/'.Config::get('quarx.frontend-theme').'/pages/*'));
+        $templates = glob(base_path('resources/themes/'.Config::get('quarx.frontend-theme').'/pages/*'));
 
         foreach ($templates as $template) {
-            $template = str_replace(base_path('resources/views/quarx/themes/'.Config::get('quarx.frontend-theme').'/pages/'), '', $template);
+            $template = str_replace(base_path('resources/themes/'.Config::get('quarx.frontend-theme').'/pages/'), '', $template);
             if (stristr($template, 'template')) {
                 $template = str_replace('-template.blade.php', '', $template);
                 if (! stristr($template, '.php')) {

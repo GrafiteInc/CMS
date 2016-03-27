@@ -140,10 +140,10 @@ class EventService
     public function getTemplatesAsOptions()
     {
         $availableTemplates = ['show'];
-        $templates = glob(base_path('resources/views/quarx/themes/'.Config::get('quarx.frontend-theme').'/events/*'));
+        $templates = glob(base_path('resources/themes/'.Config::get('quarx.frontend-theme').'/events/*'));
 
         foreach ($templates as $template) {
-            $template = str_replace(base_path('resources/views/quarx/themes/'.Config::get('quarx.frontend-theme').'/events/'), '', $template);
+            $template = str_replace(base_path('resources/themes/'.Config::get('quarx.frontend-theme').'/events/'), '', $template);
             if (stristr($template, 'template')) {
                 $template = str_replace('-template.blade.php', '', $template);
                 if (! stristr($template, '.php')) {

@@ -10,10 +10,10 @@ class BlogService
     public function getTemplatesAsOptions()
     {
         $availableTemplates = ['show'];
-        $templates = glob(base_path('resources/views/quarx/themes/'.Config::get('quarx.frontend-theme').'/blog/*'));
+        $templates = glob(base_path('resources/themes/'.Config::get('quarx.frontend-theme').'/blog/*'));
 
         foreach ($templates as $template) {
-            $template = str_replace(base_path('resources/views/quarx/themes/'.Config::get('quarx.frontend-theme').'/blog/'), '', $template);
+            $template = str_replace(base_path('resources/themes/'.Config::get('quarx.frontend-theme').'/blog/'), '', $template);
             if (stristr($template, 'template')) {
                 $template = str_replace('-template.blade.php', '', $template);
                 if (! stristr($template, '.php')) {

@@ -9,24 +9,6 @@ use Illuminate\Contracts\Auth\Guard;
 class Quarx
 {
     /**
-     * The Guard implementation.
-     *
-     * @var Guard
-     */
-    protected $auth;
-
-    /**
-     * Create a new filter instance.
-     *
-     * @param  Guard  $auth
-     * @return void
-     */
-    public function __construct(Guard $auth)
-    {
-        $this->auth = $auth;
-    }
-
-    /**
      * Handle an incoming request.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -35,7 +17,7 @@ class Quarx
      */
     public function handle($request, Closure $next)
     {
-        if (Gate::allows('quarx', $this->auth->user())) {
+        if (Gate::allows('quarx')) {
             return $next($request);
         }
 

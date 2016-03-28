@@ -70,11 +70,7 @@
 
 @endsection
 
-<script type="text/javascript">
-
-    function confirmDelete (url) {
-        $('#deleteBtn').attr('href', url);
-        $('#deleteModal').modal('toggle');
-    }
-
-</script>
+@section('javascript')
+    @parent
+    {!! Minify::javascript( Quarx::asset('js/basic-module.js', 'application/javascript') ) !!}
+@stop

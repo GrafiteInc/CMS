@@ -68,8 +68,6 @@
 @endsection
 
 @section('javascript')
-
     @parent
     {!! Minify::javascript(Quarx::asset('js/menu.js', 'application/javascript')) !!}
-
 @endsection

@@ -30,8 +30,6 @@
         <h1 class="page-header">_camel_casePlural_</h1>
     </div>
 
-    @include('_lower_casePlural_::_lower_casePlural_.breadcrumbs', ['location' => []])
-
     @if (isset($term))
     <div class="row">
         <div class="well text-center">You searched for "{{ $term }}"</div>

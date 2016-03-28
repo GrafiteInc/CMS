@@ -40,7 +40,7 @@
             <table class="table table-striped">
                 <thead>
                 <th>Question</th>
-                <th class="raw-m-hide">Is Published</th>
+                <th class="raw-m-hide text-center">Is Published</th>
                 <th width="50px">Action</th>
                 </thead>
                 <tbody>
@@ -48,12 +48,14 @@
                 @foreach($faqs as $faq)
                     <tr>
                         <td><a href="{!! route('quarx.faqs.edit', [CryptoService::encrypt($faq->id)]) !!}">{!! $faq->question !!}</a></td>
-                        <td class="raw-m-hide">
+                        <td class="raw-m-hide text-center">
                             @if ($faq->is_published)
                                 <span class="fa fa-check"></span>
+                            @else
+                                <span class="fa fa-close"></span>
                             @endif
                         </td>
-                        <td>
+                        <td class="text-right">
                             <a href="{!! route('quarx.faqs.edit', [CryptoService::encrypt($faq->id)]) !!}"><i class="text-info glyphicon glyphicon-edit"></i></a>
                             <a href="#" onclick="confirmDelete('{!! route('quarx.faqs.delete', [CryptoService::encrypt($faq->id)]) !!}')"><i class="text-danger glyphicon glyphicon-remove"></i></a>
                         </td>

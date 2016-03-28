@@ -39,11 +39,11 @@
         @else
             <table class="table table-striped">
                 <thead>
-                <th>Title</th>
-                <th>Start Date</th>
-                <th>End Date</th>
-                <th class="raw-m-hide">Is Published</th>
-                <th width="50px">Action</th>
+                    <th>Title</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th class="raw-m-hide text-center">Is Published</th>
+                    <th width="50px">Action</th>
                 </thead>
                 <tbody>
 
@@ -52,12 +52,14 @@
                         <td><a href="{!! route('quarx.events.edit', [CryptoService::encrypt($event->id)]) !!}">{!! $event->title !!}</a></td>
                         <td>{!! date('M jS, Y', strtotime($event->start_date)) !!}</td>
                         <td>{!! date('M jS, Y', strtotime($event->end_date)) !!}</td>
-                        <td class="raw-m-hide">
+                        <td class="raw-m-hide text-center">
                             @if ($event->is_published)
                                 <span class="fa fa-check"></span>
+                            @else
+                                <span class="fa fa-close"></span>
                             @endif
                         </td>
-                        <td>
+                        <td class="text-right">
                             <a href="{!! route('quarx.events.edit', [CryptoService::encrypt($event->id)]) !!}"><i class="text-info glyphicon glyphicon-edit"></i></a>
                             <a href="#" onclick="confirmDelete('{!! route('quarx.events.delete', [CryptoService::encrypt($event->id)]) !!}')"><i class="text-danger glyphicon glyphicon-remove"></i></a>
                         </td>

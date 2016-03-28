@@ -47,6 +47,8 @@
                     <p class="raw-margin-bottom-24">
                         @if ($image->is_published)
                             <span class="pull-left fa fa-check"></span>
+                        @else
+                            <span class="pull-left fa fa-close"></span>
                         @endif
                         <a class="pull-right" href="#" onclick="confirmDelete('{!! route('quarx.images.delete', [CryptoService::encrypt($image->id)]) !!}')"><i class="text-danger glyphicon glyphicon-remove"></i></a>
                         <a class="pull-right raw-margin-right-8" href="{!! route('quarx.images.edit', [CryptoService::encrypt($image->id)]) !!}"><i class="text-info glyphicon glyphicon-edit"></i></a>

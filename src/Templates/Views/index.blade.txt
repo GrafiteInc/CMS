@@ -54,7 +54,7 @@
                         <td>
                             <a href="{!! route('quarx._lower_casePlural_.edit', [CryptoService::encrypt($_lower_casePlural_->id)]) !!}">{!! $_lower_casePlural_->name !!}</a>
                         </td>
-                        <td>
+                        <td class="text-right">
                             <a href="{!! route('quarx._lower_casePlural_.edit', [CryptoService::encrypt($_lower_casePlural_->id)]) !!}"><i class="text-info glyphicon glyphicon-edit"></i></a>
                             <a href="#" onclick="confirmDelete('{!! route('quarx._lower_casePlural_.delete', [CryptoService::encrypt($_lower_casePlural_->id)]) !!}')"><i class="text-danger glyphicon glyphicon-remove"></i></a>
                         </td>

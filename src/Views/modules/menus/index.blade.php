@@ -49,7 +49,7 @@
                         <tr>
                             <td><a href="{!! route('quarx.menus.edit', [CryptoService::encrypt($menu->id)]) !!}">{!! $menu->name !!}</a></td>
                             <td class="raw-m-hide">{!! $menu->uuid !!}</td>
-                            <td>
+                            <td class="text-right">
                                 <a href="{!! route('quarx.menus.edit', [CryptoService::encrypt($menu->id)]) !!}"><i class="text-info glyphicon glyphicon-edit"></i></a>
                                 <a href="#" onclick="confirmDelete('{!! route('quarx.menus.delete', [CryptoService::encrypt($menu->id)]) !!}')"><i class="text-danger glyphicon glyphicon-remove"></i></a>
                             </td>

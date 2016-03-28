@@ -16,7 +16,7 @@
                 <table class="table table-striped">
                     <thead>
                         <th>Name</th>
-                        <th class="raw-m-hide">Published</th>
+                        <th class="raw-m-hide text-center">Published</th>
                         <th width="50px">Action</th>
                     </thead>
                     <tbody>
@@ -27,8 +27,8 @@
                                 <a href="{!! FileService::fileAsDownload($file->name, $file->location) !!}"><span class="fa fa-download"></span></a>
                                 <a href="{!! route('quarx.files.edit', [CryptoService::encrypt($file->id)]) !!}">{!! $file->name !!}</a>
                             </td>
-                            <td class="raw-m-hide">@if ($file->is_published) <span class="fa fa-check"></span> @endif</td>
-                            <td>
+                            <td class="raw-m-hide text-center">@if ($file->is_published) <span class="fa fa-check"></span> @else <span class="fa fa-close"></span> @endif</td>
+                            <td class="text-right">
                                 <a href="{!! route('quarx.files.edit', [CryptoService::encrypt($file->id)]) !!}"><i class="text-info glyphicon glyphicon-edit"></i></a>
                                 <a href="#" onclick="confirmDelete('{!! route('quarx.files.delete', [CryptoService::encrypt($file->id)]) !!}')"><i class="text-danger glyphicon glyphicon-remove"></i></a>
                             </td>

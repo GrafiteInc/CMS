@@ -43,7 +43,7 @@
                     <thead>
                         <th>Title</th>
                         <th class="raw-m-hide">Url</th>
-                        <th class="raw-m-hide">Published</th>
+                        <th class="raw-m-hide text-center">Published</th>
                         <th width="50px">Action</th>
                     </thead>
                     <tbody>
@@ -52,8 +52,8 @@
                         <tr>
                             <td><a href="{!! route('quarx.blog.edit', [CryptoService::encrypt($blog->id)]) !!}">{!! $blog->title !!}</a></td>
                             <td class="raw-m-hide">{!! $blog->url !!}</td>
-                            <td class="raw-m-hide">@if ($blog->is_published) <span class="fa fa-check"></span> @endif </td>
-                            <td>
+                            <td class="raw-m-hide text-center">@if ($blog->is_published) <span class="fa fa-check"></span> @else <span class="fa fa-close"></span> @endif </td>
+                            <td class="text-right">
                                 <a href="{!! route('quarx.blog.edit', [CryptoService::encrypt($blog->id)]) !!}"><i class="text-info glyphicon glyphicon-edit"></i></a>
                                 <a href="#" onclick="confirmDelete('{!! route('quarx.blog.delete', [CryptoService::encrypt($blog->id)]) !!}')"><i class="text-danger glyphicon glyphicon-remove"></i></a>
                             </td>

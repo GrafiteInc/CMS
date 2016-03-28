@@ -48,19 +48,15 @@ php artisan quarx:publish {module}
 </pre>
 
         <h2>Front-End Code</h2>
-        <p>Quarx automatically builds you a sample of the controllers, and views for your application's pages, blog, faqs, etc. There are two main method calls available outside of the standard Laravel methods:</p>
+        <p>Quarx automatically builds you a sample of the controllers, and views for your application's pages, blog, faqs, etc. You can run the following services as method calls or use the blade directives listed below:</p>
 
 <pre>
 Quarx::widget('uuid') // Renders the widget
 </pre>
 
-<p>and</p>
-
 <pre>
 Quarx::menu('uuid', 'custom-view-path') // Renders the menu
 </pre>
-
-<p>and</p>
 
 <pre>
 Quarx::images('tag') // Outputs an array of images with matching tags if no tag defined all images are returned
@@ -73,12 +69,21 @@ Quarx::images('tag') // Outputs an array of images with matching tags if no tag 
         <p>By default the Quarx has the default theme. You can override this in the <code>config/quarx.php</code> file. The theme has the namespace of: <code>quarx-frontend::</code>, and has some Blade directives such as:</p>
 
 <pre>
-&#64;theme('path')
-&#64;menu('uuid')
-&#64;widget('uuid')
-&#64;images('tag')
+&#64;theme('path') // includes file within the theme path
 </pre>
-        <p>You can generate new themes and publish thier public assets. Consult the <a target="_blank" href="http://quarx.info/themes">documentation</a> for more information about themes.</p>
+<pre>
+&#64;menu('uuid') // menu rendering
+</pre>
+<pre>
+&#64;widget('uuid') // widget contents
+</pre>
+<pre>
+&#64;images('tag') // images
+</pre>
+<pre>
+&#64;edit('module', 'id') // a link to edit a module or item on the front-end of the site
+</pre>
+        <p>You can generate new themes and publish thier public assets. Consult the <a target="_blank" href="http://quarx.info/themes">documentation</a> for more information about themes etc.</p>
     </div>
 
 @stop

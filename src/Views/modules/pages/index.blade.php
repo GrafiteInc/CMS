@@ -41,7 +41,7 @@
                     <thead>
                         <th>Title</th>
                         <th class="raw-m-hide">Url</th>
-                        <th class="raw-m-hide">Is Published</th>
+                        <th class="raw-m-hide text-center">Is Published</th>
                         <th width="50px">Action</th>
                     </thead>
                     <tbody>
@@ -50,12 +50,14 @@
                         <tr>
                             <td><a href="{!! route('quarx.pages.edit', [CryptoService::encrypt($pages->id)]) !!}">{!! $pages->title !!}</a></td>
                             <td class="raw-m-hide">{!! $pages->url !!}</td>
-                            <td class="raw-m-hide">
+                            <td class="raw-m-hide text-center">
                                 @if ($pages->is_published)
                                     <span class="fa fa-check"></span>
+                                @else
+                                    <span class="fa fa-close"></span>
                                 @endif
                             </td>
-                            <td>
+                            <td class="text-right">
                                 <a href="{!! route('quarx.pages.edit', [CryptoService::encrypt($pages->id)]) !!}"><i class="text-info glyphicon glyphicon-edit"></i></a>
                                 <a href="#" onclick="confirmDelete('{!! route('quarx.pages.delete', [CryptoService::encrypt($pages->id)]) !!}')"><i class="text-danger glyphicon glyphicon-remove"></i></a>
                             </td>

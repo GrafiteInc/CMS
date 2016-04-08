@@ -37,25 +37,25 @@ class Module extends Command
         $moduleDirectory = base_path('quarx/modules/'.ucfirst(str_plural($table)));
 
         if (! is_dir(base_path('quarx'))) {
-            mkdir(base_path('quarx'));
+            @mkdir(base_path('quarx'));
         }
 
         if (! is_dir(base_path('quarx/modules'))) {
-            mkdir(base_path('quarx/modules'));
+            @mkdir(base_path('quarx/modules'));
         }
 
-        mkdir($moduleDirectory);
-        mkdir($moduleDirectory.'/Assets');
-        mkdir($moduleDirectory.'/Publishes');
-        mkdir($moduleDirectory.'/Publishes/database');
-        mkdir($moduleDirectory.'/Publishes/database/migrations');
-        mkdir($moduleDirectory.'/Facades');
-        mkdir($moduleDirectory.'/Controllers');
-        mkdir($moduleDirectory.'/Services');
-        mkdir($moduleDirectory.'/Repositories');
-        mkdir($moduleDirectory.'/Models');
-        mkdir($moduleDirectory.'/Views');
-        mkdir($moduleDirectory.'/Tests');
+        @mkdir($moduleDirectory);
+        @mkdir($moduleDirectory.'/Assets');
+        @mkdir($moduleDirectory.'/Publishes');
+        @mkdir($moduleDirectory.'/Publishes/database');
+        @mkdir($moduleDirectory.'/Publishes/database/migrations');
+        @mkdir($moduleDirectory.'/Facades');
+        @mkdir($moduleDirectory.'/Controllers');
+        @mkdir($moduleDirectory.'/Services');
+        @mkdir($moduleDirectory.'/Repositories');
+        @mkdir($moduleDirectory.'/Models');
+        @mkdir($moduleDirectory.'/Views');
+        @mkdir($moduleDirectory.'/Tests');
 
         file_put_contents($moduleDirectory.'/config.php', "<?php \n\n\n return [];");
         file_put_contents($moduleDirectory.'/Views/menu.blade.php', "<li><a href=\"<?= URL::to('quarx/".strtolower(str_plural($table))."'); ?>\"><span class=\"fa fa-file\"></span> ".ucfirst(str_plural($table))."</a></li>");

@@ -39,9 +39,5 @@ class QuarxRouteProvider extends ServiceProvider
         $router->group(['namespace' => $this->namespace], function ($router) {
             require __DIR__.'/../Routes/routes.php';
         });
-
-        $router->group([], function ($router) {
-            @include app_path('Http/quarx-routes.php');
-        });
     }
 }

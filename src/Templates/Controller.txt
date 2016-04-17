@@ -5,7 +5,7 @@ namespace _namespace_controller_;
 use Quarx;
 use CryptoService;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use _app_namespace_Http\Controllers\Controller;
 use Quarx\Modules\_camel_casePlural_\Services\_camel_case_Service;
 use Quarx\Modules\_camel_casePlural_\Requests\_camel_case_Request;
 

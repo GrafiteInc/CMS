@@ -29,6 +29,18 @@ Yab\Quarx\QuarxProvider::class
 php artisan vendor:publish --provider="Yab\Quarx\QuarxProvider"
 ```
 
+* Add the following to your routes provider:
+
+```php
+require app_path('Http/quarx-routes.php');
+```
+
+* Add the following to your app.scss file, you will want to modify depending on your theme of choice.
+
+```css
+@import "resources/themes/default/assets/sass/_theme.scss";
+```
+
 * Then migrate:
 
 ```bash

@@ -61,6 +61,7 @@ class Module extends Command
         file_put_contents($moduleDirectory.'/Views/menu.blade.php', "<li><a href=\"<?= URL::to('quarx/".strtolower(str_plural($table))."'); ?>\"><span class=\"fa fa-file\"></span> ".ucfirst(str_plural($table))."</a></li>");
 
         $config = [
+            'bootstrap'                  => false,
             '_path_facade_'              => $moduleDirectory.'/Facades',
             '_path_service_'             => $moduleDirectory.'/Services',
             '_path_repository_'          => $moduleDirectory.'/Repositories',
@@ -72,6 +73,7 @@ class Module extends Command
             '_path_routes_'              => $moduleDirectory.'/routes.php',
             'routes_prefix'              => "<?php \n\nRoute::group(['namespace' => 'Quarx\Modules\\".ucfirst(str_plural($table))."\Controllers', 'prefix' => 'quarx', 'middleware' => ['web', 'auth', 'quarx']], function () { \n\n",
             'routes_suffix'              => "\n\n});",
+            '_app_namespace_'            => app()->getInstance()->getNamespace(),
             '_namespace_services_'       => 'Quarx\Modules\\'.ucfirst(str_plural($table)).'\Services',
             '_namespace_facade_'         => 'Quarx\Modules\\'.ucfirst(str_plural($table)).'\Facades',
             '_namespace_repository_'     => 'Quarx\Modules\\'.ucfirst(str_plural($table)).'\Repositories',

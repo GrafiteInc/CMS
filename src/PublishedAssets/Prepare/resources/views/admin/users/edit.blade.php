@@ -32,11 +32,7 @@
 
                 <div class="col-md-12 raw-margin-top-24">
                    <label> Role</label>
-                    <select class="form-control" name="role">
-                        @foreach(App\Repositories\Role\Role::all() as $role)
-                            <option @if($user->roles->first()->id === $role->id) selected @endif value="{{ $role->name }}">{{ $role->label }}</option>
-                        @endforeach
-                    </select>
+                    @input_maker_create('roles', ['type' => 'relationship', 'model' => 'App\Repositories\Role\Role', 'label' => 'label', 'value' => 'name'], $user)
                 </div>
 
                 <div class="col-md-12 raw-margin-top-24">

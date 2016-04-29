@@ -1,4 +1,4 @@
-# Quarx - Add a CMS to any  Laravel apps gain control of: pages, blogs, galleries, events, custom modules, images and more.
+# Quarx - Add a CMS to any Laravel app to gain control of: pages, blogs, galleries, events, custom modules, images and more.
 
 [![Codeship](https://img.shields.io/codeship/8bf4be00-a7c3-0133-9b26-721682b6b155.svg)](https://github.com/YABhq/Quarx)
 

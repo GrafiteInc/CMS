@@ -21,5 +21,5 @@
 @endsection
 
 @section('quarx')
-    @editBtn('faqs')
+    @edit('faqs')
 @endsection

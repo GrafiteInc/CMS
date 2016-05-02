@@ -3,15 +3,15 @@
 namespace App\Http\Controllers\Quarx;
 
 use App\Http\Controllers\Controller;
-use Yab\Quarx\Repositories\FaqRepository;
+use Yab\Quarx\Repositories\FAQRepository;
 
 class FaqController extends Controller
 {
 
-    /** @var  FaqRepository */
+    /** @var  FAQRepository */
     private $faqRepository;
 
-    function __construct(FaqRepository $faqRepository)
+    function __construct(FAQRepository $faqRepository)
     {
         $this->faqRepository = $faqRepository;
     }

@@ -14,7 +14,7 @@ class Module extends Command
      *
      * @var string
      */
-    protected $signature = 'quarx:module {table} {--migration}';
+    protected $signature = 'quarx:module {table} {--migration} {--schema=}';
 
     /**
      * The console command description.
@@ -62,6 +62,7 @@ class Module extends Command
 
         $config = [
             'bootstrap'                  => false,
+            'semantic'                   => false,
             '_path_facade_'              => $moduleDirectory.'/Facades',
             '_path_service_'             => $moduleDirectory.'/Services',
             '_path_repository_'          => $moduleDirectory.'/Repositories',

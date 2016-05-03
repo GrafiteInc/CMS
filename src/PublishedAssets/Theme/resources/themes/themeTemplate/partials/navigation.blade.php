@@ -1,20 +1,24 @@
-<div class="navbar navbar-default navbar-fixed-top clearfix">
+<nav class="navbar navbar-default navbar-fixed-top clearfix">
     <div class="container-fluid">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                <span class="sr-only">Toggle navigation</span>
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navBar">
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="{{ url('') }}">Home</a>
+        <a class="navbar-brand" href="{{ url('') }}">Home</a>
+        </div>
+        <div class="collapse navbar-collapse" id="navBar">
             <ul class="nav navbar-nav">
+                <li><a href="{{ url('page/welcome') }}">Welcome</a></li>
                 <li><a href="{{ url('blog') }}">Blog</a></li>
-                <li><a href="{{ url('page') }}">Pages</a></li>
                 <li><a href="{{ url('gallery') }}">Gallery</a></li>
                 <li><a href="{{ url('faqs') }}">FAQs</a></li>
                 <li><a href="{{ url('events') }}">Events</a></li>
             </ul>
+            <ul class="nav navbar-nav navbar-right menu">
+                @menu('main')
+            </ul>
         </div>
     </div>
-</div>
+</nav>

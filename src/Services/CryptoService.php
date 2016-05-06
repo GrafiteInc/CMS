@@ -16,7 +16,7 @@ class CryptoService
      * Encrypted Key
      * @var string
      */
-    protected $encryptionKey;
+    protected $password;
 
     /**
      * Bad URL characters
@@ -39,7 +39,7 @@ class CryptoService
      */
     public function __construct()
     {
-        $this->password = md5('quarx');
+        $this->password = env('APP_KEY');
 
         $this->specialCharactersForward = [
             '+' => '.',
@@ -62,9 +62,9 @@ class CryptoService
      */
     public function encrypt($value)
     {
-        $encrypted = openssl_encrypt($value, 'AES-256-CBC', $this->password, null, substr($this->password, 16));
-
-        return $this->url_encode($encrypted);
+        $iv = substr(md5(random_bytes(16)), 0, 16);
+        $encrypted = openssl_encrypt($value, 'AES-256-CBC', $this->password, null, $iv);
+        return $this->url_encode($iv.$encrypted);
     }
 
     /**
@@ -78,8 +78,9 @@ class CryptoService
     public function decrypt($value)
     {
         $decoded = $this->url_decode($value);
-
-        return trim(openssl_decrypt($decoded, 'AES-256-CBC', $this->password, null, substr($this->password, 16)));
+        $iv = substr($decoded, 0, 16);
+        $encryptedValue = str_replace($iv, '', $decoded);
+        return trim(openssl_decrypt($encryptedValue, 'AES-256-CBC', $this->password, null, $iv));
     }
 
     /**

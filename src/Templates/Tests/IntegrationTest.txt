@@ -40,7 +40,6 @@ class _camel_case_IntegrationTest extends TestCase
         $response = $this->actor->call('POST', '_lower_casePlural_', $this->_lower_case_->toArray());
 
         $this->assertEquals(302, $response->getStatusCode());
-        $this->assertRedirectedTo('_lower_casePlural_/'.$this->_lower_case_->id.'/edit');
     }
 
     public function testEdit()

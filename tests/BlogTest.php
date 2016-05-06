@@ -51,7 +51,6 @@ class BlogTest extends AppTest
 
         $this->seeInDatabase('blogs', ['id' => 2]);
         $this->assertEquals(302, $response->getStatusCode());
-        $this->assertRedirectedTo('/quarx/blog/'.CryptoService::encrypt(2).'/edit');
     }
 
     public function testSearch()
@@ -74,7 +73,6 @@ class BlogTest extends AppTest
 
         $this->seeInDatabase('blogs', ['title' => 'dumber and dumber']);
         $this->assertEquals(302, $response->getStatusCode());
-        $this->assertRedirectedTo('quarx/blog/'.CryptoService::encrypt(1).'/edit');
     }
 
     public function testDelete()

@@ -53,7 +53,6 @@ class FaqTest extends AppTest
 
         $this->seeInDatabase('faqs', ['id' => 1]);
         $this->assertEquals(302, $response->getStatusCode());
-        $this->assertRedirectedTo('quarx/faqs/'.CryptoService::encrypt(2).'/edit');
     }
 
     public function testSearch()
@@ -74,7 +73,6 @@ class FaqTest extends AppTest
 
         $this->seeInDatabase('faqs', ['question' => 'who is this']);
         $this->assertEquals(302, $response->getStatusCode());
-        $this->assertRedirectedTo('quarx/faqs/'.CryptoService::encrypt(1).'/edit');
     }
 
     public function testDelete()

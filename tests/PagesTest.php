@@ -49,7 +49,6 @@ class PagesTest extends AppTest
         $response = $this->call('POST', 'quarx/pages', $pages['attributes']);
 
         $this->assertEquals(302, $response->getStatusCode());
-        $this->assertRedirectedTo('/quarx/pages/'.CryptoService::encrypt(2).'/edit');
     }
 
     public function testSearch()

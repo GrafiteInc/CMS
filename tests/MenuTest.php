@@ -49,7 +49,6 @@ class MenuTest extends AppTest
         $response = $this->call('POST', '/quarx/menus', $menu['attributes']);
 
         $this->assertEquals(302, $response->getStatusCode());
-        $this->assertRedirectedTo('/quarx/menus/'.CryptoService::encrypt(2).'/edit');
     }
 
     public function testSearch()
@@ -67,7 +66,6 @@ class MenuTest extends AppTest
         ]);
 
         $this->assertEquals(302, $response->getStatusCode());
-        $this->assertRedirectedTo('/quarx/menus/'.CryptoService::encrypt(1).'/edit');
     }
 
     public function testDelete()

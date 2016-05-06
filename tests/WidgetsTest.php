@@ -48,7 +48,6 @@ class WidgetsTest extends AppTest
         $response = $this->call('POST', 'quarx/widgets', $widgets['attributes']);
 
         $this->assertEquals(302, $response->getStatusCode());
-        $this->assertRedirectedTo('/quarx/widgets/'.CryptoService::encrypt(2).'/edit');
     }
 
     public function testUpdate()

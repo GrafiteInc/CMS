@@ -53,14 +53,12 @@ class LinksTest extends AppTest
         ]);
 
         $this->assertEquals(302, $response->getStatusCode());
-        $this->assertRedirectedTo('/quarx/links/'.CryptoService::encrypt(1).'/edit');
     }
 
     public function testDelete()
     {
         $response = $this->call('GET', '/quarx/links/'.CryptoService::encrypt(1).'/delete');
         $this->assertEquals(302, $response->getStatusCode());
-        $this->assertRedirectedTo('/quarx/menus/'.CryptoService::encrypt(1).'/edit');
     }
 
 }

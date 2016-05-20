@@ -1,6 +1,6 @@
 {
     "name": "yab/quarx",
-    "description": "A CMS for Laravel Apps",
+    "description": "Add a CMS to any Laravel apps gain control of: pages, blogs, galleries, events, custom modules, images and more.",
     "license": "MIT",
     "authors": [
         {

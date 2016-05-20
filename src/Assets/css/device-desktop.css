@@ -4,6 +4,8 @@
 |--------------------------------------------------------------------------
 */
 
-.raw-t-hide {
-    display: block !important;
+@media screen and (min-width: 984px) and (max-width: 1272px) {
+    .raw-t-hide {
+        display: block !important;
+    }
 }

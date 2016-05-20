@@ -13,23 +13,11 @@
         {!! Minify::stylesheet('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css') !!}
         {!! Minify::stylesheet('https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css') !!}
 
-        <!-- RAWCSS -->
-        {!! Minify::stylesheet(Quarx::asset('css/raw.min.css', 'text/css')) !!}
-
         <!-- App style -->
-        {!! Minify::stylesheet(Quarx::asset('css/main.css', 'text/css')) !!}
-        {!! Minify::stylesheet(Quarx::asset('css/loaders.css', 'text/css')) !!}
-        {!! Minify::stylesheet(Quarx::asset('css/device-desktop.css', 'text/css'), ["media" => 'screen and (min-width: 984px) and (max-width: 1272px)']) !!}
-        {!! Minify::stylesheet(Quarx::asset('css/device-tablet.css', 'text/css'), ["media" => 'screen and (min-width: 696px) and (max-width: 984px)']) !!}
-        {!! Minify::stylesheet(Quarx::asset('css/device-mobile.css', 'text/css'), ["media" => 'screen and (max-width: 696px)']) !!}
+        {!! Minify::stylesheet(Quarx::asset('dist/css/all.css', 'text/css')) !!}
 
         <!-- Bootstrap Theme -->
         {!! Minify::stylesheet(Quarx::asset('themes/bootstrap-'.Config::get('quarx.backend-theme', 'united').'.css', 'text/css')) !!}
-
-        {!! Minify::stylesheet(Quarx::asset('css/quarx-style.css', 'text/css')) !!}
-        {!! Minify::stylesheet(Quarx::asset('packages/redactor/redactor.css', 'text/css')) !!}
-
-        {!! Minify::stylesheet(Quarx::asset('packages/datepicker/bootstrap-datetimepicker.css', 'text/css')) !!}
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -84,22 +72,7 @@
         </script>
 
         {!! Minify::javascript(Quarx::asset('js/jquery.min.js', 'application/javascript')) !!}
-        {!! Minify::javascript(Quarx::asset('js/bootstrap.min.js', 'application/javascript')) !!}
-        {!! Minify::javascript(Quarx::asset('js/quarx.js', 'application/javascript')) !!}
-        {!! Minify::javascript(Quarx::asset('js/quarx-script.js', 'application/javascript')) !!}
-        {!! Minify::javascript(Quarx::asset('packages/redactor/redactor.js', 'application/javascript')) !!}
-        {!! Minify::javascript(Quarx::asset('packages/redactor/filemanager.js', 'application/javascript')) !!}
-        {!! Minify::javascript(Quarx::asset('packages/redactor/fontcolor.js', 'application/javascript')) !!}
-        {!! Minify::javascript(Quarx::asset('packages/redactor/fontfamily.js', 'application/javascript')) !!}
-        {!! Minify::javascript(Quarx::asset('packages/redactor/fontsize.js', 'application/javascript')) !!}
-        {!! Minify::javascript(Quarx::asset('packages/redactor/imagemanager.js', 'application/javascript')) !!}
-        {!! Minify::javascript(Quarx::asset('packages/redactor/stockimagemanager.js', 'application/javascript')) !!}
-        {!! Minify::javascript(Quarx::asset('packages/redactor/specialchar.js', 'application/javascript')) !!}
-        {!! Minify::javascript(Quarx::asset('packages/redactor/table.js', 'application/javascript')) !!}
-        {!! Minify::javascript(Quarx::asset('packages/redactor/video.js', 'application/javascript')) !!}
-        {!! Minify::javascript(Quarx::asset('packages/datepicker/moment.js', 'application/javascript')) !!}
-        {!! Minify::javascript(Quarx::asset('packages/datepicker/bootstrap-datetimepicker.min.js', 'application/javascript')) !!}
-        {!! Minify::javascript(Quarx::asset('js/bootstrap-tagsinput.min.js', 'application/javascript')) !!}
+        {!! Minify::javascript(Quarx::asset('dist/js/all.js', 'application/javascript')) !!}
 
         <script type="text/javascript">
 

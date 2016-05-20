@@ -10,7 +10,29 @@ $(function() {
         e.preventDefault();
     });
 
-    $('form').submit(function(){
+    $(".delete-btn").bind("click", function(e){
+        e.preventDefault();
+        $('#deleteModal').modal('toggle');
+        var _parentForm = $(this).parent('form');
+        $('#deleteBtn').bind('click', function(){
+            _parentForm[0].submit();
+        });
+    });
+
+    $(".delete-link-btn").bind("click", function(e){
+        e.preventDefault();
+        $('#deleteLinkModal').modal('toggle');
+        var _parentForm = $(this).parent('form');
+        $('#deleteLinkBtn').bind('click', function(){
+            _parentForm[0].submit();
+        });
+    });
+
+    $(".delete-btn-confirm").bind("click", function(e){
+        e.preventDefault();
+    });
+
+    $('form.add, form.edit').submit(function(){
         $('.loading-overlay').show();
     });
 

@@ -17,7 +17,7 @@
             </div>
         </div>
 
-        {!! Form::model($images, ['route' => ['quarx.images.update', CryptoService::encrypt($images->id)], 'method' => 'patch', 'files' => true]) !!}
+        {!! Form::model($images, ['route' => ['quarx.images.update', CryptoService::encrypt($images->id)], 'method' => 'patch', 'files' => true, 'class' => 'edit']) !!}
 
             {!! FormMaker::fromObject($images, Config::get('quarx.forms.images-edit')) !!}
 

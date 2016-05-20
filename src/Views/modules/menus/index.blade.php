@@ -43,7 +43,7 @@
                 <thead>
                     <th>Name</th>
                     <th class="raw-m-hide">Uuid</th>
-                    <th width="50px">Action</th>
+                    <th width="200px" class="text-right">Action</th>
                 </thead>
                 <tbody>
                     @foreach($menus as $menu)
@@ -51,8 +51,12 @@
                             <td><a href="{!! route('quarx.menus.edit', [CryptoService::encrypt($menu->id)]) !!}">{!! $menu->name !!}</a></td>
                             <td class="raw-m-hide">{!! $menu->uuid !!}</td>
                             <td class="text-right">
-                                <a href="{!! route('quarx.menus.edit', [CryptoService::encrypt($menu->id)]) !!}"><i class="text-info glyphicon glyphicon-edit"></i></a>
-                                <a href="#" onclick="confirmDelete('{!! route('quarx.menus.delete', [CryptoService::encrypt($menu->id)]) !!}')"><i class="text-danger glyphicon glyphicon-remove"></i></a>
+                                <form method="post" action="{!! url('quarx/menus/'.CryptoService::encrypt($menu->id)) !!}">
+                                    {!! csrf_field() !!}
+                                    {!! method_field('DELETE') !!}
+                                    <button class="delete-btn btn btn-xs btn-danger pull-right" type="submit"><i class="fa fa-trash"></i> Delete</button>
+                                </form>
+                                <a class="btn btn-xs btn-default pull-right raw-margin-right-8" href="{!! route('quarx.menus.edit', [CryptoService::encrypt($menu->id)]) !!}"><i class="fa fa-pencil"></i> Edit</a>
                             </td>
                         </tr>
                     @endforeach
@@ -65,9 +69,4 @@
         {!! $pagination !!}
     </div>
 
-@endsection
-
-@section('javascript')
-    @parent
-    {!! Minify::javascript(Quarx::asset('js/menu.js', 'application/javascript')) !!}
 @endsection

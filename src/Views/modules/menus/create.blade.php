@@ -7,7 +7,7 @@
 
     @include('quarx::modules.menus.breadcrumbs', ['location' => ['create']])
 
-    {!! Form::open(['route' => 'quarx.menus.store']) !!}
+    {!! Form::open(['route' => 'quarx.menus.store', 'class' => 'add']) !!}
 
         {!! FormMaker::fromTable('menus', Config::get('quarx.forms.menu')) !!}
 

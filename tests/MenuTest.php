@@ -70,7 +70,7 @@ class MenuTest extends AppTest
 
     public function testDelete()
     {
-        $response = $this->call('GET', '/quarx/menus/'.CryptoService::encrypt(1).'/delete');
+        $response = $this->call('DELETE', '/quarx/menus/'.CryptoService::encrypt(1));
         $this->assertEquals(302, $response->getStatusCode());
         $this->assertRedirectedTo('/quarx/menus');
     }

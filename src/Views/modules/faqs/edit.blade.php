@@ -9,7 +9,7 @@
 
         @include('quarx::modules.faqs.breadcrumbs', ['location' => ['edit']])
 
-        {!! Form::model($faq, ['route' => ['quarx.faqs.update', CryptoService::encrypt($faq->id)], 'method' => 'patch']) !!}
+        {!! Form::model($faq, ['route' => ['quarx.faqs.update', CryptoService::encrypt($faq->id)], 'method' => 'patch', 'class' => 'edit']) !!}
 
             {!! FormMaker::fromObject($faq, Config::get('quarx.forms.faqs')) !!}
 

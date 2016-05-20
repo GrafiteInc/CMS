@@ -17,7 +17,7 @@
                 <thead>
                     <th>Name</th>
                     <th class="raw-m-hide text-center">Published</th>
-                    <th width="50px">Action</th>
+                    <th width="200px" class="text-right">Action</th>
                 </thead>
                 <tbody>
 
@@ -29,8 +29,12 @@
                         </td>
                         <td class="raw-m-hide text-center">@if ($file->is_published) <span class="fa fa-check"></span> @else <span class="fa fa-close"></span> @endif</td>
                         <td class="text-right">
-                            <a href="{!! route('quarx.files.edit', [CryptoService::encrypt($file->id)]) !!}"><i class="text-info glyphicon glyphicon-edit"></i></a>
-                            <a href="#" onclick="confirmDelete('{!! route('quarx.files.delete', [CryptoService::encrypt($file->id)]) !!}')"><i class="text-danger glyphicon glyphicon-remove"></i></a>
+                            <form method="post" action="{!! url('quarx/files/'.CryptoService::encrypt($file->id)) !!}">
+                                {!! csrf_field() !!}
+                                {!! method_field('DELETE') !!}
+                                <button class="delete-btn btn btn-xs btn-danger pull-right" type="submit"><i class="fa fa-trash"></i> Delete</button>
+                            </form>
+                            <a class="btn btn-xs btn-default pull-right raw-margin-right-8" href="{!! route('quarx.files.edit', [CryptoService::encrypt($file->id)]) !!}"><i class="fa fa-pencil"></i> Edit</a>
                         </td>
                     </tr>
                 @endforeach

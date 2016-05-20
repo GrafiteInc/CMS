@@ -44,15 +44,23 @@
                     @else
                     <p>{!! str_limit($image->original_name, 35) !!}</p>
                     @endif
-                    <p class="raw-margin-bottom-24">
-                        @if ($image->is_published)
-                            <span class="pull-left fa fa-check"></span>
-                        @else
-                            <span class="pull-left fa fa-close"></span>
-                        @endif
-                        <a class="pull-right" href="#" onclick="confirmDelete('{!! route('quarx.images.delete', [CryptoService::encrypt($image->id)]) !!}')"><i class="text-danger glyphicon glyphicon-remove"></i></a>
-                        <a class="pull-right raw-margin-right-8" href="{!! route('quarx.images.edit', [CryptoService::encrypt($image->id)]) !!}"><i class="text-info glyphicon glyphicon-edit"></i></a>
-                    </p>
+                    <div class="row">
+                        <div class="col-md-6">
+                            @if ($image->is_published)
+                                <span clas="pull-left"><span class="pull-left fa fa-check"></span> Published</span>
+                            @else
+                                <span clas="pull-left"><span class="pull-left fa fa-close"></span> Published</span>
+                            @endif
+                        </div>
+                        <div class="col-md-6">
+                            <form method="post" action="{!! url('quarx/images/'.CryptoService::encrypt($image->id)) !!}">
+                                {!! csrf_field() !!}
+                                {!! method_field('DELETE') !!}
+                                <button class="delete-btn btn btn-xs btn-danger pull-right" type="submit"><i class="fa fa-trash"></i> Delete</button>
+                            </form>
+                            <a class="btn btn-xs btn-default pull-right raw-margin-right-8" href="{!! route('quarx.images.edit', [CryptoService::encrypt($image->id)]) !!}"><i class="fa fa-pencil"></i> Edit</a>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -66,8 +74,3 @@
     </div>
 
 @endsection
-
-@section('javascript')
-    @parent
-    {!! Minify::javascript( Quarx::asset('js/basic-module.js', 'application/javascript') ) !!}
-@stop

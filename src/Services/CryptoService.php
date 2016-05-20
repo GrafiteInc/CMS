@@ -31,6 +31,12 @@ class CryptoService
     protected $specialCharactersReversed;
 
     /**
+     * The encoding
+     * @var string
+     */
+    protected $encoding;
+
+    /**
      * Construct the Encrypter with the fields
      *
      * @param string
@@ -51,6 +57,8 @@ class CryptoService
             '-' => '=',
             '~' => '/'
         ];
+
+        $this->encoding = 'AES-256-CBC';
     }
 
     /**
@@ -63,7 +71,7 @@ class CryptoService
     public function encrypt($value)
     {
         $iv = substr(md5(random_bytes(16)), 0, 16);
-        $encrypted = openssl_encrypt($value, 'AES-256-CBC', $this->password, null, $iv);
+        $encrypted = openssl_encrypt($value, $this->encoding, $this->password, null, $iv);
         return $this->url_encode($iv.$encrypted);
     }
 
@@ -80,7 +88,7 @@ class CryptoService
         $decoded = $this->url_decode($value);
         $iv = substr($decoded, 0, 16);
         $encryptedValue = str_replace($iv, '', $decoded);
-        return trim(openssl_decrypt($encryptedValue, 'AES-256-CBC', $this->password, null, $iv));
+        return trim(openssl_decrypt($encryptedValue, $this->encoding, $this->password, null, $iv));
     }
 
     /**

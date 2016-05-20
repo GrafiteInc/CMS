@@ -8,7 +8,7 @@
 
     @include('quarx::modules.menus.breadcrumbs', ['location' => ['edit']])
 
-    {!! Form::model($menu, ['route' => ['quarx.menus.update', CryptoService::encrypt($menu->id)], 'method' => 'patch']) !!}
+    {!! Form::model($menu, ['route' => ['quarx.menus.update', CryptoService::encrypt($menu->id)], 'method' => 'patch', 'class' => 'edit']) !!}
 
         {!! FormMaker::fromObject($menu, Config::get('quarx.forms.menu')) !!}
 
@@ -30,9 +30,3 @@
 
 @endsection
 
-@section('javascript')
-
-    @parent
-    {!! Minify::javascript(Quarx::asset('js/menu.js', 'application/javascript')) !!}
-
-@endsection

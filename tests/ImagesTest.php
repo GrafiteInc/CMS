@@ -88,7 +88,7 @@ class ImagesTest extends AppTest
         ];
         $this->call('POST', 'quarx/images', $image, [], ['location' => ['image' => $uploadedFile]]);
 
-        $response = $this->call('GET', 'quarx/images/'.CryptoService::encrypt(2).'/delete');
+        $response = $this->call('DELETE', 'quarx/images/'.CryptoService::encrypt(2));
         $this->assertEquals(302, $response->getStatusCode());
         $this->assertRedirectedTo('quarx/images');
     }

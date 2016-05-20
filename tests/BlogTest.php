@@ -77,7 +77,7 @@ class BlogTest extends AppTest
 
     public function testDelete()
     {
-        $response = $this->call('GET', 'quarx/blog/'.Crypto::encrypt(1).'/delete');
+        $response = $this->call('DELETE', 'quarx/blog/'.Crypto::encrypt(1));
         $this->assertEquals(302, $response->getStatusCode());
         $this->assertRedirectedTo('quarx/blog');
     }

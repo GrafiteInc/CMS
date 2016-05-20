@@ -77,7 +77,7 @@ class FaqTest extends AppTest
 
     public function testDelete()
     {
-        $response = $this->call('GET', 'quarx/faqs/'.CryptoService::encrypt(1).'/delete');
+        $response = $this->call('DELETE', 'quarx/faqs/'.CryptoService::encrypt(1));
         $this->assertEquals(302, $response->getStatusCode());
         $this->assertRedirectedTo('quarx/faqs');
     }

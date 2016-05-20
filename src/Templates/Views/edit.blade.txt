@@ -9,7 +9,7 @@
 
     @include('_lower_casePlural_::_lower_casePlural_.breadcrumbs', ['location' => ['edit']])
 
-    {!! Form::model($_lower_case_, ['route' => ['quarx._lower_casePlural_.update', CryptoService::encrypt($_lower_case_->id)], 'method' => 'patch']) !!}
+    {!! Form::model($_lower_case_, ['route' => ['quarx._lower_casePlural_.update', CryptoService::encrypt($_lower_case_->id)], 'method' => 'patch', 'class' => 'edit']) !!}
 
         {!! FormMaker::fromObject($_lower_case_, FormMaker::getTableColumns('_lower_casePlural_')) !!}
 

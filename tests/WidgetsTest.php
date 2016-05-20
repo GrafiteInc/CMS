@@ -61,7 +61,7 @@ class WidgetsTest extends AppTest
 
     public function testDelete()
     {
-        $response = $this->call('GET', 'quarx/widgets/'.CryptoService::encrypt(1).'/delete');
+        $response = $this->call('DELETE', 'quarx/widgets/'.CryptoService::encrypt(1));
         $this->assertEquals(302, $response->getStatusCode());
         $this->assertRedirectedTo('quarx/widgets');
     }

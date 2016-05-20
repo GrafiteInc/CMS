@@ -8,7 +8,7 @@
 
     @include('quarx::modules.blogs.breadcrumbs', ['location' => ['create']])
 
-    {!! Form::open(['route' => 'quarx.blog.store']) !!}
+    {!! Form::open(['route' => 'quarx.blog.store', 'class' => 'add']) !!}
 
         {!! FormMaker::fromTable('blogs', Config::get('quarx.forms.blog')) !!}
 

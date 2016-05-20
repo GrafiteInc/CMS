@@ -8,7 +8,7 @@
 
     @include('quarx::modules.widgets.breadcrumbs', ['location' => ['create']])
 
-    {!! Form::open(['route' => 'quarx.widgets.store']) !!}
+    {!! Form::open(['route' => 'quarx.widgets.store', 'class' => 'add']) !!}
 
         {!! FormMaker::fromTable('widgets', Config::get('quarx.forms.widget')) !!}
 

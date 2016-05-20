@@ -8,7 +8,7 @@
 
     @include('quarx::modules.faqs.breadcrumbs', ['location' => ['create']])
 
-    {!! Form::open(['route' => 'quarx.faqs.store']) !!}
+    {!! Form::open(['route' => 'quarx.faqs.store', 'class' => 'add']) !!}
 
         {!! FormMaker::fromTable('faqs', Config::get('quarx.forms.faqs')) !!}
 

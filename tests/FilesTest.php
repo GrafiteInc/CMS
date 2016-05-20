@@ -106,7 +106,7 @@ class FilesTest extends AppTest
         ]);
         $this->call('POST', 'quarx/files', $file->getAttributes());
 
-        $response = $this->call('GET', 'quarx/files/'.CryptoService::encrypt(2).'/delete');
+        $response = $this->call('DELETE', 'quarx/files/'.CryptoService::encrypt(2));
         $this->assertEquals(302, $response->getStatusCode());
         $this->assertRedirectedTo('quarx/files');
     }

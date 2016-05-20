@@ -7,7 +7,7 @@
 
     @include('quarx::modules.widgets.breadcrumbs', ['location' => ['edit']])
 
-    {!! Form::model($widgets, ['route' => ['quarx.widgets.update', CryptoService::encrypt($widgets->id)], 'method' => 'patch']) !!}
+    {!! Form::model($widgets, ['route' => ['quarx.widgets.update', CryptoService::encrypt($widgets->id)], 'method' => 'patch', 'class' => 'edit']) !!}
 
         {!! FormMaker::fromObject($widgets, Config::get('quarx.forms.widget')) !!}
 

@@ -8,7 +8,7 @@
 
     @include('quarx::modules.links.breadcrumbs', ['location' => ['create']])
 
-    {!! Form::open(['route' => 'quarx.links.store']) !!}
+    {!! Form::open(['route' => 'quarx.links.store', 'class' => 'add']) !!}
 
         {!! FormMaker::fromTable('links', Config::get('quarx.forms.link')) !!}
 

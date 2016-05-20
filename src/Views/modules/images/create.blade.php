@@ -20,7 +20,7 @@
         {!! Form::open(['url' => 'quarx/images/upload', 'files' => true, 'class' => 'dropzone', 'id' => 'fileDropzone']); !!}
         {!! Form::close() !!}
 
-        {!! Form::open(['route' => 'quarx.images.store', 'files' => true, 'id' => 'fileDetailsForm']) !!}
+        {!! Form::open(['route' => 'quarx.images.store', 'files' => true, 'id' => 'fileDetailsForm', 'class' => 'add']) !!}
 
             {!! FormMaker::fromTable('files', Config::get('quarx.forms.images')) !!}
 

@@ -14,7 +14,7 @@
 
         @include('quarx::modules.events.breadcrumbs', ['location' => ['edit']])
 
-        {!! Form::model($event, ['route' => ['quarx.events.update', CryptoService::encrypt($event->id)], 'method' => 'patch']) !!}
+        {!! Form::model($event, ['route' => ['quarx.events.update', CryptoService::encrypt($event->id)], 'method' => 'patch', 'class' => 'edit']) !!}
 
             <div class="form-group">
                 <label for="Template">Template</label>

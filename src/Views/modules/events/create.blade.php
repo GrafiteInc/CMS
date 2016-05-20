@@ -8,7 +8,7 @@
 
     @include('quarx::modules.events.breadcrumbs', ['location' => ['create']])
 
-    {!! Form::open(['route' => 'quarx.events.store']) !!}
+    {!! Form::open(['route' => 'quarx.events.store', 'class' => 'add']) !!}
 
         {!! FormMaker::fromTable('events', Config::get('quarx.forms.event')) !!}
 

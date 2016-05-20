@@ -44,7 +44,7 @@
                     <th>Title</th>
                     <th class="raw-m-hide">Url</th>
                     <th class="raw-m-hide text-center">Published</th>
-                    <th width="50px">Action</th>
+                    <th width="200px" class="text-right">Actions</th>
                 </thead>
                 <tbody>
 
@@ -54,8 +54,12 @@
                         <td class="raw-m-hide">{!! $blog->url !!}</td>
                         <td class="raw-m-hide text-center">@if ($blog->is_published) <span class="fa fa-check"></span> @else <span class="fa fa-close"></span> @endif </td>
                         <td class="text-right">
-                            <a href="{!! route('quarx.blog.edit', [CryptoService::encrypt($blog->id)]) !!}"><i class="text-info glyphicon glyphicon-edit"></i></a>
-                            <a href="#" onclick="confirmDelete('{!! route('quarx.blog.delete', [CryptoService::encrypt($blog->id)]) !!}')"><i class="text-danger glyphicon glyphicon-remove"></i></a>
+                            <form method="post" action="{!! url('quarx/blog/'.CryptoService::encrypt($blog->id)) !!}">
+                                {!! csrf_field() !!}
+                                {!! method_field('DELETE') !!}
+                                <button class="delete-btn btn btn-xs btn-danger pull-right" type="submit"><i class="fa fa-trash"></i> Delete</button>
+                            </form>
+                            <a class="btn btn-xs btn-default pull-right raw-margin-right-8" href="{!! route('quarx.blog.edit', [CryptoService::encrypt($blog->id)]) !!}"><i class="fa fa-pencil"></i> Edit</a>
                         </td>
                     </tr>
                 @endforeach
@@ -69,8 +73,3 @@
     </div>
 
 @endsection
-
-@section('javascript')
-    @parent
-    {!! Minify::javascript( Quarx::asset('js/basic-module.js', 'application/javascript') ) !!}
-@stop

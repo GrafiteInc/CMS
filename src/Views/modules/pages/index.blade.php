@@ -43,24 +43,28 @@
                     <th>Title</th>
                     <th class="raw-m-hide">Url</th>
                     <th class="raw-m-hide text-center">Is Published</th>
-                    <th width="50px">Action</th>
+                    <th width="200px" class="text-right">Action</th>
                 </thead>
                 <tbody>
 
-                @foreach($pages as $pages)
+                @foreach($pages as $page)
                     <tr>
-                        <td><a href="{!! route('quarx.pages.edit', [CryptoService::encrypt($pages->id)]) !!}">{!! $pages->title !!}</a></td>
-                        <td class="raw-m-hide">{!! $pages->url !!}</td>
+                        <td><a href="{!! route('quarx.pages.edit', [CryptoService::encrypt($page->id)]) !!}">{!! $page->title !!}</a></td>
+                        <td class="raw-m-hide">{!! $page->url !!}</td>
                         <td class="raw-m-hide text-center">
-                            @if ($pages->is_published)
+                            @if ($page->is_published)
                                 <span class="fa fa-check"></span>
                             @else
                                 <span class="fa fa-close"></span>
                             @endif
                         </td>
                         <td class="text-right">
-                            <a href="{!! route('quarx.pages.edit', [CryptoService::encrypt($pages->id)]) !!}"><i class="text-info glyphicon glyphicon-edit"></i></a>
-                            <a href="#" onclick="confirmDelete('{!! route('quarx.pages.delete', [CryptoService::encrypt($pages->id)]) !!}')"><i class="text-danger glyphicon glyphicon-remove"></i></a>
+                            <form method="post" action="{!! url('quarx/pages/'.CryptoService::encrypt($page->id)) !!}">
+                                {!! csrf_field() !!}
+                                {!! method_field('DELETE') !!}
+                                <button class="delete-btn btn btn-xs btn-danger pull-right" type="submit"><i class="fa fa-trash"></i> Delete</button>
+                            </form>
+                            <a class="btn btn-xs btn-default pull-right raw-margin-right-8" href="{!! route('quarx.pages.edit', [CryptoService::encrypt($page->id)]) !!}"><i class="fa fa-pencil"></i> Edit</a>
                         </td>
                     </tr>
                 @endforeach
@@ -76,7 +80,3 @@
 
 @endsection
 
-@section('javascript')
-    @parent
-    {!! Minify::javascript( Quarx::asset('js/basic-module.js', 'application/javascript') ) !!}
-@stop

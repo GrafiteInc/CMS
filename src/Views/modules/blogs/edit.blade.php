@@ -14,7 +14,7 @@
 
     @include('quarx::modules.blogs.breadcrumbs', ['location' => ['edit']])
 
-    {!! Form::model($blog, ['route' => ['quarx.blog.update', CryptoService::encrypt($blog->id)], 'method' => 'patch']) !!}
+    {!! Form::model($blog, ['route' => ['quarx.blog.update', CryptoService::encrypt($blog->id)], 'method' => 'patch', 'class' => 'edit']) !!}
 
         <div class="form-group">
             <label for="Template">Template</label>

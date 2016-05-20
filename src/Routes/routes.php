@@ -56,11 +56,6 @@
                     Route::resource('menus', 'MenuController');
                     Route::post('menus/search', 'MenuController@search');
 
-                    Route::get('menus/{id}/delete', [
-                    'as' => 'quarx.menus.delete',
-                    'uses' => 'MenuController@destroy',
-                    ]);
-
                 /*
                 |--------------------------------------------------------------------------
                 | Links
@@ -68,13 +63,7 @@
                 */
 
                     Route::resource('links', 'LinksController', ['except' => ['index', 'show']]);
-
                     Route::post('links/search', 'LinksController@search');
-
-                    Route::get('links/{id}/delete', [
-                    'as' => 'quarx.links.delete',
-                    'uses' => 'LinksController@destroy',
-                    ]);
 
                 /*
                 |--------------------------------------------------------------------------
@@ -83,13 +72,7 @@
                 */
 
                     Route::resource('images', 'ImagesController');
-
                     Route::post('images/upload', 'ImagesController@upload');
-
-                    Route::get('images/{id}/delete', [
-                    'as' => 'quarx.images.delete',
-                    'uses' => 'ImagesController@destroy',
-                    ]);
 
                 /*
                 |--------------------------------------------------------------------------
@@ -101,11 +84,6 @@
                     Route::post('blog/search', 'BlogController@search');
                     Route::patch('blog/publish/{id}', 'BlogController@publish');
 
-                    Route::get('blog/{id}/delete', [
-                    'as' => 'quarx.blog.delete',
-                    'uses' => 'BlogController@destroy',
-                    ]);
-
                 /*
                 |--------------------------------------------------------------------------
                 | Pages
@@ -114,11 +92,6 @@
 
                     Route::resource('pages', 'PagesController');
                     Route::post('pages/search', 'PagesController@search');
-
-                    Route::get('pages/{id}/delete', [
-                    'as' => 'quarx.pages.delete',
-                    'uses' => 'PagesController@destroy',
-                    ]);
 
                 /*
                 |--------------------------------------------------------------------------
@@ -129,11 +102,6 @@
                     Route::resource('widgets', 'WidgetsController');
                     Route::post('widgets/search', 'WidgetsController@search');
 
-                    Route::get('widgets/{id}/delete', [
-                    'as' => 'quarx.widgets.delete',
-                    'uses' => 'WidgetsController@destroy',
-                    ]);
-
                 /*
                 |--------------------------------------------------------------------------
                 | FAQs
@@ -142,11 +110,6 @@
 
                     Route::resource('faqs', 'FAQController');
                     Route::post('faqs/search', 'FAQController@search');
-
-                    Route::get('faqs/{id}/delete', [
-                    'as' => 'quarx.faqs.delete',
-                    'uses' => 'FAQController@destroy',
-                    ]);
 
                 /*
                 |--------------------------------------------------------------------------
@@ -157,11 +120,6 @@
                     Route::resource('events', 'EventController');
                     Route::post('events/search', 'EventController@search');
 
-                    Route::get('events/{id}/delete', [
-                    'as' => 'quarx.events.delete',
-                    'uses' => 'EventController@destroy',
-                    ]);
-
                 /*
                 |--------------------------------------------------------------------------
                 | Files
@@ -169,11 +127,6 @@
                 */
 
                     Route::get('api/files/list', 'FilesController@apiList');
-
-                    Route::get('files/{id}/delete', [
-                    'as' => 'quarx.files.delete',
-                    'uses' => 'FilesController@destroy',
-                    ]);
 
                     Route::get('files/remove/{id}', 'FilesController@remove');
                     Route::post('files/upload', 'FilesController@upload');

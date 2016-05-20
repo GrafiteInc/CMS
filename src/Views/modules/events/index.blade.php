@@ -43,7 +43,7 @@
                     <th>Start Date</th>
                     <th>End Date</th>
                     <th class="raw-m-hide text-center">Is Published</th>
-                    <th width="50px">Action</th>
+                    <th width="200px" class="text-right">Action</th>
                 </thead>
                 <tbody>
 
@@ -60,8 +60,12 @@
                             @endif
                         </td>
                         <td class="text-right">
-                            <a href="{!! route('quarx.events.edit', [CryptoService::encrypt($event->id)]) !!}"><i class="text-info glyphicon glyphicon-edit"></i></a>
-                            <a href="#" onclick="confirmDelete('{!! route('quarx.events.delete', [CryptoService::encrypt($event->id)]) !!}')"><i class="text-danger glyphicon glyphicon-remove"></i></a>
+                            <form method="post" action="{!! url('quarx/events/'.CryptoService::encrypt($event->id)) !!}">
+                                {!! csrf_field() !!}
+                                {!! method_field('DELETE') !!}
+                                <button class="delete-btn btn btn-xs btn-danger pull-right" type="submit"><i class="fa fa-trash"></i> Delete</button>
+                            </form>
+                            <a class="btn btn-xs btn-default pull-right raw-margin-right-8" href="{!! route('quarx.events.edit', [CryptoService::encrypt($event->id)]) !!}"><i class="fa fa-pencil"></i> Edit</a>
                         </td>
                     </tr>
                 @endforeach
@@ -73,8 +77,3 @@
     {!! $pagination !!}
 
 @endsection
-
-@section('javascript')
-    @parent
-    {!! Minify::javascript( Quarx::asset('js/basic-module.js', 'application/javascript') ) !!}
-@stop

@@ -22,23 +22,27 @@
 @else
     <table class="table table-striped">
         <thead>
-        <th>Name</th>
-        <th class="raw-m-hide">Links To</th>
-        <th width="50px">Action</th>
+            <th>Name</th>
+            <th class="raw-m-hide">Links To</th>
+            <th width="200px" class="text-right">Action</th>
         </thead>
         <tbody>
 
-        @foreach($links as $links)
+        @foreach($links as $link)
             <tr>
-                <td><a href="{!! route('quarx.links.edit', [CryptoService::encrypt($links->id)]) !!}">{!! $links->name !!}</a></td>
-                @if ($links->external)
-                <td class="raw-m-hide">{!! $links->external_url !!}</td>
+                <td><a href="{!! route('quarx.links.edit', [CryptoService::encrypt($link->id)]) !!}">{!! $link->name !!}</a></td>
+                @if ($link->external)
+                <td class="raw-m-hide">{!! $link->external_url !!}</td>
                 @else
-                <td class="raw-m-hide">{!! PageService::pageName($links->page_id) !!}</td>
+                <td class="raw-m-hide">{!! PageService::pageName($link->page_id) !!}</td>
                 @endif
                 <td>
-                    <a href="{!! route('quarx.links.edit', [CryptoService::encrypt($links->id)]) !!}"><i class="text-info glyphicon glyphicon-edit"></i></a>
-                    <a href="#" onclick="confirmLinkDelete('{!! route('quarx.links.delete', [CryptoService::encrypt($links->id)]) !!}')"><i class="text-danger glyphicon glyphicon-remove"></i></a>
+                    <form method="post" action="{!! url('quarx/links/'.CryptoService::encrypt($link->id)) !!}">
+                        {!! csrf_field() !!}
+                        {!! method_field('DELETE') !!}
+                        <button class="delete-link-btn btn btn-xs btn-danger pull-right" type="submit"><i class="fa fa-trash"></i> Delete</button>
+                    </form>
+                    <a class="btn btn-xs btn-default pull-right raw-margin-right-8" href="{!! route('quarx.links.edit', [CryptoService::encrypt($link->id)]) !!}"><i class="fa fa-pencil"></i> Edit</a>
                 </td>
             </tr>
         @endforeach

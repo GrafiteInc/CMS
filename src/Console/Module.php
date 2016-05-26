@@ -96,9 +96,9 @@ class Module extends Command
         $appConfig['template_source'] = __DIR__.'/../AppTemplates/';
         $appConfig['_path_controller_'] = $moduleDirectory.'/Publishes/app/Http/Controllers/Quarx';
         $appConfig['_path_views_'] = $moduleDirectory.'/Publishes/resources/themes/default';
-        $appConfig['_path_routes_'] = base_path('app/Http/quarx-routes.php');
+        $appConfig['_path_routes_'] = $moduleDirectory.'/Publishes/app/Http/'.$config['_lower_casePlural_'].'-routes.php';
         $appConfig['_namespace_controller_'] = $config['_app_namespace_'].'Http\Controllers\Quarx';
-        $appConfig['routes_prefix'] = "\n\nRoute::group(['namespace' => 'Quarx', 'middleware' => ['web']], function () {";
+        $appConfig['routes_prefix'] = "<?php \n\nRoute::group(['namespace' => 'Quarx', 'middleware' => ['web']], function () {\n\n";
         $appConfig['routes_suffix'] = "\n\n});";
 
         try {
@@ -137,7 +137,11 @@ class Module extends Command
             $crudGenerator->createViews($appConfig);
 
             $this->line('Building routes...');
+            @file_put_contents($moduleDirectory.'/Publishes/app/Http/'.$config['_lower_casePlural_'].'-routes.php', '');
             $crudGenerator->createRoutes($appConfig, false);
+
+            $this->info('Add this to your `app/Providers/RouteServiceProver.php` in the `mapWebRoutes` method:');
+            $this->comment("\nrequire app_path('Http/".$config['_lower_casePlural_']."-routes.php');\n");
         } catch (Exception $e) {
             throw new Exception("Unable to generate your Module", 1);
         }

@@ -48,6 +48,9 @@ class Module extends Command
         @mkdir($moduleDirectory.'/Assets');
         @mkdir($moduleDirectory.'/Publishes');
         @mkdir($moduleDirectory.'/Publishes/database');
+        @mkdir($moduleDirectory.'/Publishes/app/Http', 0777, true);
+        @mkdir($moduleDirectory.'/Publishes/app/Http/Controllers/Quarx', 0777, true);
+        @mkdir($moduleDirectory.'/Publishes/resources/themes/default', 0777, true);
         @mkdir($moduleDirectory.'/Publishes/database/migrations');
         @mkdir($moduleDirectory.'/Facades');
         @mkdir($moduleDirectory.'/Controllers');
@@ -89,7 +92,18 @@ class Module extends Command
             'template_source'            => __DIR__.'/../Templates/',
         ];
 
+        $appConfig = $config;
+        $appConfig['template_source'] = __DIR__.'/../AppTemplates/';
+        $appConfig['_path_controller_'] = $moduleDirectory.'/Publishes/app/Http/Controllers/Quarx';
+        $appConfig['_path_views_'] = $moduleDirectory.'/Publishes/resources/themes/default';
+        $appConfig['_path_routes_'] = base_path('app/Http/quarx-routes.php');
+        $appConfig['_namespace_controller_'] = $config['_app_namespace_'].'Http\Controllers\Quarx';
+        $appConfig['routes_prefix'] = "\n\nRoute::group(['namespace' => 'Quarx', 'middleware' => ['web']], function () {";
+        $appConfig['routes_suffix'] = "\n\n});";
+
         try {
+            $this->info('Building the admin side...');
+
             $this->line('Building controller...');
             $crudGenerator->createController($config);
 
@@ -113,8 +127,19 @@ class Module extends Command
 
             $this->line('Building facade...');
             $crudGenerator->createFacade($config);
+
+            $this->info('Building the theme side...');
+
+            $this->line('Building controller...');
+            $crudGenerator->createController($appConfig);
+
+            $this->line('Building views...');
+            $crudGenerator->createViews($appConfig);
+
+            $this->line('Building routes...');
+            $crudGenerator->createRoutes($appConfig, false);
         } catch (Exception $e) {
-            throw new Exception("Unable to generate your CRUD", 1);
+            throw new Exception("Unable to generate your Module", 1);
         }
 
         if ($this->option('migration')) {
@@ -128,6 +153,6 @@ class Module extends Command
 
         $this->line('You may wish to add this as your testing database');
         $this->line("'testing' => [ 'driver' => 'sqlite', 'database' => ':memory:', 'prefix' => '' ],");
-        $this->info('CRUD for '.$table.' is done.');
+        $this->info('Module for '.$table.' is done.');
     }
 }

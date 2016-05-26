@@ -66,9 +66,11 @@ class Publish extends Command
                     $fileSystem->copy($file, base_path($newFileName));
                 }
             }
-        }
 
-        $this->info("Finished publishing this module.");
+            $this->info("Finished publishing this module.");
+        } else {
+            $this->info("You cancelled publishing this module");
+        }
     }
 
     /**

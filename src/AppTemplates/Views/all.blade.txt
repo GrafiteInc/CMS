@@ -1,0 +1,25 @@
+@extends('quarx-frontend::layout.master')
+
+@section('content')
+
+<div class="container">
+
+    <h1>_camel_case_</h1>
+
+    <div class="row">
+        <div class="col-md-12">
+            @foreach($_lower_casePlural_ as $_lower_case_)
+                <a href="{!! URL::to('_lower_casePlural_/'.$_lower_case_->id) !!}"><p>{!! $_lower_case_->name !!} - <span>{!! $_lower_case_->updated_at !!}</span></p></a>
+            @endforeach
+
+            {!! $_lower_casePlural_ !!}
+        </div>
+    </div>
+
+</div>
+
+@endsection
+
+@section('quarx')
+    @edit('_lower_casePlural_')
+@endsection

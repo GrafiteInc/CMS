@@ -3,6 +3,13 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 ----
 
+## [v1.3.6] - 2016-05-26
+### Added
+- New Theme files for custom modules
+### Changed
+- Overall improvements
+- Better module publishing
+
 ## [v1.3.5] - 2016-05-20
 ### Changed
 - Improved loading times

@@ -48,7 +48,7 @@
                 @foreach($widgets as $widget)
                     <tr>
                         <td><a href="{!! route('quarx.widgets.edit', [CryptoService::encrypt($widget->id)]) !!}">{!! $widget->name !!}</a></td>
-                        <td class="raw-m-hide">{!! $widget->uuid !!}</td>
+                        <td class="raw-m-hide">{!! $widget->slug !!}</td>
                         <td>
                             <form method="post" action="{!! url('quarx/widgets/'.CryptoService::encrypt($widget->id)) !!}">
                                 {!! csrf_field() !!}

@@ -11,7 +11,7 @@ $factory->define(\Yab\Quarx\Models\Menu::class, function (Faker\Generator $faker
 
         'id' => 1,
         'name' => 'dumb menu',
-        'uuid' => 'testerUUID',
+        'slug' => 'testerSLUG',
         'updated_at' => $faker->datetime(),
         'created_at' => $faker->datetime(),
 

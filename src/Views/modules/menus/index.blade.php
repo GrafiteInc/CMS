@@ -49,7 +49,7 @@
                     @foreach($menus as $menu)
                         <tr>
                             <td><a href="{!! route('quarx.menus.edit', [CryptoService::encrypt($menu->id)]) !!}">{!! $menu->name !!}</a></td>
-                            <td class="raw-m-hide">{!! $menu->uuid !!}</td>
+                            <td class="raw-m-hide">{!! $menu->slug !!}</td>
                             <td class="text-right">
                                 <form method="post" action="{!! url('quarx/menus/'.CryptoService::encrypt($menu->id)) !!}">
                                     {!! csrf_field() !!}

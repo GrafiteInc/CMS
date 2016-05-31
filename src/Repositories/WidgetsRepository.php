@@ -63,15 +63,15 @@ class WidgetsRepository
 
 
     /**
-     * Find Widgets by given uuid
+     * Find Widgets by given slug
      *
-     * @param int $uuid
+     * @param int $slug
      *
      * @return \Illuminate\Support\Collection|null|static|Widgets
      */
-    public static function getWidgetByUUID($uuid)
+    public static function getWidgetBySLUG($slug)
     {
-        return Widgets::where('uuid', $uuid)->first();
+        return Widgets::where('slug', $slug)->first();
     }
 
     /**

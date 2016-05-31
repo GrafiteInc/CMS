@@ -10,7 +10,7 @@ $factory->define(\Yab\Quarx\Models\Widgets::class, function (Faker\Generator $fa
     return [
         'id' => 1,
         'name' => 'test',
-        'uuid' => 'tester',
+        'slug' => 'tester',
         'content' => implode(' ', $faker->paragraphs(3)),
         'updated_at' => $faker->datetime(),
         'created_at' => $faker->datetime(),

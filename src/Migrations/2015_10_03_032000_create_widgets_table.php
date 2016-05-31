@@ -17,7 +17,7 @@ class CreateWidgetsTable extends Migration
         {
             $table->increments('id');
             $table->string('name');
-            $table->string('uuid');
+            $table->string('slug');
             $table->text('content')->nullable();
             $table->nullableTimestamps();
         });

@@ -74,15 +74,15 @@ class MenuRepository
     }
 
     /**
-     * Find Menu by given uuid
+     * Find Menu by given slug
      *
      * @param int $id
      *
      * @return \Illuminate\Support\Collection|null|static|Menu
      */
-    public static function getMenuByUUID($id)
+    public static function getMenuBySLUG($id)
     {
-        return Menu::where('uuid', $id)->get();
+        return Menu::where('slug', $id)->get();
     }
 
     /**

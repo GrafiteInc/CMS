@@ -51,11 +51,11 @@ php artisan quarx:publish {module}
         <p>Quarx automatically builds you a sample of the controllers, and views for your application's pages, blog, faqs, etc. You can run the following services as method calls or use the blade directives listed below:</p>
 
 <pre>
-Quarx::widget('uuid') // Renders the widget
+Quarx::widget('slug') // Renders the widget
 </pre>
 
 <pre>
-Quarx::menu('uuid', 'custom-view-path') // Renders the menu
+Quarx::menu('slug', 'custom-view-path') // Renders the menu
 </pre>
 
 <pre>
@@ -72,10 +72,10 @@ Quarx::images('tag') // Outputs an array of images with matching tags if no tag 
 &#64;theme('path') // includes file within the theme path
 </pre>
 <pre>
-&#64;menu('uuid') // menu rendering
+&#64;menu('slug') // menu rendering
 </pre>
 <pre>
-&#64;widget('uuid') // widget contents
+&#64;widget('slug') // widget contents
 </pre>
 <pre>
 &#64;images('tag') // images

@@ -13,7 +13,7 @@ class Widgets extends Model
 
     public $fillable = [
         "name",
-        "uuid",
+        "slug",
         "content"
     ];
 

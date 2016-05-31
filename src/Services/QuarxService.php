@@ -154,12 +154,12 @@ class QuarxService implements QuarxServiceInterface
     /**
      * Get a widget
      *
-     * @param  string $uuid
+     * @param  string $slug
      * @return widget
      */
-    public function widget($uuid)
+    public function widget($slug)
     {
-        $widget = WidgetsRepository::getWidgetByUUID($uuid);
+        $widget = WidgetsRepository::getWidgetBySLUG($slug);
 
         if (Gate::allows('quarx', Auth::user())) {
             $widget->content .= '<a href="'. url('quarx/widgets/'.CryptoServiceFacade::encrypt($widget->id).'/edit') .'" style="margin-left: 8px;" class="btn btn-xs btn-default"><span class="fa fa-pencil"></span> Edit</a>';
@@ -230,14 +230,14 @@ class QuarxService implements QuarxServiceInterface
 
     /**
      * Get a view
-     * @param  string $uuid
+     * @param  string $slug
      * @param  View $view
      * @return string
      */
-    public function menu($uuid, $view = null)
+    public function menu($slug, $view = null)
     {
         $pageRepo = new PagesRepository;
-        $menu = MenuRepository::getMenuByUUID($uuid)->first();
+        $menu = MenuRepository::getMenuBySLUG($slug)->first();
 
         if (! $menu) {
             return '';

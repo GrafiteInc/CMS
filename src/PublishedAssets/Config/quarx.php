@@ -120,7 +120,7 @@ return [
             'name'       => [
                 'type' => 'string',
             ],
-            'uuid'       => [
+            'slug'       => [
                 'type' => 'string',
             ],
             'content'       => [
@@ -147,7 +147,7 @@ return [
             'name' => [
                 'type' => 'string'
             ],
-            'uuid' => [
+            'slug' => [
                 'type' => 'string'
             ],
         ],

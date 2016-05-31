@@ -13,7 +13,7 @@ class Menu extends Model
 
     public $fillable = [
         "name",
-        "uuid"
+        "slug"
     ];
 
     public static $rules = [

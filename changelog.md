@@ -3,6 +3,13 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 ----
 
+## [v1.4.2] - 2016-05-31
+### Added
+- Simple setup for fast website making
+### Changed
+- Moved the dashboard layout around
+- Simple setup drops some of the Laracogs additions
+
 ## [v1.4.1] - 2016-05-31
 ### Changed
 - Fixed naming issues

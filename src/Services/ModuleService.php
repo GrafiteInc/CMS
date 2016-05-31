@@ -37,7 +37,6 @@ class ModuleService
 
     public function packageMenus()
     {
-
         Config::get('quarx.packages');
 
         $modules = glob($modulePath.'*');

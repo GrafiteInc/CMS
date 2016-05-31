@@ -3,6 +3,13 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 ----
 
+## [v1.4.3] - 2016-05-31
+### Added
+- Auto-publish theme assets with quick start
+- Auto gulp running
+### Fixed
+- Issues with quick start and composer dump
+
 ## [v1.4.2] - 2016-05-31
 ### Added
 - Simple setup for fast website making

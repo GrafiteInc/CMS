@@ -47,6 +47,7 @@ class Setup extends Command
         ]);
 
         $this->line("Are you sure you want to run the setup? (yes/no)");
+
         Artisan::call('laracogs:starter');
 
         $files = [
@@ -191,9 +192,7 @@ public function leaveAllTeams(\$userId)
 }", "", $userService);
         file_put_contents(app_path('Services/UserService.php'), $userService);
 
-        // Remove the dashboard
-
-        //
+        exec('composer dump');
 
         Artisan::call('migrate:reset', [
             '--force' => true

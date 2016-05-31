@@ -35,7 +35,7 @@
             <div class="col-md-4">
                 <div class="well">
                     <h3>Widgets, Menus, Images &amp; Includes</h3>
-                    <p>Widgets are easy to add to any template since they can be injected with the <code>&#64;menu('xxxx')</code>, <code>&#64;widget('xxxx')</code> or <code>&#64;images('tag')</code>. If you don't suppy a tag for the images you will get all images. To include a theme view you can easily use: <code>&#64;theme('path.in.theme')</code>.</p>
+                    <p>Widgets are easy to add to any template since they can be injected with the <code>&#64;menu('slug')</code>, <code>&#64;widget('slug')</code> or <code>&#64;images('tag')</code>. If you don't suppy a tag for the images you will get all images. To include a theme view you can easily use: <code>&#64;theme('path.in.theme')</code>.</p>
                 </div>
                 <br>
             </div>

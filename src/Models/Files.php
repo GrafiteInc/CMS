@@ -23,7 +23,7 @@ class Files extends Model
     ];
 
     public static $rules = [
-        // "location" => ['required', 'array'],
+        "location" => 'required',
     ];
 
     public function category()

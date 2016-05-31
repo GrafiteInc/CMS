@@ -61,11 +61,18 @@ class PagesTest extends AppTest
 
     public function testUpdate()
     {
-        $pages = (array) factory(\Yab\Quarx\Models\Blog::class)->make([ 'id' => 3, 'title' => 'dumber' ]);
-        $response = $this->call('PATCH', 'quarx/pages/'.CryptoService::encrypt(3), $pages);
+        $page = [ 'id' => 1, 'title' => 'dumber', 'url' => 'dumber', 'entry' => 'okie dokie' ];
+        $response = $this->call('POST', 'quarx/pages', $page);
+
+        $response = $this->call('PATCH', 'quarx/pages/'.CryptoService::encrypt(1), [
+            'title' => 'smarter',
+            'url' => 'smart'
+        ]);
+
+        // dd($response);
 
         $this->assertEquals(302, $response->getStatusCode());
-        $this->assertRedirectedTo('/quarx/pages');
+        $this->seeInDatabase('pages', ['title' => 'smarter']);
     }
 
     public function testDelete()

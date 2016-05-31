@@ -52,11 +52,16 @@ class WidgetsTest extends AppTest
 
     public function testUpdate()
     {
-        $widgets = (array) factory(\Yab\Quarx\Models\Widgets::class)->make([ 'id' => 3, 'name' => 'sillywidget' ]);
-        $response = $this->call('PATCH', 'quarx/widgets/'.CryptoService::encrypt(3), $widgets);
+        $widget = ['id' => 1, 'name' => 'dumber', 'slug' => 'dumber'];
+        $response = $this->call('POST', 'quarx/widgets', $widget);
+
+        $response = $this->call('PATCH', 'quarx/widgets/'.CryptoService::encrypt(1), [
+            'name' => 'whacky',
+            'slug' => 'whacky'
+        ]);
 
         $this->assertEquals(302, $response->getStatusCode());
-        $this->assertRedirectedTo('/quarx/widgets');
+        $this->seeInDatabase('widgets', ['name' => 'whacky']);
     }
 
     public function testDelete()

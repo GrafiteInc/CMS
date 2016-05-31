@@ -11,6 +11,8 @@ Quarx comes with a module builder for all your custom CMS needs, as well as a mo
 
 ## Installation
 
+Create a new Laravel application.
+
 * Run the following command:
 
 ```bash
@@ -20,7 +22,6 @@ composer require yab/quarx
 * Add the following to your Providers:
 
 ```php
-Yab\Laracogs\LaracogsProvider::class,
 Yab\Quarx\QuarxProvider::class
 ```
 
@@ -29,6 +30,21 @@ Yab\Quarx\QuarxProvider::class
 ```bash
 php artisan vendor:publish --provider="Yab\Quarx\QuarxProvider"
 ```
+
+## Simple Setup
+
+If you're looking to do a simple website with a powerful CMS, and the only people logging on to the app are the CMS managers. Then you can run the setup command.
+Quarx will install everything it needs, run its migrations and give you a login to start with. Take control of your website in seconds.
+
+```php
+php artisan quarx:setup
+```
+
+Now your done setup. Login, and start building your amazing new website!
+
+## Complex Setup
+
+If you just want to add Laracogs to your existing application and already have your own
 
 * Add the following to your routes provider:
 
@@ -61,7 +77,7 @@ In order to have modules load as well please add the following to your composer 
 This should be added to the autoloader below the App itself.
 
 ## Quarx Access
-Route to the administration dashboard is "/quarx/dashboard".  
+Route to the administration dashboard is "/quarx/dashboard".
 
 Quarx requires Laracogs to run (only for the FormMaker), but Laracogs does not require you to use its version of roles. But you will still need to ensure some degree of control for Quarx's access. This is done in the Quarx Middleware, using the gate and the Quarx Policy. If you opt in to the roles system provided by Laracogs, then you can replace 'quarx' with admin to handle the Quarx authorization, if not, you will need to set your own security policy for access to Quarx. To do this simply add the Quarx policy to your `app/Providers/AuthServiceProvider.php` file, and ensure that any rules you wish it to use are in within the policy method. We suggest a policy similar to below.
 

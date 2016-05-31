@@ -2,7 +2,9 @@
 
 namespace Yab\Quarx\Requests;
 
-use Yab\Quarx\Models\Pages;
+use Gate;
+use Auth;
+use Yab\Quarx\Models\Widgets;
 use Illuminate\Foundation\Http\FormRequest;
 
 class WidgetsRequest extends FormRequest
@@ -15,6 +17,10 @@ class WidgetsRequest extends FormRequest
      */
     public function authorize()
     {
+        if (env('APP_ENV') !== 'testing') {
+            return Gate::allows('quarx', Auth::user());
+        }
+
         return true;
     }
 
@@ -25,7 +31,7 @@ class WidgetsRequest extends FormRequest
      */
     public function rules()
     {
-        return Pages::$rules;
+        return Widgets::$rules;
     }
 
 }

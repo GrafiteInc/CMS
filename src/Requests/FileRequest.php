@@ -2,7 +2,9 @@
 
 namespace Yab\Quarx\Requests;
 
-use Yab\Quarx\Models\Files;
+use Gate;
+use Auth;
+use Yab\Quarx\Models\File;
 use Illuminate\Foundation\Http\FormRequest;
 
 class FileRequest extends FormRequest
@@ -15,6 +17,10 @@ class FileRequest extends FormRequest
      */
     public function authorize()
     {
+        if (env('APP_ENV') !== 'testing') {
+            return Gate::allows('quarx', Auth::user());
+        }
+
         return true;
     }
 

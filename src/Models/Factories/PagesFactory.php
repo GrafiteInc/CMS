@@ -15,7 +15,6 @@ $factory->define(\Yab\Quarx\Models\Pages::class, function (Faker\Generator $fake
         'seo_description' => 'dumb is dumb',
         'entry' => $faker->paragraph().' '.$faker->paragraph(),
         'is_published' => 1,
-        'template_id' => 1,
         'updated_at' => $faker->datetime(),
         'created_at' => $faker->datetime(),
     ];

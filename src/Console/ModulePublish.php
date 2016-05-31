@@ -10,21 +10,21 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
 use Illuminate\Filesystem\Filesystem;
 
-class Publish extends Command
+class ModulePublish extends Command
 {
     /**
      * The console command name.
      *
      * @var string
      */
-    protected $name = 'quarx:publish';
+    protected $name = 'module:publish';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Publish Quarx modules';
+    protected $description = 'Publish a Quarx module';
 
     /**
      * Create a new command instance.

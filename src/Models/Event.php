@@ -17,11 +17,13 @@ class Event extends QuarxModel
         "title",
         "template",
         "details",
+        "seo_description",
+        "seo_keywords",
         "is_published"
     ];
 
     public static $rules = [
-
+        'title' => 'required',
     ];
 
 }

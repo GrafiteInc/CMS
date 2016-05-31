@@ -18,7 +18,8 @@ class Widgets extends Model
     ];
 
     public static $rules = [
-
+        'name' => 'required',
+        'slug' => 'required',
     ];
 
 }

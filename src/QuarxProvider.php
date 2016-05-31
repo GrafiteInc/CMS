@@ -78,6 +78,8 @@ class QuarxProvider extends ServiceProvider
         $this->app->register(\Yab\Quarx\Providers\QuarxEventServiceProvider::class);
         $this->app->register(\Yab\Quarx\Providers\QuarxRouteProvider::class);
         $this->app->register(\Yab\Quarx\Providers\QuarxModuleProvider::class);
+
+        $this->app->register(\Yab\Laracogs\LaracogsProvider::class);
         $this->app->register(\Devfactory\Minify\MinifyServiceProvider::class);
         $this->app->register(\Spatie\LaravelAnalytics\LaravelAnalyticsServiceProvider::class);
 
@@ -95,9 +97,9 @@ class QuarxProvider extends ServiceProvider
         $this->commands([
             \Yab\Quarx\Console\ThemeGenerate::class,
             \Yab\Quarx\Console\ThemePublish::class,
-            \Yab\Quarx\Console\Prepare::class,
-            \Yab\Quarx\Console\Publish::class,
-            \Yab\Quarx\Console\Module::class,
+            \Yab\Quarx\Console\ModulePublish::class,
+            \Yab\Quarx\Console\ModuleMake::class,
+            \Yab\Quarx\Console\Setup::class,
         ]);
     }
 }

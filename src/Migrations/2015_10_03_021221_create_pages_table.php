@@ -22,7 +22,6 @@ class CreatePagesTable extends Migration
             $table->string('seo_description')->nullable();
             $table->string('seo_keywords')->nullable();
             $table->boolean('is_published')->default(0);
-            $table->integer('template_id')->default(0);
             $table->nullableTimestamps();
         });
     }

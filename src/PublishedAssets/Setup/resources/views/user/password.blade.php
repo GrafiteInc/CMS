@@ -1,19 +1,16 @@
-@extends('quarx::layouts.blank')
+@extends('quarx::layouts.dashboard')
 
 @section('content')
 
-<div class="container raw-margin-bottom-24">
     <div class="row">
-        <h1 class="text-center">Password</h1>
-        <div class="col-md-12 text-center">
-            @include('partials.navigation')
+        <h1 class="page-header">Password</h1>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="profile-image" style="background-image: url(https://www.gravatar.com/avatar/{{ md5($user->email) }}?s=400)"></div>
         </div>
-
-        <div class="col-md-12">
-
-            @include('partials.errors')
-            @include('partials.message')
-
+        <div class="col-md-8">
             <form method="POST" action="/user/password">
                 {!! csrf_field() !!}
 

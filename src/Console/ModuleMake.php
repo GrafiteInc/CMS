@@ -7,21 +7,21 @@ use Artisan;
 use Illuminate\Console\Command;
 use Yab\Laracogs\Generators\CrudGenerator;
 
-class Module extends Command
+class ModuleMake extends Command
 {
     /**
      * The console command name.
      *
      * @var string
      */
-    protected $signature = 'quarx:module {table} {--migration} {--schema=}';
+    protected $signature = 'module:make {table} {--migration} {--schema=}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Generate a module';
+    protected $description = 'Generate a module for Quarx';
 
     /**
      * Generate a CRUD stack

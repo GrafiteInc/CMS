@@ -268,6 +268,21 @@ span.twitter-typeahead {
 .quarx-errors li {
     list-style: none;
 }
+
+.profile-image {
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 48px auto;
+}
+
+.sidebar-header {
+    text-align: center;
+    color: #fff;
+    background-color: #777;
+    padding: 16px 0;
+}
 /*
 |--------------------------------------------------------------------------
 | Gondolyn Loaders

@@ -19,7 +19,7 @@ class FAQ extends Model
     ];
 
     public static $rules = [
-
+        'question' => 'required'
     ];
 
 }

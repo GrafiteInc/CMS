@@ -20,6 +20,8 @@ class CreateEventsTable extends Migration
             $table->date('end_date');
             $table->string('title');
             $table->text('details');
+            $table->string('seo_description')->nullable();
+            $table->string('seo_keywords')->nullable();
             $table->boolean('is_published')->default(0);
             $table->nullableTimestamps();
         });

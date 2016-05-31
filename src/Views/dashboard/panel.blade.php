@@ -10,6 +10,9 @@
     @if (in_array('events', Config::get('quarx.modules', Quarx::defaultModules()))) <li><a href="{!! url('quarx/events') !!}"><span class="fa fa-calendar"></span> Events</a></li> @endif
     {!! ModuleService::menus() !!}
     {!! Quarx::packageMenus() !!}
+    @if (Route::get('user/settings')) <li><a href="{!! url('user/settings') !!}"><span class="fa fa-gear"></span> Settings</a></li> @endif
     <li><a href="{!! url('quarx/help') !!}"><span class="fa fa-info-circle"></span> Help</a></li>
-    <li><a href="{!! url('dashboard') !!}"><span class="fa fa-arrow-left"></span> Site Dashboard</a></li>
+    @if (Route::get('admin/users')) <li class="sidebar-header"><span>Admin</span></li> @endif
+    @if (Route::get('admin/users')) <li><a href="{!! url('admin/users') !!}"><span class="fa fa-users"></span> Users</a></li> @endif
+    @if (Route::get('admin/roles')) <li><a href="{!! url('admin/roles') !!}"><span class="fa fa-lock"></span> Roles</a></li> @endif
 </ul>

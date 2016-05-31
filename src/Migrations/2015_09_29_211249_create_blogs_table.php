@@ -20,6 +20,8 @@ class CreateBlogsTable extends Migration
             $table->text('entry')->nullable();
             $table->string('tags')->nullable();
             $table->boolean('is_published')->default(0);
+            $table->string('seo_description')->nullable();
+            $table->string('seo_keywords')->nullable();
             $table->string('url');
             $table->nullableTimestamps();
         });

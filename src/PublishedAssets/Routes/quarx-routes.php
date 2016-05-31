@@ -6,7 +6,7 @@
     |--------------------------------------------------------------------------
     */
 
-    Route::group(['namespace' => 'Quarx', 'middleware' => ['web']], function () {
+    Route::group(['namespace' => 'Quarx'], function () {
 
         Route::get('', 'PagesController@home');
         Route::get('page', 'PagesController@all');

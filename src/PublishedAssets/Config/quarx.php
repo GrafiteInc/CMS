@@ -56,6 +56,15 @@ return [
                 'class' => 'redactor',
                 'alt_name' => 'Content',
             ],
+            'seo_description'       => [
+                'type' => 'text',
+                'alt_name' => 'SEO Description',
+            ],
+            'seo_keywords'       => [
+                'type' => 'string',
+                'class' => 'tags',
+                'alt_name' => 'SEO Keywords',
+            ],
             'is_published' => [
                 'type' => 'checkbox',
                 'alt_name' => 'Published'
@@ -109,6 +118,15 @@ return [
                 'type' => 'text',
                 'class' => 'redactor',
                 'alt_name' => 'Content',
+            ],
+            'seo_description'       => [
+                'type' => 'text',
+                'alt_name' => 'SEO Description',
+            ],
+            'seo_keywords'       => [
+                'type' => 'string',
+                'class' => 'tags',
+                'alt_name' => 'SEO Keywords',
             ],
             'is_published' => [
                 'type' => 'checkbox',
@@ -212,6 +230,15 @@ return [
                 'type' => 'text',
                 'class' => 'redactor',
                 'alt_name' => 'Details',
+            ],
+            'seo_description'       => [
+                'type' => 'text',
+                'alt_name' => 'SEO Description',
+            ],
+            'seo_keywords'       => [
+                'type' => 'string',
+                'class' => 'tags',
+                'alt_name' => 'SEO Keywords',
             ],
             'is_published' => [
                 'type' => 'checkbox',

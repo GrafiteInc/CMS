@@ -17,7 +17,8 @@ class Menu extends Model
     ];
 
     public static $rules = [
-        "name" => "required"
+        "name" => "required",
+        "slug" => "required",
     ];
 
 }

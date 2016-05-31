@@ -16,6 +16,8 @@ class Blog extends QuarxModel
         "entry",
         "template",
         "is_published",
+        "seo_description",
+        "seo_keywords",
         "url"
     ];
 

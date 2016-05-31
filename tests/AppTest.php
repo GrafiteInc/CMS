@@ -21,6 +21,10 @@ class AppTest extends Orchestra\Testbench\TestCase
 
         $app['config']->set('minify.config.ignore_environments', ['local', 'testing']);
         $app->make('Illuminate\Contracts\Http\Kernel')->pushMiddleware('Illuminate\Session\Middleware\StartSession');
+
+        $app['Illuminate\Contracts\Auth\Access\Gate']->define('quarx', function ($user) {
+            return true;
+        });
     }
 
     /**

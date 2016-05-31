@@ -18,11 +18,11 @@ class Pages extends QuarxModel
         "entry",
         "seo_description",
         "seo_keywords",
-        "is_published",
-        "template_id"
+        "is_published"
     ];
 
     public static $rules = [
-
+        'title' => 'required',
+        'url' => 'required',
     ];
 }

@@ -36,6 +36,8 @@ class Setup extends Command
      */
     public function fire()
     {
+        $this->confirm('Please confirm that you have gulp fully installed.');
+
         Artisan::call('vendor:publish', [
             '--provider' => 'Yab\Quarx\QuarxProvider',
             '--force' => true
@@ -193,6 +195,12 @@ public function leaveAllTeams(\$userId)
         file_put_contents(app_path('Services/UserService.php'), $userService);
 
         exec('composer dump');
+
+        $css = file_get_contents(base_path('resources/sass/app.scss'));
+        $css = str_replace('@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";', '@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";'."\n".'@import "resources/themes/default/assets/sass/_theme.scss";', $css);
+        file_put_contents(base_path('resources/sass/app.scss'), $css);
+
+        exec('gulp');
 
         Artisan::call('migrate:reset', [
             '--force' => true

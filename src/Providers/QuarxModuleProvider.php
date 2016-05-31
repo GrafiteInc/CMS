@@ -27,6 +27,10 @@ class QuarxModuleProvider extends ServiceProvider
                     require $modulePath.$module.'/routes.php';
                 }
 
+                if (file_exists($modulePath.$module.'/config.php')) {
+                    Config::set('quarx.'.strtolower($module), include($modulePath.$module.'/config.php'));
+                }
+
                 // Load the Views
                 if (is_dir($modulePath.$module.'/Views')) {
                     View::addNamespace(lcfirst($module), $modulePath.$module.'/Views');

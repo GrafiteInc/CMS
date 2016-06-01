@@ -11,7 +11,7 @@ Quarx comes with a module builder for all your custom CMS needs, as well as a mo
 
 ## Installation
 
-Create a new Laravel application.
+Create a new Laravel application, and make a database somewhere and update the .env file.
 
 * Run the following command:
 

@@ -136,6 +136,9 @@ class ModuleCrud extends Command
             @file_put_contents($moduleDirectory.'/Publishes/app/Http/'.$config['_lower_casePlural_'].'-routes.php', '');
             $crudGenerator->createRoutes($appConfig, false);
 
+            $this->line('You will need to publish your module to make it available to your vistors:');
+            $this->comment('php artisan module:publish '.str_plural($table));
+            $this->line('');
             $this->info('Add this to your `app/Providers/RouteServiceProver.php` in the `mapWebRoutes` method:');
             $this->comment("\nrequire app_path('Http/".$config['_lower_casePlural_']."-routes.php');\n");
         } catch (Exception $e) {

@@ -69,6 +69,12 @@ return [
                 'type' => 'checkbox',
                 'alt_name' => 'Published'
             ],
+            'published_at' => [
+                'type' => 'string',
+                'class' => 'datetimepicker',
+                'alt_name' => 'Publish Date',
+                'after' => '<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>',
+            ],
         ],
 
         'images' => [
@@ -131,6 +137,12 @@ return [
             'is_published' => [
                 'type' => 'checkbox',
                 'alt_name' => 'Published'
+            ],
+            'published_at' => [
+                'type' => 'string',
+                'class' => 'datetimepicker',
+                'alt_name' => 'Publish Date',
+                'after' => '<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>',
             ],
         ],
 
@@ -243,6 +255,12 @@ return [
             'is_published' => [
                 'type' => 'checkbox',
                 'alt_name' => 'Published'
+            ],
+            'published_at' => [
+                'type' => 'string',
+                'class' => 'datetimepicker',
+                'alt_name' => 'Publish Date',
+                'after' => '<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>',
             ],
         ],
     ]

@@ -45,5 +45,10 @@ $(function(){
         format: 'YYYY-MM-DD'
     });
 
+    $('.datetimepicker').datetimepicker({
+        showTodayButton: true,
+        format: 'YYYY-MM-DD h:m:s'
+    });
+
     $('.tags').tagsinput();
 });

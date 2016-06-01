@@ -27,7 +27,7 @@ class PagesRepository
 
     public function published()
     {
-        return Pages::where('is_published', 1)->orderBy('created_at', 'desc')->paginate(Config::get('quarx.pagination', 25));
+        return Pages::where('is_published', 1)->where('published_at', '<=', Carbon::now()->format('d-m-Y h:i:s'))->orderBy('created_at', 'desc')->paginate(Config::get('quarx.pagination', 25));
     }
 
     public function search($input)

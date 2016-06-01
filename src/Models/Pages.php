@@ -18,7 +18,8 @@ class Pages extends QuarxModel
         "entry",
         "seo_description",
         "seo_keywords",
-        "is_published"
+        "is_published",
+        "published_at",
     ];
 
     public static $rules = [

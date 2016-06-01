@@ -36,7 +36,7 @@ class EventRepository
      */
     public function findEventsByDate($date)
     {
-        return Event::where('is_published', 1)->orderBy('created_at', 'desc')->where('start_date', '<=', $date)->where('end_date', '>=', $date)->get();
+        return Event::where('is_published', 1)->where('published_at', '<=', Carbon::now()->format('d-m-Y h:i:s'))->orderBy('created_at', 'desc')->where('start_date', '<=', $date)->where('end_date', '>=', $date)->get();
     }
 
     /**
@@ -45,7 +45,7 @@ class EventRepository
      */
     public function published()
     {
-        return Event::where('is_published', 1)->orderBy('created_at', 'desc')->paginate(Config::get('quarx.pagination', 25));
+        return Event::where('is_published', 1)->where('published_at', '<=', Carbon::now()->format('d-m-Y h:i:s'))->orderBy('created_at', 'desc')->paginate(Config::get('quarx.pagination', 25));
     }
 
     /**

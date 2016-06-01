@@ -3,6 +3,7 @@
 namespace Yab\Quarx\Repositories;
 
 use Quarx;
+use Carbon\Carbon;
 use Yab\Quarx\Models\Blog;
 use Yab\Quarx\Models\Archive;
 use Illuminate\Support\Facades\Config;
@@ -28,7 +29,7 @@ class BlogRepository
 
     public function publishedAndPaginated()
     {
-        return Blog::orderBy('created_at', 'desc')->where('is_published', 1)->paginate(Config::get('quarx.pagination', 25));
+        return Blog::orderBy('created_at', 'desc')->where('is_published', 1)->where('published_at', '<=', Carbon::now()->format('d-m-Y h:i:s'))->paginate(Config::get('quarx.pagination', 25));
     }
 
     public function published()

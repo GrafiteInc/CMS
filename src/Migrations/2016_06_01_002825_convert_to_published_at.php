@@ -13,15 +13,15 @@ class ConvertToPublishedAt extends Migration
     public function up()
     {
         Schema::table('pages', function (Blueprint $table) {
-            $table->timestamp('published_at')->useCurrent();
+            $table->timestamp('published_at')->nullable();
         });
 
         Schema::table('blogs', function (Blueprint $table) {
-            $table->timestamp('published_at')->useCurrent();
+            $table->timestamp('published_at')->nullable();
         });
 
         Schema::table('events', function (Blueprint $table) {
-            $table->timestamp('published_at')->useCurrent();
+            $table->timestamp('published_at')->nullable();
         });
     }
 

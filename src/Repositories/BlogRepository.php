@@ -29,17 +29,17 @@ class BlogRepository
 
     public function publishedAndPaginated()
     {
-        return Blog::orderBy('created_at', 'desc')->where('is_published', 1)->where('published_at', '<=', Carbon::now()->format('d-m-Y h:i:s'))->paginate(Config::get('quarx.pagination', 25));
+        return Blog::orderBy('created_at', 'desc')->where('is_published', 1)->where('published_at', '<=', Carbon::now()->format('Y-m-d h:i:s'))->paginate(Config::get('quarx.pagination', 25));
     }
 
     public function published()
     {
-        return Blog::where('is_published', 1)->orderBy('created_at', 'desc')->paginate(Config::get('quarx.pagination', 25));
+        return Blog::where('is_published', 1)->where('published_at', '<=', Carbon::now()->format('Y-m-d h:i:s'))->orderBy('created_at', 'desc')->paginate(Config::get('quarx.pagination', 25));
     }
 
     public function tags($tag)
     {
-        return Blog::where('is_published', 1)->where('tags', 'LIKE', '%'.$tag.'%')->orderBy('created_at', 'desc')->paginate(Config::get('quarx.pagination', 25));
+        return Blog::where('is_published', 1)->where('published_at', '<=', Carbon::now()->format('Y-m-d h:i:s'))->where('tags', 'LIKE', '%'.$tag.'%')->orderBy('created_at', 'desc')->paginate(Config::get('quarx.pagination', 25));
     }
 
     public function allTags()
@@ -80,6 +80,7 @@ class BlogRepository
     {
         $input['url'] = Quarx::convertToURL($input['url']);
         $input['is_published'] = (isset($input['is_published'])) ? (bool) $input['is_published'] : 0;
+        $input['published_at'] = (isset($input['published_at'])) ? $input['published_at'] : Carbon::now()->format('Y-m-d h:i:s');
         return Blog::create($input);
     }
 
@@ -131,6 +132,7 @@ class BlogRepository
     {
         $input['url'] = Quarx::convertToURL($input['url']);
         $input['is_published'] = (isset($input['is_published'])) ? (bool) $input['is_published'] : 0;
+        $input['published_at'] = (isset($input['published_at'])) ? $input['published_at'] : Carbon::now()->format('Y-m-d h:i:s');
         $blog->fill($input);
         $blog->save();
 

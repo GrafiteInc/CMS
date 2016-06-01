@@ -36,7 +36,7 @@ class EventRepository
      */
     public function findEventsByDate($date)
     {
-        return Event::where('is_published', 1)->where('published_at', '<=', Carbon::now()->format('d-m-Y h:i:s'))->orderBy('created_at', 'desc')->where('start_date', '<=', $date)->where('end_date', '>=', $date)->get();
+        return Event::where('is_published', 1)->where('published_at', '<=', Carbon::now()->format('Y-m-d h:i:s'))->orderBy('created_at', 'desc')->where('start_date', '<=', $date)->where('end_date', '>=', $date)->get();
     }
 
     /**
@@ -45,7 +45,7 @@ class EventRepository
      */
     public function published()
     {
-        return Event::where('is_published', 1)->where('published_at', '<=', Carbon::now()->format('d-m-Y h:i:s'))->orderBy('created_at', 'desc')->paginate(Config::get('quarx.pagination', 25));
+        return Event::where('is_published', 1)->where('published_at', '<=', Carbon::now()->format('Y-m-d h:i:s'))->orderBy('created_at', 'desc')->paginate(Config::get('quarx.pagination', 25));
     }
 
     /**
@@ -79,6 +79,7 @@ class EventRepository
     public function store($input)
     {
         $input['is_published'] = (isset($input['is_published'])) ? (bool) $input['is_published'] : 0;
+        $input['published_at'] = (isset($input['published_at'])) ? $input['published_at'] : Carbon::now()->format('Y-m-d h:i:s');
         return Event::create($input);
     }
 
@@ -105,6 +106,7 @@ class EventRepository
     public function update($event, $input)
     {
         $input['is_published'] = (isset($input['is_published'])) ? (bool) $input['is_published'] : 0;
+        $input['published_at'] = (isset($input['published_at'])) ? $input['published_at'] : Carbon::now()->format('Y-m-d h:i:s');
         $event->fill($input);
         $event->save();
 

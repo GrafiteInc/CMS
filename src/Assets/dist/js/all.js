@@ -186,7 +186,7 @@ $(function(){
 
     $('.datetimepicker').datetimepicker({
         showTodayButton: true,
-        format: 'YYYY-MM-DD h:m'
+        format: 'YYYY-MM-DD h:m:s'
     });
 
     $('.tags').tagsinput();

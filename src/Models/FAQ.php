@@ -15,7 +15,8 @@ class FAQ extends Model
     public $fillable = [
         "question",
         "answer",
-        "is_published"
+        "is_published",
+        "published_at"
     ];
 
     public static $rules = [

@@ -23,6 +23,10 @@ class ConvertToPublishedAt extends Migration
         Schema::table('events', function (Blueprint $table) {
             $table->timestamp('published_at')->nullable();
         });
+
+        Schema::table('faqs', function (Blueprint $table) {
+            $table->timestamp('published_at')->nullable();
+        });
     }
 
     /**
@@ -41,6 +45,10 @@ class ConvertToPublishedAt extends Migration
         });
 
         Schema::table('events', function ($table) {
+            $table->dropColumn('published_at');
+        });
+
+        Schema::table('faqs', function ($table) {
             $table->dropColumn('published_at');
         });
     }

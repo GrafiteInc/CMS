@@ -12,8 +12,6 @@ class QuarxModuleProvider extends ServiceProvider
 {
     public function boot()
     {
-        // $modules = config("quarx.modules");
-
         $modulePath = base_path(Config::get('quarx.module-directory').'/');
         $modules = glob($modulePath.'*');
 
@@ -28,7 +26,7 @@ class QuarxModuleProvider extends ServiceProvider
                 }
 
                 if (file_exists($modulePath.$module.'/config.php')) {
-                    Config::set('quarx.'.strtolower($module), include($modulePath.$module.'/config.php'));
+                    Config::set('quarx.modules.'.strtolower($module), include($modulePath.$module.'/config.php'));
                 }
 
                 // Load the Views

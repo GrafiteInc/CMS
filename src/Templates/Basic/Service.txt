@@ -1,0 +1,14 @@
+<?php
+
+namespace _namespace_services_;
+
+use Config;
+
+class _camel_case_Service
+{
+    public function __construct()
+    {
+        // use dependancy injection!
+    }
+
+}

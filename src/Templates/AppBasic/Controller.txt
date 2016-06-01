@@ -1,0 +1,25 @@
+<?php
+
+namespace _namespace_controller_;
+
+use Illuminate\Http\Request;
+use _app_namespace_Http\Controllers\Controller;
+use Quarx\Modules\_camel_casePlural_\Services\_camel_case_Service;
+
+class _camel_case_Controller extends Controller
+{
+    public function __construct(_camel_case_Service $_lower_case_Service)
+    {
+        $this->service = $_lower_case_Service;
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index(Request $request)
+    {
+        return view('quarx-frontend::_lower_casePlural_.index');
+    }
+}

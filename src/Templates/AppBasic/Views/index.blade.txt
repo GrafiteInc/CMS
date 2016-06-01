@@ -1,0 +1,15 @@
+@extends('quarx-frontend::layout.master')
+
+@section('content')
+
+<div class="container">
+
+    <h1>_camel_case_</h1>
+
+</div>
+
+@endsection
+
+@section('quarx')
+    @edit('_lower_casePlural_')
+@endsection

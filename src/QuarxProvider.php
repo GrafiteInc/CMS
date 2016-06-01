@@ -99,6 +99,7 @@ class QuarxProvider extends ServiceProvider
             \Yab\Quarx\Console\ThemePublish::class,
             \Yab\Quarx\Console\ModulePublish::class,
             \Yab\Quarx\Console\ModuleMake::class,
+            \Yab\Quarx\Console\ModuleCrud::class,
             \Yab\Quarx\Console\Setup::class,
         ]);
     }

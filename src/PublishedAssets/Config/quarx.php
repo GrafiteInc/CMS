@@ -28,7 +28,7 @@ return [
     'apiKey' => 'gALPkYVALEtQYWztKy3d',
     'apiToken' => 'fwCVH1bJEV3GOCyGDDNP',
 
-    'modules' => [
+    'activeCodeModules' => [
         'blog',
         'menus',
         'files',

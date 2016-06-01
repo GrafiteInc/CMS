@@ -3,6 +3,13 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 ----
 
+## [v1.4.4] - 2016-06-01
+### Added
+- New publish date
+- Added event tracking and rollback for custom modules
+### Changed
+- Better template layouts internally.
+
 ## [v1.4.3] - 2016-05-31
 ### Added
 - Auto-publish theme assets with quick start

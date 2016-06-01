@@ -17,6 +17,20 @@ class QuarxFeatureController extends QuarxController
         if (! class_exists($modelString)) {
             $modelString = 'Yab\Quarx\Models\\'.ucfirst($entity).'s';
         }
+        if (! class_exists($modelString)) {
+            $modelString = 'Quarx\Modules\\'.ucfirst(str_plural($entity)).'.\Models\\'.ucfirst(str_plural($entity));
+        }
+        if (! class_exists($modelString)) {
+            $modelString = 'Quarx\Modules\\'.ucfirst(str_plural($entity)).'\Models\\'.ucfirst(str_singular($entity));
+        }
+        if (! class_exists($modelString)) {
+            $modelString = 'Quarx\Modules\\'.ucfirst(str_singular($entity)).'\Models\\'.ucfirst(str_singular($entity));
+        }
+        if (! class_exists($modelString)) {
+            Quarx::notification('Could not rollback Model not found', 'warning');
+            return redirect(URL::previous());
+        }
+
 
         $model = new $modelString;
         $modelInstance = $model->find(CryptoService::decrypt($id));

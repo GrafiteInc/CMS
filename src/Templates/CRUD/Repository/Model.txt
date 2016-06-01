@@ -2,9 +2,9 @@
 
 namespace _namespace_model_;
 
-use Eloquent;
+use Yab\Quarx\Models\QuarxModel;
 
-class _camel_case_ extends Eloquent
+class _camel_case_ extends QuarxModel
 {
     public $table = "_lower_casePlural_";
 
@@ -13,7 +13,7 @@ class _camel_case_ extends Eloquent
     public $timestamps = true;
 
     public $fillable = [
-        // fill this in
+        // _camel_case_ table data
     ];
 
     public static $rules = [

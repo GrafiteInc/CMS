@@ -88,11 +88,11 @@ class ModuleCrud extends Command
             '_lower_casePlural_'         => str_plural(strtolower($table)),
             '_camel_case_'               => ucfirst(camel_case($table)),
             '_camel_casePlural_'         => ucfirst(str_plural(camel_case($table))),
-            'template_source'            => __DIR__.'/../Templates/',
+            'template_source'            => __DIR__.'/../Templates/CRUD/',
         ];
 
         $appConfig = $config;
-        $appConfig['template_source'] = __DIR__.'/../AppTemplates/';
+        $appConfig['template_source'] = __DIR__.'/../Templates/AppCRUD';
         $appConfig['_path_controller_'] = $moduleDirectory.'/Publishes/app/Http/Controllers/Quarx';
         $appConfig['_path_views_'] = $moduleDirectory.'/Publishes/resources/themes/default';
         $appConfig['_path_routes_'] = $moduleDirectory.'/Publishes/app/Http/'.$config['_lower_casePlural_'].'-routes.php';

@@ -29,12 +29,12 @@ class ImagesRepository
 
     public function publishedAndPaginated()
     {
-        return Images::orderBy('created_at', 'desc')->where('is_published', 1)->where('published_at', '<=', Carbon::now()->format('d-m-Y h:i:s'))->paginate(Config::get('quarx.pagination', 25));
+        return Images::orderBy('created_at', 'desc')->where('is_published', 1)->paginate(Config::get('quarx.pagination', 25));
     }
 
     public function published()
     {
-        return Images::where('is_published', 1)->where('published_at', '<=', Carbon::now()->format('d-m-Y h:i:s'))->orderBy('created_at', 'desc')->paginate(Config::get('quarx.pagination', 25));
+        return Images::where('is_published', 1)->orderBy('created_at', 'desc')->paginate(Config::get('quarx.pagination', 25));
     }
 
     /**

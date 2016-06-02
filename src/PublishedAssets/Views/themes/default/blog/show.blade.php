@@ -1,5 +1,8 @@
 @extends('quarx-frontend::layout.master')
 
+@section('seoDescription') {{ $blog->seo_description }} @endsection
+@section('seoKeywords') {{ $blog->seo_keywords }} @endsection
+
 @section('content')
 
 <div class="container">

@@ -17,6 +17,8 @@ return [
     'appAdminEmail' => '',
     'appAdminName' => '',
 
+    'storage-location' => 'local', // s3, local
+
     'registrationAvailable' => false,
 
     'backend-theme' => 'united', // cosmo, cyborg, darkly, flatly, hero, journal, lumen, paper, readable, sandstone, simplex, slate, united, yeti

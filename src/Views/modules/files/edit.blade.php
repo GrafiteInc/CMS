@@ -7,7 +7,7 @@
         @include('quarx::modules.files.breadcrumbs', ['location' => ['edit']])
 
         <div class="row raw-margin-bottom-48 raw-margin-top-48 text-center">
-            <a class="btn btn-default" href="{!! FileService::fileAsDownload($files->location, $files->location) !!}"><span class="fa fa-download"></span> Download: {!! $files->name !!}</a>
+            <a class="btn btn-default" href="{!! FileService::fileAsDownload($files->name, $files->location) !!}"><span class="fa fa-download"></span> Download: {!! $files->name !!}</a>
         </div>
 
         {!! Form::model($files, ['route' => ['quarx.files.update', CryptoService::encrypt($files->id)], 'files' => true, 'method' => 'patch', 'class' => 'edit']) !!}

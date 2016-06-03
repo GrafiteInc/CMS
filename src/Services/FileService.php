@@ -33,7 +33,7 @@ class FileService
      * @param  string $location Storage location
      * @return array
      */
-    public static function saveClone($fileName, $directory = "", $fileTypes = array(), $location = 'local')
+    public static function saveClone($fileName, $directory = "", $fileTypes = array())
     {
         $fileInfo = pathinfo($fileName);
 
@@ -49,7 +49,7 @@ class FileService
             }
         }
 
-        Storage::disk($location)->put($directory.$newFileName.'.'.$extension, file_get_contents($fileName));
+        Storage::disk(Config::get('quarx.storage-location', 'local'))->put($directory.$newFileName.'.'.$extension, file_get_contents($fileName));
 
         return [
             'original' => basename($fileName),
@@ -63,7 +63,7 @@ class FileService
      * @param  string $location Storage location
      * @return array
      */
-    public static function saveFile($fileName, $directory = "", $fileTypes = array(), $location = 'local')
+    public static function saveFile($fileName, $directory = "", $fileTypes = array())
     {
         if (is_object($fileName)) {
             $file = $fileName;
@@ -93,7 +93,7 @@ class FileService
             }
         }
 
-        Storage::disk($location)->put($directory.$newFileName.'.'.$extension,  File::get($file));
+        Storage::disk(Config::get('quarx.storage-location', 'local'))->put($directory.$newFileName.'.'.$extension,  File::get($file));
 
         return [
             'original' => $originalName ?: $file->getFilename().'.'.$extension,

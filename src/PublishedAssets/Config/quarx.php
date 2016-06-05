@@ -82,7 +82,8 @@ return [
         'images' => [
             'is_published'      => [
                 'type' => 'checkbox',
-                'value' => 1
+                'value' => 1,
+                'custom' => 'checked'
             ],
             'tags'       => [
                 'custom' => 'data-role="tagsinput"'

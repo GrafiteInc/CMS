@@ -152,6 +152,28 @@ class ModuleCrud extends Command
                 '--table' => str_plural(strtolower($table)),
                 '--create' => true,
             ]);
+
+            if ($this->option('schema')) {
+                $migrationFiles = $filesystem->allFiles(base_path('quarx/modules/'.ucfirst(str_plural($table)).'/Publishes/database/migrations'));
+                foreach ($migrationFiles as $file) {
+                    if (stristr($file->getBasename(), $migrationName) ) {
+                        $migrationData = file_get_contents($file->getPathname());
+                        $parsedTable = "";
+
+                        foreach (explode(',', $this->option('schema')) as $key => $column) {
+                            $columnDefinition = explode(':', $column);
+                            if ($key === 0) {
+                                $parsedTable .= "\$table->$columnDefinition[1]('$columnDefinition[0]');\n";
+                            } else {
+                                $parsedTable .= "\t\t\t\$table->$columnDefinition[1]('$columnDefinition[0]');\n";
+                            }
+                        }
+
+                        $migrationData = str_replace("\$table->increments('id');", $parsedTable, $migrationData);
+                        file_put_contents($file->getPathname(), $migrationData);
+                    }
+                }
+            }
         }
 
         $this->line('You may wish to add this as your testing database');

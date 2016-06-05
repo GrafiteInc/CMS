@@ -31,7 +31,7 @@ class WidgetsTest extends AppTest
 
     public function testEdit()
     {
-        $response = $this->call('GET', 'quarx/widgets/'.CryptoService::encrypt(1).'/edit');
+        $response = $this->call('GET', 'quarx/widgets/1/edit');
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertViewHas('widgets');
     }
@@ -55,7 +55,7 @@ class WidgetsTest extends AppTest
         $widget = ['id' => 1, 'name' => 'dumber', 'slug' => 'dumber'];
         $response = $this->call('POST', 'quarx/widgets', $widget);
 
-        $response = $this->call('PATCH', 'quarx/widgets/'.CryptoService::encrypt(1), [
+        $response = $this->call('PATCH', 'quarx/widgets/1', [
             'name' => 'whacky',
             'slug' => 'whacky'
         ]);
@@ -66,7 +66,7 @@ class WidgetsTest extends AppTest
 
     public function testDelete()
     {
-        $response = $this->call('DELETE', 'quarx/widgets/'.CryptoService::encrypt(1));
+        $response = $this->call('DELETE', 'quarx/widgets/1');
         $this->assertEquals(302, $response->getStatusCode());
         $this->assertRedirectedTo('quarx/widgets');
     }

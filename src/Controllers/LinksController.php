@@ -85,7 +85,6 @@ class LinksController extends QuarxController
      */
     public function edit($id)
     {
-        $id = CryptoService::decrypt($id);
         $links = $this->linksRepository->findLinksById($id);
 
         if (empty($links)) {
@@ -107,7 +106,6 @@ class LinksController extends QuarxController
     public function update($id, LinksRequest $request)
     {
         try {
-            $id = CryptoService::decrypt($id);
             $links = $this->linksRepository->findLinksById($id);
 
             if (empty($links)) {
@@ -125,7 +123,7 @@ class LinksController extends QuarxController
             Quarx::notification($e->getMessage() ?: 'Links could not be updated.', 'danger');
         }
 
-        return redirect(route('quarx.links.edit', [CryptoService::encrypt($id)]));
+        return redirect(route('quarx.links.edit', [$id]));
     }
 
     /**
@@ -137,10 +135,8 @@ class LinksController extends QuarxController
      */
     public function destroy($id)
     {
-        $id = CryptoService::decrypt($id);
         $links = $this->linksRepository->findLinksById($id);
-        $menu = CryptoService::encrypt($links->menu_id);
-
+        $menu = $links->menu_id;
 
         if (empty($links)) {
             Quarx::notification('Link not found', 'warning');

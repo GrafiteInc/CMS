@@ -96,7 +96,7 @@ class FilesController extends QuarxController
 
         Quarx::notification('File saved successfully.', 'success');
 
-        return redirect(route('quarx.files.edit', [CryptoService::encrypt($file->id)]));
+        return redirect(route('quarx.files.index'));
     }
 
     /**
@@ -134,9 +134,7 @@ class FilesController extends QuarxController
     public function remove($id)
     {
         try {
-            $file = CryptoService::decrypt($id);
-
-            Storage::delete($file);
+            Storage::delete($id);
 
             $response = QuarxResponseService::apiResponse("success", "success!");
         } catch (Exception $e) {
@@ -154,7 +152,6 @@ class FilesController extends QuarxController
      */
     public function edit($id)
     {
-        $id = CryptoService::decrypt($id);
         $files = $this->fileRepository->findFilesById($id);
 
         if (empty($files)) {
@@ -175,7 +172,6 @@ class FilesController extends QuarxController
      */
     public function update($id, FileRequest $request)
     {
-        $id = CryptoService::decrypt($id);
         $files = $this->fileRepository->findFilesById($id);
 
         if (empty($files)) {
@@ -199,7 +195,6 @@ class FilesController extends QuarxController
      */
     public function destroy($id)
     {
-        $id = CryptoService::decrypt($id);
         $files = $this->fileRepository->findFilesById($id);
 
         if (empty($files)) {

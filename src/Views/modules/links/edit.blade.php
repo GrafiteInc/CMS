@@ -6,9 +6,9 @@
             <h1 class="page-header">Links</h1>
         </div>
 
-        @include('quarx::modules.links.breadcrumbs', ['location' => [['Menu' => URL::to('quarx/menus/'.CryptoService::encrypt($links->menu_id).'/edit')], 'links', 'edit']])
+        @include('quarx::modules.links.breadcrumbs', ['location' => [['Menu' => URL::to('quarx/menus/'.$links->menu_id.'/edit')], 'links', 'edit']])
 
-        {!! Form::model($links, ['route' => ['quarx.links.update', CryptoService::encrypt($links->id)], 'method' => 'patch', 'class' => 'edit']) !!}
+        {!! Form::model($links, ['route' => ['quarx.links.update', $links->id], 'method' => 'patch', 'class' => 'edit']) !!}
 
             {!! FormMaker::fromObject($links, Config::get('quarx.forms.link')) !!}
 

@@ -50,15 +50,15 @@
                 @foreach($_lower_casePlural_ as $_lower_case_)
                     <tr>
                         <td>
-                            <a href="{!! route('quarx._lower_casePlural_.edit', [CryptoService::encrypt($_lower_case_->id)]) !!}">{!! $_lower_case_->name !!}</a>
+                            <a href="{!! route('quarx._lower_casePlural_.edit', [$_lower_case_->id]) !!}">{!! $_lower_case_->name !!}</a>
                         </td>
                         <td class="text-right">
-                            <form method="post" action="{!! url('_sectionPrefix__lower_casePlural_/'.CryptoService::encrypt($_lower_case_->id)) !!}">
+                            <form method="post" action="{!! url('_sectionPrefix__lower_casePlural_/'.$_lower_case_->id) !!}">
                                 {!! csrf_field() !!}
                                 {!! method_field('DELETE') !!}
                                 <button class="delete-btn btn btn-xs btn-danger pull-right" type="submit"><i class="fa fa-trash"></i> Delete</button>
                             </form>
-                            <a class="btn btn-xs btn-default raw-margin-right-8 pull-right" href="{!! route('quarx._lower_casePlural_.edit', [CryptoService::encrypt($_lower_case_->id)]) !!}"><i class="fa fa-pencil"></i> Edit</a>
+                            <a class="btn btn-xs btn-default raw-margin-right-8 pull-right" href="{!! route('quarx._lower_casePlural_.edit', [$_lower_case_->id]) !!}"><i class="fa fa-pencil"></i> Edit</a>
                         </td>
                     </tr>
                 @endforeach

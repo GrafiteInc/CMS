@@ -47,15 +47,15 @@
 
                 @foreach($widgets as $widget)
                     <tr>
-                        <td><a href="{!! route('quarx.widgets.edit', [CryptoService::encrypt($widget->id)]) !!}">{!! $widget->name !!}</a></td>
+                        <td><a href="{!! route('quarx.widgets.edit', [$widget->id]) !!}">{!! $widget->name !!}</a></td>
                         <td class="raw-m-hide">{!! $widget->slug !!}</td>
                         <td>
-                            <form method="post" action="{!! url('quarx/widgets/'.CryptoService::encrypt($widget->id)) !!}">
+                            <form method="post" action="{!! url('quarx/widgets/'.$widget->id) !!}">
                                 {!! csrf_field() !!}
                                 {!! method_field('DELETE') !!}
                                 <button class="delete-btn btn btn-xs btn-danger pull-right" type="submit"><i class="fa fa-trash"></i> Delete</button>
                             </form>
-                            <a class="btn btn-xs btn-default pull-right raw-margin-right-8" href="{!! route('quarx.widgets.edit', [CryptoService::encrypt($widget->id)]) !!}"><i class="fa fa-pencil"></i> Edit</a>
+                            <a class="btn btn-xs btn-default pull-right raw-margin-right-8" href="{!! route('quarx.widgets.edit', [$widget->id]) !!}"><i class="fa fa-pencil"></i> Edit</a>
                         </td>
                     </tr>
                 @endforeach

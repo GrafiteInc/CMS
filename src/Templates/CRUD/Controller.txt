@@ -65,7 +65,7 @@ class _camel_case_Controller extends Controller
 
         if ($result) {
             Quarx::notification('Successfully created', 'success');
-            return redirect('quarx/_lower_casePlural_/'.CryptoService::encrypt($result->id).'/edit');
+            return redirect('quarx/_lower_casePlural_/'.$result->id.'/edit');
         }
 
         Quarx::notification('Failed to create', 'warning');

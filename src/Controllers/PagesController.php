@@ -4,7 +4,6 @@ namespace Yab\Quarx\Controllers;
 
 use Quarx;
 use Response;
-use CryptoService;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 use Yab\Quarx\Models\Pages;
@@ -88,7 +87,7 @@ class PagesController extends QuarxController
             Quarx::notification('Page could not be saved.', 'warning');
         }
 
-        return redirect(route('quarx.pages.edit', [CryptoService::encrypt($pages->id)]));
+        return redirect(route('quarx.pages.edit', [$pages->id]));
     }
 
     /**
@@ -99,7 +98,6 @@ class PagesController extends QuarxController
      */
     public function edit($id)
     {
-        $id = CryptoService::decrypt($id);
         $page = $this->pagesRepository->findPagesById($id);
 
         if (empty($page)) {
@@ -120,7 +118,6 @@ class PagesController extends QuarxController
      */
     public function update($id, PagesRequest $request)
     {
-        $id = CryptoService::decrypt($id);
         $pages = $this->pagesRepository->findPagesById($id);
 
         if (empty($pages)) {
@@ -135,7 +132,7 @@ class PagesController extends QuarxController
             Quarx::notification('Page could not be saved.', 'warning');
         }
 
-        return redirect(route('quarx.pages.edit', [CryptoService::encrypt($id)]));
+        return redirect(route('quarx.pages.edit', [$id]));
     }
 
     /**
@@ -147,7 +144,6 @@ class PagesController extends QuarxController
      */
     public function destroy($id)
     {
-        $id = CryptoService::decrypt($id);
         $pages = $this->pagesRepository->findPagesById($id);
 
         if (empty($pages)) {

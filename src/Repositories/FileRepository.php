@@ -124,12 +124,12 @@ class FileRepository
 
     public function apiPrepared()
     {
-        $files = Files::orderBy('created_at', 'desc')->get();
+        $files = Files::orderBy('created_at', 'desc')->where('is_published', 1)->get();
         $allFiles = [];
 
         foreach ($files as $file) {
             array_push($allFiles, [
-                'file_identifier' => CryptoService::encrypt($file->name).'/'.CryptoService::encrypt($file->location),
+                'file_identifier' => CryptoService::url_encode($file->name).'/'.CryptoService::url_encode($file->location),
                 'file_name' => $file->name,
                 'file_date' => $file->created_at->format('F jS, Y'),
             ]);

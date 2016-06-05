@@ -3,7 +3,6 @@
 namespace Yab\Quarx\Controllers;
 
 use Quarx;
-use CryptoService;
 use Illuminate\Http\Request;
 use Yab\Quarx\Models\Blog;
 use Yab\Quarx\Services\ValidationService;
@@ -86,7 +85,7 @@ class BlogController extends QuarxController
             Quarx::notification('Blog could not be saved.', 'warning');
         }
 
-        return redirect(route('quarx.blog.edit', [CryptoService::encrypt($blog->id)]));
+        return redirect(route('quarx.blog.edit', [$blog->id]));
     }
 
     /**
@@ -97,7 +96,6 @@ class BlogController extends QuarxController
      */
     public function edit($id)
     {
-        $id = CryptoService::decrypt($id);
         $blog = $this->blogRepository->findBlogById($id);
 
         if (empty($blog)) {
@@ -118,7 +116,6 @@ class BlogController extends QuarxController
      */
     public function update($id, BlogRequest $request)
     {
-        $id = CryptoService::decrypt($id);
         $blog = $this->blogRepository->findBlogById($id);
 
         if (empty($blog)) {
@@ -133,7 +130,7 @@ class BlogController extends QuarxController
             Quarx::notification('Blog could not be saved.', 'warning');
         }
 
-        return redirect(route('quarx.blog.edit', [CryptoService::encrypt($id)]));
+        return redirect(route('quarx.blog.edit', [$id]));
     }
 
     /**
@@ -145,7 +142,6 @@ class BlogController extends QuarxController
      */
     public function destroy($id)
     {
-        $id = CryptoService::decrypt($id);
         $blog = $this->blogRepository->findBlogById($id);
 
         if (empty($blog)) {

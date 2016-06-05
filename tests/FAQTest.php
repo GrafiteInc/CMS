@@ -32,7 +32,7 @@ class FaqTest extends AppTest
 
     public function testEdit()
     {
-        $response = $this->call('GET', 'quarx/faqs/'.CryptoService::encrypt(1).'/edit');
+        $response = $this->call('GET', 'quarx/faqs/1'.'/edit');
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertViewHas('faq');
     }
@@ -65,7 +65,7 @@ class FaqTest extends AppTest
 
     public function testUpdate()
     {
-        $response = $this->call('PATCH', 'quarx/faqs/'.CryptoService::encrypt(1), [
+        $response = $this->call('PATCH', 'quarx/faqs/1', [
             'question' => 'who is this',
             'answer' => 'I am your worst nightmare!',
             'is_published' => 'on'
@@ -77,7 +77,7 @@ class FaqTest extends AppTest
 
     public function testDelete()
     {
-        $response = $this->call('DELETE', 'quarx/faqs/'.CryptoService::encrypt(1));
+        $response = $this->call('DELETE', 'quarx/faqs/1');
         $this->assertEquals(302, $response->getStatusCode());
         $this->assertRedirectedTo('quarx/faqs');
     }

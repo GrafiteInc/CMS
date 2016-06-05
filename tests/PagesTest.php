@@ -32,7 +32,7 @@ class PagesTest extends AppTest
 
     public function testEdit()
     {
-        $response = $this->call('GET', 'quarx/pages/'.CryptoService::encrypt(1).'/edit');
+        $response = $this->call('GET', 'quarx/pages/1/edit');
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertViewHas('page');
     }
@@ -64,7 +64,7 @@ class PagesTest extends AppTest
         $page = [ 'id' => 1, 'title' => 'dumber', 'url' => 'dumber', 'entry' => 'okie dokie' ];
         $response = $this->call('POST', 'quarx/pages', $page);
 
-        $response = $this->call('PATCH', 'quarx/pages/'.CryptoService::encrypt(1), [
+        $response = $this->call('PATCH', 'quarx/pages/1', [
             'title' => 'smarter',
             'url' => 'smart'
         ]);
@@ -77,7 +77,7 @@ class PagesTest extends AppTest
 
     public function testDelete()
     {
-        $response = $this->call('DELETE', 'quarx/pages/'.CryptoService::encrypt(1));
+        $response = $this->call('DELETE', 'quarx/pages/1');
         $this->assertEquals(302, $response->getStatusCode());
         $this->assertRedirectedTo('quarx/pages');
     }

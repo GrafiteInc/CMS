@@ -30,19 +30,19 @@
 
         @foreach($links as $link)
             <tr>
-                <td><a href="{!! route('quarx.links.edit', [CryptoService::encrypt($link->id)]) !!}">{!! $link->name !!}</a></td>
+                <td><a href="{!! route('quarx.links.edit', [$link->id]) !!}">{!! $link->name !!}</a></td>
                 @if ($link->external)
                 <td class="raw-m-hide">{!! $link->external_url !!}</td>
                 @else
                 <td class="raw-m-hide">{!! PageService::pageName($link->page_id) !!}</td>
                 @endif
                 <td>
-                    <form method="post" action="{!! url('quarx/links/'.CryptoService::encrypt($link->id)) !!}">
+                    <form method="post" action="{!! url('quarx/links/'.$link->id) !!}">
                         {!! csrf_field() !!}
                         {!! method_field('DELETE') !!}
                         <button class="delete-link-btn btn btn-xs btn-danger pull-right" type="submit"><i class="fa fa-trash"></i> Delete</button>
                     </form>
-                    <a class="btn btn-xs btn-default pull-right raw-margin-right-8" href="{!! route('quarx.links.edit', [CryptoService::encrypt($link->id)]) !!}"><i class="fa fa-pencil"></i> Edit</a>
+                    <a class="btn btn-xs btn-default pull-right raw-margin-right-8" href="{!! route('quarx.links.edit', [$link->id]) !!}"><i class="fa fa-pencil"></i> Edit</a>
                 </td>
             </tr>
         @endforeach

@@ -10,7 +10,7 @@
             <a class="btn btn-default" href="{!! FileService::fileAsDownload($files->name, $files->location) !!}"><span class="fa fa-download"></span> Download: {!! $files->name !!}</a>
         </div>
 
-        {!! Form::model($files, ['route' => ['quarx.files.update', CryptoService::encrypt($files->id)], 'files' => true, 'method' => 'patch', 'class' => 'edit']) !!}
+        {!! Form::model($files, ['route' => ['quarx.files.update', $files->id], 'files' => true, 'method' => 'patch', 'class' => 'edit']) !!}
 
             {!! FormMaker::fromObject($files, Config::get('quarx.forms.file-edit')) !!}
 

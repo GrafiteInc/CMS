@@ -48,15 +48,15 @@
                 <tbody>
                     @foreach($menus as $menu)
                         <tr>
-                            <td><a href="{!! route('quarx.menus.edit', [CryptoService::encrypt($menu->id)]) !!}">{!! $menu->name !!}</a></td>
+                            <td><a href="{!! route('quarx.menus.edit', [$menu->id]) !!}">{!! $menu->name !!}</a></td>
                             <td class="raw-m-hide">{!! $menu->slug !!}</td>
                             <td class="text-right">
-                                <form method="post" action="{!! url('quarx/menus/'.CryptoService::encrypt($menu->id)) !!}">
+                                <form method="post" action="{!! url('quarx/menus/'.$menu->id) !!}">
                                     {!! csrf_field() !!}
                                     {!! method_field('DELETE') !!}
                                     <button class="delete-btn btn btn-xs btn-danger pull-right" type="submit"><i class="fa fa-trash"></i> Delete</button>
                                 </form>
-                                <a class="btn btn-xs btn-default pull-right raw-margin-right-8" href="{!! route('quarx.menus.edit', [CryptoService::encrypt($menu->id)]) !!}"><i class="fa fa-pencil"></i> Edit</a>
+                                <a class="btn btn-xs btn-default pull-right raw-margin-right-8" href="{!! route('quarx.menus.edit', [$menu->id]) !!}"><i class="fa fa-pencil"></i> Edit</a>
                             </td>
                         </tr>
                     @endforeach

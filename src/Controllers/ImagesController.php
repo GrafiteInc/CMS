@@ -130,7 +130,6 @@ class ImagesController extends QuarxController
      */
     public function edit($id)
     {
-        $id = CryptoService::decrypt($id);
         $images = $this->imagesRepository->findImagesById($id);
 
         if (empty($images)) {
@@ -152,7 +151,6 @@ class ImagesController extends QuarxController
     public function update($id, ImagesRequest $request)
     {
         try {
-            $id = CryptoService::decrypt($id);
             $images = $this->imagesRepository->findImagesById($id);
 
             Quarx::notification('Image updated successfully.', 'success');
@@ -171,7 +169,7 @@ class ImagesController extends QuarxController
             Quarx::notification($e->getMessage() ?: 'Image could not be saved.', 'danger');
         }
 
-        return redirect(route('quarx.images.edit', CryptoService::encrypt($id)));
+        return redirect(route('quarx.images.edit', $id));
     }
 
     /**
@@ -183,7 +181,6 @@ class ImagesController extends QuarxController
      */
     public function destroy($id)
     {
-        $id = CryptoService::decrypt($id);
         $image = $this->imagesRepository->findImagesById($id);
 
         if (is_file(storage_path($image->location))) {

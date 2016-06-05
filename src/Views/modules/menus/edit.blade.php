@@ -8,7 +8,7 @@
 
     @include('quarx::modules.menus.breadcrumbs', ['location' => ['edit']])
 
-    {!! Form::model($menu, ['route' => ['quarx.menus.update', CryptoService::encrypt($menu->id)], 'method' => 'patch', 'class' => 'edit']) !!}
+    {!! Form::model($menu, ['route' => ['quarx.menus.update', $menu->id], 'method' => 'patch', 'class' => 'edit']) !!}
 
         {!! FormMaker::fromObject($menu, Config::get('quarx.forms.menu')) !!}
 
@@ -21,7 +21,7 @@
 
     <div class="row">
         <div class="col-12">
-            <a class="btn btn-primary pull-right" href="{!! URL::to('quarx/links/create?m='.CryptoService::encrypt($menu->id)) !!}">Add Link</a>
+            <a class="btn btn-primary pull-right" href="{!! URL::to('quarx/links/create?m='.$menu->id) !!}">Add Link</a>
             <h1>Links</h1>
             @include('quarx::modules.links.index')
         </div>

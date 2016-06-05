@@ -33,7 +33,7 @@ class BlogTest extends AppTest
     public function testEdit()
     {
         factory(\Yab\Quarx\Models\Blog::class)->create([ 'id' => 4 ]);
-        $response = $this->call('GET', 'quarx/blog/'.CryptoService::encrypt(4).'/edit');
+        $response = $this->call('GET', 'quarx/blog/4/edit');
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertViewHas('blog');
     }
@@ -66,7 +66,7 @@ class BlogTest extends AppTest
         $blog = [ 'title' => 'dumber', 'url' => 'dumber', 'entry' => 'okie dokie' ];
         $this->call('POST', 'quarx/blog', $blog);
 
-        $response = $this->call('PATCH', 'quarx/blog/'.CryptoService::encrypt(1), [
+        $response = $this->call('PATCH', 'quarx/blog/1', [
             'title' => 'dumber and dumber',
             'url' => 'dumber-and-dumber',
         ]);

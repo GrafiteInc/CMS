@@ -3,7 +3,6 @@
 namespace Yab\Quarx\Controllers;
 
 use Quarx;
-use CryptoService;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 use Yab\Quarx\Models\Menu;
@@ -93,7 +92,7 @@ class MenuController extends QuarxController
             Quarx::notification($e->getMessage() ?: 'Menu could not be saved.', 'danger');
         }
 
-        return redirect(route('quarx.menus.edit', [CryptoService::encrypt($menu->id)]));
+        return redirect(route('quarx.menus.edit', [$menu->id]));
     }
 
     /**
@@ -104,7 +103,6 @@ class MenuController extends QuarxController
      */
     public function edit($id)
     {
-        $id = CryptoService::decrypt($id);
         $menu = $this->menuRepository->findMenuById($id);
 
         if (empty($menu)) {
@@ -127,7 +125,6 @@ class MenuController extends QuarxController
     public function update($id, MenuRequest $request)
     {
         try {
-            $id = CryptoService::decrypt($id);
             $menu = $this->menuRepository->findMenuById($id);
 
             if (empty($menu)) {
@@ -145,7 +142,7 @@ class MenuController extends QuarxController
             Quarx::notification($e->getMessage() ?: 'Menu could not be updated.', 'danger');
         }
 
-        return redirect(route('quarx.menus.edit', [CryptoService::encrypt($id)]));
+        return redirect(route('quarx.menus.edit', [$id]));
     }
 
     /**
@@ -157,7 +154,6 @@ class MenuController extends QuarxController
      */
     public function destroy($id)
     {
-        $id = CryptoService::decrypt($id);
         $menu = $this->menuRepository->findMenuById($id);
 
         if (empty($menu)) {

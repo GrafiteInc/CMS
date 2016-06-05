@@ -50,16 +50,16 @@
 
                 @foreach($blogs as $blog)
                     <tr>
-                        <td><a href="{!! route('quarx.blog.edit', [CryptoService::encrypt($blog->id)]) !!}">{!! $blog->title !!}</a></td>
+                        <td><a href="{!! route('quarx.blog.edit', [$blog->id]) !!}">{!! $blog->title !!}</a></td>
                         <td class="raw-m-hide">{!! $blog->url !!}</td>
                         <td class="raw-m-hide text-center">@if ($blog->is_published) <span class="fa fa-check"></span> @else <span class="fa fa-close"></span> @endif </td>
                         <td class="text-right">
-                            <form method="post" action="{!! url('quarx/blog/'.CryptoService::encrypt($blog->id)) !!}">
+                            <form method="post" action="{!! url('quarx/blog/'.$blog->id) !!}">
                                 {!! csrf_field() !!}
                                 {!! method_field('DELETE') !!}
                                 <button class="delete-btn btn btn-xs btn-danger pull-right" type="submit"><i class="fa fa-trash"></i> Delete</button>
                             </form>
-                            <a class="btn btn-xs btn-default pull-right raw-margin-right-8" href="{!! route('quarx.blog.edit', [CryptoService::encrypt($blog->id)]) !!}"><i class="fa fa-pencil"></i> Edit</a>
+                            <a class="btn btn-xs btn-default pull-right raw-margin-right-8" href="{!! route('quarx.blog.edit', [$blog->id]) !!}"><i class="fa fa-pencil"></i> Edit</a>
                         </td>
                     </tr>
                 @endforeach

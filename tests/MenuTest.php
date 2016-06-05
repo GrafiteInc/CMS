@@ -32,7 +32,7 @@ class MenuTest extends AppTest
 
     public function testEdit()
     {
-        $response = $this->call('GET', '/quarx/menus/'.CryptoService::encrypt(1).'/edit');
+        $response = $this->call('GET', '/quarx/menus/1/edit');
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertViewHas('menu');
     }
@@ -61,7 +61,7 @@ class MenuTest extends AppTest
 
     public function testUpdate()
     {
-        $response = $this->call('PATCH', '/quarx/menus/'.CryptoService::encrypt(1), [
+        $response = $this->call('PATCH', '/quarx/menus/1', [
             'name' => 'awesome'
         ]);
 
@@ -70,7 +70,7 @@ class MenuTest extends AppTest
 
     public function testDelete()
     {
-        $response = $this->call('DELETE', '/quarx/menus/'.CryptoService::encrypt(1));
+        $response = $this->call('DELETE', '/quarx/menus/1');
         $this->assertEquals(302, $response->getStatusCode());
         $this->assertRedirectedTo('/quarx/menus');
     }

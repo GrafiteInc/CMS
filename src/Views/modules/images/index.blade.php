@@ -34,7 +34,7 @@
 
             <div class="col-md-3 panel raw-margin-top-24">
                 <div class="thumbnail">
-                    <a href="{!! route('quarx.images.edit', [CryptoService::encrypt($image->id)]) !!}">
+                    <a href="{!! route('quarx.images.edit', [$image->id]) !!}">
                         <div class="img" style="background-image: url('{!! FileService::filePreview($image->location) !!}')"></div>
                     </a>
                 </div>
@@ -53,12 +53,12 @@
                             @endif
                         </div>
                         <div class="col-md-6">
-                            <form method="post" action="{!! url('quarx/images/'.CryptoService::encrypt($image->id)) !!}">
+                            <form method="post" action="{!! url('quarx/images/'.$image->id) !!}">
                                 {!! csrf_field() !!}
                                 {!! method_field('DELETE') !!}
                                 <button class="delete-btn btn btn-xs btn-danger pull-right" type="submit"><i class="fa fa-trash"></i> Delete</button>
                             </form>
-                            <a class="btn btn-xs btn-default pull-right raw-margin-right-8" href="{!! route('quarx.images.edit', [CryptoService::encrypt($image->id)]) !!}"><i class="fa fa-pencil"></i> Edit</a>
+                            <a class="btn btn-xs btn-default pull-right raw-margin-right-8" href="{!! route('quarx.images.edit', [$image->id]) !!}"><i class="fa fa-pencil"></i> Edit</a>
                         </div>
                     </div>
                 </div>

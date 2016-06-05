@@ -54,7 +54,7 @@ class QuarxService implements QuarxServiceInterface
             return base_path(__DIR__.'/../Assets/'.$path);
         }
 
-        return url('quarx/asset/'.CryptoServiceFacade::encrypt($path).'/'.CryptoServiceFacade::encrypt($contentType));
+        return url('quarx/asset/'.CryptoServiceFacade::url_encode($path).'/'.CryptoServiceFacade::url_encode($contentType));
     }
 
     /**
@@ -68,7 +68,7 @@ class QuarxService implements QuarxServiceInterface
     public function moduleAsset($module, $path, $contentType = 'null')
     {
         $path = base_path(Config::get('quarx.module-directory').'/'.ucfirst($module).'/Assets/'.$path);
-        return url('quarx/asset/'.CryptoServiceFacade::encrypt($path).'/'.CryptoServiceFacade::encrypt($contentType).'/?isModule=true');
+        return url('quarx/asset/'.CryptoServiceFacade::url_encode($path).'/'.CryptoServiceFacade::url_encode($contentType).'/?isModule=true');
     }
 
     /**
@@ -162,7 +162,7 @@ class QuarxService implements QuarxServiceInterface
         $widget = WidgetsRepository::getWidgetBySLUG($slug);
 
         if (Gate::allows('quarx', Auth::user())) {
-            $widget->content .= '<a href="'. url('quarx/widgets/'.CryptoServiceFacade::encrypt($widget->id).'/edit') .'" style="margin-left: 8px;" class="btn btn-xs btn-default"><span class="fa fa-pencil"></span> Edit</a>';
+            $widget->content .= '<a href="'. url('quarx/widgets/'.$widget->id.'/edit') .'" style="margin-left: 8px;" class="btn btn-xs btn-default"><span class="fa fa-pencil"></span> Edit</a>';
         }
 
         return $widget->content;
@@ -260,7 +260,7 @@ class QuarxService implements QuarxServiceInterface
         }
 
         if (Gate::allows('quarx', Auth::user())) {
-            $response .= '<a href="'. url('quarx/menus/'.CryptoServiceFacade::encrypt($menu->id).'/edit') .'" style="margin-left: 8px;" class="btn btn-xs btn-default"><span class="fa fa-pencil"></span> Edit</a>';
+            $response .= '<a href="'. url('quarx/menus/'.$menu->id.'/edit') .'" style="margin-left: 8px;" class="btn btn-xs btn-default"><span class="fa fa-pencil"></span> Edit</a>';
         }
 
         return $response;
@@ -291,7 +291,7 @@ class QuarxService implements QuarxServiceInterface
     {
         if (Gate::allows('quarx', Auth::user())) {
             if (! is_null($id)) {
-                return '<a href="'. url('quarx/'.$type.'/'.CryptoServiceFacade::encrypt($id).'/edit') .'" class="btn btn-xs btn-default pull-right"><span class="fa fa-pencil"></span> Edit</a>';
+                return '<a href="'. url('quarx/'.$type.'/'.$id.'/edit') .'" class="btn btn-xs btn-default pull-right"><span class="fa fa-pencil"></span> Edit</a>';
             } else {
                 return '<a href="'. url('quarx/'.$type) .'" class="btn btn-xs btn-default pull-right"><span class="fa fa-pencil"></span> Edit</a>';
             }

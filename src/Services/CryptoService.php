@@ -97,7 +97,7 @@ class CryptoService
      * @param  string
      * @return string
      */
-    protected function url_encode($string)
+    public function url_encode($string)
     {
         return rawurlencode( $this->url_base64_encode($string) );
     }
@@ -108,7 +108,7 @@ class CryptoService
      * @param  string
      * @return string
      */
-    protected function url_decode($string)
+    public function url_decode($string)
     {
         return $this->url_base64_decode( rawurldecode($string) );
     }

@@ -32,7 +32,7 @@ class FilesTest extends AppTest
 
     public function testEdit()
     {
-        $response = $this->call('GET', 'quarx/files/'.CryptoService::encrypt(1).'/edit');
+        $response = $this->call('GET', 'quarx/files/1/edit');
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertViewHas('files');
     }
@@ -84,7 +84,7 @@ class FilesTest extends AppTest
     public function testUpdate()
     {
         $file = (array) factory(\Yab\Quarx\Models\Files::class)->make([ 'id' => 3, 'title' => 'dumber' ]);
-        $response = $this->call('PATCH', 'quarx/files/'.CryptoService::encrypt(3), $file);
+        $response = $this->call('PATCH', 'quarx/files/3', $file);
 
         $this->assertEquals(302, $response->getStatusCode());
         $this->assertRedirectedTo('/quarx/files');
@@ -106,7 +106,7 @@ class FilesTest extends AppTest
         ]);
         $this->call('POST', 'quarx/files', $file->getAttributes());
 
-        $response = $this->call('DELETE', 'quarx/files/'.CryptoService::encrypt(2));
+        $response = $this->call('DELETE', 'quarx/files/2');
         $this->assertEquals(302, $response->getStatusCode());
         $this->assertRedirectedTo('quarx/files');
     }

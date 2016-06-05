@@ -49,7 +49,7 @@
 
                 @foreach($events as $event)
                     <tr>
-                        <td><a href="{!! route('quarx.events.edit', [CryptoService::encrypt($event->id)]) !!}">{!! $event->title !!}</a></td>
+                        <td><a href="{!! route('quarx.events.edit', [$event->id]) !!}">{!! $event->title !!}</a></td>
                         <td>{!! date('M jS, Y', strtotime($event->start_date)) !!}</td>
                         <td>{!! date('M jS, Y', strtotime($event->end_date)) !!}</td>
                         <td class="raw-m-hide text-center">
@@ -60,12 +60,12 @@
                             @endif
                         </td>
                         <td class="text-right">
-                            <form method="post" action="{!! url('quarx/events/'.CryptoService::encrypt($event->id)) !!}">
+                            <form method="post" action="{!! url('quarx/events/'.$event->id) !!}">
                                 {!! csrf_field() !!}
                                 {!! method_field('DELETE') !!}
                                 <button class="delete-btn btn btn-xs btn-danger pull-right" type="submit"><i class="fa fa-trash"></i> Delete</button>
                             </form>
-                            <a class="btn btn-xs btn-default pull-right raw-margin-right-8" href="{!! route('quarx.events.edit', [CryptoService::encrypt($event->id)]) !!}"><i class="fa fa-pencil"></i> Edit</a>
+                            <a class="btn btn-xs btn-default pull-right raw-margin-right-8" href="{!! route('quarx.events.edit', [$event->id]) !!}"><i class="fa fa-pencil"></i> Edit</a>
                         </td>
                     </tr>
                 @endforeach

@@ -3,7 +3,6 @@
 namespace Yab\Quarx\Controllers;
 
 use Quarx;
-use CryptoService;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 use Yab\Quarx\Models\Event;
@@ -87,7 +86,7 @@ class EventController extends QuarxController
             Quarx::notification('Event could not be saved.', 'warning');
         }
 
-        return redirect(route('quarx.events.edit', [CryptoService::encrypt($event->id)]));
+        return redirect(route('quarx.events.edit', [$event->id]));
     }
 
     /**
@@ -98,7 +97,6 @@ class EventController extends QuarxController
      */
     public function edit($id)
     {
-        $id = CryptoService::decrypt($id);
         $event = $this->eventRepository->findEventById($id);
 
         if (empty($event)) {
@@ -119,7 +117,6 @@ class EventController extends QuarxController
      */
     public function update($id, EventRequest $request)
     {
-        $id = CryptoService::decrypt($id);
         $event = $this->eventRepository->findEventById($id);
 
         if (empty($event)) {
@@ -134,7 +131,7 @@ class EventController extends QuarxController
             Quarx::notification('Event could not be saved.', 'warning');
         }
 
-        return redirect(route('quarx.events.edit', [CryptoService::encrypt($id)]));
+        return redirect(route('quarx.events.edit', [$id]));
     }
 
     /**
@@ -146,7 +143,6 @@ class EventController extends QuarxController
      */
     public function destroy($id)
     {
-        $id = CryptoService::decrypt($id);
         $event = $this->eventRepository->findEventById($id);
 
         if (empty($event)) {

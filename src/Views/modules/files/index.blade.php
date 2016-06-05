@@ -25,16 +25,16 @@
                     <tr>
                         <td>
                             <a href="{!! FileService::fileAsDownload($file->name, $file->location) !!}"><span class="fa fa-download"></span></a>
-                            <a href="{!! route('quarx.files.edit', [CryptoService::encrypt($file->id)]) !!}">{!! $file->name !!}</a>
+                            <a href="{!! route('quarx.files.edit', [$file->id]) !!}">{!! $file->name !!}</a>
                         </td>
                         <td class="raw-m-hide text-center">@if ($file->is_published) <span class="fa fa-check"></span> @else <span class="fa fa-close"></span> @endif</td>
                         <td class="text-right">
-                            <form method="post" action="{!! url('quarx/files/'.CryptoService::encrypt($file->id)) !!}">
+                            <form method="post" action="{!! url('quarx/files/'.$file->id) !!}">
                                 {!! csrf_field() !!}
                                 {!! method_field('DELETE') !!}
                                 <button class="delete-btn btn btn-xs btn-danger pull-right" type="submit"><i class="fa fa-trash"></i> Delete</button>
                             </form>
-                            <a class="btn btn-xs btn-default pull-right raw-margin-right-8" href="{!! route('quarx.files.edit', [CryptoService::encrypt($file->id)]) !!}"><i class="fa fa-pencil"></i> Edit</a>
+                            <a class="btn btn-xs btn-default pull-right raw-margin-right-8" href="{!! route('quarx.files.edit', [$file->id]) !!}"><i class="fa fa-pencil"></i> Edit</a>
                         </td>
                     </tr>
                 @endforeach

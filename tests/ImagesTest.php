@@ -32,7 +32,7 @@ class ImagesTest extends AppTest
 
     public function testEdit()
     {
-        $response = $this->call('GET', 'quarx/images/'.CryptoService::encrypt(1).'/edit');
+        $response = $this->call('GET', 'quarx/images/1/edit');
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertViewHas('images');
     }
@@ -66,7 +66,7 @@ class ImagesTest extends AppTest
     public function testUpdate()
     {
         $image = (array) factory(\Yab\Quarx\Models\Images::class)->make([ 'id' => 3, 'title' => 'dumber' ]);
-        $response = $this->call('PATCH', 'quarx/images/'.CryptoService::encrypt(3), $image);
+        $response = $this->call('PATCH', 'quarx/images/3', $image);
 
         $this->assertEquals(302, $response->getStatusCode());
         $this->assertRedirectedTo('/quarx/images');
@@ -88,7 +88,7 @@ class ImagesTest extends AppTest
         ];
         $this->call('POST', 'quarx/images', $image, [], ['location' => ['image' => $uploadedFile]]);
 
-        $response = $this->call('DELETE', 'quarx/images/'.CryptoService::encrypt(2));
+        $response = $this->call('DELETE', 'quarx/images/2');
         $this->assertEquals(302, $response->getStatusCode());
         $this->assertRedirectedTo('quarx/images');
     }

@@ -6,15 +6,15 @@
         @if ($blog->is_published)
         <a class="btn btn-default pull-right raw-margin-left-8" href="{!! URL::to('blog/'.$blog->url) !!}">Live</a>
         @else
-        <a class="btn btn-default pull-right raw-margin-left-8" href="{!! URL::to('quarx/preview/blog/'.CryptoService::encrypt($blog->id)) !!}">Preview</a>
+        <a class="btn btn-default pull-right raw-margin-left-8" href="{!! URL::to('quarx/preview/blog/'.$blog->id) !!}">Preview</a>
         @endif
-        <a class="btn btn-warning pull-right raw-margin-left-8" href="{!! URL::to('quarx/rollback/blog/'.CryptoService::encrypt($blog->id)) !!}">Rollback</a>
+        <a class="btn btn-warning pull-right raw-margin-left-8" href="{!! URL::to('quarx/rollback/blog/'.$blog->id) !!}">Rollback</a>
         <h1 class="page-header">Blog</h1>
     </div>
 
     @include('quarx::modules.blogs.breadcrumbs', ['location' => ['edit']])
 
-    {!! Form::model($blog, ['route' => ['quarx.blog.update', CryptoService::encrypt($blog->id)], 'method' => 'patch', 'class' => 'edit']) !!}
+    {!! Form::model($blog, ['route' => ['quarx.blog.update', $blog->id], 'method' => 'patch', 'class' => 'edit']) !!}
 
         <div class="form-group">
             <label for="Template">Template</label>

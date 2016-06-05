@@ -669,7 +669,7 @@ class AssetController extends QuarxController
     public function asPublic($encFileName, Filesystem $fileSystem)
     {
         try {
-            $fileName = CryptoService::decrypt($encFileName);
+            $fileName = CryptoService::url_decode($encFileName);
 
             if (Config::get('quarx.storage-location') === 'local' || Config::get('quarx.storage-location') === null) {
                 $filePath = storage_path('app/'.$fileName);
@@ -706,7 +706,7 @@ class AssetController extends QuarxController
     public function asPreview($encFileName, Filesystem $fileSystem)
     {
         try {
-            $fileName = CryptoService::decrypt($encFileName);
+            $fileName = CryptoService::url_decode($encFileName);
 
             if (Config::get('quarx.storage-location') === 'local' || Config::get('quarx.storage-location') === null) {
                 $filePath = storage_path('app/'.$fileName);
@@ -759,8 +759,8 @@ class AssetController extends QuarxController
     public function asDownload($encFileName, $encRealFileName, Filesystem $fileSystem)
     {
         try {
-            $fileName = CryptoService::decrypt($encFileName);
-            $realFileName = CryptoService::decrypt($encRealFileName);
+            $fileName = CryptoService::url_decode($encFileName);
+            $realFileName = CryptoService::url_decode($encRealFileName);
 
             if (Config::get('quarx.storage-location') === 'local' || Config::get('quarx.storage-location') === null) {
                 $filePath = storage_path('app/'.$realFileName);
@@ -799,7 +799,7 @@ class AssetController extends QuarxController
     public function asset($encPath, $contentType = null, Filesystem $fileSystem)
     {
         try {
-            $path = CryptoService::decrypt($encPath);
+            $path = CryptoService::url_decode($encPath);
 
             if (Request::get('isModule') === 'true') {
                 $filePath = $path;
@@ -810,7 +810,7 @@ class AssetController extends QuarxController
             $fileName = basename($filePath);
 
             if (! is_null($contentType)) {
-                $contentType = CryptoService::decrypt($contentType);
+                $contentType = CryptoService::url_decode($contentType);
             } else {
                 $contentType = $fileSystem->mimeType($fileName);
             }

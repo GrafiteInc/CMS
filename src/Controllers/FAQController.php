@@ -3,7 +3,6 @@
 namespace Yab\Quarx\Controllers;
 
 use Quarx;
-use CryptoService;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 use Yab\Quarx\Models\FAQ;
@@ -87,7 +86,7 @@ class FAQController extends QuarxController
             Quarx::notification('FAQ could not be saved.', 'warning');
         }
 
-        return redirect(route('quarx.faqs.edit', [CryptoService::encrypt($faq->id)]));
+        return redirect(route('quarx.faqs.edit', [$faq->id]));
     }
 
     /**
@@ -98,7 +97,6 @@ class FAQController extends QuarxController
      */
     public function edit($id)
     {
-        $id = CryptoService::decrypt($id);
         $faq = $this->faqRepository->findFAQById($id);
 
         if (empty($faq)) {
@@ -119,7 +117,6 @@ class FAQController extends QuarxController
      */
     public function update($id, FAQRequest $request)
     {
-        $id = CryptoService::decrypt($id);
         $faq = $this->faqRepository->findFAQById($id);
 
         if (empty($faq)) {
@@ -134,7 +131,7 @@ class FAQController extends QuarxController
             Quarx::notification('FAQ could not be saved.', 'warning');
         }
 
-        return redirect(route('quarx.faqs.edit', [CryptoService::encrypt($id)]));
+        return redirect(route('quarx.faqs.edit', [$id]));
     }
 
     /**
@@ -146,7 +143,6 @@ class FAQController extends QuarxController
      */
     public function destroy($id)
     {
-        $id = CryptoService::decrypt($id);
         $faq = $this->faqRepository->findFAQById($id);
 
         if (empty($faq)) {

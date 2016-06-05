@@ -33,9 +33,9 @@ class QuarxFeatureController extends QuarxController
 
 
         $model = new $modelString;
-        $modelInstance = $model->find(CryptoService::decrypt($id));
+        $modelInstance = $model->find($id);
 
-        $archive = Archive::where('entity_id', CryptoService::decrypt($id))->where('entity_type', $modelString)->limit(1)->offset(1)->orderBy('id', 'desc')->first();
+        $archive = Archive::where('entity_id', $id)->where('entity_type', $modelString)->limit(1)->offset(1)->orderBy('id', 'desc')->first();
 
         if (! $archive) {
             Quarx::notification('Could not rollback', 'warning');
@@ -59,7 +59,7 @@ class QuarxFeatureController extends QuarxController
         }
 
         $model = new $modelString;
-        $modelInstance = $model->find(CryptoService::decrypt($id));
+        $modelInstance = $model->find($id);
 
         $data = [
             $entity => $modelInstance

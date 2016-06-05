@@ -3,7 +3,6 @@
 namespace Yab\Quarx\Controllers;
 
 use Quarx;
-use CryptoService;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 use Yab\Quarx\Models\Widgets;
@@ -84,7 +83,7 @@ class WidgetsController extends QuarxController
 
         Quarx::notification('Widgets saved successfully.', 'success');
 
-        return redirect(route('quarx.widgets.edit', [CryptoService::encrypt($widgets->id)]));
+        return redirect(route('quarx.widgets.edit', [$widgets->id]));
     }
 
     /**
@@ -95,7 +94,6 @@ class WidgetsController extends QuarxController
      */
     public function edit($id)
     {
-        $id = CryptoService::decrypt($id);
         $widgets = $this->widgetsRepository->findWidgetsById($id);
 
         if (empty($widgets)) {
@@ -116,7 +114,6 @@ class WidgetsController extends QuarxController
      */
     public function update($id, WidgetsRequest $request)
     {
-        $id = CryptoService::decrypt($id);
         $widgets = $this->widgetsRepository->findWidgetsById($id);
 
         if (empty($widgets)) {
@@ -128,7 +125,7 @@ class WidgetsController extends QuarxController
 
         Quarx::notification('Widgets updated successfully.', 'success');
 
-        return redirect(route('quarx.widgets.edit', [CryptoService::encrypt($id)]));
+        return redirect(route('quarx.widgets.edit', [$id]));
     }
 
     /**
@@ -140,7 +137,6 @@ class WidgetsController extends QuarxController
      */
     public function destroy($id)
     {
-        $id = CryptoService::decrypt($id);
         $widgets = $this->widgetsRepository->findWidgetsById($id);
 
         if (empty($widgets)) {

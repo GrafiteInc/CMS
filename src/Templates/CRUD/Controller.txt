@@ -92,7 +92,7 @@ class _camel_case_Controller extends Controller
      */
     public function edit($id)
     {
-        $_lower_case_ = $this->service->find(CryptoService::decrypt($id));
+        $_lower_case_ = $this->service->find($id);
         return view('_lower_casePlural_::_lower_casePlural_.edit')->with('_lower_case_', $_lower_case_);
     }
 
@@ -105,7 +105,7 @@ class _camel_case_Controller extends Controller
      */
     public function update(_camel_case_Request $request, $id)
     {
-        $result = $this->service->update(CryptoService::decrypt($id), $request->except(['_token', '_method']));
+        $result = $this->service->update($id, $request->except(['_token', '_method']));
 
         if ($result) {
             Quarx::notification('Successfully updated', 'success');
@@ -124,7 +124,7 @@ class _camel_case_Controller extends Controller
      */
     public function destroy($id)
     {
-        $result = $this->service->destroy(CryptoService::decrypt($id));
+        $result = $this->service->destroy($id);
 
         if ($result) {
             Quarx::notification('Successfully deleted', 'success');

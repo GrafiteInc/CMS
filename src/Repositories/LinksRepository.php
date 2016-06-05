@@ -28,7 +28,6 @@ class LinksRepository
      */
     public function store($input)
     {
-        $input['menu_id'] = CryptoService::decrypt($input['menu_id']);
         $input['external'] = isset($input['external']) ? $input['external'] : 0;
 
         return Links::create($input);

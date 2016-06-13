@@ -1,14 +1,18 @@
 @extends('quarx-frontend::layout.master')
 
-@section('seoDescription') {{ $page->seo_description }} @endsection
-@section('seoKeywords') {{ $page->seo_keywords }} @endsection
+@if (isset($page))
+    @section('seoDescription') {{ $page->seo_description }} @endsection
+    @section('seoKeywords') {{ $page->seo_keywords }} @endsection
+@endif
 
 @section('content')
 
 <div class="container">
 
     <div class="jumbotron">
-        <h1>{!! $page->title or 'Home Page' !!}</h1>
+        @if (isset($page))
+            <h1>{!! $page->title or 'Home Page' !!}</h1>
+        @endif
     </div>
 
     @if (isset($page))

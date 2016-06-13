@@ -5,6 +5,7 @@ namespace Yab\Quarx\Console;
 use Config;
 use Artisan;
 use Illuminate\Console\Command;
+use Illuminate\Filesystem\Filesystem;
 use Yab\Laracogs\Generators\CrudGenerator;
 
 class ModuleCrud extends Command
@@ -30,6 +31,8 @@ class ModuleCrud extends Command
      */
     public function handle()
     {
+        $filesystem = new Filesystem;
+
         $crudGenerator = new CrudGenerator();
 
         $table = ucfirst(str_singular($this->argument('table')));
@@ -155,6 +158,7 @@ class ModuleCrud extends Command
 
             if ($this->option('schema')) {
                 $migrationFiles = $filesystem->allFiles(base_path('quarx/modules/'.ucfirst(str_plural($table)).'/Publishes/database/migrations'));
+                $migrationName = 'create_'.str_plural(strtolower($table)).'_table';
                 foreach ($migrationFiles as $file) {
                     if (stristr($file->getBasename(), $migrationName) ) {
                         $migrationData = file_get_contents($file->getPathname());

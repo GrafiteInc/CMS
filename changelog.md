@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 ----
 
+## [v1.4.9] - 2016-06-13
+### Fixed
+- Missing tests key
+
 ## [v1.4.8] - 2016-06-13
 ### Fixed
 - Issues resulting from the schema option on the crud generator

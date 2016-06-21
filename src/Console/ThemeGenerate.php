@@ -61,21 +61,21 @@ class ThemeGenerate extends Command
                 }
             }
 
-            $sass = file_get_contents(base_path('resources/views/quarx/themes/'.strtolower($name).'/assets/sass/_theme.scss'));
+            $sass = file_get_contents(base_path('resources/themes/'.strtolower($name).'/assets/sass/_theme.scss'));
             $sassRepairs = str_replace('themeTemplate', strtolower($name), $sass);
-            file_put_contents(base_path('resources/views/quarx/themes/'.strtolower($name).'/assets/sass/_theme.scss'), $sassRepairs);
+            file_put_contents(base_path('resources/themes/'.strtolower($name).'/assets/sass/_theme.scss'), $sassRepairs);
 
-            $layout = file_get_contents(base_path('resources/views/quarx/themes/'.strtolower($name).'/layout/master.blade.php'));
+            $layout = file_get_contents(base_path('resources/themes/'.strtolower($name).'/layout/master.blade.php'));
             $layoutRepairs = str_replace('themeTemplate', strtolower($name), $layout);
-            file_put_contents(base_path('resources/views/quarx/themes/'.strtolower($name).'/layout/master.blade.php'), $layoutRepairs);
+            file_put_contents(base_path('resources/themes/'.strtolower($name).'/layout/master.blade.php'), $layoutRepairs);
 
             $this->info("Finished generating your theme");
             $this->line("\n");
             $this->info("Please add this to your gulpfile.js in the scripts elixir:");
-            $this->comment('../../views/quarx/themes/'.strtolower($name).'/assets/js/theme.js');
+            $this->comment('../../themes/'.strtolower($name).'/assets/js/theme.js');
             $this->line("\n");
             $this->info("Please add this to your app.scss:");
-            $this->comment('@import "resources/views/quarx/themes/'.strtolower($name).'/assets/sass/_theme.scss"');
+            $this->comment('@import "resources/themes/'.strtolower($name).'/assets/sass/_theme.scss"');
         } else {
             $this->info("Nothing has been changed or added");
         }

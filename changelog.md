@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 ----
 
+## [v1.4.10] - 2016-06-21
+### Fixed
+- Fixed issue with file paths #10
+
 ## [v1.4.9] - 2016-06-13
 ### Fixed
 - Missing tests key

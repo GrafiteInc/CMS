@@ -61,10 +61,10 @@ class PagesTest extends AppTest
 
     public function testUpdate()
     {
-        $page = [ 'id' => 1, 'title' => 'dumber', 'url' => 'dumber', 'entry' => 'okie dokie' ];
+        $page = [ 'id' => 6, 'title' => 'dumber', 'url' => 'dumber', 'entry' => 'okie dokie' ];
         $response = $this->call('POST', 'quarx/pages', $page);
 
-        $response = $this->call('PATCH', 'quarx/pages/1', [
+        $response = $this->call('PATCH', 'quarx/pages/6', [
             'title' => 'smarter',
             'url' => 'smart'
         ]);

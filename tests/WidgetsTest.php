@@ -52,10 +52,10 @@ class WidgetsTest extends AppTest
 
     public function testUpdate()
     {
-        $widget = ['id' => 1, 'name' => 'dumber', 'slug' => 'dumber'];
+        $widget = ['id' => 8, 'name' => 'dumber', 'slug' => 'dumber'];
         $response = $this->call('POST', 'quarx/widgets', $widget);
 
-        $response = $this->call('PATCH', 'quarx/widgets/1', [
+        $response = $this->call('PATCH', 'quarx/widgets/8', [
             'name' => 'whacky',
             'slug' => 'whacky'
         ]);

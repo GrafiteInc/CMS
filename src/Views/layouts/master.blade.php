@@ -10,8 +10,8 @@
         <link rel="icon" type="image/ico" href="{!! Quarx::asset('images/favicon-cogs.ico', 'image/ico') !!}">
 
         <!-- Bootstrap -->
-        {!! Minify::stylesheet('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css') !!}
-        {!! Minify::stylesheet('https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css') !!}
+        {!! Minify::stylesheet('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css') !!}
+        {!! Minify::stylesheet('https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css') !!}
 
         <!-- App style -->
         {!! Minify::stylesheet(Quarx::asset('dist/css/all.css', 'text/css')) !!}

@@ -12,12 +12,7 @@ class FAQ extends Model
 
     public $primaryKey = "id";
 
-    public $fillable = [
-        "question",
-        "answer",
-        "is_published",
-        "published_at"
-    ];
+    protected $guarded = [];
 
     public static $rules = [
         'question' => 'required'

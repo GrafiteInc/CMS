@@ -11,13 +11,7 @@ class Links extends Model
 
     public $primaryKey = "id";
 
-    public $fillable = [
-        "name",
-        "external",
-        "page_id",
-        "menu_id",
-        "external_url",
-    ];
+    protected $guarded = [];
 
     public static $rules = [
         "name" => "required"

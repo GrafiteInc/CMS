@@ -10,17 +10,7 @@ class Files extends Model
 
     public $primaryKey = "id";
 
-    public $fillable = [
-        "name",
-        "location",
-        "tags",
-        "mime",
-        "size",
-        "details",
-        "is_published",
-        "user",
-        "order"
-    ];
+    protected $guarded = [];
 
     public static $rules = [
         "location" => 'required',

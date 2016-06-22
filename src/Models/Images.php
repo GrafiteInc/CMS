@@ -12,15 +12,7 @@ class Images extends Model
 
     public $primaryKey = "id";
 
-    public $fillable = [
-        "location",
-        "name",
-        "original_name",
-        "alt_tag",
-        "title_tag",
-        "is_published",
-        'tags'
-    ];
+    protected $guarded = [];
 
     public static $rules = [
         'location' => 'mimes:jpeg,jpg,bmp,png,gif'

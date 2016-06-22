@@ -11,17 +11,7 @@ class Event extends QuarxModel
 
     public $primaryKey = "id";
 
-    public $fillable = [
-        "start_date",
-        "end_date",
-        "title",
-        "template",
-        "details",
-        "seo_description",
-        "seo_keywords",
-        "is_published",
-        "published_at",
-    ];
+    protected $guarded = [];
 
     public static $rules = [
         'title' => 'required',

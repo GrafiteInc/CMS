@@ -11,10 +11,7 @@ class Menu extends Model
 
     public $primaryKey = "id";
 
-    public $fillable = [
-        "name",
-        "slug"
-    ];
+    protected $guarded = [];
 
     public static $rules = [
         "name" => "required",

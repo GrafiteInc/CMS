@@ -10,17 +10,7 @@ class Blog extends QuarxModel
 
     public $primaryKey = "id";
 
-    public $fillable = [
-        "title",
-        "tags",
-        "entry",
-        "template",
-        "is_published",
-        "published_at",
-        "seo_description",
-        "seo_keywords",
-        "url"
-    ];
+    protected $guarded = [];
 
     public static $rules = [
         'title' => 'required|string',

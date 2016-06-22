@@ -11,11 +11,7 @@ class Widgets extends Model
 
     public $primaryKey = "id";
 
-    public $fillable = [
-        "name",
-        "slug",
-        "content"
-    ];
+    protected $guarded = [];
 
     public static $rules = [
         'name' => 'required',

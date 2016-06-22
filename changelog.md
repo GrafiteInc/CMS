@@ -3,6 +3,12 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 ----
 
+## [v1.4.11] - 2016-06-22
+### Changed
+- Changed models for core elements to use guarded vs fillable for expandability
+### Fixed
+- Fixed some unit tests
+
 ## [v1.4.10] - 2016-06-21
 ### Fixed
 - Fixed issue with file paths #10

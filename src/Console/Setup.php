@@ -202,6 +202,10 @@ public function leaveAllTeams(\$userId)
 
             exec('gulp');
 
+            $composer = file_get_contents(base_path('composer.json'));
+            $composer = str_replace('"App\\": "app/",', '"App\\": "app/",'."\n".'"Quarx\\": "quarx/",', $composer);
+            file_put_contents(base_path('composer.json'), $composer);
+
             Artisan::call('theme:publish', [
                 'name' => 'default'
             ]);

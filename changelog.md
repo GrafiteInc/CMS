@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 ----
 
+## [v1.4.12] - 2016-06-23
+### Fixed
+- Issue with quick install and missing Quarx in composer.json
+
 ## [v1.4.11] - 2016-06-22
 ### Changed
 - Changed models for core elements to use guarded vs fillable for expandability

@@ -2,9 +2,8 @@
 
 namespace Yab\Quarx\Models;
 
-use Log;
-use Yab\Quarx\Models\Archive;
 use Illuminate\Database\Eloquent\Model;
+use Log;
 
 class QuarxModel extends Model
 {
@@ -20,10 +19,9 @@ class QuarxModel extends Model
                 'token'         => md5(time()),
                 'entity_id'     => $payload->attributes['id'],
                 'entity_type'   => get_class($payload),
-                'entity_data'   => json_encode($payload->attributes)
+                'entity_data'   => json_encode($payload->attributes),
             ]);
             Log::info(get_class($payload).' #'.$payload->attributes['id'].' was archived');
         }
     }
-
 }

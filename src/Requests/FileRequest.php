@@ -2,14 +2,12 @@
 
 namespace Yab\Quarx\Requests;
 
-use Gate;
 use Auth;
-use Yab\Quarx\Models\File;
+use Gate;
 use Illuminate\Foundation\Http\FormRequest;
 
 class FileRequest extends FormRequest
 {
-
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -33,5 +31,4 @@ class FileRequest extends FormRequest
     {
         return [];
     }
-
 }

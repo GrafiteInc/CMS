@@ -2,23 +2,20 @@
 
 namespace Yab\Quarx\Controllers;
 
-use Quarx;
-use CryptoService;
-use App\Http\Requests;
 use Illuminate\Http\Request;
-use Yab\Quarx\Models\Links;
 use Illuminate\Support\Facades\URL;
-use Yab\Quarx\Services\ValidationService;
-use Yab\Quarx\Requests\LinksRequest;
+use Quarx;
+use Yab\Quarx\Models\Links;
 use Yab\Quarx\Repositories\LinksRepository;
+use Yab\Quarx\Requests\LinksRequest;
+use Yab\Quarx\Services\ValidationService;
 
 class LinksController extends QuarxController
 {
-
-    /** @var  LinksRepository */
+    /** @var LinksRepository */
     private $linksRepository;
 
-    function __construct(LinksRepository $linksRepo)
+    public function __construct(LinksRepository $linksRepo)
     {
         $this->linksRepository = $linksRepo;
     }
@@ -45,6 +42,7 @@ class LinksController extends QuarxController
     public function create(Request $request)
     {
         $menu = $request->get('m');
+
         return view('quarx::modules.links.create')->with('menu_id', $menu);
     }
 
@@ -60,11 +58,11 @@ class LinksController extends QuarxController
         try {
             $validation = ValidationService::check(Links::$rules);
 
-            if ( ! $validation['errors']) {
+            if (!$validation['errors']) {
                 $links = $this->linksRepository->store($request->all());
                 Quarx::notification('Link saved successfully.', 'success');
 
-                if (! $links) {
+                if (!$links) {
                     Quarx::notification('Link could not be saved.', 'danger');
                 }
             } else {
@@ -80,7 +78,8 @@ class LinksController extends QuarxController
     /**
      * Show the form for editing the specified Links.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return Response
      */
     public function edit($id)
@@ -89,6 +88,7 @@ class LinksController extends QuarxController
 
         if (empty($links)) {
             Quarx::notification('Link not found', 'warning');
+
             return redirect(route('quarx.links.index'));
         }
 
@@ -98,7 +98,7 @@ class LinksController extends QuarxController
     /**
      * Update the specified Links in storage.
      *
-     * @param  int    $id
+     * @param int          $id
      * @param LinksRequest $request
      *
      * @return Response
@@ -110,13 +110,14 @@ class LinksController extends QuarxController
 
             if (empty($links)) {
                 Quarx::notification('Link not found', 'warning');
+
                 return redirect(route('quarx.links.index'));
             }
 
             $links = $this->linksRepository->update($links, $request->all());
             Quarx::notification('Link updated successfully.', 'success');
 
-            if (! $links) {
+            if (!$links) {
                 Quarx::notification('Link could not be updated.', 'danger');
             }
         } catch (Exception $e) {
@@ -129,7 +130,7 @@ class LinksController extends QuarxController
     /**
      * Remove the specified Links from storage.
      *
-     * @param  int $id
+     * @param int $id
      *
      * @return Response
      */
@@ -140,6 +141,7 @@ class LinksController extends QuarxController
 
         if (empty($links)) {
             Quarx::notification('Link not found', 'warning');
+
             return redirect(route('quarx.links.index'));
         }
 
@@ -149,5 +151,4 @@ class LinksController extends QuarxController
 
         return redirect(URL::to('quarx/menus/'.$menu.'/edit'));
     }
-
 }

@@ -15,7 +15,7 @@ return [
     'module-directory' => 'quarx/modules',
 
     'appAdminEmail' => '',
-    'appAdminName' => '',
+    'appAdminName'  => '',
 
     'storage-location' => 'local', // s3, local
 
@@ -27,7 +27,7 @@ return [
 
     'pagination' => 25,
 
-    'apiKey' => 'gALPkYVALEtQYWztKy3d',
+    'apiKey'   => 'gALPkYVALEtQYWztKy3d',
     'apiToken' => 'fwCVH1bJEV3GOCyGDDNP',
 
     'activeCoreModules' => [
@@ -50,69 +50,69 @@ return [
                 'type' => 'string',
             ],
             'tags'       => [
-                'type' => 'string',
-                'class' => 'tags'
+                'type'  => 'string',
+                'class' => 'tags',
             ],
             'entry'       => [
-                'type' => 'text',
-                'class' => 'redactor',
+                'type'     => 'text',
+                'class'    => 'redactor',
                 'alt_name' => 'Content',
             ],
             'seo_description'       => [
-                'type' => 'text',
+                'type'     => 'text',
                 'alt_name' => 'SEO Description',
             ],
             'seo_keywords'       => [
-                'type' => 'string',
-                'class' => 'tags',
+                'type'     => 'string',
+                'class'    => 'tags',
                 'alt_name' => 'SEO Keywords',
             ],
             'is_published' => [
-                'type' => 'checkbox',
-                'alt_name' => 'Published'
+                'type'     => 'checkbox',
+                'alt_name' => 'Published',
             ],
             'published_at' => [
-                'type' => 'string',
-                'class' => 'datetimepicker',
+                'type'     => 'string',
+                'class'    => 'datetimepicker',
                 'alt_name' => 'Publish Date',
-                'after' => '<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>',
+                'after'    => '<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>',
             ],
         ],
 
         'images' => [
             'is_published'      => [
-                'type' => 'checkbox',
-                'value' => 1,
-                'custom' => 'checked'
+                'type'   => 'checkbox',
+                'value'  => 1,
+                'custom' => 'checked',
             ],
             'tags'       => [
-                'custom' => 'data-role="tagsinput"'
+                'custom' => 'data-role="tagsinput"',
             ],
         ],
 
         'images-edit' => [
             'location'       => [
-                'type' => 'file',
-                'alt_name' => 'File'
+                'type'     => 'file',
+                'alt_name' => 'File',
             ],
             'name'       => [
                 'type' => 'string',
             ],
             'alt_tag'       => [
-                'type' => 'string',
+                'type'     => 'string',
                 'alt_name' => 'Alt Tag',
             ],
             'title_tag'       => [
-                'type' => 'string',
+                'type'     => 'string',
                 'alt_name' => 'Title Tag',
             ],
             'tags'       => [
-                'type' => 'string',
-                'class' => 'tags'
+                'type'  => 'string',
+                'class' => 'tags',
             ],
             'is_published' => [
-                'type' => 'checkbox',
-                'alt_name' => 'Published'
+                'type'     => 'checkbox',
+                'alt_name' => 'Published',
             ],
         ],
 
@@ -124,28 +124,28 @@ return [
                 'type' => 'string',
             ],
             'entry'       => [
-                'type' => 'text',
-                'class' => 'redactor',
+                'type'     => 'text',
+                'class'    => 'redactor',
                 'alt_name' => 'Content',
             ],
             'seo_description'       => [
-                'type' => 'text',
+                'type'     => 'text',
                 'alt_name' => 'SEO Description',
             ],
             'seo_keywords'       => [
-                'type' => 'string',
-                'class' => 'tags',
+                'type'     => 'string',
+                'class'    => 'tags',
                 'alt_name' => 'SEO Keywords',
             ],
             'is_published' => [
-                'type' => 'checkbox',
-                'alt_name' => 'Published'
+                'type'     => 'checkbox',
+                'alt_name' => 'Published',
             ],
             'published_at' => [
-                'type' => 'string',
-                'class' => 'datetimepicker',
+                'type'     => 'string',
+                'class'    => 'datetimepicker',
                 'alt_name' => 'Publish Date',
-                'after' => '<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>',
+                'after'    => '<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>',
             ],
         ],
 
@@ -157,7 +157,7 @@ return [
                 'type' => 'string',
             ],
             'content'       => [
-                'type' => 'text',
+                'type'  => 'text',
                 'class' => 'redactor',
             ],
         ],
@@ -167,27 +167,27 @@ return [
                 'type' => 'string',
             ],
             'answer'       => [
-                'type' => 'text',
+                'type'  => 'text',
                 'class' => 'redactor',
             ],
             'is_published' => [
-                'type' => 'checkbox',
-                'alt_name' => 'Published'
+                'type'     => 'checkbox',
+                'alt_name' => 'Published',
             ],
             'published_at' => [
-                'type' => 'string',
-                'class' => 'datetimepicker',
+                'type'     => 'string',
+                'class'    => 'datetimepicker',
                 'alt_name' => 'Publish Date',
-                'after' => '<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>',
+                'after'    => '<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>',
             ],
         ],
 
         'menu' => [
             'name' => [
-                'type' => 'string'
+                'type' => 'string',
             ],
             'slug' => [
-                'type' => 'string'
+                'type' => 'string',
             ],
         ],
 
@@ -196,12 +196,12 @@ return [
                 'type' => 'string',
             ],
             'external'       => [
-                'type' => 'checkbox',
-                'custom' => 'value="1"'
+                'type'   => 'checkbox',
+                'custom' => 'value="1"',
             ],
             'external_url' => [
-                'type' => 'string',
-                'alt_name' => 'Url'
+                'type'     => 'string',
+                'alt_name' => 'Url',
             ],
             'menu_id' => [
                 'type' => 'hidden',
@@ -210,28 +210,28 @@ return [
 
         'files' => [
             'is_published'      => [
-                'type' => 'checkbox',
-                'value' => 1
+                'type'  => 'checkbox',
+                'value' => 1,
             ],
             'tags'       => [
-                'custom' => 'data-role="tagsinput"'
+                'custom' => 'data-role="tagsinput"',
             ],
             'details'       => [
-                'type' => 'textarea'
+                'type' => 'textarea',
             ],
         ],
 
         'file-edit' => [
-            'name'       => [],
+            'name'              => [],
             'is_published'      => [
-                'type' => 'checkbox',
-                'value' => 1
+                'type'  => 'checkbox',
+                'value' => 1,
             ],
             'tags'       => [
-                'custom' => 'data-role="tagsinput"'
+                'custom' => 'data-role="tagsinput"',
             ],
             'details'       => [
-                'type' => 'textarea'
+                'type' => 'textarea',
             ],
         ],
 
@@ -240,38 +240,38 @@ return [
                 'type' => 'string',
             ],
             'start_date'       => [
-                'type' => 'string',
+                'type'  => 'string',
                 'class' => 'datepicker',
             ],
             'end_date'       => [
-                'type' => 'string',
+                'type'  => 'string',
                 'class' => 'datepicker',
             ],
             'details'       => [
-                'type' => 'text',
-                'class' => 'redactor',
+                'type'     => 'text',
+                'class'    => 'redactor',
                 'alt_name' => 'Details',
             ],
             'seo_description'       => [
-                'type' => 'text',
+                'type'     => 'text',
                 'alt_name' => 'SEO Description',
             ],
             'seo_keywords'       => [
-                'type' => 'string',
-                'class' => 'tags',
+                'type'     => 'string',
+                'class'    => 'tags',
                 'alt_name' => 'SEO Keywords',
             ],
             'is_published' => [
-                'type' => 'checkbox',
-                'alt_name' => 'Published'
+                'type'     => 'checkbox',
+                'alt_name' => 'Published',
             ],
             'published_at' => [
-                'type' => 'string',
-                'class' => 'datetimepicker',
+                'type'     => 'string',
+                'class'    => 'datetimepicker',
                 'alt_name' => 'Publish Date',
-                'after' => '<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>',
+                'after'    => '<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>',
             ],
         ],
-    ]
+    ],
 
 ];

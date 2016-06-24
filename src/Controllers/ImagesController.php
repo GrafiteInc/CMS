@@ -2,27 +2,24 @@
 
 namespace Yab\Quarx\Controllers;
 
-use Quarx;
 use Config;
-use Storage;
-use FileService;
 use CryptoService;
-use App\Http\Requests;
+use FileService;
 use Illuminate\Http\Request;
+use Quarx;
+use Storage;
 use Yab\Quarx\Models\Images;
-use Yab\Quarx\Services\ValidationService;
-use Yab\Quarx\Controllers\QuarxController;
+use Yab\Quarx\Repositories\ImagesRepository;
 use Yab\Quarx\Requests\ImagesRequest;
 use Yab\Quarx\Services\QuarxResponseService;
-use Yab\Quarx\Repositories\ImagesRepository;
+use Yab\Quarx\Services\ValidationService;
 
 class ImagesController extends QuarxController
 {
-
-    /** @var  ImagesRepository */
+    /** @var ImagesRepository */
     private $imagesRepository;
 
-    function __construct(ImagesRepository $imagesRepo)
+    public function __construct(ImagesRepository $imagesRepo)
     {
         $this->imagesRepository = $imagesRepo;
     }
@@ -69,23 +66,24 @@ class ImagesController extends QuarxController
     public function store(Request $request)
     {
         try {
-            $validation = ValidationService::check([ 'location' => 'required' ]);
-            if (! $validation['errors']) {
+            $validation = ValidationService::check(['location' => 'required']);
+            if (!$validation['errors']) {
                 foreach ($request->input('location') as $image) {
                     $imageSaved = $this->imagesRepository->store([
-                        'location' => $image,
+                        'location'     => $image,
                         'is_published' => $request->input('is_published'),
-                        'tags' => $request->input('tags'),
+                        'tags'         => $request->input('tags'),
                     ]);
                 }
 
                 Quarx::notification('Image saved successfully.', 'success');
 
-                if (! $imageSaved) {
+                if (!$imageSaved) {
                     Quarx::notification('Image was not saved.', 'danger');
                 }
             } else {
                 Quarx::notification('Image could not be saved', 'danger');
+
                 return $validation['redirect'];
             }
         } catch (Exception $e) {
@@ -105,16 +103,16 @@ class ImagesController extends QuarxController
     public function upload(Request $request)
     {
         $validation = ValidationService::check([
-            "location" => ['required'],
+            'location' => ['required'],
         ]);
 
-        if ( ! $validation['errors']) {
+        if (!$validation['errors']) {
             $file = $request->file('location');
             $fileSaved = FileService::saveFile($file, 'images/');
             $fileSaved['name'] = CryptoService::encrypt($fileSaved['name']);
             $fileSaved['mime'] = $file->getClientMimeType();
             $fileSaved['size'] = $file->getClientSize();
-            $response = QuarxResponseService::apiResponse("success", $fileSaved);
+            $response = QuarxResponseService::apiResponse('success', $fileSaved);
         } else {
             $response = QuarxResponseService::apiErrorResponse($validation['errors'], $validation['inputs']);
         }
@@ -125,7 +123,8 @@ class ImagesController extends QuarxController
     /**
      * Show the form for editing the specified Images.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return Response
      */
     public function edit($id)
@@ -134,6 +133,7 @@ class ImagesController extends QuarxController
 
         if (empty($images)) {
             Quarx::notification('Image not found', 'warning');
+
             return redirect(route('quarx.images.index'));
         }
 
@@ -143,7 +143,7 @@ class ImagesController extends QuarxController
     /**
      * Update the specified Images in storage.
      *
-     * @param  int    $id
+     * @param int           $id
      * @param ImagesRequest $request
      *
      * @return Response
@@ -157,12 +157,13 @@ class ImagesController extends QuarxController
 
             if (empty($images)) {
                 Quarx::notification('Image not found', 'warning');
+
                 return redirect(route('quarx.images.index'));
             }
 
             $images = $this->imagesRepository->update($images, $request->all());
 
-            if (! $images) {
+            if (!$images) {
                 Quarx::notification('Image could not be updated', 'danger');
             }
         } catch (Exception $e) {
@@ -175,7 +176,7 @@ class ImagesController extends QuarxController
     /**
      * Remove the specified Images from storage.
      *
-     * @param  int $id
+     * @param int $id
      *
      * @return Response
      */
@@ -189,6 +190,7 @@ class ImagesController extends QuarxController
 
         if (empty($image)) {
             Quarx::notification('Image not found', 'warning');
+
             return redirect(route('quarx.images.index'));
         }
 
@@ -232,6 +234,7 @@ class ImagesController extends QuarxController
     {
         $image = $this->imagesRepository->apiStore($request->all());
         $image->location = FileService::fileAsPublicAsset($image->location);
+
         return QuarxResponseService::apiResponse('success', $image);
     }
 }

@@ -1,11 +1,10 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreateArchivesTable extends Migration
 {
-
     /**
      * Run the migrations.
      *
@@ -13,8 +12,7 @@ class CreateArchivesTable extends Migration
      */
     public function up()
     {
-        Schema::create('archives', function(Blueprint $table)
-        {
+        Schema::create('archives', function (Blueprint $table) {
             $table->increments('id');
             $table->string('token');
             $table->integer('entity_id');
@@ -33,5 +31,4 @@ class CreateArchivesTable extends Migration
     {
         Schema::drop('archives');
     }
-
 }

@@ -1,11 +1,10 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreateLinksTable extends Migration
 {
-
     /**
      * Run the migrations.
      *
@@ -13,8 +12,7 @@ class CreateLinksTable extends Migration
      */
     public function up()
     {
-        Schema::create('links', function(Blueprint $table)
-        {
+        Schema::create('links', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->boolean('external')->default(0);
@@ -34,5 +32,4 @@ class CreateLinksTable extends Migration
     {
         Schema::drop('links');
     }
-
 }

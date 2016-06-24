@@ -2,20 +2,11 @@
 
 namespace Yab\Quarx\Services;
 
-use Illuminate\Support\Facades\URL;
-use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\Session;
-use Yab\Quarx\Services\CryptoService;
-use Yab\Quarx\Repositories\MenuRepository;
-use Yab\Quarx\Repositories\LinksRepository;
-use Yab\Quarx\Repositories\PagesRepository;
-use Yab\Quarx\Repositories\WidgetsRepository;
-use Yab\Quarx\Interfaces\QuarxServiceInterface;
+use Illuminate\Support\Facades\View;
 
 class ModuleService
 {
-
     public function menus()
     {
         $modulePath = base_path(Config::get('quarx.module-directory').'/');
@@ -54,5 +45,4 @@ class ModuleService
 
         return $menu;
     }
-
 }

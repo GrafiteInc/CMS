@@ -2,20 +2,19 @@
 
 namespace Yab\Quarx\Controllers;
 
-use Quarx;
 use Illuminate\Http\Request;
+use Quarx;
 use Yab\Quarx\Models\Blog;
-use Yab\Quarx\Services\ValidationService;
-use Yab\Quarx\Requests\BlogRequest;
 use Yab\Quarx\Repositories\BlogRepository;
+use Yab\Quarx\Requests\BlogRequest;
+use Yab\Quarx\Services\ValidationService;
 
 class BlogController extends QuarxController
 {
-
-    /** @var  BlogRepository */
+    /** @var BlogRepository */
     private $blogRepository;
 
-    function __construct(BlogRepository $blogRepo)
+    public function __construct(BlogRepository $blogRepo)
     {
         $this->blogRepository = $blogRepo;
     }
@@ -35,7 +34,7 @@ class BlogController extends QuarxController
     }
 
     /**
-     * Search
+     * Search.
      *
      * @param Request $request
      *
@@ -74,14 +73,14 @@ class BlogController extends QuarxController
     {
         $validation = ValidationService::check(Blog::$rules);
 
-        if ( ! $validation['errors']) {
+        if (!$validation['errors']) {
             $blog = $this->blogRepository->store($request->all());
             Quarx::notification('Blog saved successfully.', 'success');
         } else {
             return $validation['redirect'];
         }
 
-        if (! $blog) {
+        if (!$blog) {
             Quarx::notification('Blog could not be saved.', 'warning');
         }
 
@@ -91,7 +90,8 @@ class BlogController extends QuarxController
     /**
      * Show the form for editing the specified Blog.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return Response
      */
     public function edit($id)
@@ -100,6 +100,7 @@ class BlogController extends QuarxController
 
         if (empty($blog)) {
             Quarx::notification('Blog not found', 'warning');
+
             return redirect(route('quarx.blog.index'));
         }
 
@@ -109,7 +110,7 @@ class BlogController extends QuarxController
     /**
      * Update the specified Blog in storage.
      *
-     * @param  int    $id
+     * @param int         $id
      * @param BlogRequest $request
      *
      * @return Response
@@ -120,13 +121,14 @@ class BlogController extends QuarxController
 
         if (empty($blog)) {
             Quarx::notification('Blog not found', 'warning');
+
             return redirect(route('quarx.blog.index'));
         }
 
         $blog = $this->blogRepository->update($blog, $request->all());
         Quarx::notification('Blog updated successfully.', 'success');
 
-        if (! $blog) {
+        if (!$blog) {
             Quarx::notification('Blog could not be saved.', 'warning');
         }
 
@@ -136,7 +138,7 @@ class BlogController extends QuarxController
     /**
      * Remove the specified Blog from storage.
      *
-     * @param  int $id
+     * @param int $id
      *
      * @return Response
      */
@@ -146,6 +148,7 @@ class BlogController extends QuarxController
 
         if (empty($blog)) {
             Quarx::notification('Blog not found', 'warning');
+
             return redirect(route('quarx.blog.index'));
         }
 
@@ -155,5 +158,4 @@ class BlogController extends QuarxController
 
         return redirect(route('quarx.blog.index'));
     }
-
 }

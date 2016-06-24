@@ -2,18 +2,18 @@
 
 namespace Yab\Quarx;
 
-use Quarx;
-use Illuminate\Support\Str;
-use Illuminate\Support\Facades\View;
+use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Config;
-use Illuminate\Foundation\AliasLoader;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Str;
+use Quarx;
 
 class QuarxProvider extends ServiceProvider
 {
     /**
-     * Alias the services in the boot
+     * Alias the services in the boot.
      *
      * @return void
      */
@@ -40,29 +40,30 @@ class QuarxProvider extends ServiceProvider
         |--------------------------------------------------------------------------
         */
 
-        Blade::directive('theme', function($expression) {
+        Blade::directive('theme', function ($expression) {
             if (Str::startsWith($expression, '(')) {
                 $expression = substr($expression, 1, -1);
             }
 
             $theme = Config::get('quarx.frontend-theme');
-            $view = '"quarx-frontend::'.str_replace('"', '', str_replace("'", "", $expression)).'"';
+            $view = '"quarx-frontend::'.str_replace('"', '', str_replace("'", '', $expression)).'"';
+
             return "<?php echo \$__env->make($view, array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>";
         });
 
-        Blade::directive('menu', function($expression) {
+        Blade::directive('menu', function ($expression) {
             return "<?php echo Quarx::menu$expression; ?>";
         });
 
-        Blade::directive('widget', function($expression) {
+        Blade::directive('widget', function ($expression) {
             return "<?php echo Quarx::widget$expression; ?>";
         });
 
-        Blade::directive('images', function($expression) {
+        Blade::directive('images', function ($expression) {
             return "<?php echo Quarx::images$expression; ?>";
         });
 
-        Blade::directive('edit', function($expression) {
+        Blade::directive('edit', function ($expression) {
             return "<?php echo Quarx::editBtn$expression; ?>";
         });
     }

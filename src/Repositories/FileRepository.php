@@ -4,17 +4,15 @@ namespace Yab\Quarx\Repositories;
 
 use Auth;
 use Config;
-use Request;
 use CryptoService;
+use Illuminate\Support\Facades\Schema;
 use Yab\Quarx\Models\Files;
 use Yab\Quarx\Services\FileService;
-use Illuminate\Support\Facades\Schema;
 
 class FileRepository
 {
-
     /**
-     * Returns all Files
+     * Returns all Files.
      *
      * @return \Illuminate\Database\Eloquent\Collection|static[]
      */
@@ -24,7 +22,7 @@ class FileRepository
     }
 
     /**
-     * Paginated Files
+     * Paginated Files.
      *
      * @return \Illuminate\Database\Eloquent\Collection|static[]
      */
@@ -34,9 +32,10 @@ class FileRepository
     }
 
     /**
-     * Search for files
+     * Search for files.
      *
-     * @param  string $input
+     * @param string $input
+     *
      * @return array
      */
     public function search($input)
@@ -47,14 +46,13 @@ class FileRepository
 
         foreach ($columns as $attribute) {
             $query->orWhere($attribute, 'LIKE', '%'.$input['term'].'%');
-        };
+        }
 
         return [$query, $input['term'], $query->paginate(Config::get('quarx.pagination', 25))->render()];
-
     }
 
     /**
-     * Stores Files into database
+     * Stores Files into database.
      *
      * @param array $input
      *
@@ -80,7 +78,7 @@ class FileRepository
     }
 
     /**
-     * Find Files by given id
+     * Find Files by given id.
      *
      * @param int $id
      *
@@ -92,7 +90,7 @@ class FileRepository
     }
 
     /**
-     * Updates Files into database
+     * Updates Files into database.
      *
      * @param Files $files
      * @param array $input
@@ -130,8 +128,8 @@ class FileRepository
         foreach ($files as $file) {
             array_push($allFiles, [
                 'file_identifier' => CryptoService::url_encode($file->name).'/'.CryptoService::url_encode($file->location),
-                'file_name' => $file->name,
-                'file_date' => $file->created_at->format('F jS, Y'),
+                'file_name'       => $file->name,
+                'file_date'       => $file->created_at->format('F jS, Y'),
             ]);
         }
 

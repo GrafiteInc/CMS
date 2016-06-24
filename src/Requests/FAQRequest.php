@@ -2,14 +2,13 @@
 
 namespace Yab\Quarx\Requests;
 
-use Gate;
 use Auth;
-use Yab\Quarx\Models\FAQ;
+use Gate;
 use Illuminate\Foundation\Http\FormRequest;
+use Yab\Quarx\Models\FAQ;
 
 class FAQRequest extends FormRequest
 {
-
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -33,5 +32,4 @@ class FAQRequest extends FormRequest
     {
         return FAQ::$rules;
     }
-
 }

@@ -2,22 +2,20 @@
 
 namespace Yab\Quarx\Controllers;
 
+use Illuminate\Http\Request;
 use Quarx;
 use Response;
-use App\Http\Requests;
-use Illuminate\Http\Request;
 use Yab\Quarx\Models\Pages;
-use Yab\Quarx\Services\ValidationService;
-use Yab\Quarx\Requests\PagesRequest;
 use Yab\Quarx\Repositories\PagesRepository;
+use Yab\Quarx\Requests\PagesRequest;
+use Yab\Quarx\Services\ValidationService;
 
 class PagesController extends QuarxController
 {
-
-    /** @var  PagesRepository */
+    /** @var PagesRepository */
     private $pagesRepository;
 
-    function __construct(PagesRepository $pagesRepo)
+    public function __construct(PagesRepository $pagesRepo)
     {
         $this->pagesRepository = $pagesRepo;
     }
@@ -37,7 +35,7 @@ class PagesController extends QuarxController
     }
 
     /**
-     * Search
+     * Search.
      *
      * @param Request $request
      *
@@ -76,14 +74,14 @@ class PagesController extends QuarxController
     {
         $validation = ValidationService::check(Pages::$rules);
 
-        if ( ! $validation['errors']) {
+        if (!$validation['errors']) {
             $pages = $this->pagesRepository->store($request->all());
             Quarx::notification('Page saved successfully.', 'success');
         } else {
             return $validation['redirect'];
         }
 
-        if (! $pages) {
+        if (!$pages) {
             Quarx::notification('Page could not be saved.', 'warning');
         }
 
@@ -93,7 +91,8 @@ class PagesController extends QuarxController
     /**
      * Show the form for editing the specified Pages.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return Response
      */
     public function edit($id)
@@ -102,6 +101,7 @@ class PagesController extends QuarxController
 
         if (empty($page)) {
             Quarx::notification('Page not found', 'warning');
+
             return redirect(route('quarx.pages.index'));
         }
 
@@ -111,7 +111,7 @@ class PagesController extends QuarxController
     /**
      * Update the specified Pages in storage.
      *
-     * @param  int    $id
+     * @param int          $id
      * @param PagesRequest $request
      *
      * @return Response
@@ -122,13 +122,14 @@ class PagesController extends QuarxController
 
         if (empty($pages)) {
             Quarx::notification('Page not found', 'warning');
+
             return redirect(route('quarx.pages.index'));
         }
 
         $pages = $this->pagesRepository->update($pages, $request->all());
         Quarx::notification('Page updated successfully.', 'success');
 
-        if (! $pages) {
+        if (!$pages) {
             Quarx::notification('Page could not be saved.', 'warning');
         }
 
@@ -138,7 +139,7 @@ class PagesController extends QuarxController
     /**
      * Remove the specified Pages from storage.
      *
-     * @param  int $id
+     * @param int $id
      *
      * @return Response
      */
@@ -148,6 +149,7 @@ class PagesController extends QuarxController
 
         if (empty($pages)) {
             Quarx::notification('Page not found', 'warning');
+
             return redirect(route('quarx.pages.index'));
         }
 
@@ -157,5 +159,4 @@ class PagesController extends QuarxController
 
         return redirect(route('quarx.pages.index'));
     }
-
 }

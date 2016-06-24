@@ -7,7 +7,6 @@
     */
 
     Route::group(['namespace' => 'Quarx'], function () {
-
         Route::get('', 'PagesController@home');
         Route::get('page', 'PagesController@all');
         Route::get('page/{url}', 'PagesController@show');
@@ -26,5 +25,4 @@
         Route::get('events/all', 'EventsController@all');
         Route::get('events/date/{date}', 'EventsController@date');
         Route::get('events/event/{id}', 'EventsController@show');
-
     });

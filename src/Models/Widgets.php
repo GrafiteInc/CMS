@@ -6,10 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Widgets extends Model
 {
+    public $table = 'widgets';
 
-    public $table = "widgets";
-
-    public $primaryKey = "id";
+    public $primaryKey = 'id';
 
     protected $guarded = [];
 
@@ -17,5 +16,4 @@ class Widgets extends Model
         'name' => 'required',
         'slug' => 'required',
     ];
-
 }

@@ -2,7 +2,6 @@
 
 class PagesTest extends AppTest
 {
-
     public function setUp()
     {
         parent::setUp();
@@ -45,7 +44,7 @@ class PagesTest extends AppTest
 
     public function testStore()
     {
-        $pages = factory(\Yab\Quarx\Models\Pages::class)->make([ 'id' => 2 ]);
+        $pages = factory(\Yab\Quarx\Models\Pages::class)->make(['id' => 2]);
         $response = $this->call('POST', 'quarx/pages', $pages['attributes']);
 
         $this->assertEquals(302, $response->getStatusCode());
@@ -61,12 +60,12 @@ class PagesTest extends AppTest
 
     public function testUpdate()
     {
-        $page = [ 'id' => 6, 'title' => 'dumber', 'url' => 'dumber', 'entry' => 'okie dokie' ];
+        $page = ['id' => 6, 'title' => 'dumber', 'url' => 'dumber', 'entry' => 'okie dokie'];
         $response = $this->call('POST', 'quarx/pages', $page);
 
         $response = $this->call('PATCH', 'quarx/pages/6', [
             'title' => 'smarter',
-            'url' => 'smart'
+            'url'   => 'smart',
         ]);
 
         // dd($response);
@@ -81,6 +80,4 @@ class PagesTest extends AppTest
         $this->assertEquals(302, $response->getStatusCode());
         $this->assertRedirectedTo('quarx/pages');
     }
-
 }
-

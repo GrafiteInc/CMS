@@ -2,31 +2,26 @@
 
 namespace Yab\Quarx\Controllers;
 
-use Input;
-use Quarx;
 use Config;
-use Storage;
-use Response;
-use Redirect;
 use CryptoService;
-use App\Http\Requests;
 use Illuminate\Http\Request;
+use Quarx;
+use Redirect;
+use Response;
+use Storage;
 use Yab\Quarx\Models\Files;
-use Yab\Quarx\Models\Categories;
-use Yab\Quarx\Services\FileService;
-use Yab\Quarx\Services\ValidationService;
-use Yab\Quarx\Requests\FileRequest;
 use Yab\Quarx\Repositories\FileRepository;
-use Yab\Quarx\Controllers\QuarxController;
+use Yab\Quarx\Requests\FileRequest;
+use Yab\Quarx\Services\FileService;
 use Yab\Quarx\Services\QuarxResponseService;
+use Yab\Quarx\Services\ValidationService;
 
 class FilesController extends QuarxController
 {
-
-    /** @var  FilesRepository */
+    /** @var FilesRepository */
     private $fileRepository;
 
-    function __construct(FileRepository $fileRepo)
+    public function __construct(FileRepository $fileRepo)
     {
         $this->fileRepository = $fileRepo;
     }
@@ -48,7 +43,7 @@ class FilesController extends QuarxController
     }
 
     /**
-     * Search
+     * Search.
      *
      * @param Request $request
      *
@@ -65,7 +60,6 @@ class FilesController extends QuarxController
             ->with('pagination', $result[2])
             ->with('term', $result[1]);
     }
-
 
     /**
      * Show the form for creating a new Files.
@@ -88,7 +82,7 @@ class FilesController extends QuarxController
     {
         $validation = ValidationService::check(Files::$rules);
 
-        if ( ! $validation['errors']) {
+        if (!$validation['errors']) {
             $file = $this->fileRepository->store($request->all());
         } else {
             return $validation['redirect'];
@@ -109,16 +103,16 @@ class FilesController extends QuarxController
     public function upload(Request $request)
     {
         $validation = ValidationService::check([
-            "location" => ['required'],
+            'location' => ['required'],
         ]);
 
-        if ( ! $validation['errors']) {
+        if (!$validation['errors']) {
             $file = $request->file('location');
             $fileSaved = FileService::saveFile($file, 'files/');
             $fileSaved['name'] = CryptoService::encrypt($fileSaved['name']);
             $fileSaved['mime'] = $file->getClientMimeType();
             $fileSaved['size'] = $file->getClientSize();
-            $response = QuarxResponseService::apiResponse("success", $fileSaved);
+            $response = QuarxResponseService::apiResponse('success', $fileSaved);
         } else {
             $response = QuarxResponseService::apiErrorResponse($validation['errors'], $validation['inputs']);
         }
@@ -127,8 +121,10 @@ class FilesController extends QuarxController
     }
 
     /**
-     * Remove a file
-     * @param  string $id
+     * Remove a file.
+     *
+     * @param string $id
+     *
      * @return Response
      */
     public function remove($id)
@@ -136,9 +132,9 @@ class FilesController extends QuarxController
         try {
             Storage::delete($id);
 
-            $response = QuarxResponseService::apiResponse("success", "success!");
+            $response = QuarxResponseService::apiResponse('success', 'success!');
         } catch (Exception $e) {
-            $response = QuarxResponseService::apiResponse("error", $e->getMessage());
+            $response = QuarxResponseService::apiResponse('error', $e->getMessage());
         }
 
         return $response;
@@ -147,7 +143,8 @@ class FilesController extends QuarxController
     /**
      * Show the form for editing the specified Files.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return Response
      */
     public function edit($id)
@@ -156,6 +153,7 @@ class FilesController extends QuarxController
 
         if (empty($files)) {
             Quarx::notification('File not found', 'warning');
+
             return redirect(route('quarx.files.index'));
         }
 
@@ -165,7 +163,7 @@ class FilesController extends QuarxController
     /**
      * Update the specified Files in storage.
      *
-     * @param  int    $id
+     * @param int         $id
      * @param FileRequest $request
      *
      * @return Response
@@ -176,6 +174,7 @@ class FilesController extends QuarxController
 
         if (empty($files)) {
             Quarx::notification('File not found', 'warning');
+
             return redirect(route('quarx.files.index'));
         }
 
@@ -189,7 +188,7 @@ class FilesController extends QuarxController
     /**
      * Remove the specified Files from storage.
      *
-     * @param  int $id
+     * @param int $id
      *
      * @return Response
      */
@@ -199,6 +198,7 @@ class FilesController extends QuarxController
 
         if (empty($files)) {
             Quarx::notification('File not found', 'warning');
+
             return redirect(route('quarx.files.index'));
         }
 
@@ -225,5 +225,4 @@ class FilesController extends QuarxController
 
         return QuarxResponseService::apiResponse('success', $files);
     }
-
 }

@@ -2,7 +2,6 @@
 
 class FilesTest extends AppTest
 {
-
     public function setUp()
     {
         parent::setUp();
@@ -47,15 +46,15 @@ class FilesTest extends AppTest
     {
         $uploadedFile = new Symfony\Component\HttpFoundation\File\UploadedFile(__DIR__.'/test-file.txt', 'test-file.txt');
         $file = factory(\Yab\Quarx\Models\Files::class)->make([
-            'id' => 2,
+            'id'       => 2,
             'location' => [
                 'file_a' => [
-                    'name' => CryptoService::encrypt('test-file.txt'),
+                    'name'     => CryptoService::encrypt('test-file.txt'),
                     'original' => 'test-file.txt',
-                    'mime' => 'txt',
-                    'size' => 24,
+                    'mime'     => 'txt',
+                    'size'     => 24,
                 ],
-            ]
+            ],
         ]);
         $response = $this->call('POST', 'quarx/files', $file->getAttributes());
         $this->assertEquals(302, $response->getStatusCode());
@@ -64,7 +63,7 @@ class FilesTest extends AppTest
     public function testUpload()
     {
         $uploadedFile = new Symfony\Component\HttpFoundation\File\UploadedFile(__DIR__.'/test-file.txt', 'test-file.txt');
-        $file = (array) factory(\Yab\Quarx\Models\Files::class)->make([ 'id' => 2 ]);
+        $file = (array) factory(\Yab\Quarx\Models\Files::class)->make(['id' => 2]);
         $response = $this->call('POST', 'quarx/files/upload', [], [], ['location' => $uploadedFile]);
 
         $this->assertEquals(200, $response->getStatusCode());
@@ -83,7 +82,7 @@ class FilesTest extends AppTest
 
     public function testUpdate()
     {
-        $file = (array) factory(\Yab\Quarx\Models\Files::class)->make([ 'id' => 3, 'title' => 'dumber' ]);
+        $file = (array) factory(\Yab\Quarx\Models\Files::class)->make(['id' => 3, 'title' => 'dumber']);
         $response = $this->call('PATCH', 'quarx/files/3', $file);
 
         $this->assertEquals(302, $response->getStatusCode());
@@ -94,15 +93,15 @@ class FilesTest extends AppTest
     {
         Storage::put('test-file.txt', 'what is this');
         $file = factory(\Yab\Quarx\Models\Files::class)->make([
-            'id' => 2,
+            'id'       => 2,
             'location' => [
                 'file_a' => [
-                    'name' => CryptoService::encrypt('test-file.txt'),
+                    'name'     => CryptoService::encrypt('test-file.txt'),
                     'original' => 'test-file.txt',
-                    'mime' => 'txt',
-                    'size' => 24,
+                    'mime'     => 'txt',
+                    'size'     => 24,
                 ],
-            ]
+            ],
         ]);
         $this->call('POST', 'quarx/files', $file->getAttributes());
 
@@ -110,6 +109,4 @@ class FilesTest extends AppTest
         $this->assertEquals(302, $response->getStatusCode());
         $this->assertRedirectedTo('quarx/files');
     }
-
 }
-

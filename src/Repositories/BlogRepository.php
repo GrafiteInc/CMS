@@ -2,18 +2,16 @@
 
 namespace Yab\Quarx\Repositories;
 
-use Quarx;
 use Carbon\Carbon;
-use Yab\Quarx\Models\Blog;
-use Yab\Quarx\Models\Archive;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Schema;
+use Quarx;
+use Yab\Quarx\Models\Blog;
 
 class BlogRepository
 {
-
     /**
-     * Returns all Blogs
+     * Returns all Blogs.
      *
      * @return \Illuminate\Database\Eloquent\Collection|static[]
      */
@@ -64,13 +62,13 @@ class BlogRepository
 
         foreach ($columns as $attribute) {
             $query->orWhere($attribute, 'LIKE', '%'.$input['term'].'%');
-        };
+        }
 
         return [$query, $input['term'], $query->paginate(Config::get('quarx.pagination', 25))->render()];
     }
 
     /**
-     * Stores Blog into database
+     * Stores Blog into database.
      *
      * @param array $input
      *
@@ -81,11 +79,12 @@ class BlogRepository
         $input['url'] = Quarx::convertToURL($input['url']);
         $input['is_published'] = (isset($input['is_published'])) ? (bool) $input['is_published'] : 0;
         $input['published_at'] = (isset($input['published_at'])) ? $input['published_at'] : Carbon::now()->format('Y-m-d h:i:s');
+
         return Blog::create($input);
     }
 
     /**
-     * Find Blog by given id
+     * Find Blog by given id.
      *
      * @param int $id
      *
@@ -97,7 +96,7 @@ class BlogRepository
     }
 
     /**
-     * Find Blog by given URL
+     * Find Blog by given URL.
      *
      * @param string $url
      *
@@ -109,7 +108,7 @@ class BlogRepository
     }
 
     /**
-     * Find Blogs by given Tag
+     * Find Blogs by given Tag.
      *
      * @param string $tag
      *
@@ -121,9 +120,9 @@ class BlogRepository
     }
 
     /**
-     * Updates Blog into database
+     * Updates Blog into database.
      *
-     * @param Blog $blog
+     * @param Blog  $blog
      * @param array $input
      *
      * @return Blog

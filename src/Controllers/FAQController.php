@@ -2,21 +2,19 @@
 
 namespace Yab\Quarx\Controllers;
 
-use Quarx;
-use App\Http\Requests;
 use Illuminate\Http\Request;
+use Quarx;
 use Yab\Quarx\Models\FAQ;
+use Yab\Quarx\Repositories\FAQRepository;
 use Yab\Quarx\Requests\FAQRequest;
 use Yab\Quarx\Services\ValidationService;
-use Yab\Quarx\Repositories\FAQRepository;
 
 class FAQController extends QuarxController
 {
-
-    /** @var  FAQRepository */
+    /** @var FAQRepository */
     private $faqRepository;
 
-    function __construct(FAQRepository $faqRepo)
+    public function __construct(FAQRepository $faqRepo)
     {
         $this->faqRepository = $faqRepo;
     }
@@ -36,7 +34,7 @@ class FAQController extends QuarxController
     }
 
     /**
-     * Search
+     * Search.
      *
      * @param Request $request
      *
@@ -75,14 +73,14 @@ class FAQController extends QuarxController
     {
         $validation = ValidationService::check(FAQ::$rules);
 
-        if ( ! $validation['errors']) {
+        if (!$validation['errors']) {
             $faq = $this->faqRepository->store($request->all());
             Quarx::notification('FAQ saved successfully.', 'success');
         } else {
             return $validation['redirect'];
         }
 
-        if (! $faq) {
+        if (!$faq) {
             Quarx::notification('FAQ could not be saved.', 'warning');
         }
 
@@ -92,7 +90,8 @@ class FAQController extends QuarxController
     /**
      * Show the form for editing the specified FAQ.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return Response
      */
     public function edit($id)
@@ -101,6 +100,7 @@ class FAQController extends QuarxController
 
         if (empty($faq)) {
             Quarx::notification('FAQ not found', 'warning');
+
             return redirect(route('quarx.faqs.index'));
         }
 
@@ -110,7 +110,7 @@ class FAQController extends QuarxController
     /**
      * Update the specified FAQ in storage.
      *
-     * @param  int    $id
+     * @param int        $id
      * @param FAQRequest $request
      *
      * @return Response
@@ -121,13 +121,14 @@ class FAQController extends QuarxController
 
         if (empty($faq)) {
             Quarx::notification('FAQ not found', 'warning');
+
             return redirect(route('quarx.faqs.index'));
         }
 
         $faq = $this->faqRepository->update($faq, $request->all());
         Quarx::notification('FAQ updated successfully.', 'success');
 
-        if (! $faq) {
+        if (!$faq) {
             Quarx::notification('FAQ could not be saved.', 'warning');
         }
 
@@ -137,7 +138,7 @@ class FAQController extends QuarxController
     /**
      * Remove the specified FAQ from storage.
      *
-     * @param  int $id
+     * @param int $id
      *
      * @return Response
      */
@@ -147,6 +148,7 @@ class FAQController extends QuarxController
 
         if (empty($faq)) {
             Quarx::notification('FAQ not found', 'warning');
+
             return redirect(route('quarx.faqs.index'));
         }
 
@@ -156,5 +158,4 @@ class FAQController extends QuarxController
 
         return redirect(route('quarx.faqs.index'));
     }
-
 }

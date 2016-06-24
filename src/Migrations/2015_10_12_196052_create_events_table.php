@@ -1,11 +1,10 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreateEventsTable extends Migration
 {
-
     /**
      * Run the migrations.
      *
@@ -13,8 +12,7 @@ class CreateEventsTable extends Migration
      */
     public function up()
     {
-        Schema::create('events', function(Blueprint $table)
-        {
+        Schema::create('events', function (Blueprint $table) {
             $table->increments('id');
             $table->date('start_date');
             $table->date('end_date');
@@ -36,5 +34,4 @@ class CreateEventsTable extends Migration
     {
         Schema::drop('events');
     }
-
 }

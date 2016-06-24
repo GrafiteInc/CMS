@@ -3,15 +3,14 @@
 namespace Yab\Quarx\Repositories;
 
 use Carbon\Carbon;
-use Yab\Quarx\Models\Event;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Schema;
+use Yab\Quarx\Models\Event;
 
 class EventRepository
 {
-
     /**
-     * Returns all EventS
+     * Returns all EventS.
      *
      * @return \Illuminate\Database\Eloquent\Collection|static[]
      */
@@ -21,7 +20,7 @@ class EventRepository
     }
 
     /**
-     * Returns all paginated EventS
+     * Returns all paginated EventS.
      *
      * @return \Illuminate\Database\Eloquent\Collection|static[]
      */
@@ -31,7 +30,8 @@ class EventRepository
     }
 
     /**
-     * Returns all published Events
+     * Returns all published Events.
+     *
      * @return \Illuminate\Database\Eloquent\Collection|static[]
      */
     public function findEventsByDate($date)
@@ -40,7 +40,8 @@ class EventRepository
     }
 
     /**
-     * Returns all published Events
+     * Returns all published Events.
+     *
      * @return \Illuminate\Database\Eloquent\Collection|static[]
      */
     public function published()
@@ -49,7 +50,7 @@ class EventRepository
     }
 
     /**
-     * Search Event
+     * Search Event.
      *
      * @param string $input
      *
@@ -63,14 +64,13 @@ class EventRepository
 
         foreach ($columns as $attribute) {
             $query->orWhere($attribute, 'LIKE', '%'.$input['term'].'%');
-        };
+        }
 
         return [$query, $input['term'], $query->paginate(Config::get('quarx.pagination', 25))->render()];
-
     }
 
     /**
-     * Stores Event into database
+     * Stores Event into database.
      *
      * @param array $input
      *
@@ -80,11 +80,12 @@ class EventRepository
     {
         $input['is_published'] = (isset($input['is_published'])) ? (bool) $input['is_published'] : 0;
         $input['published_at'] = (isset($input['published_at'])) ? $input['published_at'] : Carbon::now()->format('Y-m-d h:i:s');
+
         return Event::create($input);
     }
 
     /**
-     * Find Event by given id
+     * Find Event by given id.
      *
      * @param int $id
      *
@@ -96,7 +97,7 @@ class EventRepository
     }
 
     /**
-     * Updates Event into database
+     * Updates Event into database.
      *
      * @param Event $event
      * @param array $input

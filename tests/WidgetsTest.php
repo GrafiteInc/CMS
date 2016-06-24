@@ -44,7 +44,7 @@ class WidgetsTest extends AppTest
 
     public function testStore()
     {
-        $widgets = factory(\Yab\Quarx\Models\Widgets::class)->make([ 'id' => 2 ]);
+        $widgets = factory(\Yab\Quarx\Models\Widgets::class)->make(['id' => 2]);
         $response = $this->call('POST', 'quarx/widgets', $widgets['attributes']);
 
         $this->assertEquals(302, $response->getStatusCode());
@@ -57,7 +57,7 @@ class WidgetsTest extends AppTest
 
         $response = $this->call('PATCH', 'quarx/widgets/8', [
             'name' => 'whacky',
-            'slug' => 'whacky'
+            'slug' => 'whacky',
         ]);
 
         $this->assertEquals(302, $response->getStatusCode());
@@ -70,6 +70,4 @@ class WidgetsTest extends AppTest
         $this->assertEquals(302, $response->getStatusCode());
         $this->assertRedirectedTo('quarx/widgets');
     }
-
 }
-

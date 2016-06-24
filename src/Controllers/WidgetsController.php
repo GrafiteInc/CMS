@@ -2,21 +2,19 @@
 
 namespace Yab\Quarx\Controllers;
 
-use Quarx;
-use App\Http\Requests;
 use Illuminate\Http\Request;
+use Quarx;
 use Yab\Quarx\Models\Widgets;
-use Yab\Quarx\Services\ValidationService;
-use Yab\Quarx\Requests\WidgetsRequest;
 use Yab\Quarx\Repositories\WidgetsRepository;
+use Yab\Quarx\Requests\WidgetsRequest;
+use Yab\Quarx\Services\ValidationService;
 
 class WidgetsController extends QuarxController
 {
-
-    /** @var  WidgetsRepository */
+    /** @var WidgetsRepository */
     private $widgetsRepository;
 
-    function __construct(WidgetsRepository $widgetsRepo)
+    public function __construct(WidgetsRepository $widgetsRepo)
     {
         $this->widgetsRepository = $widgetsRepo;
     }
@@ -36,7 +34,7 @@ class WidgetsController extends QuarxController
     }
 
     /**
-     * Search
+     * Search.
      *
      * @param Request $request
      *
@@ -75,7 +73,7 @@ class WidgetsController extends QuarxController
     {
         $validation = ValidationService::check(Widgets::$rules);
 
-        if ( ! $validation['errors']) {
+        if (!$validation['errors']) {
             $widgets = $this->widgetsRepository->store($request->all());
         } else {
             return $validation['redirect'];
@@ -89,7 +87,8 @@ class WidgetsController extends QuarxController
     /**
      * Show the form for editing the specified Widgets.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return Response
      */
     public function edit($id)
@@ -98,6 +97,7 @@ class WidgetsController extends QuarxController
 
         if (empty($widgets)) {
             Quarx::notification('Widgets not found', 'warning');
+
             return redirect(route('quarx.widgets.index'));
         }
 
@@ -107,7 +107,7 @@ class WidgetsController extends QuarxController
     /**
      * Update the specified Widgets in storage.
      *
-     * @param  int    $id
+     * @param int            $id
      * @param WidgetsRequest $request
      *
      * @return Response
@@ -118,6 +118,7 @@ class WidgetsController extends QuarxController
 
         if (empty($widgets)) {
             Quarx::notification('Widgets not found', 'warning');
+
             return redirect(route('quarx.widgets.index'));
         }
 
@@ -131,7 +132,7 @@ class WidgetsController extends QuarxController
     /**
      * Remove the specified Widgets from storage.
      *
-     * @param  int $id
+     * @param int $id
      *
      * @return Response
      */
@@ -141,6 +142,7 @@ class WidgetsController extends QuarxController
 
         if (empty($widgets)) {
             Quarx::notification('Widgets not found', 'warning');
+
             return redirect(route('quarx.widgets.index'));
         }
 
@@ -150,5 +152,4 @@ class WidgetsController extends QuarxController
 
         return redirect(route('quarx.widgets.index'));
     }
-
 }

@@ -2,13 +2,10 @@
 
 namespace Yab\Quarx\Console;
 
-use Illuminate\Support\Str;
-use Illuminate\Support\Schema;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Config;
-use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Console\Input\InputArgument;
 use Illuminate\Filesystem\Filesystem;
+use Illuminate\Support\Facades\Config;
+use Symfony\Component\Console\Input\InputArgument;
 
 class ModulePublish extends Command
 {
@@ -43,28 +40,28 @@ class ModulePublish extends Command
      */
     public function fire()
     {
-        $fileSystem = new Filesystem;
+        $fileSystem = new Filesystem();
 
         $files = $fileSystem->allFiles(base_path(Config::get('quarx.module-directory')).'/'.ucfirst($this->argument('module')).'/Publishes');
         $this->line("\n");
         foreach ($files as $file) {
-            if ($file->getType() == "file") {
+            if ($file->getType() == 'file') {
                 $this->line(str_replace(base_path(Config::get('quarx.module-directory')).'/'.ucfirst($this->argument('module')).'/Publishes/', '', $file));
             }
         }
 
         $this->info("\n\nThese files will be published\n");
 
-        $result = $this->confirm("Are you sure you want to overwrite any files of the same name?");
+        $result = $this->confirm('Are you sure you want to overwrite any files of the same name?');
 
         if ($result) {
             foreach ($files as $file) {
                 $newFileName = str_replace(base_path('quarx/modules/'.ucfirst($this->argument('module')).'/Publishes/'), '', $file);
                 if (strstr($newFileName, 'resources/themes/')) {
                     $newFileName = str_replace('/default/', '/'.Config::get('quarx.frontend-theme').'/', $newFileName);
-                    $this->line("Copying ".$newFileName." using current Quarx theme...");
+                    $this->line('Copying '.$newFileName.' using current Quarx theme...');
                 } else {
-                    $this->line("Copying ".$newFileName."...");
+                    $this->line('Copying '.$newFileName.'...');
                 }
                 if (is_dir($file)) {
                     $fileSystem->copyDirectory($file, base_path($newFileName));
@@ -74,9 +71,9 @@ class ModulePublish extends Command
                 }
             }
 
-            $this->info("Finished publishing this module.");
+            $this->info('Finished publishing this module.');
         } else {
-            $this->info("You cancelled publishing this module");
+            $this->info('You cancelled publishing this module');
         }
     }
 
@@ -101,5 +98,4 @@ class ModulePublish extends Command
     {
         return [];
     }
-
 }

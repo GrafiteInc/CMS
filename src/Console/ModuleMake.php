@@ -2,8 +2,8 @@
 
 namespace Yab\Quarx\Console;
 
-use Config;
 use Artisan;
+use Config;
 use Illuminate\Console\Command;
 use Yab\Laracogs\Generators\CrudGenerator;
 
@@ -24,7 +24,7 @@ class ModuleMake extends Command
     protected $description = 'Generate a module for Quarx';
 
     /**
-     * Generate a CRUD stack
+     * Generate a CRUD stack.
      *
      * @return mixed
      */
@@ -36,11 +36,11 @@ class ModuleMake extends Command
 
         $moduleDirectory = base_path('quarx/modules/'.ucfirst(($name)));
 
-        if (! is_dir(base_path('quarx'))) {
+        if (!is_dir(base_path('quarx'))) {
             @mkdir(base_path('quarx'));
         }
 
-        if (! is_dir(base_path('quarx/modules'))) {
+        if (!is_dir(base_path('quarx/modules'))) {
             @mkdir(base_path('quarx/modules'));
         }
 
@@ -56,7 +56,7 @@ class ModuleMake extends Command
         @mkdir($moduleDirectory.'/Tests');
 
         file_put_contents($moduleDirectory.'/config.php', "<?php \n\n\n return [];");
-        file_put_contents($moduleDirectory.'/Views/menu.blade.php', "<li><a href=\"<?= URL::to('quarx/".strtolower(($name))."'); ?>\"><span class=\"fa fa-file\"></span> ".ucfirst(($name))."</a></li>");
+        file_put_contents($moduleDirectory.'/Views/menu.blade.php', "<li><a href=\"<?= URL::to('quarx/".strtolower(($name))."'); ?>\"><span class=\"fa fa-file\"></span> ".ucfirst(($name)).'</a></li>');
 
         $config = [
             'bootstrap'                  => false,
@@ -71,7 +71,7 @@ class ModuleMake extends Command
             '_app_namespace_'            => app()->getInstance()->getNamespace(),
             '_namespace_services_'       => 'Quarx\Modules\\'.ucfirst(($name)).'\Services',
             '_namespace_controller_'     => 'Quarx\Modules\\'.ucfirst(($name)).'\Controllers',
-            '_name_name_'               => (strtolower($name)),
+            '_name_name_'                => (strtolower($name)),
             '_lower_case_'               => strtolower($name),
             '_lower_casePlural_'         => (strtolower($name)),
             '_camel_case_'               => ucfirst(camel_case($name)),
@@ -121,7 +121,7 @@ class ModuleMake extends Command
             $this->info('Add this to your `app/Providers/RouteServiceProver.php` in the `mapWebRoutes` method:');
             $this->comment("\nrequire app_path('Http/".$config['_lower_casePlural_']."-routes.php');\n");
         } catch (Exception $e) {
-            throw new Exception("Unable to generate your Module", 1);
+            throw new Exception('Unable to generate your Module', 1);
         }
 
         $this->info('Module for '.$name.' is done.');

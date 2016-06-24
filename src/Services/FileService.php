@@ -2,9 +2,8 @@
 
 namespace Yab\Quarx\Services;
 
-use Exception;
 use CryptoService as CryptoServiceForFiles;
-use Illuminate\Support\Facades\Lang;
+use Exception;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Request;
@@ -13,8 +12,10 @@ use Illuminate\Support\Facades\Storage;
 class FileService
 {
     /**
-     * Generate a name from the file path
-     * @param  string $file File path
+     * Generate a name from the file path.
+     *
+     * @param string $file File path
+     *
      * @return string
      */
     public static function getFileClass($file)
@@ -28,23 +29,27 @@ class FileService
     }
 
     /**
-     * Saves File
-     * @param  string $fileName File input name
-     * @param  string $location Storage location
+     * Saves File.
+     *
+     * @param string $fileName File input name
+     * @param string $location Storage location
+     *
      * @return array
      */
-    public static function saveClone($fileName, $directory = "", $fileTypes = array())
+    public static function saveClone($fileName, $directory = '', $fileTypes = [])
     {
         $fileInfo = pathinfo($fileName);
 
-        if (substr($directory, 0, -1) != '/') $directory .= '/';
+        if (substr($directory, 0, -1) != '/') {
+            $directory .= '/';
+        }
 
         $extension = $fileInfo['extension'];
-        $newFileName = md5(rand(1111,9999).time());
+        $newFileName = md5(rand(1111, 9999).time());
 
         // In case we don't want that file type
-        if ( ! empty($fileTypes)) {
-            if ( ! in_array($extension, $fileTypes)) {
+        if (!empty($fileTypes)) {
+            if (!in_array($extension, $fileTypes)) {
                 throw new Exception('Incorrect file type', 1);
             }
         }
@@ -53,17 +58,19 @@ class FileService
 
         return [
             'original' => basename($fileName),
-            'name'  => $directory.$newFileName.'.'.$extension,
+            'name'     => $directory.$newFileName.'.'.$extension,
         ];
     }
 
     /**
-     * Saves File
-     * @param  string $fileName File input name
-     * @param  string $location Storage location
+     * Saves File.
+     *
+     * @param string $fileName File input name
+     * @param string $location Storage location
+     *
      * @return array
      */
-    public static function saveFile($fileName, $directory = "", $fileTypes = array())
+    public static function saveFile($fileName, $directory = '', $fileTypes = [])
     {
         if (is_object($fileName)) {
             $file = $fileName;
@@ -81,29 +88,33 @@ class FileService
             throw new Exception('This file is too large', 1);
         }
 
-        if (substr($directory, 0, -1) != '/') $directory .= '/';
+        if (substr($directory, 0, -1) != '/') {
+            $directory .= '/';
+        }
 
         $extension = $file->getClientOriginalExtension();
-        $newFileName = md5(rand(1111,9999).time());
+        $newFileName = md5(rand(1111, 9999).time());
 
         // In case we don't want that file type
-        if ( ! empty($fileTypes)) {
-            if ( ! in_array($extension, $fileTypes)) {
+        if (!empty($fileTypes)) {
+            if (!in_array($extension, $fileTypes)) {
                 throw new Exception('Incorrect file type', 1);
             }
         }
 
-        Storage::disk(Config::get('quarx.storage-location', 'local'))->put($directory.$newFileName.'.'.$extension,  File::get($file));
+        Storage::disk(Config::get('quarx.storage-location', 'local'))->put($directory.$newFileName.'.'.$extension, File::get($file));
 
         return [
             'original' => $originalName ?: $file->getFilename().'.'.$extension,
-            'name'  => $directory.$newFileName.'.'.$extension,
+            'name'     => $directory.$newFileName.'.'.$extension,
         ];
     }
 
     /**
-     * Provide a URL for the file as a public asset
-     * @param  string $fileName File name
+     * Provide a URL for the file as a public asset.
+     *
+     * @param string $fileName File name
+     *
      * @return string
      */
     public static function fileAsPublicAsset($fileName)
@@ -112,9 +123,11 @@ class FileService
     }
 
     /**
-     * Provides a URL for the file as a download
-     * @param  string $fileName File name
-     * @param  string $realFileName Real file name
+     * Provides a URL for the file as a download.
+     *
+     * @param string $fileName     File name
+     * @param string $realFileName Real file name
+     *
      * @return string
      */
     public static function fileAsDownload($fileName, $realFileName)
@@ -123,13 +136,14 @@ class FileService
     }
 
     /**
-     * Provide a URL for the file as a public preview
-     * @param  string $fileName File name
+     * Provide a URL for the file as a public preview.
+     *
+     * @param string $fileName File name
+     *
      * @return string
      */
     public static function filePreview($fileName)
     {
         return url('public-preview/'.CryptoServiceForFiles::url_encode($fileName));
     }
-
 }

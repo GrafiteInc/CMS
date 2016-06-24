@@ -2,14 +2,13 @@
 
 namespace Yab\Quarx\Requests;
 
-use Gate;
 use Auth;
-use Yab\Quarx\Models\Blog;
+use Gate;
 use Illuminate\Foundation\Http\FormRequest;
+use Yab\Quarx\Models\Blog;
 
 class BlogRequest extends FormRequest
 {
-
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -33,5 +32,4 @@ class BlogRequest extends FormRequest
     {
         return Blog::$rules;
     }
-
 }

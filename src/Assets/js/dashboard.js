@@ -5,7 +5,7 @@
 */
 
 $('.nav-sidebar li').each(function(){
-    if ($('.page-header').text().toLowerCase().trim().indexOf($(this).children('a').text().toLowerCase().trim()) >= 0) {
+    if ($('.page-header').text().toLowerCase().trim() == ($(this).children('a').text().toLowerCase().trim())) {
         $(this).addClass('active');
     }
 });

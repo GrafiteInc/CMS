@@ -1,8 +1,7 @@
 <?php
 
-class FaqTest extends AppTest
+class FAQTest extends AppTest
 {
-
     public function setUp()
     {
         parent::setUp();
@@ -46,9 +45,9 @@ class FaqTest extends AppTest
     public function testStore()
     {
         $response = $this->call('POST', 'quarx/faqs', [
-            'question' => 'who is this',
-            'answer' => 'I am your worst nightmare!',
-            'is_published' => ''
+            'question'     => 'who is this',
+            'answer'       => 'I am your worst nightmare!',
+            'is_published' => '',
         ]);
 
         $this->seeInDatabase('faqs', ['id' => 1]);
@@ -66,9 +65,9 @@ class FaqTest extends AppTest
     public function testUpdate()
     {
         $response = $this->call('PATCH', 'quarx/faqs/1', [
-            'question' => 'who is this',
-            'answer' => 'I am your worst nightmare!',
-            'is_published' => 'on'
+            'question'     => 'who is this',
+            'answer'       => 'I am your worst nightmare!',
+            'is_published' => 'on',
         ]);
 
         $this->seeInDatabase('faqs', ['question' => 'who is this']);
@@ -81,6 +80,4 @@ class FaqTest extends AppTest
         $this->assertEquals(302, $response->getStatusCode());
         $this->assertRedirectedTo('quarx/faqs');
     }
-
 }
-

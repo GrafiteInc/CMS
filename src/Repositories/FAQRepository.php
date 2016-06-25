@@ -3,15 +3,14 @@
 namespace Yab\Quarx\Repositories;
 
 use Carbon\Carbon;
-use Yab\Quarx\Models\FAQ;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Schema;
+use Yab\Quarx\Models\FAQ;
 
 class FAQRepository
 {
-
     /**
-     * Returns all FAQS
+     * Returns all FAQS.
      *
      * @return \Illuminate\Database\Eloquent\Collection|static[]
      */
@@ -21,7 +20,7 @@ class FAQRepository
     }
 
     /**
-     * Returns all paginated FAQS
+     * Returns all paginated FAQS.
      *
      * @return \Illuminate\Database\Eloquent\Collection|static[]
      */
@@ -31,7 +30,8 @@ class FAQRepository
     }
 
     /**
-     * Returns all published Faqs
+     * Returns all published Faqs.
+     *
      * @return \Illuminate\Database\Eloquent\Collection|static[]
      */
     public function published()
@@ -40,7 +40,7 @@ class FAQRepository
     }
 
     /**
-     * Search FAQ
+     * Search FAQ.
      *
      * @param string $input
      *
@@ -54,14 +54,13 @@ class FAQRepository
 
         foreach ($columns as $attribute) {
             $query->orWhere($attribute, 'LIKE', '%'.$input['term'].'%');
-        };
+        }
 
         return [$query, $input['term'], $query->paginate(Config::get('quarx.pagination', 25))->render()];
-
     }
 
     /**
-     * Stores FAQ into database
+     * Stores FAQ into database.
      *
      * @param array $input
      *
@@ -71,11 +70,12 @@ class FAQRepository
     {
         $input['is_published'] = (isset($input['is_published'])) ? (bool) $input['is_published'] : 0;
         $input['published_at'] = (isset($input['published_at'])) ? $input['published_at'] : Carbon::now()->format('Y-m-d h:i:s');
+
         return FAQ::create($input);
     }
 
     /**
-     * Find FAQ by given id
+     * Find FAQ by given id.
      *
      * @param int $id
      *
@@ -87,9 +87,9 @@ class FAQRepository
     }
 
     /**
-     * Updates FAQ into database
+     * Updates FAQ into database.
      *
-     * @param FAQ $fAQ
+     * @param FAQ   $fAQ
      * @param array $input
      *
      * @return FAQ

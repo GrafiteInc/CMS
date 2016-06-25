@@ -2,14 +2,13 @@
 
 class LinksTest extends AppTest
 {
-
     public function setUp()
     {
         parent::setUp();
         $this->withoutMiddleware();
         $this->withoutEvents();
         factory(\Yab\Quarx\Models\Links::class)->create();
-        factory(\Yab\Quarx\Models\Links::class)->make([ 'id' => 1 ]);
+        factory(\Yab\Quarx\Models\Links::class)->make(['id' => 1]);
     }
 
     /*
@@ -39,7 +38,7 @@ class LinksTest extends AppTest
 
     public function testStore()
     {
-        $link = factory(\Yab\Quarx\Models\Links::class)->make([ 'id' => 89 ]);
+        $link = factory(\Yab\Quarx\Models\Links::class)->make(['id' => 89]);
         $response = $this->call('POST', '/quarx/links', $link['attributes']);
 
         $this->assertEquals(302, $response->getStatusCode());
@@ -49,7 +48,7 @@ class LinksTest extends AppTest
     public function testUpdate()
     {
         $response = $this->call('PATCH', '/quarx/links/1', [
-            'name' => 'wtf'
+            'name' => 'wtf',
         ]);
 
         $this->assertEquals(302, $response->getStatusCode());
@@ -60,6 +59,4 @@ class LinksTest extends AppTest
         $response = $this->call('DELETE', '/quarx/links/1');
         $this->assertEquals(302, $response->getStatusCode());
     }
-
 }
-

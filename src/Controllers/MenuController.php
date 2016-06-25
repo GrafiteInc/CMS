@@ -2,22 +2,20 @@
 
 namespace Yab\Quarx\Controllers;
 
-use Quarx;
-use App\Http\Requests;
 use Illuminate\Http\Request;
+use Quarx;
 use Yab\Quarx\Models\Menu;
+use Yab\Quarx\Repositories\LinksRepository;
+use Yab\Quarx\Repositories\MenuRepository;
 use Yab\Quarx\Requests\MenuRequest;
 use Yab\Quarx\Services\ValidationService;
-use Yab\Quarx\Repositories\MenuRepository;
-use Yab\Quarx\Repositories\LinksRepository;
 
 class MenuController extends QuarxController
 {
-
-    /** @var  MenuRepository */
+    /** @var MenuRepository */
     private $menuRepository;
 
-    function __construct(MenuRepository $menuRepo, LinksRepository $linkRepo)
+    public function __construct(MenuRepository $menuRepo, LinksRepository $linkRepo)
     {
         $this->menuRepository = $menuRepo;
         $this->linkRepository = $linkRepo;
@@ -38,7 +36,7 @@ class MenuController extends QuarxController
     }
 
     /**
-     * Search
+     * Search.
      *
      * @param Request $request
      *
@@ -78,11 +76,11 @@ class MenuController extends QuarxController
         try {
             $validation = ValidationService::check(Menu::$rules);
 
-            if ( ! $validation['errors']) {
+            if (!$validation['errors']) {
                 $menu = $this->menuRepository->store($request->all());
                 Quarx::notification('Menu saved successfully.', 'success');
 
-                if (! $menu) {
+                if (!$menu) {
                     Quarx::notification('Menu could not be saved.', 'danger');
                 }
             } else {
@@ -98,7 +96,8 @@ class MenuController extends QuarxController
     /**
      * Show the form for editing the specified Menu.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return Response
      */
     public function edit($id)
@@ -107,17 +106,19 @@ class MenuController extends QuarxController
 
         if (empty($menu)) {
             Quarx::notification('Menu not found', 'warning');
+
             return redirect(route('quarx.menus.index'));
         }
 
         $links = $this->linkRepository->getLinksByMenu($menu->id);
+
         return view('quarx::modules.menus.edit')->with('menu', $menu)->with('links', $links);
     }
 
     /**
      * Update the specified Menu in storage.
      *
-     * @param  int    $id
+     * @param int         $id
      * @param MenuRequest $request
      *
      * @return Response
@@ -129,13 +130,14 @@ class MenuController extends QuarxController
 
             if (empty($menu)) {
                 Quarx::notification('Menu not found', 'warning');
+
                 return redirect(route('quarx.menus.index'));
             }
 
             $menu = $this->menuRepository->update($menu, $request->all());
             Quarx::notification('Menu updated successfully.', 'success');
 
-            if (! $menu) {
+            if (!$menu) {
                 Quarx::notification('Menu could not be updated.', 'danger');
             }
         } catch (Exception $e) {
@@ -148,7 +150,7 @@ class MenuController extends QuarxController
     /**
      * Remove the specified Menu from storage.
      *
-     * @param  int $id
+     * @param int $id
      *
      * @return Response
      */
@@ -158,6 +160,7 @@ class MenuController extends QuarxController
 
         if (empty($menu)) {
             Quarx::notification('Menu not found', 'warning');
+
             return redirect(route('quarx.menus.index'));
         }
 
@@ -167,5 +170,4 @@ class MenuController extends QuarxController
 
         return redirect(route('quarx.menus.index'));
     }
-
 }

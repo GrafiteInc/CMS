@@ -7,19 +7,18 @@ use Yab\Quarx\Repositories\PagesRepository;
 
 class PagesController extends Controller
 {
-
-    /** @var  PagesRepository */
+    /** @var PagesRepository */
     private $pagesRepository;
 
-    function __construct(PagesRepository $pagesRepo)
+    public function __construct(PagesRepository $pagesRepo)
     {
         $this->pagesRepository = $pagesRepo;
     }
 
     /**
-     * Homepage
+     * Homepage.
      *
-     * @param  string $url
+     * @param string $url
      *
      * @return Response
      */
@@ -55,7 +54,7 @@ class PagesController extends Controller
     /**
      * Display the specified Page.
      *
-     * @param  string $url
+     * @param string $url
      *
      * @return Response
      */

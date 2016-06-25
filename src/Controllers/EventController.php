@@ -2,21 +2,19 @@
 
 namespace Yab\Quarx\Controllers;
 
-use Quarx;
-use App\Http\Requests;
 use Illuminate\Http\Request;
+use Quarx;
 use Yab\Quarx\Models\Event;
+use Yab\Quarx\Repositories\EventRepository;
 use Yab\Quarx\Requests\EventRequest;
 use Yab\Quarx\Services\ValidationService;
-use Yab\Quarx\Repositories\EventRepository;
 
 class EventController extends QuarxController
 {
-
-    /** @var  EventRepository */
+    /** @var EventRepository */
     private $eventRepository;
 
-    function __construct(EventRepository $eventRepo)
+    public function __construct(EventRepository $eventRepo)
     {
         $this->eventRepository = $eventRepo;
     }
@@ -36,7 +34,7 @@ class EventController extends QuarxController
     }
 
     /**
-     * Search
+     * Search.
      *
      * @param Request $request
      *
@@ -75,14 +73,14 @@ class EventController extends QuarxController
     {
         $validation = ValidationService::check(Event::$rules);
 
-        if ( ! $validation['errors']) {
+        if (!$validation['errors']) {
             $event = $this->eventRepository->store($request->all());
             Quarx::notification('Event saved successfully.', 'success');
         } else {
             return $validation['redirect'];
         }
 
-        if (! $event) {
+        if (!$event) {
             Quarx::notification('Event could not be saved.', 'warning');
         }
 
@@ -92,7 +90,8 @@ class EventController extends QuarxController
     /**
      * Show the form for editing the specified Event.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return Response
      */
     public function edit($id)
@@ -101,6 +100,7 @@ class EventController extends QuarxController
 
         if (empty($event)) {
             Quarx::notification('Event not found', 'warning');
+
             return redirect(route('quarx.events.index'));
         }
 
@@ -110,7 +110,7 @@ class EventController extends QuarxController
     /**
      * Update the specified Event in storage.
      *
-     * @param  int    $id
+     * @param int          $id
      * @param EventRequest $request
      *
      * @return Response
@@ -121,13 +121,14 @@ class EventController extends QuarxController
 
         if (empty($event)) {
             Quarx::notification('Event not found', 'warning');
+
             return redirect(route('quarx.events.index'));
         }
 
         $event = $this->eventRepository->update($event, $request->all());
         Quarx::notification('Event updated successfully.', 'success');
 
-        if (! $event) {
+        if (!$event) {
             Quarx::notification('Event could not be saved.', 'warning');
         }
 
@@ -137,7 +138,7 @@ class EventController extends QuarxController
     /**
      * Remove the specified Event from storage.
      *
-     * @param  int $id
+     * @param int $id
      *
      * @return Response
      */
@@ -147,6 +148,7 @@ class EventController extends QuarxController
 
         if (empty($event)) {
             Quarx::notification('Event not found', 'warning');
+
             return redirect(route('quarx.events.index'));
         }
 
@@ -156,5 +158,4 @@ class EventController extends QuarxController
 
         return redirect(route('quarx.events.index'));
     }
-
 }

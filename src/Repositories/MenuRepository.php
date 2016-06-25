@@ -2,14 +2,13 @@
 
 namespace Yab\Quarx\Repositories;
 
-use Yab\Quarx\Models\Menu;
 use Illuminate\Support\Facades\Schema;
+use Yab\Quarx\Models\Menu;
 
 class MenuRepository
 {
-
     /**
-     * Returns all Menus
+     * Returns all Menus.
      *
      * @return \Illuminate\Database\Eloquent\Collection|static[]
      */
@@ -19,7 +18,7 @@ class MenuRepository
     }
 
     /**
-     * Returns all paginated Menus
+     * Returns all paginated Menus.
      *
      * @return \Illuminate\Database\Eloquent\Collection|static[]
      */
@@ -29,7 +28,7 @@ class MenuRepository
     }
 
     /**
-     * Search Menu
+     * Search Menu.
      *
      * @param string $input
      *
@@ -43,14 +42,13 @@ class MenuRepository
 
         foreach ($columns as $attribute) {
             $query->orWhere($attribute, 'LIKE', '%'.$input['term'].'%');
-        };
+        }
 
         return [$query, $input['term'], $query->paginate(25)->render()];
-
     }
 
     /**
-     * Stores Menu into database
+     * Stores Menu into database.
      *
      * @param array $input
      *
@@ -62,7 +60,7 @@ class MenuRepository
     }
 
     /**
-     * Find Menu by given id
+     * Find Menu by given id.
      *
      * @param int $id
      *
@@ -74,7 +72,7 @@ class MenuRepository
     }
 
     /**
-     * Find Menu by given slug
+     * Find Menu by given slug.
      *
      * @param int $id
      *
@@ -86,9 +84,9 @@ class MenuRepository
     }
 
     /**
-     * Updates Menu into database
+     * Updates Menu into database.
      *
-     * @param Menu $menu
+     * @param Menu  $menu
      * @param array $input
      *
      * @return Menu

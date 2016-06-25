@@ -3,15 +3,13 @@
 namespace Yab\Quarx\Services;
 
 use Carbon\Carbon;
-use Illuminate\Support\Facades\URL;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\URL;
 use Yab\Quarx\Repositories\EventRepository;
 
 class EventService
 {
-
-    function __construct(EventRepository $eventRepo)
+    public function __construct(EventRepository $eventRepo)
     {
         $this->eventRepository = $eventRepo;
         $this->weeks = [];
@@ -54,13 +52,13 @@ class EventService
         $eventsByDate = [];
 
         foreach (range(1, $daysInMonth) as $day) {
-            $date = $dateArray[0].'-'.$dateArray[1].'-'.sprintf("%02d", $day);
+            $date = $dateArray[0].'-'.$dateArray[1].'-'.sprintf('%02d', $day);
             foreach ($events as $event) {
                 $startDate = explode('-', $event->start_date);
                 $endDate = explode('-', $event->end_date);
                 $first = Carbon::create($startDate[0], $startDate[1], $startDate[2]);
                 $second = Carbon::create($endDate[0], $endDate[1], $endDate[2]);
-                if (Carbon::create($dateArray[0], $dateArray[1], sprintf("%02d", $day))->between($first, $second)) {
+                if (Carbon::create($dateArray[0], $dateArray[1], sprintf('%02d', $day))->between($first, $second)) {
                     $eventsByDate[$date][] = $event;
                 }
             }
@@ -86,9 +84,9 @@ class EventService
 
         $output = '<table class="'.$class.'">';
         $output .= '<thead>';
-            foreach ($daysOfTheWeek as $day) {
-                $output .= '<th>'.$day.'</th>';
-            }
+        foreach ($daysOfTheWeek as $day) {
+            $output .= '<th>'.$day.'</th>';
+        }
         $output .= '</thead>';
 
         foreach ($this->weeks as $week) {
@@ -146,7 +144,7 @@ class EventService
             $template = str_replace(base_path('resources/themes/'.Config::get('quarx.frontend-theme').'/events/'), '', $template);
             if (stristr($template, 'template')) {
                 $template = str_replace('-template.blade.php', '', $template);
-                if (! stristr($template, '.php')) {
+                if (!stristr($template, '.php')) {
                     $availableTemplates[] = $template.'-template';
                 }
             }
@@ -154,6 +152,4 @@ class EventService
 
         return $availableTemplates;
     }
-
-
 }

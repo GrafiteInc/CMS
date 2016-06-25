@@ -2,7 +2,6 @@
 
 class BlogTest extends AppTest
 {
-
     public function setUp()
     {
         parent::setUp();
@@ -32,7 +31,7 @@ class BlogTest extends AppTest
 
     public function testEdit()
     {
-        factory(\Yab\Quarx\Models\Blog::class)->create([ 'id' => 4 ]);
+        factory(\Yab\Quarx\Models\Blog::class)->create(['id' => 4]);
         $response = $this->call('GET', 'quarx/blog/4/edit');
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertViewHas('blog');
@@ -46,7 +45,7 @@ class BlogTest extends AppTest
 
     public function testStore()
     {
-        $blog = [ 'title' => 'dumber', 'url' => 'dumber', 'entry' => 'okie dokie' ];
+        $blog = ['title' => 'dumber', 'url' => 'dumber', 'entry' => 'okie dokie'];
         $response = $this->call('POST', 'quarx/blog', $blog);
 
         $this->seeInDatabase('blogs', ['id' => 2]);
@@ -63,12 +62,12 @@ class BlogTest extends AppTest
 
     public function testUpdate()
     {
-        $blog = [ 'title' => 'dumber', 'url' => 'dumber', 'entry' => 'okie dokie' ];
+        $blog = ['title' => 'dumber', 'url' => 'dumber', 'entry' => 'okie dokie'];
         $this->call('POST', 'quarx/blog', $blog);
 
         $response = $this->call('PATCH', 'quarx/blog/1', [
             'title' => 'dumber and dumber',
-            'url' => 'dumber-and-dumber',
+            'url'   => 'dumber-and-dumber',
         ]);
 
         $this->seeInDatabase('blogs', ['title' => 'dumber and dumber']);
@@ -81,6 +80,4 @@ class BlogTest extends AppTest
         $this->assertEquals(302, $response->getStatusCode());
         $this->assertRedirectedTo('quarx/blog');
     }
-
 }
-

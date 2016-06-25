@@ -6,7 +6,8 @@ use Illuminate\Support\Facades\Facade;
 
 class PageServiceFacade extends Facade
 {
-
-    protected static function getFacadeAccessor() { return 'PageService'; }
-
+    protected static function getFacadeAccessor()
+    {
+        return 'PageService';
+    }
 }

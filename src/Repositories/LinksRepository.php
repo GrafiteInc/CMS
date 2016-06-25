@@ -2,15 +2,12 @@
 
 namespace Yab\Quarx\Repositories;
 
-use CryptoService;
 use Yab\Quarx\Models\Links;
-use Illuminate\Support\Facades\Schema;
 
 class LinksRepository
 {
-
     /**
-     * Returns all Links
+     * Returns all Links.
      *
      * @return \Illuminate\Database\Eloquent\Collection|static[]
      */
@@ -20,7 +17,7 @@ class LinksRepository
     }
 
     /**
-     * Stores Links into database
+     * Stores Links into database.
      *
      * @param array $input
      *
@@ -34,7 +31,7 @@ class LinksRepository
     }
 
     /**
-     * Find Links by given id
+     * Find Links by given id.
      *
      * @param int $id
      *
@@ -46,7 +43,7 @@ class LinksRepository
     }
 
     /**
-     * Find Links by menu id
+     * Find Links by menu id.
      *
      * @param int $id
      *
@@ -58,7 +55,7 @@ class LinksRepository
     }
 
     /**
-     * Find Links by given id
+     * Find Links by given id.
      *
      * @param int $id
      *
@@ -70,7 +67,7 @@ class LinksRepository
     }
 
     /**
-     * Updates Links into database
+     * Updates Links into database.
      *
      * @param Links $links
      * @param array $input

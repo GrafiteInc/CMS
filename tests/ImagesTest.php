@@ -2,7 +2,6 @@
 
 class ImagesTest extends AppTest
 {
-
     public function setUp()
     {
         parent::setUp();
@@ -46,16 +45,16 @@ class ImagesTest extends AppTest
     public function testStore()
     {
         $uploadedFile = new Symfony\Component\HttpFoundation\File\UploadedFile(__DIR__.'/test-pic.jpg', 'test-pic.jpg');
-        $image = (array) factory(\Yab\Quarx\Models\Images::class)->make([ 'id' => 2 ]);
+        $image = (array) factory(\Yab\Quarx\Models\Images::class)->make(['id' => 2]);
         $image['location'] = [
             [
-                'name' => CryptoService::encrypt('test-pic.jpg'),
+                'name'     => CryptoService::encrypt('test-pic.jpg'),
                 'original' => 'what.jpg',
             ],
             [
-                'name' => CryptoService::encrypt('test-pic.jpg'),
+                'name'     => CryptoService::encrypt('test-pic.jpg'),
                 'original' => 'what.jpg',
-            ]
+            ],
         ];
         $response = $this->call('POST', 'quarx/images', $image, [], ['location' => $uploadedFile]);
 
@@ -65,7 +64,7 @@ class ImagesTest extends AppTest
 
     public function testUpdate()
     {
-        $image = (array) factory(\Yab\Quarx\Models\Images::class)->make([ 'id' => 3, 'title' => 'dumber' ]);
+        $image = (array) factory(\Yab\Quarx\Models\Images::class)->make(['id' => 3, 'title' => 'dumber']);
         $response = $this->call('PATCH', 'quarx/images/3', $image);
 
         $this->assertEquals(302, $response->getStatusCode());
@@ -75,16 +74,16 @@ class ImagesTest extends AppTest
     public function testDelete()
     {
         $uploadedFile = new Symfony\Component\HttpFoundation\File\UploadedFile(__DIR__.'/test-pic.jpg', 'test-pic.jpg');
-        $image = (array) factory(\Yab\Quarx\Models\Images::class)->make([ 'id' => 2 ]);
+        $image = (array) factory(\Yab\Quarx\Models\Images::class)->make(['id' => 2]);
         $image['location'] = [
             [
-                'name' => CryptoService::encrypt('files/dumb'),
+                'name'     => CryptoService::encrypt('files/dumb'),
                 'original' => 'what.jpg',
             ],
             [
-                'name' => CryptoService::encrypt('files/dumb'),
+                'name'     => CryptoService::encrypt('files/dumb'),
                 'original' => 'what.jpg',
-            ]
+            ],
         ];
         $this->call('POST', 'quarx/images', $image, [], ['location' => ['image' => $uploadedFile]]);
 
@@ -92,6 +91,4 @@ class ImagesTest extends AppTest
         $this->assertEquals(302, $response->getStatusCode());
         $this->assertRedirectedTo('quarx/images');
     }
-
 }
-

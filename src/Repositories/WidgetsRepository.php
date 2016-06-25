@@ -2,15 +2,13 @@
 
 namespace Yab\Quarx\Repositories;
 
-use Yab\Quarx\Services\Quarx;
-use Yab\Quarx\Models\Widgets;
 use Illuminate\Support\Facades\Schema;
+use Yab\Quarx\Models\Widgets;
 
 class WidgetsRepository
 {
-
     /**
-     * Returns all Widgets
+     * Returns all Widgets.
      *
      * @return \Illuminate\Database\Eloquent\Collection|static[]
      */
@@ -32,13 +30,13 @@ class WidgetsRepository
 
         foreach ($columns as $attribute) {
             $query->orWhere($attribute, 'LIKE', '%'.$input['term'].'%');
-        };
+        }
 
         return [$query, $input['term'], $query->paginate(25)->render()];
     }
 
     /**
-     * Stores Widgets into database
+     * Stores Widgets into database.
      *
      * @param array $input
      *
@@ -50,7 +48,7 @@ class WidgetsRepository
     }
 
     /**
-     * Find Widgets by given id
+     * Find Widgets by given id.
      *
      * @param int $id
      *
@@ -61,9 +59,8 @@ class WidgetsRepository
         return Widgets::find($id);
     }
 
-
     /**
-     * Find Widgets by given slug
+     * Find Widgets by given slug.
      *
      * @param int $slug
      *
@@ -75,10 +72,10 @@ class WidgetsRepository
     }
 
     /**
-     * Updates Widgets into database
+     * Updates Widgets into database.
      *
      * @param Widgets $widgets
-     * @param array $input
+     * @param array   $input
      *
      * @return Widgets
      */

@@ -2,13 +2,7 @@
 
 namespace Yab\Quarx\Console;
 
-use Artisan;
-use Illuminate\Support\Str;
-use Illuminate\Support\Schema;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Config;
-use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Console\Input\InputArgument;
 use Illuminate\Filesystem\Filesystem;
 
 class ThemePublish extends Command
@@ -36,7 +30,7 @@ class ThemePublish extends Command
     {
         $name = $this->argument('name');
 
-        $fileSystem = new Filesystem;
+        $fileSystem = new Filesystem();
 
         $files = $fileSystem->allFiles(base_path('resources/themes/'.strtolower($name).'/public'));
         $this->line("\n");
@@ -48,7 +42,7 @@ class ThemePublish extends Command
 
         foreach ($files as $file) {
             $newFileName = str_replace(base_path('resources/themes/'.strtolower($name).'/public'), '', $file);
-            $this->line("Copying ".$newFileName."...");
+            $this->line('Copying '.$newFileName.'...');
             if (is_dir($file)) {
                 $fileSystem->copyDirectory($file, public_path($newFileName));
             } else {

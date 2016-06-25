@@ -2,9 +2,8 @@
 
 namespace Yab\Quarx\Providers;
 
-use Illuminate\Routing\Router;
-use Illuminate\Support\Facades\Config;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+use Illuminate\Routing\Router;
 
 class QuarxRouteProvider extends ServiceProvider
 {
@@ -20,7 +19,8 @@ class QuarxRouteProvider extends ServiceProvider
     /**
      * Define your route model bindings, pattern filters, etc.
      *
-     * @param  \Illuminate\Routing\Router  $router
+     * @param \Illuminate\Routing\Router $router
+     *
      * @return void
      */
     public function boot(Router $router)
@@ -31,7 +31,8 @@ class QuarxRouteProvider extends ServiceProvider
     /**
      * Define the routes for the application.
      *
-     * @param  \Illuminate\Routing\Router  $router
+     * @param \Illuminate\Routing\Router $router
+     *
      * @return void
      */
     public function map(Router $router)

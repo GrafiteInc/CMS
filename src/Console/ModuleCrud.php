@@ -2,8 +2,8 @@
 
 namespace Yab\Quarx\Console;
 
-use Config;
 use Artisan;
+use Config;
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
 use Yab\Laracogs\Generators\CrudGenerator;
@@ -25,13 +25,13 @@ class ModuleCrud extends Command
     protected $description = 'Generate a CRUD module for Quarx';
 
     /**
-     * Generate a CRUD stack
+     * Generate a CRUD stack.
      *
      * @return mixed
      */
     public function handle()
     {
-        $filesystem = new Filesystem;
+        $filesystem = new Filesystem();
 
         $crudGenerator = new CrudGenerator();
 
@@ -39,11 +39,11 @@ class ModuleCrud extends Command
 
         $moduleDirectory = base_path('quarx/modules/'.ucfirst(str_plural($table)));
 
-        if (! is_dir(base_path('quarx'))) {
+        if (!is_dir(base_path('quarx'))) {
             @mkdir(base_path('quarx'));
         }
 
-        if (! is_dir(base_path('quarx/modules'))) {
+        if (!is_dir(base_path('quarx/modules'))) {
             @mkdir(base_path('quarx/modules'));
         }
 
@@ -63,7 +63,7 @@ class ModuleCrud extends Command
         @mkdir($moduleDirectory.'/Tests');
 
         file_put_contents($moduleDirectory.'/config.php', "<?php \n\n\n return [];");
-        file_put_contents($moduleDirectory.'/Views/menu.blade.php', "<li><a href=\"<?= URL::to('quarx/".strtolower(str_plural($table))."'); ?>\"><span class=\"fa fa-file\"></span> ".ucfirst(str_plural($table))."</a></li>");
+        file_put_contents($moduleDirectory.'/Views/menu.blade.php', "<li><a href=\"<?= URL::to('quarx/".strtolower(str_plural($table))."'); ?>\"><span class=\"fa fa-file\"></span> ".ucfirst(str_plural($table)).'</a></li>');
 
         $config = [
             'bootstrap'                  => false,
@@ -146,14 +146,14 @@ class ModuleCrud extends Command
             $this->info('Add this to your `app/Providers/RouteServiceProver.php` in the `mapWebRoutes` method:');
             $this->comment("\nrequire app_path('Http/".$config['_lower_casePlural_']."-routes.php');\n");
         } catch (Exception $e) {
-            throw new Exception("Unable to generate your Module", 1);
+            throw new Exception('Unable to generate your Module', 1);
         }
 
         if ($this->option('migration')) {
             Artisan::call('make:migration', [
-                'name' => 'create_'.str_plural(strtolower($table)).'_table',
-                '--path' => 'quarx/modules/'.ucfirst(str_plural($table)).'/Publishes/database/migrations',
-                '--table' => str_plural(strtolower($table)),
+                'name'     => 'create_'.str_plural(strtolower($table)).'_table',
+                '--path'   => 'quarx/modules/'.ucfirst(str_plural($table)).'/Publishes/database/migrations',
+                '--table'  => str_plural(strtolower($table)),
                 '--create' => true,
             ]);
 
@@ -161,9 +161,9 @@ class ModuleCrud extends Command
                 $migrationFiles = $filesystem->allFiles(base_path('quarx/modules/'.ucfirst(str_plural($table)).'/Publishes/database/migrations'));
                 $migrationName = 'create_'.str_plural(strtolower($table)).'_table';
                 foreach ($migrationFiles as $file) {
-                    if (stristr($file->getBasename(), $migrationName) ) {
+                    if (stristr($file->getBasename(), $migrationName)) {
                         $migrationData = file_get_contents($file->getPathname());
-                        $parsedTable = "";
+                        $parsedTable = '';
 
                         foreach (explode(',', $this->option('schema')) as $key => $column) {
                             $columnDefinition = explode(':', $column);

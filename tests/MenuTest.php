@@ -2,7 +2,6 @@
 
 class MenuTest extends AppTest
 {
-
     public function setUp()
     {
         parent::setUp();
@@ -45,7 +44,7 @@ class MenuTest extends AppTest
 
     public function testStore()
     {
-        $menu = factory(\Yab\Quarx\Models\Menu::class)->make([ 'id' => 2 ]);
+        $menu = factory(\Yab\Quarx\Models\Menu::class)->make(['id' => 2]);
         $response = $this->call('POST', '/quarx/menus', $menu['attributes']);
 
         $this->assertEquals(302, $response->getStatusCode());
@@ -62,7 +61,7 @@ class MenuTest extends AppTest
     public function testUpdate()
     {
         $response = $this->call('PATCH', '/quarx/menus/1', [
-            'name' => 'awesome'
+            'name' => 'awesome',
         ]);
 
         $this->assertEquals(302, $response->getStatusCode());
@@ -74,6 +73,4 @@ class MenuTest extends AppTest
         $this->assertEquals(302, $response->getStatusCode());
         $this->assertRedirectedTo('/quarx/menus');
     }
-
 }
-

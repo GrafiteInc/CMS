@@ -2,14 +2,13 @@
 
 namespace Yab\Quarx\Requests;
 
-use Gate;
 use Auth;
-use Yab\Quarx\Models\Pages;
+use Gate;
 use Illuminate\Foundation\Http\FormRequest;
+use Yab\Quarx\Models\Pages;
 
 class PagesRequest extends FormRequest
 {
-
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -33,5 +32,4 @@ class PagesRequest extends FormRequest
     {
         return Pages::$rules;
     }
-
 }

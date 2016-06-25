@@ -2,28 +2,29 @@
 
 namespace Yab\Quarx\Services;
 
-use Illuminate\Support\Facades\Input;
-use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Request;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 
 class ValidationService
 {
     /**
-     * Validation check
-     * @param  string  $form      form in question from the config
-     * @param  string  $module    module name
-     * @param  bool    $jsonInput JSON input
+     * Validation check.
+     *
+     * @param string $form      form in question from the config
+     * @param string $module    module name
+     * @param bool   $jsonInput JSON input
+     *
      * @return array
      */
     public static function check($form, $jsonInput = false)
     {
-        $result = array();
-        $errors = array();
-        $inputs = array();
+        $result = [];
+        $errors = [];
+        $inputs = [];
 
         if (is_array($form)) {
             $fields = $form;
@@ -32,7 +33,7 @@ class ValidationService
             $fields = $conditions;
         }
 
-        if ( ! is_array($fields)) {
+        if (!is_array($fields)) {
             $fields = [$fields];
         }
 
@@ -40,78 +41,83 @@ class ValidationService
 
         foreach ($fields as $key => $value) {
             if (isset($fields[$key])) {
-                $inputs[$key] = ValidationService::getInput($key, $jsonInput);
-                $validationInputs[$key] = ValidationService::getInput($key, $jsonInput);
+                $inputs[$key] = self::getInput($key, $jsonInput);
+                $validationInputs[$key] = self::getInput($key, $jsonInput);
                 $validationRules[$key] = $fields[$key];
             }
         }
 
-        $validation = Validator::make( $validationInputs, $validationRules );
+        $validation = Validator::make($validationInputs, $validationRules);
 
         if ($validation->fails()) {
             $errors = $validation->messages();
         }
 
-        if ( ! $jsonInput) {
-            $result["redirect"] = Redirect::back()->with('errors', $errors)->with('inputs', ValidationService::inputsArray($jsonInput));
+        if (!$jsonInput) {
+            $result['redirect'] = Redirect::back()->with('errors', $errors)->with('inputs', self::inputsArray($jsonInput));
         }
 
-        if ( ! empty($errors)) {
-            $result["errors"] = $errors;
+        if (!empty($errors)) {
+            $result['errors'] = $errors;
         } else {
-            $result["errors"] = false;
+            $result['errors'] = false;
         }
 
-        $result["inputs"] = ValidationService::inputsArray($jsonInput);
+        $result['inputs'] = self::inputsArray($jsonInput);
 
         return $result;
     }
 
     /**
-     * Json form validation
-     * @param  string $form   validation config
-     * @param  string $module module name if validation is in module
+     * Json form validation.
+     *
+     * @param string $form   validation config
+     * @param string $module module name if validation is in module
+     *
      * @return mixed
      */
     public static function jsonCheck($form, $module = null)
     {
-        return ValidationService::check($form, $module, true);
+        return self::check($form, $module, true);
     }
 
     /**
-     * ValidationService Errors
-     * @param  string $format Type of error request
+     * ValidationService Errors.
+     *
+     * @param string $format Type of error request
+     *
      * @return mixed
      */
     public static function errors($format = 'array')
     {
-        $errorMessage = "";
-        $errors = Session::get("errors") ?: false;
+        $errorMessage = '';
+        $errors = Session::get('errors') ?: false;
 
-        if ( ! $errors) {
+        if (!$errors) {
             return false;
         }
 
         if ($format === 'string') {
             foreach ($errors as $error => $message) {
-                $errorMessage .= $message."<br>";
+                $errorMessage .= $message.'<br>';
             }
         } else {
-            $errorMessage = Session::get("errors");
+            $errorMessage = Session::get('errors');
         }
 
         return $errorMessage;
     }
 
     /**
-     * Validation inputs
+     * Validation inputs.
+     *
      * @return mixed
      */
     public static function inputs()
     {
-        $inputs = Session::get("inputs") ?: false;
+        $inputs = Session::get('inputs') ?: false;
 
-        if ( ! $inputs) {
+        if (!$inputs) {
             return false;
         }
 
@@ -119,16 +125,18 @@ class ValidationService
     }
 
     /**
-     * Get input
-     * @param  string $key       Input name
-     * @param  bool $jsonInput JSON or not
+     * Get input.
+     *
+     * @param string $key       Input name
+     * @param bool   $jsonInput JSON or not
+     *
      * @return mixed
      */
     private static function getInput($key, $jsonInput)
     {
         if ($jsonInput) {
             $input = Input::json($key);
-        } else if (Input::file($key)) {
+        } elseif (Input::file($key)) {
             $input = Input::file($key);
         } else {
             $input = Input::get($key);
@@ -138,8 +146,10 @@ class ValidationService
     }
 
     /**
-     * Get the inputs as an array
-     * @param  bool $jsonInput JSON or not
+     * Get the inputs as an array.
+     *
+     * @param bool $jsonInput JSON or not
+     *
      * @return array
      */
     private static function inputsArray($jsonInput)
@@ -163,19 +173,20 @@ class ValidationService
     }
 
     /**
-     * Get the value last attempted in valuation
-     * @param  string $key Input key
+     * Get the value last attempted in valuation.
+     *
+     * @param string $key Input key
+     *
      * @return string
      */
     public static function value($key)
     {
-        $inputs = Session::get("inputs") ?: false;
+        $inputs = Session::get('inputs') ?: false;
 
-        if ( ! $inputs) {
+        if (!$inputs) {
             return '';
         }
 
         return $inputs[$key];
     }
-
 }

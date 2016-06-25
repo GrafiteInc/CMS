@@ -1,11 +1,10 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreateFaqsTable extends Migration
 {
-
     /**
      * Run the migrations.
      *
@@ -13,8 +12,7 @@ class CreateFaqsTable extends Migration
      */
     public function up()
     {
-        Schema::create('faqs', function(Blueprint $table)
-        {
+        Schema::create('faqs', function (Blueprint $table) {
             $table->increments('id');
             $table->string('question');
             $table->text('answer');
@@ -32,5 +30,4 @@ class CreateFaqsTable extends Migration
     {
         Schema::drop('faqs');
     }
-
 }

@@ -2,16 +2,15 @@
 
 namespace App\Http\Controllers\Quarx;
 
-use Config;
 use App\Http\Controllers\Controller;
+use Config;
 use Yab\Quarx\Repositories\ImagesRepository;
 
 class GalleryController extends Controller
 {
-
     private $imageRepository;
 
-    function __construct(ImagesRepository $imageRepo)
+    public function __construct(ImagesRepository $imageRepo)
     {
         $this->imageRepository = $imageRepo;
     }
@@ -38,7 +37,7 @@ class GalleryController extends Controller
     /**
      * Display the specified Gallery.
      *
-     * @param  string $url
+     * @param string $url
      *
      * @return Response
      */

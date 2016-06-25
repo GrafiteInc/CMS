@@ -7,11 +7,10 @@ use Yab\Quarx\Repositories\BlogRepository;
 
 class BlogController extends Controller
 {
-
-    /** @var  BlogRepository */
+    /** @var BlogRepository */
     private $blogRepository;
 
-    function __construct(BlogRepository $blogRepo)
+    public function __construct(BlogRepository $blogRepo)
     {
         $this->blogRepository = $blogRepo;
     }
@@ -19,7 +18,7 @@ class BlogController extends Controller
     /**
      * Display all Blog entries.
      *
-     * @param  int $id
+     * @param int $id
      *
      * @return Response
      */
@@ -28,7 +27,9 @@ class BlogController extends Controller
         $blogs = $this->blogRepository->publishedAndPaginated();
         $tags = $this->blogRepository->allTags();
 
-        if (empty($blogs)) abort(404);
+        if (empty($blogs)) {
+            abort(404);
+        }
 
         return view('quarx-frontend::blog.all')
             ->with('tags', $tags)
@@ -38,7 +39,7 @@ class BlogController extends Controller
     /**
      * Display all Blog entries.
      *
-     * @param  int $id
+     * @param int $id
      *
      * @return Response
      */
@@ -47,7 +48,9 @@ class BlogController extends Controller
         $blogs = $this->blogRepository->tags($tag);
         $tags = $this->blogRepository->allTags();
 
-        if (empty($blogs)) abort(404);
+        if (empty($blogs)) {
+            abort(404);
+        }
 
         return view('quarx-frontend::blog.all')
             ->with('tags', $tags)
@@ -57,7 +60,7 @@ class BlogController extends Controller
     /**
      * Display the specified Blog.
      *
-     * @param  int $id
+     * @param int $id
      *
      * @return Response
      */
@@ -65,9 +68,10 @@ class BlogController extends Controller
     {
         $blog = $this->blogRepository->findBlogsByURL($url);
 
-        if (empty($blog)) abort(404);
+        if (empty($blog)) {
+            abort(404);
+        }
 
         return view('quarx-frontend::blog.'.$blog->template)->with('blog', $blog);
     }
-
 }

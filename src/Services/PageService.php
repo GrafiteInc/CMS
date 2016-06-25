@@ -2,16 +2,14 @@
 
 namespace Yab\Quarx\Services;
 
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
 use Yab\Quarx\Repositories\PagesRepository;
 
 class PageService
 {
-
     public function __construct()
     {
-        $this->pageRepo = new PagesRepository;
+        $this->pageRepo = new PagesRepository();
     }
 
     public function getPagesAsOptions()
@@ -35,7 +33,7 @@ class PageService
             $template = str_replace(base_path('resources/themes/'.Config::get('quarx.frontend-theme').'/pages/'), '', $template);
             if (stristr($template, 'template')) {
                 $template = str_replace('-template.blade.php', '', $template);
-                if (! stristr($template, '.php')) {
+                if (!stristr($template, '.php')) {
                     $availableTemplates[] = $template.'-template';
                 }
             }
@@ -47,6 +45,7 @@ class PageService
     public function pageName($id)
     {
         $page = $this->pageRepo->findPagesById($id);
+
         return $page->title;
     }
 }

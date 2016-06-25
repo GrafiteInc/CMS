@@ -2,12 +2,10 @@
 
 namespace Yab\Quarx\Providers;
 
-use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\View;
-use Yab\Quarx\Services\FileService;
-use Illuminate\Support\Facades\Config;
-use Illuminate\Support\ServiceProvider;
 use Illuminate\Contracts\Events\Dispatcher as DispatcherContract;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\View;
+use Illuminate\Support\ServiceProvider;
 
 class QuarxModuleProvider extends ServiceProvider
 {
@@ -19,8 +17,7 @@ class QuarxModuleProvider extends ServiceProvider
         $modules = glob($modulePath.'*');
 
         if (is_array($modules)) {
-            while (list(,$module) = each($modules)) {
-
+            while (list(, $module) = each($modules)) {
                 $module = str_replace($modulePath, '', $module);
 
                 // Load the Routes
@@ -44,6 +41,7 @@ class QuarxModuleProvider extends ServiceProvider
         }
     }
 
-    public function register() {}
-
+    public function register()
+    {
+    }
 }

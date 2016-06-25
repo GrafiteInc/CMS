@@ -2,14 +2,13 @@
 
 namespace Yab\Quarx\Requests;
 
-use Gate;
 use Auth;
-use Yab\Quarx\Models\Widgets;
+use Gate;
 use Illuminate\Foundation\Http\FormRequest;
+use Yab\Quarx\Models\Widgets;
 
 class WidgetsRequest extends FormRequest
 {
-
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -33,5 +32,4 @@ class WidgetsRequest extends FormRequest
     {
         return Widgets::$rules;
     }
-
 }

@@ -2,17 +2,16 @@
 
 namespace Yab\Quarx\Repositories;
 
-use Quarx;
 use Carbon\Carbon;
-use Yab\Quarx\Models\Pages;
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Schema;
+use Quarx;
+use Yab\Quarx\Models\Pages;
 
 class PagesRepository
 {
-
     /**
-     * Returns all Pages
+     * Returns all Pages.
      *
      * @return \Illuminate\Database\Eloquent\Collection|static[]
      */
@@ -39,14 +38,13 @@ class PagesRepository
 
         foreach ($columns as $attribute) {
             $query->orWhere($attribute, 'LIKE', '%'.$input['term'].'%');
-        };
+        }
 
         return [$query, $input['term'], $query->paginate(Config::get('quarx.pagination', 25))->render()];
-
     }
 
     /**
-     * Stores Pages into database
+     * Stores Pages into database.
      *
      * @param array $input
      *
@@ -57,11 +55,12 @@ class PagesRepository
         $input['url'] = Quarx::convertToURL($input['url']);
         $input['is_published'] = (isset($input['is_published'])) ? (bool) $input['is_published'] : 0;
         $input['published_at'] = (isset($input['published_at'])) ? $input['published_at'] : Carbon::now()->format('Y-m-d h:i:s');
+
         return Pages::create($input);
     }
 
     /**
-     * Find Pages by given id
+     * Find Pages by given id.
      *
      * @param int $id
      *
@@ -73,7 +72,7 @@ class PagesRepository
     }
 
     /**
-     * Find Pages by given URL
+     * Find Pages by given URL.
      *
      * @param string $url
      *
@@ -85,7 +84,7 @@ class PagesRepository
     }
 
     /**
-     * Updates Pages into database
+     * Updates Pages into database.
      *
      * @param Pages $pages
      * @param array $input

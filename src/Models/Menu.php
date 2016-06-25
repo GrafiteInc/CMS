@@ -6,16 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Menu extends Model
 {
+    public $table = 'menus';
 
-    public $table = "menus";
-
-    public $primaryKey = "id";
+    public $primaryKey = 'id';
 
     protected $guarded = [];
 
     public static $rules = [
-        "name" => "required",
-        "slug" => "required",
+        'name' => 'required',
+        'slug' => 'required',
     ];
-
 }

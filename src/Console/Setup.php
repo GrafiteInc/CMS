@@ -3,13 +3,9 @@
 namespace Yab\Quarx\Console;
 
 use Artisan;
-use Illuminate\Support\Str;
-use Illuminate\Support\Schema;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Config;
-use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Console\Input\InputArgument;
 use Illuminate\Filesystem\Filesystem;
+use Illuminate\Support\Facades\Config;
 
 class Setup extends Command
 {
@@ -39,18 +35,17 @@ class Setup extends Command
         $cssReady = $this->confirm('Please confirm that you have gulp fully installed.');
 
         if ($cssReady) {
-
             Artisan::call('vendor:publish', [
                 '--provider' => 'Yab\Quarx\QuarxProvider',
-                '--force' => true
+                '--force'    => true,
             ]);
 
             Artisan::call('vendor:publish', [
                 '--provider' => 'Yab\Laracogs\LaracogsProvider',
-                '--force' => true
+                '--force'    => true,
             ]);
 
-            $this->line("Are you sure you want to run the setup? (yes/no)");
+            $this->line('Are you sure you want to run the setup? (yes/no)');
 
             Artisan::call('laracogs:starter');
 
@@ -79,7 +74,7 @@ class Setup extends Command
             $routeContents = str_replace("'auth' => \App\Http\Middleware\Authenticate::class,", "'auth' => \App\Http\Middleware\Authenticate::class,\n\t\t'quarx' => \App\Http\Middleware\Quarx::class,\n\t\t'admin' => \App\Http\Middleware\Admin::class,", $routeContents);
             file_put_contents(app_path('Http/Kernel.php'), $routeContents);
 
-            $fileSystem = new Filesystem;
+            $fileSystem = new Filesystem();
 
             $files = $fileSystem->allFiles(__DIR__.'/../PublishedAssets/Setup');
 
@@ -95,7 +90,7 @@ class Setup extends Command
 
             // AuthProviders
             $authProviderContents = file_get_contents(app_path('Providers/AuthServiceProvider.php'));
-            $authProviderContents = str_replace("\$this->registerPolicies(\$gate);", "\$this->registerPolicies(\$gate);\n\t\t\$gate->define('quarx', function (\$user) {\n\t\t\treturn (\$user->roles->first()->name === 'admin');\n\t\t});\n\t\t\$gate->define('admin', function (\$user) {\n\t\t\treturn (\$user->roles->first()->name === 'admin');\n\t\t});", $authProviderContents);
+            $authProviderContents = str_replace('$this->registerPolicies($gate);', "\$this->registerPolicies(\$gate);\n\t\t\$gate->define('quarx', function (\$user) {\n\t\t\treturn (\$user->roles->first()->name === 'admin');\n\t\t});\n\t\t\$gate->define('admin', function (\$user) {\n\t\t\treturn (\$user->roles->first()->name === 'admin');\n\t\t});", $authProviderContents);
             file_put_contents(app_path('Providers/AuthServiceProvider.php'), $authProviderContents);
 
             // Remove the teams
@@ -129,7 +124,7 @@ Route::get('team/{name}', 'TeamController@showByName');
 Route::resource('teams', 'TeamController', ['except' => ['show']]);
 Route::post('teams/search', 'TeamController@search');
 Route::post('teams/{id}/invite', 'TeamController@inviteMember');
-Route::get('teams/{id}/remove/{userId}', 'TeamController@removeMember');", "", $mainRoutes);
+Route::get('teams/{id}/remove/{userId}', 'TeamController@removeMember');", '', $mainRoutes);
             file_put_contents(app_path('Http/routes.php'), $mainRoutes);
 
             $userModel = file_get_contents(app_path('Repositories/User/User.php'));
@@ -168,30 +163,30 @@ public function isTeamAdmin(\$id)
 {
     \$team = \$this->teams->find(\$id);
     return (int)\$team->user_id === (int)\$this->id;
-}", "", $userModel);
+}", '', $userModel);
             file_put_contents(app_path('Repositories/User/User.php'), $userModel);
 
             $userService = file_get_contents(app_path('Services/UserService.php'));
-            $userService = str_replace("/*
+            $userService = str_replace('/*
 |--------------------------------------------------------------------------
 | Teams
 |--------------------------------------------------------------------------
 */
 
-public function joinTeam(\$teamId, \$userId)
+public function joinTeam($teamId, $userId)
 {
-   return \$this->userRepo->joinTeam(\$teamId, \$userId);
+   return $this->userRepo->joinTeam($teamId, $userId);
 }
 
-public function leaveTeam(\$teamId, \$userId)
+public function leaveTeam($teamId, $userId)
 {
-   return \$this->userRepo->leaveTeam(\$teamId, \$userId);
+   return $this->userRepo->leaveTeam($teamId, $userId);
 }
 
-public function leaveAllTeams(\$userId)
+public function leaveAllTeams($userId)
 {
-   return \$this->userRepo->leaveAllTeams(\$userId);
-}", "", $userService);
+   return $this->userRepo->leaveAllTeams($userId);
+}', '', $userService);
             file_put_contents(app_path('Services/UserService.php'), $userService);
 
             exec('composer dump');
@@ -207,22 +202,22 @@ public function leaveAllTeams(\$userId)
             file_put_contents(base_path('composer.json'), $composer);
 
             Artisan::call('theme:publish', [
-                'name' => 'default'
+                'name' => 'default',
             ]);
 
             Artisan::call('migrate:reset', [
-                '--force' => true
+                '--force' => true,
             ]);
 
             Artisan::call('migrate', [
-                '--seed' => true,
-                '--force' => true
+                '--seed'  => true,
+                '--force' => true,
             ]);
 
-            $this->info("Finished setting up your site with Quarx");
-            $this->line("You can now login with the following username and password:");
-            $this->comment("admin@admin.com");
-            $this->comment("admin");
+            $this->info('Finished setting up your site with Quarx');
+            $this->line('You can now login with the following username and password:');
+            $this->comment('admin@admin.com');
+            $this->comment('admin');
         } else {
             $this->info('Please run:');
             $this->comment('npm install');

@@ -8,14 +8,14 @@
 
 $factory->define(\Yab\Quarx\Models\Images::class, function (Faker\Generator $faker) {
     return [
-        'id' => 1,
-        'location' => 'files/dumb',
-        'name' => 'dumb',
+        'id'            => 1,
+        'location'      => 'files/dumb',
+        'name'          => 'dumb',
         'original_name' => 'dumb',
-        'alt_tag' => 'dumb',
-        'title_tag' => 'dumb',
-        'is_published' => 1,
-        'updated_at' => $faker->datetime(),
-        'created_at' => $faker->datetime(),
+        'alt_tag'       => 'dumb',
+        'title_tag'     => 'dumb',
+        'is_published'  => 1,
+        'updated_at'    => $faker->datetime(),
+        'created_at'    => $faker->datetime(),
     ];
 });

@@ -1,13 +1,13 @@
 <?php
 
-use Illuminate\Contracts\Auth\Access\Gate as GateContract;
 
 class AppTest extends Orchestra\Testbench\TestCase
 {
     /**
      * Define environment setup.
      *
-     * @param  \Illuminate\Foundation\Application  $app
+     * @param \Illuminate\Foundation\Application $app
+     *
      * @return void
      */
     protected function getEnvironmentSetUp($app)
@@ -28,9 +28,10 @@ class AppTest extends Orchestra\Testbench\TestCase
     }
 
     /**
-     * getPackageProviders
+     * getPackageProviders.
      *
-     * @param  App $app
+     * @param App $app
+     *
      * @return array
      */
     protected function getPackageProviders($app)
@@ -46,11 +47,11 @@ class AppTest extends Orchestra\Testbench\TestCase
     protected function getPackageAliases($app)
     {
         return [
-            'Form' => \Collective\Html\FormFacade::class,
-            'HTML' => \Collective\Html\HtmlFacade::class,
-            'FormMaker' => \Yab\Laracogs\Facades\FormMaker::class,
+            'Form'       => \Collective\Html\FormFacade::class,
+            'HTML'       => \Collective\Html\HtmlFacade::class,
+            'FormMaker'  => \Yab\Laracogs\Facades\FormMaker::class,
             'InputMaker' => \Yab\Laracogs\Facades\InputMaker::class,
-            'Crypto' => \Yab\Laracogs\Utilities\Crypto::class,
+            'Crypto'     => \Yab\Laracogs\Utilities\Crypto::class,
         ];
     }
 
@@ -67,7 +68,7 @@ class AppTest extends Orchestra\Testbench\TestCase
         ]);
         $this->artisan('vendor:publish', [
             '--provider' => 'Yab\Quarx\QuarxProvider',
-            '--force' => true
+            '--force'    => true,
         ]);
         $this->withoutMiddleware();
         $this->withoutEvents();

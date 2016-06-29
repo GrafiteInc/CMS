@@ -44,7 +44,7 @@ Now your done setup. Login, and start building your amazing new website!
 
 ## Complex Setup
 
-If you just want to add Laracogs to your existing application and already have your own
+If you just want to add Quarx to your existing application and already have your own
 
 * Add the following to your routes provider:
 
@@ -79,7 +79,7 @@ This should be added to the autoloader below the App itself.
 ## Quarx Access
 Route to the administration dashboard is "/quarx/dashboard".
 
-Quarx requires Laracogs to run (only for the FormMaker), but Laracogs does not require you to use its version of roles. But you will still need to ensure some degree of control for Quarx's access. This is done in the Quarx Middleware, using the gate and the Quarx Policy. If you opt in to the roles system provided by Laracogs, then you can replace 'quarx' with admin to handle the Quarx authorization, if not, you will need to set your own security policy for access to Quarx. To do this simply add the Quarx policy to your `app/Providers/AuthServiceProvider.php` file, and ensure that any rules you wish it to use are in within the policy method. We suggest a policy similar to below.
+Quarx requires Laracogs to run (only for the FormMaker), but Quarx does not require you to use the Laracogs version of roles. But you will still need to ensure some degree of control for Quarx's access. This is done in the Quarx Middleware, using the gate and the Quarx Policy. If you opt in to the roles system provided by Laracogs, then you can replace 'quarx' with admin to handle the Quarx authorization, if not, you will need to set your own security policy for access to Quarx. To do this simply add the Quarx policy to your `app/Providers/AuthServiceProvider.php` file, and ensure that any rules you wish it to use are in within the policy method. We suggest a policy similar to below.
 
 Possible Quarx Policy:
 ```

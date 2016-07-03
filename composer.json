@@ -27,7 +27,10 @@
     "autoload": {
         "psr-4": {
             "Yab\\Quarx\\": "src/"
-        }
+        },
+        "files": [
+          "src/Helpers/blade.php"
+        ]
     },
     "minimum-stability": "dev",
     "prefer-stable": true

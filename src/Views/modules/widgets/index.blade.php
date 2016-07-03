@@ -40,7 +40,7 @@
             <table class="table table-striped">
                 <thead>
                     <th>Name</th>
-                    <th class="raw-m-hide">Uuid</th>
+                    <th class="raw-m-hide">Slug</th>
                     <th width="200px" class="text-right">Action</th>
                 </thead>
                 <tbody>

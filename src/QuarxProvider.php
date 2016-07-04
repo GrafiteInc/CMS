@@ -30,7 +30,7 @@ class QuarxProvider extends ServiceProvider
 
         $theme = Config::get('quarx.frontend-theme', 'default');
 
-        View::addNamespace('quarx', __DIR__.'/Views');
+        $this->loadViewsFrom(__DIR__.'/Views', 'quarx');
         View::addLocation(base_path('resources/themes/'.$theme));
         View::addNamespace('quarx-frontend', base_path('resources/themes/'.$theme));
 

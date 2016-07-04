@@ -193,7 +193,8 @@ class ModuleCrud extends Command
      * Generate the provider file.
      *
      * @param  array $config
-     * @return boolean
+     *
+     * @return bool
      */
     public function makeTheProvider($config)
     {

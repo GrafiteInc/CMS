@@ -42,7 +42,7 @@
                 |--------------------------------------------------------------------------
                 */
 
-                    Route::get('preview/{entity}/{entityId}', 'QuarxFeatureController@preview');
+                Route::get('preview/{entity}/{entityId}', 'QuarxFeatureController@preview');
                 Route::get('rollback/{entity}/{entityId}', 'QuarxFeatureController@rollback');
 
                 /*
@@ -51,7 +51,7 @@
                 |--------------------------------------------------------------------------
                 */
 
-                    Route::resource('menus', 'MenuController');
+                Route::resource('menus', 'MenuController');
                 Route::post('menus/search', 'MenuController@search');
 
                 /*
@@ -60,7 +60,7 @@
                 |--------------------------------------------------------------------------
                 */
 
-                    Route::resource('links', 'LinksController', ['except' => ['index', 'show']]);
+                Route::resource('links', 'LinksController', ['except' => ['index', 'show']]);
                 Route::post('links/search', 'LinksController@search');
 
                 /*
@@ -69,7 +69,8 @@
                 |--------------------------------------------------------------------------
                 */
 
-                    Route::resource('images', 'ImagesController');
+                Route::resource('images', 'ImagesController');
+                Route::post('images/search', 'ImagesController@search');
                 Route::post('images/upload', 'ImagesController@upload');
 
                 /*
@@ -78,9 +79,8 @@
                 |--------------------------------------------------------------------------
                 */
 
-                    Route::resource('blog', 'BlogController');
+                Route::resource('blog', 'BlogController');
                 Route::post('blog/search', 'BlogController@search');
-                Route::patch('blog/publish/{id}', 'BlogController@publish');
 
                 /*
                 |--------------------------------------------------------------------------
@@ -88,7 +88,7 @@
                 |--------------------------------------------------------------------------
                 */
 
-                    Route::resource('pages', 'PagesController');
+                Route::resource('pages', 'PagesController');
                 Route::post('pages/search', 'PagesController@search');
 
                 /*
@@ -97,7 +97,7 @@
                 |--------------------------------------------------------------------------
                 */
 
-                    Route::resource('widgets', 'WidgetsController');
+                Route::resource('widgets', 'WidgetsController');
                 Route::post('widgets/search', 'WidgetsController@search');
 
                 /*
@@ -106,7 +106,7 @@
                 |--------------------------------------------------------------------------
                 */
 
-                    Route::resource('faqs', 'FAQController');
+                Route::resource('faqs', 'FAQController');
                 Route::post('faqs/search', 'FAQController@search');
 
                 /*
@@ -115,7 +115,7 @@
                 |--------------------------------------------------------------------------
                 */
 
-                    Route::resource('events', 'EventController');
+                Route::resource('events', 'EventController');
                 Route::post('events/search', 'EventController@search');
 
                 /*
@@ -124,7 +124,7 @@
                 |--------------------------------------------------------------------------
                 */
 
-                    Route::get('api/files/list', 'FilesController@apiList');
+                Route::get('api/files/list', 'FilesController@apiList');
 
                 Route::get('files/remove/{id}', 'FilesController@remove');
                 Route::post('files/upload', 'FilesController@upload');

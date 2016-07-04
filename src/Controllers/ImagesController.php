@@ -35,15 +35,30 @@ class ImagesController extends QuarxController
     {
         $input = $request->all();
 
-        $result = $this->imagesRepository->search($input);
-        $images = $result[0]->sortByDesc('created_at');
-        $attributes = $result[1];
-        $pagination = $result[2];
+        $result = $this->imagesRepository->paginated();
 
         return view('quarx::modules.images.index')
-            ->with('images', $images)
-            ->with('pagination', $pagination)
-            ->with('attributes', $attributes);
+            ->with('images', $result)
+            ->with('pagination', $result->render());
+    }
+
+    /**
+     * Search.
+     *
+     * @param Request $request
+     *
+     * @return Response
+     */
+    public function search(Request $request)
+    {
+        $input = $request->all();
+
+        $result = $this->imagesRepository->search($input);
+
+        return view('quarx::modules.images.index')
+            ->with('images', $result[0]->get())
+            ->with('pagination', $result[2])
+            ->with('term', $result[1]);
     }
 
     /**

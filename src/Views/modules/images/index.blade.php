@@ -22,11 +22,20 @@
 
     <div class="row">
         <a class="btn btn-primary pull-right" href="{!! route('quarx.images.create') !!}">Add New</a>
+        <div class="raw-m-hide raw-m-hide pull-right">
+            {!! Form::open(['url' => 'quarx/images/search']) !!}
+            <input class="form-control header-input pull-right raw-margin-right-24" name="term" placeholder="Search">
+            {!! Form::close() !!}
+        </div>
         <h1 class="page-header">Images</h1>
     </div>
 
     <div class="row">
-        @if($images->isEmpty())
+        @if (isset($term))
+        <div class="well text-center">Searched for "{!! $term !!}".</div>
+        @endif
+
+        @if ($images->isEmpty())
             <div class="well text-center">No images found.</div>
         @else
 

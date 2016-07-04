@@ -92,21 +92,15 @@ class ImagesRepository
      */
     public function search($input)
     {
-        $query = Images::orderBy('created_at', 'desc')->paginate(Config::get('quarx.pagination', 25));
+        $query = Images::orderBy('created_at', 'desc');
 
         $columns = Schema::getColumnListing('images');
-        $attributes = [];
 
         foreach ($columns as $attribute) {
-            if (isset($input[$attribute])) {
-                $query->where($attribute, $input[$attribute]);
-                $attributes[$attribute] = $input[$attribute];
-            } else {
-                $attributes[$attribute] = null;
-            }
+            $query->orWhere($attribute, 'LIKE', '%'.$input['term'].'%');
         }
 
-        return [$query, $attributes, $query->render()];
+        return [$query, $input['term'], $query->paginate(Config::get('quarx.pagination', 25))->render()];
     }
 
     /**

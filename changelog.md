@@ -3,6 +3,12 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 ----
 
+## [v1.4.14] - 2016-07-04
+### Added
+- Images are now searchable
+### Changed
+- Minor cleanup
+
 ## [v1.4.13] - 2016-07-04
 ### Added
 - New service provider support

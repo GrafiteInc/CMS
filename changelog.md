@@ -3,6 +3,15 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 ----
 
+## [v1.4.13] - 2016-07-04
+### Added
+- New service provider support
+### Changed
+- Improved overall support of modules
+### Fixed
+- Add in missing helper methods
+-  Fixed improperly named columns
+
 ## [v1.4.12] - 2016-06-23
 ### Fixed
 - Issue with quick install and missing Quarx in composer.json

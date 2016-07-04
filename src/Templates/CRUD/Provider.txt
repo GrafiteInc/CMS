@@ -15,17 +15,24 @@ class _camel_case_ModuleProvider extends ServiceProvider
         parent::boot($events);
         parent::boot($router);
 
+        // Publishes
         $this->publishes([
             __DIR__.'/Publishes/app'       => base_path('app'),
             __DIR__.'/Publishes/resources' => base_path('resources'),
         ]);
 
+        // Load events
+        $events->listen('eloquent.saved: Quarx\Modules\_lower_casePlural_\Models\_lower_case_', 'Quarx\Modules\_lower_casePlural_\Models\_lower_case_@afterSaved');
+
+        // Load Routes
         $router->group(['middleware' => ['web']], function ($router) {
             require __DIR__.'/routes.php';
         });
 
+        // View namespace
         View::addNamespace('_lower_casePlural_', __DIR__.'/Views');
 
+        // Configs
         Config::set('quarx.modules._lower_casePlural_', include(__DIR__.'/config.php'));
     }
 

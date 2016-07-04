@@ -32,7 +32,6 @@ class ModuleCrud extends Command
     public function handle()
     {
         $filesystem = new Filesystem();
-
         $crudGenerator = new CrudGenerator();
 
         $table = ucfirst(str_singular($this->argument('table')));
@@ -44,23 +43,25 @@ class ModuleCrud extends Command
         }
 
         if (!is_dir(base_path('quarx/modules'))) {
-            @mkdir(base_path('quarx/modules'));
+            mkdir(base_path('quarx/modules'));
         }
 
-        @mkdir($moduleDirectory);
-        @mkdir($moduleDirectory.'/Assets');
-        @mkdir($moduleDirectory.'/Publishes');
-        @mkdir($moduleDirectory.'/Publishes/database');
-        @mkdir($moduleDirectory.'/Publishes/app/Http', 0777, true);
-        @mkdir($moduleDirectory.'/Publishes/app/Http/Controllers/Quarx', 0777, true);
-        @mkdir($moduleDirectory.'/Publishes/resources/themes/default', 0777, true);
-        @mkdir($moduleDirectory.'/Publishes/database/migrations');
-        @mkdir($moduleDirectory.'/Controllers');
-        @mkdir($moduleDirectory.'/Services');
-        @mkdir($moduleDirectory.'/Repositories');
-        @mkdir($moduleDirectory.'/Models');
-        @mkdir($moduleDirectory.'/Views');
-        @mkdir($moduleDirectory.'/Tests');
+        if (!is_dir($moduleDirectory)) {
+            mkdir($moduleDirectory);
+            mkdir($moduleDirectory.'/Assets', 0777, true);
+            mkdir($moduleDirectory.'/Publishes', 0777, true);
+            mkdir($moduleDirectory.'/Publishes/database', 0777, true);
+            mkdir($moduleDirectory.'/Publishes/app/Http', 0777, true);
+            mkdir($moduleDirectory.'/Publishes/app/Http/Controllers/Quarx', 0777, true);
+            mkdir($moduleDirectory.'/Publishes/resources/themes/default', 0777, true);
+            mkdir($moduleDirectory.'/Publishes/database/migrations', 0777, true);
+            mkdir($moduleDirectory.'/Controllers', 0777, true);
+            mkdir($moduleDirectory.'/Services', 0777, true);
+            mkdir($moduleDirectory.'/Repositories', 0777, true);
+            mkdir($moduleDirectory.'/Models', 0777, true);
+            mkdir($moduleDirectory.'/Views', 0777, true);
+            mkdir($moduleDirectory.'/Tests', 0777, true);
+        }
 
         file_put_contents($moduleDirectory.'/config.php', "<?php \n\n\n return [];");
         file_put_contents($moduleDirectory.'/Views/menu.blade.php', "<li><a href=\"<?= URL::to('quarx/".strtolower(str_plural($table))."'); ?>\"><span class=\"fa fa-file\"></span> ".ucfirst(str_plural($table)).'</a></li>');
@@ -94,6 +95,8 @@ class ModuleCrud extends Command
             'template_source'            => __DIR__.'/../Templates/CRUD/',
             'tests_generated'            => 'integration,service,repository',
         ];
+
+        $this->makeTheProvider($config);
 
         $appConfig = $config;
         $appConfig['template_source'] = __DIR__.'/../Templates/AppCRUD';
@@ -184,5 +187,22 @@ class ModuleCrud extends Command
         $this->line('You may wish to add this as your testing database');
         $this->line("'testing' => [ 'driver' => 'sqlite', 'database' => ':memory:', 'prefix' => '' ],");
         $this->info('Module for '.$table.' is done.');
+    }
+
+    /**
+     * Generate the provider file.
+     *
+     * @param  array $config
+     * @return boolean
+     */
+    public function makeTheProvider($config)
+    {
+        $provider = file_get_contents(__DIR__.'/../Templates/CRUD/provider.txt');
+
+        foreach ($config as $key => $value) {
+            $provider = str_replace($key, $value, $provider);
+        }
+
+        return file_put_contents($moduleDirectory.'/'.ucfirst(str_plural($table)).'ModuleProvider.php', $provider);
     }
 }

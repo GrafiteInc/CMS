@@ -22,7 +22,7 @@ class _camel_case_ModuleProvider extends ServiceProvider
         ]);
 
         // Load events
-        $events->listen('eloquent.saved: Quarx\Modules\_lower_casePlural_\Models\_lower_case_', 'Quarx\Modules\_lower_casePlural_\Models\_lower_case_@afterSaved');
+        $events->listen('eloquent.saved: Quarx\Modules\_camel_casePlural_\Models\_camel_case_', 'Quarx\Modules\_camel_casePlural_\Models\_camel_case_@afterSaved');
 
         // Load Routes
         $router->group(['middleware' => ['web']], function ($router) {

@@ -18,7 +18,7 @@
                             <th>Keyword</th>
                             <th>Sessions</th>
                         </thead>
-                        @foreach (LaravelAnalytics::getTopKeywords(365, 10) as $word)
+                        @foreach (Analytics::getTopKeywords(365, 10) as $word)
                             <tr>
                                 <td>{{ $word['keyword'] }}</td>
                                 <td>{{ $word['sessions'] }}</td>
@@ -33,7 +33,7 @@
                             <th>URL</th>
                             <th>Views</th>
                         </thead>
-                        @foreach (LaravelAnalytics::getMostVisitedPages(365, 10) as $browser)
+                        @foreach (Analytics::getMostVisitedPages(365, 10) as $browser)
                             <tr>
                                 <td>{{ $browser['url'] }}</td>
                                 <td>{{ $browser['pageViews'] }}</td>
@@ -51,7 +51,7 @@
                             <th>URL</th>
                             <th>Views</th>
                         </thead>
-                        @foreach (LaravelAnalytics::getTopReferrers(365, 10) as $referers)
+                        @foreach (Analytics::getTopReferrers(365, 10) as $referers)
                             <tr>
                                 <td>{{ $referers['url'] }}</td>
                                 <td>{{ $referers['pageViews'] }}</td>
@@ -66,7 +66,7 @@
                             <th>Browser</th>
                             <th>Sessions</th>
                         </thead>
-                        @foreach (LaravelAnalytics::getTopBrowsers(365, 10) as $browser)
+                        @foreach (Analytics::getTopBrowsers(365, 10) as $browser)
                             <tr>
                                 <td>{{ $browser['browser'] }}</td>
                                 <td>{{ $browser['sessions'] }}</td>

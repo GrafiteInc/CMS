@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 ----
 
+## [v1.4.15] - 2016-07-05
+### Changed
+- Merged in PR #16
+
 ## [v1.4.14] - 2016-07-04
 ### Added
 - Images are now searchable

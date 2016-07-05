@@ -2,6 +2,7 @@
 
 namespace Yab\Quarx\Controllers;
 
+use Spatie\Analytics\Period;
 use Analytics;
 
 class DashboardController extends QuarxController
@@ -12,12 +13,14 @@ class DashboardController extends QuarxController
             return view('quarx::dashboard.empty');
         }
 
-        foreach (Analytics::getVisitorsAndPageViews(7) as $view) {
+        foreach (Analytics::fetchVisitorsAndPageViews(Period::days(7)) as $view) {
             $visitStats['date'][] = $view['date']->format('Y-m-d');
             $visitStats['visitors'][] = $view['visitors'];
             $visitStats['pageViews'][] = $view['pageViews'];
         }
 
-        return view('quarx::dashboard.analytics', ['visitStats' => $visitStats]);
+        $oneYear = Period::days(365);
+
+        return view('quarx::dashboard.analytics', compact('visitStats', 'oneYear'));
     }
 }

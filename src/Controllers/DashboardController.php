@@ -2,8 +2,8 @@
 
 namespace Yab\Quarx\Controllers;
 
-use Spatie\Analytics\Period;
 use Analytics;
+use Spatie\Analytics\Period;
 
 class DashboardController extends QuarxController
 {

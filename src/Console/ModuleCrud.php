@@ -192,7 +192,7 @@ class ModuleCrud extends Command
     /**
      * Generate the provider file.
      *
-     * @param  array $config
+     * @param array $config
      *
      * @return bool
      */

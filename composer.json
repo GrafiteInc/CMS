@@ -16,7 +16,7 @@
         "illuminate/support": "5.*",
         "devfactory/minify": "1.0.*",
         "yab/laracogs": "^1.9",
-        "spatie/laravel-analytics": "^1.3",
+        "spatie/laravel-analytics": "^2.1",
         "aws/aws-sdk-php": "^3.18",
         "league/flysystem-aws-s3-v3": "^1.0"
     },

@@ -145,11 +145,13 @@ var typeaheadMatcher = function(strs) {
 
 var _redactorConfig = {
     toolbar: true,
+    visual: true,
     minHeight: 175,
     convertVideoLinks: true,
     imageUpload: true,
     buttonSource: true,
     replaceDivs: false,
+    paragraphize: false,
     pastePlaintext: true,
     deniedTags: ['script'],
     imageManagerJson: _url+'/quarx/api/images/list',

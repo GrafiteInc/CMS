@@ -1,6 +1,8 @@
 # Quarx - Add a CMS to any Laravel app to gain control of: pages, blogs, galleries, events, custom modules, images and more.
 
-[![Codeship](https://img.shields.io/codeship/8bf4be00-a7c3-0133-9b26-721682b6b155.svg)](https://github.com/YABhq/Quarx)
+[![Codeship](https://img.shields.io/codeship/8bf4be00-a7c3-0133-9b26-721682b6b155.svg)](https://packagist.org/packages/yab/quarx)
+[![Packagist](https://img.shields.io/packagist/dt/yab/quarx.svg?maxAge=2592000)](https://packagist.org/packages/yab/quarx)
+[![license](https://img.shields.io/github/license/mashape/apistatus.svg?maxAge=2592000)](https://packagist.org/packages/yab/quarx)
 
 Quarx is a full fledged CMS that can be added to any Laravel application. It provides you with full control of things like: pages, menus, links, widgets, blogs, events, faqs etc.
 

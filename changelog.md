@@ -3,6 +3,12 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 ----
 
+## [v1.4.16] - 2016-07-07
+### Changed
+- General improvements with WYSIWYG
+- Code Style improvements
+- Readme updates and refactoring
+
 ## [v1.4.15] - 2016-07-05
 ### Changed
 - Merged in PR #16

@@ -10,13 +10,12 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\View;
 use Yab\Quarx\Facades\CryptoServiceFacade;
-use Yab\Quarx\Interfaces\QuarxServiceInterface;
 use Yab\Quarx\Repositories\LinksRepository;
 use Yab\Quarx\Repositories\MenuRepository;
 use Yab\Quarx\Repositories\PagesRepository;
 use Yab\Quarx\Repositories\WidgetsRepository;
 
-class QuarxService implements QuarxServiceInterface
+class QuarxService
 {
     public function __construct()
     {

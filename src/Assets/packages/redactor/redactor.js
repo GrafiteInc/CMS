@@ -255,7 +255,7 @@
         // lang
         langs: {
             en: {
-                html: 'HTML',
+                html: 'HTML/Markdown',
                 video: 'Insert Video',
                 image: 'Insert Image',
                 table: 'Table',

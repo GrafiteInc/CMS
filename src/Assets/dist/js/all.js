@@ -6112,7 +6112,7 @@ if("function"!=typeof a)throw new TypeError("parseInputDate() sholud be as funct
         // lang
         langs: {
             en: {
-                html: 'HTML',
+                html: 'HTML/Markdown',
                 video: 'Insert Video',
                 image: 'Insert Image',
                 table: 'Table',

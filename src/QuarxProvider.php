@@ -19,8 +19,6 @@ class QuarxProvider extends ServiceProvider
      */
     public function boot()
     {
-        require(__DIR__.'/../vendor/autoload.php');
-
         $this->publishes([
             __DIR__.'/PublishedAssets/Views/themes'         => base_path('resources/themes'),
             __DIR__.'/PublishedAssets/Controllers'          => app_path('Http/Controllers/Quarx'),

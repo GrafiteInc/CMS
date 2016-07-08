@@ -19,6 +19,8 @@ class QuarxProvider extends ServiceProvider
      */
     public function boot()
     {
+        require(__DIR__.'/../vendor/autoload.php');
+
         $this->publishes([
             __DIR__.'/PublishedAssets/Views/themes'         => base_path('resources/themes'),
             __DIR__.'/PublishedAssets/Controllers'          => app_path('Http/Controllers/Quarx'),
@@ -65,6 +67,10 @@ class QuarxProvider extends ServiceProvider
 
         Blade::directive('edit', function ($expression) {
             return "<?php echo Quarx::editBtn$expression; ?>";
+        });
+
+        Blade::directive('markdown', function ($expression) {
+            return "<?php echo Markdown::parse(htmlspecialchars_decode$expression); ?>";
         });
     }
 

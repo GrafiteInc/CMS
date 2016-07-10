@@ -79,6 +79,8 @@ class ModuleMake extends Command
             'template_source'            => __DIR__.'/../Templates/Basic/',
         ];
 
+        $this->makeTheProvider($config, $moduleDirectory);
+
         $appConfig = $config;
         $appConfig['template_source'] = __DIR__.'/../Templates/AppBasic/';
         $appConfig['_path_controller_'] = $moduleDirectory.'/Publishes/app/Http/Controllers/Quarx';
@@ -125,5 +127,23 @@ class ModuleMake extends Command
         }
 
         $this->info('Module for '.$name.' is done.');
+    }
+
+    /**
+     * Generate the provider file.
+     *
+     * @param array $config
+     *
+     * @return bool
+     */
+    public function makeTheProvider($config, $moduleDirectory)
+    {
+        $provider = file_get_contents(__DIR__.'/../Templates/Basic/provider.txt');
+
+        foreach ($config as $key => $value) {
+            $provider = str_replace($key, $value, $provider);
+        }
+
+        return file_put_contents($moduleDirectory.'/'.ucfirst(str_plural($table)).'ModuleProvider.php', $provider);
     }
 }

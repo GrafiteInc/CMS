@@ -21,9 +21,6 @@ class _camel_case_ModuleProvider extends ServiceProvider
             __DIR__.'/Publishes/resources' => base_path('resources'),
         ]);
 
-        // Load events
-        $events->listen('eloquent.saved: Quarx\Modules\_camel_casePlural_\Models\_camel_case_', 'Quarx\Modules\_camel_casePlural_\Models\_camel_case_@afterSaved');
-
         // Load Routes
         $router->group(['middleware' => ['web']], function ($router) {
             require __DIR__.'/routes.php';

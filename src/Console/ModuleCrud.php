@@ -129,7 +129,7 @@ class ModuleCrud extends Command
             $crudGenerator->createRoutes($config, false);
 
             $this->line('Building tests...');
-            $crudGenerator->createTests($config);
+            $crudGenerator->createTests($config, false);
 
             $this->info('Building the theme side...');
 

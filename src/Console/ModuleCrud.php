@@ -96,7 +96,7 @@ class ModuleCrud extends Command
             'tests_generated'            => 'integration,service,repository',
         ];
 
-        $this->makeTheProvider($config, $moduleDirectory);
+        $this->makeTheProvider($config, $moduleDirectory, $table);
 
         $appConfig = $config;
         $appConfig['template_source'] = __DIR__.'/../Templates/AppCRUD';
@@ -196,7 +196,7 @@ class ModuleCrud extends Command
      *
      * @return bool
      */
-    public function makeTheProvider($config, $moduleDirectory)
+    public function makeTheProvider($config, $moduleDirectory, $table)
     {
         $provider = file_get_contents(__DIR__.'/../Templates/CRUD/provider.txt');
 

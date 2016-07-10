@@ -79,7 +79,7 @@ class ModuleMake extends Command
             'template_source'            => __DIR__.'/../Templates/Basic/',
         ];
 
-        $this->makeTheProvider($config, $moduleDirectory);
+        $this->makeTheProvider($config, $moduleDirectory, $table);
 
         $appConfig = $config;
         $appConfig['template_source'] = __DIR__.'/../Templates/AppBasic/';
@@ -136,7 +136,7 @@ class ModuleMake extends Command
      *
      * @return bool
      */
-    public function makeTheProvider($config, $moduleDirectory)
+    public function makeTheProvider($config, $moduleDirectory, $table)
     {
         $provider = file_get_contents(__DIR__.'/../Templates/Basic/provider.txt');
 

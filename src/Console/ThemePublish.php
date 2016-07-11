@@ -33,22 +33,29 @@ class ThemePublish extends Command
         $fileSystem = new Filesystem();
 
         $files = $fileSystem->allFiles(base_path('resources/themes/'.strtolower($name).'/public'));
-        $this->line("\n");
+
         foreach ($files as $file) {
-            if (file_exists($file)) {
-                $this->line($file);
+            if ($file->getType() === 'file') {
+                $this->line(public_path($file->getBasename()));
             }
         }
 
-        foreach ($files as $file) {
-            $newFileName = str_replace(base_path('resources/themes/'.strtolower($name).'/public'), '', $file);
-            $this->line('Copying '.$newFileName.'...');
-            if (is_dir($file)) {
-                $fileSystem->copyDirectory($file, public_path($newFileName));
-            } else {
-                @mkdir(public_path(str_replace(basename($newFileName), '', $newFileName)), 0755, true);
-                $fileSystem->copy($file, public_path($newFileName));
+        $this->info("\n\nThese files will be overwritten\n");
+        $result = $this->confirm('Are you sure you want to overwrite any files of the same name?');
+
+        if ($result) {
+            foreach ($files as $file) {
+                $newFileName = str_replace(base_path('resources/themes/'.strtolower($name).'/public/'), '', $file);
+                $this->line('Copying '.public_path($newFileName).'...');
+                if (is_dir($file)) {
+                    $fileSystem->copyDirectory($file, public_path($newFileName));
+                } else {
+                    @mkdir(public_path(str_replace(basename($newFileName), '', $newFileName)), 0755, true);
+                    $fileSystem->copy($file, public_path($newFileName));
+                }
             }
+        } else {
+            $this->info("\n\nNo files were published\n");
         }
     }
 }

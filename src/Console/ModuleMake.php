@@ -79,7 +79,7 @@ class ModuleMake extends Command
             'template_source'            => __DIR__.'/../Templates/Basic/',
         ];
 
-        $this->makeTheProvider($config, $moduleDirectory, $table);
+        $this->makeTheProvider($config, $moduleDirectory, $name);
 
         $appConfig = $config;
         $appConfig['template_source'] = __DIR__.'/../Templates/AppBasic/';

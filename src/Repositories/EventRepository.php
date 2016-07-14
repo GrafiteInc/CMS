@@ -59,6 +59,7 @@ class EventRepository
     public function search($input)
     {
         $query = Event::orderBy('created_at', 'desc');
+        $query->where('id', 'LIKE', '%'.$input.'%');
 
         $columns = Schema::getColumnListing('events');
 

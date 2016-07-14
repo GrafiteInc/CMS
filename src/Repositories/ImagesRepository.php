@@ -93,6 +93,7 @@ class ImagesRepository
     public function search($input)
     {
         $query = Images::orderBy('created_at', 'desc');
+        $query->where('id', 'LIKE', '%'.$input.'%');
 
         $columns = Schema::getColumnListing('images');
 

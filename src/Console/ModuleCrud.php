@@ -126,7 +126,7 @@ class ModuleCrud extends Command
             $crudGenerator->createViews($config);
 
             $this->line('Building routes...');
-            $crudGenerator->createRoutes($config, false);
+            $crudGenerator->createRoutes($config);
 
             $this->line('Building tests...');
             $crudGenerator->createTests($config, false);

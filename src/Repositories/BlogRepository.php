@@ -57,6 +57,7 @@ class BlogRepository
     public function search($input)
     {
         $query = Blog::orderBy('created_at', 'desc');
+        $query->where('id', 'LIKE', '%'.$input.'%');
 
         $columns = Schema::getColumnListing('blogs');
 

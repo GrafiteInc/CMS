@@ -37,6 +37,7 @@ class MenuRepository
     public function search($input)
     {
         $query = Menu::orderBy('created_at', 'desc');
+        $query->where('id', 'LIKE', '%'.$input.'%');
 
         $columns = Schema::getColumnListing('menus');
 

@@ -15,5 +15,5 @@
 @endsection
 
 @section('quarx')
-    @edit('blogs', $blog->id)
+    @edit('blog', $blog->id)
 @endsection

@@ -6,9 +6,12 @@ use Artisan;
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Facades\Config;
+use Yab\Laracogs\Traits\FileMakerTrait;
 
 class Setup extends Command
 {
+    use FileMakerTrait;
+
     /**
      * The console command name.
      *
@@ -32,7 +35,7 @@ class Setup extends Command
      */
     public function fire()
     {
-        $cssReady = $this->confirm('Please confirm that you have gulp fully installed.');
+        $cssReady = $this->confirm('Please confirm that you have gulp fully installed, and a database set and configured in your .env file.');
 
         if ($cssReady) {
             Artisan::call('vendor:publish', [
@@ -45,9 +48,30 @@ class Setup extends Command
                 '--force'    => true,
             ]);
 
-            $this->line('Are you sure you want to run the setup? (yes/no)');
+            $fileSystem = new Filesystem();
 
-            Artisan::call('laracogs:starter');
+            $files = $fileSystem->allFiles(__DIR__.'/../../../laracogs/src/Packages/Starter');
+
+            $this->line('Copying app/Http...');
+            $this->copyPreparedFiles(__DIR__.'/../../../laracogs/src/Packages/Starter/app/Http', app_path('Http'));
+
+            $this->line('Copying app/Repositories...');
+            $this->copyPreparedFiles(__DIR__.'/../../../laracogs/src/Packages/Starter/app/Repositories', app_path('Repositories'));
+
+            $this->line('Copying app/Services...');
+            $this->copyPreparedFiles(__DIR__.'/../../../laracogs/src/Packages/Starter/app/Services', app_path('Services'));
+
+            $this->line('Copying database...');
+            $this->copyPreparedFiles(__DIR__.'/../../../laracogs/src/Packages/Starter/database', base_path('database'));
+
+            $this->line('Copying resources/views...');
+            $this->copyPreparedFiles(__DIR__.'/../../../laracogs/src/Packages/Starter/resources/views', base_path('resources/views'));
+
+            $this->line('Copying tests...');
+            $this->copyPreparedFiles(__DIR__.'/../../../laracogs/src/Packages/Starter/tests', base_path('tests'));
+
+            $this->line('Appending database/factory...');
+            $this->createFactory();
 
             $files = [
                 base_path('database/factories/ModelFactory.php'),
@@ -189,22 +213,23 @@ public function leaveAllTeams($userId)
 }', '', $userService);
             file_put_contents(app_path('Services/UserService.php'), $userService);
 
-            exec('composer dump');
+            passthru('composer dump');
 
             $css = file_get_contents(base_path('resources/assets/sass/app.scss'));
             $css = str_replace('@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";', '@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";'."\n".'@import "resources/themes/default/assets/sass/_theme.scss";', $css);
             file_put_contents(base_path('resources/assets/sass/app.scss'), $css);
 
-            exec('gulp');
-
             $composer = file_get_contents(base_path('composer.json'));
             $composer = str_replace('"App\\": "app/",', '"App\\": "app/",'."\n".'"Quarx\\": "quarx/",', $composer);
             file_put_contents(base_path('composer.json'), $composer);
 
+            $this->info('Publishing theme');
             Artisan::call('theme:publish', [
                 'name' => 'default',
+                '--forced' => true
             ]);
 
+            $this->info('Migrating database');
             Artisan::call('migrate:reset', [
                 '--force' => true,
             ]);
@@ -215,6 +240,8 @@ public function leaveAllTeams($userId)
             ]);
 
             $this->info('Finished setting up your site with Quarx');
+            $this->info('Please run:');
+            $this->comment('gulp');
             $this->line('You can now login with the following username and password:');
             $this->comment('admin@admin.com');
             $this->comment('admin');
@@ -234,5 +261,15 @@ public function leaveAllTeams($userId)
     protected function getOptions()
     {
         return [];
+    }
+
+    public function createFactory()
+    {
+        $factory = file_get_contents(__DIR__.'/../../../laracogs/src/Packages/Starter/Factory.txt');
+        $factoryPrepared = str_replace('{{App\}}', $this->getAppNamespace(), $factory);
+        $factoryMaster = base_path('database/factories/ModelFactory.php');
+        file_put_contents($factoryMaster, str_replace($factoryPrepared, '', file_get_contents($factoryMaster)));
+
+        return file_put_contents($factoryMaster, $factoryPrepared, FILE_APPEND);
     }
 }

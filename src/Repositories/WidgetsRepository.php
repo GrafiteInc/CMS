@@ -25,7 +25,7 @@ class WidgetsRepository
     public function search($input)
     {
         $query = Widgets::orderBy('created_at', 'desc');
-        $query->where('id', 'LIKE', '%'.$input.'%');
+        $query->where('id', 'LIKE', '%'.$input['term'].'%');
 
         $columns = Schema::getColumnListing('widgets');
 

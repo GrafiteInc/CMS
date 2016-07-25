@@ -12,7 +12,7 @@ class ThemePublish extends Command
      *
      * @var string
      */
-    protected $signature = 'theme:publish {name}';
+    protected $signature = 'theme:publish {name} {--forced}';
 
     /**
      * The console command description.
@@ -41,7 +41,12 @@ class ThemePublish extends Command
         }
 
         $this->info("\n\nThese files will be overwritten\n");
-        $result = $this->confirm('Are you sure you want to overwrite any files of the same name?');
+
+        if (!$this->option('forced')) {
+            $result = $this->confirm('Are you sure you want to overwrite any files of the same name?');
+        } else {
+            $result = true;
+        }
 
         if ($result) {
             foreach ($files as $file) {

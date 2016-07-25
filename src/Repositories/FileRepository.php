@@ -41,7 +41,7 @@ class FileRepository
     public function search($input)
     {
         $query = Files::orderBy('created_at', 'desc');
-        $query->where('id', 'LIKE', '%'.$input.'%');
+        $query->where('id', 'LIKE', '%'.$input['term'].'%');
 
         $columns = Schema::getColumnListing('files');
 

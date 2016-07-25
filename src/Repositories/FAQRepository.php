@@ -49,7 +49,7 @@ class FAQRepository
     public function search($input)
     {
         $query = FAQ::orderBy('created_at', 'desc');
-        $query->where('id', 'LIKE', '%'.$input.'%');
+        $query->where('id', 'LIKE', '%'.$input['term'].'%');
 
         $columns = Schema::getColumnListing('faqs');
 

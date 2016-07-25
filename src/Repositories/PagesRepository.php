@@ -33,7 +33,7 @@ class PagesRepository
     public function search($input)
     {
         $query = Pages::orderBy('created_at', 'desc');
-        $query->where('id', 'LIKE', '%'.$input.'%');
+        $query->where('id', 'LIKE', '%'.$input['term'].'%');
 
         $columns = Schema::getColumnListing('pages');
 

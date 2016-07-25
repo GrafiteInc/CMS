@@ -3,6 +3,11 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 ----
 
+## [v1.4.20] - 2016-07-25
+
+### Fixed
+- Fixed issues with templates and setup
+
 ## [v1.4.19] - 2016-07-11
 
 ### Changed

@@ -3,6 +3,11 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 ----
 
+## [v1.4.21] - 2016-07-27
+
+### Fixed
+- Fixes some issues with the Module maker
+
 ## [v1.4.20] - 2016-07-25
 
 ### Fixed

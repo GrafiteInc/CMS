@@ -23,7 +23,7 @@
     "require-dev": {
         "mockery/mockery": "^0.9.4",
         "orchestra/testbench": "~3.0",
-        "laravelcollective/html": "^5.2|^5.1"
+        "mikey179/vfsStream": "^1.6"
     },
     "autoload": {
         "psr-4": {
@@ -31,6 +31,11 @@
         },
         "files": [
           "src/Helpers/blade.php"
+        ]
+    },
+    "autoload-dev": {
+        "classmap": [
+            "tests/TestCase.php"
         ]
     },
     "minimum-stability": "dev",

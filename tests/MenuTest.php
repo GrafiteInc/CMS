@@ -1,6 +1,6 @@
 <?php
 
-class MenuTest extends AppTest
+class MenuTest extends TestCase
 {
     public function setUp()
     {

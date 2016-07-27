@@ -1,6 +1,6 @@
 <?php
 
-class BlogTest extends AppTest
+class BlogTest extends TestCase
 {
     public function setUp()
     {

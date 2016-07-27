@@ -1,6 +1,6 @@
 <?php
 
-class WidgetsTest extends AppTest
+class WidgetsTest extends TestCase
 {
     public function setUp()
     {

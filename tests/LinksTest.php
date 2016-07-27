@@ -1,6 +1,6 @@
 <?php
 
-class LinksTest extends AppTest
+class LinksTest extends TestCase
 {
     public function setUp()
     {

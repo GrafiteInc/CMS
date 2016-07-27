@@ -5,7 +5,7 @@ namespace Yab\Quarx\Console;
 use Artisan;
 use Config;
 use Illuminate\Console\Command;
-use Yab\Laracogs\Generators\CrudGenerator;
+use Yab\CrudMaker\Generators\CrudGenerator;
 
 class ModuleMake extends Command
 {
@@ -103,7 +103,7 @@ class ModuleMake extends Command
             $crudGenerator->createViews($config);
 
             $this->line('Building routes...');
-            $crudGenerator->createRoutes($config, false);
+            $crudGenerator->createRoutes($config);
 
             $this->info('Building the theme side...');
 
@@ -115,7 +115,7 @@ class ModuleMake extends Command
 
             $this->line('Building routes...');
             @file_put_contents($moduleDirectory.'/Publishes/app/Http/'.$config['_lower_casePlural_'].'-routes.php', '');
-            $crudGenerator->createRoutes($appConfig, false);
+            $crudGenerator->createRoutes($appConfig);
 
             $this->line('You will need to publish your module to make it available to your vistors:');
             $this->comment('php artisan module:publish '.str_plural($name));

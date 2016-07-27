@@ -6,7 +6,7 @@ use Artisan;
 use Config;
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
-use Yab\Laracogs\Generators\CrudGenerator;
+use Yab\CrudMaker\Generators\CrudGenerator;
 
 class ModuleCrud extends Command
 {

@@ -24,7 +24,7 @@ class QuarxProvider extends ServiceProvider
             __DIR__.'/PublishedAssets/Controllers'          => app_path('Http/Controllers/Quarx'),
             __DIR__.'/Migrations'                           => base_path('database/migrations'),
             __DIR__.'/PublishedAssets/Middleware'           => app_path('Http/Middleware'),
-            __DIR__.'/PublishedAssets/Routes'               => app_path('Http'),
+            __DIR__.'/PublishedAssets/Routes'               => base_path('routes'),
             __DIR__.'/PublishedAssets/Config'               => base_path('config'),
         ]);
 
@@ -52,23 +52,23 @@ class QuarxProvider extends ServiceProvider
         });
 
         Blade::directive('menu', function ($expression) {
-            return "<?php echo Quarx::menu$expression; ?>";
+            return "<?php echo Quarx::menu($expression); ?>";
         });
 
         Blade::directive('widget', function ($expression) {
-            return "<?php echo Quarx::widget$expression; ?>";
+            return "<?php echo Quarx::widget($expression); ?>";
         });
 
         Blade::directive('images', function ($expression) {
-            return "<?php echo Quarx::images$expression; ?>";
+            return "<?php echo Quarx::images($expression); ?>";
         });
 
         Blade::directive('edit', function ($expression) {
-            return "<?php echo Quarx::editBtn$expression; ?>";
+            return "<?php echo Quarx::editBtn($expression); ?>";
         });
 
         Blade::directive('markdown', function ($expression) {
-            return "<?php echo Markdown::parse(htmlspecialchars_decode$expression); ?>";
+            return "<?php echo Markdown::parse(htmlspecialchars_decode($expression)); ?>";
         });
     }
 
@@ -82,7 +82,6 @@ class QuarxProvider extends ServiceProvider
         $this->app->register(\Yab\Quarx\Providers\QuarxServiceProvider::class);
         $this->app->register(\Yab\Quarx\Providers\QuarxEventServiceProvider::class);
         $this->app->register(\Yab\Quarx\Providers\QuarxRouteProvider::class);
-        $this->app->register(\Yab\Quarx\Providers\QuarxModuleProvider::class);
 
         $this->app->register(\Yab\Laracogs\LaracogsProvider::class);
         $this->app->register(\Devfactory\Minify\MinifyServiceProvider::class);

@@ -55,7 +55,7 @@ class PagesRepository
     {
         $input['url'] = Quarx::convertToURL($input['url']);
         $input['is_published'] = (isset($input['is_published'])) ? (bool) $input['is_published'] : 0;
-        $input['published_at'] = (isset($input['published_at'])) ? $input['published_at'] : Carbon::now()->format('Y-m-d h:i:s');
+        $input['published_at'] = (isset($input['published_at']) && !empty($input['published_at'])) ? $input['published_at'] : Carbon::now()->format('Y-m-d h:i:s');
 
         return Pages::create($input);
     }
@@ -96,7 +96,7 @@ class PagesRepository
     {
         $input['url'] = Quarx::convertToURL($input['url']);
         $input['is_published'] = (isset($input['is_published'])) ? (bool) $input['is_published'] : 0;
-        $input['published_at'] = (isset($input['published_at'])) ? $input['published_at'] : Carbon::now()->format('Y-m-d h:i:s');
+        $input['published_at'] = (isset($input['published_at']) && !empty($input['published_at'])) ? $input['published_at'] : Carbon::now()->format('Y-m-d h:i:s');
         $pages->fill($input);
         $pages->save();
 

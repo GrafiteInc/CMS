@@ -2,7 +2,6 @@
 
 namespace Yab\Quarx\Providers;
 
-use Illuminate\Contracts\Events\Dispatcher as DispatcherContract;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
 class QuarxEventServiceProvider extends ServiceProvider
@@ -31,10 +30,8 @@ class QuarxEventServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot(DispatcherContract $events)
+    public function boot()
     {
-        parent::boot($events);
-
-        //
+        parent::boot();
     }
 }

@@ -4,6 +4,11 @@
 |--------------------------------------------------------------------------
 */
 
+html, body {
+    height: 100%;
+    min-height: 100%;
+}
+
 .homepage {
     background-image: url('../img/pexels-photo-28938.jpg');
     background-size: cover;
@@ -12,6 +17,8 @@
 
 .site-wrapper {
     margin: 50px auto;
+    height: 100%;
+    min-height: 100%;
 }
 
 .menu {

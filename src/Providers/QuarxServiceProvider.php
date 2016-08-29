@@ -15,11 +15,11 @@ use Yab\Quarx\Services\QuarxService;
 class QuarxServiceProvider extends ServiceProvider
 {
     /**
-     * Alias the services in the boot.
+     * Register the services.
      *
      * @return void
      */
-    public function boot()
+    public function register()
     {
         $loader = AliasLoader::getInstance();
 
@@ -30,15 +30,7 @@ class QuarxServiceProvider extends ServiceProvider
         $loader->alias('ModuleService', \Yab\Quarx\Facades\ModuleServiceFacade::class);
         $loader->alias('BlogService', \Yab\Quarx\Facades\BlogServiceFacade::class);
         $loader->alias('FileService', \Yab\Quarx\Services\FileService::class);
-    }
 
-    /**
-     * Register the services.
-     *
-     * @return void
-     */
-    public function register()
-    {
         $this->app->bind('QuarxService', function ($app) {
             return new QuarxService();
         });

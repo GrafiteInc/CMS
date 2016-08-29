@@ -57,7 +57,7 @@ If you just want to add Quarx to your existing application and already have your
 * Add the following to your routes provider:
 
 ```php
-require app_path('Http/quarx-routes.php');
+require base_path('routes/quarx-routes.php');
 ```
 
 * Add the following to your app.scss file, you will want to modify depending on your theme of choice.

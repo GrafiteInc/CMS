@@ -55,6 +55,9 @@ class Setup extends Command
             $this->line('Copying app/Http...');
             $this->copyPreparedFiles(__DIR__.'/../../../laracogs/src/Packages/Starter/app/Http', app_path('Http'));
 
+            $this->line('Copying routes...');
+            $this->copyPreparedFiles(__DIR__.'/../../../laracogs/src/Packages/Starter/routes', base_path('routes'));
+
             $this->line('Copying app/Repositories...');
             $this->copyPreparedFiles(__DIR__.'/../../../laracogs/src/Packages/Starter/app/Repositories', app_path('Repositories'));
 
@@ -86,16 +89,16 @@ class Setup extends Command
 
             // Route setup
             $routeContents = file_get_contents(app_path('Providers/RouteServiceProvider.php'));
-            $routeContents = str_replace("require app_path('Http/routes.php');", "require app_path('Http/routes.php');\n\t\t\trequire app_path('Http/quarx-routes.php');", $routeContents);
+            $routeContents = str_replace("require base_path('routes/web.php');", "require base_path('routes/web.php');\n\t\t\trequire base_path('routes/quarx-routes.php');", $routeContents);
             file_put_contents(app_path('Providers/RouteServiceProvider.php'), $routeContents);
 
-            $routeToDashboardContents = file_get_contents(app_path('Http/routes.php'));
+            $routeToDashboardContents = file_get_contents(base_path('routes/web.php'));
             $routeToDashboardContents = str_replace("Route::get('/dashboard', 'PagesController@dashboard');", "Route::get('/dashboard', function(){ return Redirect::to('quarx/dashboard'); });", $routeToDashboardContents);
-            file_put_contents(app_path('Http/routes.php'), $routeToDashboardContents);
+            file_put_contents(base_path('routes/web.php'), $routeToDashboardContents);
 
             // Kernel setup
             $routeContents = file_get_contents(app_path('Http/Kernel.php'));
-            $routeContents = str_replace("'auth' => \App\Http\Middleware\Authenticate::class,", "'auth' => \App\Http\Middleware\Authenticate::class,\n\t\t'quarx' => \App\Http\Middleware\Quarx::class,\n\t\t'admin' => \App\Http\Middleware\Admin::class,", $routeContents);
+            $routeContents = str_replace("'auth' => \Illuminate\Auth\Middleware\Authenticate::class,", "'auth' => \Illuminate\Auth\Middleware\Authenticate::class,\n\t\t'quarx' => \App\Http\Middleware\Quarx::class,\n\t\t'admin' => \App\Http\Middleware\Admin::class,", $routeContents);
             file_put_contents(app_path('Http/Kernel.php'), $routeContents);
 
             $fileSystem = new Filesystem();
@@ -114,7 +117,7 @@ class Setup extends Command
 
             // AuthProviders
             $authProviderContents = file_get_contents(app_path('Providers/AuthServiceProvider.php'));
-            $authProviderContents = str_replace('$this->registerPolicies($gate);', "\$this->registerPolicies(\$gate);\n\t\t\$gate->define('quarx', function (\$user) {\n\t\t\treturn (\$user->roles->first()->name === 'admin');\n\t\t});\n\t\t\$gate->define('admin', function (\$user) {\n\t\t\treturn (\$user->roles->first()->name === 'admin');\n\t\t});", $authProviderContents);
+            $authProviderContents = str_replace('$this->registerPolicies();', "\$this->registerPolicies();\n\t\t\Gate::define('quarx', function (\$user) {\n\t\t\treturn (\$user->roles->first()->name === 'admin');\n\t\t});\n\t\t\Gate::define('admin', function (\$user) {\n\t\t\treturn (\$user->roles->first()->name === 'admin');\n\t\t});", $authProviderContents);
             file_put_contents(app_path('Providers/AuthServiceProvider.php'), $authProviderContents);
 
             // Remove the teams
@@ -137,7 +140,7 @@ class Setup extends Command
             @rmdir(base_path('resources/views/team'));
             @rmdir(base_path('resources/views/dashboard'));
 
-            $mainRoutes = file_get_contents(app_path('Http/routes.php'));
+            $mainRoutes = file_get_contents(base_path('routes/web.php'));
             $mainRoutes = str_replace("/*
 |--------------------------------------------------------------------------
 | Team Routes
@@ -149,7 +152,7 @@ Route::resource('teams', 'TeamController', ['except' => ['show']]);
 Route::post('teams/search', 'TeamController@search');
 Route::post('teams/{id}/invite', 'TeamController@inviteMember');
 Route::get('teams/{id}/remove/{userId}', 'TeamController@removeMember');", '', $mainRoutes);
-            file_put_contents(app_path('Http/routes.php'), $mainRoutes);
+            file_put_contents(base_path('routes/web.php'), $mainRoutes);
 
             $userModel = file_get_contents(app_path('Repositories/User/User.php'));
             $userModel = str_replace("/**

@@ -10,9 +10,7 @@
 <div class="container">
 
     <div class="jumbotron">
-        @if (isset($page))
-            <h1>{!! $page->title or 'Home Page' !!}</h1>
-        @endif
+        <h1>{!! $page->title or 'Home Page' !!}</h1>
     </div>
 
     @if (isset($page))

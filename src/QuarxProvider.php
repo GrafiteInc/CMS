@@ -68,7 +68,7 @@ class QuarxProvider extends ServiceProvider
         });
 
         Blade::directive('markdown', function ($expression) {
-            return "<?php echo Markdown::convertToHtml($expression); ?>";
+            return "<?php echo Markdown::convertToHtml$expression; ?>";
         });
     }
 
@@ -92,7 +92,7 @@ class QuarxProvider extends ServiceProvider
 
         $loader->alias('Minify', \Devfactory\Minify\Facades\MinifyFacade::class);
         $loader->alias('LaravelAnalytics', \Spatie\LaravelAnalytics\LaravelAnalyticsFacade::class);
-        $loader->alias('Markdown', \GrahamCampbell\Markdown\MarkdownServiceProvider::class);
+        $loader->alias('Markdown', \GrahamCampbell\Markdown\Facades\Markdown::class);
 
         /*
         |--------------------------------------------------------------------------

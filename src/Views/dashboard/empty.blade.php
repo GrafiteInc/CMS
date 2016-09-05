@@ -24,34 +24,13 @@ php artisan vendor:publish
                 <br>
                 <h5>Step 2:</h5>
                 <hr>
-                <p>You will need: <code>siteId</code>, <code>clientId</code> and <code>serviceEmail</code>. Additionally a <code>p12-file</code> is required.</p>
-                <p>To obtain these credentials start by going to the <a href="https://console.developers.google.com">Google Developers Console</a>.</p>
-                <p>If you don't have a project present in the console yet, create one.</p>
-                <p>If you click on the project name, you'll see a menu item <code>APIs</code> under <code>APIs & auth</code> on the left hand side. Click it to go the the Enabled API's screen. On that screen you should enable the Analytics API.</p>
-                <p>Now, again under the <code>APIs & Auth</code>-menu click <code>Credentials</code>.</p>
-                <p>On this screen you should press <code>Create new Client ID</code>. In the creation screen make sure you select application type <code>Service Account</code> and key type <code>P12-key</code>.</p>
+                <p>Follow the installation guide for <a href="https://github.com/spatie/laravel-analytics#how-to-obtain-the-credentials-to-communicate-with-google-analytics">laravel-analytics</a></p>
 
-                <p>The creation of the Service Account generated a new public/private key pair and the <code>.p12-file</code> will get downloaded to your machine. Store this file in the location specified in the config file of this package.</p>
-
-                <p>From the <code>Credentials</code> screen in Google Console. From there select the <a href="https://console.developers.google.com/permissions/serviceaccounts">'Manage service accounts'</a>. Within that screen, edit the service account you just made and select <code>Enable Google Apps Domain-wide Delegation</code> This will allow you to view the <code>client ID</code> where you can see the <code>client ID</code> and the <code>Client Email</code>.</p>
-
-                <br>
                 <h5>Step 3:</h5>
                 <hr>
-                <p>To find the right value for <code>siteId</code> log in to <a href="http://www.google.be/intl/en/analytics/">Google Analytics</a> go the the Admin section.</p>
-                <p>In the property-column select the website name of which you want to retrieve data, then click <code>View Settings</code> in the <code>View</code>-column.</p>
-                <p>The value presented as <code>View Id</code> prepended with 'ga:' can be used as <code>siteId</code>. You can see the 'ga:' example below.</p>
-
-                <br>
-                <h5>Notes:</h5>
-                <hr>
-                <p>For further information please follow these <a href="https://github.com/spatie/laravel-analytics">directions</a></p>
-
-                <p>Please add the following lines to you <code>.env</code> file.</p>
+                <p>Please add the following lines to your <code>.env</code> file.</p>
 <pre>
-ANALYTICS_SITE_ID=ga:&lt;Site ID&gt;
-ANALYTICS_CLIENT_ID=&lt;Client ID&gt;
-ANALYTICS_SERVICE_EMAIL=&lt;Client Email&gt;
+ANALYTICS_VIEW_ID=ga:&lt;View ID&gt;
 </pre>
         </div>
     </div>

@@ -94,9 +94,6 @@ class MenuRepository
      */
     public function update($menu, $input)
     {
-        $menu->fill($input);
-        $menu->save();
-
-        return $menu;
+        return $menu->update($input);
     }
 }

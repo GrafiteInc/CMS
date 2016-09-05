@@ -52,6 +52,7 @@ class ModuleCrud extends Command
             mkdir($moduleDirectory.'/Publishes', 0777, true);
             mkdir($moduleDirectory.'/Publishes/database', 0777, true);
             mkdir($moduleDirectory.'/Publishes/app/Http', 0777, true);
+            mkdir($moduleDirectory.'/Publishes/routes', 0777, true);
             mkdir($moduleDirectory.'/Publishes/app/Http/Controllers/Quarx', 0777, true);
             mkdir($moduleDirectory.'/Publishes/resources/themes/default', 0777, true);
             mkdir($moduleDirectory.'/Publishes/database/migrations', 0777, true);
@@ -59,6 +60,7 @@ class ModuleCrud extends Command
             mkdir($moduleDirectory.'/Services', 0777, true);
             mkdir($moduleDirectory.'/Repositories', 0777, true);
             mkdir($moduleDirectory.'/Models', 0777, true);
+            mkdir($moduleDirectory.'/Routes', 0777, true);
             mkdir($moduleDirectory.'/Views', 0777, true);
             mkdir($moduleDirectory.'/Tests', 0777, true);
         }
@@ -77,7 +79,7 @@ class ModuleCrud extends Command
             '_path_views_'               => $moduleDirectory.'/Views',
             '_path_tests_'               => $moduleDirectory.'/Tests',
             '_path_request_'             => $moduleDirectory.'/Requests',
-            '_path_routes_'              => $moduleDirectory.'/routes.php',
+            '_path_routes_'              => $moduleDirectory.'/Routes/web.php',
             'routes_prefix'              => "<?php \n\nRoute::group(['namespace' => 'Quarx\Modules\\".ucfirst(str_plural($table))."\Controllers', 'prefix' => 'quarx', 'middleware' => ['web', 'auth', 'quarx']], function () { \n\n",
             'routes_suffix'              => "\n\n});",
             '_app_namespace_'            => app()->getInstance()->getNamespace(),
@@ -102,7 +104,7 @@ class ModuleCrud extends Command
         $appConfig['template_source'] = __DIR__.'/../Templates/AppCRUD';
         $appConfig['_path_controller_'] = $moduleDirectory.'/Publishes/app/Http/Controllers/Quarx';
         $appConfig['_path_views_'] = $moduleDirectory.'/Publishes/resources/themes/default';
-        $appConfig['_path_routes_'] = $moduleDirectory.'/Publishes/app/Http/'.$config['_lower_casePlural_'].'-routes.php';
+        $appConfig['_path_routes_'] = $moduleDirectory.'/Publishes/routes/'.$config['_lower_casePlural_'].'-web.php';
         $appConfig['_namespace_controller_'] = $config['_app_namespace_'].'Http\Controllers\Quarx';
         $appConfig['routes_prefix'] = "<?php \n\nRoute::group(['namespace' => 'Quarx', 'middleware' => ['web']], function () {\n\n";
         $appConfig['routes_suffix'] = "\n\n});";
@@ -140,46 +142,44 @@ class ModuleCrud extends Command
             $crudGenerator->createViews($appConfig);
 
             $this->line('Building routes...');
-            @file_put_contents($moduleDirectory.'/Publishes/app/Http/'.$config['_lower_casePlural_'].'-routes.php', '');
+            @file_put_contents($moduleDirectory.'/Publishes/routes/'.$config['_lower_casePlural_'].'-web.php', '');
             $crudGenerator->createRoutes($appConfig, false);
 
             $this->line('You will need to publish your module to make it available to your vistors:');
             $this->comment('php artisan module:publish '.str_plural($table));
             $this->line('');
             $this->info('Add this to your `app/Providers/RouteServiceProver.php` in the `mapWebRoutes` method:');
-            $this->comment("\nrequire app_path('Http/".$config['_lower_casePlural_']."-routes.php');\n");
+            $this->comment("\nrequire app_path('routes/".$config['_lower_casePlural_']."-web.php');\n");
         } catch (Exception $e) {
             throw new Exception('Unable to generate your Module', 1);
         }
 
-        if ($this->option('migration')) {
-            Artisan::call('make:migration', [
-                'name'     => 'create_'.str_plural(strtolower($table)).'_table',
-                '--path'   => 'quarx/modules/'.ucfirst(str_plural($table)).'/Publishes/database/migrations',
-                '--table'  => str_plural(strtolower($table)),
-                '--create' => true,
-            ]);
+        Artisan::call('make:migration', [
+            'name'     => 'create_'.str_plural(strtolower($table)).'_table',
+            '--path'   => 'quarx/modules/'.ucfirst(str_plural($table)).'/Publishes/database/migrations',
+            '--table'  => str_plural(strtolower($table)),
+            '--create' => true,
+        ]);
 
-            if ($this->option('schema')) {
-                $migrationFiles = $filesystem->allFiles(base_path('quarx/modules/'.ucfirst(str_plural($table)).'/Publishes/database/migrations'));
-                $migrationName = 'create_'.str_plural(strtolower($table)).'_table';
-                foreach ($migrationFiles as $file) {
-                    if (stristr($file->getBasename(), $migrationName)) {
-                        $migrationData = file_get_contents($file->getPathname());
-                        $parsedTable = '';
+        if ($this->option('schema')) {
+            $migrationFiles = $filesystem->allFiles(base_path('quarx/modules/'.ucfirst(str_plural($table)).'/Publishes/database/migrations'));
+            $migrationName = 'create_'.str_plural(strtolower($table)).'_table';
+            foreach ($migrationFiles as $file) {
+                if (stristr($file->getBasename(), $migrationName)) {
+                    $migrationData = file_get_contents($file->getPathname());
+                    $parsedTable = '';
 
-                        foreach (explode(',', $this->option('schema')) as $key => $column) {
-                            $columnDefinition = explode(':', $column);
-                            if ($key === 0) {
-                                $parsedTable .= "\$table->$columnDefinition[1]('$columnDefinition[0]');\n";
-                            } else {
-                                $parsedTable .= "\t\t\t\$table->$columnDefinition[1]('$columnDefinition[0]');\n";
-                            }
+                    foreach (explode(',', $this->option('schema')) as $key => $column) {
+                        $columnDefinition = explode(':', $column);
+                        if ($key === 0) {
+                            $parsedTable .= "\$table->$columnDefinition[1]('$columnDefinition[0]');\n";
+                        } else {
+                            $parsedTable .= "\t\t\t\$table->$columnDefinition[1]('$columnDefinition[0]');\n";
                         }
-
-                        $migrationData = str_replace("\$table->increments('id');", $parsedTable, $migrationData);
-                        file_put_contents($file->getPathname(), $migrationData);
                     }
+
+                    $migrationData = str_replace("\$table->increments('id');", $parsedTable, $migrationData);
+                    file_put_contents($file->getPathname(), $migrationData);
                 }
             }
         }

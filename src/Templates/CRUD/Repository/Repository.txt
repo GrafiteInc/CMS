@@ -100,9 +100,6 @@ class _camel_case_Repository
     public function update($id, $inputs)
     {
         $_lower_case_ = $this->model->find($id);
-        $_lower_case_->fill($inputs);
-        $_lower_case_->save();
-
-        return $_lower_case_;
+        return $_lower_case_->update($inputs);
     }
 }

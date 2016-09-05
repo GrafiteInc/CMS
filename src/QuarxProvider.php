@@ -82,6 +82,7 @@ class QuarxProvider extends ServiceProvider
         $this->app->register(\Yab\Quarx\Providers\QuarxServiceProvider::class);
         $this->app->register(\Yab\Quarx\Providers\QuarxEventServiceProvider::class);
         $this->app->register(\Yab\Quarx\Providers\QuarxRouteProvider::class);
+        $this->app->register(\Yab\Quarx\Providers\QuarxModuleProvider::class);
 
         $this->app->register(\Yab\Laracogs\LaracogsProvider::class);
         $this->app->register(\Devfactory\Minify\MinifyServiceProvider::class);

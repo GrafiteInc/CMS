@@ -27,6 +27,10 @@ class LinksRepository
     {
         $input['external'] = isset($input['external']) ? $input['external'] : 0;
 
+        if (! isset($input['page_id'])) {
+            $input['page_id'] = 0;
+        }
+
         return Links::create($input);
     }
 
@@ -78,9 +82,6 @@ class LinksRepository
     {
         $input['external'] = isset($input['external']) ? $input['external'] : 0;
 
-        $links->fill($input);
-        $links->save();
-
-        return $links;
+        return $links->update($input);
     }
 }

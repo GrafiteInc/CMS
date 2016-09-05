@@ -51,7 +51,7 @@
                 |--------------------------------------------------------------------------
                 */
 
-                Route::resource('menus', 'MenuController');
+                Route::resource('menus', 'MenuController', ['as' => 'quarx']);
                 Route::post('menus/search', 'MenuController@search');
 
                 /*

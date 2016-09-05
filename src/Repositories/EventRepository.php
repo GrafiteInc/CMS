@@ -109,9 +109,7 @@ class EventRepository
     {
         $input['is_published'] = (isset($input['is_published'])) ? (bool) $input['is_published'] : 0;
         $input['published_at'] = (isset($input['published_at']) && !empty($input['published_at'])) ? $input['published_at'] : Carbon::now()->format('Y-m-d h:i:s');
-        $event->fill($input);
-        $event->save();
 
-        return $event;
+        return $event->update($input);
     }
 }

@@ -18,19 +18,20 @@
 
             <p>You can also build simple modules which will run inside Quarx. Simply provide a table name you wish to manage and allow Quarx to build a CRUD structure that works inside Quarx's module directory.</p>
             <p>You need to add the following line in the autoload PSR-4 group to your composer file to ensure that all modules will work correctly:</p>
-            <pre>"Quarx\\": "quarx/",</pre>
+            <pre>"Quarx\\Modules\\": "quarx/modules/",</pre>
 
         <h3>Modules</h3>
         <p>The commmand for generating custom modules for Quarx is:</p>
 
-        <pre>php artisan quarx:module {name} {--migration} {--schema="id:increments,name:string"}</pre>
+        <pre>php artisan module:crud {name} {--schema="id:increments,name:string"}</pre>
+        <pre>php artisan module:make {name}</pre>
 
         <p>The migration option will generate a migration file that can be found in the module. You will then need to run the module migrate to get the module to run its migration course.</p>
 
         <h3>Publish</h3>
         <p>Quarx also lets you publish assets that belong to a module. So in the chance you wish to build your own modules for future projects you can easily publish specific assets to any applications you build.</p>
 
-        <pre>php artisan quarx:publish {module}</pre>
+        <pre>php artisan module:publish {module}</pre>
 
         <h2>Front-End Code</h2>
         <p>Quarx automatically builds you a sample of the controllers, and views for your application's pages, blog, faqs, etc. You can run the following services as method calls or use the blade directives listed below:</p>

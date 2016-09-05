@@ -115,10 +115,7 @@ class FileRepository
 
         $fileInput['is_published'] = (isset($input['is_published'])) ? (bool) $input['is_published'] : 0;
 
-        $files->fill($fileInput);
-        $files->save();
-
-        return $files;
+        return $files->update($fileInput);
     }
 
     public function apiPrepared()

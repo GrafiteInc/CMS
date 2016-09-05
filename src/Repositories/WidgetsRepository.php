@@ -82,9 +82,6 @@ class WidgetsRepository
      */
     public function update($widgets, $input)
     {
-        $widgets->fill($input);
-        $widgets->save();
-
-        return $widgets;
+        return $widgets->update($input);
     }
 }

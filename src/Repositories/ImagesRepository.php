@@ -198,9 +198,6 @@ class ImagesRepository
             $input['is_published'] = 1;
         }
 
-        $images->fill($input);
-        $images->save();
-
-        return $images;
+        return $images->update($input);
     }
 }

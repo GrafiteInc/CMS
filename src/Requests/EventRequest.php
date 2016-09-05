@@ -5,6 +5,7 @@ namespace Yab\Quarx\Requests;
 use Auth;
 use Gate;
 use Illuminate\Foundation\Http\FormRequest;
+use Yab\Quarx\Models\Event;
 
 class EventRequest extends FormRequest
 {

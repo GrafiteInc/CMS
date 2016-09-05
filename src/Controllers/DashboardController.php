@@ -2,24 +2,21 @@
 
 namespace Yab\Quarx\Controllers;
 
-use Analytics;
-use Spatie\Analytics\Period;
+use Spatie\LaravelAnalytics\LaravelAnalyticsFacade as LaravelAnalytics;
 
 class DashboardController extends QuarxController
 {
     public function main()
     {
-        if (is_null(env('ANALYTICS_VIEW_ID'))) {
+        if (is_null(env('ANALYTICS_SITE_ID'))) {
             return view('quarx::dashboard.empty');
         }
 
-        foreach (Analytics::fetchVisitorsAndPageViews(Period::days(7)) as $view) {
+        foreach (LaravelAnalytics::getVisitorsAndPageViews(7) as $view) {
             $visitStats['date'][] = $view['date']->format('Y-m-d');
             $visitStats['visitors'][] = $view['visitors'];
             $visitStats['pageViews'][] = $view['pageViews'];
         }
-
-        $oneYear = Period::days(365);
 
         return view('quarx::dashboard.analytics', compact('visitStats', 'oneYear'));
     }

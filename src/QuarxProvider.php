@@ -87,13 +87,13 @@ class QuarxProvider extends ServiceProvider
         $this->app->register(\Yab\Laracogs\LaracogsProvider::class);
         $this->app->register(\Devfactory\Minify\MinifyServiceProvider::class);
         $this->app->register(\GrahamCampbell\Markdown\MarkdownServiceProvider::class);
-        $this->app->register(\Spatie\Analytics\AnalyticsServiceProvider::class);
+        $this->app->register(\Spatie\LaravelAnalytics\LaravelAnalyticsServiceProvider::class);
 
         $loader = AliasLoader::getInstance();
 
         $loader->alias('Minify', \Devfactory\Minify\Facades\MinifyFacade::class);
         $loader->alias('Markdown', \GrahamCampbell\Markdown\Facades\Markdown::class);
-        $loader->alias('Analytics', \Spatie\Analytics\AnalyticsFacade::class);
+        $loader->alias('LaravelAnalytics', \Spatie\LaravelAnalytics\LaravelAnalyticsFacade::class);
 
         /*
         |--------------------------------------------------------------------------

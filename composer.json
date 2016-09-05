@@ -13,10 +13,11 @@
         }
     ],
     "require": {
+        "php": ">=5.6.4",
         "illuminate/support": "^5.3",
         "yab/laracogs": "^2.0",
         "devfactory/minify": "1.0.*",
-        "spatie/laravel-analytics": "^2.1",
+        "spatie/laravel-analytics": "^1.4",
         "aws/aws-sdk-php": "^3.18",
         "league/flysystem-aws-s3-v3": "^1.0",
         "graham-campbell/markdown": "^6.1"

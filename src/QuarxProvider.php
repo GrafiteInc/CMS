@@ -68,7 +68,7 @@ class QuarxProvider extends ServiceProvider
         });
 
         Blade::directive('markdown', function ($expression) {
-            return "<?php echo Markdown::parse(htmlspecialchars_decode($expression)); ?>";
+            return "<?php echo Markdown::convertToHtml($expression); ?>";
         });
     }
 
@@ -86,11 +86,13 @@ class QuarxProvider extends ServiceProvider
         $this->app->register(\Yab\Laracogs\LaracogsProvider::class);
         $this->app->register(\Devfactory\Minify\MinifyServiceProvider::class);
         $this->app->register(\Spatie\LaravelAnalytics\LaravelAnalyticsServiceProvider::class);
+        $this->app->register(\GrahamCampbell\Markdown\MarkdownServiceProvider::class);
 
         $loader = AliasLoader::getInstance();
 
         $loader->alias('Minify', \Devfactory\Minify\Facades\MinifyFacade::class);
         $loader->alias('LaravelAnalytics', \Spatie\LaravelAnalytics\LaravelAnalyticsFacade::class);
+        $loader->alias('Markdown', \GrahamCampbell\Markdown\Facades\Markdown::class);
 
         /*
         |--------------------------------------------------------------------------

@@ -223,7 +223,7 @@ public function leaveAllTeams($userId)
             file_put_contents(base_path('resources/assets/sass/app.scss'), $css);
 
             $composer = file_get_contents(base_path('composer.json'));
-            $composer = str_replace('"App\\": "app/",', '"App\\": "app/",'."\n".'"Quarx\\": "quarx/",', $composer);
+            $composer = str_replace('"App\\": "app/",', '"App\\": "app/",'."\n".'"Quarx\\Modules\\": "quarx/modules/",', $composer);
             file_put_contents(base_path('composer.json'), $composer);
 
             $this->info('Publishing theme');

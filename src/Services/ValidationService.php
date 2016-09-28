@@ -50,6 +50,7 @@ class ValidationService
         $validation = Validator::make($validationInputs, $validationRules);
 
         if ($validation->fails()) {
+            dd($validation->errors('location'));
             $errors = $validation->messages();
         }
 

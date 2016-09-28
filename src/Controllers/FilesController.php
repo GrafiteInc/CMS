@@ -102,12 +102,14 @@ class FilesController extends QuarxController
      */
     public function upload(Request $request)
     {
+        dd($request);
         $validation = ValidationService::check([
-            'location' => ['required'],
+            'location' => [],
         ]);
 
         if (!$validation['errors']) {
             $file = $request->file('location');
+            dd($file);
             $fileSaved = FileService::saveFile($file, 'files/');
             $fileSaved['name'] = CryptoService::encrypt($fileSaved['name']);
             $fileSaved['mime'] = $file->getClientMimeType();

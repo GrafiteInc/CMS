@@ -38,7 +38,7 @@ class QuarxRouteProvider extends ServiceProvider
     public function map(Router $router)
     {
         $router->group(['namespace' => $this->namespace], function ($router) {
-            require __DIR__.'/../Routes/routes.php';
+            require __DIR__.'/../Routes/web.php';
         });
     }
 }

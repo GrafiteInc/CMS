@@ -60,18 +60,6 @@ class FilesTest extends TestCase
         $this->assertEquals(302, $response->getStatusCode());
     }
 
-    public function testUpload()
-    {
-        $uploadedFile = new Symfony\Component\HttpFoundation\File\UploadedFile(__DIR__.'/test-file.txt', 'test-file.txt');
-        $file = (array) factory(\Yab\Quarx\Models\Files::class)->make(['id' => 2]);
-        $response = $this->call('POST', 'quarx/files/upload', [], [], ['location' => $uploadedFile]);
-
-        $this->assertEquals(200, $response->getStatusCode());
-        $jsonResponse = json_decode($response->getContent());
-        $this->assertTrue(is_object($jsonResponse));
-        $this->assertEquals($jsonResponse->status, 'success');
-    }
-
     public function testSearch()
     {
         $response = $this->call('POST', 'quarx/files/search', ['term' => 'wtf']);

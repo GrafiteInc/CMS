@@ -24,8 +24,7 @@ class CrudSingleGeneratorTest extends PHPUnit_Framework_TestCase
             'schema'                     => null,
             '_path_facade_'              => vfsStream::url('Facades'),
             '_path_service_'             => vfsStream::url('Services'),
-            '_path_repository_'          => vfsStream::url('Repositories/'.ucfirst('testTable')),
-            '_path_model_'               => vfsStream::url('Repositories/'.ucfirst('testTable')),
+            '_path_model_'               => vfsStream::url('Models/'.ucfirst('testTable')),
             '_path_controller_'          => vfsStream::url('Http/Controllers'),
             '_path_api_controller_'      => vfsStream::url('Http/Controllers/Api'),
             '_path_views_'               => vfsStream::url('resources/views'),
@@ -59,17 +58,6 @@ class CrudSingleGeneratorTest extends PHPUnit_Framework_TestCase
         $contents = $this->crud->getChild('Http/Controllers/TestTableController.php');
 
         $this->assertContains('class TestTableController extends Controller', $contents->getContent());
-    }
-
-    public function testRepositoryGenerator()
-    {
-        $this->crud = vfsStream::setup("Repositories/TestTable");
-
-        $this->generator->createRepository($this->config);
-        $contents = $this->crud->getChild('Repositories/TestTable/TestTableRepository.php');
-
-        $this->assertTrue($this->crud->hasChild('Repositories/TestTable/TestTableRepository.php'));
-        $this->assertContains('class TestTableRepository', $contents->getContent());
     }
 
     public function testRequestGenerator()

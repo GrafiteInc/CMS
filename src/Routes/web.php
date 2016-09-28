@@ -69,7 +69,7 @@
                 |--------------------------------------------------------------------------
                 */
 
-                Route::resource('images', 'ImagesController', ['as' => 'quarx']);
+                Route::resource('images', 'ImagesController', ['as' => 'quarx', 'except' => ['show']]);
                 Route::post('images/search', 'ImagesController@search');
                 Route::post('images/upload', 'ImagesController@upload');
 
@@ -79,7 +79,7 @@
                 |--------------------------------------------------------------------------
                 */
 
-                Route::resource('blog', 'BlogController', ['as' => 'quarx']);
+                Route::resource('blog', 'BlogController', ['as' => 'quarx', 'except' => ['show']]);
                 Route::post('blog/search', 'BlogController@search');
 
                 /*
@@ -88,7 +88,7 @@
                 |--------------------------------------------------------------------------
                 */
 
-                Route::resource('pages', 'PagesController', ['as' => 'quarx']);
+                Route::resource('pages', 'PagesController', ['as' => 'quarx', 'except' => ['show']]);
                 Route::post('pages/search', 'PagesController@search');
 
                 /*
@@ -97,7 +97,7 @@
                 |--------------------------------------------------------------------------
                 */
 
-                Route::resource('widgets', 'WidgetsController', ['as' => 'quarx']);
+                Route::resource('widgets', 'WidgetsController', ['as' => 'quarx', 'except' => ['show']]);
                 Route::post('widgets/search', 'WidgetsController@search');
 
                 /*
@@ -106,7 +106,7 @@
                 |--------------------------------------------------------------------------
                 */
 
-                Route::resource('faqs', 'FAQController', ['as' => 'quarx']);
+                Route::resource('faqs', 'FAQController', ['as' => 'quarx', 'except' => ['show']]);
                 Route::post('faqs/search', 'FAQController@search');
 
                 /*
@@ -115,7 +115,7 @@
                 |--------------------------------------------------------------------------
                 */
 
-                Route::resource('events', 'EventController', ['as' => 'quarx']);
+                Route::resource('events', 'EventController', ['as' => 'quarx', 'except' => ['show']]);
                 Route::post('events/search', 'EventController@search');
 
                 /*
@@ -130,7 +130,7 @@
                 Route::post('files/upload', 'FilesController@upload');
                 Route::post('files/search', 'FilesController@search');
 
-                Route::resource('files', 'FilesController', ['as' => 'quarx']);
+                Route::resource('files', 'FilesController', ['as' => 'quarx', 'except' => ['show']]);
             });
         });
     });

@@ -12,6 +12,7 @@ return [
 
     'frontend-theme' => 'default',
 
+    'load-modules' => true,
     'module-directory' => 'quarx/modules',
 
     'appAdminEmail' => '',

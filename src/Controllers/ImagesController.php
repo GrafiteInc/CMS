@@ -117,6 +117,8 @@ class ImagesController extends QuarxController
      */
     public function upload(Request $request)
     {
+        dd($request);
+
         $validation = ValidationService::check([
             'location' => ['required'],
         ]);

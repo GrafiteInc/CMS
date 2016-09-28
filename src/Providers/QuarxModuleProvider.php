@@ -16,13 +16,15 @@ class QuarxModuleProvider extends ServiceProvider
      */
     public function register()
     {
-        $modulePath = base_path(Config::get('quarx.module-directory').'/');
-        $modules = glob($modulePath.'*');
+        if (Config::get('quarx.load-modules', true)) {
+            $modulePath = base_path(Config::get('quarx.module-directory').'/');
+            $modules = glob($modulePath.'*');
 
-        foreach ($modules as $module) {
-            if (is_dir($module)) {
-                $module = lcfirst(str_replace($modulePath, '', $module));
-                $this->app->register('\Quarx\Modules\\'. ucfirst($module) . '\\' . ucfirst($module) . 'ModuleProvider');
+            foreach ($modules as $module) {
+                if (is_dir($module)) {
+                    $module = lcfirst(str_replace($modulePath, '', $module));
+                    $this->app->register('\Quarx\Modules\\'. ucfirst($module) . '\\' . ucfirst($module) . 'ModuleProvider');
+                }
             }
         }
     }

@@ -1,0 +1,23 @@
+<?php
+
+namespace _namespace_model_;
+
+use Yab\Quarx\Models\QuarxModel;
+
+class _camel_case_ extends QuarxModel
+{
+    public $table = "_lower_casePlural_";
+
+    public $primaryKey = "id";
+
+    public $timestamps = true;
+
+    public $fillable = [
+        // _camel_case_ table data
+    ];
+
+    public static $rules = [
+        // create rules
+    ];
+
+}

@@ -3,48 +3,57 @@
 namespace _namespace_services_;
 
 use Config;
-use _namespace_repository_\_camel_case_Repository;
+use _namespace_model_\_camel_case_;
 
 class _camel_case_Service
 {
-    public function __construct(_camel_case_Repository $_lower_case_Repository)
+    public function __construct(_camel_case_ $_lower_case_)
     {
-        $this->repo = $_lower_case_Repository;
+        $this->model = $_lower_case_;
     }
 
     public function all()
     {
-        return $this->repo->all();
+        return $this->model->all();
     }
 
     public function paginated()
     {
-        return $this->repo->paginated(Config::get('quarx.pagination', 25));
+        return $this->model->orderBy('created_at', 'desc')->paginate(Config::get('quarx.pagination', 25));
     }
 
-    public function search($input)
+    public function search($payload)
     {
-        return $this->repo->search($input, Config::get('quarx.pagination', 25));
+        $query = $this->model->orderBy('created_at', 'desc');
+        $query->where('id', 'LIKE', '%'.$payload.'%');
+
+        $columns = Schema::getColumnListing('_lower_casePlural_');
+
+        foreach ($columns as $attribute) {
+            $query->orWhere($attribute, 'LIKE', '%'.$payload.'%');
+        };
+
+        return $query->paginate(Config::get('quarx.pagination', 25));
     }
 
-    public function create($input)
+    public function create($payload)
     {
-        return $this->repo->create($input);
+        return $this->model->create($payload);
     }
 
     public function find($id)
     {
-        return $this->repo->find($id);
+        return $this->model->find($id);
     }
 
-    public function update($id, $input)
+    public function update($id, $payload)
     {
-        return $this->repo->update($id, $input);
+        return $this->find($id)->update($payload);
     }
 
     public function destroy($id)
     {
-        return $this->repo->destroy($id);
+        return $this->model->destroy($id);
     }
 
 }

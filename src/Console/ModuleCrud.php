@@ -73,7 +73,7 @@ class ModuleCrud extends Command
             'semantic'                   => false,
             '_path_facade_'              => $moduleDirectory.'/Facades',
             '_path_service_'             => $moduleDirectory.'/Services',
-            '_path_repository_'          => $moduleDirectory.'/Repositories',
+            '_path_model_'               => $moduleDirectory.'/Models',
             '_path_model_'               => $moduleDirectory.'/Models',
             '_path_controller_'          => $moduleDirectory.'/Controllers',
             '_path_views_'               => $moduleDirectory.'/Views',
@@ -85,7 +85,7 @@ class ModuleCrud extends Command
             '_app_namespace_'            => app()->getInstance()->getNamespace(),
             '_namespace_services_'       => 'Quarx\Modules\\'.ucfirst(str_plural($table)).'\Services',
             '_namespace_facade_'         => 'Quarx\Modules\\'.ucfirst(str_plural($table)).'\Facades',
-            '_namespace_repository_'     => 'Quarx\Modules\\'.ucfirst(str_plural($table)).'\Repositories',
+            '_namespace_model_'          => 'Quarx\Modules\\'.ucfirst(str_plural($table)).'\Models',
             '_namespace_model_'          => 'Quarx\Modules\\'.ucfirst(str_plural($table)).'\Models',
             '_namespace_controller_'     => 'Quarx\Modules\\'.ucfirst(str_plural($table)).'\Controllers',
             '_namespace_request_'        => 'Quarx\Modules\\'.ucfirst(str_plural($table)).'\Requests',
@@ -115,8 +115,8 @@ class ModuleCrud extends Command
             $this->line('Building controller...');
             $crudGenerator->createController($config);
 
-            $this->line('Building repository...');
-            $crudGenerator->createRepository($config);
+            $this->line('Building model...');
+            $crudGenerator->createModel($config);
 
             $this->line('Building request...');
             $crudGenerator->createRequest($config);

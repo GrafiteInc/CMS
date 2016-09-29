@@ -52,26 +52,38 @@ class Setup extends Command
 
             $files = $fileSystem->allFiles(__DIR__.'/../../../laracogs/src/Packages/Starter');
 
-            $this->line('Copying app/Http...');
-            $this->copyPreparedFiles(__DIR__.'/../../../laracogs/src/Packages/Starter/app/Http', app_path('Http'));
-
             $this->line('Copying routes...');
-            $this->copyPreparedFiles(__DIR__.'/../../../laracogs/src/Packages/Starter/routes', base_path('routes'));
+            $this->copyPreparedFiles(__DIR__.'/../Packages/Starter/routes', base_path('routes'));
 
-            $this->line('Copying app/Repositories...');
-            $this->copyPreparedFiles(__DIR__.'/../../../laracogs/src/Packages/Starter/app/Repositories', app_path('Repositories'));
+            $this->line('Copying config...');
+            $this->copyPreparedFiles(__DIR__.'/../Packages/Starter/config', base_path('config'));
+
+            $this->line('Copying app/Http...');
+            $this->copyPreparedFiles(__DIR__.'/../Packages/Starter/app/Http', app_path('Http'));
+
+            $this->line('Copying app/Events...');
+            $this->copyPreparedFiles(__DIR__.'/../Packages/Starter/app/Events', app_path('Events'));
+
+            $this->line('Copying app/Listeners...');
+            $this->copyPreparedFiles(__DIR__.'/../Packages/Starter/app/Listeners', app_path('Listeners'));
+
+            $this->line('Copying app/Notifications...');
+            $this->copyPreparedFiles(__DIR__.'/../Packages/Starter/app/Notifications', app_path('Notifications'));
+
+            $this->line('Copying app/Models...');
+            $this->copyPreparedFiles(__DIR__.'/../Packages/Starter/app/Models', app_path('Models'));
 
             $this->line('Copying app/Services...');
-            $this->copyPreparedFiles(__DIR__.'/../../../laracogs/src/Packages/Starter/app/Services', app_path('Services'));
+            $this->copyPreparedFiles(__DIR__.'/../Packages/Starter/app/Services', app_path('Services'));
 
             $this->line('Copying database...');
-            $this->copyPreparedFiles(__DIR__.'/../../../laracogs/src/Packages/Starter/database', base_path('database'));
+            $this->copyPreparedFiles(__DIR__.'/../Packages/Starter/database', base_path('database'));
 
             $this->line('Copying resources/views...');
-            $this->copyPreparedFiles(__DIR__.'/../../../laracogs/src/Packages/Starter/resources/views', base_path('resources/views'));
+            $this->copyPreparedFiles(__DIR__.'/../Packages/Starter/resources/views', base_path('resources/views'));
 
             $this->line('Copying tests...');
-            $this->copyPreparedFiles(__DIR__.'/../../../laracogs/src/Packages/Starter/tests', base_path('tests'));
+            $this->copyPreparedFiles(__DIR__.'/../Packages/Starter/tests', base_path('tests'));
 
             $this->line('Appending database/factory...');
             $this->createFactory();
@@ -83,13 +95,13 @@ class Setup extends Command
 
             foreach ($files as $file) {
                 $contents = file_get_contents($file);
-                $contents = str_replace('App\User::class', 'App\Repositories\User\User::class', $contents);
+                $contents = str_replace('App\User::class', 'App\Models\User::class', $contents);
                 file_put_contents($file, $contents);
             }
 
             // Route setup
             $routeContents = file_get_contents(app_path('Providers/RouteServiceProvider.php'));
-            $routeContents = str_replace("require base_path('routes/web.php');", "require base_path('routes/web.php');\n\t\t\trequire base_path('routes/quarx-routes.php');", $routeContents);
+            $routeContents = str_replace("require base_path('routes/web.php');", "require base_path('routes/web.php');\n\t\t\trequire base_path('routes/quarx.php');", $routeContents);
             file_put_contents(app_path('Providers/RouteServiceProvider.php'), $routeContents);
 
             $routeToDashboardContents = file_get_contents(base_path('routes/web.php'));
@@ -123,11 +135,9 @@ class Setup extends Command
             // Remove the teams
             @unlink(app_path('Http/Controllers/PagesController.php'));
             @unlink(app_path('Http/Controllers/TeamController.php'));
-            @unlink(app_path('Http/Requests/TeamRequest.php'));
-            @unlink(app_path('Http/Requests/UpdateTeamRequest.php'));
-            @unlink(app_path('Repositories/Team/Team.php'));
-            @unlink(app_path('Repositories/Team/TeamRepository.php'));
-            @rmdir(app_path('Repositories/Team'));
+            @unlink(app_path('Http/Requests/TeamCreateRequest.php'));
+            @unlink(app_path('Http/Requests/TeamUpdateRequest.php'));
+            @unlink(app_path('Models/Team.php'));
             @unlink(app_path('Services/TeamService.php'));
             @unlink(base_path('resources/views/dashboard.blade.php'));
             @unlink(base_path('resources/views/dashboard/main.blade.php'));
@@ -154,7 +164,7 @@ Route::post('teams/{id}/invite', 'TeamController@inviteMember');
 Route::get('teams/{id}/remove/{userId}', 'TeamController@removeMember');", '', $mainRoutes);
             file_put_contents(base_path('routes/web.php'), $mainRoutes);
 
-            $userModel = file_get_contents(app_path('Repositories/User/User.php'));
+            $userModel = file_get_contents(app_path('Models/User.php'));
             $userModel = str_replace("/**
  * Teams
  *
@@ -172,13 +182,8 @@ public function teams()
  */
 public function isTeamMember(\$id)
 {
-    \$teamIds = [];
-
-    foreach (\$this->teams->toArray() as \$team) {
-        \$teamIds[] = \$team['id'];
-    }
-
-    return in_array(\$id, \$teamIds);
+    \$teams = array_column(\$this->teams->toArray(), 'id');
+    return array_search(\$id, \$teams) > -1;
 }
 
 /**
@@ -191,7 +196,7 @@ public function isTeamAdmin(\$id)
     \$team = \$this->teams->find(\$id);
     return (int)\$team->user_id === (int)\$this->id;
 }", '', $userModel);
-            file_put_contents(app_path('Repositories/User/User.php'), $userModel);
+            file_put_contents(app_path('Models/User.php'), $userModel);
 
             $userService = file_get_contents(app_path('Services/UserService.php'));
             $userService = str_replace('/*
@@ -202,17 +207,24 @@ public function isTeamAdmin(\$id)
 
 public function joinTeam($teamId, $userId)
 {
-   return $this->userRepo->joinTeam($teamId, $userId);
+    $team = $this->team->find($teamId);
+    $user = $this->model->find($userId);
+
+    $user->teams()->attach($team);
 }
 
 public function leaveTeam($teamId, $userId)
 {
-   return $this->userRepo->leaveTeam($teamId, $userId);
+    $team = $this->team->find($teamId);
+    $user = $this->model->find($userId);
+
+    $user->teams()->detach($team);
 }
 
 public function leaveAllTeams($userId)
 {
-   return $this->userRepo->leaveAllTeams($userId);
+    $user = $this->model->find($userId);
+    $user->teams()->detach();
 }', '', $userService);
             file_put_contents(app_path('Services/UserService.php'), $userService);
 

@@ -50,40 +50,40 @@ class Setup extends Command
 
             $fileSystem = new Filesystem();
 
-            $files = $fileSystem->allFiles(__DIR__.'/../../../laracogs/src/Packages/Starter');
+            $files = $fileSystem->allFiles(getcwd().'/vendor/yab/laracogs/src/Packages/Starter');
 
             $this->line('Copying routes...');
-            $this->copyPreparedFiles(__DIR__.'/../Packages/Starter/routes', base_path('routes'));
+            $this->copyPreparedFiles(getcwd().'/vendor/yab/laracogs/src/Packages/Starter/routes', base_path('routes'));
 
             $this->line('Copying config...');
-            $this->copyPreparedFiles(__DIR__.'/../Packages/Starter/config', base_path('config'));
+            $this->copyPreparedFiles(getcwd().'/vendor/yab/laracogs/src/Packages/Starter/config', base_path('config'));
 
             $this->line('Copying app/Http...');
-            $this->copyPreparedFiles(__DIR__.'/../Packages/Starter/app/Http', app_path('Http'));
+            $this->copyPreparedFiles(getcwd().'/vendor/yab/laracogs/src/Packages/Starter/app/Http', app_path('Http'));
 
             $this->line('Copying app/Events...');
-            $this->copyPreparedFiles(__DIR__.'/../Packages/Starter/app/Events', app_path('Events'));
+            $this->copyPreparedFiles(getcwd().'/vendor/yab/laracogs/src/Packages/Starter/app/Events', app_path('Events'));
 
             $this->line('Copying app/Listeners...');
-            $this->copyPreparedFiles(__DIR__.'/../Packages/Starter/app/Listeners', app_path('Listeners'));
+            $this->copyPreparedFiles(getcwd().'/vendor/yab/laracogs/src/Packages/Starter/app/Listeners', app_path('Listeners'));
 
             $this->line('Copying app/Notifications...');
-            $this->copyPreparedFiles(__DIR__.'/../Packages/Starter/app/Notifications', app_path('Notifications'));
+            $this->copyPreparedFiles(getcwd().'/vendor/yab/laracogs/src/Packages/Starter/app/Notifications', app_path('Notifications'));
 
             $this->line('Copying app/Models...');
-            $this->copyPreparedFiles(__DIR__.'/../Packages/Starter/app/Models', app_path('Models'));
+            $this->copyPreparedFiles(getcwd().'/vendor/yab/laracogs/src/Packages/Starter/app/Models', app_path('Models'));
 
             $this->line('Copying app/Services...');
-            $this->copyPreparedFiles(__DIR__.'/../Packages/Starter/app/Services', app_path('Services'));
+            $this->copyPreparedFiles(getcwd().'/vendor/yab/laracogs/src/Packages/Starter/app/Services', app_path('Services'));
 
             $this->line('Copying database...');
-            $this->copyPreparedFiles(__DIR__.'/../Packages/Starter/database', base_path('database'));
+            $this->copyPreparedFiles(getcwd().'/vendor/yab/laracogs/src/Packages/Starter/database', base_path('database'));
 
             $this->line('Copying resources/views...');
-            $this->copyPreparedFiles(__DIR__.'/../Packages/Starter/resources/views', base_path('resources/views'));
+            $this->copyPreparedFiles(getcwd().'/vendor/yab/laracogs/src/Packages/Starter/resources/views', base_path('resources/views'));
 
             $this->line('Copying tests...');
-            $this->copyPreparedFiles(__DIR__.'/../Packages/Starter/tests', base_path('tests'));
+            $this->copyPreparedFiles(getcwd().'/vendor/yab/laracogs/src/Packages/Starter/tests', base_path('tests'));
 
             $this->line('Appending database/factory...');
             $this->createFactory();
@@ -196,6 +196,7 @@ public function isTeamAdmin(\$id)
     \$team = \$this->teams->find(\$id);
     return (int)\$team->user_id === (int)\$this->id;
 }", '', $userModel);
+            $userModel = str_replace("use App\Models\Team;", '', $userModel);
             file_put_contents(app_path('Models/User.php'), $userModel);
 
             $userService = file_get_contents(app_path('Services/UserService.php'));
@@ -226,7 +227,14 @@ public function leaveAllTeams($userId)
     $user = $this->model->find($userId);
     $user->teams()->detach();
 }', '', $userService);
+            $userService = str_replace('use App\Models\Team;', '', $userService);
+            $userService = str_replace('Team $team,', '', $userService);
+            $userService = str_replace('$this->team = $team;', '', $userService);
             file_put_contents(app_path('Services/UserService.php'), $userService);
+
+            $seed = file_get_contents(base_path('database/seeds/DatabaseSeeder.php'));
+            $seed = str_replace('$this->call(TeamTableSeeder::class);', '', $seed);
+            file_put_contents(base_path('database/seeds/DatabaseSeeder.php'), $seed);
 
             passthru('composer dump');
 
@@ -280,7 +288,7 @@ public function leaveAllTeams($userId)
 
     public function createFactory()
     {
-        $factory = file_get_contents(__DIR__.'/../../../laracogs/src/Packages/Starter/Factory.txt');
+        $factory = file_get_contents(getcwd().'/vendor/yab/laracogs/src/Packages/Starter/Factory.txt');
         $factoryPrepared = str_replace('{{App\}}', $this->getAppNamespace(), $factory);
         $factoryMaster = base_path('database/factories/ModelFactory.php');
         file_put_contents($factoryMaster, str_replace($factoryPrepared, '', file_get_contents($factoryMaster)));

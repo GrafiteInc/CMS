@@ -16,7 +16,7 @@ class QuarxModuleProvider extends ServiceProvider
      */
     public function register()
     {
-        if (Config::get('quarx.load-modules', true)) {
+        if (Config::get('quarx.load-modules', false)) {
             $modulePath = base_path(Config::get('quarx.module-directory').'/');
             $modules = glob($modulePath.'*');
 

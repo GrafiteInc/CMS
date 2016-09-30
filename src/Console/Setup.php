@@ -248,8 +248,8 @@ public function leaveAllTeams($userId)
 
             $this->info('Publishing theme');
             Artisan::call('theme:publish', [
-                'name' => 'default',
-                '--forced' => true
+                'name'     => 'default',
+                '--forced' => true,
             ]);
 
             $this->info('Migrating database');

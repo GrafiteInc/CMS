@@ -3,9 +3,7 @@
 namespace Yab\Quarx\Providers;
 
 use Illuminate\Support\Facades\Config;
-use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\ServiceProvider;
-use Yab\Quarx\Services\ModuleService;
 
 class QuarxModuleProvider extends ServiceProvider
 {
@@ -23,7 +21,7 @@ class QuarxModuleProvider extends ServiceProvider
             foreach ($modules as $module) {
                 if (is_dir($module)) {
                     $module = lcfirst(str_replace($modulePath, '', $module));
-                    $this->app->register('\Quarx\Modules\\'. ucfirst($module) . '\\' . ucfirst($module) . 'ModuleProvider');
+                    $this->app->register('\Quarx\Modules\\'.ucfirst($module).'\\'.ucfirst($module).'ModuleProvider');
                 }
             }
         }

@@ -27,7 +27,7 @@ class LinksRepository
     {
         $input['external'] = isset($input['external']) ? $input['external'] : 0;
 
-        if (! isset($input['page_id'])) {
+        if (!isset($input['page_id'])) {
             $input['page_id'] = 0;
         }
 

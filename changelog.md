@@ -3,6 +3,11 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 ----
 
+## [v2.0.1] - 2016-10-01
+
+### Fixed
+- Default to not loading modules
+
 ## [v2.0.0] - 2016-09-29
 
 ### Added

@@ -31,7 +31,7 @@ composer require yab/quarx
 * Add the following to your Providers:
 
 ```php
-Yab\Quarx\QuarxProvider::class
+Yab\Quarx\QuarxProvider::class,
 ```
 
 * Then run the vendor publish:

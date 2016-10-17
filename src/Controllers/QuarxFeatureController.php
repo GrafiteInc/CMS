@@ -3,9 +3,9 @@
 namespace Yab\Quarx\Controllers;
 
 use Quarx;
-use URL;
-use View;
 use Yab\Quarx\Models\Archive;
+use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\View;
 
 class QuarxFeatureController extends QuarxController
 {

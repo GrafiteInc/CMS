@@ -2,11 +2,11 @@
 
 namespace Yab\Quarx\Controllers;
 
-use Illuminate\Http\Request;
 use Quarx;
 use Yab\Quarx\Models\FAQ;
-use Yab\Quarx\Repositories\FAQRepository;
+use Illuminate\Http\Request;
 use Yab\Quarx\Requests\FAQRequest;
+use Yab\Quarx\Repositories\FAQRepository;
 use Yab\Quarx\Services\ValidationService;
 
 class FAQController extends QuarxController

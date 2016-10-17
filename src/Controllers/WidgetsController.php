@@ -2,12 +2,12 @@
 
 namespace Yab\Quarx\Controllers;
 
-use Illuminate\Http\Request;
 use Quarx;
+use Illuminate\Http\Request;
 use Yab\Quarx\Models\Widgets;
-use Yab\Quarx\Repositories\WidgetsRepository;
 use Yab\Quarx\Requests\WidgetsRequest;
 use Yab\Quarx\Services\ValidationService;
+use Yab\Quarx\Repositories\WidgetsRepository;
 
 class WidgetsController extends QuarxController
 {

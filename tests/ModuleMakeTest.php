@@ -46,6 +46,7 @@ class CrudSingleGeneratorTest extends PHPUnit_Framework_TestCase
             '_lower_casePlural_'         => str_plural(strtolower('testTable')),
             '_camel_case_'               => ucfirst(camel_case('testTable')),
             '_camel_casePlural_'         => str_plural(camel_case('testTable')),
+            '_ucCamel_casePlural_'       => ucfirst(str_plural(camel_case('testTable'))),
         ];
     }
 

@@ -2,13 +2,13 @@
 
 namespace Yab\Quarx\Controllers;
 
-use Illuminate\Http\Request;
 use Quarx;
 use Yab\Quarx\Models\Menu;
-use Yab\Quarx\Repositories\LinksRepository;
-use Yab\Quarx\Repositories\MenuRepository;
+use Illuminate\Http\Request;
 use Yab\Quarx\Requests\MenuRequest;
 use Yab\Quarx\Services\ValidationService;
+use Yab\Quarx\Repositories\MenuRepository;
+use Yab\Quarx\Repositories\LinksRepository;
 
 class MenuController extends QuarxController
 {

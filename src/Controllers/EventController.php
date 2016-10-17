@@ -2,12 +2,12 @@
 
 namespace Yab\Quarx\Controllers;
 
-use Illuminate\Http\Request;
 use Quarx;
 use Yab\Quarx\Models\Event;
-use Yab\Quarx\Repositories\EventRepository;
+use Illuminate\Http\Request;
 use Yab\Quarx\Requests\EventRequest;
 use Yab\Quarx\Services\ValidationService;
+use Yab\Quarx\Repositories\EventRepository;
 
 class EventController extends QuarxController
 {

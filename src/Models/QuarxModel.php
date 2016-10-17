@@ -2,8 +2,8 @@
 
 namespace Yab\Quarx\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Log;
+use Illuminate\Database\Eloquent\Model;
 
 class QuarxModel extends Model
 {

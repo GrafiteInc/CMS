@@ -2,16 +2,17 @@
 
 namespace Yab\Quarx\Models;
 
-class Pages extends QuarxModel
+use Illuminate\Database\Eloquent\Model;
+
+class Link extends Model
 {
-    public $table = 'pages';
+    public $table = 'links';
 
     public $primaryKey = 'id';
 
     protected $guarded = [];
 
     public static $rules = [
-        'title' => 'required',
-        'url'   => 'required',
+        'name' => 'required',
     ];
 }

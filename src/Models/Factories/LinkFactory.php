@@ -6,7 +6,7 @@
 |--------------------------------------------------------------------------
 */
 
-$factory->define(\Yab\Quarx\Models\Links::class, function (Faker\Generator $faker) {
+$factory->define(\Yab\Quarx\Models\Link::class, function (Faker\Generator $faker) {
     return [
 
         'id'           => 1,

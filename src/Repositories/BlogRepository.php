@@ -2,11 +2,11 @@
 
 namespace Yab\Quarx\Repositories;
 
+use Quarx;
 use Carbon\Carbon;
+use Yab\Quarx\Models\Blog;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Schema;
-use Quarx;
-use Yab\Quarx\Models\Blog;
 
 class BlogRepository
 {

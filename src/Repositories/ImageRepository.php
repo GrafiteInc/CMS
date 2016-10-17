@@ -2,14 +2,14 @@
 
 namespace Yab\Quarx\Repositories;
 
+use Quarx;
 use Config;
 use CryptoService;
-use Illuminate\Support\Facades\Schema;
-use Quarx;
-use Yab\Quarx\Models\Images;
+use Yab\Quarx\Models\Image;
 use Yab\Quarx\Services\FileService;
+use Illuminate\Support\Facades\Schema;
 
-class ImagesRepository
+class ImageRepository
 {
     /**
      * Returns all Images.
@@ -18,22 +18,22 @@ class ImagesRepository
      */
     public function all()
     {
-        return Images::orderBy('created_at', 'desc')->all();
+        return Image::orderBy('created_at', 'desc')->all();
     }
 
     public function paginated()
     {
-        return Images::orderBy('created_at', 'desc')->paginate(Config::get('quarx.pagination', 25));
+        return Image::orderBy('created_at', 'desc')->paginate(Config::get('quarx.pagination', 25));
     }
 
     public function publishedAndPaginated()
     {
-        return Images::orderBy('created_at', 'desc')->where('is_published', 1)->paginate(Config::get('quarx.pagination', 25));
+        return Image::orderBy('created_at', 'desc')->where('is_published', 1)->paginate(Config::get('quarx.pagination', 25));
     }
 
     public function published()
     {
-        return Images::where('is_published', 1)->orderBy('created_at', 'desc')->paginate(Config::get('quarx.pagination', 25));
+        return Image::where('is_published', 1)->orderBy('created_at', 'desc')->paginate(Config::get('quarx.pagination', 25));
     }
 
     /**
@@ -43,7 +43,7 @@ class ImagesRepository
      */
     public function apiPrepared()
     {
-        return Images::orderBy('created_at', 'desc')->where('is_published', 1)->get();
+        return Image::orderBy('created_at', 'desc')->where('is_published', 1)->get();
     }
 
     /**
@@ -53,7 +53,7 @@ class ImagesRepository
      */
     public function getImagesByTag($tag = null)
     {
-        $images = Images::orderBy('created_at', 'desc')->where('is_published', 1);
+        $images = Image::orderBy('created_at', 'desc')->where('is_published', 1);
 
         if (!is_null($tag)) {
             $images->where('tags', 'LIKE', '%'.$tag.'%');
@@ -70,7 +70,7 @@ class ImagesRepository
     public function allTags()
     {
         $tags = [];
-        $images = Images::orderBy('created_at', 'desc')->where('is_published', 1)->get();
+        $images = Image::orderBy('created_at', 'desc')->where('is_published', 1)->get();
 
         foreach ($images as $image) {
             foreach (explode(',', $image->tags) as $tag) {
@@ -92,7 +92,7 @@ class ImagesRepository
      */
     public function search($input)
     {
-        $query = Images::orderBy('created_at', 'desc');
+        $query = Image::orderBy('created_at', 'desc');
         $query->where('id', 'LIKE', '%'.$input['term'].'%');
 
         $columns = Schema::getColumnListing('images');
@@ -123,7 +123,7 @@ class ImagesRepository
         $input['location'] = $savedFile['name'];
         $input['original_name'] = $savedFile['original'];
 
-        return Images::create($input);
+        return Image::create($input);
     }
 
     /**
@@ -152,7 +152,7 @@ class ImagesRepository
         $input['location'] = CryptoService::decrypt($savedFile['name']);
         $input['original_name'] = $savedFile['original'];
 
-        return Images::create($input);
+        return Image::create($input);
     }
 
     /**
@@ -164,7 +164,7 @@ class ImagesRepository
      */
     public function findImagesById($id)
     {
-        return Images::find($id);
+        return Image::find($id);
     }
 
     /**

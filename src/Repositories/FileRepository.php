@@ -5,9 +5,9 @@ namespace Yab\Quarx\Repositories;
 use Auth;
 use Config;
 use CryptoService;
-use Illuminate\Support\Facades\Schema;
-use Yab\Quarx\Models\Files;
+use Yab\Quarx\Models\File;
 use Yab\Quarx\Services\FileService;
+use Illuminate\Support\Facades\Schema;
 
 class FileRepository
 {
@@ -18,7 +18,7 @@ class FileRepository
      */
     public function all()
     {
-        return Files::orderBy('created_at', 'desc')->all();
+        return File::orderBy('created_at', 'desc')->all();
     }
 
     /**
@@ -28,7 +28,7 @@ class FileRepository
      */
     public function paginated()
     {
-        return Files::orderBy('created_at', 'desc')->paginate(Config::get('quarx.pagination', 25));
+        return File::orderBy('created_at', 'desc')->paginate(Config::get('quarx.pagination', 25));
     }
 
     /**
@@ -40,7 +40,7 @@ class FileRepository
      */
     public function search($input)
     {
-        $query = Files::orderBy('created_at', 'desc');
+        $query = File::orderBy('created_at', 'desc');
         $query->where('id', 'LIKE', '%'.$input['term'].'%');
 
         $columns = Schema::getColumnListing('files');
@@ -72,7 +72,7 @@ class FileRepository
             $fileInput['order'] = 0;
             $fileInput['user'] = (isset($input['user'])) ? $input['user'] : Auth::id();
             $fileInput['is_published'] = (isset($input['is_published'])) ? (bool) $input['is_published'] : 0;
-            $result = Files::create($fileInput);
+            $result = File::create($fileInput);
         }
 
         return $result;
@@ -87,7 +87,7 @@ class FileRepository
      */
     public function findFilesById($id)
     {
-        return Files::find($id);
+        return File::find($id);
     }
 
     /**
@@ -120,7 +120,7 @@ class FileRepository
 
     public function apiPrepared()
     {
-        $files = Files::orderBy('created_at', 'desc')->where('is_published', 1)->get();
+        $files = File::orderBy('created_at', 'desc')->where('is_published', 1)->get();
         $allFiles = [];
 
         foreach ($files as $file) {

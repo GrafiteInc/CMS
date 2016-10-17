@@ -19,7 +19,7 @@
     </div>
 
     <div class="raw100 raw-left navbar navbar-fixed-bottom">
-        <div class="raw100 raw-left gondolyn-footer">
+        <div class="raw100 raw-left quarx-footer">
             <p class="raw-margin-left-20">&copy; {!! date('Y'); !!} <a href="https://yabhq.com">Yab Inc.</a></p>
         </div>
     </div>

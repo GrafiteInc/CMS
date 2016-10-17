@@ -4,9 +4,9 @@ namespace Yab\Quarx\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Links extends Model
+class Widget extends Model
 {
-    public $table = 'links';
+    public $table = 'widgets';
 
     public $primaryKey = 'id';
 
@@ -14,5 +14,6 @@ class Links extends Model
 
     public static $rules = [
         'name' => 'required',
+        'slug' => 'required',
     ];
 }

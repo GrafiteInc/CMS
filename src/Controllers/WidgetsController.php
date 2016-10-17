@@ -4,17 +4,17 @@ namespace Yab\Quarx\Controllers;
 
 use Quarx;
 use Illuminate\Http\Request;
-use Yab\Quarx\Models\Widgets;
+use Yab\Quarx\Models\Widget;
 use Yab\Quarx\Requests\WidgetsRequest;
 use Yab\Quarx\Services\ValidationService;
-use Yab\Quarx\Repositories\WidgetsRepository;
+use Yab\Quarx\Repositories\WidgetRepository;
 
 class WidgetsController extends QuarxController
 {
-    /** @var WidgetsRepository */
+    /** @var WidgetRepository */
     private $widgetsRepository;
 
-    public function __construct(WidgetsRepository $widgetsRepo)
+    public function __construct(WidgetRepository $widgetsRepo)
     {
         $this->widgetsRepository = $widgetsRepo;
     }
@@ -71,7 +71,7 @@ class WidgetsController extends QuarxController
      */
     public function store(Request $request)
     {
-        $validation = ValidationService::check(Widgets::$rules);
+        $validation = ValidationService::check(Widget::$rules);
 
         if (!$validation['errors']) {
             $widgets = $this->widgetsRepository->store($request->all());

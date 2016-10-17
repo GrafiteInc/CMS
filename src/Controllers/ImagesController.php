@@ -8,18 +8,18 @@ use Storage;
 use FileService;
 use CryptoService;
 use Illuminate\Http\Request;
-use Yab\Quarx\Models\Images;
+use Yab\Quarx\Models\Image;
 use Yab\Quarx\Requests\ImagesRequest;
 use Yab\Quarx\Services\ValidationService;
-use Yab\Quarx\Repositories\ImagesRepository;
+use Yab\Quarx\Repositories\ImageRepository;
 use Yab\Quarx\Services\QuarxResponseService;
 
 class ImagesController extends QuarxController
 {
-    /** @var ImagesRepository */
+    /** @var ImageRepository */
     private $imagesRepository;
 
-    public function __construct(ImagesRepository $imagesRepo)
+    public function __construct(ImageRepository $imagesRepo)
     {
         $this->imagesRepository = $imagesRepo;
     }
@@ -117,8 +117,6 @@ class ImagesController extends QuarxController
      */
     public function upload(Request $request)
     {
-        dd($request);
-
         $validation = ValidationService::check([
             'location' => ['required'],
         ]);

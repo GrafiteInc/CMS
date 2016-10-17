@@ -40,19 +40,19 @@
 
         @include('quarx::layouts.loading-overlay')
 
-        <div class="gondolyn-modal">
+        <div class="quarx-modal">
             <div class="container">
-                <div class="raw100 gondolyn-modal-content">
+                <div class="raw100 quarx-modal-content">
                 </div>
             </div>
         </div>
 
-        <div class="gondolyn-notification">
-            <div class="gondolyn-notify">
-                <p class="gondolyn-notify-comment"></p>
+        <div class="quarx-notification">
+            <div class="quarx-notify">
+                <p class="quarx-notify-comment"></p>
             </div>
-            <div class="gondolyn-notify-closer">
-                <span class="glyphicon glyphicon-remove gondolyn-notify-closer-icon"></span>
+            <div class="quarx-notify-closer">
+                <span class="glyphicon glyphicon-remove quarx-notify-closer-icon"></span>
             </div>
         </div>
 

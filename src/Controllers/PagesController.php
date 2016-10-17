@@ -8,14 +8,14 @@ use Yab\Quarx\Models\Pages;
 use Illuminate\Http\Request;
 use Yab\Quarx\Requests\PagesRequest;
 use Yab\Quarx\Services\ValidationService;
-use Yab\Quarx\Repositories\PagesRepository;
+use Yab\Quarx\Repositories\PageRepository;
 
 class PagesController extends QuarxController
 {
-    /** @var PagesRepository */
+    /** @var PageRepository */
     private $pagesRepository;
 
-    public function __construct(PagesRepository $pagesRepo)
+    public function __construct(PageRepository $pagesRepo)
     {
         $this->pagesRepository = $pagesRepo;
     }

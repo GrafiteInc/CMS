@@ -8,14 +8,14 @@ use Illuminate\Http\Request;
 use Yab\Quarx\Requests\MenuRequest;
 use Yab\Quarx\Services\ValidationService;
 use Yab\Quarx\Repositories\MenuRepository;
-use Yab\Quarx\Repositories\LinksRepository;
+use Yab\Quarx\Repositories\LinkRepository;
 
 class MenuController extends QuarxController
 {
     /** @var MenuRepository */
     private $menuRepository;
 
-    public function __construct(MenuRepository $menuRepo, LinksRepository $linkRepo)
+    public function __construct(MenuRepository $menuRepo, LinkRepository $linkRepo)
     {
         $this->menuRepository = $menuRepo;
         $this->linkRepository = $linkRepo;

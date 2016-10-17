@@ -3,14 +3,14 @@
 namespace App\Http\Controllers\Quarx;
 
 use App\Http\Controllers\Controller;
-use Yab\Quarx\Repositories\PagesRepository;
+use Yab\Quarx\Repositories\PageRepository;
 
 class PagesController extends Controller
 {
     /** @var PagesRepository */
     private $pagesRepository;
 
-    public function __construct(PagesRepository $pagesRepo)
+    public function __construct(PageRepository $pagesRepo)
     {
         $this->pagesRepository = $pagesRepo;
     }

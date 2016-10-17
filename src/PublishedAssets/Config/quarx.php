@@ -22,7 +22,7 @@ return [
 
     'registrationAvailable' => false,
 
-    'backend-theme' => 'united', // cosmo, cyborg, darkly, flatly, hero, journal, lumen, paper, readable, sandstone, simplex, slate, united, yeti
+    'backend-theme' => 'united', // cosmo, cyborg, flatly, lumen, paper, sandstone, simplex, united, yeti
 
     'maxFileUploadSize' => 6291456, // 6MB
 

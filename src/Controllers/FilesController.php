@@ -8,7 +8,7 @@ use Storage;
 use Redirect;
 use Response;
 use CryptoService;
-use Yab\Quarx\Models\Files;
+use Yab\Quarx\Models\File;
 use Illuminate\Http\Request;
 use Yab\Quarx\Requests\FileRequest;
 use Yab\Quarx\Services\FileService;
@@ -80,7 +80,7 @@ class FilesController extends QuarxController
      */
     public function store(Request $request)
     {
-        $validation = ValidationService::check(Files::$rules);
+        $validation = ValidationService::check(File::$rules);
 
         if (!$validation['errors']) {
             $file = $this->fileRepository->store($request->all());
@@ -102,14 +102,12 @@ class FilesController extends QuarxController
      */
     public function upload(Request $request)
     {
-        dd($request);
         $validation = ValidationService::check([
             'location' => [],
         ]);
 
         if (!$validation['errors']) {
             $file = $request->file('location');
-            dd($file);
             $fileSaved = FileService::saveFile($file, 'files/');
             $fileSaved['name'] = CryptoService::encrypt($fileSaved['name']);
             $fileSaved['mime'] = $file->getClientMimeType();

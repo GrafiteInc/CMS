@@ -14,17 +14,17 @@ html, body {
     text-align: center;
 }
 
-.gondolyn-footer {
-    height: 50px;
+.quarx-footer {
+    min-height: 50px;
     background-color: #333;
 }
 
-.gondolyn-footer p, .gondolyn-footer a {
+.quarx-footer p, .quarx-footer a {
     line-height: 50px;
     color: #FFF;
 }
 
-.gondolyn-footer a:hover {
+.quarx-footer a:hover {
     color: #FFF;
 }
 
@@ -46,7 +46,7 @@ html, body {
 |--------------------------------------------------------------------------
 */
 
-.gondolyn-notification {
+.quarx-notification {
     width: 260px;
     min-height: 30px;
     position: fixed;
@@ -57,20 +57,20 @@ html, body {
     padding: 8px 8px 0 8px;
 }
 
-.gondolyn-notify {
+.quarx-notify {
     float: left;
     margin-left: 10px;
     width: 200px;
 }
 
-.gondolyn-notify-closer {
+.quarx-notify-closer {
     width: 20px;
     margin-left: 10px;
     float: left;
     line-height: 20px;
 }
 
-.gondolyn-notify-closer-icon {
+.quarx-notify-closer-icon {
     cursor: pointer;
 }
 
@@ -80,7 +80,7 @@ html, body {
 |--------------------------------------------------------------------------
 */
 
-.gondolyn-modal {
+.quarx-modal {
     width: 100%;
     height: 100%;
     opacity: 0.9;
@@ -96,7 +96,7 @@ html, body {
 |--------------------------------------------------------------------------
 */
 
-.gondolyn-login {
+.quarx-login {
     position: absolute;
     z-index: 1000001;
     top: 0;
@@ -109,19 +109,19 @@ html, body {
     transition: transform 0.5s ease-in;
 }
 
-    .gondolyn-login a {
+    .quarx-login a {
         font-weight: bold;
         color: #222 !important;
     }
 
-.gondolyn-login-animate {
+.quarx-login-animate {
     -webkit-transform: translate(0, 360px);
     -moz-transform: translate(0, 360px);
     -ms-transform: translate(0, 360px);
     -o-transform: translate(0, 360px);
     transform: translate(0, 360px);
 }
-.gondolyn-login-icon-wrapper {
+.quarx-login-icon-wrapper {
     display: inline-block;
     width: 96px;
     height: 96px;
@@ -130,25 +130,25 @@ html, body {
     text-align: center;
 }
 
-    span.gondolyn-login-icon {
+    span.quarx-login-icon {
         display: block;
         line-height: 82px !important;
         font-size: 36px;
         color: #FFF;
     }
 
-    span.gondolyn-login-text {
+    span.quarx-login-text {
         display: block;
         margin-top: 8px;
         font-size: 24px;
         color: #FFF;
     }
 
-        .gondolyn-login a:hover {
+        .quarx-login a:hover {
             text-decoration: none;
         }
 
-    .gondolyn-profile {
+    .quarx-profile {
         border-radius: 150px;
         height: 300px;
         width: 300px;
@@ -255,16 +255,23 @@ span.twitter-typeahead {
 }
 
 .profile-image {
-    width: 400px;
-    height: 400px;
+    width: 100%;
     border-radius: 50%;
     overflow: hidden;
     margin: 48px auto;
+    background-position: center center;
+    background-size: cover;
+}
+
+.profile-image:after {
+  content: "";
+  display: block;
+  padding-bottom: 100%;
 }
 
 .sidebar-header {
     text-align: center;
-    color: #fff;
-    background-color: #777;
+    color: #333;
+    background-color: #DDD;
     padding: 16px 0;
 }

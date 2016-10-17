@@ -5,7 +5,7 @@ namespace Yab\Quarx\Models;
 use FileService;
 use Illuminate\Database\Eloquent\Model;
 
-class Images extends Model
+class Image extends Model
 {
     public $table = 'images';
 

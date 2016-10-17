@@ -10,16 +10,16 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\View;
 use Yab\Quarx\Facades\CryptoServiceFacade;
-use Yab\Quarx\Repositories\LinksRepository;
+use Yab\Quarx\Repositories\LinkRepository;
 use Yab\Quarx\Repositories\MenuRepository;
-use Yab\Quarx\Repositories\PagesRepository;
-use Yab\Quarx\Repositories\WidgetsRepository;
+use Yab\Quarx\Repositories\PageRepository;
+use Yab\Quarx\Repositories\WidgetRepository;
 
 class QuarxService
 {
     public function __construct()
     {
-        $this->imageRepo = App::make('Yab\Quarx\Repositories\ImagesRepository');
+        $this->imageRepo = App::make('Yab\Quarx\Repositories\ImageRepository');
     }
 
     /**
@@ -172,7 +172,7 @@ class QuarxService
      */
     public function widget($slug)
     {
-        $widget = WidgetsRepository::getWidgetBySLUG($slug);
+        $widget = WidgetRepository::getWidgetBySLUG($slug);
 
         if (Gate::allows('quarx', Auth::user())) {
             $widget->content .= '<a href="'.url('quarx/widgets/'.$widget->id.'/edit').'" style="margin-left: 8px;" class="btn btn-xs btn-default"><span class="fa fa-pencil"></span> Edit</a>';
@@ -252,14 +252,14 @@ class QuarxService
      */
     public function menu($slug, $view = null)
     {
-        $pageRepo = new PagesRepository();
+        $pageRepo = new PageRepository();
         $menu = MenuRepository::getMenuBySLUG($slug)->first();
 
         if (!$menu) {
             return '';
         }
 
-        $links = LinksRepository::getLinksByMenuID($menu->id);
+        $links = LinkRepository::getLinksByMenuID($menu->id);
         $response = '';
 
         foreach ($links as $link) {

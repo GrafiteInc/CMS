@@ -3,13 +3,13 @@
 namespace Yab\Quarx\Services;
 
 use Illuminate\Support\Facades\Config;
-use Yab\Quarx\Repositories\PagesRepository;
+use Yab\Quarx\Repositories\PageRepository;
 
 class PageService
 {
     public function __construct()
     {
-        $this->pageRepo = new PagesRepository();
+        $this->pageRepo = new PageRepository();
     }
 
     public function getPagesAsOptions()

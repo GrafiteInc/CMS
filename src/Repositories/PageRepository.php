@@ -2,13 +2,13 @@
 
 namespace Yab\Quarx\Repositories;
 
+use Quarx;
 use Carbon\Carbon;
+use Yab\Quarx\Models\Page;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Schema;
-use Quarx;
-use Yab\Quarx\Models\Pages;
 
-class PagesRepository
+class PageRepository
 {
     /**
      * Returns all Pages.
@@ -17,22 +17,22 @@ class PagesRepository
      */
     public function all()
     {
-        return Pages::all();
+        return Page::all();
     }
 
     public function paginated()
     {
-        return Pages::orderBy('created_at', 'desc')->paginate(Config::get('quarx.pagination', 25));
+        return Page::orderBy('created_at', 'desc')->paginate(Config::get('quarx.pagination', 25));
     }
 
     public function published()
     {
-        return Pages::where('is_published', 1)->where('published_at', '<=', Carbon::now()->format('Y-m-d h:i:s'))->orderBy('created_at', 'desc')->paginate(Config::get('quarx.pagination', 25));
+        return Page::where('is_published', 1)->where('published_at', '<=', Carbon::now()->format('Y-m-d h:i:s'))->orderBy('created_at', 'desc')->paginate(Config::get('quarx.pagination', 25));
     }
 
     public function search($input)
     {
-        $query = Pages::orderBy('created_at', 'desc');
+        $query = Page::orderBy('created_at', 'desc');
         $query->where('id', 'LIKE', '%'.$input['term'].'%');
 
         $columns = Schema::getColumnListing('pages');
@@ -57,7 +57,7 @@ class PagesRepository
         $input['is_published'] = (isset($input['is_published'])) ? (bool) $input['is_published'] : 0;
         $input['published_at'] = (isset($input['published_at']) && !empty($input['published_at'])) ? $input['published_at'] : Carbon::now()->format('Y-m-d h:i:s');
 
-        return Pages::create($input);
+        return Page::create($input);
     }
 
     /**
@@ -69,7 +69,7 @@ class PagesRepository
      */
     public function findPagesById($id)
     {
-        return Pages::find($id);
+        return Page::find($id);
     }
 
     /**
@@ -81,7 +81,7 @@ class PagesRepository
      */
     public function findPagesByURL($url)
     {
-        return Pages::where('url', $url)->where('is_published', 1)->where('published_at', '<=', Carbon::now()->format('Y-m-d h:i:s'))->first();
+        return Page::where('url', $url)->where('is_published', 1)->where('published_at', '<=', Carbon::now()->format('Y-m-d h:i:s'))->first();
     }
 
     /**

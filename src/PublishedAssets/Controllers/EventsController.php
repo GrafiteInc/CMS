@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Quarx;
 
 use App\Http\Controllers\Controller;
-use Yab\Quarx\Repositories\EventRepository;
 use Yab\Quarx\Services\EventService;
+use Yab\Quarx\Repositories\EventRepository;
 
 class EventsController extends Controller
 {

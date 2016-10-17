@@ -22,8 +22,6 @@ class Setup extends Command
      */
     protected $name = 'quarx:setup';
 
-    protected $files;
-
     /**
      * The console command description.
      *
@@ -156,6 +154,11 @@ class Setup extends Command
         return [];
     }
 
+    /**
+     * Create the factories
+     *
+     * @return bool
+     */
     public function createFactory()
     {
         $factory = file_get_contents(getcwd().'/vendor/yab/laracogs/src/Packages/Starter/Factory.txt');
@@ -166,6 +169,11 @@ class Setup extends Command
         return file_put_contents($factoryMaster, $factoryPrepared, FILE_APPEND);
     }
 
+    /**
+     * Clean up files from the install of Laracogs etc
+     *
+     * @return void
+     */
     public function fileManager()
     {
         $files = [
@@ -310,6 +318,11 @@ public function leaveAllTeams($userId)
         file_put_contents(base_path('composer.json'), $composer);
     }
 
+    /**
+     * Clean up dead files
+     *
+     * @return void
+     */
     public function dropDeadFiles()
     {
         @unlink(app_path('Http/Controllers/PagesController.php'));

@@ -41,7 +41,6 @@
     width: 300px;
     padding: 20px;
     background-color: #EEE;
-    border-right: 1px solid #999;
     overflow-x: hidden;
     height: 100%;
     overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
@@ -71,8 +70,8 @@
 .nav-sidebar > .active > a,
 .nav-sidebar > .active > a:hover,
 .nav-sidebar > .active > a:focus {
-    color: #fff;
-    background-color: #333;
+    border-left: 4px solid #333;
+    background-color: #FFF;
 }
 
 

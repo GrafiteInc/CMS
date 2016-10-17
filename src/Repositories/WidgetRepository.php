@@ -3,9 +3,9 @@
 namespace Yab\Quarx\Repositories;
 
 use Illuminate\Support\Facades\Schema;
-use Yab\Quarx\Models\Widgets;
+use Yab\Quarx\Models\Widget;
 
-class WidgetsRepository
+class WidgetRepository
 {
     /**
      * Returns all Widgets.
@@ -14,17 +14,17 @@ class WidgetsRepository
      */
     public function all()
     {
-        return Widgets::orderBy('created_at', 'desc')->all();
+        return Widget::orderBy('created_at', 'desc')->all();
     }
 
     public function paginated()
     {
-        return Widgets::orderBy('created_at', 'desc')->paginate(25);
+        return Widget::orderBy('created_at', 'desc')->paginate(25);
     }
 
     public function search($input)
     {
-        $query = Widgets::orderBy('created_at', 'desc');
+        $query = Widget::orderBy('created_at', 'desc');
         $query->where('id', 'LIKE', '%'.$input['term'].'%');
 
         $columns = Schema::getColumnListing('widgets');
@@ -45,7 +45,7 @@ class WidgetsRepository
      */
     public function store($input)
     {
-        return Widgets::create($input);
+        return Widget::create($input);
     }
 
     /**
@@ -57,7 +57,7 @@ class WidgetsRepository
      */
     public function findWidgetsById($id)
     {
-        return Widgets::find($id);
+        return Widget::find($id);
     }
 
     /**
@@ -69,7 +69,7 @@ class WidgetsRepository
      */
     public static function getWidgetBySLUG($slug)
     {
-        return Widgets::where('slug', $slug)->first();
+        return Widget::where('slug', $slug)->first();
     }
 
     /**

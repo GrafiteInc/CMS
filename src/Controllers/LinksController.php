@@ -3,19 +3,19 @@
 namespace Yab\Quarx\Controllers;
 
 use Quarx;
-use Yab\Quarx\Models\Links;
+use Yab\Quarx\Models\Link;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\URL;
 use Yab\Quarx\Requests\LinksRequest;
 use Yab\Quarx\Services\ValidationService;
-use Yab\Quarx\Repositories\LinksRepository;
+use Yab\Quarx\Repositories\LinkRepository;
 
 class LinksController extends QuarxController
 {
-    /** @var LinksRepository */
+    /** @var LinkRepository */
     private $linksRepository;
 
-    public function __construct(LinksRepository $linksRepo)
+    public function __construct(LinkRepository $linksRepo)
     {
         $this->linksRepository = $linksRepo;
     }
@@ -56,7 +56,7 @@ class LinksController extends QuarxController
     public function store(Request $request)
     {
         try {
-            $validation = ValidationService::check(Links::$rules);
+            $validation = ValidationService::check(Link::$rules);
 
             if (!$validation['errors']) {
                 $links = $this->linksRepository->store($request->all());

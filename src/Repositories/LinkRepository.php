@@ -2,9 +2,9 @@
 
 namespace Yab\Quarx\Repositories;
 
-use Yab\Quarx\Models\Links;
+use Yab\Quarx\Models\Link;
 
-class LinksRepository
+class LinkRepository
 {
     /**
      * Returns all Links.
@@ -13,7 +13,7 @@ class LinksRepository
      */
     public function all()
     {
-        return Links::orderBy('created_at', 'desc')->get();
+        return Link::orderBy('created_at', 'desc')->get();
     }
 
     /**
@@ -31,7 +31,7 @@ class LinksRepository
             $input['page_id'] = 0;
         }
 
-        return Links::create($input);
+        return Link::create($input);
     }
 
     /**
@@ -43,7 +43,7 @@ class LinksRepository
      */
     public function findLinksById($id)
     {
-        return Links::find($id);
+        return Link::find($id);
     }
 
     /**
@@ -55,7 +55,7 @@ class LinksRepository
      */
     public static function getLinksByMenuID($id)
     {
-        return Links::where('menu_id', $id)->get();
+        return Link::where('menu_id', $id)->get();
     }
 
     /**
@@ -67,7 +67,7 @@ class LinksRepository
      */
     public function getLinksByMenu($id)
     {
-        return Links::where('menu_id', $id)->get();
+        return Link::where('menu_id', $id)->get();
     }
 
     /**

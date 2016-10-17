@@ -8,11 +8,11 @@ use Quarx;
 use Exception;
 use SplFileInfo;
 use Illuminate\Filesystem\Filesystem;
-use Yab\Quarx\Services\CryptoService;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Response;
+use Yab\Quarx\Facades\CryptoServiceFacade;
 
 class AssetController extends QuarxController
 {
@@ -669,7 +669,7 @@ class AssetController extends QuarxController
     public function asPublic($encFileName, Filesystem $fileSystem)
     {
         try {
-            $fileName = CryptoService::url_decode($encFileName);
+            $fileName = CryptoServiceFacade::url_decode($encFileName);
 
             if (Config::get('quarx.storage-location') === 'local' || Config::get('quarx.storage-location') === null) {
                 $filePath = storage_path('app/'.$fileName);
@@ -708,7 +708,7 @@ class AssetController extends QuarxController
     public function asPreview($encFileName, Filesystem $fileSystem)
     {
         try {
-            $fileName = CryptoService::url_decode($encFileName);
+            $fileName = CryptoServiceFacade::url_decode($encFileName);
 
             if (Config::get('quarx.storage-location') === 'local' || Config::get('quarx.storage-location') === null) {
                 $filePath = storage_path('app/'.$fileName);
@@ -764,8 +764,8 @@ class AssetController extends QuarxController
     public function asDownload($encFileName, $encRealFileName, Filesystem $fileSystem)
     {
         try {
-            $fileName = CryptoService::url_decode($encFileName);
-            $realFileName = CryptoService::url_decode($encRealFileName);
+            $fileName = CryptoServiceFacade::url_decode($encFileName);
+            $realFileName = CryptoServiceFacade::url_decode($encRealFileName);
 
             if (Config::get('quarx.storage-location') === 'local' || Config::get('quarx.storage-location') === null) {
                 $filePath = storage_path('app/'.$realFileName);
@@ -807,7 +807,7 @@ class AssetController extends QuarxController
     public function asset($encPath, $contentType, Filesystem $fileSystem)
     {
         try {
-            $path = CryptoService::url_decode($encPath);
+            $path = CryptoServiceFacade::url_decode($encPath);
 
             if (Request::get('isModule') === 'true') {
                 $filePath = $path;
@@ -818,7 +818,7 @@ class AssetController extends QuarxController
             $fileName = basename($filePath);
 
             if (!is_null($contentType)) {
-                $contentType = CryptoService::url_decode($contentType);
+                $contentType = CryptoServiceFacade::url_decode($contentType);
             } else {
                 $contentType = $fileSystem->mimeType($fileName);
             }

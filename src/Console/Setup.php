@@ -3,7 +3,9 @@
 namespace Yab\Quarx\Console;
 
 use Artisan;
+use App\Models\Role;
 use App\Models\User;
+use App\Services\UserService;
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Facades\Config;
@@ -89,163 +91,7 @@ class Setup extends Command
             $this->line('Appending database/factory...');
             $this->createFactory();
 
-            $files = [
-                base_path('database/factories/ModelFactory.php'),
-                base_path('config/auth.php'),
-            ];
-
-            foreach ($files as $file) {
-                $contents = file_get_contents($file);
-                $contents = str_replace('App\User::class', 'App\Models\User::class', $contents);
-                file_put_contents($file, $contents);
-            }
-
-            // Route setup
-            $routeContents = file_get_contents(app_path('Providers/RouteServiceProvider.php'));
-            $routeContents = str_replace("require base_path('routes/web.php');", "require base_path('routes/web.php');\n\t\t\trequire base_path('routes/quarx.php');", $routeContents);
-            file_put_contents(app_path('Providers/RouteServiceProvider.php'), $routeContents);
-
-            $routeToDashboardContents = file_get_contents(base_path('routes/web.php'));
-            $routeToDashboardContents = str_replace("Route::get('/dashboard', 'PagesController@dashboard');", "Route::get('/dashboard', function(){ return Redirect::to('quarx/dashboard'); });", $routeToDashboardContents);
-            file_put_contents(base_path('routes/web.php'), $routeToDashboardContents);
-
-            // Kernel setup
-            $routeContents = file_get_contents(app_path('Http/Kernel.php'));
-            $routeContents = str_replace("'auth' => \Illuminate\Auth\Middleware\Authenticate::class,", "'auth' => \Illuminate\Auth\Middleware\Authenticate::class,\n\t\t'quarx' => \App\Http\Middleware\Quarx::class,\n\t\t'admin' => \App\Http\Middleware\Admin::class,", $routeContents);
-            file_put_contents(app_path('Http/Kernel.php'), $routeContents);
-
-            $fileSystem = new Filesystem();
-
-            $files = $fileSystem->allFiles(__DIR__.'/../PublishedAssets/Setup');
-
-            foreach ($files as $file) {
-                $newFileName = str_replace(__DIR__.'/../PublishedAssets/Setup', '', $file);
-                if (is_dir($file)) {
-                    $fileSystem->copyDirectory($file, base_path($newFileName));
-                } else {
-                    @mkdir(base_path(str_replace(basename($newFileName), '', $newFileName)), 0755, true);
-                    $fileSystem->copy($file, base_path($newFileName));
-                }
-            }
-
-            // AuthProviders
-            $authProviderContents = file_get_contents(app_path('Providers/AuthServiceProvider.php'));
-            $authProviderContents = str_replace('$this->registerPolicies();', "\$this->registerPolicies();\n\t\t\Gate::define('quarx', function (\$user) {\n\t\t\treturn (\$user->roles->first()->name === 'admin');\n\t\t});\n\t\t\Gate::define('admin', function (\$user) {\n\t\t\treturn (\$user->roles->first()->name === 'admin');\n\t\t});", $authProviderContents);
-            file_put_contents(app_path('Providers/AuthServiceProvider.php'), $authProviderContents);
-
-            // Remove the teams
-            @unlink(app_path('Http/Controllers/PagesController.php'));
-            @unlink(app_path('Http/Controllers/TeamController.php'));
-            @unlink(app_path('Http/Requests/TeamCreateRequest.php'));
-            @unlink(app_path('Http/Requests/TeamUpdateRequest.php'));
-            @unlink(app_path('Models/Team.php'));
-            @unlink(app_path('Services/TeamService.php'));
-            @unlink(base_path('resources/views/dashboard.blade.php'));
-            @unlink(base_path('resources/views/dashboard/main.blade.php'));
-            @unlink(base_path('resources/views/dashboard/panel.blade.php'));
-            @unlink(base_path('resources/views/partials/navigation.blade.php'));
-            @unlink(base_path('resources/views/team/create.blade.php'));
-            @unlink(base_path('resources/views/team/edit.blade.php'));
-            @unlink(base_path('resources/views/team/show.blade.php'));
-            @unlink(base_path('resources/views/team/index.blade.php'));
-            @rmdir(base_path('resources/views/team'));
-            @rmdir(base_path('resources/views/dashboard'));
-
-            $mainRoutes = file_get_contents(base_path('routes/web.php'));
-            $mainRoutes = str_replace("/*
-|--------------------------------------------------------------------------
-| Team Routes
-|--------------------------------------------------------------------------
-*/
-
-Route::get('team/{name}', 'TeamController@showByName');
-Route::resource('teams', 'TeamController', ['except' => ['show']]);
-Route::post('teams/search', 'TeamController@search');
-Route::post('teams/{id}/invite', 'TeamController@inviteMember');
-Route::get('teams/{id}/remove/{userId}', 'TeamController@removeMember');", '', $mainRoutes);
-            file_put_contents(base_path('routes/web.php'), $mainRoutes);
-
-            $userModel = file_get_contents(app_path('Models/User.php'));
-            $userModel = str_replace("/**
- * Teams
- *
- * @return Relationship
- */
-public function teams()
-{
-    return \$this->belongsToMany(Team::class);
-}
-
-/**
- * Team member
- *
- * @return boolean
- */
-public function isTeamMember(\$id)
-{
-    \$teams = array_column(\$this->teams->toArray(), 'id');
-    return array_search(\$id, \$teams) > -1;
-}
-
-/**
- * Team admin
- *
- * @return boolean
- */
-public function isTeamAdmin(\$id)
-{
-    \$team = \$this->teams->find(\$id);
-    return (int)\$team->user_id === (int)\$this->id;
-}", '', $userModel);
-            $userModel = str_replace("use App\Models\Team;", '', $userModel);
-            file_put_contents(app_path('Models/User.php'), $userModel);
-
-            $userService = file_get_contents(app_path('Services/UserService.php'));
-            $userService = str_replace('/*
-|--------------------------------------------------------------------------
-| Teams
-|--------------------------------------------------------------------------
-*/
-
-public function joinTeam($teamId, $userId)
-{
-    $team = $this->team->find($teamId);
-    $user = $this->model->find($userId);
-
-    $user->teams()->attach($team);
-}
-
-public function leaveTeam($teamId, $userId)
-{
-    $team = $this->team->find($teamId);
-    $user = $this->model->find($userId);
-
-    $user->teams()->detach($team);
-}
-
-public function leaveAllTeams($userId)
-{
-    $user = $this->model->find($userId);
-    $user->teams()->detach();
-}', '', $userService);
-            $userService = str_replace('use App\Models\Team;', '', $userService);
-            $userService = str_replace('Team $team,', '', $userService);
-            $userService = str_replace('$this->team = $team;', '', $userService);
-            file_put_contents(app_path('Services/UserService.php'), $userService);
-
-            $seed = file_get_contents(base_path('database/seeds/DatabaseSeeder.php'));
-            $seed = str_replace('$this->call(TeamTableSeeder::class);', '', $seed);
-            file_put_contents(base_path('database/seeds/DatabaseSeeder.php'), $seed);
-
-            passthru('composer dump');
-
-            $css = file_get_contents(base_path('resources/assets/sass/app.scss'));
-            $css = str_replace('@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";', '@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";'."\n".'@import "resources/themes/default/assets/sass/_theme.scss";', $css);
-            file_put_contents(base_path('resources/assets/sass/app.scss'), $css);
-
-            $composer = file_get_contents(base_path('composer.json'));
-            $composer = str_replace('"App\\": "app/",', '"App\\": "app/",'."\n".'"Quarx\\Modules\\": "quarx/modules/",', $composer);
-            file_put_contents(base_path('composer.json'), $composer);
+            $this->fileManager();
 
             $this->info('Publishing theme');
             Artisan::call('theme:publish', [
@@ -254,30 +100,30 @@ public function leaveAllTeams($userId)
             ]);
 
             $this->info('Migrating database');
+
             Artisan::call('migrate:reset', [
                 '--force' => true,
             ]);
-
             Artisan::call('migrate', [
                 '--force' => true,
             ]);
 
-            // Seed the roles table
-            if (!\App\Models\Role::where('name', 'member')->first()) {
-                \App\Models\Role::create([
+            $this->info('Setting roles');
+            if (! Role::where('name', 'member')->first()) {
+                Role::create([
                     'name' => 'member',
                     'label' => 'Member',
                 ]);
-                \App\Models\Role::create([
+                Role::create([
                     'name' => 'admin',
                     'label' => 'Admin',
                 ]);
             }
 
-            // Seed User table with a default admin account
-            $service = app(\App\Services\UserService::class);
+            $this->info('Creating default account');
+            $service = app(UserService::class);
 
-            if (!User::where('name', 'admin')->first()) {
+            if (! User::where('name', 'admin')->first()) {
                 $user = User::create([
                     'name' => 'Admin',
                     'email' => 'admin@admin.com',
@@ -286,8 +132,7 @@ public function leaveAllTeams($userId)
             }
             $service->create($user, 'admin', 'admin', false);
 
-
-            $this->info('Finished setting up your site with Quarx');
+            $this->info('Finished setting up your site with Quarx!');
             $this->info('Please run:');
             $this->comment('gulp');
             $this->line('You can now login with the following username and password:');
@@ -319,5 +164,169 @@ public function leaveAllTeams($userId)
         file_put_contents($factoryMaster, str_replace($factoryPrepared, '', file_get_contents($factoryMaster)));
 
         return file_put_contents($factoryMaster, $factoryPrepared, FILE_APPEND);
+    }
+
+    public function fileManager()
+    {
+        $files = [
+            base_path('database/factories/ModelFactory.php'),
+            base_path('config/auth.php'),
+        ];
+
+        foreach ($files as $file) {
+            $contents = file_get_contents($file);
+            $contents = str_replace('App\User::class', 'App\Models\User::class', $contents);
+            file_put_contents($file, $contents);
+        }
+
+        // Route setup
+        $routeContents = file_get_contents(app_path('Providers/RouteServiceProvider.php'));
+        $routeContents = str_replace("require base_path('routes/web.php');", "require base_path('routes/web.php');\n\t\t\trequire base_path('routes/quarx.php');", $routeContents);
+        file_put_contents(app_path('Providers/RouteServiceProvider.php'), $routeContents);
+
+        $routeToDashboardContents = file_get_contents(base_path('routes/web.php'));
+        $routeToDashboardContents = str_replace("Route::get('/dashboard', 'PagesController@dashboard');", "Route::get('/dashboard', function(){ return Redirect::to('quarx/dashboard'); });", $routeToDashboardContents);
+        file_put_contents(base_path('routes/web.php'), $routeToDashboardContents);
+
+        // Kernel setup
+        $routeContents = file_get_contents(app_path('Http/Kernel.php'));
+        $routeContents = str_replace("'auth' => \Illuminate\Auth\Middleware\Authenticate::class,", "'auth' => \Illuminate\Auth\Middleware\Authenticate::class,\n\t\t'quarx' => \App\Http\Middleware\Quarx::class,\n\t\t'admin' => \App\Http\Middleware\Admin::class,", $routeContents);
+        file_put_contents(app_path('Http/Kernel.php'), $routeContents);
+
+        $fileSystem = new Filesystem();
+
+        $files = $fileSystem->allFiles(__DIR__.'/../PublishedAssets/Setup');
+
+        foreach ($files as $file) {
+            $newFileName = str_replace(__DIR__.'/../PublishedAssets/Setup', '', $file);
+            if (is_dir($file)) {
+                $fileSystem->copyDirectory($file, base_path($newFileName));
+            } else {
+                @mkdir(base_path(str_replace(basename($newFileName), '', $newFileName)), 0755, true);
+                $fileSystem->copy($file, base_path($newFileName));
+            }
+        }
+
+        // AuthProviders
+        $authProviderContents = file_get_contents(app_path('Providers/AuthServiceProvider.php'));
+        $authProviderContents = str_replace('$this->registerPolicies();', "\$this->registerPolicies();\n\t\t\Gate::define('quarx', function (\$user) {\n\t\t\treturn (\$user->roles->first()->name === 'admin');\n\t\t});\n\t\t\Gate::define('admin', function (\$user) {\n\t\t\treturn (\$user->roles->first()->name === 'admin');\n\t\t});", $authProviderContents);
+        file_put_contents(app_path('Providers/AuthServiceProvider.php'), $authProviderContents);
+
+        // Remove the teams
+        $this->dropDeadFiles();
+
+        $mainRoutes = file_get_contents(base_path('routes/web.php'));
+        $mainRoutes = str_replace("/*
+|--------------------------------------------------------------------------
+| Team Routes
+|--------------------------------------------------------------------------
+*/
+
+Route::get('team/{name}', 'TeamController@showByName');
+Route::resource('teams', 'TeamController', ['except' => ['show']]);
+Route::post('teams/search', 'TeamController@search');
+Route::post('teams/{id}/invite', 'TeamController@inviteMember');
+Route::get('teams/{id}/remove/{userId}', 'TeamController@removeMember');", '', $mainRoutes);
+        file_put_contents(base_path('routes/web.php'), $mainRoutes);
+
+        $userModel = file_get_contents(app_path('Models/User.php'));
+        $userModel = str_replace("/**
+ * Teams
+ *
+ * @return Relationship
+ */
+public function teams()
+{
+    return \$this->belongsToMany(Team::class);
+}
+
+/**
+ * Team member
+ *
+ * @return boolean
+ */
+public function isTeamMember(\$id)
+{
+    \$teams = array_column(\$this->teams->toArray(), 'id');
+    return array_search(\$id, \$teams) > -1;
+}
+
+/**
+ * Team admin
+ *
+ * @return boolean
+ */
+public function isTeamAdmin(\$id)
+{
+    \$team = \$this->teams->find(\$id);
+    return (int)\$team->user_id === (int)\$this->id;
+}", '', $userModel);
+        $userModel = str_replace("use App\Models\Team;", '', $userModel);
+        file_put_contents(app_path('Models/User.php'), $userModel);
+
+        $userService = file_get_contents(app_path('Services/UserService.php'));
+        $userService = str_replace('/*
+|--------------------------------------------------------------------------
+| Teams
+|--------------------------------------------------------------------------
+*/
+
+public function joinTeam($teamId, $userId)
+{
+    $team = $this->team->find($teamId);
+    $user = $this->model->find($userId);
+
+    $user->teams()->attach($team);
+}
+
+public function leaveTeam($teamId, $userId)
+{
+    $team = $this->team->find($teamId);
+    $user = $this->model->find($userId);
+
+    $user->teams()->detach($team);
+}
+
+public function leaveAllTeams($userId)
+{
+    $user = $this->model->find($userId);
+    $user->teams()->detach();
+}', '', $userService);
+        $userService = str_replace('use App\Models\Team;', '', $userService);
+        $userService = str_replace('Team $team,', '', $userService);
+        $userService = str_replace('$this->team = $team;', '', $userService);
+        file_put_contents(app_path('Services/UserService.php'), $userService);
+
+        $seed = file_get_contents(base_path('database/seeds/DatabaseSeeder.php'));
+        $seed = str_replace('$this->call(TeamTableSeeder::class);', '', $seed);
+        file_put_contents(base_path('database/seeds/DatabaseSeeder.php'), $seed);
+
+        $css = file_get_contents(base_path('resources/assets/sass/app.scss'));
+        $css = str_replace('@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";', '@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";'."\n".'@import "resources/themes/default/assets/sass/_theme.scss";', $css);
+        file_put_contents(base_path('resources/assets/sass/app.scss'), $css);
+
+        $composer = file_get_contents(base_path('composer.json'));
+        $composer = str_replace('"App\\": "app/",', '"App\\": "app/",'."\n".'"Quarx\\Modules\\": "quarx/modules/",', $composer);
+        file_put_contents(base_path('composer.json'), $composer);
+    }
+
+    public function dropDeadFiles()
+    {
+        @unlink(app_path('Http/Controllers/PagesController.php'));
+        @unlink(app_path('Http/Controllers/TeamController.php'));
+        @unlink(app_path('Http/Requests/TeamCreateRequest.php'));
+        @unlink(app_path('Http/Requests/TeamUpdateRequest.php'));
+        @unlink(app_path('Models/Team.php'));
+        @unlink(app_path('Services/TeamService.php'));
+        @unlink(base_path('resources/views/dashboard.blade.php'));
+        @unlink(base_path('resources/views/dashboard/main.blade.php'));
+        @unlink(base_path('resources/views/dashboard/panel.blade.php'));
+        @unlink(base_path('resources/views/partials/navigation.blade.php'));
+        @unlink(base_path('resources/views/team/create.blade.php'));
+        @unlink(base_path('resources/views/team/edit.blade.php'));
+        @unlink(base_path('resources/views/team/show.blade.php'));
+        @unlink(base_path('resources/views/team/index.blade.php'));
+        @rmdir(base_path('resources/views/team'));
+        @rmdir(base_path('resources/views/dashboard'));
     }
 }

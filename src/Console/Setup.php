@@ -3,6 +3,7 @@
 namespace Yab\Quarx\Console;
 
 use Artisan;
+use App\Models\User;
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Facades\Config;
@@ -258,9 +259,33 @@ public function leaveAllTeams($userId)
             ]);
 
             Artisan::call('migrate', [
-                '--seed'  => true,
                 '--force' => true,
             ]);
+
+            // Seed the roles table
+            if (!\App\Models\Role::where('name', 'member')->first()) {
+                \App\Models\Role::create([
+                    'name' => 'member',
+                    'label' => 'Member',
+                ]);
+                \App\Models\Role::create([
+                    'name' => 'admin',
+                    'label' => 'Admin',
+                ]);
+            }
+
+            // Seed User table with a default admin account
+            $service = app(\App\Services\UserService::class);
+
+            if (!User::where('name', 'admin')->first()) {
+                $user = User::create([
+                    'name' => 'Admin',
+                    'email' => 'admin@admin.com',
+                    'password' => bcrypt('admin'),
+                ]);
+            }
+            $service->create($user, 'admin', 'admin', false);
+
 
             $this->info('Finished setting up your site with Quarx');
             $this->info('Please run:');

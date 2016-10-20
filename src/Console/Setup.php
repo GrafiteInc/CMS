@@ -41,12 +41,12 @@ class Setup extends Command
         if ($cssReady) {
             Artisan::call('vendor:publish', [
                 '--provider' => 'Yab\Quarx\QuarxProvider',
-                '--force'    => true,
+                '--force' => true,
             ]);
 
             Artisan::call('vendor:publish', [
                 '--provider' => 'Yab\Laracogs\LaracogsProvider',
-                '--force'    => true,
+                '--force' => true,
             ]);
 
             $fileSystem = new Filesystem();
@@ -93,7 +93,7 @@ class Setup extends Command
 
             $this->info('Publishing theme');
             Artisan::call('theme:publish', [
-                'name'     => 'default',
+                'name' => 'default',
                 '--forced' => true,
             ]);
 
@@ -107,7 +107,7 @@ class Setup extends Command
             ]);
 
             $this->info('Setting roles');
-            if (! Role::where('name', 'member')->first()) {
+            if (!Role::where('name', 'member')->first()) {
                 Role::create([
                     'name' => 'member',
                     'label' => 'Member',
@@ -121,7 +121,7 @@ class Setup extends Command
             $this->info('Creating default account');
             $service = app(UserService::class);
 
-            if (! User::where('name', 'admin')->first()) {
+            if (!User::where('name', 'admin')->first()) {
                 $user = User::create([
                     'name' => 'Admin',
                     'email' => 'admin@admin.com',
@@ -155,7 +155,7 @@ class Setup extends Command
     }
 
     /**
-     * Create the factories
+     * Create the factories.
      *
      * @return bool
      */
@@ -170,9 +170,7 @@ class Setup extends Command
     }
 
     /**
-     * Clean up files from the install of Laracogs etc
-     *
-     * @return void
+     * Clean up files from the install of Laracogs etc.
      */
     public function fileManager()
     {
@@ -217,7 +215,7 @@ class Setup extends Command
 
         // AuthProviders
         $authProviderContents = file_get_contents(app_path('Providers/AuthServiceProvider.php'));
-        $authProviderContents = str_replace('$this->registerPolicies();', "\$this->registerPolicies();\n\t\t\Gate::define('quarx', function (\$user) {\n\t\t\treturn (\$user->roles->first()->name === 'admin');\n\t\t});\n\t\t\Gate::define('admin', function (\$user) {\n\t\t\treturn (\$user->roles->first()->name === 'admin');\n\t\t});", $authProviderContents);
+        $authProviderContents = str_replace('$this->registerPolicies();', "\$this->registerPolicies();\n\t\t\Gate::define('quarx-api', function (\$user) {\n\t\t\treturn true;\n\t\t\n\t\t\Gate::define('quarx', function (\$user) {\n\t\t\treturn (\$user->roles->first()->name === 'admin');\n\t\t});\n\t\t\Gate::define('admin', function (\$user) {\n\t\t\treturn (\$user->roles->first()->name === 'admin');\n\t\t});", $authProviderContents);
         file_put_contents(app_path('Providers/AuthServiceProvider.php'), $authProviderContents);
 
         // Remove the teams
@@ -319,9 +317,7 @@ public function leaveAllTeams($userId)
     }
 
     /**
-     * Clean up dead files
-     *
-     * @return void
+     * Clean up dead files.
      */
     public function dropDeadFiles()
     {

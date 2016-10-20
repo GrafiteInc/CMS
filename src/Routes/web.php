@@ -22,26 +22,28 @@
             Route::get('images/list', 'ImagesController@apiList');
             Route::post('images/store', 'ImagesController@apiStore');
 
-            Route::get('blog', 'ApiController@all');
-            Route::get('blog/{id}', 'ApiController@find');
+            Route::group(['middleware' => ['quarx-api']], function () {
+                Route::get('blog', 'ApiController@all');
+                Route::get('blog/{id}', 'ApiController@find');
 
-            Route::get('pages', 'ApiController@all');
-            Route::get('pages/{id}', 'ApiController@find');
+                Route::get('events', 'ApiController@all');
+                Route::get('events/{id}', 'ApiController@find');
 
-            Route::get('widgets', 'ApiController@all');
-            Route::get('widgets/{id}', 'ApiController@find');
+                Route::get('faqs', 'ApiController@all');
+                Route::get('faqs/{id}', 'ApiController@find');
 
-            Route::get('images', 'ApiController@all');
-            Route::get('images/{id}', 'ApiController@find');
+                Route::get('files', 'ApiController@all');
+                Route::get('files/{id}', 'ApiController@find');
 
-            Route::get('files', 'ApiController@all');
-            Route::get('files/{id}', 'ApiController@find');
+                Route::get('images', 'ApiController@all');
+                Route::get('images/{id}', 'ApiController@find');
 
-            Route::get('faqs', 'ApiController@all');
-            Route::get('faqs/{id}', 'ApiController@find');
+                Route::get('pages', 'ApiController@all');
+                Route::get('pages/{id}', 'ApiController@find');
 
-            Route::get('events', 'ApiController@all');
-            Route::get('events/{id}', 'ApiController@find');
+                Route::get('widgets', 'ApiController@all');
+                Route::get('widgets/{id}', 'ApiController@find');
+            });
         });
 
         /*

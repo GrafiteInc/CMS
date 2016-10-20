@@ -58,7 +58,7 @@ If you just want to add Quarx to your existing application and already have your
 * Add the following to your routes provider:
 
 ```php
-require base_path('routes/quarx-routes.php');
+require base_path('routes/quarx.php');
 ```
 
 * Add the following to your app.scss file, you will want to modify depending on your theme of choice.
@@ -77,6 +77,7 @@ php artisan migrate
 
 ```php
 'quarx' => \App\Http\Middleware\Quarx::class,
+'quarx-api' => \App\Http\Middleware\QuarxApi::class,
 ```
 
 In order to have modules load as well please add the following to your composer file:
@@ -92,16 +93,42 @@ Quarx requires Laracogs to run (only for the FormMaker), but Quarx does not requ
 
 Possible Quarx Policy:
 ```
-$gate->define('quarx', function ($user) {
+Gate::define('quarx-api', function ($user) {
+    return true;
+});
+
+Gate::define('quarx', function ($user) {
     return (bool) $user;
 });
 ```
 
 Or Using Laracogs:
 ```
-$gate->define('quarx', function ($user) {
+Gate::define('quarx', function ($user) {
     return ($user->roles->first()->name === 'admin');
 });
+```
+
+## API Endpoints
+
+Quarx comes with a collection of handy API endpoints if you wish to use them. You can define your own policies for access and customize the middleware as you see fit.
+** All published and public facing data will be available via the API by default.
+
+```
+/quarx/api/blog
+/quarx/api/blog/{id}
+/quarx/api/events
+/quarx/api/events/{id}
+/quarx/api/faqs
+/quarx/api/faqs/{id}
+/quarx/api/files
+/quarx/api/files/{id}
+/quarx/api/images
+/quarx/api/images/{id}
+/quarx/api/pages
+/quarx/api/pages/{id}
+/quarx/api/widgets
+/quarx/api/widgets/{id}
 ```
 
 ## License

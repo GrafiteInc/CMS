@@ -37,8 +37,7 @@ class CrudSingleGeneratorTest extends PHPUnit_Framework_TestCase
             'routes_suffix' => '',
             '_namespace_services_' => 'App\Services',
             '_namespace_facade_' => 'App\Facades',
-            '_namespace_repository_' => 'App\Repositories\\'.ucfirst('testTable'),
-            '_namespace_model_' => 'App\Repositories\\'.ucfirst('testTable'),
+            '_namespace_model_' => 'App\Models',
             '_namespace_controller_' => 'App\Http\Controllers',
             '_namespace_api_controller_' => 'App\Http\Controllers\Api',
             '_namespace_request_' => 'App\Http\Requests',
@@ -55,10 +54,10 @@ class CrudSingleGeneratorTest extends PHPUnit_Framework_TestCase
         $this->crud = vfsStream::setup('Http/Controllers');
         $this->generator->createController($this->config);
 
-        $contents = $this->crud->getChild('Http/Controllers/TestTableController.php');
+        $contents = $this->crud->getChild('Http/Controllers/TestTablesController.php');
 
-        $this->assertTrue($this->crud->hasChild('Http/Controllers/TestTableController.php'));
-        $this->assertContains('class TestTableController extends Controller', $contents->getContent());
+        $this->assertTrue($this->crud->hasChild('Http/Controllers/TestTablesController.php'));
+        $this->assertContains('class TestTablesController extends Controller', $contents->getContent());
     }
 
     public function testRequestGenerator()
@@ -91,8 +90,8 @@ class CrudSingleGeneratorTest extends PHPUnit_Framework_TestCase
         $this->generator->createRoutes($this->config, false);
         $contents = $this->crud->getChild('Http/routes.php');
 
-        $this->assertContains('TestTableController', $contents->getContent());
-        $this->assertContains('TestTableController@search', $contents->getContent());
+        $this->assertContains('TestTablesController', $contents->getContent());
+        $this->assertContains('TestTablesController@search', $contents->getContent());
     }
 
     public function testViewsGenerator()
@@ -132,10 +131,6 @@ class CrudSingleGeneratorTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($this->generator->createTests($this->config, true));
 
         $this->assertFalse($this->crud->hasChild('tests/TestTableAcceptanceTest.php'));
-
-        $contents = $this->crud->getChild('tests/TestTableRepositoryTest.php');
-        $this->assertTrue($this->crud->hasChild('tests/TestTableRepositoryTest.php'));
-        $this->assertContains('class TestTableRepositoryTest', $contents->getContent());
 
         $contents = $this->crud->getChild('tests/TestTableServiceTest.php');
         $this->assertTrue($this->crud->hasChild('tests/TestTableServiceTest.php'));

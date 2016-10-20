@@ -6,9 +6,9 @@ use Quarx;
 use CryptoService;
 use Illuminate\Http\Request;
 use _app_namespace_Http\Controllers\Controller;
-use Quarx\Modules\_camel_casePlural_\Services\_camel_case_Service;
+use Quarx\Modules\_ucCamel_casePlural_\Services\_camel_case_Service;
 
-class _camel_case_Controller extends Controller
+class _ucCamel_casePlural_Controller extends Controller
 {
     public function __construct(_camel_case_Service $_lower_case_Service)
     {

@@ -4,7 +4,7 @@ namespace Yab\Quarx\Controllers;
 
 use Quarx;
 use Response;
-use Yab\Quarx\Models\Pages;
+use Yab\Quarx\Models\Page;
 use Illuminate\Http\Request;
 use Yab\Quarx\Requests\PagesRequest;
 use Yab\Quarx\Services\ValidationService;
@@ -72,7 +72,7 @@ class PagesController extends QuarxController
      */
     public function store(Request $request)
     {
-        $validation = ValidationService::check(Pages::$rules);
+        $validation = ValidationService::check(Page::$rules);
 
         if (!$validation['errors']) {
             $pages = $this->pagesRepository->store($request->all());

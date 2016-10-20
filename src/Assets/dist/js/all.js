@@ -47,15 +47,15 @@ $(function() {
         $('.loading-overlay').show();
     });
 
-    $("#gondolynLoginPanel").bind("click", function(e) {
+    $("#quarxLoginPanel").bind("click", function(e) {
         e.preventDefault();
-        gondolynModal();
+        quarxModal();
         showLoginPanel();
     });
 
-    $(".gondolyn-modal").bind("click", function(){
-        $(".gondolyn-modal").fadeOut();
-        $(".gondolyn-login").removeClass("gondolyn-login-animate");
+    $(".quarx-modal").bind("click", function(){
+        $(".quarx-modal").fadeOut();
+        $(".quarx-login").removeClass("quarx-login-animate");
     });
 
     $(window).resize(function(){
@@ -72,29 +72,29 @@ $(function() {
 */
 
 function quarxNotify(message, _type) {
-    $(".gondolyn-notification").css("display", "block");
-    $(".gondolyn-notification").addClass(_type);
+    $(".quarx-notification").css("display", "block");
+    $(".quarx-notification").addClass(_type);
 
-    $(".gondolyn-notify-comment").html(message);
-    $(".gondolyn-notification").animate({
+    $(".quarx-notify-comment").html(message);
+    $(".quarx-notification").animate({
         right: "20px",
     });
 
-    $(".gondolyn-notify-closer-icon").click(function(){
-        $(".gondolyn-notification").animate({
+    $(".quarx-notify-closer-icon").click(function(){
+        $(".quarx-notification").animate({
             right: "-300px"
         },"", function(){
-            $(".gondolyn-notification").css("display", "none");
-            $(".gondolyn-notify-comment").html("");
+            $(".quarx-notification").css("display", "none");
+            $(".quarx-notify-comment").html("");
         });
     });
 
     setTimeout(function(){
-        $(".gondolyn-notification").animate({
+        $(".quarx-notification").animate({
             right: "-300px"
         },"", function(){
-            $(".gondolyn-notification").css("display", "none");
-            $(".gondolyn-notify-comment").html("");
+            $(".quarx-notification").css("display", "none");
+            $(".quarx-notify-comment").html("");
         });
     }, 8000);
 }
@@ -105,8 +105,8 @@ function quarxNotify(message, _type) {
 |--------------------------------------------------------------------------
 */
 
-function gondolynModal() {
-    $(".gondolyn-modal").fadeIn();
+function quarxModal() {
+    $(".quarx-modal").fadeIn();
 }
 
 /*

@@ -4,8 +4,8 @@ namespace Yab\Quarx\Requests;
 
 use Auth;
 use Gate;
+use Yab\Quarx\Models\Widget;
 use Illuminate\Foundation\Http\FormRequest;
-use Yab\Quarx\Models\Widgets;
 
 class WidgetsRequest extends FormRequest
 {
@@ -30,6 +30,6 @@ class WidgetsRequest extends FormRequest
      */
     public function rules()
     {
-        return Widgets::$rules;
+        return Widget::$rules;
     }
 }

@@ -7,7 +7,7 @@ class PagesTest extends TestCase
         parent::setUp();
         $this->withoutMiddleware();
         $this->withoutEvents();
-        factory(\Yab\Quarx\Models\Pages::class)->create();
+        factory(\Yab\Quarx\Models\Page::class)->create();
     }
 
     /*
@@ -44,7 +44,7 @@ class PagesTest extends TestCase
 
     public function testStore()
     {
-        $pages = factory(\Yab\Quarx\Models\Pages::class)->make(['id' => 2]);
+        $pages = factory(\Yab\Quarx\Models\Page::class)->make(['id' => 2]);
         $response = $this->call('POST', 'quarx/pages', $pages['attributes']);
 
         $this->assertEquals(302, $response->getStatusCode());
@@ -67,8 +67,6 @@ class PagesTest extends TestCase
             'title' => 'smarter',
             'url'   => 'smart',
         ]);
-
-        // dd($response);
 
         $this->assertEquals(302, $response->getStatusCode());
         $this->seeInDatabase('pages', ['title' => 'smarter']);

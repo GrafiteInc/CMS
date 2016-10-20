@@ -4,8 +4,8 @@ namespace Yab\Quarx\Requests;
 
 use Auth;
 use Gate;
+use Yab\Quarx\Models\Image;
 use Illuminate\Foundation\Http\FormRequest;
-use Yab\Quarx\Models\Images;
 
 class ImagesRequest extends FormRequest
 {
@@ -30,6 +30,6 @@ class ImagesRequest extends FormRequest
      */
     public function rules()
     {
-        return Images::$rules;
+        return Image::$rules;
     }
 }

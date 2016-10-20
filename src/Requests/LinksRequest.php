@@ -4,8 +4,8 @@ namespace Yab\Quarx\Requests;
 
 use Auth;
 use Gate;
+use Yab\Quarx\Models\Link;
 use Illuminate\Foundation\Http\FormRequest;
-use Yab\Quarx\Models\Links;
 
 class LinksRequest extends FormRequest
 {
@@ -30,6 +30,6 @@ class LinksRequest extends FormRequest
      */
     public function rules()
     {
-        return Links::$rules;
+        return Link::$rules;
     }
 }

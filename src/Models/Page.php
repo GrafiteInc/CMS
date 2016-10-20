@@ -12,6 +12,6 @@ class Page extends QuarxModel
 
     public static $rules = [
         'title' => 'required',
-        'url'   => 'required',
+        'url' => 'required',
     ];
 }

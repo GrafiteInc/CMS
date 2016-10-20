@@ -4,8 +4,8 @@ namespace Yab\Quarx\Requests;
 
 use Auth;
 use Gate;
+use Yab\Quarx\Models\Page;
 use Illuminate\Foundation\Http\FormRequest;
-use Yab\Quarx\Models\Pages;
 
 class PagesRequest extends FormRequest
 {
@@ -30,6 +30,6 @@ class PagesRequest extends FormRequest
      */
     public function rules()
     {
-        return Pages::$rules;
+        return Page::$rules;
     }
 }

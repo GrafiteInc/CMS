@@ -7,7 +7,7 @@ class WidgetsTest extends TestCase
         parent::setUp();
         $this->withoutMiddleware();
         $this->withoutEvents();
-        factory(\Yab\Quarx\Models\Widgets::class)->create();
+        factory(\Yab\Quarx\Models\Widget::class)->create();
     }
 
     /*
@@ -44,7 +44,7 @@ class WidgetsTest extends TestCase
 
     public function testStore()
     {
-        $widgets = factory(\Yab\Quarx\Models\Widgets::class)->make(['id' => 2]);
+        $widgets = factory(\Yab\Quarx\Models\Widget::class)->make(['id' => 2]);
         $response = $this->call('POST', 'quarx/widgets', $widgets['attributes']);
 
         $this->assertEquals(302, $response->getStatusCode());

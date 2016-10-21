@@ -3,6 +3,17 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 ----
 
+## [v2.1.0] - 2016-10-21
+
+### Added
+- New API layer for basic API requests
+
+### Changed
+- Renamed models and repositories with singular names. This requires updates to your app's PagesController etc.
+
+### Fixed
+- General improvements and fixes for simple setup
+
 ## [v2.0.1] - 2016-10-01
 
 ### Fixed

@@ -11,8 +11,10 @@ Quarx comes with a module builder for all your custom CMS needs, as well as a mo
 ## Documentation
 [http://quarx.info](http://quarx.info)
 
-## Requirements
+## YAB Newsletter
+[Subscribe](http://eepurl.com/ck7dSv)
 
+## Requirements
 1. PHP 5.6+
 2. OpenSSL
 3. Laravel 5.1 - 5.2 (v1.4.*)

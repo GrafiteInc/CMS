@@ -3,6 +3,17 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 ----
 
+## [v2.1.2] - 2016-10-21
+
+### Added
+- New tokens for API calls
+
+### Changed
+- Moved migrations to publish directory
+
+### Fixed
+- API requests with gateway
+
 ## [v2.1.1] - 2016-10-21
 
 ### Fixed

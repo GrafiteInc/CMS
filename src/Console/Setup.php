@@ -132,6 +132,7 @@ class Setup extends Command
 
             $this->info('Finished setting up your site with Quarx!');
             $this->info('Please run:');
+            $this->comment('npm install');
             $this->comment('gulp');
             $this->line('You can now login with the following username and password:');
             $this->comment('admin@admin.com');

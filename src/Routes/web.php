@@ -21,6 +21,7 @@
         Route::group(['prefix' => 'quarx/api'], function () {
             Route::get('images/list', 'ImagesController@apiList');
             Route::post('images/store', 'ImagesController@apiStore');
+            Route::get('files/list', 'FilesController@apiList');
 
             Route::group(['middleware' => ['quarx-api']], function () {
                 Route::get('blog', 'ApiController@all');
@@ -146,8 +147,6 @@
                 | Files
                 |--------------------------------------------------------------------------
                 */
-
-                Route::get('api/files/list', 'FilesController@apiList');
 
                 Route::get('files/remove/{id}', 'FilesController@remove');
                 Route::post('files/upload', 'FilesController@upload');

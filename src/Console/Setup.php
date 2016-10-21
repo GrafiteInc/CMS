@@ -216,7 +216,7 @@ class Setup extends Command
 
         // AuthProviders
         $authProviderContents = file_get_contents(app_path('Providers/AuthServiceProvider.php'));
-        $authProviderContents = str_replace('$this->registerPolicies();', "\$this->registerPolicies();\n\t\t\Gate::define('quarx-api', function (\$user) {\n\t\t\treturn true;\n\t\t});\n\t\t\Gate::define('quarx', function (\$user) {\n\t\t\treturn (\$user->roles->first()->name === 'admin');\n\t\t});\n\t\t\Gate::define('admin', function (\$user) {\n\t\t\treturn (\$user->roles->first()->name === 'admin');\n\t\t});", $authProviderContents);
+        $authProviderContents = str_replace('$this->registerPolicies();', "\$this->registerPolicies();\n\t\t\Gate::define('quarx', function (\$user) {\n\t\t\treturn (\$user->roles->first()->name === 'admin');\n\t\t});\n\t\t\Gate::define('admin', function (\$user) {\n\t\t\treturn (\$user->roles->first()->name === 'admin');\n\t\t});", $authProviderContents);
         file_put_contents(app_path('Providers/AuthServiceProvider.php'), $authProviderContents);
 
         // Remove the teams

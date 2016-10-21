@@ -114,6 +114,15 @@ Gate::define('quarx', function ($user) {
 ## API Endpoints
 
 Quarx comes with a collection of handy API endpoints if you wish to use them. You can define your own policies for access and customize the middleware as you see fit.
+
+#### Token
+
+The basic Quarx API endpoints must carry the Quarx `apiToken` defined in the config for the app. This can be provided by adding the following to any request:
+
+```
+?token={your token}
+```
+
 ** All published and public facing data will be available via the API by default.
 
 ```

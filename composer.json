@@ -20,7 +20,8 @@
         "spatie/laravel-analytics": "^1.4",
         "aws/aws-sdk-php": "^3.18",
         "league/flysystem-aws-s3-v3": "^1.0",
-        "graham-campbell/markdown": "^6.1"
+        "graham-campbell/markdown": "^6.1",
+        "intervention/image": "^2.3"
     },
     "require-dev": {
         "mockery/mockery": "^0.9.4",

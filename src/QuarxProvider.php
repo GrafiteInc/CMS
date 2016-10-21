@@ -20,12 +20,12 @@ class QuarxProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__.'/PublishedAssets/Views/themes'         => base_path('resources/themes'),
-            __DIR__.'/PublishedAssets/Controllers'          => app_path('Http/Controllers/Quarx'),
-            __DIR__.'/Migrations'                           => base_path('database/migrations'),
-            __DIR__.'/PublishedAssets/Middleware'           => app_path('Http/Middleware'),
-            __DIR__.'/PublishedAssets/Routes'               => base_path('routes'),
-            __DIR__.'/PublishedAssets/Config'               => base_path('config'),
+            __DIR__.'/PublishedAssets/Views/themes' => base_path('resources/themes'),
+            __DIR__.'/PublishedAssets/Controllers' => app_path('Http/Controllers/Quarx'),
+            __DIR__.'/PublishedAssets/Migrations' => base_path('database/migrations'),
+            __DIR__.'/PublishedAssets/Middleware' => app_path('Http/Middleware'),
+            __DIR__.'/PublishedAssets/Routes' => base_path('routes'),
+            __DIR__.'/PublishedAssets/Config' => base_path('config'),
         ]);
 
         $theme = Config::get('quarx.frontend-theme', 'default');

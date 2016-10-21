@@ -30,7 +30,7 @@
                     <div class="col-md-12 raw-margin-top-24">
                        <label> Role</label>
                         <select class="form-control" name="role">
-                            @foreach(App\Repositories\Role\Role::all() as $role)
+                            @foreach(App\Models\Role::all() as $role)
                                 <option @if($user->roles->first()->id === $role->id) selected @endif value="{{ $role->name }}">{{ $role->label }}</option>
                             @endforeach
                         </select>

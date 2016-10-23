@@ -20,7 +20,9 @@
             <div class="col-md-4">
                 <div class="well">
                     <h3>Basics</h3>
-                    <p>In order to add content to this page login to Quarx and add a home page. Remember you can set up your own Auth for Quarx or run the artisan command: <code>php artisan quarx:prepare</code> to get a prebuilt auth system.</p>
+                    <p>In order to add content to this page login to Quarx and add a home page. Remember you can set up
+                        your own Auth for Quarx or run the artisan command: <code>php artisan quarx:setup</code> to get
+                        a prebuilt auth system.</p>
                     <p>Once you're all set up try building a menu with slug: main, and a widget with the slug: widget. You'll see the theme display them right away!</p>
                 </div>
             </div>

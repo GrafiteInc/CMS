@@ -13,7 +13,11 @@
             <pre>php artisan vendor:publish</pre>
 
             <h2>API Endpoints</h2>
-            <p>Quarx comes with a very basic API. It provides access to all published public facing data. You can define details in your Quarx API polcies and the middleware.</p>
+            <p>Quarx comes with a very basic API. It provides access to all published public facing data. You can define details in your Quarx API middleware.</p>
+
+            <p>Out of the box Quarx API requires use of the <code>apiToken</code> set in the config of your app.</p>
+
+            <p>All requests should have the following added to the url: <code>?token={config.quarx.apiToken}</code></p>
 
             <pre>/quarx/api/blog
 /quarx/api/blog/{id}

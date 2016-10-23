@@ -302,6 +302,7 @@ public function leaveAllTeams($userId)
         $userService = str_replace('use App\Models\Team;', '', $userService);
         $userService = str_replace('Team $team,', '', $userService);
         $userService = str_replace('$this->team = $team;', '', $userService);
+        $userService = str_replace('$this->leaveAllTeams($id);', '', $userService);
         file_put_contents(app_path('Services/UserService.php'), $userService);
 
         $seed = file_get_contents(base_path('database/seeds/DatabaseSeeder.php'));

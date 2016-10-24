@@ -3,6 +3,14 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 ----
 
+## [v2.1.3] - 2016-10-24
+
+### Changed
+- Updates to docs on landing page
+
+### Fixed
+- Minor issue with team leftover
+
 ## [v2.1.2] - 2016-10-21
 
 ### Added

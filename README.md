@@ -11,7 +11,7 @@ Quarx comes with a module builder for all your custom CMS needs, as well as a mo
 ## Documentation
 [http://quarx.info](http://quarx.info)
 
-## YAB Newsletter
+## Yab Newsletter
 [Subscribe](http://eepurl.com/ck7dSv)
 
 ## Requirements

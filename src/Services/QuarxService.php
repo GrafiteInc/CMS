@@ -267,7 +267,9 @@ class QuarxService
                 $response .= "<a href=\"$link->external_url\">$link->name</a>";
             } else {
                 $page = $pageRepo->findPagesById($link->page_id);
-                $response .= '<a href="'.URL::to('page/'.$page->url)."\">$link->name</a>";
+                if ($page) {
+                    $response .= '<a href="'.URL::to('page/'.$page->url)."\">$link->name</a>";
+                }
             }
         }
 

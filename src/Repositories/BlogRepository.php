@@ -17,17 +17,18 @@ class BlogRepository
      */
     public function all()
     {
-        return Blog::orderBy('created_at', 'desc')->all();
+        return Blog::orderBy('published_at', 'desc')->all();
     }
 
     public function paginated()
     {
-        return Blog::orderBy('created_at', 'desc')->paginate(Config::get('quarx.pagination', 25));
+        return Blog::orderBy('published_at', 'desc')->paginate(Config::get('quarx.pagination', 25));
     }
 
     public function publishedAndPaginated()
     {
-        return Blog::orderBy('created_at', 'desc')->where('is_published', 1)->where('published_at', '<=', Carbon::now()->format('Y-m-d h:i:s'))->paginate(Config::get('quarx.pagination', 25));
+        return Blog::orderBy('published_at', 'desc')->where('is_published', 1)->where('published_at', '<=',
+            Carbon::now()->format('Y-m-d h:i:s'))->paginate(Config::get('quarx.pagination', 25));
     }
 
     public function published()
@@ -42,8 +43,8 @@ class BlogRepository
 
     public function allTags()
     {
-        $tags = [];
-        $blogs = Blog::orderBy('created_at', 'desc')->get();
+        $tags  = [];
+        $blogs = Blog::orderBy('published_at', 'desc')->get();
 
         foreach ($blogs as $blog) {
             foreach (explode(',', $blog->tags) as $tag) {
@@ -56,7 +57,7 @@ class BlogRepository
 
     public function search($input)
     {
-        $query = Blog::orderBy('created_at', 'desc');
+        $query = Blog::orderBy('published_at', 'desc');
         $query->where('id', 'LIKE', '%'.$input['term'].'%');
 
         $columns = Schema::getColumnListing('blogs');

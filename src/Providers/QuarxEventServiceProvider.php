@@ -21,6 +21,15 @@ class QuarxEventServiceProvider extends ServiceProvider
         'eloquent.saved: Yab\Quarx\Models\Event' => [
             'Yab\Quarx\Models\Event@afterSaved',
         ],
+        'eloquent.saved: Yab\Quarx\Models\FAQ' => [
+            'Yab\Quarx\Models\Event@afterSaved',
+        ],
+        'eloquent.saved: Yab\Quarx\Models\Translation' => [
+            'Yab\Quarx\Models\Event@afterSaved',
+        ],
+        'eloquent.saved: Yab\Quarx\Models\Widget' => [
+            'Yab\Quarx\Models\Event@afterSaved',
+        ],
     ];
 
     /**

@@ -17,6 +17,5 @@ class Archive extends Model
         'entity_data',
     ];
 
-    public static $rules = [
-    ];
+    public static $rules = [];
 }

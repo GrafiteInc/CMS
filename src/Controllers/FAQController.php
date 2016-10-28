@@ -2,6 +2,7 @@
 
 namespace Yab\Quarx\Controllers;
 
+use URL;
 use Quarx;
 use Yab\Quarx\Models\FAQ;
 use Illuminate\Http\Request;
@@ -132,7 +133,7 @@ class FAQController extends QuarxController
             Quarx::notification('FAQ could not be saved.', 'warning');
         }
 
-        return redirect(route('quarx.faqs.edit', [$id]));
+        return redirect(URL::previous());
     }
 
     /**

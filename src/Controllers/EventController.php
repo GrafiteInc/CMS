@@ -2,6 +2,7 @@
 
 namespace Yab\Quarx\Controllers;
 
+use URL;
 use Quarx;
 use Yab\Quarx\Models\Event;
 use Illuminate\Http\Request;
@@ -132,7 +133,7 @@ class EventController extends QuarxController
             Quarx::notification('Event could not be saved.', 'warning');
         }
 
-        return redirect(route('quarx.events.edit', [$id]));
+        return redirect(URL::previous());
     }
 
     /**

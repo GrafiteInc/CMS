@@ -2,6 +2,7 @@
 
 namespace Yab\Quarx\Controllers;
 
+use URL;
 use Quarx;
 use Yab\Quarx\Models\Blog;
 use Illuminate\Http\Request;
@@ -132,7 +133,7 @@ class BlogController extends QuarxController
             Quarx::notification('Blog could not be saved.', 'warning');
         }
 
-        return redirect(route('quarx.blog.edit', [$id]));
+        return redirect(URL::previous());
     }
 
     /**

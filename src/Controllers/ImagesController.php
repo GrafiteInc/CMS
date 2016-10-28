@@ -248,7 +248,6 @@ class ImagesController extends QuarxController
     public function apiStore(Request $request)
     {
         $image = $this->imagesRepository->apiStore($request->all());
-        $image->location = FileService::fileAsPublicAsset($image->location);
 
         return QuarxResponseService::apiResponse('success', $image);
     }

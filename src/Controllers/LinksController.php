@@ -53,7 +53,7 @@ class LinksController extends QuarxController
      *
      * @return Response
      */
-    public function store(Request $request)
+    public function store(LinksRequest $request)
     {
         try {
             $validation = ValidationService::check(Link::$rules);

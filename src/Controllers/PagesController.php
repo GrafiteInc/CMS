@@ -2,6 +2,7 @@
 
 namespace Yab\Quarx\Controllers;
 
+use URL;
 use Quarx;
 use Response;
 use Yab\Quarx\Models\Page;
@@ -133,7 +134,7 @@ class PagesController extends QuarxController
             Quarx::notification('Page could not be saved.', 'warning');
         }
 
-        return redirect(route('quarx.pages.edit', [$id]));
+        return redirect(URL::previous());
     }
 
     /**

@@ -2,6 +2,7 @@
 
 namespace Yab\Quarx\Controllers;
 
+use URL;
 use Quarx;
 use Illuminate\Http\Request;
 use Yab\Quarx\Models\Widget;
@@ -126,7 +127,7 @@ class WidgetsController extends QuarxController
 
         Quarx::notification('Widgets updated successfully.', 'success');
 
-        return redirect(route('quarx.widgets.edit', [$id]));
+        return redirect(URL::previous());
     }
 
     /**

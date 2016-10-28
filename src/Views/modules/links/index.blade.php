@@ -24,7 +24,7 @@
         <thead>
             <th>Name</th>
             <th class="raw-m-hide">Links To</th>
-            <th width="200px" class="text-right">Action</th>
+            <th width="200px" class="text-right">Actions</th>
         </thead>
         <tbody>
 

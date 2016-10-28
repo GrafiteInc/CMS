@@ -178,7 +178,11 @@ class QuarxService
             $widget->content .= '<a href="'.url('quarx/widgets/'.$widget->id.'/edit').'" style="margin-left: 8px;" class="btn btn-xs btn-default"><span class="fa fa-pencil"></span> Edit</a>';
         }
 
-        return $widget->content;
+        if (config('app.locale') !== config('quarx.default-language') && $widget->translation(config('app.locale'))) {
+            return $widget->translationData(config('app.locale'))->content;
+        } else {
+            return $widget->content;
+        }
     }
 
     /**
@@ -261,14 +265,19 @@ class QuarxService
 
         $links = LinkRepository::getLinksByMenuID($menu->id);
         $response = '';
-
         foreach ($links as $link) {
             if ($link->external) {
                 $response .= "<a href=\"$link->external_url\">$link->name</a>";
             } else {
                 $page = $pageRepo->findPagesById($link->page_id);
                 if ($page) {
-                    $response .= '<a href="'.URL::to('page/'.$page->url)."\">$link->name</a>";
+                    if (config('app.locale') == config('quarx.default-language', $this->config('quarx.default-language'))) {
+                        $response .= '<a href="'.URL::to('page/'.$page->url)."\">$link->name</a>";
+                    } else if (config('app.locale') != config('quarx.default-language', $this->config('quarx.default-language'))) {
+                        if ($page->translation(config('app.locale'))) {
+                            $response .= '<a href="'.URL::to('page/'.$page->translation(config('app.locale'))->data->url)."\">$link->name</a>";
+                        }
+                    }
                 }
             }
         }

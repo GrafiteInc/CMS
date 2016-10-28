@@ -7,9 +7,17 @@ use Carbon\Carbon;
 use Yab\Quarx\Models\Blog;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Schema;
+use Yab\Quarx\Repositories\TranslationRepository;
 
 class BlogRepository
 {
+    protected $translationRepo;
+
+    public function __construct()
+    {
+        $this->translationRepo = app(TranslationRepository::class);
+    }
+
     /**
      * Returns all Blogs.
      *
@@ -106,7 +114,15 @@ class BlogRepository
      */
     public function findBlogsByURL($url)
     {
-        return Blog::where('url', $url)->where('is_published', 1)->first();
+        $blog = null;
+
+        $blog = Blog::where('url', $url)->where('is_published', 1)->where('published_at', '<=', Carbon::now()->format('Y-m-d h:i:s'))->first();
+
+        if (! $blog) {
+            $blog = $this->translationRepo->findByUrl($url, 'Yab\Quarx\Models\Blog');
+        }
+
+        return $blog;
     }
 
     /**
@@ -129,12 +145,18 @@ class BlogRepository
      *
      * @return Blog
      */
-    public function update($blog, $input)
+    public function update($blog, $payload)
     {
-        $input['url'] = Quarx::convertToURL($input['url']);
-        $input['is_published'] = (isset($input['is_published'])) ? (bool) $input['is_published'] : 0;
-        $input['published_at'] = (isset($input['published_at']) && !empty($input['published_at'])) ? $input['published_at'] : Carbon::now()->format('Y-m-d h:i:s');
+        if (! empty($payload['lang']) && $payload['lang'] !== config('quarx.default-language', 'en')) {
+            return $this->translationRepo->createOrUpdate($blog->id, 'Yab\Quarx\Models\Blog', $payload);
+        } else {
+            $payload['url'] = Quarx::convertToURL($payload['url']);
+            $payload['is_published'] = (isset($payload['is_published'])) ? (bool) $payload['is_published'] : 0;
+            $payload['published_at'] = (isset($payload['published_at']) && !empty($payload['published_at'])) ? $payload['published_at'] : Carbon::now()->format('Y-m-d h:i:s');
 
-        return $blog->update($input);
+            unset($payload['lang']);
+
+            return $blog->update($payload);
+        }
     }
 }

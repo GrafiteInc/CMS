@@ -43,7 +43,7 @@
                     <th>Start Date</th>
                     <th>End Date</th>
                     <th class="raw-m-hide text-center">Is Published</th>
-                    <th width="200px" class="text-right">Action</th>
+                    <th width="200px" class="text-right">Actions</th>
                 </thead>
                 <tbody>
 

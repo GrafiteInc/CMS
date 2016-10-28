@@ -38,43 +38,36 @@
         @if ($images->isEmpty())
             <div class="well text-center">No images found.</div>
         @else
-
-            @foreach($images as $image)
-
-            <div class="col-md-3 panel raw-margin-top-24">
-                <div class="thumbnail">
-                    <a href="{!! route('quarx.images.edit', [$image->id]) !!}">
-                        <div class="img" style="background-image: url('{!! FileService::filePreview($image->location) !!}')"></div>
-                    </a>
-                </div>
-                <div class="well pull-down overflow-hidden">
-                    @if (! empty($image->name))
-                    <p>{!! str_limit($image->name, 35) !!}</p>
-                    @else
-                    <p>{!! str_limit($image->original_name, 35) !!}</p>
-                    @endif
-                    <div class="row">
-                        <div class="col-lg-6 col-md-12 col-sm-12">
-                            @if ($image->is_published)
-                                <span clas="pull-left"><span class="pull-left fa fa-check"></span> Published</span>
-                            @else
-                                <span clas="pull-left"><span class="pull-left fa fa-close"></span> Published</span>
-                            @endif
+            <div class="row">
+                @foreach($images as $image)
+                    <div class="col-md-3 panel raw-margin-top-24">
+                        <div class="thumbnail">
+                            <a href="{!! route('quarx.images.edit', [$image->id]) !!}">
+                                <div class="img" style="background-image: url('{!! FileService::filePreview($image->location) !!}')"></div>
+                            </a>
                         </div>
-                        <div class="col-lg-6 col-md-12 col-sm-12">
-                            <form method="post" action="{!! url('quarx/images/'.$image->id) !!}">
-                                {!! csrf_field() !!}
-                                {!! method_field('DELETE') !!}
-                                <button class="delete-btn btn btn-xs btn-danger pull-right" type="submit"><i class="fa fa-trash"></i></button>
-                            </form>
-                            <a class="btn btn-xs btn-default pull-right raw-margin-right-8" href="{!! route('quarx.images.edit', [$image->id]) !!}"><i class="fa fa-pencil"></i></a>
+                        <div class="well pull-down overflow-hidden">
+                            <div class="row">
+                                <div class="col-lg-6 col-md-12 col-sm-12">
+                                    @if ($image->is_published)
+                                        <span clas="pull-left"><span class="pull-left fa fa-check"></span> Published</span>
+                                    @else
+                                        <span clas="pull-left"><span class="pull-left fa fa-close"></span> Published</span>
+                                    @endif
+                                </div>
+                                <div class="col-lg-6 col-md-12 col-sm-12">
+                                    <form method="post" action="{!! url('quarx/images/'.$image->id) !!}">
+                                        {!! csrf_field() !!}
+                                        {!! method_field('DELETE') !!}
+                                        <button class="delete-btn btn btn-xs btn-danger pull-right" type="submit"><i class="fa fa-trash"></i></button>
+                                    </form>
+                                    <a class="btn btn-xs btn-default pull-right raw-margin-right-8" href="{!! route('quarx.images.edit', [$image->id]) !!}"><i class="fa fa-pencil"></i></a>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
+                @endforeach
             </div>
-
-            @endforeach
-
         @endif
     </div>
 

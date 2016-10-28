@@ -33,17 +33,17 @@
     <div class="row">
 
         @if (isset($term))
-        <div class="well text-center">Searched for "{!! $term !!}".</div>
+            <div class="well text-center">Searched for "{!! $term !!}".</div>
         @endif
 
-        @if($menus->count() === 0)
+        @if ($menus->count() === 0)
             <div class="well text-center">No menus found.</div>
         @else
             <table class="table table-striped">
                 <thead>
                     <th>Name</th>
                     <th class="raw-m-hide">Slug</th>
-                    <th width="200px" class="text-right">Action</th>
+                    <th width="200px" class="text-right">Actions</th>
                 </thead>
                 <tbody>
                     @foreach($menus as $menu)

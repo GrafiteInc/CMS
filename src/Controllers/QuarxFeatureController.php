@@ -31,8 +31,7 @@ class QuarxFeatureController extends QuarxController
             return redirect(URL::previous());
         }
 
-
-        $model = new $modelString();
+        $model = app($modelString);
         $modelInstance = $model->find($id);
 
         $archive = Archive::where('entity_id', $id)->where('entity_type', $modelString)->limit(1)->offset(1)->orderBy('id', 'desc')->first();
@@ -52,6 +51,13 @@ class QuarxFeatureController extends QuarxController
         return redirect(URL::previous());
     }
 
+    /**
+     * Preview content
+     *
+     * @param  string $entity
+     * @param  int $id
+     * @return Response
+     */
     public function preview($entity, $id)
     {
         $modelString = 'Yab\Quarx\Models\\'.ucfirst($entity);
@@ -66,6 +72,14 @@ class QuarxFeatureController extends QuarxController
         $data = [
             $entity => $modelInstance,
         ];
+
+        if (request('lang') != config('quarx.default-language', Quarx::config('quarx.default-language'))) {
+            if ($modelInstance->translation(request('lang'))) {
+                $data = [
+                    $entity => $modelInstance->translation(request('lang'))->data
+                ];
+            }
+        }
 
         $view = 'quarx-frontend::'.$entity.'.show';
 

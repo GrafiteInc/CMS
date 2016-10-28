@@ -2,10 +2,13 @@
 
 namespace Yab\Quarx\Models;
 
+use Yab\Quarx\Traits\Translatable;
 use Illuminate\Database\Eloquent\Model;
 
 class Widget extends Model
 {
+    use Translatable;
+
     public $table = 'widgets';
 
     public $primaryKey = 'id';
@@ -15,5 +18,9 @@ class Widget extends Model
     public static $rules = [
         'name' => 'required',
         'slug' => 'required',
+    ];
+
+    protected $appends = [
+        'translations'
     ];
 }

@@ -2,8 +2,13 @@
 
 namespace Yab\Quarx\Models;
 
-class Page extends QuarxModel
+use Yab\Quarx\Traits\Translatable;
+use Illuminate\Database\Eloquent\Model;
+
+class Page extends Model
 {
+    use Translatable;
+
     public $table = 'pages';
 
     public $primaryKey = 'id';
@@ -13,5 +18,9 @@ class Page extends QuarxModel
     public static $rules = [
         'title' => 'required',
         'url' => 'required',
+    ];
+
+    protected $appends = [
+        'translations'
     ];
 }

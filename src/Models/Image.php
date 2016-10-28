@@ -18,20 +18,13 @@ class Image extends Model
 
     protected $appends = [
         'url',
-        'dataUrl'
+        'js_url',
+        'data_url'
     ];
 
     public static $rules = [
         'location' => 'mimes:jpeg,jpg,bmp,png,gif',
     ];
-
-    // public function toArray()
-    // {
-    //     $array = parent::toArray();
-    //     $array['url'] = $this->url;
-
-    //     return $array;
-    // }
 
     /**
      * Get the images url location.
@@ -43,6 +36,18 @@ class Image extends Model
     public function getUrlAttribute()
     {
         return FileService::fileAsPublicAsset($this->location);
+    }
+
+    /**
+     * Get the images url location.
+     *
+     * @param string $value
+     *
+     * @return string
+     */
+    public function getJsUrlAttribute()
+    {
+        return str_replace(url('/'), '', FileService::fileAsPublicAsset($this->location));
     }
 
     /**

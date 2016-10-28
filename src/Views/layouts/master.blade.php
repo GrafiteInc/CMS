@@ -5,13 +5,13 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
 
-        <title>Quarx</title>
+        <title>Quarx: {{ ucfirst(request()->segment(2)) }}</title>
 
         <link rel="icon" type="image/ico" href="{!! Quarx::asset('images/favicon-cogs.ico', 'image/ico') !!}">
 
         <!-- Bootstrap -->
-        {!! Minify::stylesheet('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css') !!}
-        {!! Minify::stylesheet('https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css') !!}
+        {!! Minify::stylesheet('https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css') !!}
+        {!! Minify::stylesheet('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css') !!}
 
         <!-- App style -->
         {!! Minify::stylesheet(Quarx::asset('dist/css/all.css', 'text/css')) !!}

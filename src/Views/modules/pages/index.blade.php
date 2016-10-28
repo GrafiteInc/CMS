@@ -32,7 +32,7 @@
 
     <div class="row">
         @if (isset($term))
-        <div class="well text-center">Searched for "{!! $term !!}".</div>
+            <div class="well text-center">Searched for "{!! $term !!}".</div>
         @endif
 
         @if($pages->count() === 0)
@@ -43,7 +43,7 @@
                     <th>Title</th>
                     <th class="raw-m-hide">Url</th>
                     <th class="raw-m-hide text-center">Is Published</th>
-                    <th width="200px" class="text-right">Action</th>
+                    <th width="200px" class="text-right">Actions</th>
                 </thead>
                 <tbody>
 

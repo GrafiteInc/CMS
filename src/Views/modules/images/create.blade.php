@@ -11,12 +11,13 @@
 
 @section('content')
 
-        <div class="row">
-            <h1 class="page-header">Images</h1>
-        </div>
+    <div class="row">
+        <h1 class="page-header">Images</h1>
+    </div>
 
-        @include('quarx::modules.images.breadcrumbs', ['location' => ['create']])
+    @include('quarx::modules.images.breadcrumbs', ['location' => ['create']])
 
+    <div class="row">
         {!! Form::open(['url' => 'quarx/images/upload', 'files' => true, 'class' => 'dropzone', 'id' => 'fileDropzone']); !!}
         {!! Form::close() !!}
 
@@ -30,6 +31,7 @@
             </div>
 
         {!! Form::close() !!}
+    </div>
 
 @endsection
 

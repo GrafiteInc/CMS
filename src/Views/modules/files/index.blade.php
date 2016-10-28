@@ -2,9 +2,33 @@
 
 @section('content')
 
-    @include('quarx::modules.files.modals')
+    <div class="modal fade" id="deleteModal" tabindex="-3" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="deleteModalLabel">Delete File</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure want to delete this file?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <a id="deleteBtn" type="button" class="btn btn-warning" href="#">Confirm Delete</a>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    @include('quarx::modules.files.menu', ['createBtn' => true])
+    <div class="row">
+        <a class="btn btn-primary pull-right" href="{!! route('quarx.files.create') !!}">Add New</a>
+        <div class="raw-m-hide pull-right raw-m-hide">
+            {!! Form::open(['url' => 'quarx/files/search']) !!}
+            <input class="form-control header-input pull-right raw-margin-right-24" name="term" placeholder="Search">
+            {!! Form::close() !!}
+        </div>
+        <h1 class="page-header">Files</h1>
+    </div>
 
     <div class="row">
         @if (isset($term))
@@ -17,7 +41,7 @@
                 <thead>
                     <th>Name</th>
                     <th class="raw-m-hide text-center">Published</th>
-                    <th width="200px" class="text-right">Action</th>
+                    <th width="200px" class="text-right">Actions</th>
                 </thead>
                 <tbody>
 

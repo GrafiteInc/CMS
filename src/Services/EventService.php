@@ -101,7 +101,13 @@ class EventService
                     if (is_array($content)) {
                         $itemString = '';
                         foreach ($content as $item) {
-                            $itemString .= '<a href="'.URL::to('events/event/'.$item->id).'">'.$item->title.'</a><br>';
+                            if (config('app.locale') !== config('quarx.default-language')) {
+                                if ($item->translationData(config('app.locale'))) {
+                                    $itemString .= '<a href="'.URL::to('events/event/'.$item->id).'">'.$item->translationData(config('app.locale'))->title.'</a><br>';
+                                }
+                            } else {
+                                $itemString .= '<a href="'.URL::to('events/event/'.$item->id).'">'.$item->title.'</a><br>';
+                            }
                         }
                         $content = $itemString;
                     }

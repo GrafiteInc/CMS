@@ -12,6 +12,9 @@
             <p>To generate these files simple run:</p>
             <pre>php artisan vendor:publish</pre>
 
+            <h2>Multilingual</h2>
+            <p>Quarx is fully multilingual all you need to do is set the languages in your <code>config/quarx.php</code> file and then in your app just set the <code>locale</code> and poof! you have multi-language support.</p>
+
             <h2>API Endpoints</h2>
             <p>Quarx comes with a very basic API. It provides access to all published public facing data. You can define details in your Quarx API middleware.</p>
 

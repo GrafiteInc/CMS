@@ -2,14 +2,17 @@
 
 @section('content')
 
-        @include('quarx::modules.files.menu')
+    <div class="row">
+        <h1 class="page-header">Files</h1>
+    </div>
 
-        @include('quarx::modules.files.breadcrumbs', ['location' => ['edit']])
+    @include('quarx::modules.files.breadcrumbs', ['location' => ['edit']])
 
-        <div class="row raw-margin-bottom-48 raw-margin-top-48 text-center">
-            <a class="btn btn-default" href="{!! FileService::fileAsDownload($files->name, $files->location) !!}"><span class="fa fa-download"></span> Download: {!! $files->name !!}</a>
-        </div>
+    <div class="row raw-margin-bottom-48 raw-margin-top-48 text-center">
+        <a class="btn btn-default" href="{!! FileService::fileAsDownload($files->name, $files->location) !!}"><span class="fa fa-download"></span> Download: {!! $files->name !!}</a>
+    </div>
 
+    <div class="row">
         {!! Form::model($files, ['route' => ['quarx.files.update', $files->id], 'files' => true, 'method' => 'patch', 'class' => 'edit']) !!}
 
             {!! FormMaker::fromObject($files, Config::get('quarx.forms.file-edit')) !!}
@@ -20,6 +23,7 @@
             </div>
 
         {!! Form::close() !!}
+    </div>
 
 @endsection
 

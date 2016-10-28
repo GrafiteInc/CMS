@@ -1,6 +1,7 @@
 @extends('quarx::layouts.dashboard')
 
 @section('content')
+
     <div class="row">
         <h1 class="page-header">Images</h1>
     </div>
@@ -15,14 +16,17 @@
         </div>
     </div>
 
-    {!! Form::model($images, ['route' => ['quarx.images.update', $images->id], 'method' => 'patch', 'files' => true, 'class' => 'edit']) !!}
+    <div class="row">
+        {!! Form::model($images, ['route' => ['quarx.images.update', $images->id], 'method' => 'patch', 'files' => true, 'class' => 'edit']) !!}
 
-        {!! FormMaker::fromObject($images, Config::get('quarx.forms.images-edit')) !!}
+            {!! FormMaker::fromObject($images, Config::get('quarx.forms.images-edit')) !!}
 
-        <div class="form-group text-right">
-            <a href="{!! URL::to('quarx/images') !!}" class="btn btn-default raw-left">Cancel</a>
-            {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
-        </div>
+            <div class="form-group text-right">
+                <a href="{!! URL::to('quarx/images') !!}" class="btn btn-default raw-left">Cancel</a>
+                {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
+            </div>
 
-    {!! Form::close() !!}
+        {!! Form::close() !!}
+    </div>
+
 @endsection

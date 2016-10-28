@@ -6,9 +6,17 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Schema;
 use Yab\Quarx\Models\FAQ;
+use Yab\Quarx\Repositories\TranslationRepository;
 
 class FAQRepository
 {
+    protected $translationRepo;
+
+    public function __construct()
+    {
+        $this->translationRepo = app(TranslationRepository::class);
+    }
+
     /**
      * Returns all FAQS.
      *
@@ -90,16 +98,22 @@ class FAQRepository
     /**
      * Updates FAQ into database.
      *
-     * @param FAQ   $fAQ
+     * @param FAQ   $FAQ
      * @param array $input
      *
      * @return FAQ
      */
-    public function update($fAQ, $input)
+    public function update($FAQ, $payload)
     {
-        $input['is_published'] = (isset($input['is_published'])) ? (bool) $input['is_published'] : 0;
-        $input['published_at'] = (isset($input['published_at']) && !empty($input['published_at'])) ? $input['published_at'] : Carbon::now()->format('Y-m-d h:i:s');
+        if (! empty($payload['lang']) && $payload['lang'] !== config('quarx.default-language', 'en')) {
+            return $this->translationRepo->createOrUpdate($FAQ->id, 'Yab\Quarx\Models\FAQ', $payload);
+        } else {
+            $payload['is_published'] = (isset($payload['is_published'])) ? (bool) $payload['is_published'] : 0;
+            $payload['published_at'] = (isset($payload['published_at']) && !empty($payload['published_at'])) ? $payload['published_at'] : Carbon::now()->format('Y-m-d h:i:s');
 
-        return $fAQ->update($input);
+            unset($payload['lang']);
+
+            return $FAQ->update($payload);
+        }
     }
 }

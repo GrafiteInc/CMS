@@ -27,7 +27,7 @@
             <input class="form-control header-input pull-right raw-margin-right-24" name="term" placeholder="Search">
             {!! Form::close() !!}
         </div>
-        <h1 class="page-header">FAQS</h1>
+        <h1 class="page-header">FAQs</h1>
     </div>
 
     <div class="row">
@@ -41,7 +41,7 @@
                 <thead>
                     <th>Question</th>
                     <th class="raw-m-hide text-center">Is Published</th>
-                    <th width="200px" class="text-right">Action</th>
+                    <th width="200px" class="text-right">Actions</th>
                 </thead>
                 <tbody>
 

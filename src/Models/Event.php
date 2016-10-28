@@ -2,8 +2,13 @@
 
 namespace Yab\Quarx\Models;
 
-class Event extends QuarxModel
+use Yab\Quarx\Traits\Translatable;
+use Illuminate\Database\Eloquent\Model;
+
+class Event extends Model
 {
+    use Translatable;
+
     public $table = 'events';
 
     public $primaryKey = 'id';
@@ -12,5 +17,9 @@ class Event extends QuarxModel
 
     public static $rules = [
         'title' => 'required',
+    ];
+
+    protected $appends = [
+        'translations'
     ];
 }

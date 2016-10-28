@@ -10,14 +10,18 @@
 @endsection
 
 @section('content')
+    <div class="row">
+        <h1 class="page-header">Files</h1>
+    </div>
 
-        @include('quarx::modules.files.menu')
+    @include('quarx::modules.files.breadcrumbs', ['location' => ['create']])
 
-        @include('quarx::modules.files.breadcrumbs', ['location' => ['create']])
-
+    <div class="row">
         {!! Form::open(['url' => 'quarx/files/upload', 'files' => true, 'class' => 'dropzone', 'id' => 'fileDropzone']); !!}
         {!! Form::close() !!}
+    </div>
 
+    <div class="row">
         {!! Form::open(['route' => 'quarx.files.store', 'files' => true, 'id' => 'fileDetailsForm', 'class' => 'add']); !!}
 
             {!! FormMaker::fromTable('files', Config::get('quarx.forms.files')) !!}
@@ -28,7 +32,7 @@
             </div>
 
         {!! Form::close() !!}
-
+    </div>
 @endsection
 
 @section('javascript')

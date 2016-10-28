@@ -21,7 +21,7 @@ elixir(function(mix) {
     mix.scripts([
         'bootstrap.min.js',
         'quarx.js',
-        'quarx-forms.js',
+        'forms.js',
         'typeahead.bundle.js',
         'bootstrap-tagsinput.min.js',
         '../packages/datepicker/moment.js',

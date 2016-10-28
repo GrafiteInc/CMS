@@ -13,7 +13,7 @@ RedactorPlugins.filemanager = function()
             + '<span class="btn btn-default"><span class="fa fa-search"></span></span>'
             + '</span>'
             + '</div>'
-            + '<div id="filemanager-container" class="raw-block-400 quarx-row raw-margin-top-24" style="overflow: scroll;"></div>'
+            + '<div id="filemanager-container" class="raw-block-400 quarx-row raw-margin-top-24" style="overflow: scroll;">Loading your file collection...</div>'
             + '</section>';
         },
         init: function()
@@ -48,9 +48,11 @@ RedactorPlugins.filemanager = function()
                 },
                 success: $.proxy(function(data)
                 {
+                    $('#filemanager-container').html('');
+
                     $.each((data.data), $.proxy(function(key, val)
                     {
-                        var file = $('<div class="list-row raw-left raw100"><div class="raw100 raw-left"><p><span class="fa fa-download"></span> <a class="file-link" href="#" data-url="'+ _url+'/public-download/'+val.file_identifier +'">' + val.file_name + '</a></p></div>');
+                        var file = $('<div class="list-row raw-left raw100"><div class="raw100 raw-left"><p><span class="fa fa-download"></span> <a class="file-link" href="#" data-url="/public-download/'+val.file_identifier +'">' + val.file_name + '</a></p></div>');
                         $('#filemanager-container').append(file);
                         $(file).click($.proxy(this.filemanager.insert, this));
                     }, this));

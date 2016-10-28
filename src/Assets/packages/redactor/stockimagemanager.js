@@ -43,7 +43,9 @@ RedactorPlugins.stockimagemanager = function()
             } else {
                 _searchTerm = '';
             }
+
             $('#stockimagemanager-container').html('loading...');
+
             $.ajax({
                 dataType: "json",
                 cache: false,
@@ -124,7 +126,7 @@ RedactorPlugins.stockimagemanager = function()
                 },
                 success: $.proxy(function(data) {
                     e.preventDefault();
-                    _this.insert.html('<img src="' + data.data.location + '" />', false);
+                    _this.insert.html('<img src="' + data.data.js_url + '" />', false);
                     _this.modal.close();
                 }, this)
             });

@@ -20,7 +20,7 @@ RedactorPlugins.imagemanager = function()
             var $box = $('<div id="redactor-image-manager-box" style="overflow: auto; height: 300px;" class="redactor-tab redactor-tab2">').hide();
             $modal.append($box);
 
-            $("#redactor-image-manager-box, #imagemanager-filter").show();
+            $("#redactor-image-manager-box").html('<p class="text-center raw-margin-top-48">Loading your image collection...</p>').show();
 
             $.ajax({
                 dataType: "json",
@@ -32,13 +32,14 @@ RedactorPlugins.imagemanager = function()
                 url: this.opts.imageManagerJson,
                 success: $.proxy(function(data)
                 {
+                    $('#redactor-image-manager-box').html('');
                     $.each(data.data, $.proxy(function(key, val)
                     {
                         // title
                         var thumbtitle = '';
                         if (typeof val.title_tag != 'undefined') thumbtitle = val.title_tag;
 
-                        var img = $('<div class="raw25 pull-left thumbnail-box"><img class="img-responsive" data-img-name="'+ val.url +'" src="' + val.url + '" rel="' + val.url + '" title="' + thumbtitle + '" style="cursor: pointer;" /></div>');
+                        var img = $('<div class="raw25 pull-left thumbnail-box"><div class="img" style="background-image: url(\'' + val.js_url + '\')" data-img-name="'+ val.js_url +'" src="' + val.js_url + '" rel="' + val.js_url + '" title="' + thumbtitle + '"></div></div>');
                         $('#redactor-image-manager-box').append(img);
                         $(img).click($.proxy(this.imagemanager.insert, this));
 

@@ -3,6 +3,18 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 ----
 
+## [v2.2.0] - 2016-10-28
+
+### Added
+- Now with multilingual support
+
+### Changed
+- Internal improvements to UI and flow
+
+### Fixed
+- Better blog listing
+- menu issue resolved
+
 ## [v2.1.3] - 2016-10-24
 
 ### Changed

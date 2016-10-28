@@ -10,6 +10,7 @@
         Route::get('', 'PagesController@home');
         Route::get('page', 'PagesController@all');
         Route::get('page/{url}', 'PagesController@show');
+        Route::get('p/{url}', 'PagesController@show');
 
         Route::get('gallery', 'GalleryController@all');
         Route::get('gallery/{tag}', 'GalleryController@show');

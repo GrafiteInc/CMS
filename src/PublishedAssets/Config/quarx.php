@@ -1,36 +1,30 @@
 <?php
 
 /*
-|--------------------------------------------------------------------------
-| Quarx Config
-|--------------------------------------------------------------------------
+ * --------------------------------------------------------------------------
+ * Quarx Config
+ * --------------------------------------------------------------------------
 */
 
 return [
 
-    'frontend-namespace' => '\App\Http\Controllers\Quarx',
+    /*
+     * --------------------------------------------------------------------------
+     * Front-end
+     * --------------------------------------------------------------------------
+    */
 
+    'frontend-namespace' => '\App\Http\Controllers\Quarx',
     'frontend-theme' => 'default',
+
+    /*
+     * --------------------------------------------------------------------------
+     * Modules
+     * --------------------------------------------------------------------------
+    */
 
     'load-modules'     => true,
     'module-directory' => 'quarx/modules',
-
-    'appAdminEmail' => '',
-    'appAdminName'  => '',
-
-    'storage-location' => 'local', // s3, local
-
-    'registrationAvailable' => false,
-
-    'backend-theme' => 'united', // cosmo, cyborg, flatly, lumen, paper, sandstone, simplex, united, yeti
-
-    'maxFileUploadSize' => 6291456, // 6MB
-
-    'pagination' => 25,
-
-    'apiKey'   => 'gALPkYVALEtQYWztKy3d',
-    'apiToken' => 'fwCVH1bJEV3GOCyGDDNP',
-
     'activeCoreModules' => [
         'blog',
         'menus',
@@ -41,6 +35,61 @@ return [
         'events',
         'faqs',
     ],
+
+    /*
+     * --------------------------------------------------------------------------
+     * Languages
+     * --------------------------------------------------------------------------
+    */
+
+    'default-language' => 'en',
+
+    'languages' => [
+        'en' => 'english',
+    ],
+
+    /*
+     * --------------------------------------------------------------------------
+     * Admin Contact info
+     * --------------------------------------------------------------------------
+    */
+
+    'appAdminEmail' => '',
+    'appAdminName'  => '',
+
+    /*
+     * --------------------------------------------------------------------------
+     * Images and File Storage
+     * --------------------------------------------------------------------------
+    */
+
+    'storage-location' => 'local', // s3, local
+    'maxFileUploadSize' => 6291456, // 6MB
+
+    /*
+     * --------------------------------------------------------------------------
+     * Admin management
+     * --------------------------------------------------------------------------
+    */
+
+    'registrationAvailable' => false,
+    'backend-theme' => 'united', // cosmo, cyborg, flatly, lumen, paper, sandstone, simplex, united, yeti
+    'pagination' => 25,
+
+    /*
+     * --------------------------------------------------------------------------
+     * API key and token
+     * --------------------------------------------------------------------------
+    */
+
+    'apiKey'   => env('QUARX_API_KEY', 'apis-are-cool'),
+    'apiToken' => env('QUARX_API_TOKEN', 'quarx-token'),
+
+    /*
+     * --------------------------------------------------------------------------
+     * Core Module Forms
+     * --------------------------------------------------------------------------
+    */
 
     'forms' => [
         'blog' => [
@@ -204,9 +253,6 @@ return [
                 'type'     => 'string',
                 'alt_name' => 'Url',
             ],
-            'menu_id' => [
-                'type' => 'hidden',
-            ],
         ],
 
         'files' => [
@@ -274,5 +320,4 @@ return [
             ],
         ],
     ],
-
 ];

@@ -10,16 +10,18 @@
 
     @include('_lower_casePlural_::_lower_casePlural_.breadcrumbs', ['location' => ['edit']])
 
-    {!! Form::model($_lower_case_, ['route' => ['quarx._lower_casePlural_.update', $_lower_case_->id], 'method' => 'patch', 'class' => 'edit']) !!}
+    <div class="row">
+        {!! Form::model($_lower_case_, ['route' => ['quarx._lower_casePlural_.update', $_lower_case_->id], 'method' => 'patch', 'class' => 'edit']) !!}
 
-        {!! FormMaker::fromObject($_lower_case_, FormMaker::getTableColumns('_lower_casePlural_')) !!}
+            {!! FormMaker::fromObject($_lower_case_, FormMaker::getTableColumns('_lower_casePlural_')) !!}
 
-        <div class="form-group text-right">
-            <a href="{!! URL::to('quarx/_lower_casePlural_') !!}" class="btn btn-default raw-left">Cancel</a>
-            {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
-        </div>
+            <div class="form-group text-right">
+                <a href="{!! URL::to('quarx/_lower_casePlural_') !!}" class="btn btn-default raw-left">Cancel</a>
+                {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
+            </div>
 
-    {!! Form::close() !!}
+        {!! Form::close() !!}
+    </div>
 
 @endsection
 

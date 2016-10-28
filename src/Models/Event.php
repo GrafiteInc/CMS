@@ -3,9 +3,8 @@
 namespace Yab\Quarx\Models;
 
 use Yab\Quarx\Traits\Translatable;
-use Illuminate\Database\Eloquent\Model;
 
-class Event extends Model
+class Event extends QuarxModel
 {
     use Translatable;
 

@@ -3,9 +3,8 @@
 namespace Yab\Quarx\Models;
 
 use Yab\Quarx\Traits\Translatable;
-use Illuminate\Database\Eloquent\Model;
 
-class Widget extends Model
+class Widget extends QuarxModel
 {
     use Translatable;
 

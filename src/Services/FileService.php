@@ -119,7 +119,7 @@ class FileService
      */
     public static function fileAsPublicAsset($fileName)
     {
-        return url('public-asset/'.CryptoServiceForFiles::url_encode($fileName));
+        return '/public-asset/'.CryptoServiceForFiles::url_encode($fileName);
     }
 
     /**
@@ -132,7 +132,7 @@ class FileService
      */
     public static function fileAsDownload($fileName, $realFileName)
     {
-        return url('public-download/'.CryptoServiceForFiles::url_encode($fileName).'/'.CryptoServiceForFiles::url_encode($realFileName));
+        return '/public-download/'.CryptoServiceForFiles::url_encode($fileName).'/'.CryptoServiceForFiles::url_encode($realFileName);
     }
 
     /**
@@ -144,6 +144,6 @@ class FileService
      */
     public static function filePreview($fileName)
     {
-        return url('public-preview/'.CryptoServiceForFiles::url_encode($fileName));
+        return '/public-preview/'.CryptoServiceForFiles::url_encode($fileName);
     }
 }

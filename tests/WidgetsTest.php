@@ -64,6 +64,23 @@ class WidgetsTest extends TestCase
         $this->seeInDatabase('widgets', ['name' => 'whacky']);
     }
 
+    public function testUpdateTranslation()
+    {
+        $widget = ['id' => 8, 'name' => 'dumber', 'slug' => 'dumber'];
+        $response = $this->call('POST', 'quarx/widgets', $widget);
+
+        $response = $this->call('PATCH', 'quarx/widgets/8', [
+            'name' => 'whacky',
+            'slug' => 'whacky',
+            'lang' => 'fr'
+        ]);
+
+        $this->seeInDatabase('translations', [
+            'entity_type' => 'Yab\\Quarx\\Models\\Widget'
+        ]);
+        $this->assertEquals(302, $response->getStatusCode());
+    }
+
     public function testDelete()
     {
         $response = $this->call('DELETE', 'quarx/widgets/1');

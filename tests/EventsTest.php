@@ -1,13 +1,13 @@
 <?php
 
-class PagesTest extends TestCase
+class EventsTest extends TestCase
 {
     public function setUp()
     {
         parent::setUp();
         $this->withoutMiddleware();
         $this->withoutEvents();
-        factory(\Yab\Quarx\Models\Page::class)->create();
+        factory(\Yab\Quarx\Models\Event::class)->create();
     }
 
     /*
@@ -18,22 +18,22 @@ class PagesTest extends TestCase
 
     public function testIndex()
     {
-        $response = $this->call('GET', 'quarx/pages');
+        $response = $this->call('GET', 'quarx/events');
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertViewHas('pages');
+        $this->assertViewHas('events');
     }
 
     public function testCreate()
     {
-        $response = $this->call('GET', 'quarx/pages/create');
+        $response = $this->call('GET', 'quarx/events/create');
         $this->assertEquals(200, $response->getStatusCode());
     }
 
     public function testEdit()
     {
-        $response = $this->call('GET', 'quarx/pages/1/edit');
+        $response = $this->call('GET', 'quarx/events/1/edit');
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertViewHas('page');
+        $this->assertViewHas('event');
     }
 
     /*
@@ -44,55 +44,53 @@ class PagesTest extends TestCase
 
     public function testStore()
     {
-        $pages = factory(\Yab\Quarx\Models\Page::class)->make(['id' => 2]);
-        $response = $this->call('POST', 'quarx/pages', $pages['attributes']);
+        $events = factory(\Yab\Quarx\Models\Event::class)->make(['id' => 2]);
+        $response = $this->call('POST', 'quarx/events', $events['attributes']);
 
         $this->assertEquals(302, $response->getStatusCode());
     }
 
     public function testSearch()
     {
-        $response = $this->call('POST', 'quarx/pages/search', ['term' => 'wtf']);
+        $response = $this->call('POST', 'quarx/events/search', ['term' => 'wtf']);
 
-        $this->assertViewHas('pages');
+        $this->assertViewHas('events');
         $this->assertEquals(200, $response->getStatusCode());
     }
 
     public function testUpdate()
     {
-        $page = ['id' => 6, 'title' => 'dumber', 'url' => 'dumber', 'entry' => 'okie dokie'];
-        $response = $this->call('POST', 'quarx/pages', $page);
+        $page = ['id' => 6, 'title' => 'dumber', 'start_date' => '2016-10-31', 'end_date' => '2016-10-31', 'details' => 'okie dokie'];
+        $response = $this->call('POST', 'quarx/events', $page);
 
-        $response = $this->call('PATCH', 'quarx/pages/6', [
+        $response = $this->call('PATCH', 'quarx/events/6', [
             'title' => 'smarter',
-            'url'   => 'smart',
         ]);
 
         $this->assertEquals(302, $response->getStatusCode());
-        $this->seeInDatabase('pages', ['title' => 'smarter']);
+        $this->seeInDatabase('events', ['title' => 'smarter']);
     }
 
     public function testUpdateTranslation()
     {
-        $page = ['id' => 6, 'title' => 'dumber', 'url' => 'dumber', 'entry' => 'okie dokie'];
-        $response = $this->call('POST', 'quarx/pages', $page);
+        $page = ['id' => 6, 'title' => 'dumber', 'start_date' => '2016-10-31', 'end_date' => '2016-10-31', 'details' => 'okie dokie'];
+        $response = $this->call('POST', 'quarx/events', $page);
 
-        $response = $this->call('PATCH', 'quarx/pages/6', [
+        $response = $this->call('PATCH', 'quarx/events/6', [
             'title' => 'smarter',
-            'url'   => 'smart',
             'lang'  => 'fr'
         ]);
 
         $this->seeInDatabase('translations', [
-            'entity_type' => 'Yab\\Quarx\\Models\\Page'
+            'entity_type' => 'Yab\\Quarx\\Models\\Event'
         ]);
         $this->assertEquals(302, $response->getStatusCode());
     }
 
     public function testDelete()
     {
-        $response = $this->call('DELETE', 'quarx/pages/1');
+        $response = $this->call('DELETE', 'quarx/events/1');
         $this->assertEquals(302, $response->getStatusCode());
-        $this->assertRedirectedTo('quarx/pages');
+        $this->assertRedirectedTo('quarx/events');
     }
 }

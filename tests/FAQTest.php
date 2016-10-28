@@ -74,6 +74,21 @@ class FAQTest extends TestCase
         $this->assertEquals(302, $response->getStatusCode());
     }
 
+    public function testUpdateTranslation()
+    {
+        $response = $this->call('PATCH', 'quarx/faqs/1', [
+            'question'     => 'who is this',
+            'answer'       => 'I am your worst nightmare!',
+            'is_published' => 'on',
+            'lang' => 'fr'
+        ]);
+
+        $this->seeInDatabase('translations', [
+            'entity_type' => 'Yab\\Quarx\\Models\\FAQ'
+        ]);
+        $this->assertEquals(302, $response->getStatusCode());
+    }
+
     public function testDelete()
     {
         $response = $this->call('DELETE', 'quarx/faqs/1');

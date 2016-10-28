@@ -74,6 +74,23 @@ class BlogTest extends TestCase
         $this->assertEquals(302, $response->getStatusCode());
     }
 
+    public function testUpdateTranslation()
+    {
+        $blog = ['title' => 'dumber', 'url' => 'dumber', 'entry' => 'okie dokie'];
+        $this->call('POST', 'quarx/blog', $blog);
+
+        $response = $this->call('PATCH', 'quarx/blog/1', [
+            'title' => 'dumber and dumber',
+            'url'   => 'dumber-and-dumber',
+            'lang'  => 'fr'
+        ]);
+
+        $this->seeInDatabase('translations', [
+            'entity_type' => 'Yab\\Quarx\\Models\\Blog'
+        ]);
+        $this->assertEquals(302, $response->getStatusCode());
+    }
+
     public function testDelete()
     {
         $response = $this->call('DELETE', 'quarx/blog/'.Crypto::encrypt(1));

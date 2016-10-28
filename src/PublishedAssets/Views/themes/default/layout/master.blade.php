@@ -17,10 +17,6 @@
 
         <div class="site-wrapper @if(Request::is('/')) homepage @endif">
             <div class="container-fluid">
-                <div class="menu row">
-                    @menu('main')
-                </div>
-
                 @yield('content')
             </div>
         </div>

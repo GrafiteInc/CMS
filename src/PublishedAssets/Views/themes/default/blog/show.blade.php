@@ -7,7 +7,7 @@
 
 <div class="container">
 
-    <h1>{!! $blog->title !!} - <span>{!! $blog->updated_at !!}</span></h1>
+    <h1>{!! $blog->title !!} - <span>{!! $blog->published_at !!}</span></h1>
     {!! $blog->entry !!}
 
 </div>

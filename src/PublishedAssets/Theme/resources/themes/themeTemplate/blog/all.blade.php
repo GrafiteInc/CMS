@@ -2,12 +2,20 @@
 
 @section('content')
 
+<div class="container">
+
     <h1>Blog</h1>
 
     <div class="row">
         <div class="col-md-8">
             @foreach($blogs as $blog)
-                <a href="{!! URL::to('blog/'.$blog->url) !!}"><p>{!! $blog->title !!} - <span>{!! $blog->updated_at !!}</span></p></a>
+                @if (config('app.locale') !== config('quarx.default-language'))
+                    @if ($blog->translation(config('app.locale')))
+                        <a href="{!! URL::to('blog/'.$blog->translation(config('app.locale'))->data->url) !!}"><p>{!! $blog->translation(config('app.locale'))->data->title !!} - <span>{!! $blog->published_at !!}</span></p></a>
+                    @endif
+                @else
+                    <a href="{!! URL::to('blog/'.$blog->url) !!}"><p>{!! $blog->title !!} - <span>{!! $blog->published_at !!}</span></p></a>
+                @endif
             @endforeach
 
             {!! $blogs !!}
@@ -19,6 +27,8 @@
             @endforeach
         </div>
     </div>
+
+</div>
 
 @endsection
 

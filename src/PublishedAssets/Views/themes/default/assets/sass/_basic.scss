@@ -7,6 +7,7 @@
 html, body {
     height: 100%;
     min-height: 100%;
+    overflow-y: auto;
 }
 
 .homepage {
@@ -17,8 +18,8 @@ html, body {
 
 .site-wrapper {
     margin: 50px auto;
-    height: 100%;
-    min-height: 100%;
+    min-height: calc(100% - 98px);
+    padding: 24px 0;
 }
 
 .menu {

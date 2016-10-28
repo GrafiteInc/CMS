@@ -17,7 +17,11 @@
                 <li><a href="{{ url('events') }}">Events</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right menu">
-                @menu('main')
+                @if (config('app.locale') == 'fr')
+                    @menu('main-fr')
+                @else
+                    @menu('main')
+                @endif
             </ul>
         </div>
     </div>

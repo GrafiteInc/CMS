@@ -4,8 +4,7 @@
     <head>
         <meta charset="utf-8">
         <title>Website</title>
-        <meta name="description" content="@yield('seoDescription')">
-        <meta name="keywords" content="@yield('seoKeywords')">
+        <meta name="description" content="">
         <meta name="author" content="">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
         <link rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}">
@@ -16,17 +15,11 @@
 
         @theme('partials.navigation')
 
-        <div class="site-wrapper">
-            <div class="container">
-                <div class="menu row">
-                    @menu('main')
-                </div>
-
+        <div class="site-wrapper @if(Request::is('/')) homepage @endif">
+            <div class="container-fluid">
                 @yield('content')
             </div>
         </div>
-
-        @widget('widget')
 
         <div class="footer container-fluid navbar-fixed-bottom">
             <p class="pull-left">&copy; {{ date('Y') }}</p>

@@ -6,7 +6,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-        <a class="navbar-brand" href="{{ url('') }}">Home</a>
+            <a class="navbar-brand" href="{{ url('') }}">Home</a>
         </div>
         <div class="collapse navbar-collapse" id="navBar">
             <ul class="nav navbar-nav">
@@ -17,7 +17,11 @@
                 <li><a href="{{ url('events') }}">Events</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right menu">
-                @menu('main')
+                @if (config('app.locale') == 'fr')
+                    @menu('main-fr')
+                @else
+                    @menu('main')
+                @endif
             </ul>
         </div>
     </div>

@@ -2,6 +2,8 @@
 
 @section('content')
 
+<div class="container">
+
     <h1>Calendar</h1>
 
     <div class="row">
@@ -10,6 +12,8 @@
             {!! $calendar->links('cal-link btn btn-default'); !!}
         </div>
     </div>
+
+<div class="container">
 
 @endsection
 

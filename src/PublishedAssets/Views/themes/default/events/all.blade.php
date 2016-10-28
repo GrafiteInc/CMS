@@ -7,7 +7,11 @@
     <h1>Events</h1>
 
     @foreach($events as $event)
-        <a href="{!! url('events/event/'.$event->id) !!}">{{ $event->title }}</a><br>
+        @if (config('app.locale') !== config('quarx.default-language'))
+            <a href="{!! url('events/event/'.$event->id) !!}">{{ $event->translationData(config('app.locale'))->title }}</a><br>
+        @else
+            <a href="{!! url('events/event/'.$event->id) !!}">{{ $event->title }}</a><br>
+        @endif
     @endforeach
 
 </div>

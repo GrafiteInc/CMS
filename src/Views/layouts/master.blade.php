@@ -7,7 +7,10 @@
 
         <title>Quarx: {{ ucfirst(request()->segment(2)) }}</title>
 
-        <link rel="icon" type="image/ico" href="{!! Quarx::asset('images/favicon-cogs.ico', 'image/ico') !!}">
+        <link rel="icon" type="image/ico" href="{!! Quarx::asset('images/favicon.ico', 'image/ico') !!}?v2">
+        <link rel="icon" type="image/png" sizes="32x32" href="{!! Quarx::asset('images/favicon-32x32.png', 'image/png') !!}?v2">
+        <link rel="icon" type="image/png" sizes="96x96" href="{!! Quarx::asset('images/favicon-96x96.png', 'image/png') !!}?v2">
+        <link rel="icon" type="image/png" sizes="16x16" href="{!! Quarx::asset('images/favicon-16x16.png', 'image/png') !!}?v2">
 
         <!-- Bootstrap -->
         {!! Minify::stylesheet('https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css') !!}

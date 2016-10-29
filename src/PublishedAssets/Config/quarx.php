@@ -72,8 +72,9 @@ return [
      * --------------------------------------------------------------------------
     */
 
-    'registrationAvailable' => false,
+    'backend-title' => 'Quarx',
     'backend-theme' => 'united', // cosmo, cyborg, flatly, lumen, paper, sandstone, simplex, united, yeti
+    'registrationAvailable' => false,
     'pagination' => 25,
 
     /*

@@ -7261,3 +7261,8 @@ input[type="checkbox"]:disabled:checked:after,
 .carousel-caption h6 {
   color: inherit;
 }
+
+.quarx-logo {
+    top: -21px;
+    height: 64px;
+}

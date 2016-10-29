@@ -4066,7 +4066,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 }
 .navbar {
   position: relative;
-  min-height: 60px;
+  min-height: 50px;
   margin-bottom: 21px;
   border: 1px solid transparent;
 }
@@ -4177,7 +4177,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   padding: 19.5px 15px;
   font-size: 19px;
   line-height: 21px;
-  height: 60px;
+  height: 50px;
 }
 .navbar-brand:hover,
 .navbar-brand:focus {
@@ -6827,4 +6827,9 @@ a.list-group-item-danger.active:focus {
 }
 .popover {
   color: #2c3e50;
+}
+
+.quarx-logo {
+    top: -20px;
+    height: 60px;
 }

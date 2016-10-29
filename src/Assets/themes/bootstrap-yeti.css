@@ -6885,3 +6885,9 @@ input[type="checkbox"] {
 .modal .close {
   color: #222222;
 }
+
+.quarx-logo {
+    height: 48px;
+    width: 48px;
+    background-color: #111;
+}

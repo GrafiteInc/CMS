@@ -17,7 +17,7 @@ class QuarxApi
      */
     public function handle($request, Closure $next)
     {
-        if (Config::get('quarx.apiToken') == $request->get('token')) {
+        if (Config::get('quarx.api-token') == $request->get('token')) {
             return $next($request);
         }
 

@@ -217,7 +217,7 @@ class FilesController extends QuarxController
      */
     public function apiList(Request $request)
     {
-        if (Config::get('quarx.apiKey') != $request->header('quarx')) {
+        if (Config::get('quarx.api-key') != $request->header('quarx')) {
             return QuarxResponseService::apiResponse('error', []);
         }
 

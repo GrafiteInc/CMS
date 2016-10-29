@@ -69,8 +69,8 @@
 
         <script type="text/javascript">
 
-            var _apiKey = '{!!  Config::get("quarx.apiKey") !!}';
-            var _apiToken = '{!!  Config::get("quarx.apiToken") !!}';
+            var _apiKey = '{!!  Config::get("quarx.api-key") !!}';
+            var _apiToken = '{!!  Config::get("quarx.api-token") !!}';
 
         </script>
 

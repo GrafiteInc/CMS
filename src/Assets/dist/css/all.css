@@ -31,12 +31,12 @@ html, body {
 }
 
 .quarx-footer {
-    min-height: 50px;
+    height: 60px;
     background-color: #333;
 }
 
 .quarx-footer p, .quarx-footer a {
-    line-height: 50px;
+    line-height: 60px;
     color: #FFF;
 }
 

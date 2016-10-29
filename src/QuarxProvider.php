@@ -28,9 +28,12 @@ class QuarxProvider extends ServiceProvider
             __DIR__.'/PublishedAssets/Config' => base_path('config'),
         ]);
 
+        $this->loadMigrationsFrom(__DIR__.'/Migrations');
+
         $theme = Config::get('quarx.frontend-theme', 'default');
 
         $this->loadViewsFrom(__DIR__.'/Views', 'quarx');
+
         View::addLocation(base_path('resources/themes/'.$theme));
         View::addNamespace('quarx-frontend', base_path('resources/themes/'.$theme));
 

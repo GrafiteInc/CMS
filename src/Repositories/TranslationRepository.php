@@ -38,4 +38,17 @@ class TranslationRepository
 
         return null;
     }
+
+    public function getEntitiesByTypeAndLang($lang, $type)
+    {
+        $entities = collect();
+        $collection = $this->model->where('entity_type', $type)->where('entity_data->lang', $lang)->get();
+
+        foreach ($collection as $item) {
+            $instance = app($item->type)->attributes = $item->data;
+            $entities->push($instance);
+        }
+
+        return $entities;
+    }
 }

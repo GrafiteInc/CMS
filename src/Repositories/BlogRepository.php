@@ -30,29 +30,40 @@ class BlogRepository
 
     public function paginated()
     {
-        return Blog::orderBy('published_at', 'desc')->paginate(Config::get('quarx.pagination', 25));
+        return Blog::orderBy('published_at', 'desc')
+            ->paginate(Config::get('quarx.pagination', 25));
     }
 
     public function publishedAndPaginated()
     {
-        return Blog::orderBy('published_at', 'desc')->where('is_published', 1)->where('published_at', '<=',
-            Carbon::now()->format('Y-m-d h:i:s'))->paginate(Config::get('quarx.pagination', 25));
+        return Blog::orderBy('published_at', 'desc')->where('is_published', 1)
+            ->where('published_at', '<=', Carbon::now()->format('Y-m-d h:i:s'))
+            ->paginate(Config::get('quarx.pagination', 25));
     }
 
     public function published()
     {
-        return Blog::where('is_published', 1)->where('published_at', '<=', Carbon::now()->format('Y-m-d h:i:s'))->orderBy('created_at', 'desc')->paginate(Config::get('quarx.pagination', 25));
+        return Blog::where('is_published', 1)
+            ->where('published_at', '<=', Carbon::now()->format('Y-m-d h:i:s'))->orderBy('created_at', 'desc')
+            ->paginate(Config::get('quarx.pagination', 25));
     }
 
     public function tags($tag)
     {
-        return Blog::where('is_published', 1)->where('published_at', '<=', Carbon::now()->format('Y-m-d h:i:s'))->where('tags', 'LIKE', '%'.$tag.'%')->orderBy('created_at', 'desc')->paginate(Config::get('quarx.pagination', 25));
+        return Blog::where('is_published', 1)
+            ->where('published_at', '<=', Carbon::now()->format('Y-m-d h:i:s'))
+            ->where('tags', 'LIKE', '%'.$tag.'%')->orderBy('created_at', 'desc')
+            ->paginate(Config::get('quarx.pagination', 25));
     }
 
     public function allTags()
     {
         $tags  = [];
-        $blogs = Blog::orderBy('published_at', 'desc')->get();
+        if (config('app.locale') !== config('quarx.default-language', 'en')) {
+            $blogs = $this->translationRepo->getEntitiesByTypeAndLang(config('app.locale'), 'Yab\Quarx\Models\Blog');
+        } else {
+            $blogs = Blog::orderBy('published_at', 'desc')->get();
+        }
 
         foreach ($blogs as $blog) {
             foreach (explode(',', $blog->tags) as $tag) {

@@ -3,6 +3,17 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 ----
 
+## [v2.2.1] - 2016-10-30
+
+### Added
+- New logo and more customizations
+
+### Changed
+- Better migrations for archives and translations
+
+### Fixed
+- Minor UI flow issues
+
 ## [v2.2.0] - 2016-10-28
 
 ### Added

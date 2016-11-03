@@ -43,13 +43,6 @@
 
         @include('quarx::layouts.loading-overlay')
 
-        <div class="quarx-modal">
-            <div class="container">
-                <div class="raw100 quarx-modal-content">
-                </div>
-            </div>
-        </div>
-
         <div class="quarx-notification">
             <div class="quarx-notify">
                 <p class="quarx-notify-comment"></p>

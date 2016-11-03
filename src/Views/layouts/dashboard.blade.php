@@ -4,8 +4,6 @@
 
     <div class="overlay"></div>
 
-    {!! Minify::stylesheet(Quarx::asset('css/dashboard.css', 'text/css')) !!}
-
     <div class="raw100 raw-left raw-margin-top-50">
         <div class="col-sm-3 col-md-2 sidebar">
             <div class="raw100 raw-left raw-margin-bottom-90">
@@ -14,7 +12,9 @@
         </div>
 
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-            @yield('content')
+            <div class="col-md-12">
+                @yield('content')
+            </div>
         </div>
     </div>
 

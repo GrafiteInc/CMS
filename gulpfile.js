@@ -5,25 +5,24 @@ elixir.config.assetsPath = 'src/Assets/';
 
 elixir(function(mix) {
     mix.styles([
-        'raw.min.css',
-        'main.css',
-        'loaders.css',
-        'quarx-style.css',
-        'device-desktop.css',
-        'device-tablet.css',
-        'device-mobile.css',
+        '../packages/dropzone/basic.css',
+        '../packages/dropzone/dropzone.css',
         '../packages/redactor/redactor.css',
         '../packages/datepicker/bootstrap-datetimepicker.css',
+        'raw.min.css',
+        'device.css',
+        'main.css',
+        'loaders.css',
+        'modules.css',
     ]);
-});
 
-elixir(function(mix) {
     mix.scripts([
         'bootstrap.min.js',
         'quarx.js',
         'forms.js',
         'typeahead.bundle.js',
         'bootstrap-tagsinput.min.js',
+        '../packages/dropzone/dropzone.js',
         '../packages/datepicker/moment.js',
         '../packages/datepicker/bootstrap-datetimepicker.min.js',
         '../packages/redactor/redactor.js',
@@ -36,5 +35,8 @@ elixir(function(mix) {
         '../packages/redactor/specialchar.js',
         '../packages/redactor/table.js',
         '../packages/redactor/video.js',
+
+        'modules.js',
+        'dropzone-custom.js',
     ]);
 });

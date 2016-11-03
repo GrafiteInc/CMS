@@ -84,7 +84,7 @@ class FileService
             return false;
         }
 
-        if (File::size($file) > Config::get('quarx.max-file-upload-size', '')) {
+        if (File::size($file) > Config::get('quarx.max-file-upload-size', 6291456)) {
             throw new Exception('This file is too large', 1);
         }
 

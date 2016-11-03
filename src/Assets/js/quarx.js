@@ -40,17 +40,6 @@ $(function() {
         $('.loading-overlay').show();
     });
 
-    $("#quarxLoginPanel").bind("click", function(e) {
-        e.preventDefault();
-        quarxModal();
-        showLoginPanel();
-    });
-
-    $(".quarx-modal").bind("click", function(){
-        $(".quarx-modal").fadeOut();
-        $(".quarx-login").removeClass("quarx-login-animate");
-    });
-
     $(window).resize(function(){
         _setDashboard();
     });
@@ -90,16 +79,6 @@ function quarxNotify(message, _type) {
             $(".quarx-notify-comment").html("");
         });
     }, 8000);
-}
-
-/*
-|--------------------------------------------------------------------------
-| Modal Screen
-|--------------------------------------------------------------------------
-*/
-
-function quarxModal() {
-    $(".quarx-modal").fadeIn();
 }
 
 /*

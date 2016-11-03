@@ -1,14 +1,5 @@
 @extends('quarx::layouts.dashboard')
 
-@section('stylesheets')
-
-    @parent
-    {!! Minify::stylesheet(Quarx::asset('packages/dropzone/basic.css', 'text/css')) !!}
-    {!! Minify::stylesheet(Quarx::asset('packages/dropzone/dropzone.css', 'text/css')) !!}
-    {!! Minify::stylesheet(Quarx::asset('css/files-module.css', 'text/css')) !!}
-
-@endsection
-
 @section('content')
 
     <div class="row">
@@ -34,12 +25,3 @@
     </div>
 
 @endsection
-
-@section('javascript')
-
-    @parent
-    {!! Minify::javascript(Quarx::asset('packages/dropzone/dropzone.js', 'application/javascript')) !!}
-    {!! Minify::javascript(Quarx::asset('js/images-module.js', 'application/javascript')) !!}
-    {!! Minify::javascript(Quarx::asset('js/dropzone-custom.js', 'application/javascript')) !!}
-
-@stop

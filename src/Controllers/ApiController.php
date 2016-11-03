@@ -14,7 +14,9 @@ class ApiController extends QuarxController
     public function __construct(Request $request)
     {
         $this->modelName = str_singular($request->segment(3));
-        $this->model = app('Yab\Quarx\Models\\'.ucfirst($this->modelName));
+        if (! empty($this->modelName)) {
+            $this->model = app('Yab\Quarx\Models\\'.ucfirst($this->modelName));
+        }
     }
 
     public function find($id)

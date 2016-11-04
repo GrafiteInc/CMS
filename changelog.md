@@ -3,6 +3,14 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 ----
 
+## [v2.2.2] - 2016-11-04
+
+### Changed
+- Tweaked backend css and js
+
+### Fixed
+- Minor issue with route listing
+
 ## [v2.2.1] - 2016-10-30
 
 ### Added

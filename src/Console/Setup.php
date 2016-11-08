@@ -197,7 +197,7 @@ class Setup extends Command
 
         // Kernel setup
         $routeContents = file_get_contents(app_path('Http/Kernel.php'));
-        $routeContents = str_replace("'auth' => \Illuminate\Auth\Middleware\Authenticate::class,", "'auth' => \Illuminate\Auth\Middleware\Authenticate::class,\n\t\t'quarx' => \App\Http\Middleware\Quarx::class,\n\t\t'quarx-api' => \App\Http\Middleware\QuarxApi::class,\n\t\t'admin' => \App\Http\Middleware\Admin::class,", $routeContents);
+        $routeContents = str_replace("'auth' => \Illuminate\Auth\Middleware\Authenticate::class,", "'auth' => \Illuminate\Auth\Middleware\Authenticate::class,\n\t\t'quarx' => \App\Http\Middleware\Quarx::class,\n\t\t'quarx-api' => \App\Http\Middleware\QuarxApi::class,\n\t\t'admin' => \App\Http\Middleware\Admin::class,\n\t\t'active' => \App\Http\Middleware\Active::class,", $routeContents);
         file_put_contents(app_path('Http/Kernel.php'), $routeContents);
 
         $fileSystem = new Filesystem();
@@ -222,6 +222,12 @@ class Setup extends Command
         // Remove the teams
         $this->dropDeadFiles();
 
+        /*
+         * --------------------------------------------------------------------------
+         * Drop the team routes and the active middleware
+         * --------------------------------------------------------------------------
+        */
+
         $mainRoutes = file_get_contents(base_path('routes/web.php'));
         $mainRoutes = str_replace("/*
 |--------------------------------------------------------------------------
@@ -234,7 +240,24 @@ Route::resource('teams', 'TeamController', ['except' => ['show']]);
 Route::post('teams/search', 'TeamController@search');
 Route::post('teams/{id}/invite', 'TeamController@inviteMember');
 Route::get('teams/{id}/remove/{userId}', 'TeamController@removeMember');", '', $mainRoutes);
+        $mainRoutes = str_replace("['auth', 'active']", "['auth']", $mainRoutes);
         file_put_contents(base_path('routes/web.php'), $mainRoutes);
+
+        /*
+         * --------------------------------------------------------------------------
+         * Drop the activate by email notification
+         * --------------------------------------------------------------------------
+        */
+
+        $activateUserEmail = file_get_contents(app_path('Notifications/ActivateUserEmail.php'));
+        $activateUserEmail = str_replace("'mail'", '', $ActivateUserEmail);
+        fale_put_contents(app_path('Notifications/ActivateUserEmail.php'), $ActivateUserEmail);
+
+        /*
+         * --------------------------------------------------------------------------
+         * Clean up the user model
+         * --------------------------------------------------------------------------
+        */
 
         $userModel = file_get_contents(app_path('Models/User.php'));
         $userModel = str_replace("/**

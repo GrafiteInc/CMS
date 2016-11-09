@@ -3,6 +3,11 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 ----
 
+## [v2.2.3] - 2016-11-09
+
+### Fixed
+- Fixed a couple issues which came from the Laracogs updates
+
 ## [v2.2.2] - 2016-11-04
 
 ### Changed

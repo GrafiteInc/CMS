@@ -250,8 +250,8 @@ Route::get('teams/{id}/remove/{userId}', 'TeamController@removeMember');", '', $
         */
 
         $activateUserEmail = file_get_contents(app_path('Notifications/ActivateUserEmail.php'));
-        $activateUserEmail = str_replace("'mail'", '', $ActivateUserEmail);
-        fale_put_contents(app_path('Notifications/ActivateUserEmail.php'), $ActivateUserEmail);
+        $activateUserEmail = str_replace("'mail'", '', $activateUserEmail);
+        file_put_contents(app_path('Notifications/ActivateUserEmail.php'), $activateUserEmail);
 
         /*
          * --------------------------------------------------------------------------

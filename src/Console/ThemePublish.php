@@ -50,7 +50,7 @@ class ThemePublish extends Command
 
         if ($result) {
             foreach ($files as $file) {
-                $newFileName = str_replace(base_path('resources/themes/'.strtolower($name).'/public/'), '', $file);
+                $newFileName = str_replace(base_path('resources/themes/'.strtolower($name).'/public'), '', $file);
                 $this->line('Copying '.public_path($newFileName).'...');
                 if (is_dir($file)) {
                     $fileSystem->copyDirectory($file, public_path($newFileName));

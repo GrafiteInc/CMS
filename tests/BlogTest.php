@@ -26,7 +26,9 @@ class BlogTest extends TestCase
     public function testCreate()
     {
         $response = $this->call('GET', 'quarx/blog/create');
+        dd($response);
         $this->assertEquals(200, $response->getStatusCode());
+        $this->see('Title');
     }
 
     public function testEdit()
@@ -35,6 +37,7 @@ class BlogTest extends TestCase
         $response = $this->call('GET', 'quarx/blog/4/edit');
         $this->assertEquals(200, $response->getStatusCode());
         $this->assertViewHas('blog');
+        $this->see('Title');
     }
 
     /*

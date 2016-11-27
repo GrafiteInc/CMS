@@ -26,7 +26,6 @@ class BlogTest extends TestCase
     public function testCreate()
     {
         $response = $this->call('GET', 'quarx/blog/create');
-        dd($response);
         $this->assertEquals(200, $response->getStatusCode());
         $this->see('Title');
     }

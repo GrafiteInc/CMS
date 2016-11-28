@@ -42,6 +42,8 @@ return [
      * --------------------------------------------------------------------------
     */
 
+    'auto-translate' => false,
+
     'default-language' => 'en',
 
     'languages' => [

@@ -21,7 +21,8 @@
         "aws/aws-sdk-php": "^3.18",
         "league/flysystem-aws-s3-v3": "^1.0",
         "graham-campbell/markdown": "^6.1",
-        "intervention/image": "^2.3"
+        "intervention/image": "^2.3",
+        "stichoza/google-translate-php": "^3.2"
     },
     "require-dev": {
         "mockery/mockery": "^0.9.4",

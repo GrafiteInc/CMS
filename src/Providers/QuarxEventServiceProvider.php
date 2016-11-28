@@ -31,6 +31,22 @@ class QuarxEventServiceProvider extends ServiceProvider
             'Yab\Quarx\Models\Event@afterSaved',
         ],
 
+        'eloquent.created: Yab\Quarx\Models\Blog' => [
+            'Yab\Quarx\Models\Blog@afterCreate',
+        ],
+        'eloquent.created: Yab\Quarx\Models\Page' => [
+            'Yab\Quarx\Models\Page@afterCreate',
+        ],
+        'eloquent.created: Yab\Quarx\Models\Event' => [
+            'Yab\Quarx\Models\Event@afterCreate',
+        ],
+        'eloquent.created: Yab\Quarx\Models\FAQ' => [
+            'Yab\Quarx\Models\Event@afterCreate',
+        ],
+        'eloquent.created: Yab\Quarx\Models\Widget' => [
+            'Yab\Quarx\Models\Event@afterCreate',
+        ],
+
         'eloquent.deleting: Yab\Quarx\Models\Blog' => [
             'Yab\Quarx\Models\Blog@beingDeleted',
         ],

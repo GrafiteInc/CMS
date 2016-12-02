@@ -113,9 +113,9 @@ class ImageRepository
      */
     public function apiStore($input)
     {
-        $savedFile = FileService::saveClone($input['location'], 'images/');
+        $savedFile = FileService::saveClone($input['location'], 'public/images');
 
-        if (!$savedFile) {
+        if (! $savedFile) {
             return false;
         }
 
@@ -177,8 +177,8 @@ class ImageRepository
      */
     public function update($images, $input)
     {
-        if (isset($input['location']) && !empty($input['location'])) {
-            $savedFile = FileService::saveFile($input['location'], 'images/');
+        if (isset($input['location']) && ! empty($input['location'])) {
+            $savedFile = FileService::saveFile($input['location'], 'public/images');
 
             if (!$savedFile) {
                 Quarx::notification('Image could not be updated.', 'danger');

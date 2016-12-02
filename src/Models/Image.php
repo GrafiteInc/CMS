@@ -35,6 +35,10 @@ class Image extends Model
      */
     public function getUrlAttribute()
     {
+        if (@get_headers(url('storage/'.str_replace('public/', '', $this->location)))) {
+            return url('storage/'.str_replace('public/', '', $this->location));
+        }
+
         return FileService::fileAsPublicAsset($this->location);
     }
 
@@ -47,7 +51,13 @@ class Image extends Model
      */
     public function getJsUrlAttribute()
     {
-        return str_replace(url('/'), '', FileService::fileAsPublicAsset($this->location));
+        if (@get_headers(url('storage/'.str_replace('public/', '', $this->location)))) {
+            $file = url('storage/'.str_replace('public/', '', $this->location));
+        } else {
+            $file = FileService::fileAsPublicAsset($this->location);
+        }
+
+        return str_replace(url('/'), '', $file);
     }
 
     /**

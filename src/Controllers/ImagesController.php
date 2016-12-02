@@ -82,7 +82,7 @@ class ImagesController extends QuarxController
     {
         try {
             $validation = ValidationService::check(['location' => 'required']);
-            if (!$validation['errors']) {
+            if (! $validation['errors']) {
                 foreach ($request->input('location') as $image) {
                     $imageSaved = $this->imagesRepository->store([
                         'location'     => $image,
@@ -123,7 +123,7 @@ class ImagesController extends QuarxController
 
         if (!$validation['errors']) {
             $file = $request->file('location');
-            $fileSaved = FileService::saveFile($file, 'images/');
+            $fileSaved = FileService::saveFile($file, 'public/images');
             $fileSaved['name'] = CryptoService::encrypt($fileSaved['name']);
             $fileSaved['mime'] = $file->getClientMimeType();
             $fileSaved['size'] = $file->getClientSize();

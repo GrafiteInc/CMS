@@ -48,8 +48,8 @@ class FileService
         $newFileName = md5(rand(1111, 9999).time());
 
         // In case we don't want that file type
-        if (!empty($fileTypes)) {
-            if (!in_array($extension, $fileTypes)) {
+        if (! empty($fileTypes)) {
+            if (! in_array($extension, $fileTypes)) {
                 throw new Exception('Incorrect file type', 1);
             }
         }
@@ -144,6 +144,10 @@ class FileService
      */
     public static function filePreview($fileName)
     {
+        if (@get_headers(url('storage/'.str_replace('public/', '', $fileName)))) {
+            return url('storage/'.str_replace('public/', '', $fileName));
+        }
+
         return '/public-preview/'.CryptoServiceForFiles::url_encode($fileName);
     }
 }

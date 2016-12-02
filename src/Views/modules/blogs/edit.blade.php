@@ -65,7 +65,7 @@
             {!! Form::close() !!}
         </div>
         @if (config('quarx.live-preview', false))
-            <div class="col-md-6">
+            <div class="col-md-6 hidden-sm hidden-xs">
                 <div id="wrap">
                     @if (! is_null(request('lang')) && request('lang') !== config('quarx.default-language', 'en'))
                         <iframe id="frame" src="{!! url('quarx/preview/blog/'.$blog->id.'?lang='.request('lang')) !!}"></iframe>

@@ -54,7 +54,7 @@
 
         @yield("navigation")
 
-        <div class="container-fluid raw-margin-bottom-50">
+        <div class="container-fluid raw-margin-bottom-72">
             <div class="row">
                 @yield("page-content")
             </div>

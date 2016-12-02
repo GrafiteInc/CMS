@@ -89,7 +89,9 @@ trait Translatable
                         }
                     }
 
-                    $translation['url'] = app(QuarxService::class)->convertToURL($translation['url']);
+                    if (isset($translation['url'])) {
+                        $translation['url'] = app(QuarxService::class)->convertToURL($translation['url']);
+                    }
 
                     $entityId = $payload->id;
                     $entityType = get_class($payload);

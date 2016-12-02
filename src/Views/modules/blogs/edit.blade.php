@@ -33,35 +33,52 @@
     </div>
 
     <div class="row">
-        {!! Form::model($blog, ['route' => ['quarx.blog.update', $blog->id], 'method' => 'patch', 'class' => 'edit']) !!}
+        <div class="@if (config('quarx.live-preview', false)) col-md-6 @endif">
+            {!! Form::model($blog, ['route' => ['quarx.blog.update', $blog->id], 'method' => 'patch', 'class' => 'edit']) !!}
 
-            <input type="hidden" name="lang" value="{{ request('lang') }}">
+                <input type="hidden" name="lang" value="{{ request('lang') }}">
 
-            <div class="form-group">
-                <label for="Template">Template</label>
-                <select class="form-control" id="Template" name="template">
-                    @foreach (BlogService::getTemplatesAsOptions() as $template)
-                        @if (! is_null(request('lang')) && request('lang') !== config('quarx.default-language', 'en') && $blog->translationData(request('lang')))
-                            <option @if($template === $blog->translationData(request('lang'))->template) selected  @endif value="{!! $template !!}">{!! ucfirst(str_replace('-template', '', $template)) !!}</option>
-                        @else
-                            <option @if($template === $blog->template) selected  @endif value="{!! $template !!}">{!! ucfirst(str_replace('-template', '', $template)) !!}</option>
-                        @endif
-                    @endforeach
-                </select>
+                <div class="form-group">
+                    <label for="Template">Template</label>
+                    <select class="form-control" id="Template" name="template">
+                        @foreach (BlogService::getTemplatesAsOptions() as $template)
+                            @if (! is_null(request('lang')) && request('lang') !== config('quarx.default-language', 'en') && $blog->translationData(request('lang')))
+                                <option @if($template === $blog->translationData(request('lang'))->template) selected  @endif value="{!! $template !!}">{!! ucfirst(str_replace('-template', '', $template)) !!}</option>
+                            @else
+                                <option @if($template === $blog->template) selected  @endif value="{!! $template !!}">{!! ucfirst(str_replace('-template', '', $template)) !!}</option>
+                            @endif
+                        @endforeach
+                    </select>
+                </div>
+
+                @if (! is_null(request('lang')) && request('lang') !== config('quarx.default-language', 'en'))
+                    {!! FormMaker::fromObject($blog->translationData(request('lang')), Config::get('quarx.forms.blog')) !!}
+                @else
+                    {!! FormMaker::fromObject($blog, Config::get('quarx.forms.blog')) !!}
+                @endif
+
+                <div class="form-group text-right">
+                    <a href="{!! URL::to('quarx/blog') !!}" class="btn btn-default raw-left">Cancel</a>
+                    {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
+                </div>
+
+            {!! Form::close() !!}
+        </div>
+        @if (config('quarx.live-preview', false))
+            <div class="col-md-6">
+                <div id="wrap">
+                    @if (! is_null(request('lang')) && request('lang') !== config('quarx.default-language', 'en'))
+                        <iframe id="frame" src="{!! url('quarx/preview/blog/'.$blog->id.'?lang='.request('lang')) !!}"></iframe>
+                    @else
+                        <iframe id="frame" src="{{ url('quarx/preview/blog/'.$blog->id) }}"></iframe>
+                    @endif
+                </div>
+                <div id="frameButtons" class="raw-margin-top-16">
+                    <button class="btn btn-default preview-toggle" data-platform="desktop">Desktop</button>
+                    <button class="btn btn-default preview-toggle" data-platform="mobile">Mobile</button>
+                </div>
             </div>
-
-            @if (! is_null(request('lang')) && request('lang') !== config('quarx.default-language', 'en'))
-                {!! FormMaker::fromObject($blog->translationData(request('lang')), Config::get('quarx.forms.blog')) !!}
-            @else
-                {!! FormMaker::fromObject($blog, Config::get('quarx.forms.blog')) !!}
-            @endif
-
-            <div class="form-group text-right">
-                <a href="{!! URL::to('quarx/blog') !!}" class="btn btn-default raw-left">Cancel</a>
-                {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
-            </div>
-
-        {!! Form::close() !!}
+        @endif
     </div>
 
 @endsection

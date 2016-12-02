@@ -367,3 +367,33 @@ span.twitter-typeahead {
     display: inline-block;
     border-radius: 50%;
 }
+
+/*
+|--------------------------------------------------------------------------
+| iFrame
+|--------------------------------------------------------------------------
+*/
+
+#wrap {
+    height: calc(545px * 0.65);
+}
+
+#frame {
+    width: 150%;
+    position: relative;
+    z-index: 0;
+    height: 545px;
+    border: 1px solid #ddd;
+}
+
+#frame {
+    transform: scale(0.65);
+    transform-origin: 0 0;
+    -ms-zoom: 0.65;
+    -moz-transform: scale(0.65);
+    -moz-transform-origin: 0 0;
+    -o-transform: scale(0.65);
+    -o-transform-origin: 0 0;
+    -webkit-transform: scale(0.65);
+    -webkit-transform-origin: 0 0;
+}

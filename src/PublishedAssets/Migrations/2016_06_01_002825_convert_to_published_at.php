@@ -12,19 +12,19 @@ class ConvertToPublishedAt extends Migration
      */
     public function up()
     {
-        Schema::table('pages', function (Blueprint $table) {
+        Schema::table(config('quarx.db-prefix', '').'pages', function (Blueprint $table) {
             $table->dateTime('published_at')->nullable();
         });
 
-        Schema::table('blogs', function (Blueprint $table) {
+        Schema::table(config('quarx.db-prefix', '').'blogs', function (Blueprint $table) {
             $table->dateTime('published_at')->nullable();
         });
 
-        Schema::table('events', function (Blueprint $table) {
+        Schema::table(config('quarx.db-prefix', '').'events', function (Blueprint $table) {
             $table->dateTime('published_at')->nullable();
         });
 
-        Schema::table('faqs', function (Blueprint $table) {
+        Schema::table(config('quarx.db-prefix', '').'faqs', function (Blueprint $table) {
             $table->dateTime('published_at')->nullable();
         });
     }
@@ -36,19 +36,19 @@ class ConvertToPublishedAt extends Migration
      */
     public function down()
     {
-        Schema::table('pages', function ($table) {
+        Schema::table(config('quarx.db-prefix', '').'pages', function ($table) {
             $table->dropColumn('published_at');
         });
 
-        Schema::table('blogs', function ($table) {
+        Schema::table(config('quarx.db-prefix', '').'blogs', function ($table) {
             $table->dropColumn('published_at');
         });
 
-        Schema::table('events', function ($table) {
+        Schema::table(config('quarx.db-prefix', '').'events', function ($table) {
             $table->dropColumn('published_at');
         });
 
-        Schema::table('faqs', function ($table) {
+        Schema::table(config('quarx.db-prefix', '').'faqs', function ($table) {
             $table->dropColumn('published_at');
         });
     }

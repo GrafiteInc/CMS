@@ -12,7 +12,7 @@ class AddTemplatesToPages extends Migration
      */
     public function up()
     {
-        Schema::table('pages', function (Blueprint $table) {
+        Schema::table(config('quarx.db-prefix', '').'pages', function (Blueprint $table) {
             $table->string('template')->default('show');
         });
     }
@@ -24,7 +24,7 @@ class AddTemplatesToPages extends Migration
      */
     public function down()
     {
-        Schema::table('pages', function ($table) {
+        Schema::table(config('quarx.db-prefix', '').'pages', function ($table) {
             $table->dropColumn('template');
         });
     }

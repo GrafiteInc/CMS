@@ -4,7 +4,7 @@ namespace Yab\Quarx\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Menu extends Model
+class Menu extends QuarxModel
 {
     public $table = 'menus';
 

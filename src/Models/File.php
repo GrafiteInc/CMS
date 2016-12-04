@@ -4,7 +4,7 @@ namespace Yab\Quarx\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class File extends Model
+class File extends QuarxModel
 {
     public $table = 'files';
 

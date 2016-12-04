@@ -10,6 +10,20 @@ use Illuminate\Database\Eloquent\Model;
 class QuarxModel extends Model
 {
     /**
+     * Model contructuor
+     *
+     * @param array $attributes
+     */
+    public function __construct(array $attributes = [])
+    {
+        parent::__construct($attributes);
+
+        if (config('quarx.db-prefix', '')) {
+            $this->table = config('quarx.db-prefix', '').$this->table;
+        }
+    }
+
+    /**
      * After the item is saved to the database
      *
      * @param  Object $payload

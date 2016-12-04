@@ -4,7 +4,7 @@ namespace Yab\Quarx\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Link extends Model
+class Link extends QuarxModel
 {
     public $table = 'links';
 

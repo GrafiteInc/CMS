@@ -12,7 +12,7 @@ class CreateArchivesTable extends Migration
      */
     public function up()
     {
-        Schema::create('archives', function (Blueprint $table) {
+        Schema::create(config('quarx.db-prefix', '').'archives', function (Blueprint $table) {
             $table->increments('id');
             $table->string('token');
             $table->integer('entity_id');
@@ -29,6 +29,6 @@ class CreateArchivesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('archives');
+        Schema::drop(config('quarx.db-prefix', '').'archives');
     }
 }

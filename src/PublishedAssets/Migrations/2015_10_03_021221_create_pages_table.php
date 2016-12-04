@@ -12,7 +12,7 @@ class CreatePagesTable extends Migration
      */
     public function up()
     {
-        Schema::create('pages', function (Blueprint $table) {
+        Schema::create(config('quarx.db-prefix', '').'pages', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title');
             $table->string('url');
@@ -31,6 +31,6 @@ class CreatePagesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('pages');
+        Schema::drop(config('quarx.db-prefix', '').'pages');
     }
 }

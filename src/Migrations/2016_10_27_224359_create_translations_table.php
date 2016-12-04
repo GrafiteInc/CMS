@@ -13,7 +13,7 @@ class CreateTranslationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('translations', function (Blueprint $table) {
+        Schema::create(config('quarx.db-prefix', '').'translations', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('entity_id');
             $table->string('entity_type');
@@ -29,6 +29,6 @@ class CreateTranslationsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('translations');
+        Schema::drop(config('quarx.db-prefix', '').'translations');
     }
 }

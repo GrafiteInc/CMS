@@ -12,7 +12,7 @@ class CreateFilesTable extends Migration
      */
     public function up()
     {
-        Schema::create('files', function (Blueprint $table) {
+        Schema::create(config('quarx.db-prefix', '').'files', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->string('location');
@@ -34,6 +34,6 @@ class CreateFilesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('files');
+        Schema::drop(config('quarx.db-prefix', '').'files');
     }
 }

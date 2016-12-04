@@ -8,7 +8,7 @@ use FileService;
 use Illuminate\Database\Eloquent\Model;
 use Intervention\Image\ImageManagerStatic as InterventionImage;
 
-class Image extends Model
+class Image extends QuarxModel
 {
     public $table = 'images';
 

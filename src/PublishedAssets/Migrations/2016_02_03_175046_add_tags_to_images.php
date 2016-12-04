@@ -12,7 +12,7 @@ class AddTagsToImages extends Migration
      */
     public function up()
     {
-        Schema::table('images', function (Blueprint $table) {
+        Schema::table(config('quarx.db-prefix', '').'images', function (Blueprint $table) {
             $table->text('tags')->nullable();
         });
     }
@@ -24,7 +24,7 @@ class AddTagsToImages extends Migration
      */
     public function down()
     {
-        Schema::table('images', function ($table) {
+        Schema::table(config('quarx.db-prefix', '').'images', function ($table) {
             $table->dropColumn('tags');
         });
     }

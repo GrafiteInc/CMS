@@ -12,7 +12,7 @@ class CreateEventsTable extends Migration
      */
     public function up()
     {
-        Schema::create('events', function (Blueprint $table) {
+        Schema::create(config('quarx.db-prefix', '').'events', function (Blueprint $table) {
             $table->increments('id');
             $table->date('start_date');
             $table->date('end_date');
@@ -32,6 +32,6 @@ class CreateEventsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('events');
+        Schema::drop(config('quarx.db-prefix', '').'events');
     }
 }

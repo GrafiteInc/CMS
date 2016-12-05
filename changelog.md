@@ -3,6 +3,11 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 ----
 
+## [v2.2.8] - 2016-12-05
+
+### Changed
+- Added support for MySQL 5.6
+
 ## [v2.2.7] - 2016-12-05
 
 ### Fixed

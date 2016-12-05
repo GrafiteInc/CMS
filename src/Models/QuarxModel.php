@@ -62,7 +62,8 @@ class QuarxModel extends Model
         Archive::where('entity_id', $id)->where('entity_type', $type)->delete();
 
         Archive::where('entity_type', 'Yab\Quarx\Models\Translation')
-            ->where('entity_data->entity_id', $id)
-            ->where('entity_data->entity_type', $type)->delete();
+            ->where('entity_data', 'LIKE', '%"entity_id":'.$id.'%')
+            ->where('entity_data', 'LIKE', '%"entity_type":"'.$type.'"%')
+            ->delete();
     }
 }

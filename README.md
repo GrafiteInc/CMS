@@ -16,9 +16,15 @@ Quarx comes with a module builder for all your custom CMS needs, as well as a mo
 
 ## Requirements
 1. PHP 5.6+
+1. MySQL 5.6+
 2. OpenSSL
 3. Laravel 5.1 - 5.2 (v1.4.*)
 3. Laravel 5.3 (v2.0.*)
+
+## Recommended
+1. PHP 7+
+1. MySQL 5.7+
+3. Laravel 5.3
 
 ## Installation
 

@@ -30,7 +30,7 @@ class TranslationRepository
 
     public function findByUrl($url, $type)
     {
-        $item = $this->model->where('entity_type', $type)->where('entity_data->url', $url)->first();
+        $item = $this->model->where('entity_type', $type)->where('entity_data', 'LIKE', '%"url":"'.$url.'"%')->first();
 
         if ($item && ($item->data->is_published == 1 || $item->data->is_published == 'on') && $item->data->published_at <= Carbon::now()->format('Y-m-d h:i:s')) {
             return $item->data;
@@ -42,7 +42,7 @@ class TranslationRepository
     public function getEntitiesByTypeAndLang($lang, $type)
     {
         $entities = collect();
-        $collection = $this->model->where('entity_type', $type)->where('entity_data->lang', $lang)->get();
+        $collection = $this->model->where('entity_type', $type)->where('entity_data', 'LIKE', '%"lang":"'.$lang.'"%')->get();
 
         foreach ($collection as $item) {
             $instance = app($item->type)->attributes = $item->data;

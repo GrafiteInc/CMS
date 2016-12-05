@@ -19,7 +19,7 @@ trait Translatable
     {
         return Translation::where('entity_id', $this->id)
             ->where('entity_type', get_class($this))
-            ->where('entity_data->lang', $lang)
+            ->where('entity_data', 'LIKE', '%"lang":"'.$lang.'"%')
             ->first();
     }
 

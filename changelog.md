@@ -3,6 +3,15 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 ----
 
+## [v2.2.6] - 2016-12-05
+
+### Added
+- New db-prefix option for quarx tables
+- New live preview in editor view
+
+### Fixed
+- Image loading times
+
 ## [v2.2.5] - 2016-11-17
 
 ### Fixed

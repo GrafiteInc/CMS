@@ -117,6 +117,15 @@ Gate::define('quarx', function ($user) {
 });
 ```
 
+### Roles & Permissions
+
+With the roles middleware you can specify which roles are applicable separating them with pipes: `['middleware' => ['roles:admin|moderator|member']]`.
+
+The Quarx middleware utilizes the roles to ensure that a user is an 'admin'. But you can elaborate on this substantially, you can create multiple roles, and then set their access in your app, using the roles middleware. But, what happens when you want to allow multiple roles to access Quarx but only allow Admins to access your custom modules? You can use permissions for this. Similar to the roles middleware you can set the permissions `['middleware' => ['permissions:admin|quarx']]`.
+
+A component of the roles in Quarx is custom permissions. You can set them with the `config/permissions.php`. This means you can set different role permissions for parts of your CMS.
+
+
 ## API Endpoints
 
 Quarx comes with a collection of handy API endpoints if you wish to use them. You can define your own policies for access and customize the middleware as you see fit.

@@ -8,6 +8,9 @@ Quarx is a full fledged CMS that can be added to any Laravel application. It pro
 
 Quarx comes with a module builder for all your custom CMS needs, as well as a module publishing tools. So if you decide to reuse some modules on future projects you can easily publish thier assets seamlessly. If you wish to make your Quarx module into a PHP package, then you will need to have it publish its assets to the `quarx/modules` directory.
 
+### What is simple vs complex setup?
+Simple setup uses Laracogs as the backbone of an app for you using Laravel, once the setup command has been run you will have a full CMS as an app. Complex setup is specifically for developers who want to add a CMS to their existing app.
+
 ## Documentation
 [http://quarx.info](http://quarx.info)
 
@@ -117,14 +120,11 @@ Gate::define('quarx', function ($user) {
 });
 ```
 
-### Roles & Permissions
+### Roles & Permissions (simple setup only)
 
 With the roles middleware you can specify which roles are applicable separating them with pipes: `['middleware' => ['roles:admin|moderator|member']]`.
 
-The Quarx middleware utilizes the roles to ensure that a user is an 'admin'. But you can elaborate on this substantially, you can create multiple roles, and then set their access in your app, using the roles middleware. But, what happens when you want to allow multiple roles to access Quarx but only allow Admins to access your custom modules? You can use permissions for this. Similar to the roles middleware you can set the permissions `['middleware' => ['permissions:admin|quarx']]`.
-
-A component of the roles in Quarx is custom permissions. You can set them with the `config/permissions.php`. This means you can set different role permissions for parts of your CMS.
-
+The Quarx middleware utilizes the roles to ensure that a user is an 'admin'. But you can elaborate on this substantially, you can create multiple roles, and then set their access in your app, using the roles middleware. But, what happens when you want to allow multiple roles to access Quarx but only allow Admins to access your custom modules? You can use permissions for this. Similar to the roles middleware you can set the permissions `['middleware' => ['permissions:admin|quarx']]`. You can set custom permissions in `config/permissions.php`. This means you can set different role permissions for parts of your CMS, giving you even more control.
 
 ## API Endpoints
 

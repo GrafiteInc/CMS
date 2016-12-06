@@ -3,6 +3,14 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 ----
 
+## [v2.2.9] - 2016-12-06
+
+### Changed
+- Readme updates
+
+### Fixed
+- Fixed issue with permissions and roles.
+
 ## [v2.2.8] - 2016-12-05
 
 ### Changed

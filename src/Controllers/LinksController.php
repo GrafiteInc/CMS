@@ -3,6 +3,7 @@
 namespace Yab\Quarx\Controllers;
 
 use Quarx;
+use Exception;
 use Yab\Quarx\Models\Link;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\URL;

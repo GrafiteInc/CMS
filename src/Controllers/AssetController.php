@@ -30,7 +30,7 @@ class AssetController extends QuarxController
      *
      * @return Download
      */
-    public function asPublic($encFileName, Filesystem $fileSystem)
+    public function asPublic($encFileName)
     {
         try {
             $fileName = CryptoServiceFacade::url_decode($encFileName);
@@ -125,7 +125,7 @@ class AssetController extends QuarxController
      *
      * @return Downlaod
      */
-    public function asDownload($encFileName, $encRealFileName, Filesystem $fileSystem)
+    public function asDownload($encFileName, $encRealFileName)
     {
         try {
             $fileName = CryptoServiceFacade::url_decode($encFileName);

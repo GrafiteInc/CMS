@@ -3,6 +3,7 @@
 namespace Yab\Quarx\Controllers;
 
 use Quarx;
+use Exception;
 use Yab\Quarx\Models\Menu;
 use Illuminate\Http\Request;
 use Yab\Quarx\Requests\MenuRequest;

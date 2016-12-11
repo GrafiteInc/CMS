@@ -7,6 +7,7 @@ use Config;
 use Storage;
 use Redirect;
 use Response;
+use Exception;
 use CryptoService;
 use Yab\Quarx\Models\File;
 use Illuminate\Http\Request;

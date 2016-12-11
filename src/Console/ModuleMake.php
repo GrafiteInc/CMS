@@ -4,6 +4,7 @@ namespace Yab\Quarx\Console;
 
 use Artisan;
 use Config;
+use Exception;
 use Illuminate\Console\Command;
 use Yab\CrudMaker\Generators\CrudGenerator;
 

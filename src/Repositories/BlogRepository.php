@@ -159,7 +159,7 @@ class BlogRepository
     public function update($blog, $payload)
     {
         if (! empty($payload['lang']) && $payload['lang'] !== config('quarx.default-language', 'en')) {
-            return $this->translationRepo->createOrUpdate($blog->id, 'Yab\Quarx\Models\Blog', $payload);
+            return $this->translationRepo->createOrUpdate($blog->id, 'Yab\Quarx\Models\Blog', $payload['lang'], $payload);
         } else {
             $payload['url'] = Quarx::convertToURL($payload['url']);
             $payload['is_published'] = (isset($payload['is_published'])) ? (bool) $payload['is_published'] : 0;

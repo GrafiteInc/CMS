@@ -2,10 +2,11 @@
 
 namespace Yab\Quarx\Controllers;
 
-use Quarx;
-use Yab\Quarx\Models\Archive;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\View;
+use Quarx;
+use Yab\Quarx\Models\Archive;
 
 class QuarxFeatureController extends QuarxController
 {
@@ -92,5 +93,17 @@ class QuarxFeatureController extends QuarxController
         }
 
         return view($view, $data);
+    }
+
+    /**
+     * Set the default lanugage for the session
+     *
+     * @param Request $request
+     * @param string  $lang
+     */
+    public function setLanguage(Request $request, $lang)
+    {
+        $request->session()->put('language', $lang);
+        return back();
     }
 }

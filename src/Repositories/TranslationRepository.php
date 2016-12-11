@@ -13,11 +13,12 @@ class TranslationRepository
         $this->model = $translation;
     }
 
-    public function createOrUpdate($entityId, $entityType, $payload)
+    public function createOrUpdate($entityId, $entityType, $lang, $payload)
     {
         $translation = $this->model->firstOrCreate([
             'entity_id' => $entityId,
-            'entity_type' => $entityType
+            'entity_type' => $entityType,
+            'language' => $lang
         ]);
 
         unset($payload['_method']);

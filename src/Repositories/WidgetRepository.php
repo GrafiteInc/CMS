@@ -91,7 +91,7 @@ class WidgetRepository
     public function update($widgets, $payload)
     {
         if (! empty($payload['lang']) && $payload['lang'] !== config('quarx.default-language', 'en')) {
-            return $this->translationRepo->createOrUpdate($widgets->id, 'Yab\Quarx\Models\Widget', $payload);
+            return $this->translationRepo->createOrUpdate($widgets->id, 'Yab\Quarx\Models\Widget', $payload['lang'], $payload);
         } else {
             unset($payload['lang']);
             return $widgets->update($payload);

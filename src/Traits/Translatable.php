@@ -95,7 +95,7 @@ trait Translatable
 
                     $entityId = $payload->id;
                     $entityType = get_class($payload);
-                    app(TranslationRepository::class)->createOrUpdate($entityId, $entityType, $translation);
+                    app(TranslationRepository::class)->createOrUpdate($entityId, $entityType, $code, $translation);
                 }
             }
         }

@@ -3,6 +3,10 @@
         <a href="{!! url('quarx/dashboard') !!}"><span class="fa fa-dashboard"></span> Dashboard</a>
     </li>
 
+    <li class="@if (Request::is('quarx/help')) active @endif">
+        <a href="{!! url('quarx/help') !!}"><span class="fa fa-info-circle"></span> Help</a>
+    </li>
+
     @if (in_array('images', Config::get('quarx.active-core-modules', Quarx::defaultModules())))
         <li class="@if (Request::is('quarx/images') || Request::is('quarx/images/*')) active @endif">
             <a href="{!! url('quarx/images') !!}"><span class="fa fa-image"></span> Images</a>
@@ -59,10 +63,6 @@
             <a href="{!! url('user/settings') !!}"><span class="fa fa-gear"></span> Settings</a>
         </li>
     @endif
-
-    <li class="@if (Request::is('quarx/help')) active @endif">
-        <a href="{!! url('quarx/help') !!}"><span class="fa fa-info-circle"></span> Help</a>
-    </li>
 
     @if (Route::get('admin/users')) <li class="sidebar-header"><span>Admin</span></li> @endif
 

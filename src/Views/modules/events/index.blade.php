@@ -74,6 +74,8 @@
         @endif
     </div>
 
-    {!! $pagination !!}
+    <div class="text-center">
+        {!! $pagination !!}
+    </div>
 
 @endsection

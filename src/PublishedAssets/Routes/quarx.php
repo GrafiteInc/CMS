@@ -6,7 +6,7 @@
     |--------------------------------------------------------------------------
     */
 
-    Route::group(['namespace' => 'Quarx'], function () {
+    Route::group(['namespace' => 'Quarx', 'middleware' => ['quarx-language']], function () {
         Route::get('', 'PagesController@home');
         Route::get('page', 'PagesController@all');
         Route::get('page/{url}', 'PagesController@show');

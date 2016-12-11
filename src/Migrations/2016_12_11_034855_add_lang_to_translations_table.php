@@ -12,7 +12,7 @@ class AddLangToTranslationsTable extends Migration
     public function up()
     {
         Schema::table(config('quarx.db-prefix', '').'translations', function (Blueprint $table) {
-            $table->string('language');
+            $table->string('language')->nullable();
         });
     }
 

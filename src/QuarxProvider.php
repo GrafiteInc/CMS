@@ -14,8 +14,6 @@ class QuarxProvider extends ServiceProvider
 {
     /**
      * Alias the services in the boot.
-     *
-     * @return void
      */
     public function boot()
     {
@@ -77,8 +75,6 @@ class QuarxProvider extends ServiceProvider
 
     /**
      * Register the services.
-     *
-     * @return void
      */
     public function register()
     {

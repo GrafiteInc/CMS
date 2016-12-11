@@ -3,7 +3,6 @@
 namespace Yab\Quarx\Repositories;
 
 use Carbon\Carbon;
-use Quarx;
 use Yab\Quarx\Models\Translation;
 
 class TranslationRepository
@@ -18,7 +17,7 @@ class TranslationRepository
         $translation = $this->model->firstOrCreate([
             'entity_id' => $entityId,
             'entity_type' => $entityType,
-            'language' => $lang
+            'language' => $lang,
         ]);
 
         unset($payload['_method']);

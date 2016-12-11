@@ -19,6 +19,6 @@ class Event extends QuarxModel
     ];
 
     protected $appends = [
-        'translations'
+        'translations',
     ];
 }

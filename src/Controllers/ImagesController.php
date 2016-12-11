@@ -82,12 +82,12 @@ class ImagesController extends QuarxController
     {
         try {
             $validation = ValidationService::check(['location' => 'required']);
-            if (! $validation['errors']) {
+            if (!$validation['errors']) {
                 foreach ($request->input('location') as $image) {
                     $imageSaved = $this->imagesRepository->store([
-                        'location'     => $image,
+                        'location' => $image,
                         'is_published' => $request->input('is_published'),
-                        'tags'         => $request->input('tags'),
+                        'tags' => $request->input('tags'),
                     ]);
                 }
 

@@ -20,8 +20,6 @@ class QuarxRouteProvider extends ServiceProvider
      * Define your route model bindings, pattern filters, etc.
      *
      * @param \Illuminate\Routing\Router $router
-     *
-     * @return void
      */
     public function boot()
     {
@@ -32,8 +30,6 @@ class QuarxRouteProvider extends ServiceProvider
      * Define the routes for the application.
      *
      * @param \Illuminate\Routing\Router $router
-     *
-     * @return void
      */
     public function map(Router $router)
     {

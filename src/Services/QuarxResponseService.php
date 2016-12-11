@@ -34,13 +34,13 @@ class QuarxResponseService
             if (!isset($errors[$key])) {
                 $message[$key] = [
                     'status' => 'valid',
-                    'value'  => $value,
+                    'value' => $value,
                 ];
             } else {
                 $message[$key] = [
                     'status' => 'invalid',
-                    'error'  => $errors[$key],
-                    'value'  => $value,
+                    'error' => $errors[$key],
+                    'value' => $value,
                 ];
             }
         }

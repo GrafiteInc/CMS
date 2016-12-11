@@ -7,7 +7,6 @@ use Carbon\Carbon;
 use Yab\Quarx\Models\Blog;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Schema;
-use Yab\Quarx\Repositories\TranslationRepository;
 
 class BlogRepository
 {
@@ -58,7 +57,7 @@ class BlogRepository
 
     public function allTags()
     {
-        $tags  = [];
+        $tags = [];
         if (config('app.locale') !== config('quarx.default-language', 'en')) {
             $blogs = $this->translationRepo->getEntitiesByTypeAndLang(config('app.locale'), 'Yab\Quarx\Models\Blog');
         } else {
@@ -129,7 +128,7 @@ class BlogRepository
 
         $blog = Blog::where('url', $url)->where('is_published', 1)->where('published_at', '<=', Carbon::now()->format('Y-m-d h:i:s'))->first();
 
-        if (! $blog) {
+        if (!$blog) {
             $blog = $this->translationRepo->findByUrl($url, 'Yab\Quarx\Models\Blog');
         }
 
@@ -158,7 +157,7 @@ class BlogRepository
      */
     public function update($blog, $payload)
     {
-        if (! empty($payload['lang']) && $payload['lang'] !== config('quarx.default-language', 'en')) {
+        if (!empty($payload['lang']) && $payload['lang'] !== config('quarx.default-language', 'en')) {
             return $this->translationRepo->createOrUpdate($blog->id, 'Yab\Quarx\Models\Blog', $payload['lang'], $payload);
         } else {
             $payload['url'] = Quarx::convertToURL($payload['url']);

@@ -20,6 +20,6 @@ class Widget extends QuarxModel
     ];
 
     protected $appends = [
-        'translations'
+        'translations',
     ];
 }

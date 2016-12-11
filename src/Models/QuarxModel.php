@@ -2,15 +2,13 @@
 
 namespace Yab\Quarx\Models;
 
-use Yab\Quarx\Models\Archive;
-use Yab\Quarx\Models\Translation;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Database\Eloquent\Model;
 
 class QuarxModel extends Model
 {
     /**
-     * Model contructuor
+     * Model contructuor.
      *
      * @param array $attributes
      */
@@ -24,10 +22,9 @@ class QuarxModel extends Model
     }
 
     /**
-     * After the item is saved to the database
+     * After the item is saved to the database.
      *
-     * @param  Object $payload
-     * @return void
+     * @param object $payload
      */
     public function afterSaved($payload)
     {
@@ -38,20 +35,19 @@ class QuarxModel extends Model
 
         if ($payload->attributes != $payload->original) {
             Archive::create([
-                'token'         => md5(time()),
-                'entity_id'     => $payload->attributes['id'],
-                'entity_type'   => get_class($payload),
-                'entity_data'   => json_encode($payload->attributes),
+                'token' => md5(time()),
+                'entity_id' => $payload->attributes['id'],
+                'entity_type' => get_class($payload),
+                'entity_data' => json_encode($payload->attributes),
             ]);
             Log::info(get_class($payload).' #'.$payload->attributes['id'].' was archived');
         }
     }
 
     /**
-     * When the item is being deleted
+     * When the item is being deleted.
      *
-     * @param  Object $payload
-     * @return void
+     * @param object $payload
      */
     public function beingDeleted($payload)
     {

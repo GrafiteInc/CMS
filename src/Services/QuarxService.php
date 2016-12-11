@@ -27,8 +27,6 @@ class QuarxService
      *
      * @param string $string Notification string
      * @param string $type   Notification type
-     *
-     * @return void
      */
     public function notification($string, $type = null)
     {
@@ -272,7 +270,7 @@ class QuarxService
                 if ($page) {
                     if (config('app.locale') == config('quarx.default-language', $this->config('quarx.default-language'))) {
                         $response .= '<a href="'.URL::to('page/'.$page->url)."\">$link->name</a>";
-                    } else if (config('app.locale') != config('quarx.default-language', $this->config('quarx.default-language'))) {
+                    } elseif (config('app.locale') != config('quarx.default-language', $this->config('quarx.default-language'))) {
                         if ($page->translation(config('app.locale'))) {
                             $response .= '<a href="'.URL::to('page/'.$page->translation(config('app.locale'))->data->url)."\">$link->name</a>";
                         }

@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Schema;
 use Quarx;
 use Yab\Quarx\Models\Page;
-use Yab\Quarx\Repositories\TranslationRepository;
 
 class PageRepository
 {
@@ -93,7 +92,7 @@ class PageRepository
 
         $page = Page::where('url', $url)->where('is_published', 1)->where('published_at', '<=', Carbon::now()->format('Y-m-d h:i:s'))->first();
 
-        if (! $page) {
+        if (!$page) {
             $page = $this->translationRepo->findByUrl($url, 'Yab\Quarx\Models\Page');
         }
 
@@ -114,7 +113,7 @@ class PageRepository
      */
     public function update($page, $payload)
     {
-        if (! empty($payload['lang']) && $payload['lang'] !== config('quarx.default-language', 'en')) {
+        if (!empty($payload['lang']) && $payload['lang'] !== config('quarx.default-language', 'en')) {
             return $this->translationRepo->createOrUpdate($page->id, 'Yab\Quarx\Models\Page', $payload['lang'], $payload);
         } else {
             $payload['url'] = Quarx::convertToURL($payload['url']);

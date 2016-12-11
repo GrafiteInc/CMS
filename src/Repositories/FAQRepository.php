@@ -6,7 +6,6 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Schema;
 use Yab\Quarx\Models\FAQ;
-use Yab\Quarx\Repositories\TranslationRepository;
 
 class FAQRepository
 {
@@ -105,7 +104,7 @@ class FAQRepository
      */
     public function update($FAQ, $payload)
     {
-        if (! empty($payload['lang']) && $payload['lang'] !== config('quarx.default-language', 'en')) {
+        if (!empty($payload['lang']) && $payload['lang'] !== config('quarx.default-language', 'en')) {
             return $this->translationRepo->createOrUpdate($FAQ->id, 'Yab\Quarx\Models\FAQ', $payload['lang'], $payload);
         } else {
             $payload['is_published'] = (isset($payload['is_published'])) ? (bool) $payload['is_published'] : 0;

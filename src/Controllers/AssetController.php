@@ -20,7 +20,7 @@ class AssetController extends QuarxController
 
     public function __construct()
     {
-         $this->mimeTypes = require __DIR__.'/../Config/mime.php';
+        $this->mimeTypes = require __DIR__.'/../Config/mime.php';
     }
 
     /**
@@ -53,7 +53,7 @@ class AssetController extends QuarxController
                 $fileContent = Storage::disk(Config::get('quarx.storage-location', 'local'))->get($fileName);
 
                 return Response::make($fileContent, 200, [
-                    'Content-Type'        => $contentType,
+                    'Content-Type' => $contentType,
                     'Content-Disposition' => 'attachment; filename="'.$fileName.'"',
                 ]);
             }
@@ -93,7 +93,7 @@ class AssetController extends QuarxController
                     $fileContent = Storage::disk(Config::get('quarx.storage-location', 'local'))->get($fileName);
 
                     return Response::make($fileContent, 200, [
-                        'Content-Type'        => $contentType,
+                        'Content-Type' => $contentType,
                         'Content-Disposition' => 'attachment; filename="'.$fileName.'"',
                     ]);
                 }
@@ -149,7 +149,7 @@ class AssetController extends QuarxController
                 $fileContent = Storage::disk(Config::get('quarx.storage-location', 'local'))->get($realFileName);
 
                 return Response::make($fileContent, 200, [
-                    'Content-Type'        => $contentType,
+                    'Content-Type' => $contentType,
                     'Content-Disposition' => 'attachment; filename="'.$fileName.'"',
                 ]);
             }

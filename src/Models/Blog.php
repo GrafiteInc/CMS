@@ -16,10 +16,10 @@ class Blog extends QuarxModel
 
     public static $rules = [
         'title' => 'required|string',
-        'url'   => 'required|string',
+        'url' => 'required|string',
     ];
 
     protected $appends = [
-        'translations'
+        'translations',
     ];
 }

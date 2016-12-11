@@ -10,9 +10,10 @@ use Yab\Quarx\Repositories\TranslationRepository;
 trait Translatable
 {
     /**
-     * Get a translation
+     * Get a translation.
      *
-     * @param  string $lang
+     * @param string $lang
+     *
      * @return mixed
      */
     public function translation($lang)
@@ -24,9 +25,10 @@ trait Translatable
     }
 
     /**
-     * Get translation data
+     * Get translation data.
      *
-     * @param  string $lang
+     * @param string $lang
+     *
      * @return array|null
      */
     public function translationData($lang)
@@ -41,7 +43,7 @@ trait Translatable
     }
 
     /**
-     * Get a translations attribute
+     * Get a translations attribute.
      *
      * @return array
      */
@@ -58,10 +60,9 @@ trait Translatable
     }
 
     /**
-     * After the item is created in the database
+     * After the item is created in the database.
      *
-     * @param  Object $payload
-     * @return void
+     * @param object $payload
      */
     public function afterCreate($payload)
     {
@@ -84,7 +85,7 @@ trait Translatable
                     ];
 
                     foreach ($entry as $key => $value) {
-                        if (! empty($value)) {
+                        if (!empty($value)) {
                             $translation[$key] = json_decode(json_encode($tr->translate(strip_tags($value))));
                         }
                     }

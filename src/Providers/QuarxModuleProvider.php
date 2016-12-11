@@ -9,8 +9,6 @@ class QuarxModuleProvider extends ServiceProvider
 {
     /**
      * Register the services.
-     *
-     * @return void
      */
     public function register()
     {

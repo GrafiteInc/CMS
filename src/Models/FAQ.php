@@ -19,6 +19,6 @@ class FAQ extends QuarxModel
     ];
 
     protected $appends = [
-        'translations'
+        'translations',
     ];
 }

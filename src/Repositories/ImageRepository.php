@@ -115,7 +115,7 @@ class ImageRepository
     {
         $savedFile = FileService::saveClone($input['location'], 'public/images');
 
-        if (! $savedFile) {
+        if (!$savedFile) {
             return false;
         }
 
@@ -177,7 +177,7 @@ class ImageRepository
      */
     public function update($images, $input)
     {
-        if (isset($input['location']) && ! empty($input['location'])) {
+        if (isset($input['location']) && !empty($input['location'])) {
             $savedFile = FileService::saveFile($input['location'], 'public/images');
 
             if (!$savedFile) {

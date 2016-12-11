@@ -14,7 +14,7 @@ class ApiController extends QuarxController
     public function __construct(Request $request)
     {
         $this->modelName = str_singular($request->segment(3));
-        if (! empty($this->modelName)) {
+        if (!empty($this->modelName)) {
             $this->model = app('Yab\Quarx\Models\\'.ucfirst($this->modelName));
         }
     }
@@ -51,7 +51,7 @@ class ApiController extends QuarxController
 
         return [
             'term' => $input['term'],
-            'result' => $query->paginate(Config::get('quarx.pagination', 25))
+            'result' => $query->paginate(Config::get('quarx.pagination', 25)),
         ];
     }
 }

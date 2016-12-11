@@ -53,10 +53,11 @@ class QuarxFeatureController extends QuarxController
     }
 
     /**
-     * Preview content
+     * Preview content.
      *
-     * @param  string $entity
-     * @param  int $id
+     * @param string $entity
+     * @param int    $id
+     *
      * @return Response
      */
     public function preview($entity, $id)
@@ -77,7 +78,7 @@ class QuarxFeatureController extends QuarxController
         if (request('lang') != config('quarx.default-language', Quarx::config('quarx.default-language'))) {
             if ($modelInstance->translation(request('lang'))) {
                 $data = [
-                    $entity => $modelInstance->translation(request('lang'))->data
+                    $entity => $modelInstance->translation(request('lang'))->data,
                 ];
             }
         }
@@ -96,7 +97,7 @@ class QuarxFeatureController extends QuarxController
     }
 
     /**
-     * Set the default lanugage for the session
+     * Set the default lanugage for the session.
      *
      * @param Request $request
      * @param string  $lang
@@ -104,6 +105,7 @@ class QuarxFeatureController extends QuarxController
     public function setLanguage(Request $request, $lang)
     {
         $request->session()->put('language', $lang);
+
         return back();
     }
 }

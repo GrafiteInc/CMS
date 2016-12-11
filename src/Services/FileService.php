@@ -48,8 +48,8 @@ class FileService
         $newFileName = md5(rand(1111, 9999).time());
 
         // In case we don't want that file type
-        if (! empty($fileTypes)) {
-            if (! in_array($extension, $fileTypes)) {
+        if (!empty($fileTypes)) {
+            if (!in_array($extension, $fileTypes)) {
                 throw new Exception('Incorrect file type', 1);
             }
         }
@@ -58,7 +58,7 @@ class FileService
 
         return [
             'original' => basename($fileName),
-            'name'     => $directory.$newFileName.'.'.$extension,
+            'name' => $directory.$newFileName.'.'.$extension,
         ];
     }
 
@@ -106,7 +106,7 @@ class FileService
 
         return [
             'original' => $originalName ?: $file->getFilename().'.'.$extension,
-            'name'     => $directory.$newFileName.'.'.$extension,
+            'name' => $directory.$newFileName.'.'.$extension,
         ];
     }
 

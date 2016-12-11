@@ -20,6 +20,6 @@ class Page extends QuarxModel
     ];
 
     protected $appends = [
-        'translations'
+        'translations',
     ];
 }

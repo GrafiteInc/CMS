@@ -7,8 +7,6 @@ class ConvertToPublishedAt extends Migration
 {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
     public function up()
     {
@@ -31,8 +29,6 @@ class ConvertToPublishedAt extends Migration
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
     public function down()
     {

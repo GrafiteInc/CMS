@@ -2,8 +2,6 @@
 
 namespace Yab\Quarx\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
 class Translation extends QuarxModel
 {
     public $table = 'translations';
@@ -20,7 +18,7 @@ class Translation extends QuarxModel
 
         $attributes = (array) json_decode($this->entity_data);
         $object->attributes = array_merge($attributes, [
-            'id' => $this->entity_id
+            'id' => $this->entity_id,
         ]);
 
         return $object;

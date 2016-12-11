@@ -7,6 +7,12 @@
         <a href="{!! url('quarx/help') !!}"><span class="fa fa-info-circle"></span> Help</a>
     </li>
 
+    @if (Route::get('user/settings'))
+        <li class="@if (Request::is('user/settings') || Request::is('user/password')) active @endif">
+            <a href="{!! url('user/settings') !!}"><span class="fa fa-gear"></span> Settings</a>
+        </li>
+    @endif
+
     @if (in_array('images', Config::get('quarx.active-core-modules', Quarx::defaultModules())))
         <li class="@if (Request::is('quarx/images') || Request::is('quarx/images/*')) active @endif">
             <a href="{!! url('quarx/images') !!}"><span class="fa fa-image"></span> Images</a>
@@ -56,13 +62,8 @@
     @endif
 
     {!! ModuleService::menus() !!}
-    {!! Quarx::packageMenus() !!}
 
-    @if (Route::get('user/settings'))
-        <li class="@if (Request::is('user/settings') || Request::is('user/password')) active @endif">
-            <a href="{!! url('user/settings') !!}"><span class="fa fa-gear"></span> Settings</a>
-        </li>
-    @endif
+    {!! Quarx::packageMenus() !!}
 
     @if (Route::get('admin/users')) <li class="sidebar-header"><span>Admin</span></li> @endif
 

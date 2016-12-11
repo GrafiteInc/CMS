@@ -25,24 +25,4 @@ class ModuleService
 
         return $menu;
     }
-
-    public function packageMenus()
-    {
-        Config::get('quarx.packages');
-
-        $modules = glob($modulePath.'*');
-
-        $menu = '';
-
-        foreach ($modules as $module) {
-            if (is_dir($module)) {
-                $module = lcfirst(str_replace($modulePath, '', $module));
-                if (file_exists($modulePath.ucfirst($module).'/Views/menu.blade.php')) {
-                    $menu .= View::make($module.'::menu');
-                }
-            }
-        }
-
-        return $menu;
-    }
 }

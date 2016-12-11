@@ -204,6 +204,10 @@ class AssetController extends QuarxController
      */
     public function getMimeType($extension)
     {
-        return $this->mimeTypes['.'.strtolower($extension)];
+        if (isset($this->mimeTypes['.'.strtolower($extension)])) {
+            return $this->mimeTypes['.'.strtolower($extension)];
+        }
+
+        return 'text/plain';
     }
 }

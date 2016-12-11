@@ -238,7 +238,6 @@ class QuarxService
      */
     public function packageMenus()
     {
-        $packageMenus = '';
         $packageViews = Config::get('quarx.package-menus', []);
 
         foreach ($packageViews as $view) {

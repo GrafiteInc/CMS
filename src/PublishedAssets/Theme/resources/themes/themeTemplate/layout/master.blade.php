@@ -33,13 +33,14 @@
 
     </body>
 
-    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-    <script type="text/javascript" src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+    <script type="text/javascript">
+        var _token = '{!! Session::token() !!}';
+        var _url = '{!! url("/") !!}';
+    </script>
+    @yield("pre-javascript")
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
-
-    <script type="text/javascript">
-        var _url = '{!! url('') !!}';
-    </script>
     @yield('javascript')
 </html>

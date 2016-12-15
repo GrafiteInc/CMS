@@ -2,13 +2,13 @@
 
 namespace Yab\Quarx;
 
-use Illuminate\Foundation\AliasLoader;
-use Illuminate\Support\Facades\Blade;
-use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\View;
-use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Str;
 use Quarx;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Blade;
+use Illuminate\Foundation\AliasLoader;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\ServiceProvider;
 
 class QuarxProvider extends ServiceProvider
 {

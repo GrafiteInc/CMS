@@ -3,6 +3,15 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 ----
 
+## [v2.2.10] - 2016-12-15
+
+### Added
+- New middleware for language setting
+
+### Changed
+- Minor improvements
+- Also added ability to customize dashboard
+
 ## [v2.2.9] - 2016-12-06
 
 ### Changed

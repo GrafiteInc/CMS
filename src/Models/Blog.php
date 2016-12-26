@@ -2,6 +2,7 @@
 
 namespace Yab\Quarx\Models;
 
+use Yab\Quarx\Services\Normalizer;
 use Yab\Quarx\Traits\Translatable;
 
 class Blog extends QuarxModel
@@ -22,4 +23,9 @@ class Blog extends QuarxModel
     protected $appends = [
         'translations',
     ];
+
+    public function getEntryAttribute($value)
+    {
+        return new Normalizer($value);
+    }
 }

@@ -2,6 +2,7 @@
 
 namespace Yab\Quarx\Models;
 
+use Yab\Quarx\Services\Normalizer;
 use Yab\Quarx\Traits\Translatable;
 
 class Event extends QuarxModel
@@ -21,4 +22,9 @@ class Event extends QuarxModel
     protected $appends = [
         'translations',
     ];
+
+    public function getDetailsAttribute($value)
+    {
+        return new Normalizer($value);
+    }
 }

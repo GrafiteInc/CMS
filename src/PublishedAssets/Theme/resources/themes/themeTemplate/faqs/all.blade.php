@@ -6,8 +6,6 @@
 
     <h1>FAQs</h1>
 
-    @widget('sample')
-
     @foreach($faqs as $faq)
         <div class="container-fluid">
         @if (config('app.locale') !== config('quarx.default-language'))

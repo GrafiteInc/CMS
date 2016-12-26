@@ -14,6 +14,13 @@
                 <img src="{!! FileService::filePreview($images->location) !!}" />
             </div>
         </div>
+        <div class="col-md-4">
+            <h2 class="raw-margin-top-0 raw-margin-bottom-24">Blade Tags</h2>
+<pre>
+ &#64;image({{ $images->id }})
+ &#64;image_link({{ $images->id }})
+@foreach(explode(',', $images->tags) as $tag) &#64;images({{ trim($tag) }})<br>@endforeach</pre>
+        </div>
     </div>
 
     <div class="row">

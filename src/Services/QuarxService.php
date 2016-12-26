@@ -188,6 +188,42 @@ class QuarxService
     }
 
     /**
+     * Get image.
+     *
+     * @param string $tag
+     *
+     * @return collection
+     */
+    public function image($id, $class = '')
+    {
+        $img = '';
+
+        if ($image = app('Yab\Quarx\Models\Image')->find($id)) {
+            $img = FileService::filePreview($image->location);
+        }
+
+        return '<img class="'.$class.'" src="'.$img.'">';
+    }
+
+    /**
+     * Get image link.
+     *
+     * @param string $tag
+     *
+     * @return collection
+     */
+    public function imageLink($id)
+    {
+        $img = '';
+
+        if ($image = app('Yab\Quarx\Models\Image')->find($id)) {
+            $img = FileService::filePreview($image->location);
+        }
+
+        return $img;
+    }
+
+    /**
      * Get images.
      *
      * @param string $tag

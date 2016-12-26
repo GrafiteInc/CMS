@@ -64,6 +64,14 @@ class QuarxProvider extends ServiceProvider
             return "<?php echo Quarx::widget($expression); ?>";
         });
 
+        Blade::directive('image', function ($expression) {
+            return "<?php echo Quarx::image($expression); ?>";
+        });
+
+        Blade::directive('image_link', function ($expression) {
+            return "<?php echo Quarx::imageLink($expression); ?>";
+        });
+
         Blade::directive('images', function ($expression) {
             return "<?php echo Quarx::images($expression); ?>";
         });

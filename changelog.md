@@ -3,6 +3,12 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 ----
 
+## [v2.2.11] - 2016-12-26
+
+### Added
+- New normalizer for entry content
+- New image blade tags
+
 ## [v2.2.10] - 2016-12-15
 
 ### Added

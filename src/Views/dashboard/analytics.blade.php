@@ -63,7 +63,6 @@
 
 @stop
 
-
 @section('javascript')
     @parent
     <script type="text/javascript">

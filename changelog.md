@@ -3,6 +3,11 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 ----
 
+## [v2.2.12] - 2016-12-28
+
+### Fixed
+- Fixes issue with Minify breaking CDN libs
+
 ## [v2.2.11] - 2016-12-26
 
 ### Added

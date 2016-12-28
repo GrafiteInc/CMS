@@ -4,7 +4,7 @@
 
     <div class="overlay"></div>
 
-    {!! Minify::stylesheet(Quarx::asset('css/dashboard.css', 'text/css')) !!}
+    <link rel="stylesheet" type="text/css" href="{{ Quarx::asset('css/dashboard.css', 'text/css') }}">
 
     <div class="row raw-margin-top-50">
         <div class="col-md-12">

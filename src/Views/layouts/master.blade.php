@@ -13,14 +13,14 @@
         <link rel="icon" type="image/png" sizes="16x16" href="{!! Quarx::asset('images/favicon-16x16.png', 'image/png') !!}?v2">
 
         <!-- Bootstrap -->
-        {!! Minify::stylesheet('https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css') !!}
-        {!! Minify::stylesheet('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css') !!}
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
         <!-- App style -->
-        {!! Minify::stylesheet(Quarx::asset('dist/css/all.css', 'text/css')) !!}
+        <link rel="stylesheet" type="text/css" href="{!! Quarx::asset('dist/css/all.css', 'text/css') !!}">
 
         <!-- Bootstrap Theme -->
-        {!! Minify::stylesheet(Quarx::asset('themes/bootstrap-'.Config::get('quarx.backend-theme', 'united').'.css', 'text/css')) !!}
+        <link rel="stylesheet" type="text/css" href="{!! Quarx::asset('themes/bootstrap-'.Config::get('quarx.backend-theme', 'united').'.css', 'text/css') !!}">
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -61,21 +61,14 @@
         </div>
 
         <script type="text/javascript">
-
             var _apiKey = '{!!  Config::get("quarx.api-key") !!}';
             var _apiToken = '{!!  Config::get("quarx.api-token") !!}';
-
         </script>
-
-        {!! Minify::javascript(Quarx::asset('js/jquery.min.js', 'application/javascript')) !!}
-        {!! Minify::javascript(Quarx::asset('dist/js/all.js', 'application/javascript')) !!}
-
+        <script type="text/javascript" src="{!! Quarx::asset('js/jquery.min.js', 'application/javascript') !!}"></script>
+        <script type="text/javascript" src="{!! Quarx::asset('dist/js/all.js', 'application/javascript') !!}"></script>
         <script type="text/javascript">
-
             @include('quarx::notifications')
-
         </script>
-
         @yield("javascript")
     </body>
 </html>

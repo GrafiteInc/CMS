@@ -8,7 +8,7 @@ class DashboardController extends QuarxController
 {
     public function main()
     {
-        if (is_null(config('quarx.analytics.site_id'))) {
+        if (is_null(config('laravel-analytics.siteId'))) {
             return view('quarx::dashboard.empty');
         }
 

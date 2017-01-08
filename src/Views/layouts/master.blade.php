@@ -35,7 +35,7 @@
 
             var _token = '{!! Session::token() !!}';
             var _url = '{!! url("/") !!}';
-            var _pixabayKey = '{!! env('PIXABAY', '') !!}';
+            var _pixabayKey = '{!! config('quarx.pixabay', '') !!}';
 
         </script>
     </head>

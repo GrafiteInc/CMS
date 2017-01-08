@@ -48,7 +48,7 @@ class CryptoService
      */
     public function __construct()
     {
-        $this->password = env('APP_KEY');
+        $this->password = config('app.key');
 
         $this->specialCharactersForward = [
             '+' => '.',

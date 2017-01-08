@@ -15,7 +15,7 @@ class FileRequest extends FormRequest
      */
     public function authorize()
     {
-        if (env('APP_ENV') !== 'testing') {
+        if (config('app.env') !== 'testing') {
             return Gate::allows('quarx', Auth::user());
         }
 

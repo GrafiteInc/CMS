@@ -67,7 +67,7 @@ class ModuleCrud extends Command
         }
 
         file_put_contents($moduleDirectory.'/config.php', "<?php \n\n\n return [];");
-        file_put_contents($moduleDirectory.'/Views/menu.blade.php', "<li class=\"@if (Request::is('quarx/".str_plural($table)."') || Request::is('quarx/".str_plural($table)."/*')) active @endif\"><a href=\"<?= URL::to('quarx/".strtolower(str_plural($table))."'); ?>\"><span class=\"fa fa-file\"></span> ".ucfirst(str_plural($table)).'</a></li>');
+        file_put_contents($moduleDirectory.'/Views/menu.blade.php', "<li class=\"@if (Request::is('quarx/".strtolower(str_plural($table))."') || Request::is('quarx/".strtolower(str_plural($table))."/*')) active @endif\"><a href=\"{{ url('quarx/".strtolower(str_plural($table))."') }}\"><span class=\"fa fa-file\"></span> ".ucfirst(str_plural($table)).'</a></li>');
 
         $config = [
             'bootstrap' => false,
@@ -87,7 +87,6 @@ class ModuleCrud extends Command
             '_namespace_services_' => 'Quarx\Modules\\'.ucfirst(str_plural($table)).'\Services',
             '_namespace_facade_' => 'Quarx\Modules\\'.ucfirst(str_plural($table)).'\Facades',
             '_namespace_model_' => 'Quarx\Modules\\'.ucfirst(str_plural($table)).'\Models',
-            '_namespace_model_' => 'Quarx\Modules\\'.ucfirst(str_plural($table)).'\Models',
             '_namespace_controller_' => 'Quarx\Modules\\'.ucfirst(str_plural($table)).'\Controllers',
             '_namespace_request_' => 'Quarx\Modules\\'.ucfirst(str_plural($table)).'\Requests',
             '_table_name_' => str_plural(strtolower($table)),
@@ -95,6 +94,7 @@ class ModuleCrud extends Command
             '_lower_casePlural_' => str_plural(strtolower($table)),
             '_camel_case_' => ucfirst(camel_case($table)),
             '_camel_casePlural_' => ucfirst(str_plural(camel_case($table))),
+            '_ucCamel_casePlural_' => ucfirst(str_plural(camel_case($table))),
             'template_source' => __DIR__.'/../Templates/CRUD/',
             'tests_generated' => 'integration,service,repository',
         ];
@@ -150,7 +150,7 @@ class ModuleCrud extends Command
             $this->comment('php artisan module:publish '.str_plural($table));
             $this->line('');
             $this->info('Add this to your `app/Providers/RouteServiceProver.php` in the `mapWebRoutes` method:');
-            $this->comment("\nrequire app_path('routes/".$config['_lower_casePlural_']."-web.php');\n");
+            $this->comment("\nrequire base_path('routes/".$config['_lower_casePlural_']."-web.php');\n");
         } catch (Exception $e) {
             throw new Exception('Unable to generate your Module', 1);
         }

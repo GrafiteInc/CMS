@@ -14,7 +14,8 @@ class _camel_casePlural_ModuleProvider extends ServiceProvider
     {
         // Publishes
         $this->publishes([
-            __DIR__.'/Publishes/app'       => base_path('app'),
+            __DIR__.'/Publishes/app' => base_path('app'),
+            __DIR__.'/Publishes/routes' => base_path('routes'),
             __DIR__.'/Publishes/resources' => base_path('resources'),
         ]);
 

@@ -35,7 +35,7 @@ class ModuleMake extends Command
 
         $name = ucfirst(str_singular($this->argument('name')));
 
-        $moduleDirectory = base_path('quarx/modules/'.ucfirst(($name)));
+        $moduleDirectory = base_path('quarx/modules/'.ucfirst(str_plural($name)));
 
         if (!is_dir(base_path('quarx'))) {
             @mkdir(base_path('quarx'));
@@ -49,15 +49,17 @@ class ModuleMake extends Command
         @mkdir($moduleDirectory.'/Assets');
         @mkdir($moduleDirectory.'/Publishes');
         @mkdir($moduleDirectory.'/Publishes/app/Http', 0777, true);
+        @mkdir($moduleDirectory.'/Publishes/routes', 0777, true);
         @mkdir($moduleDirectory.'/Publishes/app/Http/Controllers/Quarx', 0777, true);
         @mkdir($moduleDirectory.'/Publishes/resources/themes/default', 0777, true);
         @mkdir($moduleDirectory.'/Controllers');
         @mkdir($moduleDirectory.'/Services');
         @mkdir($moduleDirectory.'/Views');
+        @mkdir($moduleDirectory.'/Routes');
         @mkdir($moduleDirectory.'/Tests');
 
         file_put_contents($moduleDirectory.'/config.php', "<?php \n\n\n return [];");
-        file_put_contents($moduleDirectory.'/Views/menu.blade.php', "<li><a href=\"<?= URL::to('quarx/".strtolower(($name))."'); ?>\"><span class=\"fa fa-file\"></span> ".ucfirst(($name)).'</a></li>');
+        file_put_contents($moduleDirectory.'/Views/menu.blade.php', "<li class=\"@if (Request::is('quarx/".strtolower(str_plural($name))."') || Request::is('quarx/".strtolower(str_plural($name))."/*')) active @endif\"><a href=\"{{ url('quarx/".strtolower(str_plural($name))."') }}\"><span class=\"fa fa-file\"></span> ".ucfirst(str_plural($name)).'</a></li>');
 
         $config = [
             'bootstrap' => false,
@@ -66,17 +68,18 @@ class ModuleMake extends Command
             '_path_controller_' => $moduleDirectory.'/Controllers',
             '_path_views_' => $moduleDirectory.'/Views',
             '_path_tests_' => $moduleDirectory.'/Tests',
-            '_path_routes_' => $moduleDirectory.'/routes.php',
-            'routes_prefix' => "<?php \n\nRoute::group(['namespace' => 'Quarx\Modules\\".ucfirst(($name))."\Controllers', 'prefix' => 'quarx', 'middleware' => ['web', 'auth', 'quarx']], function () { \n\n",
+            '_path_routes_' => $moduleDirectory.'/Routes/web.php',
+            'routes_prefix' => "<?php \n\nRoute::group(['namespace' => 'Quarx\Modules\\".ucfirst(str_plural($name))."\Controllers', 'prefix' => 'quarx', 'middleware' => ['web', 'auth', 'quarx']], function () { \n\n",
             'routes_suffix' => "\n\n});",
             '_app_namespace_' => app()->getInstance()->getNamespace(),
-            '_namespace_services_' => 'Quarx\Modules\\'.ucfirst(($name)).'\Services',
-            '_namespace_controller_' => 'Quarx\Modules\\'.ucfirst(($name)).'\Controllers',
-            '_name_name_' => (strtolower($name)),
+            '_namespace_services_' => 'Quarx\Modules\\'.ucfirst(str_plural($name)).'\Services',
+            '_namespace_controller_' => 'Quarx\Modules\\'.ucfirst(str_plural($name)).'\Controllers',
+            '_name_name_' => strtolower($name),
             '_lower_case_' => strtolower($name),
-            '_lower_casePlural_' => (strtolower($name)),
+            '_lower_casePlural_' => str_plural(strtolower($name)),
             '_camel_case_' => ucfirst(camel_case($name)),
-            '_camel_casePlural_' => ucfirst((camel_case($name))),
+            '_camel_casePlural_' => ucfirst(str_plural(camel_case($name))),
+            '_ucCamel_casePlural_' => ucfirst(str_plural(camel_case($name))),
             'template_source' => __DIR__.'/../Templates/Basic/',
         ];
 
@@ -86,7 +89,7 @@ class ModuleMake extends Command
         $appConfig['template_source'] = __DIR__.'/../Templates/AppBasic/';
         $appConfig['_path_controller_'] = $moduleDirectory.'/Publishes/app/Http/Controllers/Quarx';
         $appConfig['_path_views_'] = $moduleDirectory.'/Publishes/resources/themes/default';
-        $appConfig['_path_routes_'] = $moduleDirectory.'/Publishes/app/Http/'.$config['_lower_casePlural_'].'-routes.php';
+        $appConfig['_path_routes_'] = $moduleDirectory.'/Publishes/routes/'.$config['_lower_casePlural_'].'-routes.php';
         $appConfig['_namespace_controller_'] = $config['_app_namespace_'].'Http\Controllers\Quarx';
         $appConfig['routes_prefix'] = "<?php \n\nRoute::group(['namespace' => 'Quarx', 'middleware' => ['web']], function () {\n\n";
         $appConfig['routes_suffix'] = "\n\n});";
@@ -122,7 +125,7 @@ class ModuleMake extends Command
             $this->comment('php artisan module:publish '.str_plural($name));
             $this->line('');
             $this->info('Add this to your `app/Providers/RouteServiceProver.php` in the `mapWebRoutes` method:');
-            $this->comment("\nrequire app_path('Http/".$config['_lower_casePlural_']."-routes.php');\n");
+            $this->comment("\nrequire base_path('routes/".$config['_lower_casePlural_']."-routes.php');\n");
         } catch (Exception $e) {
             throw new Exception('Unable to generate your Module', 1);
         }

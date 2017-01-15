@@ -12,25 +12,23 @@ class _camel_casePlural_ModuleProvider extends ServiceProvider
 {
     public function boot(DispatcherContract $events, Router $router)
     {
-        parent::boot($events);
-        parent::boot($router);
-
         // Publishes
         $this->publishes([
-            __DIR__.'/Publishes/app'       => base_path('app'),
+            __DIR__.'/Publishes/app' => base_path('app'),
             __DIR__.'/Publishes/resources' => base_path('resources'),
+            __DIR__.'/Publishes/routes' => base_path('routes'),
         ]);
 
         // Load Routes
-        $router->group(['middleware' => ['web']], function ($router) {
-            require __DIR__.'/routes.php';
+        $this->app->router->group(['middleware' => ['web']], function ($router) {
+            require __DIR__.'/Routes/web.php';
         });
 
         // View namespace
-        View::addNamespace('_lower_casePlural_', __DIR__.'/Views');
+        $this->app->view->addNamespace('_lower_casePlural_', __DIR__.'/Views');
 
         // Configs
-        Config::set('quarx.modules._lower_casePlural_', include(__DIR__.'/config.php'));
+        $this->app->config->set('quarx.modules._lower_casePlural_', include(__DIR__.'/config.php'));
     }
 
     public function register()

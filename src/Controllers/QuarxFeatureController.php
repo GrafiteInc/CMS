@@ -10,6 +10,19 @@ use Yab\Quarx\Models\Archive;
 
 class QuarxFeatureController extends QuarxController
 {
+    public function sendHome()
+    {
+        return redirect('/');
+    }
+
+    /**
+     * Rollback to a previous version of an entity.
+     *
+     * @param string $entity
+     * @param int    $id
+     *
+     * @return Redirect
+     */
     public function rollback($entity, $id)
     {
         $modelString = 'Yab\Quarx\Models\\'.ucfirst($entity);

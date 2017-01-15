@@ -3,21 +3,33 @@
 namespace Yab\Quarx\Controllers;
 
 use Spatie\LaravelAnalytics\LaravelAnalyticsFacade as LaravelAnalytics;
+use Yab\Quarx\Services\AnalyticsService;
 
 class DashboardController extends QuarxController
 {
+    public function __construct(AnalyticsService $service)
+    {
+        $this->service = $service;
+    }
+
     public function main()
     {
-        if (is_null(config('laravel-analytics.siteId'))) {
-            return view('quarx::dashboard.empty');
+        if (!is_null(config('laravel-analytics.siteId')) && config('quarx.analytics') == 'google') {
+            foreach (LaravelAnalytics::getVisitorsAndPageViews(7) as $view) {
+                $visitStats['date'][] = $view['date']->format('Y-m-d');
+                $visitStats['visitors'][] = $view['visitors'];
+                $visitStats['pageViews'][] = $view['pageViews'];
+            }
+
+            return view('quarx::dashboard.analytics-google', compact('visitStats', 'oneYear'));
+        } elseif (is_null(config('quarx.analytics')) || config('quarx.analytics') == 'internal') {
+            return view('quarx::dashboard.analytics-internal')
+                ->with('stats', $this->service->getDays(15))
+                ->with('topReferers', $this->service->topReferers(15))
+                ->with('topBrowsers', $this->service->topBrowsers(15))
+                ->with('topPages', $this->service->topPages(15));
         }
 
-        foreach (LaravelAnalytics::getVisitorsAndPageViews(7) as $view) {
-            $visitStats['date'][] = $view['date']->format('Y-m-d');
-            $visitStats['visitors'][] = $view['visitors'];
-            $visitStats['pageViews'][] = $view['pageViews'];
-        }
-
-        return view('quarx::dashboard.analytics', compact('visitStats', 'oneYear'));
+        return view('quarx::dashboard.empty');
     }
 }

@@ -4,6 +4,7 @@ namespace Yab\Quarx\Providers;
 
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Routing\Router;
+use Yab\Quarx\Middleware\QuarxAnalytics;
 
 class QuarxRouteProvider extends ServiceProvider
 {
@@ -33,6 +34,8 @@ class QuarxRouteProvider extends ServiceProvider
      */
     public function map(Router $router)
     {
+        $router->middleware('quarx-analytics', QuarxAnalytics::class);
+
         $router->group(['namespace' => $this->namespace], function ($router) {
             require __DIR__.'/../Routes/web.php';
         });

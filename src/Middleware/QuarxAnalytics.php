@@ -17,7 +17,9 @@ class QuarxAnalytics
      */
     public function handle($request, Closure $next)
     {
-        app(AnalyticsService::class)->log($request);
+        if (!$request->ajax()) {
+            app(AnalyticsService::class)->log($request);
+        }
 
         return $next($request);
     }

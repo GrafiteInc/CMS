@@ -66,7 +66,7 @@ class ModuleCrud extends Command
             mkdir($moduleDirectory.'/Tests', 0777, true);
         }
 
-        file_put_contents($moduleDirectory.'/config.php', "<?php \n\n\n return [];");
+        file_put_contents($moduleDirectory.'/config.php', "<?php \n\n\n return [ 'asset_path' => __DIR__.'/Assets', ];");
         file_put_contents($moduleDirectory.'/Views/menu.blade.php', "<li class=\"@if (Request::is('quarx/".strtolower(str_plural($table))."') || Request::is('quarx/".strtolower(str_plural($table))."/*')) active @endif\"><a href=\"{{ url('quarx/".strtolower(str_plural($table))."') }}\"><span class=\"fa fa-file\"></span> ".ucfirst(str_plural($table)).'</a></li>');
 
         $config = [

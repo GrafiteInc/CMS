@@ -58,7 +58,7 @@ class ModuleMake extends Command
         @mkdir($moduleDirectory.'/Routes');
         @mkdir($moduleDirectory.'/Tests');
 
-        file_put_contents($moduleDirectory.'/config.php', "<?php \n\n\n return [];");
+        file_put_contents($moduleDirectory.'/config.php', "<?php \n\n\n return [ 'asset_path' => __DIR__.'/Assets', ];");
         file_put_contents($moduleDirectory.'/Views/menu.blade.php', "<li class=\"@if (Request::is('quarx/".strtolower(str_plural($name))."') || Request::is('quarx/".strtolower(str_plural($name))."/*')) active @endif\"><a href=\"{{ url('quarx/".strtolower(str_plural($name))."') }}\"><span class=\"fa fa-file\"></span> ".ucfirst(str_plural($name)).'</a></li>');
 
         $config = [

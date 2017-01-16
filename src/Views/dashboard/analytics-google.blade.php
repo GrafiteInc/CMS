@@ -35,7 +35,7 @@
                         </thead>
                         @foreach (LaravelAnalytics::getMostVisitedPages(365, 10) as $browser)
                             <tr>
-                                <td>{{ $browser['url'] }}</td>
+                                <td>{{ str_limit($browser['url'], 30) }}</td>
                                 <td>{{ $browser['pageViews'] }}</td>
                             </tr>
                         @endforeach
@@ -50,7 +50,7 @@
                         </thead>
                         @foreach (LaravelAnalytics::getTopReferrers(365, 10) as $referers)
                             <tr>
-                                <td>{{ $referers['url'] }}</td>
+                                <td>{{ str_limit($referers['url'], 30) }}</td>
                                 <td>{{ $referers['pageViews'] }}</td>
                             </tr>
                         @endforeach

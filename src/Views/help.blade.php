@@ -68,6 +68,7 @@
 
             <pre>&#64;theme('path') // includes file within the theme path</pre>
             <pre>&#64;menu('slug') // menu rendering</pre>
+            <pre>&#64;modules() // module url links</pre>
             <pre>&#64;widget('slug') // widget contents</pre>
             <pre>&#64;images('tag') // images</pre>
             <pre>&#64;edit('module', 'id') // a link to edit a module or item on the front-end of the site</pre>

@@ -97,6 +97,28 @@ class QuarxService
     }
 
     /**
+     * Module Links.
+     *
+     * @return string
+     */
+    public function moduleLinks()
+    {
+        $links = '';
+
+        foreach (config('quarx.modules') as $module => $config) {
+            $link = $module;
+
+            if (isset($config['url'])) {
+                $link = $config['url'];
+            }
+
+            $links .= '<li><a href="'.url($link).'">'.ucfirst($link).'</a></li>';
+        }
+
+        return $links;
+    }
+
+    /**
      * Creates a breadcrumb trail.
      *
      * @param array $locations Locations array

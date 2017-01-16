@@ -58,7 +58,7 @@ class ModuleMake extends Command
         @mkdir($moduleDirectory.'/Routes');
         @mkdir($moduleDirectory.'/Tests');
 
-        file_put_contents($moduleDirectory.'/config.php', "<?php \n\n\n return [ 'asset_path' => __DIR__.'/Assets', ];");
+        file_put_contents($moduleDirectory.'/config.php', "<?php \n\n\n return [ 'asset_path' => __DIR__.'/Assets', 'url' => '".strtolower(str_plural($name))."', ];");
         file_put_contents($moduleDirectory.'/Views/menu.blade.php', "<li class=\"@if (Request::is('quarx/".strtolower(str_plural($name))."') || Request::is('quarx/".strtolower(str_plural($name))."/*')) active @endif\"><a href=\"{{ url('quarx/".strtolower(str_plural($name))."') }}\"><span class=\"fa fa-file\"></span> ".ucfirst(str_plural($name)).'</a></li>');
 
         $config = [
@@ -89,7 +89,7 @@ class ModuleMake extends Command
         $appConfig['template_source'] = __DIR__.'/../Templates/AppBasic/';
         $appConfig['_path_controller_'] = $moduleDirectory.'/Publishes/app/Http/Controllers/Quarx';
         $appConfig['_path_views_'] = $moduleDirectory.'/Publishes/resources/themes/default';
-        $appConfig['_path_routes_'] = $moduleDirectory.'/Publishes/routes/'.$config['_lower_casePlural_'].'-routes.php';
+        $appConfig['_path_routes_'] = $moduleDirectory.'/Publishes/routes/'.$config['_lower_casePlural_'].'-web.php';
         $appConfig['_namespace_controller_'] = $config['_app_namespace_'].'Http\Controllers\Quarx';
         $appConfig['routes_prefix'] = "<?php \n\nRoute::group(['namespace' => 'Quarx', 'middleware' => ['web']], function () {\n\n";
         $appConfig['routes_suffix'] = "\n\n});";
@@ -118,7 +118,6 @@ class ModuleMake extends Command
             $crudGenerator->createViews($appConfig);
 
             $this->line('Building routes...');
-            @file_put_contents($moduleDirectory.'/Publishes/app/Http/'.$config['_lower_casePlural_'].'-routes.php', '');
             $crudGenerator->createRoutes($appConfig);
 
             $this->line('You will need to publish your module to make it available to your vistors:');

@@ -60,6 +60,10 @@ class QuarxProvider extends ServiceProvider
             return "<?php echo Quarx::menu($expression); ?>";
         });
 
+        Blade::directive('modules', function () {
+            return '<?php echo Quarx::moduleLinks(); ?>';
+        });
+
         Blade::directive('widget', function ($expression) {
             return "<?php echo Quarx::widget($expression); ?>";
         });

@@ -15,6 +15,7 @@
                 <li><a href="{{ url('gallery') }}">Gallery</a></li>
                 <li><a href="{{ url('faqs') }}">FAQs</a></li>
                 <li><a href="{{ url('events') }}">Events</a></li>
+                @modules()
             </ul>
             <ul class="nav navbar-nav navbar-right menu">
                 @if (config('app.locale') == 'fr')

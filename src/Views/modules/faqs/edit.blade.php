@@ -5,14 +5,14 @@
     <div class="row">
         @if (! is_null(request('lang')) && request('lang') !== config('quarx.default-language', 'en') && $faq->translationData(request('lang')))
             @if (isset($faq->translationData(request('lang'))->is_published))
-                <a class="btn btn-default pull-right raw-margin-left-8" href="{!! URL::to('faqs') !!}">Live</a>
+                <a class="btn btn-default pull-right raw-margin-left-8" href="{!! url('faqs') !!}">Live</a>
             @endif
-            <a class="btn btn-warning pull-right raw-margin-left-8" href="{!! URL::to('quarx/rollback/translation/'.$faq->translation(request('lang'))->id) !!}">Rollback</a>
+            <a class="btn btn-warning pull-right raw-margin-left-8" href="{!! Quarx::rollbackUrl($faq->translation(request('lang')))!!}">Rollback</a>
         @else
             @if ($faq->is_published)
-                <a class="btn btn-default pull-right raw-margin-left-8" href="{!! URL::to('faqs') !!}">Live</a>
+                <a class="btn btn-default pull-right raw-margin-left-8" href="{!! url('faqs') !!}">Live</a>
             @endif
-            <a class="btn btn-warning pull-right raw-margin-left-8" href="{!! URL::to('quarx/rollback/faq/'.$faq->id) !!}">Rollback</a>
+            <a class="btn btn-warning pull-right raw-margin-left-8" href="{!! Quarx::rollbackUrl($faq) !!}">Rollback</a>
         @endif
 
         <h1 class="page-header">FAQs</h1>
@@ -40,7 +40,7 @@
             @endif
 
             <div class="form-group text-right">
-                <a href="{!! URL::to('quarx/faqs') !!}" class="btn btn-default raw-left">Cancel</a>
+                <a href="{!! url('quarx/faqs') !!}" class="btn btn-default raw-left">Cancel</a>
                 {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
             </div>
 

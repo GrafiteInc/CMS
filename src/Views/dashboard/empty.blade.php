@@ -5,8 +5,16 @@
     <div class="row">
         <div class="col-md-12">
             <h1 class="page-header text-center">Dashboard</h1>
+                <p>The Quarx dashboard is powered by <b>Google Analytics</b> or by its own <b>Internal Analytics</b>.</p>
 
-                <p>The Quarx dashboard is powered by Google Analytics. By following the directions below, you will enable the Google Analytics charts and data sets on your dashboard.</p>
+                <h3>Internal Analytics</h3>
+                <p>In order to use the internal analytics (just for this dashboard - you can still add your Google Analytics tracking to the site) simply run:</p>
+<pre>
+php artisan migrate
+</pre>
+
+                <h3>Google Analytics</h3>
+                <p>By following the directions below, you will enable the Google Analytics charts and data sets on your dashboard.</p>
 
                 <p>First run:</p>
 <pre>

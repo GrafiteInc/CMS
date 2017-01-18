@@ -159,4 +159,19 @@ class EventController extends QuarxController
 
         return redirect(route('quarx.events.index'));
     }
+
+    /**
+     * Page history.
+     *
+     * @param int $id
+     *
+     * @return Response
+     */
+    public function history($id)
+    {
+        $event = $this->eventRepository->findEventById($id);
+
+        return view('quarx::modules.events.history')
+            ->with('event', $event);
+    }
 }

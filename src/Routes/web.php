@@ -77,6 +77,7 @@
 
                 Route::get('preview/{entity}/{entityId}', 'QuarxFeatureController@preview');
                 Route::get('rollback/{entity}/{entityId}', 'QuarxFeatureController@rollback');
+                Route::get('revert/{id}', 'QuarxFeatureController@revert');
 
                 /*
                 |--------------------------------------------------------------------------
@@ -114,6 +115,7 @@
 
                 Route::resource('blog', 'BlogController', ['as' => 'quarx', 'except' => ['show']]);
                 Route::post('blog/search', 'BlogController@search');
+                Route::get('blog/{id}/history', 'BlogController@history');
 
                 /*
                 |--------------------------------------------------------------------------
@@ -123,6 +125,7 @@
 
                 Route::resource('pages', 'PagesController', ['as' => 'quarx', 'except' => ['show']]);
                 Route::post('pages/search', 'PagesController@search');
+                Route::get('pages/{id}/history', 'PagesController@history');
 
                 /*
                 |--------------------------------------------------------------------------
@@ -150,6 +153,7 @@
 
                 Route::resource('events', 'EventController', ['as' => 'quarx', 'except' => ['show']]);
                 Route::post('events/search', 'EventController@search');
+                Route::get('events/{id}/history', 'EventController@history');
 
                 /*
                 |--------------------------------------------------------------------------

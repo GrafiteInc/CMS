@@ -394,4 +394,18 @@ class QuarxService
 
         return '';
     }
+
+    /**
+     * Rollback URL.
+     *
+     * @param obj $object
+     *
+     * @return string
+     */
+    public function rollbackUrl($object)
+    {
+        $class = str_replace('\\', '_', get_class($object));
+
+        return url('quarx/rollback/'.$class.'/'.$object->id);
+    }
 }

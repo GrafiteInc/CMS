@@ -28,4 +28,9 @@ class Page extends QuarxModel
     {
         return new Normalizer($value);
     }
+
+    public function history()
+    {
+        return Archive::where('entity_type', get_class($this))->where('entity_id', $this->id)->get();
+    }
 }

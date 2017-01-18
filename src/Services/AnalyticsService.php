@@ -3,6 +3,7 @@
 namespace Yab\Quarx\Services;
 
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Schema;
 use Yab\Quarx\Models\Analytics;
 
 class AnalyticsService
@@ -25,9 +26,11 @@ class AnalyticsService
             'time' => $request->server('REQUEST_TIME', null),
         ]);
 
-        $this->model->create([
-            'data' => $requestData,
-        ]);
+        if (Schema::hasTable(config('quarx.db-prefix', '').'analytics')) {
+            $this->model->create([
+                'data' => $requestData,
+            ]);
+        }
     }
 
     public function topReferers($count)

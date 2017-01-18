@@ -16,6 +16,30 @@ class QuarxFeatureController extends QuarxController
     }
 
     /**
+     * Rollback to a previous version of an entity, a specific moment.
+     *
+     * @param int $id
+     *
+     * @return Redirect
+     */
+    public function revert($id)
+    {
+        $archive = Archive::find($id);
+
+        $model = app($archive->entity_type);
+        $modelInstance = $model->find($archive->entity_id);
+
+        $archiveData = (array) json_decode($archive->entity_data);
+
+        $modelInstance->fill($archiveData);
+        $modelInstance->save();
+
+        Quarx::notification('Reversion was successful', 'success');
+
+        return redirect(URL::previous());
+    }
+
+    /**
      * Rollback to a previous version of an entity.
      *
      * @param string $entity
@@ -25,20 +49,8 @@ class QuarxFeatureController extends QuarxController
      */
     public function rollback($entity, $id)
     {
-        $modelString = 'Yab\Quarx\Models\\'.ucfirst($entity);
+        $modelString = str_replace('_', '\\', $entity);
 
-        if (!class_exists($modelString)) {
-            $modelString = 'Yab\Quarx\Models\\'.ucfirst($entity).'s';
-        }
-        if (!class_exists($modelString)) {
-            $modelString = 'Quarx\Modules\\'.ucfirst(str_plural($entity)).'.\Models\\'.ucfirst(str_plural($entity));
-        }
-        if (!class_exists($modelString)) {
-            $modelString = 'Quarx\Modules\\'.ucfirst(str_plural($entity)).'\Models\\'.ucfirst(str_singular($entity));
-        }
-        if (!class_exists($modelString)) {
-            $modelString = 'Quarx\Modules\\'.ucfirst(str_singular($entity)).'\Models\\'.ucfirst(str_singular($entity));
-        }
         if (!class_exists($modelString)) {
             Quarx::notification('Could not rollback Model not found', 'warning');
 

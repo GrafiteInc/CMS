@@ -159,4 +159,19 @@ class BlogController extends QuarxController
 
         return redirect(route('quarx.blog.index'));
     }
+
+    /**
+     * Blog history.
+     *
+     * @param int $id
+     *
+     * @return Response
+     */
+    public function history($id)
+    {
+        $blog = $this->blogRepository->findBlogById($id);
+
+        return view('quarx::modules.blogs.history')
+            ->with('blog', $blog);
+    }
 }

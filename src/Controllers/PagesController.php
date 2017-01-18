@@ -160,4 +160,19 @@ class PagesController extends QuarxController
 
         return redirect(route('quarx.pages.index'));
     }
+
+    /**
+     * Page history.
+     *
+     * @param int $id
+     *
+     * @return Response
+     */
+    public function history($id)
+    {
+        $page = $this->pagesRepository->findPagesById($id);
+
+        return view('quarx::modules.pages.history')
+            ->with('page', $page);
+    }
 }

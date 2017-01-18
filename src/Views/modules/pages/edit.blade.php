@@ -9,14 +9,15 @@
             @else
                 <a class="btn btn-default pull-right raw-margin-left-8" href="{!! url('quarx/preview/page/'.$page->id.'?lang='.request('lang')) !!}">Preview</a>
             @endif
-             <a class="btn btn-warning pull-right raw-margin-left-8" href="{!! url('quarx/rollback/translation/'.$page->translation(request('lang'))->id) !!}">Rollback</a>
+             <a class="btn btn-warning pull-right raw-margin-left-8" href="{!! Quarx::rollbackUrl($page->translation(request('lang'))) !!}">Rollback</a>
         @else
             @if ($page->is_published)
                 <a class="btn btn-default pull-right raw-margin-left-8" href="{!! url('page/'.$page->url) !!}">Live</a>
             @else
                 <a class="btn btn-default pull-right raw-margin-left-8" href="{!! url('quarx/preview/page/'.$page->id) !!}">Preview</a>
             @endif
-            <a class="btn btn-warning pull-right raw-margin-left-8" href="{!! url('quarx/rollback/page/'.$page->id) !!}">Rollback</a>
+            <a class="btn btn-warning pull-right raw-margin-left-8" href="{!! Quarx::rollbackUrl($page) !!}">Rollback</a>
+            <a class="btn btn-default pull-right raw-margin-left-8" href="{!! url('quarx/pages/'.$page->id.'/history') !!}">History</a>
         @endif
 
         <h1 class="page-header">Pages</h1>

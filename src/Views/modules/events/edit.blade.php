@@ -5,18 +5,19 @@
     <div class="row">
         @if (! is_null(request('lang')) && request('lang') !== config('quarx.default-language', 'en') && $event->translationData(request('lang')))
             @if (isset($event->translationData(request('lang'))->is_published))
-                <a class="btn btn-default pull-right raw-margin-left-8" href="{!! URL::to('events/event/'.$event->id) !!}">Live</a>
+                <a class="btn btn-default pull-right raw-margin-left-8" href="{!! url('events/event/'.$event->id) !!}">Live</a>
             @else
-                <a class="btn btn-default pull-right raw-margin-left-8" href="{!! URL::to('quarx/preview/event/'.$event->id.'?lang='.request('lang')) !!}">Preview</a>
+                <a class="btn btn-default pull-right raw-margin-left-8" href="{!! url('quarx/preview/event/'.$event->id.'?lang='.request('lang')) !!}">Preview</a>
             @endif
-            <a class="btn btn-warning pull-right raw-margin-left-8" href="{!! URL::to('quarx/rollback/translation/'.$event->translation(request('lang'))->id) !!}">Rollback</a>
+            <a class="btn btn-warning pull-right raw-margin-left-8" href="{!! Quarx::rollbackUrl($event->translation(request('lang'))) !!}">Rollback</a>
         @else
             @if ($event->is_published)
-                <a class="btn btn-default pull-right raw-margin-left-8" href="{!! URL::to('events/event/'.$event->id) !!}">Live</a>
+                <a class="btn btn-default pull-right raw-margin-left-8" href="{!! url('events/event/'.$event->id) !!}">Live</a>
             @else
-                <a class="btn btn-default pull-right raw-margin-left-8" href="{!! URL::to('quarx/preview/event/'.$event->id) !!}">Preview</a>
+                <a class="btn btn-default pull-right raw-margin-left-8" href="{!! url('quarx/preview/event/'.$event->id) !!}">Preview</a>
             @endif
-            <a class="btn btn-warning pull-right raw-margin-left-8" href="{!! URL::to('quarx/rollback/event/'.$event->id) !!}">Rollback</a>
+            <a class="btn btn-warning pull-right raw-margin-left-8" href="{!! Quarx::rollbackUrl($event) !!}">Rollback</a>
+            <a class="btn btn-default pull-right raw-margin-left-8" href="{!! url('quarx/events/'.$event->id.'/history') !!}">History</a>
         @endif
         <h1 class="page-header">Events</h1>
     </div>
@@ -57,7 +58,7 @@
                 @endif
 
                 <div class="form-group text-right">
-                    <a href="{!! URL::to('quarx/events') !!}" class="btn btn-default raw-left">Cancel</a>
+                    <a href="{!! url('quarx/events') !!}" class="btn btn-default raw-left">Cancel</a>
                     {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
                 </div>
 

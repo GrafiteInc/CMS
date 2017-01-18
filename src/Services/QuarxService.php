@@ -408,4 +408,22 @@ class QuarxService
 
         return url('quarx/rollback/'.$class.'/'.$object->id);
     }
+
+    /**
+     * Get version from the changelog.
+     *
+     * @return string
+     */
+    public function version()
+    {
+        $changelog = @file_get_contents(__DIR__.'/../../changelog.md');
+
+        if (!$changelog) {
+            return 'unknown version';
+        }
+
+        $matches = strstr($changelog, '## [');
+
+        return substr($matches, 5, 6);
+    }
 }

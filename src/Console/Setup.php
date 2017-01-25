@@ -20,7 +20,7 @@ class Setup extends Command
      *
      * @var string
      */
-    protected $name = 'quarx:setup';
+    protected $signature = 'quarx:setup';
 
     /**
      * The console command description.
@@ -133,7 +133,7 @@ class Setup extends Command
             $this->info('Finished setting up your site with Quarx!');
             $this->info('Please run:');
             $this->comment('npm install');
-            $this->comment('gulp');
+            $this->comment('npm run dev');
             $this->line('You can now login with the following username and password:');
             $this->comment('admin@admin.com');
             $this->comment('admin');
@@ -141,18 +141,8 @@ class Setup extends Command
             $this->info('Please run:');
             $this->comment('npm install');
             $this->info('and:');
-            $this->comment('npm install gulp -g');
+            $this->comment('npm run dev');
         }
-    }
-
-    /**
-     * Get the console command options.
-     *
-     * @return array
-     */
-    protected function getOptions()
-    {
-        return [];
     }
 
     /**
@@ -178,6 +168,7 @@ class Setup extends Command
         $files = [
             base_path('database/factories/ModelFactory.php'),
             base_path('config/auth.php'),
+            base_path('config/services.php'),
         ];
 
         foreach ($files as $file) {
@@ -188,7 +179,7 @@ class Setup extends Command
 
         // Route setup
         $routeContents = file_get_contents(app_path('Providers/RouteServiceProvider.php'));
-        $routeContents = str_replace("require base_path('routes/web.php');", "require base_path('routes/web.php');\n\t\t\trequire base_path('routes/quarx.php');", $routeContents);
+        $routeContents = str_replace("->group(base_path('routes/web.php'));", "->group(function() { \n\t\t\trequire base_path('routes/web.php');\n\t\t\trequire base_path('routes/quarx.php'); });", $routeContents);
         file_put_contents(app_path('Providers/RouteServiceProvider.php'), $routeContents);
 
         $routeToDashboardContents = file_get_contents(base_path('routes/web.php'));

@@ -21,13 +21,18 @@ Simple setup uses Laracogs as the backbone of an app for you using Laravel, once
 1. PHP 5.6+
 1. MySQL 5.6+
 2. OpenSSL
-3. Laravel 5.1 - 5.2 (v1.4.*)
-3. Laravel 5.3 (v2.0.*)
 
 ## Recommended
 1. PHP 7+
 1. MySQL 5.7+
-3. Laravel 5.3
+
+## Compatibility Guide
+
+| Laravel Version | Package Tag | Supported |
+|-----------------|-------------|-----------|
+| 5.4.x | 2.1.x | yes |
+| 5.3.x | 2.0.x | no |
+| 5.1.x|5.2.x | 1.4.x | no |
 
 ## Installation
 

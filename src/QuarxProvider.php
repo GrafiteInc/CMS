@@ -2,13 +2,31 @@
 
 namespace Yab\Quarx;
 
-use Quarx;
-use Illuminate\Support\Str;
-use Illuminate\Support\Facades\View;
-use Illuminate\Support\Facades\Blade;
+use Devfactory\Minify\Facades\MinifyFacade;
+use Devfactory\Minify\MinifyServiceProvider;
+use GrahamCampbell\Markdown\Facades\Markdown;
+use GrahamCampbell\Markdown\MarkdownServiceProvider;
 use Illuminate\Foundation\AliasLoader;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Str;
+use Quarx;
+use Spatie\LaravelAnalytics\LaravelAnalyticsFacade;
+use Spatie\LaravelAnalytics\LaravelAnalyticsServiceProvider;
+use Yab\Laracogs\LaracogsProvider;
+use Yab\Quarx\Console\ModuleComposer;
+use Yab\Quarx\Console\ModuleCrud;
+use Yab\Quarx\Console\ModuleMake;
+use Yab\Quarx\Console\ModulePublish;
+use Yab\Quarx\Console\Setup;
+use Yab\Quarx\Console\ThemeGenerate;
+use Yab\Quarx\Console\ThemePublish;
+use Yab\Quarx\Providers\QuarxEventServiceProvider;
+use Yab\Quarx\Providers\QuarxModuleProvider;
+use Yab\Quarx\Providers\QuarxRouteProvider;
+use Yab\Quarx\Providers\QuarxServiceProvider;
 
 class QuarxProvider extends ServiceProvider
 {
@@ -94,21 +112,21 @@ class QuarxProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->register(\Yab\Quarx\Providers\QuarxServiceProvider::class);
-        $this->app->register(\Yab\Quarx\Providers\QuarxEventServiceProvider::class);
-        $this->app->register(\Yab\Quarx\Providers\QuarxRouteProvider::class);
-        $this->app->register(\Yab\Quarx\Providers\QuarxModuleProvider::class);
+        $this->app->register(QuarxServiceProvider::class);
+        $this->app->register(QuarxEventServiceProvider::class);
+        $this->app->register(QuarxRouteProvider::class);
+        $this->app->register(QuarxModuleProvider::class);
 
-        $this->app->register(\Yab\Laracogs\LaracogsProvider::class);
-        $this->app->register(\Devfactory\Minify\MinifyServiceProvider::class);
-        $this->app->register(\GrahamCampbell\Markdown\MarkdownServiceProvider::class);
-        $this->app->register(\Spatie\LaravelAnalytics\LaravelAnalyticsServiceProvider::class);
+        $this->app->register(LaracogsProvider::class);
+        $this->app->register(MinifyServiceProvider::class);
+        $this->app->register(MarkdownServiceProvider::class);
+        $this->app->register(LaravelAnalyticsServiceProvider::class);
 
         $loader = AliasLoader::getInstance();
 
-        $loader->alias('Minify', \Devfactory\Minify\Facades\MinifyFacade::class);
-        $loader->alias('Markdown', \GrahamCampbell\Markdown\Facades\Markdown::class);
-        $loader->alias('LaravelAnalytics', \Spatie\LaravelAnalytics\LaravelAnalyticsFacade::class);
+        $loader->alias('Minify', MinifyFacade::class);
+        $loader->alias('Markdown', Markdown::class);
+        $loader->alias('LaravelAnalytics', LaravelAnalyticsFacade::class);
 
         /*
         |--------------------------------------------------------------------------
@@ -117,12 +135,13 @@ class QuarxProvider extends ServiceProvider
         */
 
         $this->commands([
-            \Yab\Quarx\Console\ThemeGenerate::class,
-            \Yab\Quarx\Console\ThemePublish::class,
-            \Yab\Quarx\Console\ModulePublish::class,
-            \Yab\Quarx\Console\ModuleMake::class,
-            \Yab\Quarx\Console\ModuleCrud::class,
-            \Yab\Quarx\Console\Setup::class,
+            ThemeGenerate::class,
+            ThemePublish::class,
+            ModulePublish::class,
+            ModuleMake::class,
+            ModuleComposer::class,
+            ModuleCrud::class,
+            Setup::class,
         ]);
     }
 }

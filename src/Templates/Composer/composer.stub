@@ -1,0 +1,23 @@
+{
+    "name": "{package}",
+    "description": "{description}",
+    "license": "MIT",
+    "require": {
+        "illuminate/support": "5.*",
+    },
+    "require-dev": {
+    },
+    "autoload": {
+        "psr-4": {
+            "{escapedNamespace}": "src/"
+        }
+    },
+    "autoload-dev": {},
+    "scripts": {
+        "post-install-cmd": [],
+        "post-update-cmd": [],
+        "post-create-project-cmd": []
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

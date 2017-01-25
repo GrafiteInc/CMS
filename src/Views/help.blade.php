@@ -6,6 +6,9 @@
         <div class="col-md-12">
             <h1 class="page-header text-center">Help</h1>
 
+            <h2>Rollback and Revert</h2>
+            <p>With many of the Quarx modules you can perform a Rollback or Revert to an earlier moment in history. In pages for example if you click Rollback, you will go back to the most recently saved version of the post. However, you can only go back once, or rather undo, it does not keep digging through history. If you would like to go further back, visit the pages History and you will find different edits, you can revert to any of these with just a single click.</p>
+
             <h2>Published Assets</h2>
             <p>Quarx publishes views and controllers within your application. This allows you to control everything you want. You will find the controllers in: <code>app/Http/Controllers/Quarx</code> and the views in: <code>resources/themes</code>. There is also the quarx config which is added to your app's config directory.</p>
             <p>Quarx will also be able to generate cutom modules which you can find in the following directory: <code>quarx/modules</code></p>
@@ -49,6 +52,10 @@
             <pre>php artisan module:make {name}</pre>
             <p>The migration option will generate a migration file that can be found in the module. You will then need to run the module migrate to get the module to run its migration course.</p>
 
+            <h3>Composer</h3>
+            <p>Quarx also lets you create a composer package from a module. So if you want to can offer them to others rather easily.</p>
+            <pre>php artisan module:composer {module} {namespace}</pre>
+
             <h3>Publish</h3>
             <p>Quarx also lets you publish assets that belong to a module. So in the chance you wish to build your own modules for future projects you can easily publish specific assets to any applications you build.</p>
             <pre>php artisan module:publish {module}</pre>
@@ -70,6 +77,8 @@
             <pre>&#64;menu('slug') // menu rendering</pre>
             <pre>&#64;modules() // module url links</pre>
             <pre>&#64;widget('slug') // widget contents</pre>
+            <pre>&#64;image('id', 'class') // an image HTML tag</pre>
+            <pre>&#64;image_link('id') // an image url</pre>
             <pre>&#64;images('tag') // images</pre>
             <pre>&#64;edit('module', 'id') // a link to edit a module or item on the front-end of the site</pre>
 

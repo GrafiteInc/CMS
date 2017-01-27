@@ -124,7 +124,7 @@ class ModuleMake extends Command
             $this->comment('php artisan module:publish '.str_plural($name));
             $this->line('');
             $this->info('Add this to your `app/Providers/RouteServiceProver.php` in the `mapWebRoutes` method:');
-            $this->comment("\nrequire base_path('routes/".$config['_lower_casePlural_']."-routes.php');\n");
+            $this->comment("\nrequire base_path('routes/".$config['_lower_casePlural_']."-web.php');\n");
         } catch (Exception $e) {
             throw new Exception('Unable to generate your Module', 1);
         }

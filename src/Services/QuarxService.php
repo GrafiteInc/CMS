@@ -105,7 +105,7 @@ class QuarxService
     {
         $links = '';
 
-        foreach (config('quarx.modules') as $module => $config) {
+        foreach (config('quarx.modules', []) as $module => $config) {
             $link = $module;
 
             if (isset($config['url'])) {

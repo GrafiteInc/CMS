@@ -36,7 +36,7 @@ class Setup extends Command
      */
     public function fire()
     {
-        $cssReady = $this->confirm('Please confirm that you have gulp fully installed, and a database set and configured in your .env file.');
+        $cssReady = $this->confirm('Please confirm that you have a database set and configured in your .env file.');
 
         if ($cssReady) {
             Artisan::call('vendor:publish', [
@@ -188,7 +188,7 @@ class Setup extends Command
 
         // Kernel setup
         $routeContents = file_get_contents(app_path('Http/Kernel.php'));
-        $routeContents = str_replace("'auth' => \Illuminate\Auth\Middleware\Authenticate::class,", "'auth' => \Illuminate\Auth\Middleware\Authenticate::class,\n\t\t'quarx' => \App\Http\Middleware\Quarx::class,\n\t\t'quarx-api' => \App\Http\Middleware\QuarxApi::class,\n\t\t'quarx-language' => \App\Http\Middleware\QuarxLanguage::class,\n\t\t'admin' => \App\Http\Middleware\Admin::class,\n\t\t'active' => \App\Http\Middleware\Active::class,", $routeContents);
+        $routeContents = str_replace("'auth' => \Illuminate\Auth\Middleware\Authenticate::class,", "'auth' => \Illuminate\Auth\Middleware\Authenticate::class,\n\t\t'quarx' => \App\Http\Middleware\Quarx::class,\n\t\t'quarx-api' => \App\Http\Middleware\QuarxApi::class,\n\t\t'quarx-analytics' => \Yab\Quarx\Middleware\QuarxAnalytics::class,\n\t\t'quarx-language' => \App\Http\Middleware\QuarxLanguage::class,\n\t\t'admin' => \App\Http\Middleware\Admin::class,\n\t\t'active' => \App\Http\Middleware\Active::class,", $routeContents);
         file_put_contents(app_path('Http/Kernel.php'), $routeContents);
 
         $fileSystem = new Filesystem();

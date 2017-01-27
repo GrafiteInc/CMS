@@ -3,6 +3,16 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 ----
 
+## [v2.3.0] - 2017-01-27
+
+### Added
+- New history and revert actions
+- New module composer packager
+- New internal analytics component
+
+### Changed
+- Laravel 5.4 compatibility
+
 ## [v2.2.12] - 2016-12-28
 
 ### Fixed

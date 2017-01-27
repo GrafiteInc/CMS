@@ -6,7 +6,7 @@ use Auth;
 use Illuminate\Foundation\Http\FormRequest;
 use _namespace_model_\_camel_case_;
 
-class _camel_case_Request extends FormRequest
+class _camel_case_CreateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

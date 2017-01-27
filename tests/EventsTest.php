@@ -20,7 +20,7 @@ class EventsTest extends TestCase
     {
         $response = $this->call('GET', 'quarx/events');
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertViewHas('events');
+        $response->assertViewHas('events');
     }
 
     public function testCreate()
@@ -33,7 +33,7 @@ class EventsTest extends TestCase
     {
         $response = $this->call('GET', 'quarx/events/1/edit');
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertViewHas('event');
+        $response->assertViewHas('event');
     }
 
     /*
@@ -54,7 +54,7 @@ class EventsTest extends TestCase
     {
         $response = $this->call('POST', 'quarx/events/search', ['term' => 'wtf']);
 
-        $this->assertViewHas('events');
+        $response->assertViewHas('events');
         $this->assertEquals(200, $response->getStatusCode());
     }
 
@@ -68,7 +68,7 @@ class EventsTest extends TestCase
         ]);
 
         $this->assertEquals(302, $response->getStatusCode());
-        $this->seeInDatabase('events', ['title' => 'smarter']);
+        $this->assertDatabaseHas('events', ['title' => 'smarter']);
     }
 
     public function testUpdateTranslation()
@@ -78,11 +78,11 @@ class EventsTest extends TestCase
 
         $response = $this->call('PATCH', 'quarx/events/6', [
             'title' => 'smarter',
-            'lang'  => 'fr'
+            'lang' => 'fr',
         ]);
 
-        $this->seeInDatabase('translations', [
-            'entity_type' => 'Yab\\Quarx\\Models\\Event'
+        $this->assertDatabaseHas('translations', [
+            'entity_type' => 'Yab\\Quarx\\Models\\Event',
         ]);
         $this->assertEquals(302, $response->getStatusCode());
     }
@@ -91,6 +91,6 @@ class EventsTest extends TestCase
     {
         $response = $this->call('DELETE', 'quarx/events/1');
         $this->assertEquals(302, $response->getStatusCode());
-        $this->assertRedirectedTo('quarx/events');
+        $response->assertRedirect('quarx/events');
     }
 }

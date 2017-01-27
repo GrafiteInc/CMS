@@ -27,7 +27,7 @@ class LinksTest extends TestCase
     {
         $response = $this->call('GET', '/quarx/links/1/edit');
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertViewHas('links');
+        $response->assertViewHas('links');
     }
 
     /*
@@ -42,7 +42,7 @@ class LinksTest extends TestCase
         $response = $this->call('POST', '/quarx/links', $link['attributes']);
 
         $this->assertEquals(302, $response->getStatusCode());
-        $this->assertRedirectedTo('/quarx/menus/1/edit');
+        $response->assertRedirect('/quarx/menus/1/edit');
     }
 
     public function testUpdate()

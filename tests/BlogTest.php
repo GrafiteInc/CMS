@@ -20,14 +20,14 @@ class BlogTest extends TestCase
     {
         $response = $this->call('GET', 'quarx/blog');
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertViewHas('blogs');
+        $response->assertViewHas('blogs');
     }
 
     public function testCreate()
     {
         $response = $this->call('GET', 'quarx/blog/create');
         $this->assertEquals(200, $response->getStatusCode());
-        $this->see('Title');
+        $response->assertSee('Title');
     }
 
     public function testEdit()
@@ -35,8 +35,8 @@ class BlogTest extends TestCase
         factory(\Yab\Quarx\Models\Blog::class)->create(['id' => 4]);
         $response = $this->call('GET', 'quarx/blog/4/edit');
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertViewHas('blog');
-        $this->see('Title');
+        $response->assertViewHas('blog');
+        $response->assertSee('Title');
     }
 
     /*
@@ -50,7 +50,7 @@ class BlogTest extends TestCase
         $blog = ['title' => 'dumber', 'url' => 'dumber', 'entry' => 'okie dokie'];
         $response = $this->call('POST', 'quarx/blog', $blog);
 
-        $this->seeInDatabase('blogs', ['id' => 2]);
+        $this->assertDatabaseHas('blogs', ['id' => 2]);
         $this->assertEquals(302, $response->getStatusCode());
     }
 
@@ -58,7 +58,7 @@ class BlogTest extends TestCase
     {
         $response = $this->call('POST', 'quarx/blog/search', ['term' => 'wtf']);
 
-        $this->assertViewHas('blogs');
+        $response->assertViewHas('blogs');
         $this->assertEquals(200, $response->getStatusCode());
     }
 
@@ -69,10 +69,10 @@ class BlogTest extends TestCase
 
         $response = $this->call('PATCH', 'quarx/blog/1', [
             'title' => 'dumber and dumber',
-            'url'   => 'dumber-and-dumber',
+            'url' => 'dumber-and-dumber',
         ]);
 
-        $this->seeInDatabase('blogs', ['title' => 'dumber and dumber']);
+        $this->assertDatabaseHas('blogs', ['title' => 'dumber and dumber']);
         $this->assertEquals(302, $response->getStatusCode());
     }
 
@@ -83,12 +83,12 @@ class BlogTest extends TestCase
 
         $response = $this->call('PATCH', 'quarx/blog/1', [
             'title' => 'dumber and dumber',
-            'url'   => 'dumber-and-dumber',
-            'lang'  => 'fr'
+            'url' => 'dumber-and-dumber',
+            'lang' => 'fr',
         ]);
 
-        $this->seeInDatabase('translations', [
-            'entity_type' => 'Yab\\Quarx\\Models\\Blog'
+        $this->assertDatabaseHas('translations', [
+            'entity_type' => 'Yab\\Quarx\\Models\\Blog',
         ]);
         $this->assertEquals(302, $response->getStatusCode());
     }
@@ -97,6 +97,6 @@ class BlogTest extends TestCase
     {
         $response = $this->call('DELETE', 'quarx/blog/'.Crypto::encrypt(1));
         $this->assertEquals(302, $response->getStatusCode());
-        $this->assertRedirectedTo('quarx/blog');
+        $response->assertRedirect('quarx/blog');
     }
 }

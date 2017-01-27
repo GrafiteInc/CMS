@@ -20,7 +20,7 @@ class FilesTest extends TestCase
     {
         $response = $this->call('GET', 'quarx/files');
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertViewHas('files');
+        $response->assertViewHas('files');
     }
 
     public function testCreate()
@@ -33,7 +33,7 @@ class FilesTest extends TestCase
     {
         $response = $this->call('GET', 'quarx/files/1/edit');
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertViewHas('files');
+        $response->assertViewHas('files');
     }
 
     /*
@@ -46,13 +46,13 @@ class FilesTest extends TestCase
     {
         $uploadedFile = new Symfony\Component\HttpFoundation\File\UploadedFile(__DIR__.'/test-file.txt', 'test-file.txt');
         $file = factory(\Yab\Quarx\Models\File::class)->make([
-            'id'       => 2,
+            'id' => 2,
             'location' => [
                 'file_a' => [
-                    'name'     => CryptoService::encrypt('test-file.txt'),
+                    'name' => CryptoService::encrypt('test-file.txt'),
                     'original' => 'test-file.txt',
-                    'mime'     => 'txt',
-                    'size'     => 24,
+                    'mime' => 'txt',
+                    'size' => 24,
                 ],
             ],
         ]);
@@ -64,7 +64,7 @@ class FilesTest extends TestCase
     {
         $response = $this->call('POST', 'quarx/files/search', ['term' => 'wtf']);
 
-        $this->assertViewHas('files');
+        $response->assertViewHas('files');
         $this->assertEquals(200, $response->getStatusCode());
     }
 
@@ -74,20 +74,20 @@ class FilesTest extends TestCase
         $response = $this->call('PATCH', 'quarx/files/3', $file);
 
         $this->assertEquals(302, $response->getStatusCode());
-        $this->assertRedirectedTo('/quarx/files');
+        $response->assertRedirect('/quarx/files');
     }
 
     public function testDelete()
     {
         Storage::put('test-file.txt', 'what is this');
         $file = factory(\Yab\Quarx\Models\File::class)->make([
-            'id'       => 2,
+            'id' => 2,
             'location' => [
                 'file_a' => [
-                    'name'     => CryptoService::encrypt('test-file.txt'),
+                    'name' => CryptoService::encrypt('test-file.txt'),
                     'original' => 'test-file.txt',
-                    'mime'     => 'txt',
-                    'size'     => 24,
+                    'mime' => 'txt',
+                    'size' => 24,
                 ],
             ],
         ]);
@@ -95,6 +95,6 @@ class FilesTest extends TestCase
 
         $response = $this->call('DELETE', 'quarx/files/2');
         $this->assertEquals(302, $response->getStatusCode());
-        $this->assertRedirectedTo('quarx/files');
+        $response->assertRedirect('quarx/files');
     }
 }

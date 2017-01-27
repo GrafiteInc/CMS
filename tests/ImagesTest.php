@@ -20,7 +20,7 @@ class ImagesTest extends TestCase
     {
         $response = $this->call('GET', 'quarx/images');
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertViewHas('images');
+        $response->assertViewHas('images');
     }
 
     public function testCreate()
@@ -33,7 +33,7 @@ class ImagesTest extends TestCase
     {
         $response = $this->call('GET', 'quarx/images/1/edit');
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertViewHas('images');
+        $response->assertViewHas('images');
     }
 
     /*
@@ -48,18 +48,18 @@ class ImagesTest extends TestCase
         $image = (array) factory(\Yab\Quarx\Models\Image::class)->make(['id' => 2]);
         $image['location'] = [
             [
-                'name'     => CryptoService::encrypt('test-pic.jpg'),
+                'name' => CryptoService::encrypt('test-pic.jpg'),
                 'original' => 'what.jpg',
             ],
             [
-                'name'     => CryptoService::encrypt('test-pic.jpg'),
+                'name' => CryptoService::encrypt('test-pic.jpg'),
                 'original' => 'what.jpg',
             ],
         ];
         $response = $this->call('POST', 'quarx/images', $image, [], ['location' => $uploadedFile]);
 
         $this->assertEquals(302, $response->getStatusCode());
-        $this->assertRedirectedTo('/quarx/images/');
+        $response->assertRedirect('/');
     }
 
     public function testUpdate()
@@ -68,7 +68,7 @@ class ImagesTest extends TestCase
         $response = $this->call('PATCH', 'quarx/images/3', $image);
 
         $this->assertEquals(302, $response->getStatusCode());
-        $this->assertRedirectedTo('/quarx/images');
+        $response->assertRedirect('/quarx/images');
     }
 
     public function testDelete()
@@ -77,11 +77,11 @@ class ImagesTest extends TestCase
         $image = (array) factory(\Yab\Quarx\Models\Image::class)->make(['id' => 2]);
         $image['location'] = [
             [
-                'name'     => CryptoService::encrypt('files/dumb'),
+                'name' => CryptoService::encrypt('files/dumb'),
                 'original' => 'what.jpg',
             ],
             [
-                'name'     => CryptoService::encrypt('files/dumb'),
+                'name' => CryptoService::encrypt('files/dumb'),
                 'original' => 'what.jpg',
             ],
         ];
@@ -89,6 +89,6 @@ class ImagesTest extends TestCase
 
         $response = $this->call('DELETE', 'quarx/images/2');
         $this->assertEquals(302, $response->getStatusCode());
-        $this->assertRedirectedTo('quarx/images');
+        $response->assertRedirect('quarx/images');
     }
 }

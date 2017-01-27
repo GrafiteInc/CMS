@@ -20,7 +20,7 @@ class PagesTest extends TestCase
     {
         $response = $this->call('GET', 'quarx/pages');
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertViewHas('pages');
+        $response->assertViewHas('pages');
     }
 
     public function testCreate()
@@ -33,7 +33,7 @@ class PagesTest extends TestCase
     {
         $response = $this->call('GET', 'quarx/pages/1/edit');
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertViewHas('page');
+        $response->assertViewHas('page');
     }
 
     /*
@@ -54,7 +54,7 @@ class PagesTest extends TestCase
     {
         $response = $this->call('POST', 'quarx/pages/search', ['term' => 'wtf']);
 
-        $this->assertViewHas('pages');
+        $response->assertViewHas('pages');
         $this->assertEquals(200, $response->getStatusCode());
     }
 
@@ -65,11 +65,11 @@ class PagesTest extends TestCase
 
         $response = $this->call('PATCH', 'quarx/pages/6', [
             'title' => 'smarter',
-            'url'   => 'smart',
+            'url' => 'smart',
         ]);
 
         $this->assertEquals(302, $response->getStatusCode());
-        $this->seeInDatabase('pages', ['title' => 'smarter']);
+        $this->assertDatabaseHas('pages', ['title' => 'smarter']);
     }
 
     public function testUpdateTranslation()
@@ -79,12 +79,12 @@ class PagesTest extends TestCase
 
         $response = $this->call('PATCH', 'quarx/pages/6', [
             'title' => 'smarter',
-            'url'   => 'smart',
-            'lang'  => 'fr'
+            'url' => 'smart',
+            'lang' => 'fr',
         ]);
 
-        $this->seeInDatabase('translations', [
-            'entity_type' => 'Yab\\Quarx\\Models\\Page'
+        $this->assertDatabaseHas('translations', [
+            'entity_type' => 'Yab\\Quarx\\Models\\Page',
         ]);
         $this->assertEquals(302, $response->getStatusCode());
     }
@@ -93,6 +93,6 @@ class PagesTest extends TestCase
     {
         $response = $this->call('DELETE', 'quarx/pages/1');
         $this->assertEquals(302, $response->getStatusCode());
-        $this->assertRedirectedTo('quarx/pages');
+        $response->assertRedirect('quarx/pages');
     }
 }

@@ -65,10 +65,10 @@ class CrudSingleGeneratorTest extends PHPUnit_Framework_TestCase
         $this->crud = vfsStream::setup('Http/Requests');
 
         $this->generator->createRequest($this->config);
-        $contents = $this->crud->getChild('Http/Requests/TestTableRequest.php');
+        $contents = $this->crud->getChild('Http/Requests/TestTableCreateRequest.php');
 
-        $this->assertTrue($this->crud->hasChild('Http/Requests/TestTableRequest.php'));
-        $this->assertContains('class TestTableRequest', $contents->getContent());
+        $this->assertTrue($this->crud->hasChild('Http/Requests/TestTableCreateRequest.php'));
+        $this->assertContains('class TestTableCreateRequest', $contents->getContent());
     }
 
     public function testServiceGenerator()

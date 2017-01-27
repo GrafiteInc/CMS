@@ -20,7 +20,7 @@ class MenuTest extends TestCase
     {
         $response = $this->call('GET', '/quarx/menus');
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertViewHas('menus');
+        $response->assertViewHas('menus');
     }
 
     public function testCreate()
@@ -33,7 +33,7 @@ class MenuTest extends TestCase
     {
         $response = $this->call('GET', '/quarx/menus/1/edit');
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertViewHas('menu');
+        $response->assertViewHas('menu');
     }
 
     /*
@@ -54,7 +54,7 @@ class MenuTest extends TestCase
     {
         $response = $this->call('POST', 'quarx/menus/search', ['term' => 'wtf']);
 
-        $this->assertViewHas('menus');
+        $response->assertViewHas('menus');
         $this->assertEquals(200, $response->getStatusCode());
     }
 
@@ -71,6 +71,6 @@ class MenuTest extends TestCase
     {
         $response = $this->call('DELETE', '/quarx/menus/1');
         $this->assertEquals(302, $response->getStatusCode());
-        $this->assertRedirectedTo('/quarx/menus');
+        $response->assertRedirect('/quarx/menus');
     }
 }

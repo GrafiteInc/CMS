@@ -20,7 +20,7 @@ class WidgetsTest extends TestCase
     {
         $response = $this->call('GET', 'quarx/widgets');
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertViewHas('widgets');
+        $response->assertViewHas('widgets');
     }
 
     public function testCreate()
@@ -33,7 +33,7 @@ class WidgetsTest extends TestCase
     {
         $response = $this->call('GET', 'quarx/widgets/1/edit');
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertViewHas('widgets');
+        $response->assertViewHas('widgets');
     }
 
     /*
@@ -61,7 +61,7 @@ class WidgetsTest extends TestCase
         ]);
 
         $this->assertEquals(302, $response->getStatusCode());
-        $this->seeInDatabase('widgets', ['name' => 'whacky']);
+        $this->assertDatabaseHas('widgets', ['name' => 'whacky']);
     }
 
     public function testUpdateTranslation()
@@ -72,11 +72,11 @@ class WidgetsTest extends TestCase
         $response = $this->call('PATCH', 'quarx/widgets/8', [
             'name' => 'whacky',
             'slug' => 'whacky',
-            'lang' => 'fr'
+            'lang' => 'fr',
         ]);
 
-        $this->seeInDatabase('translations', [
-            'entity_type' => 'Yab\\Quarx\\Models\\Widget'
+        $this->assertDatabaseHas('translations', [
+            'entity_type' => 'Yab\\Quarx\\Models\\Widget',
         ]);
         $this->assertEquals(302, $response->getStatusCode());
     }
@@ -85,6 +85,6 @@ class WidgetsTest extends TestCase
     {
         $response = $this->call('DELETE', 'quarx/widgets/1');
         $this->assertEquals(302, $response->getStatusCode());
-        $this->assertRedirectedTo('quarx/widgets');
+        $response->assertRedirect('quarx/widgets');
     }
 }

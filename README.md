@@ -30,9 +30,9 @@ Simple setup uses Laracogs as the backbone of an app for you using Laravel, once
 
 | Laravel Version | Package Tag | Supported |
 |-----------------|-------------|-----------|
-| 5.4.x | 2.1.x | yes |
-| 5.3.x | 2.0.x | no |
-| 5.1.x|5.2.x | 1.4.x | no |
+| 5.4.x | 2.3.x | yes |
+| 5.3.x | 2.0.x - 2.2.x | no |
+| 5.1.x - 5.2.x | 1.4.x | no |
 
 ## Installation
 

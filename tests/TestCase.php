@@ -61,17 +61,12 @@ class TestCase extends Orchestra\Testbench\TestCase
     {
         parent::setUp();
         $this->withFactories(__DIR__.'/../src/Models/Factories');
-        $this->artisan('migrate', [
-            '--database' => 'testbench',
-            '--realpath' => realpath(__DIR__.'/../src/PublishedAssets/Migrations'),
-        ]);
-        $this->artisan('migrate', [
-            '--database' => 'testbench',
-            '--realpath' => realpath(__DIR__.'/../src/Migrations'),
-        ]);
         $this->artisan('vendor:publish', [
             '--provider' => 'Yab\Quarx\QuarxProvider',
             '--force' => true,
+        ]);
+        $this->artisan('migrate', [
+            '--database' => 'testbench',
         ]);
         $this->withoutMiddleware();
         $this->withoutEvents();

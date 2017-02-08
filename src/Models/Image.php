@@ -2,10 +2,12 @@
 
 namespace Yab\Quarx\Models;
 
+use Carbon\Carbon;
 use Config;
-use Storage;
 use FileService;
+use Illuminate\Support\Facades\Cache;
 use Intervention\Image\ImageManagerStatic as InterventionImage;
+use Storage;
 
 class Image extends QuarxModel
 {
@@ -34,11 +36,13 @@ class Image extends QuarxModel
      */
     public function getUrlAttribute()
     {
-        if (@get_headers(url('storage/'.str_replace('public/', '', $this->location)))) {
-            return url('storage/'.str_replace('public/', '', $this->location));
-        }
+        return $this->remember('url', function () {
+            if ($this->isLocalFile()) {
+                return url(str_replace('public/', 'storage/', $this->location));
+            }
 
-        return FileService::fileAsPublicAsset($this->location);
+            return FileService::fileAsPublicAsset($this->location);
+        });
     }
 
     /**
@@ -50,13 +54,15 @@ class Image extends QuarxModel
      */
     public function getJsUrlAttribute()
     {
-        if (@get_headers(url('storage/'.str_replace('public/', '', $this->location)))) {
-            $file = url('storage/'.str_replace('public/', '', $this->location));
-        } else {
-            $file = FileService::fileAsPublicAsset($this->location);
-        }
+        return $this->remember('js_url', function () {
+            if ($this->isLocalFile()) {
+                $file = url(str_replace('public/', 'storage/', $this->location));
+            } else {
+                $file = FileService::fileAsPublicAsset($this->location);
+            }
 
-        return str_replace(url('/'), '', $file);
+            return str_replace(url('/'), '', $file);
+        });
     }
 
     /**
@@ -68,14 +74,44 @@ class Image extends QuarxModel
      */
     public function getDataUrlAttribute()
     {
-        if (Config::get('quarx.storage-location') === 'local' || Config::get('quarx.storage-location') === null) {
-            $imagePath = storage_path('app/'.$this->location);
-        } else {
-            $imagePath = Storage::disk(Config::get('quarx.storage-location', 'local'))->url($this->location);
+        return $this->remember('data_url', function () {
+            if ($this->isLocalFile()) {
+                $imagePath = storage_path('app/'.$this->location);
+            } else {
+                $imagePath = Storage::disk(config('quarx.storage-location', 'local'))->url($this->location);
+            }
+
+            $image = InterventionImage::make($imagePath)->resize(800, null);
+
+            return (string) $image->encode('data-url');
+        });
+    }
+
+    public function remember($attribute, $closure)
+    {
+        $key = $attribute.'_'.$this->location;
+
+        if (!Cache::has($key)) {
+            $expiresAt = Carbon::now()->addMinutes(15);
+            Cache::put($key, $closure(), $expiresAt);
         }
 
-        $image = InterventionImage::make($imagePath)->resize(800, null);
+        return Cache::get($key);
+    }
 
-        return $image->encode('data-url');
+    /**
+     * Check the location of the file.
+     *
+     * @return bool
+     */
+    private function isLocalFile()
+    {
+        $headers = get_headers(url(str_replace('public/', 'storage/', $this->location)));
+
+        if (strpos($headers[0], '200')) {
+            return true;
+        }
+
+        return false;
     }
 }

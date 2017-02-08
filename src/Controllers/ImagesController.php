@@ -2,17 +2,17 @@
 
 namespace Yab\Quarx\Controllers;
 
-use Quarx;
 use Config;
-use Storage;
-use FileService;
 use CryptoService;
+use FileService;
 use Illuminate\Http\Request;
+use Quarx;
+use Storage;
 use Yab\Quarx\Models\Image;
-use Yab\Quarx\Requests\ImagesRequest;
-use Yab\Quarx\Services\ValidationService;
 use Yab\Quarx\Repositories\ImageRepository;
+use Yab\Quarx\Requests\ImagesRequest;
 use Yab\Quarx\Services\QuarxResponseService;
+use Yab\Quarx\Services\ValidationService;
 
 class ImagesController extends QuarxController
 {
@@ -233,7 +233,7 @@ class ImagesController extends QuarxController
             return QuarxResponseService::apiResponse('error', []);
         }
 
-        $images = $this->imagesRepository->apiPrepared();
+        return $this->imagesRepository->apiPrepared();
 
         return QuarxResponseService::apiResponse('success', $images);
     }

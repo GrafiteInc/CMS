@@ -423,7 +423,8 @@ class QuarxService
         }
 
         $matches = strstr($changelog, '## [');
+        $until = strpos($matches, '-');
 
-        return substr($matches, 5, 6);
+        return str_replace(']', '', substr($matches, 5, $until - 5));
     }
 }

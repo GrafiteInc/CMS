@@ -15,6 +15,7 @@ class CreateImagesTable extends Migration
             $table->string('location');
             $table->string('name')->nullable();
             $table->string('original_name');
+            $table->string('storage_location')->default('local');
             $table->string('alt_tag')->nullable();
             $table->string('title_tag')->nullable();
             $table->boolean('is_published')->default(0);

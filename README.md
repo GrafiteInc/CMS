@@ -95,6 +95,7 @@ php artisan migrate
 'quarx' => \App\Http\Middleware\Quarx::class,
 'quarx-api' => \App\Http\Middleware\QuarxApi::class,
 'quarx-language' => \App\Http\Middleware\QuarxLanguage::class,
+'quarx-analytics' => \Yab\Quarx\Middleware\QuarxAnalytics::class,
 ```
 
 In order to have modules load as well please add the following to your composer file:

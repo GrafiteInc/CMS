@@ -121,6 +121,7 @@ class ImageRepository
 
         $input['is_published'] = 1;
         $input['location'] = $savedFile['name'];
+        $input['storage_location'] = config('quarx.storage-location');
         $input['original_name'] = $savedFile['original'];
 
         return Image::create($input);
@@ -150,6 +151,7 @@ class ImageRepository
         }
 
         $input['location'] = CryptoService::decrypt($savedFile['name']);
+        $input['storage_location'] = config('quarx.storage-location');
         $input['original_name'] = $savedFile['original'];
 
         return Image::create($input);

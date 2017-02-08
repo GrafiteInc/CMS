@@ -16472,7 +16472,7 @@ RedactorPlugins.imagemanager = function()
                 success: $.proxy(function(data)
                 {
                     $('#redactor-image-manager-box').html('');
-                    $.each(data.data, $.proxy(function(key, val)
+                    $.each(data, $.proxy(function(key, val)
                     {
                         // title
                         var thumbtitle = '';

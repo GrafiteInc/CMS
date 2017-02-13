@@ -106,7 +106,7 @@ class Image extends QuarxModel
      */
     private function isLocalFile()
     {
-        $headers = get_headers(url(str_replace('public/', 'storage/', $this->location)));
+        $headers = @get_headers(url(str_replace('public/', 'storage/', $this->location)));
 
         if (strpos($headers[0], '200')) {
             return true;

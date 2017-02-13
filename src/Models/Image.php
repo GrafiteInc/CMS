@@ -5,6 +5,7 @@ namespace Yab\Quarx\Models;
 use Carbon\Carbon;
 use Config;
 use FileService;
+use Exception;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
 use Intervention\Image\ImageManagerStatic as InterventionImage;

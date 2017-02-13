@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Config;
 use FileService;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Log;
 use Intervention\Image\ImageManagerStatic as InterventionImage;
 use Storage;
 
@@ -106,10 +107,16 @@ class Image extends QuarxModel
      */
     private function isLocalFile()
     {
-        $headers = @get_headers(url(str_replace('public/', 'storage/', $this->location)));
+        try {
+            $headers = @get_headers(url(str_replace('public/', 'storage/', $this->location)));
 
-        if (strpos($headers[0], '200')) {
-            return true;
+            if (strpos($headers[0], '200')) {
+                return true;
+            }
+        } catch (Exception $e) {
+            Log::debug('Could not find the image');
+
+            return false;
         }
 
         return false;

@@ -39,8 +39,8 @@
         @else
             <table class="table table-striped">
                 <thead>
-                    <th>Name</th>
-                    <th class="raw-m-hide text-center">Published</th>
+                    <th>{!! sortable('Name', 'name') !!}</th>
+                    <th>{!! sortable('Is Published', 'is_published') !!}</th>
                     <th width="200px" class="text-right">Actions</th>
                 </thead>
                 <tbody>
@@ -51,7 +51,7 @@
                             <a href="{!! FileService::fileAsDownload($file->name, $file->location) !!}"><span class="fa fa-download"></span></a>
                             <a href="{!! route('quarx.files.edit', [$file->id]) !!}">{!! $file->name !!}</a>
                         </td>
-                        <td class="raw-m-hide text-center">@if ($file->is_published) <span class="fa fa-check"></span> @else <span class="fa fa-close"></span> @endif</td>
+                        <td class="raw-m-hide">@if ($file->is_published) <span class="fa fa-check"></span> @else <span class="fa fa-close"></span> @endif</td>
                         <td class="text-right">
                             <form method="post" action="{!! url('quarx/files/'.$file->id) !!}">
                                 {!! csrf_field() !!}

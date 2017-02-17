@@ -39,10 +39,10 @@
         @else
             <table class="table table-striped">
                 <thead>
-                    <th>Title</th>
-                    <th>Start Date</th>
-                    <th>End Date</th>
-                    <th class="raw-m-hide text-center">Is Published</th>
+                    <th>{!! sortable('Title', 'title') !!}</th>
+                    <th>{!! sortable('Start Date', 'start_date') !!}</th>
+                    <th>{!! sortable('End Date', 'end_date') !!}</th>
+                    <th>{!! sortable('Published', 'is_published') !!}</th>
                     <th width="200px" class="text-right">Actions</th>
                 </thead>
                 <tbody>
@@ -52,7 +52,7 @@
                         <td><a href="{!! route('quarx.events.edit', [$event->id]) !!}">{!! $event->title !!}</a></td>
                         <td>{!! date('M jS, Y', strtotime($event->start_date)) !!}</td>
                         <td>{!! date('M jS, Y', strtotime($event->end_date)) !!}</td>
-                        <td class="raw-m-hide text-center">
+                        <td class="raw-m-hide">
                             @if ($event->is_published)
                                 <span class="fa fa-check"></span>
                             @else

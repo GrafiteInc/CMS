@@ -39,8 +39,8 @@
         @else
             <table class="table table-striped">
                 <thead>
-                    <th>Question</th>
-                    <th class="raw-m-hide text-center">Is Published</th>
+                    <th>{!! sortable('Question', 'question') !!}</th>
+                    <th>{!! sortable('Is Published', 'is_published') !!}</th>
                     <th width="200px" class="text-right">Actions</th>
                 </thead>
                 <tbody>
@@ -48,7 +48,7 @@
                 @foreach($faqs as $faq)
                     <tr>
                         <td><a href="{!! route('quarx.faqs.edit', [$faq->id]) !!}">{!! $faq->question !!}</a></td>
-                        <td class="raw-m-hide text-center">
+                        <td class="raw-m-hide">
                             @if ($faq->is_published)
                                 <span class="fa fa-check"></span>
                             @else

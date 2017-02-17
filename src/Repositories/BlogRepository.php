@@ -27,12 +27,29 @@ class BlogRepository
         return Blog::orderBy('published_at', 'desc')->all();
     }
 
+    /**
+     * Returns all paginated EventS.
+     *
+     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     */
     public function paginated()
     {
-        return Blog::orderBy('published_at', 'desc')
-            ->paginate(Config::get('quarx.pagination', 25));
+        $model = app(Blog::class);
+
+        if (isset(request()->dir) && isset(request()->field)) {
+            $model = $model->orderBy(request()->field, request()->dir);
+        } else {
+            $model = $model->orderBy('published_at', 'desc');
+        }
+
+        return $model->paginate(config('quarx.pagination', 25));
     }
 
+    /**
+     * Returns all paginated EventS.
+     *
+     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     */
     public function publishedAndPaginated()
     {
         return Blog::orderBy('published_at', 'desc')->where('is_published', 1)

@@ -36,7 +36,8 @@
             "Yab\\Quarx\\": "src/"
         },
         "files": [
-          "src/Helpers/blade.php"
+          "src/Helpers/blade.php",
+          "src/Helpers/general.php"
         ]
     },
     "autoload-dev": {

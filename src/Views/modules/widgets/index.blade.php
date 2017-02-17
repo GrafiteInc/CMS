@@ -39,8 +39,8 @@
         @else
             <table class="table table-striped">
                 <thead>
-                    <th>Name</th>
-                    <th class="raw-m-hide">Slug</th>
+                    <th>{!! sortable('Name', 'name') !!}</th>
+                    <th>{!! sortable('Slug', 'slug') !!}</th>
                     <th width="200px" class="text-right">Actions</th>
                 </thead>
                 <tbody>

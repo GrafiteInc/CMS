@@ -33,7 +33,15 @@ class FAQRepository
      */
     public function paginated()
     {
-        return FAQ::orderBy('created_at', 'desc')->paginate(Config::get('quarx.pagination', 25));
+        $model = app(FAQ::class);
+
+        if (isset(request()->dir) && isset(request()->field)) {
+            $model = $model->orderBy(request()->field, request()->dir);
+        } else {
+            $model = $model->orderBy('created_at', 'desc');
+        }
+
+        return $model->paginate(Config::get('quarx.pagination', 25));
     }
 
     /**

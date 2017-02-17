@@ -41,9 +41,9 @@
         @else
             <table class="table table-striped">
                 <thead>
-                    <th>Title</th>
-                    <th class="raw-m-hide">Url</th>
-                    <th class="raw-m-hide text-center">Published</th>
+                    <th>{!! sortable('Title', 'title') !!}</th>
+                    <th>{!! sortable('Url', 'url') !!}</th>
+                    <th>{!! sortable('Published', 'is_published') !!}</th>
                     <th width="200px" class="text-right">Actions</th>
                 </thead>
                 <tbody>
@@ -52,7 +52,7 @@
                     <tr>
                         <td><a href="{!! route('quarx.blog.edit', [$blog->id]) !!}">{!! $blog->title !!}</a></td>
                         <td class="raw-m-hide">{!! $blog->url !!}</td>
-                        <td class="raw-m-hide text-center">@if ($blog->is_published) <span class="fa fa-check"></span> @else <span class="fa fa-close"></span> @endif </td>
+                        <td class="raw-m-hide">@if ($blog->is_published) <span class="fa fa-check"></span> @else <span class="fa fa-close"></span> @endif </td>
                         <td class="text-right">
                             <form method="post" action="{!! url('quarx/blog/'.$blog->id) !!}">
                                 {!! csrf_field() !!}

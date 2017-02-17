@@ -72,6 +72,6 @@
         };
         var options = {};
     </script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.bundle.js"></script>
     {!! Minify::javascript(Quarx::asset('js/dashboard-chart.js')) !!}
 @stop

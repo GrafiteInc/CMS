@@ -33,7 +33,15 @@ class EventRepository
      */
     public function paginated()
     {
-        return Event::orderBy('created_at', 'desc')->paginate(Config::get('quarx.pagination', 25));
+        $model = app(Event::class);
+
+        if (isset(request()->dir) && isset(request()->field)) {
+            $model = $model->orderBy(request()->field, request()->dir);
+        } else {
+            $model = $model->orderBy('created_at', 'desc');
+        }
+
+        return $model->paginate(config('quarx.pagination', 25));
     }
 
     /**

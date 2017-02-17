@@ -24,9 +24,22 @@ class WidgetRepository
         return Widget::orderBy('created_at', 'desc')->all();
     }
 
+    /**
+     * Returns all paginated EventS.
+     *
+     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     */
     public function paginated()
     {
-        return Widget::orderBy('created_at', 'desc')->paginate(25);
+        $model = app(Widget::class);
+
+        if (isset(request()->dir) && isset(request()->field)) {
+            $model = $model->orderBy(request()->field, request()->dir);
+        } else {
+            $model = $model->orderBy('created_at', 'desc');
+        }
+
+        return $model->paginate(config('quarx.pagination', 25));
     }
 
     public function search($input)

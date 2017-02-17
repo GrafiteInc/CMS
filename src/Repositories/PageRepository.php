@@ -29,7 +29,15 @@ class PageRepository
 
     public function paginated()
     {
-        return Page::orderBy('created_at', 'desc')->paginate(Config::get('quarx.pagination', 25));
+        $model = app(Page::class);
+
+        if (isset(request()->dir) && isset(request()->field)) {
+            $model = $model->orderBy(request()->field, request()->dir);
+        } else {
+            $model = $model->orderBy('created_at', 'desc');
+        }
+
+        return $model->paginate(Config::get('quarx.pagination', 25));
     }
 
     public function published()

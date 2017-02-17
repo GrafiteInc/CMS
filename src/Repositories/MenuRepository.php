@@ -24,7 +24,15 @@ class MenuRepository
      */
     public function paginated()
     {
-        return Menu::orderBy('created_at', 'desc')->paginate(25);
+        $model = app(Menu::class);
+
+        if (isset(request()->dir) && isset(request()->field)) {
+            $model = $model->orderBy(request()->field, request()->dir);
+        } else {
+            $model = $model->orderBy('created_at', 'desc');
+        }
+
+        return $model->paginate(config('quarx.pagination', 25));
     }
 
     /**

@@ -40,9 +40,9 @@
         @else
             <table class="table table-striped">
                 <thead>
-                    <th>Title</th>
-                    <th class="raw-m-hide">Url</th>
-                    <th class="raw-m-hide text-center">Is Published</th>
+                    <th>{!! sortable('Title', 'title') !!}</th>
+                    <th class="raw-m-hide">{!! sortable('Url', 'url') !!}</th>
+                    <th class="raw-m-hide">{!! sortable('Is Published', 'is_published') !!}</th>
                     <th width="200px" class="text-right">Actions</th>
                 </thead>
                 <tbody>
@@ -51,7 +51,7 @@
                     <tr>
                         <td><a href="{!! route('quarx.pages.edit', [$page->id]) !!}">{!! $page->title !!}</a></td>
                         <td class="raw-m-hide">{!! $page->url !!}</td>
-                        <td class="raw-m-hide text-center">
+                        <td class="raw-m-hide">
                             @if ($page->is_published)
                                 <span class="fa fa-check"></span>
                             @else

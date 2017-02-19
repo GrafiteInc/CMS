@@ -204,8 +204,8 @@ span.twitter-typeahead {
 
 .sidebar-header {
     text-align: center;
-    color: #333;
-    background-color: #DDD;
+    color: #EEE;
+    background-color: #444;
     padding: 16px 0;
 }
 
@@ -307,7 +307,7 @@ span.twitter-typeahead {
     top: 31px;
     width: 300px;
     padding: 20px;
-    background-color: #EEE;
+    background-color: #333;
     overflow-x: hidden;
     height: 100%;
     overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
@@ -334,17 +334,25 @@ span.twitter-typeahead {
 .nav-sidebar > li > a {
     padding-right: 20px;
     padding-left: 20px;
-    border-left: 4px solid #EEE;
+    border-left: 4px solid #333;
+    color: #FFF;
 }
 .nav-sidebar > li > a:hover {
-    background-color: #333 !important;
+    border-left: 4px solid #dd4814;
+    background-color: #555 !important;
     color: #FFF;
 }
 .nav-sidebar > .active > a,
-.nav-sidebar > .active > a:hover,
 .nav-sidebar > .active > a:focus {
-    border-left: 4px solid #333;
+    border-left: 4px solid #dd4814;
     background-color: #FFF;
+    color: #222;
+}
+
+.nav-sidebar > .active > a:hover {
+    border-left: 4px solid #dd4814;
+    background-color: #FFF;
+    color: #FFF;
 }
 
 /*

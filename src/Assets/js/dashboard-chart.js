@@ -12,9 +12,12 @@ $(function(){
             labels: _chartData._labels,
             datasets: [{
                 label: "Visits",
-                fillColor: "rgba(220,220,220,0.2)",
-                strokeColor: "rgba(220,220,220,1)",
-                pointColor: "rgba(220,220,220,1)",
+                backgroundColor: [
+                    "#36A2EB"
+                ],
+                hoverBackgroundColor: [
+                    "#36A2EB"
+                ],
                 pointStrokeColor: "#fff",
                 pointHighlightFill: "#fff",
                 pointHighlightStroke: "rgba(220,220,220,1)",

@@ -3,6 +3,14 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 ----
 
+## [v2.3.2] - 2017-02-19
+
+### Added
+- New sorting in the index pages for admin views
+
+### Changed
+- Updated the charts in the dashboard
+
 ## [v2.3.1] - 2017-02-13
 
 ### Fixed

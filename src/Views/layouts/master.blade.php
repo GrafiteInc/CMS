@@ -16,11 +16,11 @@
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-        <!-- App style -->
-        <link rel="stylesheet" type="text/css" href="{!! Quarx::asset('dist/css/all.css', 'text/css') !!}">
-
         <!-- Bootstrap Theme -->
         <link rel="stylesheet" type="text/css" href="{!! Quarx::asset('themes/bootstrap-'.Config::get('quarx.backend-theme', 'united').'.css', 'text/css') !!}">
+
+        <!-- App style -->
+        <link rel="stylesheet" type="text/css" href="{!! Quarx::asset('dist/css/all.css', 'text/css') !!}">
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -33,7 +33,7 @@
 
         <script type="text/javascript">
 
-            var _token = '{!! Session::token() !!}';
+            var _token = '{!! csrf_token() !!}';
             var _url = '{!! url("/") !!}';
             var _pixabayKey = '{!! config('quarx.pixabay', '') !!}';
 
@@ -61,8 +61,8 @@
         </div>
 
         <script type="text/javascript">
-            var _apiKey = '{!!  Config::get("quarx.api-key") !!}';
-            var _apiToken = '{!!  Config::get("quarx.api-token") !!}';
+            var _apiKey = '{!!  config("quarx.api-key") !!}';
+            var _apiToken = '{!!  config("quarx.api-token") !!}';
         </script>
         <script type="text/javascript" src="{!! Quarx::asset('js/jquery.min.js', 'application/javascript') !!}"></script>
         <script type="text/javascript" src="{!! Quarx::asset('dist/js/all.js', 'application/javascript') !!}"></script>

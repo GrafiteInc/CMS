@@ -43,10 +43,16 @@ html, body {
 
 .main {
     padding-top: 24px;
+    padding-left: 24px;
+    padding-right: 24px;
 }
 
 .main h1 {
     margin-top: 0px;
+}
+
+.page-header {
+    padding-bottom: 24px;
 }
 
 /*
@@ -233,6 +239,10 @@ span.twitter-typeahead {
     max-height: 300px;
 }
 
+.panel-help {
+    height: auto !important;
+}
+
 .panel {
     height: 320px;
 }
@@ -327,8 +337,8 @@ span.twitter-typeahead {
 .nav-sidebar {
     margin-right: 0px;
     margin-bottom: 20px;
-    margin-left: -15px;
-    width: calc(100% + 30px);
+    margin-left: -20px;
+    width: calc(100% + 40px);
 }
 
 .nav-sidebar > li > a {

@@ -7,10 +7,7 @@
 
 <div class="container">
 
-    <div class="jumbotron">
-        <h1>Featured Page</h1>
-        <h2>{{ $page->title }}</h2>
-    </div>
+    <h1 class="page-header">{{ $page->title }}</h1>
 
     @markdown($page->entry)
 

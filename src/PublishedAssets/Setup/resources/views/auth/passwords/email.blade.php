@@ -15,7 +15,7 @@
                     <label>Email</label>
                     <input class="form-control" type="email" name="email" placeholder="Email Address" value="{{ old('email') }}">
                 </div>
-                <div class="col-md-12 pull-left raw-margin-top-24">
+                <div class="col-md-12 pull-left form-group">
                     <a class="btn btn-default pull-left" href="/login">Wait I remember!</a>
                     <button class="btn btn-primary pull-right" type="submit" class="button">Send Password Reset Link</button>
                 </div>

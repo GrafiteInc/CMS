@@ -7,8 +7,11 @@
 
 <div class="container">
 
-    <h1>{!! $page->title !!}</h1>
-    {!! $page->entry !!}
+    <h1 class="page-header">{!! $page->title !!}</h1>
+
+    <div class="entry-row">
+        {!! $page->entry !!}
+    </div>
 
 </div>
 

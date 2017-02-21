@@ -4,7 +4,7 @@
 
 <div class="container">
 
-    <h1>Gallery</h1>
+    <h1 class="page-header">Gallery</h1>
 
     <div class="col-md-6">
         @foreach ($images as $image)

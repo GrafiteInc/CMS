@@ -11,23 +11,84 @@ html, body {
 }
 
 .homepage {
-    background-image: url('/img/pexels-photo-28938.jpg');
-    background-size: cover;
     background-position: center center;
+}
+
+.homepage-container {
+    .col-md-6 .well {
+        height: 260px;
+    }
+    h3 {
+        margin: 0px 0px 16px 0px;
+    }
+}
+
+.homepage-banner {
+    text-align: center;
+    height: 600px;
+    margin: -100px -15px 24px -15px;
+    background-color: #DFDBE5;
+    background-image: url($triangles);
+    h1 {
+        margin: 0;
+        padding: 250px 0 0 0;
+        font-size: 6em;
+        font-weight: bold;
+        color: #FFF;
+    }
+    p.lead {
+        text-transform: uppercase;
+        color: #FFF;
+    }
+}
+
+.entry-row {
+    margin-bottom: 24px;
 }
 
 .site-wrapper {
     margin: 50px auto;
     min-height: calc(100% - 98px);
     padding: 24px 0;
-}
-
-.menu {
-    margin-top: 15px;
+    .container-fluid {
+        .container {
+            h1 {
+                margin: 0;
+            }
+            .page-header {
+                margin-bottom: 24px;
+            }
+        }
+    }
 }
 
 .menu a {
     padding: 0 8px;
+}
+
+.profile-image {
+    display: block;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background-color: #222;
+    background-position: center center;
+    background-size: cover;
+}
+
+/*
+|--------------------------------------------------------------------------
+| Nav
+|--------------------------------------------------------------------------
+*/
+
+.navbar-default {
+    background-color: rgba(255, 255, 255, 0.9);
+    border-color: #d3e0e9;
+}
+
+.user-tabs {
+    margin-bottom: 24px;
 }
 
 /*

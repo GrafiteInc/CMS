@@ -8,7 +8,7 @@
 
     Route::group(['namespace' => 'Quarx', 'middleware' => ['quarx-language', 'quarx-analytics']], function () {
         Route::get('', 'PagesController@home');
-        Route::get('page', 'PagesController@all');
+        Route::get('pages', 'PagesController@all');
         Route::get('page/{url}', 'PagesController@show');
         Route::get('p/{url}', 'PagesController@show');
 

@@ -4,7 +4,7 @@
 
 <div class="container">
 
-    <h1>Events</h1>
+    <h1 class="page-header">Events ({{ $date->format('d M, Y') }})</h1>
 
     @foreach($events as $event)
         @if (config('app.locale') !== config('quarx.default-language'))

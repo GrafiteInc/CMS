@@ -10,18 +10,19 @@
         </div>
         <div class="collapse navbar-collapse" id="navBar">
             <ul class="nav navbar-nav">
-                <li><a href="{{ url('page/welcome') }}">Welcome</a></li>
+                @menu('main', 'quarx-frontend::partials.main-menu')
                 <li><a href="{{ url('blog') }}">Blog</a></li>
-                <li><a href="{{ url('gallery') }}">Gallery</a></li>
-                <li><a href="{{ url('faqs') }}">FAQs</a></li>
                 <li><a href="{{ url('events') }}">Events</a></li>
+                <li><a href="{{ url('faqs') }}">FAQs</a></li>
+                <li><a href="{{ url('gallery') }}">Gallery</a></li>
                 @modules()
             </ul>
             <ul class="nav navbar-nav navbar-right menu">
-                @if (config('app.locale') == 'fr')
-                    @menu('main-fr')
+                @if (auth()->user())
+                    <li><a href="{!! url('user/settings') !!}"><span class="fa fa-user"></span> Settings</a></li>
+                    <li><a href="{!! url('logout') !!}"><span class="fa fa-sign-out"></span> Logout</a></li>
                 @else
-                    @menu('main')
+                    <li><a href="{!! url('login') !!}"><span class="fa fa-sign-in"></span> Login</a></li>
                 @endif
             </ul>
         </div>

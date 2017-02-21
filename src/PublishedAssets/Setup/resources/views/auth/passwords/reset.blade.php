@@ -14,19 +14,19 @@
                 @include('partials.errors')
                 @include('partials.status')
 
-                <div class="col-md-12 raw-margin-top-24">
+                <div class="col-md-12 form-group">
                     <label>Email</label>
                     <input class="form-control" type="email" name="email" value="{{ old('email') }}">
                 </div>
-                <div class="col-md-12 raw-margin-top-24">
+                <div class="col-md-12 form-group">
                     <label>Password</label>
                     <input class="form-control" type="password" name="password">
                 </div>
-                <div class="col-md-12 raw-margin-top-24">
+                <div class="col-md-12 form-group">
                     <label>Confirm Password</label>
                     <input class="form-control" type="password" name="password_confirmation">
                 </div>
-                <div class="col-md-12 raw-margin-top-24">
+                <div class="col-md-12 form-group">
                     <button class="btn btn-primary" type="submit">Reset Password</button>
                 </div>
             </form>

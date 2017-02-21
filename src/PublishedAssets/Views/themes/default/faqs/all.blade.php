@@ -4,12 +4,13 @@
 
 <div class="container">
 
-    <h1>FAQs</h1>
+    <h1 class="page-header">FAQs</h1>
 
-    @widget('sample')
+    <div class="entry-row">
+        @widget('faq-description')
+    </div>
 
     @foreach($faqs as $faq)
-        <div class="container-fluid">
         @if (config('app.locale') !== config('quarx.default-language'))
             <blockquote>{!! $faq->translationData(config('app.locale'))->question !!}</blockquote>
             <div class="well">
@@ -23,7 +24,6 @@
             </div>
             @edit('faqs', $faq->id)
         @endif
-        </div>
     @endforeach
 
 </div>

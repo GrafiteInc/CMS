@@ -5,12 +5,15 @@
 
 @section('content')
 
-<div class="container">
+    <div class="container">
 
-    <h1>{!! $blog->title !!} - <span>{!! $blog->published_at !!}</span></h1>
-    {!! $blog->entry !!}
+        <h1 class="page-header">{!! $blog->title !!} <span class="pull-right">{!! \Carbon\Carbon::parse($blog->published_at)->format('d M, Y') !!}</span></h1>
 
-</div>
+        <div class="entry-row">
+            {!! $blog->entry !!}
+        </div>
+
+    </div>
 
 @endsection
 

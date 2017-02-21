@@ -332,17 +332,21 @@ class QuarxService
 
         $links = LinkRepository::getLinksByMenuID($menu->id);
         $response = '';
+        $processedLinks = [];
         foreach ($links as $link) {
             if ($link->external) {
                 $response .= "<a href=\"$link->external_url\">$link->name</a>";
+                $processedLinks[] = "<a href=\"$link->external_url\">$link->name</a>";
             } else {
                 $page = $pageRepo->findPagesById($link->page_id);
                 if ($page) {
                     if (config('app.locale') == config('quarx.default-language', $this->config('quarx.default-language'))) {
                         $response .= '<a href="'.URL::to('page/'.$page->url)."\">$link->name</a>";
+                        $processedLinks[] = '<a href="'.URL::to('page/'.$page->url)."\">$link->name</a>";
                     } elseif (config('app.locale') != config('quarx.default-language', $this->config('quarx.default-language'))) {
                         if ($page->translation(config('app.locale'))) {
                             $response .= '<a href="'.URL::to('page/'.$page->translation(config('app.locale'))->data->url)."\">$link->name</a>";
+                            $processedLinks[] = '<a href="'.URL::to('page/'.$page->translation(config('app.locale'))->data->url)."\">$link->name</a>";
                         }
                     }
                 }
@@ -350,7 +354,7 @@ class QuarxService
         }
 
         if (!is_null($view)) {
-            $response = view($view, ['links' => $links, 'linksAsHtml' => $response]);
+            $response = view($view, ['links' => $links, 'linksAsHtml' => $response, 'processed_links' => $processedLinks]);
         }
 
         if (Gate::allows('quarx', Auth::user())) {

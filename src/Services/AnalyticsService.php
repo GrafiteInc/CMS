@@ -66,6 +66,14 @@ class AnalyticsService
 
     public function convertDataToItems($data, $key, $conversions = [])
     {
+        if (!isset($conversions['unknown'])) {
+            $conversions['unknown'] = 0;
+        }
+
+        if (!isset($conversions['unknown'])) {
+            $conversions['unknown'] = 0;
+        }
+
         foreach ($data as $item) {
             $visit = json_decode($item);
             if (!empty($visit->$key) && $visit->$key > '') {

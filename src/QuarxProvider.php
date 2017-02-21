@@ -16,6 +16,7 @@ use Quarx;
 use Spatie\LaravelAnalytics\LaravelAnalyticsFacade;
 use Spatie\LaravelAnalytics\LaravelAnalyticsServiceProvider;
 use Yab\Laracogs\LaracogsProvider;
+use Yab\Quarx\Console\Keys;
 use Yab\Quarx\Console\ModuleComposer;
 use Yab\Quarx\Console\ModuleCrud;
 use Yab\Quarx\Console\ModuleMake;
@@ -142,6 +143,7 @@ class QuarxProvider extends ServiceProvider
             ModuleComposer::class,
             ModuleCrud::class,
             Setup::class,
+            Keys::class,
         ]);
     }
 }

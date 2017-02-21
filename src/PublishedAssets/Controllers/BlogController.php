@@ -13,6 +13,10 @@ class BlogController extends Controller
     public function __construct(BlogRepository $blogRepo)
     {
         $this->blogRepository = $blogRepo;
+
+        if (!in_array('blog', config('quarx.active-core-modules'))) {
+            return redirect('/')->send();
+        }
     }
 
     /**

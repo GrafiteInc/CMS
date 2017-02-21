@@ -13,6 +13,10 @@ class FaqController extends Controller
     public function __construct(FAQRepository $faqRepository)
     {
         $this->faqRepository = $faqRepository;
+
+        if (!in_array('faqs', config('quarx.active-core-modules'))) {
+            return redirect('/')->send();
+        }
     }
 
     /**

@@ -14,6 +14,10 @@ class EventsController extends Controller
     {
         $this->eventsRepository = $eventsRepo;
         $this->eventService = $eventService;
+
+        if (!in_array('events', config('quarx.active-core-modules'))) {
+            return redirect('/')->send();
+        }
     }
 
     /**

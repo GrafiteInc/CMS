@@ -221,16 +221,16 @@ class Setup extends Command
 
         $mainRoutes = file_get_contents(base_path('routes/web.php'));
         $mainRoutes = str_replace("/*
-|--------------------------------------------------------------------------
-| Team Routes
-|--------------------------------------------------------------------------
-*/
+    |--------------------------------------------------------------------------
+    | Team Routes
+    |--------------------------------------------------------------------------
+    */
 
-Route::get('team/{name}', 'TeamController@showByName');
-Route::resource('teams', 'TeamController', ['except' => ['show']]);
-Route::post('teams/search', 'TeamController@search');
-Route::post('teams/{id}/invite', 'TeamController@inviteMember');
-Route::get('teams/{id}/remove/{userId}', 'TeamController@removeMember');", '', $mainRoutes);
+    Route::get('team/{name}', 'TeamController@showByName');
+    Route::resource('teams', 'TeamController', ['except' => ['show']]);
+    Route::post('teams/search', 'TeamController@search');
+    Route::post('teams/{id}/invite', 'TeamController@inviteMember');
+    Route::get('teams/{id}/remove/{userId}', 'TeamController@removeMember');", '', $mainRoutes);
         $mainRoutes = str_replace("['auth', 'active']", "['auth']", $mainRoutes);
         file_put_contents(base_path('routes/web.php'), $mainRoutes);
 

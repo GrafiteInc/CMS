@@ -11,6 +11,9 @@ use Yab\CrudMaker\Generators\CrudGenerator;
 
 class ModuleCrud extends Command
 {
+    public $table;
+    public $filesystem;
+
     /**
      * The console command name.
      *
@@ -32,20 +35,14 @@ class ModuleCrud extends Command
      */
     public function handle()
     {
-        $filesystem = new Filesystem();
+        $this->filesystem = new Filesystem();
         $crudGenerator = new CrudGenerator();
 
-        $table = ucfirst(str_singular($this->argument('table')));
+        $this->table = ucfirst(str_singular($this->argument('table')));
 
-        $moduleDirectory = base_path('quarx/modules/'.ucfirst(str_plural($table)));
+        $moduleDirectory = base_path('quarx/modules/'.ucfirst(str_plural($this->table)));
 
-        if (!is_dir(base_path('quarx'))) {
-            @mkdir(base_path('quarx'));
-        }
-
-        if (!is_dir(base_path('quarx/modules'))) {
-            mkdir(base_path('quarx/modules'));
-        }
+        $this->directorySetup();
 
         if (!is_dir($moduleDirectory)) {
             mkdir($moduleDirectory);
@@ -66,8 +63,8 @@ class ModuleCrud extends Command
             mkdir($moduleDirectory.'/Tests', 0777, true);
         }
 
-        file_put_contents($moduleDirectory.'/config.php', "<?php \n\n\n return [ 'asset_path' => __DIR__.'/Assets', 'url' => '".strtolower(str_plural($table))."', ];");
-        file_put_contents($moduleDirectory.'/Views/menu.blade.php', "<li class=\"@if (Request::is('quarx/".strtolower(str_plural($table))."') || Request::is('quarx/".strtolower(str_plural($table))."/*')) active @endif\"><a href=\"{{ url('quarx/".strtolower(str_plural($table))."') }}\"><span class=\"fa fa-file\"></span> ".ucfirst(str_plural($table)).'</a></li>');
+        file_put_contents($moduleDirectory.'/config.php', "<?php \n\n\n return [ 'asset_path' => __DIR__.'/Assets', 'url' => '".strtolower(str_plural($this->table))."', ];");
+        file_put_contents($moduleDirectory.'/Views/menu.blade.php', "<li class=\"@if (Request::is('quarx/".strtolower(str_plural($this->table))."') || Request::is('quarx/".strtolower(str_plural($this->table))."/*')) active @endif\"><a href=\"{{ url('quarx/".strtolower(str_plural($this->table))."') }}\"><span class=\"fa fa-file\"></span> ".ucfirst(str_plural($this->table)).'</a></li>');
 
         $config = [
             'bootstrap' => false,
@@ -81,25 +78,25 @@ class ModuleCrud extends Command
             '_path_tests_' => $moduleDirectory.'/Tests',
             '_path_request_' => $moduleDirectory.'/Requests',
             '_path_routes_' => $moduleDirectory.'/Routes/web.php',
-            'routes_prefix' => "<?php \n\nRoute::group(['namespace' => 'Quarx\Modules\\".ucfirst(str_plural($table))."\Controllers', 'prefix' => 'quarx', 'middleware' => ['web', 'auth', 'quarx']], function () { \n\n",
+            'routes_prefix' => "<?php \n\nRoute::group(['namespace' => 'Quarx\Modules\\".ucfirst(str_plural($this->table))."\Controllers', 'prefix' => 'quarx', 'middleware' => ['web', 'auth', 'quarx']], function () { \n\n",
             'routes_suffix' => "\n\n});",
             '_app_namespace_' => app()->getInstance()->getNamespace(),
-            '_namespace_services_' => 'Quarx\Modules\\'.ucfirst(str_plural($table)).'\Services',
-            '_namespace_facade_' => 'Quarx\Modules\\'.ucfirst(str_plural($table)).'\Facades',
-            '_namespace_model_' => 'Quarx\Modules\\'.ucfirst(str_plural($table)).'\Models',
-            '_namespace_controller_' => 'Quarx\Modules\\'.ucfirst(str_plural($table)).'\Controllers',
-            '_namespace_request_' => 'Quarx\Modules\\'.ucfirst(str_plural($table)).'\Requests',
-            '_table_name_' => str_plural(strtolower($table)),
-            '_lower_case_' => strtolower($table),
-            '_lower_casePlural_' => str_plural(strtolower($table)),
-            '_camel_case_' => ucfirst(camel_case($table)),
-            '_camel_casePlural_' => ucfirst(str_plural(camel_case($table))),
-            '_ucCamel_casePlural_' => ucfirst(str_plural(camel_case($table))),
+            '_namespace_services_' => 'Quarx\Modules\\'.ucfirst(str_plural($this->table)).'\Services',
+            '_namespace_facade_' => 'Quarx\Modules\\'.ucfirst(str_plural($this->table)).'\Facades',
+            '_namespace_model_' => 'Quarx\Modules\\'.ucfirst(str_plural($this->table)).'\Models',
+            '_namespace_controller_' => 'Quarx\Modules\\'.ucfirst(str_plural($this->table)).'\Controllers',
+            '_namespace_request_' => 'Quarx\Modules\\'.ucfirst(str_plural($this->table)).'\Requests',
+            '_table_name_' => str_plural(strtolower($this->table)),
+            '_lower_case_' => strtolower($this->table),
+            '_lower_casePlural_' => str_plural(strtolower($this->table)),
+            '_camel_case_' => ucfirst(camel_case($this->table)),
+            '_camel_casePlural_' => ucfirst(str_plural(camel_case($this->table))),
+            '_ucCamel_casePlural_' => ucfirst(str_plural(camel_case($this->table))),
             'template_source' => __DIR__.'/../Templates/CRUD/',
             'tests_generated' => 'integration,service,repository',
         ];
 
-        $this->makeTheProvider($config, $moduleDirectory, $table);
+        $this->makeTheProvider($config, $moduleDirectory, $this->table);
 
         $appConfig = $config;
         $appConfig['template_source'] = __DIR__.'/../Templates/AppCRUD';
@@ -147,7 +144,7 @@ class ModuleCrud extends Command
             $crudGenerator->createRoutes($appConfig, false);
 
             $this->line('You will need to publish your module to make it available to your vistors:');
-            $this->comment('php artisan module:publish '.str_plural($table));
+            $this->comment('php artisan module:publish '.str_plural($this->table));
             $this->line('');
             $this->info('Add this to your `app/Providers/RouteServiceProver.php` in the `mapWebRoutes` method:');
             $this->comment("\nrequire base_path('routes/".$config['_lower_casePlural_']."-web.php');\n");
@@ -156,15 +153,56 @@ class ModuleCrud extends Command
         }
 
         Artisan::call('make:migration', [
-            'name' => 'create_'.str_plural(strtolower($table)).'_table',
-            '--path' => 'quarx/modules/'.ucfirst(str_plural($table)).'/Publishes/database/migrations',
-            '--table' => str_plural(strtolower($table)),
+            'name' => 'create_'.str_plural(strtolower($this->table)).'_table',
+            '--path' => 'quarx/modules/'.ucfirst(str_plural($this->table)).'/Publishes/database/migrations',
+            '--table' => str_plural(strtolower($this->table)),
             '--create' => true,
         ]);
 
+        $this->setSchema();
+
+        $this->line('You may wish to add this as your testing database');
+        $this->line("'testing' => [ 'driver' => 'sqlite', 'database' => ':memory:', 'prefix' => '' ],");
+        $this->info('Module for '.$this->table.' is done.');
+    }
+
+    /**
+     * Generate the provider file.
+     *
+     * @param array $config
+     *
+     * @return bool
+     */
+    public function makeTheProvider($config, $moduleDirectory, $table)
+    {
+        $provider = file_get_contents(__DIR__.'/../Templates/CRUD/Provider.txt');
+
+        foreach ($config as $key => $value) {
+            $provider = str_replace($key, $value, $provider);
+        }
+
+        return file_put_contents($moduleDirectory.'/'.ucfirst(str_plural($table)).'ModuleProvider.php', $provider);
+    }
+
+    /**
+     * Setup the directories for modules.
+     */
+    public function directorySetup()
+    {
+        if (!is_dir(base_path('quarx'))) {
+            @mkdir(base_path('quarx'));
+        }
+
+        if (!is_dir(base_path('quarx/modules'))) {
+            mkdir(base_path('quarx/modules'));
+        }
+    }
+
+    public function setSchema()
+    {
         if ($this->option('schema')) {
-            $migrationFiles = $filesystem->allFiles(base_path('quarx/modules/'.ucfirst(str_plural($table)).'/Publishes/database/migrations'));
-            $migrationName = 'create_'.str_plural(strtolower($table)).'_table';
+            $migrationFiles = $this->filesystem->allFiles(base_path('quarx/modules/'.ucfirst(str_plural($this->table)).'/Publishes/database/migrations'));
+            $migrationName = 'create_'.str_plural(strtolower($this->table)).'_table';
             foreach ($migrationFiles as $file) {
                 if (stristr($file->getBasename(), $migrationName)) {
                     $migrationData = file_get_contents($file->getPathname());
@@ -184,27 +222,5 @@ class ModuleCrud extends Command
                 }
             }
         }
-
-        $this->line('You may wish to add this as your testing database');
-        $this->line("'testing' => [ 'driver' => 'sqlite', 'database' => ':memory:', 'prefix' => '' ],");
-        $this->info('Module for '.$table.' is done.');
-    }
-
-    /**
-     * Generate the provider file.
-     *
-     * @param array $config
-     *
-     * @return bool
-     */
-    public function makeTheProvider($config, $moduleDirectory, $table)
-    {
-        $provider = file_get_contents(__DIR__.'/../Templates/CRUD/provider.txt');
-
-        foreach ($config as $key => $value) {
-            $provider = str_replace($key, $value, $provider);
-        }
-
-        return file_put_contents($moduleDirectory.'/'.ucfirst(str_plural($table)).'ModuleProvider.php', $provider);
     }
 }

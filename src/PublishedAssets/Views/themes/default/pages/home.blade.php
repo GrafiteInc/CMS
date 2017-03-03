@@ -9,7 +9,7 @@
 
 <div class="homepage-banner">
     <h1>{{ config('app.name') }}</h1>
-    <p class="lead">Eloquent, Minimalism</p>
+    <p class="lead">Fluent, Minimalism</p>
 </div>
 
 <div class="container">

@@ -19,7 +19,9 @@ class QuarxModuleProvider extends ServiceProvider
             foreach ($modules as $module) {
                 if (is_dir($module)) {
                     $module = lcfirst(str_replace($modulePath, '', $module));
-                    $this->app->register('\Quarx\Modules\\'.ucfirst($module).'\\'.ucfirst($module).'ModuleProvider');
+                    $moduleProvider = '\Quarx\Modules\_module_\_module_ModuleProvider';
+                    $moduleProvider = str_replace('_module_', ucfirst($module), $moduleProvider);
+                    $this->app->register($moduleProvider);
                 }
             }
         }

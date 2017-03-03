@@ -141,7 +141,7 @@ class ModuleMake extends Command
      */
     public function makeTheProvider($config, $moduleDirectory, $table)
     {
-        $provider = file_get_contents(__DIR__.'/../Templates/Basic/provider.txt');
+        $provider = file_get_contents(__DIR__.'/../Templates/Basic/Provider.txt');
 
         foreach ($config as $key => $value) {
             $provider = str_replace($key, $value, $provider);

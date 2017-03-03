@@ -3,6 +3,12 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 ----
 
+## [v2.3.7] - 2017-03-03
+
+### Fixed
+- Minor fixes for the module loader
+- Fixed issue with module builder
+
 ## [v2.3.6] - 2017-03-03
 
 ### Fixed

@@ -20,14 +20,14 @@
             <ul class="nav navbar-nav navbar-right menu">
                 @if (auth()->user())
                     <li><a href="{!! url('user/settings') !!}"><span class="fa fa-user"></span> Settings</a></li>
-                    <li><a href="{!! url('logout') !!}" 
+                    <li><a href="{!! url('logout') !!}"
                         onclick="event.preventDefault();
                                  document.getElementById('logout-form').submit();">
                             <span class="fa fa-sign-out"></span>
                             Logout
                         </a>
                     </li>
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    <form id="logout-form" action="{{ url('logout') }}" method="POST" style="display: none;">
                         {{ csrf_field() }}
                     </form>
                 @else

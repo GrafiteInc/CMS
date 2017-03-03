@@ -3,6 +3,12 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 ----
 
+## [v2.3.5] - 2017-03-03
+
+### Fixed
+- Minor issue with module crud
+- Navigation issue
+
 ## [v2.3.4] - 2017-02-22
 
 ### Changed

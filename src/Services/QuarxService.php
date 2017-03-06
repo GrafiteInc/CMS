@@ -8,34 +8,20 @@ use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\URL;
-use Illuminate\Support\Facades\View;
 use Yab\Quarx\Facades\CryptoServiceFacade;
-use Yab\Quarx\Repositories\LinkRepository;
-use Yab\Quarx\Repositories\MenuRepository;
-use Yab\Quarx\Repositories\PageRepository;
-use Yab\Quarx\Repositories\WidgetRepository;
+use Yab\Quarx\Services\Traits\DefaultModuleServiceTrait;
+use Yab\Quarx\Services\Traits\MenuServiceTrait;
+use Yab\Quarx\Services\Traits\ModuleServiceTrait;
 
 class QuarxService
 {
+    use MenuServiceTrait;
+    use DefaultModuleServiceTrait;
+    use ModuleServiceTrait;
+
     public function __construct()
     {
         $this->imageRepo = App::make('Yab\Quarx\Repositories\ImageRepository');
-    }
-
-    /**
-     * Generates a notification for the app.
-     *
-     * @param string $string Notification string
-     * @param string $type   Notification type
-     */
-    public function notification($string, $type = null)
-    {
-        if (is_null($type)) {
-            $type = 'info';
-        }
-
-        Session::flash('notification', $string);
-        Session::flash('notificationType', 'alert-'.$type);
     }
 
     /**
@@ -57,65 +43,19 @@ class QuarxService
     }
 
     /**
-     * Module Assets.
+     * Generates a notification for the app.
      *
-     * @param string $module      Module name
-     * @param string $path        Asset path
-     * @param string $contentType Content type
-     *
-     * @return string
+     * @param string $string Notification string
+     * @param string $type   Notification type
      */
-    public function moduleAsset($module, $path, $contentType = 'null')
+    public function notification($string, $type = null)
     {
-        $assetPath = base_path(Config::get('quarx.module-directory').'/'.ucfirst($module).'/Assets/'.$path);
-
-        if (!is_file($assetPath)) {
-            $assetPath = config('quarx.modules.'.$module.'.asset_path').'/'.$path;
+        if (is_null($type)) {
+            $type = 'info';
         }
 
-        return url('quarx/asset/'.CryptoServiceFacade::url_encode($assetPath).'/'.CryptoServiceFacade::url_encode($contentType).'/?isModule=true');
-    }
-
-    /**
-     * Module Config.
-     *
-     * @param string $module      Module name
-     * @param string $path        Asset path
-     * @param string $contentType Content type
-     *
-     * @return string
-     */
-    public function moduleConfig($module, $path)
-    {
-        $configArray = @include base_path(Config::get('quarx.module-directory').'/'.ucfirst($module).'/config.php');
-
-        if (!$configArray) {
-            return config('quarx.modules.'.$module.'.'.$path);
-        }
-
-        return self::assignArrayByPath($configArray, $path);
-    }
-
-    /**
-     * Module Links.
-     *
-     * @return string
-     */
-    public function moduleLinks()
-    {
-        $links = '';
-
-        foreach (config('quarx.modules', []) as $module => $config) {
-            $link = $module;
-
-            if (isset($config['url'])) {
-                $link = $config['url'];
-            }
-
-            $links .= '<li><a href="'.url($link).'">'.ucfirst($link).'</a></li>';
-        }
-
-        return $links;
+        Session::flash('notification', $string);
+        Session::flash('notificationType', 'alert-'.$type);
     }
 
     /**
@@ -192,92 +132,6 @@ class QuarxService
     }
 
     /**
-     * Get a widget.
-     *
-     * @param string $slug
-     *
-     * @return widget
-     */
-    public function widget($slug)
-    {
-        $widget = WidgetRepository::getWidgetBySLUG($slug);
-
-        if ($widget) {
-            if (Gate::allows('quarx', Auth::user())) {
-                $widget->content .= '<a href="'.url('quarx/widgets/'.$widget->id.'/edit').'" style="margin-left: 8px;" class="btn btn-xs btn-default"><span class="fa fa-pencil"></span> Edit</a>';
-            }
-
-            if (config('app.locale') !== config('quarx.default-language') && $widget->translation(config('app.locale'))) {
-                return $widget->translationData(config('app.locale'))->content;
-            } else {
-                return $widget->content;
-            }
-        }
-
-        return '';
-    }
-
-    /**
-     * Get image.
-     *
-     * @param string $tag
-     *
-     * @return collection
-     */
-    public function image($id, $class = '')
-    {
-        $img = '';
-
-        if ($image = app('Yab\Quarx\Models\Image')->find($id)) {
-            $img = FileService::filePreview($image->location);
-        }
-
-        return '<img class="'.$class.'" src="'.$img.'">';
-    }
-
-    /**
-     * Get image link.
-     *
-     * @param string $tag
-     *
-     * @return collection
-     */
-    public function imageLink($id)
-    {
-        $img = '';
-
-        if ($image = app('Yab\Quarx\Models\Image')->find($id)) {
-            $img = FileService::filePreview($image->location);
-        }
-
-        return $img;
-    }
-
-    /**
-     * Get images.
-     *
-     * @param string $tag
-     *
-     * @return collection
-     */
-    public function images($tag = null)
-    {
-        $images = [];
-
-        if (is_array($tag)) {
-            foreach ($tag as $tagName) {
-                $images = array_merge($images, $this->imageRepo->getImagesByTag($tag)->get()->toArray());
-            }
-        } elseif (is_null($tag)) {
-            $images = array_merge($images, $this->imageRepo->getImagesByTag()->get()->toArray());
-        } else {
-            $images = array_merge($images, $this->imageRepo->getImagesByTag($tag)->get()->toArray());
-        }
-
-        return $images;
-    }
-
-    /**
      * Add these views to the packages.
      *
      * @param string $dir
@@ -297,85 +151,6 @@ class QuarxService
         }
 
         return Config::set('quarx.package-menus', $packageViews);
-    }
-
-    /**
-     * Quarx package Menus.
-     *
-     * @return string
-     */
-    public function packageMenus()
-    {
-        $packageViews = Config::get('quarx.package-menus', []);
-
-        foreach ($packageViews as $view) {
-            include $view;
-        }
-    }
-
-    /**
-     * Get a view.
-     *
-     * @param string $slug
-     * @param View   $view
-     *
-     * @return string
-     */
-    public function menu($slug, $view = null)
-    {
-        $pageRepo = new PageRepository();
-        $menu = MenuRepository::getMenuBySLUG($slug)->first();
-
-        if (!$menu) {
-            return '';
-        }
-
-        $links = LinkRepository::getLinksByMenuID($menu->id);
-        $response = '';
-        $processedLinks = [];
-        foreach ($links as $link) {
-            if ($link->external) {
-                $response .= "<a href=\"$link->external_url\">$link->name</a>";
-                $processedLinks[] = "<a href=\"$link->external_url\">$link->name</a>";
-            } else {
-                $page = $pageRepo->findPagesById($link->page_id);
-                if ($page) {
-                    if (config('app.locale') == config('quarx.default-language', $this->config('quarx.default-language'))) {
-                        $response .= '<a href="'.URL::to('page/'.$page->url)."\">$link->name</a>";
-                        $processedLinks[] = '<a href="'.URL::to('page/'.$page->url)."\">$link->name</a>";
-                    } elseif (config('app.locale') != config('quarx.default-language', $this->config('quarx.default-language'))) {
-                        if ($page->translation(config('app.locale'))) {
-                            $response .= '<a href="'.URL::to('page/'.$page->translation(config('app.locale'))->data->url)."\">$link->name</a>";
-                            $processedLinks[] = '<a href="'.URL::to('page/'.$page->translation(config('app.locale'))->data->url)."\">$link->name</a>";
-                        }
-                    }
-                }
-            }
-        }
-
-        if (!is_null($view)) {
-            $response = view($view, ['links' => $links, 'linksAsHtml' => $response, 'processed_links' => $processedLinks]);
-        }
-
-        if (Gate::allows('quarx', Auth::user())) {
-            $response .= '<a href="'.url('quarx/menus/'.$menu->id.'/edit').'" style="margin-left: 8px;" class="btn btn-xs btn-default"><span class="fa fa-pencil"></span> Edit</a>';
-        }
-
-        return $response;
-    }
-
-    public function defaultModules()
-    {
-        return [
-            'blog',
-            'menus',
-            'files',
-            'images',
-            'pages',
-            'widgets',
-            'events',
-            'faqs',
-        ];
     }
 
     /**

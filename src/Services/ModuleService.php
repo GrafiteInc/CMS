@@ -22,7 +22,7 @@ class ModuleService
 
         if (is_array(config('quarx.modules'))) {
             foreach (config('quarx.modules') as $module => $config) {
-                if (!is_dir($modulePath.$module)) {
+                if (!is_dir($modulePath.ucfirst($module))) {
                     $menu .= view($module.'::menu');
                 }
             }

@@ -12,7 +12,7 @@ Quarx comes with a module builder for all your custom CMS needs, as well as a mo
 Simple setup uses Laracogs as the backbone of an app for you using Laravel, once the setup command has been run you will have a full CMS as an app. Complex setup is specifically for developers who want to add a CMS to their existing app.
 
 ## Documentation
-[http://quarx.info](http://quarx.info)
+[http://quarxcms.com](http://quarxcms.com)
 
 ## Yab Newsletter
 [Subscribe](http://eepurl.com/ck7dSv)

@@ -59,7 +59,6 @@ class ImagesTest extends TestCase
         $response = $this->call('POST', 'quarx/images', $image, [], ['location' => $uploadedFile]);
 
         $this->assertEquals(302, $response->getStatusCode());
-        $response->assertRedirect('/');
     }
 
     public function testUpdate()

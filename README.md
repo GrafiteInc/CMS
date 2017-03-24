@@ -44,7 +44,7 @@ Create a new Laravel application, and make a database somewhere and update the .
 composer require yab/quarx
 ```
 
-* Add the following to your Providers:
+* Add the following to your Providers array in your config/app.php file:
 
 ```php
 Yab\Quarx\QuarxProvider::class,
@@ -98,7 +98,7 @@ php artisan migrate
 'quarx-analytics' => \Yab\Quarx\Middleware\QuarxAnalytics::class,
 ```
 
-In order to have modules load as well please add the following to your composer file:
+In order to have modules load as well please add the following to your composer file under autoload psr-4 object:
 ```php
 "Quarx\\": "quarx/",
 ```

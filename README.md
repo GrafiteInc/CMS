@@ -89,6 +89,11 @@ require base_path('routes/quarx.php');
 php artisan migrate
 ```
 
+* Run storage link is set for images & file uploads to work
+```bash
+php artisan storage:link
+```
+
 * Then add to the Kernel Route Middleware:
 
 ```php

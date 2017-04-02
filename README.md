@@ -69,27 +69,36 @@ Now your done setup. Login, and start building your amazing new website!
 
 ## Complex Setup
 
-If you just want to add Quarx to your existing application and already have your own
+If you just want to add Quarx to your existing application the follow these steps:
 
-* Add the following to your routes provider:
+1. Update your routes provider (app/Providers/RouteServiceProvider.php) by changing the following:
 
 ```php
-require base_path('routes/quarx.php');
+->group(base_path('routes/web.php'));
 ```
 
-* Add the following to your app.scss file, you will want to modify depending on your theme of choice.
+Into:
+
+```php
+->group(function() {
+    require base_path('routes/web.php');
+    require base_path('routes/quarx.php');
+});
+```
+
+2. Add the following to your app.scss file, you will want to modify depending on your theme of choice.
 
 ```css
 @import "resources/themes/default/assets/sass/_theme.scss";
 ```
 
-* Then migrate:
+3. Then migrate:
 
 ```bash
 php artisan migrate
 ```
 
-* Then add to the Kernel Route Middleware:
+4. Add to the Kernel Route Middleware:
 
 ```php
 'quarx' => \App\Http\Middleware\Quarx::class,
@@ -98,10 +107,12 @@ php artisan migrate
 'quarx-analytics' => \Yab\Quarx\Middleware\QuarxAnalytics::class,
 ```
 
-In order to have modules load as well please add the following to your composer file under autoload psr-4 object:
+5. In order to have modules load as well please add the following to your composer file under autoload psr-4 object:
+
 ```php
 "Quarx\\": "quarx/",
 ```
+
 This should be added to the autoloader below the App itself.
 
 ## Quarx Access

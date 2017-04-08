@@ -36,7 +36,13 @@ trait Translatable
         $translation = $this->translation($lang);
 
         if ($translation) {
-            return json_decode($translation->entity_data);
+            $data = json_decode($translation->entity_data);
+
+            if (isset($data->blocks)) {
+                $data->blocks = json_decode($data->blocks, true);
+            }
+
+            return $data;
         }
 
         return null;

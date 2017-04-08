@@ -84,3 +84,35 @@ $('#frame').load(function () {
         e.preventDefault();
     });
 });
+
+/*
+ * --------------------------------------------------------------------------
+ * Pages and Blocks
+ * --------------------------------------------------------------------------
+*/
+
+$(function () {
+    $('.add-block-btn').bind('click', function (e) {
+        e.preventDefault();
+        $('#addBlockModal').modal('toggle');
+    });
+
+    $('#addBlockBtn').bind('click', function () {
+        var _slug = $('#blockName').val();
+        $('.blocks').prepend('<div id="block_container_'+_slug+'" class="col-md-12"><div class="form-group"><h4>'+_slug+'<button type="button" class="btn btn-xs btn-danger delete-block-btn pull-right"><span class="fa fa-trash"></span></button></h4><textarea id="block_'+_slug+'" name="block_'+_slug+'" class="form-control redactor"></textarea></div></div>');
+        $('#addBlockModal').modal('toggle');
+        $('#block_'+_slug).redactor(_redactorConfig);
+    });
+
+    $('.delete-block-btn').bind('click', function (e) {
+        e.preventDefault();
+        $('#deleteBlockBtn').attr('data-slug', $(this).attr('data-slug'));
+        $('#deleteBlockModal').modal('toggle');
+    });
+
+    $('#deleteBlockBtn').bind('click', function () {
+        console.log($(this).attr('data-slug'))
+        $('#'+$(this).attr('data-slug')).remove();
+        $('#deleteBlockModal').modal('toggle');
+    });
+});

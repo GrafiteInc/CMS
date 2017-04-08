@@ -64,4 +64,38 @@ class QuarxModel extends Model
             ->where('entity_data', 'LIKE', '%"entity_type":"'.$type.'"%')
             ->delete();
     }
+
+    /**
+     * A method for getting / setting blocks
+     *
+     * @param  string $slug
+     * @return string
+     */
+    public function block($slug)
+    {
+        $block = $this->findABlock($slug);
+
+        if (!$block) {
+            $this->update([
+                'blocks' => json_encode(array_merge($this->blocks, [ $slug => '' ]))
+            ]);
+        }
+
+        return $block;
+    }
+
+    /**
+     * Find a block based on slug
+     *
+     * @param  string $slug
+     * @return string
+     */
+    public function findABlock($slug)
+    {
+        if (isset($this->blocks[$slug])) {
+            return $this->blocks[$slug];
+        }
+
+        return false;
+    }
 }

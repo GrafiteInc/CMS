@@ -43,7 +43,6 @@
                     <label for="Template">Template</label>
                     <select class="form-control" id="Template" name="template">
                         @foreach (PageService::getTemplatesAsOptions() as $template)
-
                             @if (! is_null(request('lang')) && request('lang') !== config('quarx.default-language', 'en') && $page->translationData(request('lang')))
                                 <option @if($template === $page->translationData(request('lang'))->template) selected  @endif value="{!! $template !!}">{!! ucfirst(str_replace('-template', '', $template)) !!}</option>
                             @else
@@ -57,6 +56,12 @@
                     {!! FormMaker::fromObject($page->translationData(request('lang')), Config::get('quarx.forms.page')) !!}
                 @else
                     {!! FormMaker::fromObject($page, Config::get('quarx.forms.page')) !!}
+                @endif
+
+                @if (! is_null(request('lang')) && request('lang') !== config('quarx.default-language', 'en'))
+                    @include('quarx::modules.pages.blocks', ['page' => $page->translationData(request('lang'))])
+                @else
+                    @include('quarx::modules.pages.blocks', ['page' => $page])
                 @endif
 
                 <div class="form-group text-right">

@@ -121,6 +121,18 @@ class PageRepository
      */
     public function update($page, $payload)
     {
+        $blockCollection = [];
+
+        foreach ($payload as $key => $value) {
+            if (stristr($key, 'block_')) {
+                $blockName = str_replace('block_', '', $key);
+                $blockCollection[$blockName] = $value;
+                unset($payload[$key]);
+            }
+        }
+
+        $payload['blocks'] = json_encode($blockCollection);
+
         if (!empty($payload['lang']) && $payload['lang'] !== config('quarx.default-language', 'en')) {
             return $this->translationRepo->createOrUpdate($page->id, 'Yab\Quarx\Models\Page', $payload['lang'], $payload);
         } else {

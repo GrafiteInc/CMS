@@ -143,6 +143,8 @@ class PageRepository
             }
         }
 
+        $blockCollection = $this->parseTemplate($payload['template'], $blockCollection);
+
         $payload['blocks'] = json_encode($blockCollection);
 
         if (!empty($payload['lang']) && $payload['lang'] !== config('quarx.default-language', 'en')) {
@@ -156,5 +158,22 @@ class PageRepository
 
             return $page->update($payload);
         }
+    }
+
+    public function parseTemplate($template, $currentBlocks)
+    {
+        $content = file_get_contents(base_path('resources/themes/'.config('quarx.frontend-theme').'/pages/'.$template.'.blade.php'));
+
+        preg_match_all('/->block\((.*)\)/', $content, $matches);
+
+        foreach ($matches[1] as $match) {
+            $match = str_replace('"', "", $match);
+            $match = str_replace("'", "", $match);
+            if (!isset($currentBlocks[$match])) {
+                $currentBlocks[$match] = '';
+            }
+        }
+
+        return $currentBlocks;
     }
 }

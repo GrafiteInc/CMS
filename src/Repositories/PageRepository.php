@@ -66,13 +66,25 @@ class PageRepository
      *
      * @return Pages
      */
-    public function store($input)
+    public function store($payload)
     {
-        $input['url'] = Quarx::convertToURL($input['url']);
-        $input['is_published'] = (isset($input['is_published'])) ? (bool) $input['is_published'] : 0;
-        $input['published_at'] = (isset($input['published_at']) && !empty($input['published_at'])) ? $input['published_at'] : Carbon::now()->format('Y-m-d h:i:s');
+        $blockCollection = [];
 
-        return Page::create($input);
+        foreach ($payload as $key => $value) {
+            if (stristr($key, 'block_')) {
+                $blockName = str_replace('block_', '', $key);
+                $blockCollection[$blockName] = $value;
+                unset($payload[$key]);
+            }
+        }
+
+        $payload['blocks'] = json_encode($blockCollection);
+
+        $payload['url'] = Quarx::convertToURL($payload['url']);
+        $payload['is_published'] = (isset($payload['is_published'])) ? (bool) $payload['is_published'] : 0;
+        $payload['published_at'] = (isset($payload['published_at']) && !empty($payload['published_at'])) ? $payload['published_at'] : Carbon::now()->format('Y-m-d h:i:s');
+
+        return Page::create($payload);
     }
 
     /**

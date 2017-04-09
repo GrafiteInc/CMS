@@ -45,17 +45,19 @@
             <hr>
         </div>
         <div class="blocks">
-            @foreach ($page->blocks as $slug => $block)
-                <div id="block_container_{{ $slug }}" class="col-md-12">
-                    <div class="form-group">
-                        <h4>
-                            {{ ucfirst($slug) }}
-                            <button type="button" class="btn btn-xs btn-danger delete-block-btn pull-right" data-slug="block_container_{{ $slug }}"><span class="fa fa-trash"></span></button>
-                        </h4>
-                        <textarea id="block_{{ $slug }}" name="block_{{ $slug }}" class="form-control redactor">{{ $block }}</textarea>
+            @if (!is_null($page))
+                @foreach ($page->blocks as $slug => $block)
+                    <div id="block_container_{{ $slug }}" class="col-md-12">
+                        <div class="form-group">
+                            <h4>
+                                {{ ucfirst($slug) }}
+                                <button type="button" class="btn btn-xs btn-danger delete-block-btn pull-right" data-slug="block_container_{{ $slug }}"><span class="fa fa-trash"></span></button>
+                            </h4>
+                            <textarea id="block_{{ $slug }}" name="block_{{ $slug }}" class="form-control redactor">{{ $block }}</textarea>
+                        </div>
                     </div>
-                </div>
-            @endforeach
+                @endforeach
+            @endif
         </div>
     </div>
 </div>

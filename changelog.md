@@ -3,6 +3,14 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 ----
 
+## [v2.3.11] - 2017-04-09
+
+### Added
+- New block templating for pages
+
+### Fixed
+- Some minor doc issues
+
 ## [v2.3.10] - 2017-03-24
 
 ### Fixed

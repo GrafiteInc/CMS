@@ -92,6 +92,12 @@ Into:
 @import "resources/themes/default/assets/sass/_theme.scss";
 ```
 
+* Run storage link is set for images & file uploads to work
+
+```bash
+php artisan storage:link
+```
+
 3. Then migrate:
 
 ```bash

@@ -3,6 +3,12 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 ----
 
+## [v2.3.12] - 2017-04-09
+
+### Fixed
+- Issue with multilingual
+- Issue with template parsing
+
 ## [v2.3.11] - 2017-04-09
 
 ### Added

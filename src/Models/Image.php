@@ -29,6 +29,17 @@ class Image extends QuarxModel
         'location' => 'mimes:jpeg,jpg,bmp,png,gif',
     ];
 
+    protected $fillable = [
+        'location',
+        'name',
+        'original_name',
+        'storage_location',
+        'alt_tag',
+        'title_tag',
+        'is_published',
+        'tags',
+    ];
+
     /**
      * Get the images url location.
      *

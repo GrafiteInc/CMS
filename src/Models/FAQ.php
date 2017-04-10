@@ -21,4 +21,11 @@ class FAQ extends QuarxModel
     protected $appends = [
         'translations',
     ];
+
+    protected $fillable = [
+        'question',
+        'answer',
+        'is_published',
+        'published_at',
+    ];
 }

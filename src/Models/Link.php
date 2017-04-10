@@ -13,4 +13,12 @@ class Link extends QuarxModel
     public static $rules = [
         'name' => 'required',
     ];
+
+    protected $fillable = [
+        'name',
+        'external',
+        'page_id',
+        'menu_id',
+        'external_url',
+    ];
 }

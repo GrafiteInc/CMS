@@ -24,6 +24,17 @@ class Page extends QuarxModel
         'translations',
     ];
 
+    protected $fillable = [
+        'title',
+        'url',
+        'entry',
+        'seo_description',
+        'seo_keywords',
+        'is_published',
+        'template',
+        'published_at',
+    ];
+
     public function getEntryAttribute($value)
     {
         return new Normalizer($value);

@@ -36,73 +36,69 @@ class Setup extends Command
      */
     public function fire()
     {
-        $cssReady = $this->confirm('Please confirm that you have a database set and configured in your .env file.');
+        Artisan::call('vendor:publish', [
+            '--provider' => 'Yab\Quarx\QuarxProvider',
+            '--force' => true,
+        ]);
 
-        if ($cssReady) {
-            Artisan::call('vendor:publish', [
-                '--provider' => 'Yab\Quarx\QuarxProvider',
-                '--force' => true,
-            ]);
+        Artisan::call('vendor:publish', [
+            '--provider' => 'Yab\Laracogs\LaracogsProvider',
+            '--force' => true,
+        ]);
 
-            Artisan::call('vendor:publish', [
-                '--provider' => 'Yab\Laracogs\LaracogsProvider',
-                '--force' => true,
-            ]);
+        $fileSystem = new Filesystem();
 
-            $fileSystem = new Filesystem();
+        $files = $fileSystem->allFiles(getcwd().'/vendor/yab/laracogs/src/Packages/Starter');
 
-            $files = $fileSystem->allFiles(getcwd().'/vendor/yab/laracogs/src/Packages/Starter');
+        $this->line('Copying routes...');
+        $this->copyPreparedFiles(getcwd().'/vendor/yab/laracogs/src/Packages/Starter/routes', base_path('routes'));
 
-            $this->line('Copying routes...');
-            $this->copyPreparedFiles(getcwd().'/vendor/yab/laracogs/src/Packages/Starter/routes', base_path('routes'));
+        $this->line('Copying config...');
+        $this->copyPreparedFiles(getcwd().'/vendor/yab/laracogs/src/Packages/Starter/config', base_path('config'));
 
-            $this->line('Copying config...');
-            $this->copyPreparedFiles(getcwd().'/vendor/yab/laracogs/src/Packages/Starter/config', base_path('config'));
+        $this->line('Copying app/Http...');
+        $this->copyPreparedFiles(getcwd().'/vendor/yab/laracogs/src/Packages/Starter/app/Http', app_path('Http'));
 
-            $this->line('Copying app/Http...');
-            $this->copyPreparedFiles(getcwd().'/vendor/yab/laracogs/src/Packages/Starter/app/Http', app_path('Http'));
+        $this->line('Copying app/Events...');
+        $this->copyPreparedFiles(getcwd().'/vendor/yab/laracogs/src/Packages/Starter/app/Events', app_path('Events'));
 
-            $this->line('Copying app/Events...');
-            $this->copyPreparedFiles(getcwd().'/vendor/yab/laracogs/src/Packages/Starter/app/Events', app_path('Events'));
+        $this->line('Copying app/Listeners...');
+        $this->copyPreparedFiles(getcwd().'/vendor/yab/laracogs/src/Packages/Starter/app/Listeners', app_path('Listeners'));
 
-            $this->line('Copying app/Listeners...');
-            $this->copyPreparedFiles(getcwd().'/vendor/yab/laracogs/src/Packages/Starter/app/Listeners', app_path('Listeners'));
+        $this->line('Copying app/Notifications...');
+        $this->copyPreparedFiles(getcwd().'/vendor/yab/laracogs/src/Packages/Starter/app/Notifications', app_path('Notifications'));
 
-            $this->line('Copying app/Notifications...');
-            $this->copyPreparedFiles(getcwd().'/vendor/yab/laracogs/src/Packages/Starter/app/Notifications', app_path('Notifications'));
+        $this->line('Copying app/Models...');
+        $this->copyPreparedFiles(getcwd().'/vendor/yab/laracogs/src/Packages/Starter/app/Models', app_path('Models'));
 
-            $this->line('Copying app/Models...');
-            $this->copyPreparedFiles(getcwd().'/vendor/yab/laracogs/src/Packages/Starter/app/Models', app_path('Models'));
+        $this->line('Copying app/Services...');
+        $this->copyPreparedFiles(getcwd().'/vendor/yab/laracogs/src/Packages/Starter/app/Services', app_path('Services'));
 
-            $this->line('Copying app/Services...');
-            $this->copyPreparedFiles(getcwd().'/vendor/yab/laracogs/src/Packages/Starter/app/Services', app_path('Services'));
+        $this->line('Copying database...');
+        $this->copyPreparedFiles(getcwd().'/vendor/yab/laracogs/src/Packages/Starter/database', base_path('database'));
 
-            $this->line('Copying database...');
-            $this->copyPreparedFiles(getcwd().'/vendor/yab/laracogs/src/Packages/Starter/database', base_path('database'));
+        $this->line('Copying resources/views...');
+        $this->copyPreparedFiles(getcwd().'/vendor/yab/laracogs/src/Packages/Starter/resources/views', base_path('resources/views'));
 
-            $this->line('Copying resources/views...');
-            $this->copyPreparedFiles(getcwd().'/vendor/yab/laracogs/src/Packages/Starter/resources/views', base_path('resources/views'));
+        $this->line('Copying tests...');
+        $this->copyPreparedFiles(getcwd().'/vendor/yab/laracogs/src/Packages/Starter/tests', base_path('tests'));
 
-            $this->line('Copying tests...');
-            $this->copyPreparedFiles(getcwd().'/vendor/yab/laracogs/src/Packages/Starter/tests', base_path('tests'));
+        $this->line('Appending database/factory...');
+        $this->createFactory();
 
-            $this->line('Appending database/factory...');
-            $this->createFactory();
+        $this->fileManager();
 
-            $this->fileManager();
+        $this->info('Publishing theme');
+        Artisan::call('theme:publish', [
+            'name' => 'default',
+            '--forced' => true,
+        ]);
 
-            $this->info('Publishing theme');
-            Artisan::call('theme:publish', [
-                'name' => 'default',
-                '--forced' => true,
-            ]);
+        $dbReady = $this->confirm('Please confirm that you have a database set and configured in your .env file.');
 
+        if ($dbReady) {
             $this->info('Migrating database');
-
-            Artisan::call('migrate:reset', [
-                '--force' => true,
-            ]);
-            Artisan::call('migrate', [
+            Artisan::call('migrate:refresh', [
                 '--force' => true,
             ]);
 
@@ -131,18 +127,15 @@ class Setup extends Command
             $service->create($user, 'admin', 'admin', false);
 
             $this->info('Finished setting up your site with Quarx!');
-            $this->info('Please run:');
-            $this->comment('npm install');
-            $this->comment('npm run dev');
             $this->line('You can now login with the following username and password:');
             $this->comment('admin@admin.com');
             $this->comment('admin');
-        } else {
-            $this->info('Please run:');
-            $this->comment('npm install');
-            $this->info('and:');
-            $this->comment('npm run dev');
         }
+
+        $this->info('Please run:');
+        $this->comment('npm install');
+        $this->info('and:');
+        $this->comment('npm run dev');
     }
 
     /**

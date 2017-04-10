@@ -3,6 +3,11 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 ----
 
+## [v2.3.14] - 2017-04-10
+
+### Changed
+- Improved the structure of the setup command
+
 ## [v2.3.13] - 2017-04-09
 
 ### Fixed

@@ -12,6 +12,13 @@ class Translation extends QuarxModel
 
     public static $rules = [];
 
+    protected $fillable = [
+        'entity_id',
+        'entity_type',
+        'entity_data',
+        'language',
+    ];
+
     public function getDataAttribute()
     {
         $object = app($this->entity_type);

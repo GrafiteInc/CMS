@@ -22,4 +22,10 @@ class Widget extends QuarxModel
     protected $appends = [
         'translations',
     ];
+
+    protected $fillable = [
+        'name',
+        'slug',
+        'content',
+    ];
 }

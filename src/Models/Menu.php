@@ -14,4 +14,9 @@ class Menu extends QuarxModel
         'name' => 'required',
         'slug' => 'required',
     ];
+
+    protected $fillable = [
+        'name',
+        'slug',
+    ];
 }

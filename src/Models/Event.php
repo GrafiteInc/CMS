@@ -23,6 +23,18 @@ class Event extends QuarxModel
         'translations',
     ];
 
+    protected $fillable = [
+        'start_date',
+        'end_date',
+        'title',
+        'details',
+        'seo_description',
+        'seo_keywords',
+        'is_published',
+        'template',
+        'published_at',
+    ];
+
     public function getDetailsAttribute($value)
     {
         return new Normalizer($value);

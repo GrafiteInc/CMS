@@ -60,12 +60,13 @@ class PagesTest extends TestCase
 
     public function testUpdate()
     {
-        $page = ['id' => 6, 'title' => 'dumber', 'url' => 'dumber', 'entry' => 'okie dokie'];
+        $page = ['id' => 2, 'title' => 'dumber', 'url' => 'dumber', 'entry' => 'okie dokie'];
         $response = $this->call('POST', 'quarx/pages', $page);
 
-        $response = $this->call('PATCH', 'quarx/pages/6', [
+        $response = $this->call('PATCH', 'quarx/pages/2', [
             'title' => 'smarter',
             'url' => 'smart',
+            'blocks' => null,
         ]);
 
         $this->assertEquals(302, $response->getStatusCode());
@@ -74,13 +75,14 @@ class PagesTest extends TestCase
 
     public function testUpdateTranslation()
     {
-        $page = ['id' => 6, 'title' => 'dumber', 'url' => 'dumber', 'entry' => 'okie dokie'];
+        $page = ['id' => 2, 'title' => 'dumber', 'url' => 'dumber', 'entry' => 'okie dokie'];
         $response = $this->call('POST', 'quarx/pages', $page);
 
-        $response = $this->call('PATCH', 'quarx/pages/6', [
+        $response = $this->call('PATCH', 'quarx/pages/2', [
             'title' => 'smarter',
             'url' => 'smart',
             'lang' => 'fr',
+            'blocks' => null,
         ]);
 
         $this->assertDatabaseHas('translations', [

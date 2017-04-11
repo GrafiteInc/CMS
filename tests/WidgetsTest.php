@@ -52,10 +52,10 @@ class WidgetsTest extends TestCase
 
     public function testUpdate()
     {
-        $widget = ['id' => 8, 'name' => 'dumber', 'slug' => 'dumber'];
+        $widget = ['id' => 2, 'name' => 'dumber', 'slug' => 'dumber'];
         $response = $this->call('POST', 'quarx/widgets', $widget);
 
-        $response = $this->call('PATCH', 'quarx/widgets/8', [
+        $response = $this->call('PATCH', 'quarx/widgets/2', [
             'name' => 'whacky',
             'slug' => 'whacky',
         ]);
@@ -66,10 +66,10 @@ class WidgetsTest extends TestCase
 
     public function testUpdateTranslation()
     {
-        $widget = ['id' => 8, 'name' => 'dumber', 'slug' => 'dumber'];
+        $widget = ['id' => 2, 'name' => 'dumber', 'slug' => 'dumber'];
         $response = $this->call('POST', 'quarx/widgets', $widget);
 
-        $response = $this->call('PATCH', 'quarx/widgets/8', [
+        $response = $this->call('PATCH', 'quarx/widgets/2', [
             'name' => 'whacky',
             'slug' => 'whacky',
             'lang' => 'fr',

@@ -33,6 +33,7 @@ class Page extends QuarxModel
         'is_published',
         'template',
         'published_at',
+        'blocks',
     ];
 
     public function getEntryAttribute($value)

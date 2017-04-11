@@ -65,7 +65,7 @@ Quarx will install everything it needs, run its migrations and give you a login 
 php artisan quarx:setup
 ```
 
-Now your done setup. Login, and start building your amazing new website!
+Setup is now complete. Login, and start building your amazing new website!
 
 ## Complex Setup
 

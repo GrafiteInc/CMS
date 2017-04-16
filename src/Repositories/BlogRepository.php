@@ -75,8 +75,8 @@ class BlogRepository
     public function allTags()
     {
         $tags = [];
-        if (config('app.locale') !== config('quarx.default-language', 'en')) {
-            $blogs = $this->translationRepo->getEntitiesByTypeAndLang(config('app.locale'), 'Yab\Quarx\Models\Blog');
+        if (app()->getLocale() !== config('quarx.default-language', 'en')) {
+            $blogs = $this->translationRepo->getEntitiesByTypeAndLang(app()->getLocale(), 'Yab\Quarx\Models\Blog');
         } else {
             $blogs = Blog::orderBy('published_at', 'desc')->get();
         }

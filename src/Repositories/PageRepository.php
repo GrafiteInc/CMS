@@ -112,11 +112,15 @@ class PageRepository
 
         $page = Page::where('url', $url)->where('is_published', 1)->where('published_at', '<=', Carbon::now()->format('Y-m-d h:i:s'))->first();
 
+        if ($page && app()->getLocale() !== config('quarx.default-language')) {
+            $page = $this->translationRepo->findByEntityId($page->id, 'Yab\Quarx\Models\Page');
+        }
+
         if (!$page) {
             $page = $this->translationRepo->findByUrl($url, 'Yab\Quarx\Models\Page');
         }
 
-        if ($url === 'home' && config('app.locale') !== config('quarx.default-language')) {
+        if ($url === 'home' && app()->getLocale() !== config('quarx.default-language')) {
             $page = $this->translationRepo->findByUrl($url, 'Yab\Quarx\Models\Page');
         }
 

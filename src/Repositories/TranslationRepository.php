@@ -39,6 +39,17 @@ class TranslationRepository
         return null;
     }
 
+    public function findByEntityId($entityId, $entityType)
+    {
+        $item = $this->model->where('entity_type', $entityType)->where('entity_id', $entityId)->first();
+
+        if ($item && ($item->data->is_published == 1 || $item->data->is_published == 'on') && $item->data->published_at <= Carbon::now()->format('Y-m-d h:i:s')) {
+            return $item->data;
+        }
+
+        return null;
+    }
+
     public function getEntitiesByTypeAndLang($lang, $type)
     {
         $entities = collect();

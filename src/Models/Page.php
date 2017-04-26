@@ -36,6 +36,16 @@ class Page extends QuarxModel
         'blocks',
     ];
 
+    public function __construct(array $attributes = [])
+    {
+        parent::__construct($attributes);
+        $keys = array_keys(request()->except('_method', '_token'));
+
+        if (count($keys) > count($this->fillable)) {
+            $this->fillable($keys);
+        }
+    }
+
     public function getEntryAttribute($value)
     {
         return new Normalizer($value);

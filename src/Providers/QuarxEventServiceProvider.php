@@ -22,13 +22,13 @@ class QuarxEventServiceProvider extends ServiceProvider
             'Yab\Quarx\Models\Event@afterSaved',
         ],
         'eloquent.saved: Yab\Quarx\Models\FAQ' => [
-            'Yab\Quarx\Models\Event@afterSaved',
+            'Yab\Quarx\Models\FAQ@afterSaved',
         ],
         'eloquent.saved: Yab\Quarx\Models\Translation' => [
-            'Yab\Quarx\Models\Event@afterSaved',
+            'Yab\Quarx\Models\Translation@afterSaved',
         ],
         'eloquent.saved: Yab\Quarx\Models\Widget' => [
-            'Yab\Quarx\Models\Event@afterSaved',
+            'Yab\Quarx\Models\Widget@afterSaved',
         ],
 
         'eloquent.created: Yab\Quarx\Models\Blog' => [
@@ -44,7 +44,7 @@ class QuarxEventServiceProvider extends ServiceProvider
             'Yab\Quarx\Models\Event@afterCreate',
         ],
         'eloquent.created: Yab\Quarx\Models\Widget' => [
-            'Yab\Quarx\Models\Event@afterCreate',
+            'Yab\Quarx\Models\Widget@afterCreate',
         ],
 
         'eloquent.deleting: Yab\Quarx\Models\Blog' => [
@@ -57,13 +57,13 @@ class QuarxEventServiceProvider extends ServiceProvider
             'Yab\Quarx\Models\Event@beingDeleted',
         ],
         'eloquent.deleting: Yab\Quarx\Models\FAQ' => [
-            'Yab\Quarx\Models\Event@beingDeleted',
+            'Yab\Quarx\Models\FAQ@beingDeleted',
         ],
         'eloquent.deleting: Yab\Quarx\Models\Translation' => [
-            'Yab\Quarx\Models\Event@beingDeleted',
+            'Yab\Quarx\Models\Translation@beingDeleted',
         ],
         'eloquent.deleting: Yab\Quarx\Models\Widget' => [
-            'Yab\Quarx\Models\Event@beingDeleted',
+            'Yab\Quarx\Models\Widget@beingDeleted',
         ],
     ];
 

@@ -3,6 +3,14 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 ----
 
+## [v2.3.16] - 2017-04-26
+
+### Added
+- Modules now can be ignored by the menu directive via config or expression
+
+### Changed
+- Allows fillables to be modified for default modules
+
 ## [v2.3.15] - 2017-04-11
 
 ### Changed

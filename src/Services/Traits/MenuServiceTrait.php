@@ -47,7 +47,7 @@ trait MenuServiceTrait
         $links = LinkRepository::getLinksByMenuID($menu->id);
         $response = '';
         $processedLinks = [];
-        foreach ($links as $link) {
+        foreach ($links as $key => $link) {
             if ($link->external) {
                 $response .= "<a href=\"$link->external_url\">$link->name</a>";
                 $processedLinks[] = "<a href=\"$link->external_url\">$link->name</a>";
@@ -63,6 +63,8 @@ trait MenuServiceTrait
                             $processedLinks[] = '<a href="'.URL::to('page/'.$page->translation(config('app.locale'))->data->url)."\">$link->name</a>";
                         }
                     }
+                } else {
+                    unset($links[$key]);
                 }
             }
         }

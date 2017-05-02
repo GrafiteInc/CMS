@@ -79,6 +79,10 @@ class QuarxProvider extends ServiceProvider
             return "<?php echo Quarx::menu($expression); ?>";
         });
 
+        Blade::directive('block', function ($expression) {
+            return "<?php echo \$page->block($expression); ?>";
+        });
+
         Blade::directive('languages', function ($expression) {
             if (count(config('quarx.languages')) > 1) {
                 $languageLinks = [];

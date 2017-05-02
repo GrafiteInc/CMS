@@ -168,14 +168,25 @@ class PageRepository
         }
     }
 
-    public function parseTemplate($template, $currentBlocks)
+    /**
+     * Parse the template for blocks.
+     *
+     * @param  array $payload
+     * @param  array $currentBlocks
+     *
+     * @return array
+     */
+    public function parseTemplate($payload, $currentBlocks)
     {
         if (isset($payload['template'])) {
-            $content = file_get_contents(base_path('resources/themes/'.config('quarx.frontend-theme').'/pages/'.$template.'.blade.php'));
+            $content = file_get_contents(base_path('resources/themes/'.config('quarx.frontend-theme').'/pages/'.$payload['template'].'.blade.php'));
 
-            preg_match_all('/->block\((.*)\)/', $content, $matches);
+            preg_match_all('/->block\((.*)\)/', $content, $pageMethodMatches);
+            preg_match_all('/\@block\((.*)\)/', $content, $bladeMatches);
 
-            foreach ($matches[1] as $match) {
+            $matches = array_unique(array_merge($pageMethodMatches[1], $bladeMatches[1]));
+
+            foreach ($matches as $match) {
                 $match = str_replace('"', "", $match);
                 $match = str_replace("'", "", $match);
                 if (!isset($currentBlocks[$match])) {

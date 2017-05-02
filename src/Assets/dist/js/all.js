@@ -16273,12 +16273,16 @@ RedactorPlugins.filemanager = function()
                 {
                     $('#filemanager-container').html('');
 
-                    $.each((data.data), $.proxy(function(key, val)
-                    {
-                        var file = $('<div class="list-row raw-left raw100"><div class="raw100 raw-left"><p><span class="fa fa-download"></span> <a class="file-link" href="#" data-url="/public-download/'+val.file_identifier +'">' + val.file_name + '</a></p></div>');
-                        $('#filemanager-container').append(file);
-                        $(file).click($.proxy(this.filemanager.insert, this));
-                    }, this));
+                    if (data.data.length > 0) {
+                        $.each((data.data), $.proxy(function(key, val)
+                        {
+                            var file = $('<div class="list-row raw-left raw100"><div class="raw100 raw-left"><p><span class="fa fa-download"></span> <a class="file-link" href="#" data-url="/public-download/'+val.file_identifier +'">' + val.file_name + '</a></p></div>');
+                            $('#filemanager-container').append(file);
+                            $(file).click($.proxy(this.filemanager.insert, this));
+                        }, this));
+                    } else {
+                        $('#filemanager-container').append('You have not yet uploaded any files, visit the files tab to add some.');
+                    }
 
                     $("#filemanager-filter").bind("keyup", function(){
                         $("#filemanager-container").find(".file-link").each(function(){
@@ -16472,17 +16476,21 @@ RedactorPlugins.imagemanager = function()
                 success: $.proxy(function(data)
                 {
                     $('#redactor-image-manager-box').html('');
-                    $.each(data, $.proxy(function(key, val)
-                    {
-                        // title
-                        var thumbtitle = '';
-                        if (typeof val.title_tag != 'undefined') thumbtitle = val.title_tag;
+                    if (data.length > 0) {
+                        $.each(data, $.proxy(function(key, val)
+                        {
+                            // title
+                            var thumbtitle = '';
+                            if (typeof val.title_tag != 'undefined') thumbtitle = val.title_tag;
 
-                        var img = $('<div class="raw25 pull-left thumbnail-box"><div class="img" style="background-image: url(\'' + val.js_url + '\')" data-img-name="'+ val.js_url +'" src="' + val.js_url + '" rel="' + val.js_url + '" title="' + thumbtitle + '"></div></div>');
-                        $('#redactor-image-manager-box').append(img);
-                        $(img).click($.proxy(this.imagemanager.insert, this));
+                            var img = $('<div class="raw25 pull-left thumbnail-box"><div class="img" style="background-image: url(\'' + val.js_url + '\')" data-img-name="'+ val.js_url +'" src="' + val.js_url + '" rel="' + val.js_url + '" title="' + thumbtitle + '"></div></div>');
+                            $('#redactor-image-manager-box').append(img);
+                            $(img).click($.proxy(this.imagemanager.insert, this));
 
-                    }, this));
+                        }, this));
+                    } else {
+                        $('#redactor-image-manager-box').append('You have not yet uploaded any images, visit the images tab to add some.');
+                    }
 
                     $("#imagemanager-filter").bind("keyup", function(){
                         $("#redactor-image-manager-box").find("img").each(function(){
@@ -17227,6 +17235,7 @@ $('#frame').load(function () {
 $(function () {
     $('.add-block-btn').bind('click', function (e) {
         e.preventDefault();
+        $('#blockName').val('');
         $('#addBlockModal').modal('toggle');
     });
 

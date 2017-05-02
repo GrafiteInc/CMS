@@ -50,12 +50,16 @@ RedactorPlugins.filemanager = function()
                 {
                     $('#filemanager-container').html('');
 
-                    $.each((data.data), $.proxy(function(key, val)
-                    {
-                        var file = $('<div class="list-row raw-left raw100"><div class="raw100 raw-left"><p><span class="fa fa-download"></span> <a class="file-link" href="#" data-url="/public-download/'+val.file_identifier +'">' + val.file_name + '</a></p></div>');
-                        $('#filemanager-container').append(file);
-                        $(file).click($.proxy(this.filemanager.insert, this));
-                    }, this));
+                    if (data.data.length > 0) {
+                        $.each((data.data), $.proxy(function(key, val)
+                        {
+                            var file = $('<div class="list-row raw-left raw100"><div class="raw100 raw-left"><p><span class="fa fa-download"></span> <a class="file-link" href="#" data-url="/public-download/'+val.file_identifier +'">' + val.file_name + '</a></p></div>');
+                            $('#filemanager-container').append(file);
+                            $(file).click($.proxy(this.filemanager.insert, this));
+                        }, this));
+                    } else {
+                        $('#filemanager-container').append('You have not yet uploaded any files, visit the files tab to add some.');
+                    }
 
                     $("#filemanager-filter").bind("keyup", function(){
                         $("#filemanager-container").find(".file-link").each(function(){

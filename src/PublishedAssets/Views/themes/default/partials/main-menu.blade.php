@@ -1,4 +1,4 @@
-@foreach($links as $link)
+@foreach($processed_links as $link)
     @if ($link->external)
         <li><a href="{{ url($link->external_url) }}">{{ $link->name }}</a></li>
     @else

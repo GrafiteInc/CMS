@@ -2,8 +2,9 @@
 
 namespace Yab\Quarx\Models;
 
-use Illuminate\Support\Facades\Log;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Log;
+use Yab\Quarx\Models\Link;
 
 class QuarxModel extends Model
 {
@@ -63,6 +64,10 @@ class QuarxModel extends Model
             ->where('entity_data', 'LIKE', '%"entity_id":'.$id.'%')
             ->where('entity_data', 'LIKE', '%"entity_type":"'.$type.'"%')
             ->delete();
+
+        if ($type == 'Yab\Quarx\Models\Page') {
+            Link::where('page_id', $id)->delete();
+        }
     }
 
     /**

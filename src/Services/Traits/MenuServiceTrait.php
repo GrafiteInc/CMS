@@ -2,6 +2,7 @@
 
 namespace Yab\Quarx\Services\Traits;
 
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Gate;
@@ -52,7 +53,7 @@ trait MenuServiceTrait
                 $processedLinks[] = "<a href=\"$link->external_url\">$link->name</a>";
             } else {
                 $page = $pageRepo->findPagesById($link->page_id);
-                if ($page) {
+                if ($page && $page->is_published && $page->published_at <= Carbon::now()) {
                     if (config('app.locale') == config('quarx.default-language', $this->config('quarx.default-language'))) {
                         $response .= '<a href="'.URL::to('page/'.$page->url)."\">$link->name</a>";
                         $processedLinks[] = '<a href="'.URL::to('page/'.$page->url)."\">$link->name</a>";

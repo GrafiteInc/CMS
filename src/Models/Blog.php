@@ -38,12 +38,9 @@ class Blog extends QuarxModel
 
     public function __construct(array $attributes = [])
     {
-        parent::__construct($attributes);
         $keys = array_keys(request()->except('_method', '_token'));
-
-        if (count($keys) > count($this->fillable)) {
-            $this->fillable($keys);
-        }
+        $this->fillable(array_values(array_unique(array_merge($this->fillable, $keys))));
+        parent::__construct($attributes);
     }
 
     public function getEntryAttribute($value)

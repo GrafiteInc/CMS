@@ -94,6 +94,7 @@ $('#frame').load(function () {
 $(function () {
     $('.add-block-btn').bind('click', function (e) {
         e.preventDefault();
+        $('#blockName').val('');
         $('#addBlockModal').modal('toggle');
     });
 

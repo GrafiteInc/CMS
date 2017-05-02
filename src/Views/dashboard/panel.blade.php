@@ -67,6 +67,11 @@
 
     @if (Route::get('admin/users')) <li class="sidebar-header"><span>Admin</span></li> @endif
 
+    @if (Route::get('admin/dashboard'))
+        <li class="@if (Request::is('admin/dashboard') || Request::is('admin/dashboard/*')) active @endif">
+            <a href="{!! url('admin/dashboard') !!}"><span class="fa fa-fw fa-dashboard"></span> Dashboard</a>
+        </li>
+    @endif
     @if (Route::get('admin/users'))
         <li class="@if (Request::is('admin/users') || Request::is('admin/users/*')) active @endif">
             <a href="{!! url('admin/users') !!}"><span class="fa fa-fw fa-users"></span> Users</a>

@@ -93,7 +93,14 @@ trait Translatable
                     foreach ($entry as $key => $value) {
                         if (!empty($value)) {
                             $translation[$key] = json_decode(json_encode($tr->translate(strip_tags($value))));
+                        } else {
+                            $translation[$key] = $value;
                         }
+                    }
+
+                    // not the biggest fan of this but it works
+                    if (empty($translation['blocks'])) {
+                        $translation['blocks'] = "{}";
                     }
 
                     if (isset($translation['url'])) {

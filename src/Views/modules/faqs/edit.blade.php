@@ -22,8 +22,8 @@
 
     <div class="row raw-margin-bottom-24">
         <ul class="nav nav-tabs">
-            @foreach(config('quarx.languages', Quarx::config('quarx.languages')) as $short => $language)
-                <li role="presentation" @if (request('lang') == $short || is_null(request('lang')) && $short == Quarx::config('quarx.default-language'))) class="active" @endif><a href="{{ url('quarx/faqs/'.$faq->id.'/edit?lang='.$short) }}">{{ ucfirst($language) }}</a></li>
+            @foreach(config('quarx.languages', config('quarx.languages')) as $short => $language)
+                <li role="presentation" @if (request('lang') == $short || is_null(request('lang')) && $short == config('quarx.default-language'))) class="active" @endif><a href="{{ url('quarx/faqs/'.$faq->id.'/edit?lang='.$short) }}">{{ ucfirst($language) }}</a></li>
             @endforeach
         </ul>
     </div>

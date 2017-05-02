@@ -78,7 +78,11 @@ class PageRepository
             }
         }
 
-        $payload['blocks'] = json_encode($blockCollection);
+        if (empty($blockCollection)) {
+            $payload['blocks'] = "{}";
+        } else {
+            $payload['blocks'] = json_encode($blockCollection);
+        }
 
         $payload['url'] = Quarx::convertToURL($payload['url']);
         $payload['is_published'] = (isset($payload['is_published'])) ? (bool) $payload['is_published'] : 0;

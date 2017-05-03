@@ -3,6 +3,19 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 ----
 
+## [v2.3.17] - 2017-05-03
+
+### Added
+- Dashboard view for admin
+- Admin dashboard link
+
+### Fixed
+- Better feedback in image/file insert
+- Menu and page block fixes
+- Fixes for windows directories
+- Language and block related fixes
+- Fillable fixes
+
 ## [v2.3.16] - 2017-04-26
 
 ### Added

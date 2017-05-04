@@ -56,6 +56,8 @@ Yab\Quarx\QuarxProvider::class,
 php artisan vendor:publish --provider="Yab\Quarx\QuarxProvider"
 ```
 
+> Set your app's timezone config to align the Quarx datepicker UI for your setup
+
 ## Simple Setup
 
 If you're looking to do a simple website with a powerful CMS, and the only people logging on to the app are the CMS managers. Then you can run the setup command.

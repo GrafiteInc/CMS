@@ -3,6 +3,11 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 ----
 
+## [v2.3.18] - 2017-05-04
+
+### Fixed
+- Resolved issue with inaccurate published_at regarding timezones
+
 ## [v2.3.17] - 2017-05-03
 
 ### Added

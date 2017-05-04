@@ -42,14 +42,20 @@ $(function(){
         $('#Url').val(_urlPrepare($(this).val()));
     });
 
-    $('.timepicker').datetimepicker({ format: 'LT' });
+    $('.timepicker').datetimepicker({
+        format: 'LT',
+        timeZone: _appTimeZone
+    });
+
     $('.datepicker').datetimepicker({
-        format: 'YYYY-MM-DD'
+        format: 'YYYY-MM-DD',
+        timeZone: _appTimeZone
     });
 
     $('.datetimepicker').datetimepicker({
         showTodayButton: true,
-        format: 'YYYY-MM-DD h:m:s'
+        format: 'YYYY-MM-DD HH:mm',
+        timeZone: _appTimeZone
     });
 
     $('.tags').tagsinput();

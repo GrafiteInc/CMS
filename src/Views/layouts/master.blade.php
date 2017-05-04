@@ -36,6 +36,7 @@
             var _token = '{!! csrf_token() !!}';
             var _url = '{!! url("/") !!}';
             var _pixabayKey = '{!! config('quarx.pixabay', '') !!}';
+            var _appTimeZone = '{!! config('app.timezone', 'UTC') !!}';
 
         </script>
     </head>

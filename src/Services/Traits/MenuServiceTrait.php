@@ -53,7 +53,7 @@ trait MenuServiceTrait
                 $processedLinks[] = "<a href=\"$link->external_url\">$link->name</a>";
             } else {
                 $page = $pageRepo->findPagesById($link->page_id);
-                if ($page && $page->is_published && $page->published_at <= Carbon::now()) {
+                if ($page && $page->is_published && $page->published_at <= Carbon::now(config('app.timezone'))) {
                     if (config('app.locale') == config('quarx.default-language', $this->config('quarx.default-language'))) {
                         $response .= '<a href="'.URL::to('page/'.$page->url)."\">$link->name</a>";
                         $processedLinks[] = '<a href="'.URL::to('page/'.$page->url)."\">$link->name</a>";

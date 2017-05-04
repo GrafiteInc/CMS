@@ -24,6 +24,7 @@ elixir(function(mix) {
         'bootstrap-tagsinput.min.js',
         '../packages/dropzone/dropzone.js',
         '../packages/datepicker/moment.js',
+        '../packages/datepicker/moment-timezone.js',
         '../packages/datepicker/bootstrap-datetimepicker.min.js',
         '../packages/redactor/redactor.js',
         '../packages/redactor/filemanager.js',

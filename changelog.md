@@ -3,6 +3,11 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 ----
 
+## [v2.3.19] - 2017-05-07
+
+### Fixed
+- Fixes an issue with the 24 hour clock in Repositories
+
 ## [v2.3.18] - 2017-05-04
 
 ### Fixed

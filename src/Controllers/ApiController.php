@@ -30,7 +30,7 @@ class ApiController extends QuarxController
 
         if (Schema::hasColumn(str_plural($this->modelName), 'published_at')) {
             $query = $query->where('is_published', 1)
-                ->where('published_at', '<=', Carbon::now(config('app.timezone'))->format('Y-m-d h:i:s'));
+                ->where('published_at', '<=', Carbon::now(config('app.timezone'))->format('Y-m-d H:i:s'));
         }
 
         return $query

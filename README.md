@@ -146,6 +146,19 @@ Gate::define('quarx', function ($user) {
 });
 ```
 
+### Fun Route Trick
+
+If you're looking for clean URL pages without having to have the URL preceed with `page` or `p` then you can
+add this to your routes.
+
+> Make sure you put it at the bottom of the routes or it may conflict with others.
+
+```php
+Route::get('{url}', function ($url) {
+    return app(App\Http\Controllers\Quarx\PagesController::class)->show($url);
+})->where('url', '([A-z\d-\/_.]+)?');
+```
+
 ### Roles & Permissions (simple setup only)
 
 With the roles middleware you can specify which roles are applicable separating them with pipes: `['middleware' => ['roles:admin|moderator|member']]`.

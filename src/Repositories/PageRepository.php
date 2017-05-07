@@ -42,7 +42,7 @@ class PageRepository
 
     public function published()
     {
-        return Page::where('is_published', 1)->where('published_at', '<=', Carbon::now(config('app.timezone'))->format('Y-m-d h:i:s'))->orderBy('created_at', 'desc')->paginate(Config::get('quarx.pagination', 25));
+        return Page::where('is_published', 1)->where('published_at', '<=', Carbon::now(config('app.timezone'))->format('Y-m-d H:i:s'))->orderBy('created_at', 'desc')->paginate(Config::get('quarx.pagination', 25));
     }
 
     public function search($input)
@@ -86,7 +86,7 @@ class PageRepository
 
         $payload['url'] = Quarx::convertToURL($payload['url']);
         $payload['is_published'] = (isset($payload['is_published'])) ? (bool) $payload['is_published'] : 0;
-        $payload['published_at'] = (isset($payload['published_at']) && !empty($payload['published_at'])) ? $payload['published_at'] : Carbon::now(config('app.timezone'))->format('Y-m-d h:i:s');
+        $payload['published_at'] = (isset($payload['published_at']) && !empty($payload['published_at'])) ? $payload['published_at'] : Carbon::now(config('app.timezone'))->format('Y-m-d H:i:s');
 
         return Page::create($payload);
     }
@@ -114,7 +114,7 @@ class PageRepository
     {
         $page = null;
 
-        $page = Page::where('url', $url)->where('is_published', 1)->where('published_at', '<=', Carbon::now(config('app.timezone'))->format('Y-m-d h:i:s'))->first();
+        $page = Page::where('url', $url)->where('is_published', 1)->where('published_at', '<=', Carbon::now(config('app.timezone'))->format('Y-m-d H:i:s'))->first();
 
         if ($page && app()->getLocale() !== config('quarx.default-language')) {
             $page = $this->translationRepo->findByEntityId($page->id, 'Yab\Quarx\Models\Page');
@@ -160,7 +160,7 @@ class PageRepository
         } else {
             $payload['url'] = Quarx::convertToURL($payload['url']);
             $payload['is_published'] = (isset($payload['is_published'])) ? (bool) $payload['is_published'] : 0;
-            $payload['published_at'] = (isset($payload['published_at']) && !empty($payload['published_at'])) ? $payload['published_at'] : Carbon::now(config('app.timezone'))->format('Y-m-d h:i:s');
+            $payload['published_at'] = (isset($payload['published_at']) && !empty($payload['published_at'])) ? $payload['published_at'] : Carbon::now(config('app.timezone'))->format('Y-m-d H:i:s');
 
             unset($payload['lang']);
 

@@ -3,6 +3,11 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 ----
 
+## [v2.3.20] - 2017-05-15
+
+### Changed
+- Switched to admin@example.org
+
 ## [v2.3.19] - 2017-05-07
 
 ### Fixed

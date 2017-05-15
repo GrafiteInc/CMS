@@ -120,7 +120,7 @@ class Setup extends Command
             if (!User::where('name', 'admin')->first()) {
                 $user = User::create([
                     'name' => 'Admin',
-                    'email' => 'admin@admin.com',
+                    'email' => 'admin@example.org',
                     'password' => bcrypt('admin'),
                 ]);
             }
@@ -128,7 +128,7 @@ class Setup extends Command
 
             $this->info('Finished setting up your site with Quarx!');
             $this->line('You can now login with the following username and password:');
-            $this->comment('admin@admin.com');
+            $this->comment('admin@example.org');
             $this->comment('admin');
         }
 

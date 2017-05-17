@@ -11,7 +11,7 @@
     <div class="row">
         <div class="col-md-4 col-md-offset-4">
             <div class="thumbnail ">
-                <img src="{!! FileService::filePreview($images->location) !!}" />
+                <img src="{!! $images->url !!}" />
             </div>
         </div>
         <div class="col-md-4">

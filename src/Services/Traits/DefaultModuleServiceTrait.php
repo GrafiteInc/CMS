@@ -61,7 +61,7 @@ trait DefaultModuleServiceTrait
         $img = '';
 
         if ($image = app('Yab\Quarx\Models\Image')->find($id)) {
-            $img = FileService::filePreview($image->location);
+            $img = $image->url;
         }
 
         return '<img class="'.$class.'" src="'.$img.'">';
@@ -79,7 +79,7 @@ trait DefaultModuleServiceTrait
         $img = '';
 
         if ($image = app('Yab\Quarx\Models\Image')->find($id)) {
-            $img = FileService::filePreview($image->location);
+            $img = $image->url;
         }
 
         return $img;

@@ -3,6 +3,11 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 ----
 
+## [v2.3.21] - 2017-05-18
+
+### Fixed
+- Minor issues with images and S3
+
 ## [v2.3.20] - 2017-05-15
 
 ### Changed

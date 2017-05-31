@@ -11,14 +11,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 - Updates to the generated tests
 
-## [v2.3.22] - 2017-05-31
-
-### Changed
-- Refactored the asset system
-
-### Fixed
-- Updates to the generated tests
-
 ## [v2.3.21] - 2017-05-18
 
 ### Fixed

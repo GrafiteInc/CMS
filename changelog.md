@@ -3,6 +3,22 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 ----
 
+## [v2.3.22] - 2017-05-31
+
+### Changed
+- Refactored the asset system
+
+### Fixed
+- Updates to the generated tests
+
+## [v2.3.22] - 2017-05-31
+
+### Changed
+- Refactored the asset system
+
+### Fixed
+- Updates to the generated tests
+
 ## [v2.3.21] - 2017-05-18
 
 ### Fixed

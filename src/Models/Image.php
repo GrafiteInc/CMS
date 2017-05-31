@@ -98,25 +98,36 @@ class Image extends QuarxModel
             if ($this->isLocalFile()) {
                 $imagePath = storage_path('app/'.$this->location);
             } else {
-                $imagePath = Storage::disk(config('quarx.storage-location', 'local'))->url($this->location);
+                if (Storage::disk(Config::get('quarx.storage-location', 'local'))->exists($this->location)) {
+                    $imagePath = Storage::disk(Config::get('quarx.storage-location', 'local'))->url($this->location);
+                } else {
+                    $imagePath = Storage::disk('s3')->url($this->location);
+                }
             }
 
-            $image = InterventionImage::make($imagePath)->resize(800, null);
+            $image = InterventionImage::make($imagePath)->resize(config('quarx.preview-image-size', 800), null, function ($constraint) {
+                $constraint->aspectRatio();
+            });
 
             return (string) $image->encode('data-url');
         });
     }
 
+    /**
+     * Simple caching tool
+     *
+     * @param  string $attribute
+     * @param  Clousre $closure
+     *
+     * @return mixed
+     */
     public function remember($attribute, $closure)
     {
         $key = $attribute.'_'.$this->location;
 
-        if (!Cache::has($key)) {
-            $expiresAt = Carbon::now()->addMinutes(15);
-            Cache::put($key, $closure(), $expiresAt);
-        }
-
-        return Cache::get($key);
+        return Cache::remember($key, 15, function () use ($closure) {
+            return $closure();
+        });
     }
 
     /**
@@ -127,9 +138,7 @@ class Image extends QuarxModel
     private function isLocalFile()
     {
         try {
-            $headers = @get_headers(url(str_replace('public/', 'storage/', $this->location)));
-
-            if (strpos($headers[0], '200')) {
+            if (file_exists(storage_path('app/'.$this->location))) {
                 return true;
             }
         } catch (Exception $e) {

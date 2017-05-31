@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
+use Intervention\Image\Facades\Image;
+use Intervention\Image\ImageServiceProvider;
 use Quarx;
 use Spatie\LaravelAnalytics\LaravelAnalyticsFacade;
 use Spatie\LaravelAnalytics\LaravelAnalyticsServiceProvider;
@@ -141,12 +143,14 @@ class QuarxProvider extends ServiceProvider
         $this->app->register(MinifyServiceProvider::class);
         $this->app->register(MarkdownServiceProvider::class);
         $this->app->register(LaravelAnalyticsServiceProvider::class);
+        $this->app->register(ImageServiceProvider::class);
 
         $loader = AliasLoader::getInstance();
 
         $loader->alias('Minify', MinifyFacade::class);
         $loader->alias('Markdown', Markdown::class);
         $loader->alias('LaravelAnalytics', LaravelAnalyticsFacade::class);
+        $loader->alias('Image', Image::class);
 
         /*
         |--------------------------------------------------------------------------

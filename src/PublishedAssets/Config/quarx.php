@@ -90,6 +90,7 @@ return [
 
     'storage-location' => 'local', // s3, local
     'max-file-upload-size' => 6291456, // 6MB
+    'preview-image-size' => 800, // width - auto height
 
     /*
      * --------------------------------------------------------------------------

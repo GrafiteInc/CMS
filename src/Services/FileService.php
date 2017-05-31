@@ -144,10 +144,6 @@ class FileService
      */
     public static function filePreview($fileName)
     {
-        if (@get_headers(url('storage/'.str_replace('public/', '', $fileName)))) {
-            return url('storage/'.str_replace('public/', '', $fileName));
-        }
-
         return '/public-preview/'.CryptoServiceForFiles::url_encode($fileName);
     }
 }

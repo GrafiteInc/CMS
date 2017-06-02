@@ -24,12 +24,12 @@
     </div>
 
     <div class="row">
-        {!! Form::model($images, ['route' => ['quarx.images.update', $images->id], 'method' => 'patch', 'files' => true, 'class' => 'edit']) !!}
+        {!! Form::model($images, ['route' => [config('quarx.backend-route-prefix', 'quarx').'.images.update', $images->id], 'method' => 'patch', 'files' => true, 'class' => 'edit']) !!}
 
             {!! FormMaker::fromObject($images, Config::get('quarx.forms.images-edit')) !!}
 
             <div class="form-group text-right">
-                <a href="{!! URL::to('quarx/images') !!}" class="btn btn-default raw-left">Cancel</a>
+                <a href="{!! url(config('quarx.backend-route-prefix', 'quarx').'/images') !!}" class="btn btn-default raw-left">Cancel</a>
                 {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
             </div>
 

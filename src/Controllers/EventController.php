@@ -85,7 +85,7 @@ class EventController extends QuarxController
             Quarx::notification('Event could not be saved.', 'warning');
         }
 
-        return redirect(route('quarx.events.edit', [$event->id]));
+        return redirect(route(config('quarx.backend-route-prefix', 'quarx').'.events.edit', [$event->id]));
     }
 
     /**
@@ -102,7 +102,7 @@ class EventController extends QuarxController
         if (empty($event)) {
             Quarx::notification('Event not found', 'warning');
 
-            return redirect(route('quarx.events.index'));
+            return redirect(route(config('quarx.backend-route-prefix', 'quarx').'.events.index'));
         }
 
         return view('quarx::modules.events.edit')->with('event', $event);
@@ -123,7 +123,7 @@ class EventController extends QuarxController
         if (empty($event)) {
             Quarx::notification('Event not found', 'warning');
 
-            return redirect(route('quarx.events.index'));
+            return redirect(route(config('quarx.backend-route-prefix', 'quarx').'.events.index'));
         }
 
         $event = $this->eventRepository->update($event, $request->all());
@@ -150,14 +150,14 @@ class EventController extends QuarxController
         if (empty($event)) {
             Quarx::notification('Event not found', 'warning');
 
-            return redirect(route('quarx.events.index'));
+            return redirect(route(config('quarx.backend-route-prefix', 'quarx').'.events.index'));
         }
 
         $event->delete();
 
         Quarx::notification('Event deleted successfully.', 'success');
 
-        return redirect(route('quarx.events.index'));
+        return redirect(route(config('quarx.backend-route-prefix', 'quarx').'.events.index'));
     }
 
     /**

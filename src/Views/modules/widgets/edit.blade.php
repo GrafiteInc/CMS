@@ -4,9 +4,9 @@
 
     <div class="row">
         @if (! is_null(request('lang')) && request('lang') !== config('quarx.default-language', 'en') && $widgets->translationData(request('lang')))
-            <a class="btn btn-warning pull-right raw-margin-left-8" href="{!! URL::to('quarx/rollback/translation/'.$widgets->translation(request('lang'))->id) !!}">Rollback</a>
+            <a class="btn btn-warning pull-right raw-margin-left-8" href="{!! url(config('quarx.backend-route-prefix', 'quarx').'/rollback/translation/'.$widgets->translation(request('lang'))->id) !!}">Rollback</a>
         @else
-            <a class="btn btn-warning pull-right raw-margin-left-8" href="{!! URL::to('quarx/rollback/widget/'.$widgets->id) !!}">Rollback</a>
+            <a class="btn btn-warning pull-right raw-margin-left-8" href="{!! url(config('quarx.backend-route-prefix', 'quarx').'/rollback/widget/'.$widgets->id) !!}">Rollback</a>
         @endif
         <h1 class="page-header">Widgets</h1>
     </div>
@@ -16,13 +16,13 @@
     <div class="row raw-margin-bottom-24">
         <ul class="nav nav-tabs">
             @foreach(config('quarx.languages', config('quarx.languages')) as $short => $language)
-                <li role="presentation" @if (request('lang') == $short || is_null(request('lang')) && $short == config('quarx.default-language'))) class="active" @endif><a href="{{ url('quarx/widgets/'.$widgets->id.'/edit?lang='.$short) }}">{{ ucfirst($language) }}</a></li>
+                <li role="presentation" @if (request('lang') == $short || is_null(request('lang')) && $short == config('quarx.default-language'))) class="active" @endif><a href="{{ url(config('quarx.backend-route-prefix', 'quarx').'/widgets/'.$widgets->id.'/edit?lang='.$short) }}">{{ ucfirst($language) }}</a></li>
             @endforeach
         </ul>
     </div>
 
     <div class="row">
-        {!! Form::model($widgets, ['route' => ['quarx.widgets.update', $widgets->id], 'method' => 'patch', 'class' => 'edit']) !!}
+        {!! Form::model($widgets, ['route' => [config('quarx.backend-route-prefix', 'quarx').'.widgets.update', $widgets->id], 'method' => 'patch', 'class' => 'edit']) !!}
 
             <input type="hidden" name="lang" value="{{ request('lang') }}">
 
@@ -40,7 +40,7 @@
             @endif
 
             <div class="form-group text-right">
-                <a href="{!! URL::to('quarx/widgets') !!}" class="btn btn-default raw-left">Cancel</a>
+                <a href="{!! url(config('quarx.backend-route-prefix', 'quarx').'/widgets') !!}" class="btn btn-default raw-left">Cancel</a>
                 {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
             </div>
 

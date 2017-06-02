@@ -34,7 +34,7 @@ class AssetService
     public function asPublic($encFileName)
     {
         try {
-            return Cache::remember($encFileName.'_asPublic', 60, function () use ($encFileName) {
+            return Cache::remember($encFileName.'_asPublic', 3600, function () use ($encFileName) {
                 $fileName = CryptoServiceFacade::url_decode($encFileName);
                 $filePath = $this->getFilePath($encFileName);
 
@@ -70,7 +70,7 @@ class AssetService
     public function asPreview($encFileName, Filesystem $fileSystem)
     {
         try {
-            return Cache::remember($encFileName.'_preview', 60, function () use ($encFileName, $fileSystem) {
+            return Cache::remember($encFileName.'_preview', 3600, function () use ($encFileName, $fileSystem) {
                 $fileName = CryptoServiceFacade::url_decode($encFileName);
 
                 if (Config::get('quarx.storage-location') === 'local' || Config::get('quarx.storage-location') === null) {
@@ -116,7 +116,7 @@ class AssetService
     public function asDownload($encFileName, $encRealFileName)
     {
         try {
-            return Cache::remember($encFileName.'_asDownload', 60, function () use ($encFileName, $encRealFileName) {
+            return Cache::remember($encFileName.'_asDownload', 3600, function () use ($encFileName, $encRealFileName) {
                 $fileName = CryptoServiceFacade::url_decode($encFileName);
                 $realFileName = CryptoServiceFacade::url_decode($encRealFileName);
                 $filePath = $this->getFilePath($fileName);

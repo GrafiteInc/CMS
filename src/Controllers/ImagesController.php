@@ -105,7 +105,7 @@ class ImagesController extends QuarxController
             Quarx::notification($e->getMessage() ?: 'Image could not be saved.', 'danger');
         }
 
-        return redirect(route('quarx.images.index'));
+        return redirect(route(config('quarx.backend-route-prefix', 'quarx').'.images.index'));
     }
 
     /**
@@ -149,7 +149,7 @@ class ImagesController extends QuarxController
         if (empty($images)) {
             Quarx::notification('Image not found', 'warning');
 
-            return redirect(route('quarx.images.index'));
+            return redirect(route(config('quarx.backend-route-prefix', 'quarx').'.images.index'));
         }
 
         return view('quarx::modules.images.edit')->with('images', $images);
@@ -173,7 +173,7 @@ class ImagesController extends QuarxController
             if (empty($images)) {
                 Quarx::notification('Image not found', 'warning');
 
-                return redirect(route('quarx.images.index'));
+                return redirect(route(config('quarx.backend-route-prefix', 'quarx').'.images.index'));
             }
 
             $images = $this->imagesRepository->update($images, $request->all());
@@ -185,7 +185,7 @@ class ImagesController extends QuarxController
             Quarx::notification($e->getMessage() ?: 'Image could not be saved.', 'danger');
         }
 
-        return redirect(route('quarx.images.edit', $id));
+        return redirect(route(config('quarx.backend-route-prefix', 'quarx').'.images.edit', $id));
     }
 
     /**
@@ -206,14 +206,14 @@ class ImagesController extends QuarxController
         if (empty($image)) {
             Quarx::notification('Image not found', 'warning');
 
-            return redirect(route('quarx.images.index'));
+            return redirect(route(config('quarx.backend-route-prefix', 'quarx').'.images.index'));
         }
 
         $image->delete();
 
         Quarx::notification('Image deleted successfully.', 'success');
 
-        return redirect(route('quarx.images.index'));
+        return redirect(route(config('quarx.backend-route-prefix', 'quarx').'.images.index'));
     }
 
     /*

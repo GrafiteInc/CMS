@@ -90,7 +90,7 @@ class LinksController extends QuarxController
         if (empty($links)) {
             Quarx::notification('Link not found', 'warning');
 
-            return redirect(route('quarx.links.index'));
+            return redirect(route(config('quarx.backend-route-prefix', 'quarx').'.links.index'));
         }
 
         return view('quarx::modules.links.edit')->with('links', $links);
@@ -112,7 +112,7 @@ class LinksController extends QuarxController
             if (empty($links)) {
                 Quarx::notification('Link not found', 'warning');
 
-                return redirect(route('quarx.links.index'));
+                return redirect(route(config('quarx.backend-route-prefix', 'quarx').'.links.index'));
             }
 
             $links = $this->linksRepository->update($links, $request->all());
@@ -125,7 +125,7 @@ class LinksController extends QuarxController
             Quarx::notification($e->getMessage() ?: 'Links could not be updated.', 'danger');
         }
 
-        return redirect(route('quarx.links.edit', [$id]));
+        return redirect(route(config('quarx.backend-route-prefix', 'quarx').'.links.edit', [$id]));
     }
 
     /**
@@ -143,7 +143,7 @@ class LinksController extends QuarxController
         if (empty($links)) {
             Quarx::notification('Link not found', 'warning');
 
-            return redirect(route('quarx.links.index'));
+            return redirect(route(config('quarx.backend-route-prefix', 'quarx').'.links.index'));
         }
 
         $links->delete();

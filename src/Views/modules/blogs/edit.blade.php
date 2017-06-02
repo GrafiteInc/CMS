@@ -5,19 +5,19 @@
     <div class="row">
         @if (! is_null(request('lang')) && request('lang') !== config('quarx.default-language', 'en') && $blog->translationData(request('lang')))
             @if (isset($blog->translationData(request('lang'))->is_published))
-                <a class="btn btn-default pull-right raw-margin-left-8" href="{!! url('blog/'.$blog->translationData(request('lang'))->url) !!}">Live</a>
+                <a class="btn btn-default pull-right raw-margin-left-8" href="{!! url(config('quarx.backend-route-prefix', 'quarx').'/blog/'.$blog->translationData(request('lang'))->url) !!}">Live</a>
             @else
-                <a class="btn btn-default pull-right raw-margin-left-8" href="{!! url('quarx/preview/blog/'.$blog->id.'?lang='.request('lang')) !!}">Preview</a>
+                <a class="btn btn-default pull-right raw-margin-left-8" href="{!! url(config('quarx.backend-route-prefix', 'quarx').'/preview/blog/'.$blog->id.'?lang='.request('lang')) !!}">Preview</a>
             @endif
             <a class="btn btn-warning pull-right raw-margin-left-8" href="{!! Quarx::rollbackUrl($blog->translation(request('lang'))) !!}">Rollback</a>
         @else
             @if ($blog->is_published)
-                <a class="btn btn-default pull-right raw-margin-left-8" href="{!! url('blog/'.$blog->url) !!}">Live</a>
+                <a class="btn btn-default pull-right raw-margin-left-8" href="{!! url(config('quarx.backend-route-prefix', 'quarx').'/blog/'.$blog->url) !!}">Live</a>
             @else
-                <a class="btn btn-default pull-right raw-margin-left-8" href="{!! url('quarx/preview/blog/'.$blog->id) !!}">Preview</a>
+                <a class="btn btn-default pull-right raw-margin-left-8" href="{!! url(config('quarx.backend-route-prefix', 'quarx').'/preview/blog/'.$blog->id) !!}">Preview</a>
             @endif
             <a class="btn btn-warning pull-right raw-margin-left-8" href="{!! Quarx::rollbackUrl($blog) !!}">Rollback</a>
-            <a class="btn btn-default pull-right raw-margin-left-8" href="{!! url('quarx/blog/'.$blog->id.'/history') !!}">History</a>
+            <a class="btn btn-default pull-right raw-margin-left-8" href="{!! url(config('quarx.backend-route-prefix', 'quarx').'/blog/'.$blog->id.'/history') !!}">History</a>
         @endif
 
         <h1 class="page-header">Blog</h1>
@@ -28,14 +28,14 @@
     <div class="row raw-margin-bottom-24">
         <ul class="nav nav-tabs">
             @foreach(config('quarx.languages', config('quarx.languages')) as $short => $language)
-                <li role="presentation" @if (request('lang') == $short || is_null(request('lang')) && $short == config('quarx.default-language'))) class="active" @endif><a href="{{ url('quarx/blog/'.$blog->id.'/edit?lang='.$short) }}">{{ ucfirst($language) }}</a></li>
+                <li role="presentation" @if (request('lang') == $short || is_null(request('lang')) && $short == config('quarx.default-language'))) class="active" @endif><a href="{{ url(config('quarx.backend-route-prefix', 'quarx').'/blog/'.$blog->id.'/edit?lang='.$short) }}">{{ ucfirst($language) }}</a></li>
             @endforeach
         </ul>
     </div>
 
     <div class="row">
         <div class="@if (config('quarx.live-preview', false)) col-md-6 @endif">
-            {!! Form::model($blog, ['route' => ['quarx.blog.update', $blog->id], 'method' => 'patch', 'class' => 'edit']) !!}
+            {!! Form::model($blog, ['route' => [config('quarx.backend-route-prefix', 'quarx').'.blog.update', $blog->id], 'method' => 'patch', 'class' => 'edit']) !!}
 
                 <input type="hidden" name="lang" value="{{ request('lang') }}">
 
@@ -59,7 +59,7 @@
                 @endif
 
                 <div class="form-group text-right">
-                    <a href="{!! url('quarx/blog') !!}" class="btn btn-default raw-left">Cancel</a>
+                    <a href="{!! url(config('quarx.backend-route-prefix', 'quarx').'/blog') !!}" class="btn btn-default raw-left">Cancel</a>
                     {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
                 </div>
 
@@ -69,9 +69,9 @@
             <div class="col-md-6 hidden-sm hidden-xs">
                 <div id="wrap">
                     @if (! is_null(request('lang')) && request('lang') !== config('quarx.default-language', 'en'))
-                        <iframe id="frame" src="{!! url('quarx/preview/blog/'.$blog->id.'?lang='.request('lang')) !!}"></iframe>
+                        <iframe id="frame" src="{!! url(config('quarx.backend-route-prefix', 'quarx').'/preview/blog/'.$blog->id.'?lang='.request('lang')) !!}"></iframe>
                     @else
-                        <iframe id="frame" src="{{ url('quarx/preview/blog/'.$blog->id) }}"></iframe>
+                        <iframe id="frame" src="{{ url(config('quarx.backend-route-prefix', 'quarx').'/preview/blog/'.$blog->id) }}"></iframe>
                     @endif
                 </div>
                 <div id="frameButtons" class="raw-margin-top-16">

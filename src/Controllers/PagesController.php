@@ -86,7 +86,7 @@ class PagesController extends QuarxController
             Quarx::notification('Page could not be saved.', 'warning');
         }
 
-        return redirect(route('quarx.pages.edit', [$pages->id]));
+        return redirect(route(config('quarx.backend-route-prefix', 'quarx').'.pages.edit', [$pages->id]));
     }
 
     /**
@@ -103,7 +103,7 @@ class PagesController extends QuarxController
         if (empty($page)) {
             Quarx::notification('Page not found', 'warning');
 
-            return redirect(route('quarx.pages.index'));
+            return redirect(route(config('quarx.backend-route-prefix', 'quarx').'.pages.index'));
         }
 
         return view('quarx::modules.pages.edit')->with('page', $page);
@@ -124,7 +124,7 @@ class PagesController extends QuarxController
         if (empty($pages)) {
             Quarx::notification('Page not found', 'warning');
 
-            return redirect(route('quarx.pages.index'));
+            return redirect(route(config('quarx.backend-route-prefix', 'quarx').'.pages.index'));
         }
 
         $pages = $this->pagesRepository->update($pages, $request->all());
@@ -151,14 +151,14 @@ class PagesController extends QuarxController
         if (empty($pages)) {
             Quarx::notification('Page not found', 'warning');
 
-            return redirect(route('quarx.pages.index'));
+            return redirect(route(config('quarx.backend-route-prefix', 'quarx').'.pages.index'));
         }
 
         $pages->delete();
 
         Quarx::notification('Page deleted successfully.', 'success');
 
-        return redirect(route('quarx.pages.index'));
+        return redirect(route(config('quarx.backend-route-prefix', 'quarx').'.pages.index'));
     }
 
     /**

@@ -13,12 +13,12 @@
     </div>
 
     <div class="row">
-        {!! Form::open(['route' => 'quarx.files.store', 'files' => true, 'id' => 'fileDetailsForm', 'class' => 'add']); !!}
+        {!! Form::open(['route' => config('quarx.backend-route-prefix', 'quarx').'.files.store', 'files' => true, 'id' => 'fileDetailsForm', 'class' => 'add']); !!}
 
             {!! FormMaker::fromTable('files', Config::get('quarx.forms.files')) !!}
 
             <div class="form-group text-right">
-                <a href="{!! URL::to('quarx/files') !!}" class="btn btn-default raw-left">Cancel</a>
+                <a href="{!! url(config('quarx.backend-route-prefix', 'quarx').'/files') !!}" class="btn btn-default raw-left">Cancel</a>
                 {!! Form::submit('Save', ['class' => 'btn btn-primary', 'id' => 'saveFilesBtn']) !!}
             </div>
 

@@ -21,7 +21,7 @@
     </div>
 
     <div class="row">
-        <a class="btn btn-primary pull-right" href="{!! route('quarx.images.create') !!}">Add New</a>
+        <a class="btn btn-primary pull-right" href="{!! route(config('quarx.backend-route-prefix', 'quarx').'.images.create') !!}">Add New</a>
         <div class="raw-m-hide raw-m-hide pull-right">
             {!! Form::open(['url' => 'quarx/images/search']) !!}
             <input class="form-control header-input pull-right raw-margin-right-24" name="term" placeholder="Search">
@@ -42,7 +42,7 @@
                 @foreach($images as $image)
                     <div class="col-md-3 panel raw-margin-top-24">
                         <div class="thumbnail">
-                            <a href="{!! route('quarx.images.edit', [$image->id]) !!}">
+                            <a href="{!! route(config('quarx.backend-route-prefix', 'quarx').'.images.edit', [$image->id]) !!}">
                                 <div class="img" style="background-image: url('{!! $image->url !!}')"></div>
                             </a>
                         </div>
@@ -56,12 +56,12 @@
                                     @endif
                                 </div>
                                 <div class="col-lg-6 col-md-12 col-sm-12">
-                                    <form method="post" action="{!! url('quarx/images/'.$image->id) !!}">
+                                    <form method="post" action="{!! url(config('quarx.backend-route-prefix', 'quarx').'/images/'.$image->id) !!}">
                                         {!! csrf_field() !!}
                                         {!! method_field('DELETE') !!}
                                         <button class="delete-btn btn btn-xs btn-danger pull-right" type="submit"><i class="fa fa-trash"></i></button>
                                     </form>
-                                    <a class="btn btn-xs btn-default pull-right raw-margin-right-8" href="{!! route('quarx.images.edit', [$image->id]) !!}"><i class="fa fa-pencil"></i></a>
+                                    <a class="btn btn-xs btn-default pull-right raw-margin-right-8" href="{!! route(config('quarx.backend-route-prefix', 'quarx').'.images.edit', [$image->id]) !!}"><i class="fa fa-pencil"></i></a>
                                 </div>
                             </div>
                         </div>

@@ -38,7 +38,7 @@ class ModuleCrud extends Command
         $this->filesystem = new Filesystem();
         $crudGenerator = new CrudGenerator();
 
-        $this->table = ucfirst(str_singular($this->argument('table')));
+        $this->table = ucfirst(str_singular(strtolower($this->argument('table'))));
 
         $moduleDirectory = base_path('quarx/modules/'.ucfirst(str_plural($this->table)));
 

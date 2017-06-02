@@ -36,24 +36,19 @@ class AssetService
         try {
             return Cache::remember($encFileName.'_asPublic', 3600, function () use ($encFileName) {
                 $fileName = CryptoServiceFacade::url_decode($encFileName);
-                $filePath = $this->getFilePath($encFileName);
+                $filePath = $this->getFilePath($fileName);
 
                 $fileTool = new SplFileInfo($filePath);
                 $ext = $fileTool->getExtension();
                 $contentType = $this->getMimeType($ext);
 
                 $headers = ['Content-Type' => $contentType];
+                $fileContent = $this->getFileContent($fileName, $contentType, $ext);
 
-                if (file_exists(storage_path('app/'.$fileName))) {
-                    return response()->download($filePath, basename($filePath), $headers);
-                } else {
-                    $fileContent = $this->getFileContent($fileName, $contentType, $ext);
-
-                    return Response::make($fileContent, 200, [
-                        'Content-Type' => $contentType,
-                        'Content-Disposition' => 'attachment; filename="'.$fileName.'"',
-                    ]);
-                }
+                return Response::make($fileContent, 200, [
+                    'Content-Type' => $contentType,
+                    'Content-Disposition' => 'attachment; filename="'.$fileName.'"',
+                ]);
             });
         } catch (Exception $e) {
             return Response::make('file not found');

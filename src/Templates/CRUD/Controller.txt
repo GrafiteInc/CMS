@@ -66,11 +66,11 @@ class _ucCamel_casePlural_Controller extends Controller
 
         if ($result) {
             Quarx::notification('Successfully created', 'success');
-            return redirect('quarx/_lower_casePlural_/'.$result->id.'/edit');
+            return redirect(config('quarx.backend-route-prefix', 'quarx').'/_lower_casePlural_/'.$result->id.'/edit');
         }
 
         Quarx::notification('Failed to create', 'warning');
-        return redirect('quarx/_lower_casePlural_');
+        return redirect(config('quarx.backend-route-prefix', 'quarx').'/_lower_casePlural_');
     }
 
     /**
@@ -129,10 +129,10 @@ class _ucCamel_casePlural_Controller extends Controller
 
         if ($result) {
             Quarx::notification('Successfully deleted', 'success');
-            return redirect('quarx/_lower_casePlural_');
+            return redirect(config('quarx.backend-route-prefix', 'quarx').'/_lower_casePlural_');
         }
 
         Quarx::notification('Failed to delete', 'warning');
-        return redirect('quarx/_lower_casePlural_');
+        return redirect(config('quarx.backend-route-prefix', 'quarx').'/_lower_casePlural_');
     }
 }

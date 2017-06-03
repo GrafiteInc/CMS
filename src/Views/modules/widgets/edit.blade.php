@@ -4,8 +4,8 @@
 
     <div class="row">
         @if (! is_null(request('lang')) && request('lang') !== config('quarx.default-language', 'en') && $widgets->translationData(request('lang')))
-            <a class="btn btn-warning pull-right raw-margin-left-8" href="{!! Quarx::rollbackUrl($widgets->translationData(request('lang'))) !!}">Rollback</a>
-        @else
+            <a class="btn btn-warning pull-right raw-margin-left-8" href="{!! Quarx::rollbackUrl($widgets->translation(request('lang'))) !!}">Rollback</a>
+        @elseif (is_null(request('lang')))
             <a class="btn btn-warning pull-right raw-margin-left-8" href="{!! Quarx::rollbackUrl($widgets) !!}">Rollback</a>
         @endif
         <h1 class="page-header">Widgets</h1>

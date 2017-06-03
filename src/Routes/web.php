@@ -24,11 +24,28 @@
         Route::get('public-download/{encFileName}/{encRealFileName}', 'AssetController@asDownload');
 
         /*
+         * --------------------------------------------------------------------------
+         * Internal APIs
+         * --------------------------------------------------------------------------
+        */
+        Route::group(['middleware' => 'auth'], function () {
+            Route::group(['prefix' => 'quarx/api'], function () {
+                Route::get('images/list', 'ImagesController@apiList');
+                Route::post('images/store', 'ImagesController@apiStore');
+                Route::get('files/list', 'FilesController@apiList');
+            });
+
+            Route::group(['prefix' => 'quarx'], function () {
+                Route::post('images/upload', 'ImagesController@upload');
+                Route::post('files/upload', 'FilesController@upload');
+            });
+        });
+
+        /*
         |--------------------------------------------------------------------------
         | APIs
         |--------------------------------------------------------------------------
         */
-
         Route::group(['prefix' => $routePrefix.'/api'], function () use ($routePrefix) {
             Route::group(['middleware' => ['quarx-api']], function () use ($routePrefix) {
                 Route::get('blog', 'ApiController@all');
@@ -52,20 +69,6 @@
                 Route::get('widgets', 'ApiController@all');
                 Route::get('widgets/{id}', 'ApiController@find');
             });
-        });
-
-        /**
-         * Internal APIs and Routes
-         */
-        Route::group(['prefix' => 'quarx/api'], function () use ($routePrefix) {
-            Route::get('images/list', 'ImagesController@apiList');
-            Route::post('images/store', 'ImagesController@apiStore');
-            Route::get('files/list', 'FilesController@apiList');
-        });
-
-        Route::group(['prefix' => 'quarx'], function () use ($routePrefix) {
-            Route::post('images/upload', 'ImagesController@upload');
-            Route::post('files/upload', 'FilesController@upload');
         });
 
         /*

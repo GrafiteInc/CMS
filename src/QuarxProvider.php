@@ -89,7 +89,7 @@ class QuarxProvider extends ServiceProvider
             if (count(config('quarx.languages')) > 1) {
                 $languageLinks = [];
                 foreach (config('quarx.languages') as $key => $value) {
-                    $languageLinks[] = '<a class="language-link" href="'.url('quarx/language/set/'.$key).'">'.$value.'</a>';
+                    $languageLinks[] = '<a class="language-link" href="'.url(config('quarx.backend-route-prefix', 'quarx').'/language/set/'.$key).'">'.$value.'</a>';
                 }
 
                 $languageLinkString = implode($languageLinks);

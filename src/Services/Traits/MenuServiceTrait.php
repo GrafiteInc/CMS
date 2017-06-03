@@ -74,7 +74,7 @@ trait MenuServiceTrait
         }
 
         if (Gate::allows('quarx', Auth::user())) {
-            $response .= '<a href="'.url('quarx/menus/'.$menu->id.'/edit').'" style="margin-left: 8px;" class="btn btn-xs btn-default"><span class="fa fa-pencil"></span> Edit</a>';
+            $response .= '<a href="'.url(config('quarx.backend-route-prefix', 'quarx').'/menus/'.$menu->id.'/edit').'" style="margin-left: 8px;" class="btn btn-xs btn-default"><span class="fa fa-pencil"></span> Edit</a>';
         }
 
         return $response;

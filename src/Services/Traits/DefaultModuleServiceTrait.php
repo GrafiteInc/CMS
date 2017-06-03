@@ -36,7 +36,7 @@ trait DefaultModuleServiceTrait
 
         if ($widget) {
             if (Gate::allows('quarx', Auth::user())) {
-                $widget->content .= '<a href="'.url('quarx/widgets/'.$widget->id.'/edit').'" style="margin-left: 8px;" class="btn btn-xs btn-default"><span class="fa fa-pencil"></span> Edit</a>';
+                $widget->content .= '<a href="'.url(config('quarx.backend-route-prefix', 'quarx').'/widgets/'.$widget->id.'/edit').'" style="margin-left: 8px;" class="btn btn-xs btn-default"><span class="fa fa-pencil"></span> Edit</a>';
             }
 
             if (config('app.locale') !== config('quarx.default-language') && $widget->translation(config('app.locale'))) {

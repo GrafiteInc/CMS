@@ -24,7 +24,7 @@ trait ModuleServiceTrait
             $assetPath = config('quarx.modules.'.$module.'.asset_path').'/'.$path;
         }
 
-        return url('quarx/asset/'.CryptoServiceFacade::url_encode($assetPath).'/'.CryptoServiceFacade::url_encode($contentType).'/?isModule=true');
+        return url(config('quarx.backend-route-prefix', 'quarx').'/asset/'.CryptoServiceFacade::url_encode($assetPath).'/'.CryptoServiceFacade::url_encode($contentType).'/?isModule=true');
     }
 
     /**

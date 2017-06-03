@@ -5,14 +5,14 @@
     <div class="row">
         @if (! is_null(request('lang')) && request('lang') !== config('quarx.default-language', 'en') && $blog->translationData(request('lang')))
             @if (isset($blog->translationData(request('lang'))->is_published))
-                <a class="btn btn-default pull-right raw-margin-left-8" href="{!! url(config('quarx.backend-route-prefix', 'quarx').'/blog/'.$blog->translationData(request('lang'))->url) !!}">Live</a>
+                <a class="btn btn-default pull-right raw-margin-left-8" href="{!! url('blog/'.$blog->translationData(request('lang'))->url) !!}">Live</a>
             @else
                 <a class="btn btn-default pull-right raw-margin-left-8" href="{!! url(config('quarx.backend-route-prefix', 'quarx').'/preview/blog/'.$blog->id.'?lang='.request('lang')) !!}">Preview</a>
             @endif
             <a class="btn btn-warning pull-right raw-margin-left-8" href="{!! Quarx::rollbackUrl($blog->translation(request('lang'))) !!}">Rollback</a>
         @else
             @if ($blog->is_published)
-                <a class="btn btn-default pull-right raw-margin-left-8" href="{!! url(config('quarx.backend-route-prefix', 'quarx').'/blog/'.$blog->url) !!}">Live</a>
+                <a class="btn btn-default pull-right raw-margin-left-8" href="{!! url('blog/'.$blog->url) !!}">Live</a>
             @else
                 <a class="btn btn-default pull-right raw-margin-left-8" href="{!! url(config('quarx.backend-route-prefix', 'quarx').'/preview/blog/'.$blog->id) !!}">Preview</a>
             @endif

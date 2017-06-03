@@ -81,16 +81,12 @@ class AssetService
 
                 if (stristr($contentType, 'image')) {
                     $headers = ['Content-Type' => $contentType];
-                    if (file_exists(storage_path('app/'.$fileName))) {
-                        return response()->download($filePath, basename($filePath), $headers);
-                    } else {
-                        $fileContent = $this->getFileContent($fileName, $contentType, $ext);
+                    $fileContent = $this->getFileContent($fileName, $contentType, $ext);
 
-                        return Response::make($fileContent, 200, [
-                            'Content-Type' => $contentType,
-                            'Content-Disposition' => 'attachment; filename="'.$fileName.'"',
-                        ]);
-                    }
+                    return Response::make($fileContent, 200, [
+                        'Content-Type' => $contentType,
+                        'Content-Disposition' => 'attachment; filename="'.$fileName.'"',
+                    ]);
                 } else {
                     return $this->generateImage($ext);
                 }
@@ -121,17 +117,12 @@ class AssetService
                 $contentType = $this->getMimeType($ext);
 
                 $headers = ['Content-Type' => $contentType];
+                $fileContent = $this->getFileContent($realFileName, $contentType, $ext);
 
-                if (file_exists(storage_path('app/'.$fileName))) {
-                    return response()->download($filePath, basename($filePath), $headers);
-                } else {
-                    $fileContent = $this->getFileContent($realFileName, $contentType, $ext);
-
-                    return Response::make($fileContent, 200, [
-                        'Content-Type' => $contentType,
-                        'Content-Disposition' => 'attachment; filename="'.$fileName.'"',
-                    ]);
-                }
+                return Response::make($fileContent, 200, [
+                    'Content-Type' => $contentType,
+                    'Content-Disposition' => 'attachment; filename="'.$fileName.'"',
+                ]);
             });
         } catch (Exception $e) {
             Quarx::notification('We encountered an error with that file', 'danger');

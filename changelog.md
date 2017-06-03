@@ -3,6 +3,17 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 ----
 
+## [v2.3.23] - 2017-06-03
+
+### Added
+- Backend route prefix default: quarx
+
+### Changed
+- Refactored asset caching and local detection
+
+### Fixed
+- Issue with widgets and translations
+
 ## [v2.3.22] - 2017-05-31
 
 ### Changed

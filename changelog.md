@@ -3,6 +3,11 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 ----
 
+## [v2.3.24] - 2017-06-03
+
+### Fixed
+- Corrected internal API issue
+
 ## [v2.3.23] - 2017-06-03
 
 ### Added

@@ -233,7 +233,7 @@ class ImagesController extends QuarxController
             return QuarxResponseService::apiResponse('error', []);
         }
 
-        return $this->imagesRepository->apiPrepared();
+        $images =  $this->imagesRepository->apiPrepared();
 
         return QuarxResponseService::apiResponse('success', $images);
     }

@@ -30,10 +30,10 @@
                 <input type="hidden" name="name" value="{{ $widgets->name }}">
                 <input type="hidden" name="slug" value="{{ $widgets->slug }}">
                 <div class="form-group">
-                    <label class="control-label" for="Content">Content</label>
-                    <textarea id="Content" class="form-control redactor" name="content" placeholder="Content" dir="ltr">
-                        {{ $widgets->translationData(request('lang'))->content }}
-                    </textarea>
+                    {!! FormMaker::fromObject($widgets->translationData(request('lang')), ['content' => [
+                        'type' => 'text',
+                        'class' => 'redactor'
+                    ]]) !!}
                 </div>
             @else
                 {!! FormMaker::fromObject($widgets, Config::get('quarx.forms.widget')) !!}

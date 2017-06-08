@@ -13294,8 +13294,8 @@ RedactorPlugins.imagemanager = function()
                 success: $.proxy(function(data)
                 {
                     $('#redactor-image-manager-box').html('');
-                    if (data.length > 0) {
-                        $.each(data, $.proxy(function(key, val)
+                    if (data.data.length > 0) {
+                        $.each(data.data, $.proxy(function(key, val)
                         {
                             // title
                             var thumbtitle = '';
@@ -13325,7 +13325,6 @@ RedactorPlugins.imagemanager = function()
         },
         insert: function(e)
         {
-            console.log(e.target)
             this.image.insert('<img src="' + $(e.target).attr('rel') + '" alt="' + $(e.target).attr('title') + '" title="' + $(e.target).attr('title') + '">');
         }
     };

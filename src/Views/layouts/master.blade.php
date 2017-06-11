@@ -64,6 +64,8 @@
         <script type="text/javascript">
             var _apiKey = '{!!  config("quarx.api-key") !!}';
             var _apiToken = '{!!  config("quarx.api-token") !!}';
+
+            @yield('pre_javascript')
         </script>
         <script type="text/javascript" src="{!! Quarx::asset('js/jquery.min.js', 'application/javascript') !!}"></script>
         <script type="text/javascript" src="{!! Quarx::asset('dist/js/all.js', 'application/javascript') !!}"></script>

@@ -102,6 +102,7 @@
 
                 Route::resource('menus', 'MenuController', ['as' => $routePrefix]);
                 Route::post('menus/search', 'MenuController@search');
+                Route::put('menus/{id}/order', 'MenuController@setOrder');
 
                 /*
                 |--------------------------------------------------------------------------

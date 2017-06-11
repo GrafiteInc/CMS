@@ -21,7 +21,7 @@
         {!! Form::close() !!}
     </div>
 
-    <div class="row">
+    <div class="row raw-margin-top-24">
         <div class="col-12">
             <a class="btn btn-info pull-right" href="{!! url(config('quarx.backend-route-prefix', 'quarx').'/links/create?m='.$menu->id) !!}">Add Link</a>
             <h1>Links</h1>
@@ -31,3 +31,11 @@
 
 @endsection
 
+@section('pre_javascript')
+
+    @parent
+    var _linkOrder = @if (!is_null($menu->order)) {!! $menu->order !!} @else [] @endif;
+    var _id = {{ $menu->id }};
+    var _quarxUrl = _url + "/{{ config('quarx.backend-route-prefix') }}"
+
+@stop

@@ -45,6 +45,10 @@ trait MenuServiceTrait
         }
 
         $links = LinkRepository::getLinksByMenuID($menu->id);
+        $order = json_decode($menu->order);
+        // Sort the links by the order from the menu
+        $links = $this->sortByKeys($links, $order);
+
         $response = '';
         $processedLinks = [];
         foreach ($links as $key => $link) {
@@ -78,5 +82,29 @@ trait MenuServiceTrait
         }
 
         return $response;
+    }
+
+    /**
+     * Sort by an existing set of keys
+     *
+     * @param  collection $links
+     * @param  array $keys
+     *
+     * @return collection
+     */
+    public function sortByKeys($links, $keys)
+    {
+        if (! is_null($keys)) {
+            $links = $links->keyBy('id');
+
+            $sortedLinks = [];
+            foreach ($keys as $key) {
+                $sortedLinks[] = $links[$key];
+            }
+
+            return collect($sortedLinks);
+        }
+
+        return $links;
     }
 }

@@ -18,6 +18,7 @@ class Menu extends QuarxModel
     protected $fillable = [
         'name',
         'slug',
+        'order',
     ];
 
     public function __construct(array $attributes = [])

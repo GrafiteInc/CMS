@@ -24,6 +24,31 @@ $(window).ready(function(){
     });
 });
 
+
+var linkList = document.getElementById('linkList');
+var sortable = Sortable.create(linkList, {
+    store: {
+        get: function (sortable) {
+            return _linkOrder ? _linkOrder : [];
+        },
+
+        set: function (sortable) {
+            var _order = sortable.toArray();
+            $.ajax({
+                url: _quarxUrl + '/menus/' + _id + '/order',
+                type: 'put',
+                data: {
+                    _token: _token,
+                    order: JSON.stringify(_order)
+                },
+                success: function (_data) {
+                    // do nothing!
+                }
+            });
+        }
+    }
+});
+
 /*
  * --------------------------------------------------------------------------
  * Files
@@ -112,7 +137,6 @@ $(function () {
     });
 
     $('#deleteBlockBtn').bind('click', function () {
-        console.log($(this).attr('data-slug'))
         $('#'+$(this).attr('data-slug')).remove();
         $('#deleteBlockModal').modal('toggle');
     });

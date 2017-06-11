@@ -2,14 +2,15 @@
 
 namespace Yab\Quarx\Controllers;
 
-use Quarx;
 use Exception;
-use Yab\Quarx\Models\Menu;
 use Illuminate\Http\Request;
-use Yab\Quarx\Requests\MenuRequest;
-use Yab\Quarx\Services\ValidationService;
-use Yab\Quarx\Repositories\MenuRepository;
+use Quarx;
+use Yab\Quarx\Models\Menu;
 use Yab\Quarx\Repositories\LinkRepository;
+use Yab\Quarx\Repositories\MenuRepository;
+use Yab\Quarx\Requests\MenuRequest;
+use Yab\Quarx\Services\QuarxResponseService;
+use Yab\Quarx\Services\ValidationService;
 
 class MenuController extends QuarxController
 {
@@ -170,5 +171,25 @@ class MenuController extends QuarxController
         Quarx::notification('Menu deleted successfully.');
 
         return redirect(route(config('quarx.backend-route-prefix', 'quarx').'.menus.index'));
+    }
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Api
+    |--------------------------------------------------------------------------
+    */
+
+    /**
+     * Set the order
+     *
+     * @return Response
+     */
+    public function setOrder($id, Request $request)
+    {
+        $menu = $this->menuRepository->findMenuById($id);
+        $result =  $this->menuRepository->setOrder($menu, $request->except('_token'));
+
+        return QuarxResponseService::apiResponse('success', $result);
     }
 }

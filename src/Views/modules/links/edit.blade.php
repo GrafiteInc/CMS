@@ -31,10 +31,3 @@
     </div>
 
 @endsection
-
-@section('javascript')
-
-    @parent
-    {!! Minify::javascript(Quarx::asset('js/links-module.js', 'application/javascript')) !!}
-
-@stop

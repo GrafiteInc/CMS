@@ -22,6 +22,7 @@ elixir(function(mix) {
         'forms.js',
         'typeahead.bundle.js',
         'bootstrap-tagsinput.min.js',
+        'sortable.min.js',
         '../packages/dropzone/dropzone.js',
         '../packages/datepicker/moment.js',
         '../packages/datepicker/moment-timezone.js',

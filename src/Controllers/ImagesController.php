@@ -229,7 +229,7 @@ class ImagesController extends QuarxController
      */
     public function apiList(Request $request)
     {
-        if (Config::get('quarx.api-key') != $request->header('quarx')) {
+        if (config('quarx.api-key') != $request->header('quarx')) {
             return QuarxResponseService::apiResponse('error', []);
         }
 

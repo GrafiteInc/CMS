@@ -24,7 +24,7 @@
     <div class="row raw-margin-top-24">
         <div class="col-12">
             <a class="btn btn-info pull-right" href="{!! url(config('quarx.backend-route-prefix', 'quarx').'/links/create?m='.$menu->id) !!}">Add Link</a>
-            <h1>Links</h1>
+            <h1>Links <span class="small fa fa-info-circle" data-toggle="tooltip" title="Drag and drop to sort"></span></h1>
             @include('quarx::modules.links.index')
         </div>
     </div>

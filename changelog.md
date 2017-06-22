@@ -3,6 +3,14 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 ----
 
+## [v2.3.25] - 2017-06-22
+
+### Added
+- Sortable menus
+
+### Fixed
+- Issue with images
+
 ## [v2.3.24] - 2017-06-03
 
 ### Fixed

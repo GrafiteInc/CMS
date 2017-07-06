@@ -36,13 +36,12 @@ $(window).ready(function(){
 
 var linkList = document.getElementById('linkList');
 
-if (typeof linkList != 'undefined') {
+if (typeof linkList != 'undefined' && linkList != null) {
     var sortable = Sortable.create(linkList, {
         store: {
             get: function (sortable) {
                 return _linkOrder ? _linkOrder : [];
             },
-
             set: function (sortable) {
                 var _order = sortable.toArray();
                 $.ajax({
@@ -68,12 +67,10 @@ if (typeof linkList != 'undefined') {
 */
 
 $(function(){
-
     $('#saveFilesBtn').click(function(e){
         e.preventDefault();
         Dropzone.forElement('.dropzone').processQueue();
     });
-
 });
 
 function confirmDelete (url) {
@@ -88,12 +85,10 @@ function confirmDelete (url) {
 */
 
 $(function(){
-
     $('#saveImagesBtn').click(function(e){
         e.preventDefault();
         Dropzone.forElement('.dropzone').processQueue();
     });
-
 });
 
 /*

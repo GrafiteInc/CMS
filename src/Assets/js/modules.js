@@ -89,6 +89,27 @@ $(function(){
         e.preventDefault();
         Dropzone.forElement('.dropzone').processQueue();
     });
+
+    $('.selectable').bind('click', function () {
+        if (!$(this).hasClass('selected-highlight')) {
+            $(this).addClass('selected-highlight');
+        } else {
+            $(this).removeClass('selected-highlight');
+        }
+    });
+
+    $('.bulk-image-delete').click(function () {
+        var _images = [];
+        $('.selected-highlight').each(function () {
+            _images.push($(this).attr('data-id'));
+        });
+
+        if (_images.length > 0) {
+            $('#bulkImageDeleteModal').modal('toggle');
+            var _deleteUrl = _url + '/quarx/images/bulk-delete/' + _images.join('-')
+            $('#bulkImageDelete').attr('href', _deleteUrl);
+        }
+    });
 });
 
 /*

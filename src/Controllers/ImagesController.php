@@ -216,6 +216,32 @@ class ImagesController extends QuarxController
         return redirect(route(config('quarx.backend-route-prefix', 'quarx').'.images.index'));
     }
 
+    /**
+     * Bulk image delete
+     *
+     * @param  string $ids
+     *
+     * @return Redirect
+     */
+    public function bulkDelete($ids)
+    {
+        $ids = explode('-', $ids);
+
+        foreach ($ids as $id) {
+            $image = $this->imagesRepository->findImagesById($id);
+
+            if (is_file(storage_path($image->location))) {
+                @Storage::delete($image->location);
+            }
+
+            $image->delete();
+        }
+
+        Quarx::notification('Bulk Image deletes completed successfully.', 'success');
+
+        return redirect(route(config('quarx.backend-route-prefix', 'quarx').'.images.index'));
+    }
+
     /*
     |--------------------------------------------------------------------------
     | Api

@@ -2505,4 +2505,9 @@ span.twitter-typeahead {
     font-size: 100% !important;
     padding: 0.6em !important;
 }
+
+.selected-highlight {
+    background-color: #FEF1B5;
+    border-color: #EEC900;
+}
 /*# sourceMappingURL=all.css.map */

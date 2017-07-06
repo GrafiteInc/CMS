@@ -36,6 +36,7 @@
             });
 
             Route::group(['prefix' => 'quarx'], function () {
+                Route::get('images/bulk-delete/{ids}', 'ImagesController@bulkDelete');
                 Route::post('images/upload', 'ImagesController@upload');
                 Route::post('files/upload', 'FilesController@upload');
             });

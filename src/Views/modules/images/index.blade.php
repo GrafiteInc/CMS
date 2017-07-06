@@ -20,7 +20,27 @@
         </div>
     </div>
 
+    <div class="modal fade" id="bulkImageDeleteModal" tabindex="-3" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="deleteModalLabel">Bulk Image Delete</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure want to delete these images?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <a id="bulkImageDelete" type="button" class="btn btn-warning" href="#">Confirm Delete</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="row">
+        <button class="btn btn-danger pull-right raw-margin-left-8 bulk-image-delete"><span class="fa fa-trash"></span> Delete</button>
+
         <a class="btn btn-primary pull-right" href="{!! route(config('quarx.backend-route-prefix', 'quarx').'.images.create') !!}">Add New</a>
         <div class="raw-m-hide raw-m-hide pull-right">
             {!! Form::open(['url' => 'quarx/images/search']) !!}
@@ -46,7 +66,7 @@
                                 <div class="img" style="background-image: url('{!! $image->url !!}')"></div>
                             </a>
                         </div>
-                        <div class="well pull-down overflow-hidden">
+                        <div data-id="{{ $image->id }}" class="well pull-down overflow-hidden selectable">
                             <div class="row">
                                 <div class="col-lg-6 col-md-12 col-sm-12">
                                     @if ($image->is_published)

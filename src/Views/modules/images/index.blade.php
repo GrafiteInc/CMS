@@ -79,9 +79,9 @@
                                     <form method="post" action="{!! url(config('quarx.backend-route-prefix', 'quarx').'/images/'.$image->id) !!}">
                                         {!! csrf_field() !!}
                                         {!! method_field('DELETE') !!}
-                                        <button class="delete-btn btn btn-xs btn-danger pull-right" type="submit"><i class="fa fa-trash"></i></button>
+                                        <button class="delete-btn btn btn-xs img-alter-btn btn-danger pull-right" type="submit"><i class="fa fa-trash"></i></button>
                                     </form>
-                                    <a class="btn btn-xs btn-default pull-right raw-margin-right-8" href="{!! route(config('quarx.backend-route-prefix', 'quarx').'.images.edit', [$image->id]) !!}"><i class="fa fa-pencil"></i></a>
+                                    <a class="btn btn-xs btn-default pull-right img-alter-btn raw-margin-right-8" href="{!! route(config('quarx.backend-route-prefix', 'quarx').'.images.edit', [$image->id]) !!}"><i class="fa fa-pencil"></i></a>
                                 </div>
                             </div>
                         </div>

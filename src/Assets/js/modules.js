@@ -110,6 +110,10 @@ $(function(){
             $('#bulkImageDelete').attr('href', _deleteUrl);
         }
     });
+
+    $('.img-alter-btn').click(function (e) {
+        e.stopPropagation();
+    });
 });
 
 /*

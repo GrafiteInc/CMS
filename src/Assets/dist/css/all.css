@@ -2506,6 +2506,10 @@ span.twitter-typeahead {
     padding: 0.6em !important;
 }
 
+.selectable {
+    cursor: pointer;
+}
+
 .selected-highlight {
     background-color: #FEF1B5;
     border-color: #EEC900;

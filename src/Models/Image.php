@@ -38,6 +38,8 @@ class Image extends QuarxModel
         'title_tag',
         'is_published',
         'tags',
+        'entity_id',
+        'entity_type',
     ];
 
     public function __construct(array $attributes = [])

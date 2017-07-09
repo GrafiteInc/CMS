@@ -20,6 +20,10 @@
  &#64;image({{ $images->id }})
  &#64;image_link({{ $images->id }})
 @foreach(explode(',', $images->tags) as $tag) &#64;images({{ trim($tag) }})<br>@endforeach</pre>
+            @if (!is_null($images->entity_id))
+                <h2 class="raw-margin-top-24 raw-margin-bottom-8">Linked Entity</h2>
+                <a href="{{ url(config('quarx.backend-route-prefix', 'quarx').'/'.$images->entity_type.'s/'.$images->entity_id.'/edit') }}">{{ ucfirst($images->entity_type) }}</a>
+            @endif
         </div>
     </div>
 

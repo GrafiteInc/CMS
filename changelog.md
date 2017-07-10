@@ -3,6 +3,11 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 ----
 
+## [v2.3.29] - 2017-07-10
+
+### Fixed
+- Minor issue with Quazar tests
+
 ## [v2.3.28] - 2017-07-10
 
 ### Added

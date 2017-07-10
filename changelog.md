@@ -3,6 +3,12 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 ----
 
+## [v2.3.28] - 2017-07-10
+
+### Added
+- New entity relations for images
+- Bulk image deleting
+
 ## [v2.3.27] - 2017-07-06
 
 ### Fixed

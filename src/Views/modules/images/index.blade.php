@@ -60,7 +60,7 @@
         @else
             <div class="row">
                 @foreach($images as $image)
-                    <div class="col-md-3 panel raw-margin-top-24">
+                    <div class="col-md-3 image-panel raw-margin-top-24">
                         <div class="thumbnail">
                             <a href="{!! route(config('quarx.backend-route-prefix', 'quarx').'.images.edit', [$image->id]) !!}">
                                 <div class="img" style="background-image: url('{!! $image->url !!}')"></div>

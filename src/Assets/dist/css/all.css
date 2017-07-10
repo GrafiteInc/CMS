@@ -2044,19 +2044,18 @@ span.twitter-typeahead {
     height: auto !important;
 }
 
-.panel {
+.image-panel {
     height: 320px;
 }
 
-    .panel .thumbnail {
+    .image-panel .thumbnail {
         overflow: hidden;
         text-align: center;
-        height: 200px;
     }
 
-    .panel .img {
+    .image-panel .img {
         width: 100%;
-        height: 100%;
+        height: 200px;
         background-size: cover;
         background-position: center center;
     }

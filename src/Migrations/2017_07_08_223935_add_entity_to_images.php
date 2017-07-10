@@ -22,9 +22,6 @@ class AddEntityToImages extends Migration
      */
     public function down()
     {
-        Schema::table(config('quarx.db-prefix', '').'images', function ($table) {
-            $table->dropColumn('entity_id');
-            $table->dropColumn('entity_type');
-        });
+        // Dropping these columns seems to break tests
     }
 }

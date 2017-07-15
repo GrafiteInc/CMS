@@ -102,7 +102,7 @@ return [
     'backend-route-prefix' => 'quarx',
     'backend-theme' => 'united', // cosmo, cyborg, flatly, lumen, paper, sandstone, simplex, united, yeti
     'registration-available' => false,
-    'pagination' => 25,
+    'pagination' => 24,
 
     /*
      * --------------------------------------------------------------------------

@@ -54,14 +54,14 @@ class BlogRepository
     {
         return Blog::orderBy('published_at', 'desc')->where('is_published', 1)
             ->where('published_at', '<=', Carbon::now(config('app.timezone'))->format('Y-m-d H:i:s'))
-            ->paginate(Config::get('quarx.pagination', 25));
+            ->paginate(Config::get('quarx.pagination', 24));
     }
 
     public function published()
     {
         return Blog::where('is_published', 1)
             ->where('published_at', '<=', Carbon::now(config('app.timezone'))->format('Y-m-d H:i:s'))->orderBy('created_at', 'desc')
-            ->paginate(Config::get('quarx.pagination', 25));
+            ->paginate(Config::get('quarx.pagination', 24));
     }
 
     public function tags($tag)
@@ -69,7 +69,7 @@ class BlogRepository
         return Blog::where('is_published', 1)
             ->where('published_at', '<=', Carbon::now(config('app.timezone'))->format('Y-m-d H:i:s'))
             ->where('tags', 'LIKE', '%'.$tag.'%')->orderBy('created_at', 'desc')
-            ->paginate(Config::get('quarx.pagination', 25));
+            ->paginate(Config::get('quarx.pagination', 24));
     }
 
     public function allTags()
@@ -101,7 +101,7 @@ class BlogRepository
             $query->orWhere($attribute, 'LIKE', '%'.$input['term'].'%');
         }
 
-        return [$query, $input['term'], $query->paginate(Config::get('quarx.pagination', 25))->render()];
+        return [$query, $input['term'], $query->paginate(Config::get('quarx.pagination', 24))->render()];
     }
 
     /**

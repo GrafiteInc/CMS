@@ -35,7 +35,7 @@ class ApiController extends QuarxController
 
         return $query
             ->orderBy('created_at', 'desc')
-            ->paginate(Config::get('quarx.pagination', 25));
+            ->paginate(Config::get('quarx.pagination', 24));
     }
 
     public function search($term)
@@ -51,7 +51,7 @@ class ApiController extends QuarxController
 
         return [
             'term' => $input['term'],
-            'result' => $query->paginate(Config::get('quarx.pagination', 25)),
+            'result' => $query->paginate(Config::get('quarx.pagination', 24)),
         ];
     }
 }

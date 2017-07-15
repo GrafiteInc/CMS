@@ -37,12 +37,12 @@ class PageRepository
             $model = $model->orderBy('created_at', 'desc');
         }
 
-        return $model->paginate(Config::get('quarx.pagination', 25));
+        return $model->paginate(Config::get('quarx.pagination', 24));
     }
 
     public function published()
     {
-        return Page::where('is_published', 1)->where('published_at', '<=', Carbon::now(config('app.timezone'))->format('Y-m-d H:i:s'))->orderBy('created_at', 'desc')->paginate(Config::get('quarx.pagination', 25));
+        return Page::where('is_published', 1)->where('published_at', '<=', Carbon::now(config('app.timezone'))->format('Y-m-d H:i:s'))->orderBy('created_at', 'desc')->paginate(Config::get('quarx.pagination', 24));
     }
 
     public function search($input)
@@ -56,7 +56,7 @@ class PageRepository
             $query->orWhere($attribute, 'LIKE', '%'.$input['term'].'%');
         }
 
-        return [$query, $input['term'], $query->paginate(Config::get('quarx.pagination', 25))->render()];
+        return [$query, $input['term'], $query->paginate(Config::get('quarx.pagination', 24))->render()];
     }
 
     /**

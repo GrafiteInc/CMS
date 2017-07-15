@@ -209,6 +209,7 @@ class ImagesController extends QuarxController
             return redirect(route(config('quarx.backend-route-prefix', 'quarx').'.images.index'));
         }
 
+        $image->forgetCache();
         $image->delete();
 
         Quarx::notification('Image deleted successfully.', 'success');

@@ -116,6 +116,18 @@ class Image extends QuarxModel
     }
 
     /**
+     * Set Image Caches
+     */
+    public function setCaches()
+    {
+        if ($this->url && $this->js_url && $this->data_url) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
      * Simple caching tool
      *
      * @param  string $attribute
@@ -127,9 +139,23 @@ class Image extends QuarxModel
     {
         $key = $attribute.'_'.$this->location;
 
-        return Cache::remember($key, 15, function () use ($closure) {
-            return $closure();
-        });
+        if (!Cache::has($key)) {
+            $result = $closure();
+            Cache::forever($key, $result);
+        }
+
+        return Cache::get($key);
+    }
+
+    /**
+     * Forget the current Image caches
+     */
+    public function forgetCache()
+    {
+        foreach (['url', 'js_url', 'data_url'] as $attribute) {
+            $key = $attribute.'_'.$this->location;
+            Cache::forget($key);
+        }
     }
 
     /**

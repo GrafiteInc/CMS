@@ -213,8 +213,10 @@ class AssetService
     {
         if (Storage::disk(Config::get('quarx.storage-location', 'local'))->exists($fileName)) {
             $fileContent = Storage::disk(Config::get('quarx.storage-location', 'local'))->get($fileName);
+        } elseif (!is_null(config('filesystems.cloud.key'))) {
+            $fileContent = Storage::disk('cloud')->get($fileName);
         } else {
-            $fileContent = Storage::disk('s3')->get($fileName);
+            $fileContent = $this->generateImage('File Not Found');
         }
 
         if (stristr($fileName, 'image') || stristr($contentType, 'image')) {

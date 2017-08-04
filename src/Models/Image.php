@@ -102,8 +102,10 @@ class Image extends QuarxModel
             } else {
                 if (Storage::disk(Config::get('quarx.storage-location', 'local'))->exists($this->location)) {
                     $imagePath = Storage::disk(Config::get('quarx.storage-location', 'local'))->url($this->location);
+                } elseif (! is_null(config('filesystems.cloud.key'))) {
+                    $imagePath = Storage::disk('cloud')->url($this->location);
                 } else {
-                    $imagePath = Storage::disk('s3')->url($this->location);
+                    $imagePath = app(AssetService::class)->generateImage('File Not Found');
                 }
             }
 

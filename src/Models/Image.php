@@ -4,12 +4,13 @@ namespace Yab\Quarx\Models;
 
 use Carbon\Carbon;
 use Config;
-use FileService;
 use Exception;
+use FileService;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
 use Intervention\Image\ImageManagerStatic as InterventionImage;
 use Storage;
+use Yab\Quarx\Services\AssetService;
 
 class Image extends QuarxModel
 {

@@ -3,6 +3,11 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 ----
 
+## [v2.3.30] - 2017-08-10
+
+### Fixed
+- Minor issues with Images
+
 ## [v2.3.29] - 2017-07-10
 
 ### Fixed

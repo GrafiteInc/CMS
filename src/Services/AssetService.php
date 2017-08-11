@@ -82,14 +82,14 @@ class AssetService
                 if (stristr($contentType, 'image')) {
                     $headers = ['Content-Type' => $contentType];
                     $fileContent = $this->getFileContent($fileName, $contentType, $ext);
-
-                    return Response::make($fileContent, 200, [
-                        'Content-Type' => $contentType,
-                        'Content-Disposition' => 'attachment; filename="'.$fileName.'"',
-                    ]);
                 } else {
-                    return $this->generateImage($ext);
+                    $fileContent = file_get_contents($this->generateImage($ext));
                 }
+
+                return Response::make($fileContent, 200, [
+                    'Content-Type' => $contentType,
+                    'Content-Disposition' => 'attachment; filename="'.$fileName.'"',
+                ]);
             });
         } catch (Exception $e) {
             return Response::make('file not found');
@@ -216,7 +216,7 @@ class AssetService
         } elseif (!is_null(config('filesystems.cloud.key'))) {
             $fileContent = Storage::disk('cloud')->get($fileName);
         } else {
-            $fileContent = $this->generateImage('File Not Found');
+            $fileContent = file_get_contents($this->generateImage('File Not Found'));
         }
 
         if (stristr($fileName, 'image') || stristr($contentType, 'image')) {
@@ -243,17 +243,19 @@ class AssetService
     public function generateImage($ext)
     {
         $color = '#'.str_pad(dechex(mt_rand(0, 0xFFFFFF)), 6, '0', STR_PAD_LEFT);
-        $img = Image::make(__DIR__.'/../Assets/Images/blank.jpg');
+        $img = Image::make(__DIR__.'/../Assets/images/blank.jpg');
         $img->fill($color);
-        $img->text($ext, 145, 145, function ($font) {
-            $font->file(__DIR__.'/../Assets/Fonts/SourceSansPro-Semibold.otf');
-            $font->size(36);
-            $font->color('#111111');
+        $img->text($ext, 150, 150, function ($font) {
+            $font->file(__DIR__.'/../Assets/fonts/SourceSansPro-Black.ttf');
+            $font->size(32);
+            $font->color('#ffffff');
             $font->align('center');
             $font->valign('center');
             $font->angle(45);
         });
 
-        return $img->response('jpg');
+        $img->save(storage_path(md5($ext).'.jpg'));
+
+        return storage_path(md5($ext).'.jpg');
     }
 }

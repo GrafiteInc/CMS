@@ -123,7 +123,7 @@ class ImagesController extends QuarxController
 
         if (!$validation['errors']) {
             $file = $request->file('location');
-            $fileSaved = FileService::saveFile($file, 'public/images');
+            $fileSaved = FileService::saveFile($file, 'public/images', [], true);
             $fileSaved['name'] = CryptoService::encrypt($fileSaved['name']);
             $fileSaved['mime'] = $file->getClientMimeType();
             $fileSaved['size'] = $file->getClientSize();
@@ -200,7 +200,9 @@ class ImagesController extends QuarxController
         $image = $this->imagesRepository->findImagesById($id);
 
         if (is_file(storage_path($image->location))) {
-            @Storage::delete($image->location);
+            Storage::delete($image->location);
+        } else {
+            Storage::disk(Config::get('quarx.storage-location', 'local'))->delete($image->location);
         }
 
         if (empty($image)) {
@@ -232,7 +234,9 @@ class ImagesController extends QuarxController
             $image = $this->imagesRepository->findImagesById($id);
 
             if (is_file(storage_path($image->location))) {
-                @Storage::delete($image->location);
+                Storage::delete($image->location);
+            } else {
+                Storage::disk(Config::get('quarx.storage-location', 'local'))->delete($image->location);
             }
 
             $image->delete();

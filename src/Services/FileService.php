@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Storage;
+use Intervention\Image\ImageManagerStatic as InterventionImage;
 
 class FileService
 {
@@ -70,7 +71,7 @@ class FileService
      *
      * @return array
      */
-    public static function saveFile($fileName, $directory = '', $fileTypes = [])
+    public static function saveFile($fileName, $directory = '', $fileTypes = [], $isImage = false)
     {
         if (is_object($fileName)) {
             $file = $fileName;
@@ -103,6 +104,21 @@ class FileService
         }
 
         Storage::disk(Config::get('quarx.storage-location', 'local'))->put($directory.$newFileName.'.'.$extension, File::get($file));
+
+           // Resize images only
+        if ($isImage) {
+            $storage = Storage::disk(Config::get('quarx.storage-location', 'local'));
+            $image = $storage->get($directory.$newFileName.'.'.$extension);
+
+            $image = InterventionImage::make($image)->resize(config('quarx.max-image-size', 800), null, function ($constraint) {
+                $constraint->aspectRatio();
+            });
+
+            $imageResized = $image->stream();
+
+            $storage->delete($directory.$newFileName.'.'.$extension);
+            $storage->put($directory.$newFileName.'.'.$extension, $imageResized->__toString());
+        }
 
         return [
             'original' => $originalName ?: $file->getFilename().'.'.$extension,

@@ -186,7 +186,7 @@ class ImageRepository
     public function update($image, $input)
     {
         if (isset($input['location']) && !empty($input['location'])) {
-            $savedFile = FileService::saveFile($input['location'], 'public/images');
+            $savedFile = FileService::saveFile($input['location'], 'public/images', [], true);
 
             if (!$savedFile) {
                 Quarx::notification('Image could not be updated.', 'danger');

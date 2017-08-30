@@ -196,6 +196,32 @@ The basic Quarx API endpoints must carry the Quarx `apiToken` defined in the con
 /quarx/api/widgets/{id}
 ```
 
+## Images
+
+Images are resized on upload for a better quality response time. They follow the guidelines specified in the `config` under `quarx.max-image-size`.
+
+## S3
+
+Regarding S3 bucket usage. You will need to set the permissions accordingly to allow images to be saved to your buckets. Then you need to set your buckets to allow public viewing access.
+This is an example of such a policy.
+
+```
+{
+    "Version":"2008-10-17",
+    "Statement":[{
+        "Sid":"AllowPublicRead",
+        "Effect":"Allow",
+        "Principal": {
+            "AWS": "*"
+        },
+        "Action":["s3:GetObject"],
+        "Resource":["arn:aws:s3:::MY_BUCKET/public/images/*"]
+    }]
+}
+```
+
+Replace `MY_BUCKET` with your bucket name.
+
 ## License
 
 Quarx is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)

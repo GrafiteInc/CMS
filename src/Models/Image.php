@@ -23,7 +23,6 @@ class Image extends QuarxModel
     protected $appends = [
         'url',
         'js_url',
-        'data_url',
     ];
 
     public static $rules = [
@@ -59,13 +58,13 @@ class Image extends QuarxModel
      */
     public function getUrlAttribute()
     {
-        return $this->remember('url', function () {
-            if ($this->isLocalFile()) {
-                return url(str_replace('public/', 'storage/', $this->location));
-            }
+        if ($this->isLocalFile()) {
+            return url(str_replace('public/', 'storage/', $this->location));
+        } elseif ($this->fileExists()) {
+            return Storage::disk(Config::get('quarx.storage-location', 'local'))->url($this->location);
+        }
 
-            return FileService::fileAsPublicAsset($this->location);
-        });
+        return $this->lostImage();
     }
 
     /**
@@ -77,45 +76,7 @@ class Image extends QuarxModel
      */
     public function getJsUrlAttribute()
     {
-        return $this->remember('js_url', function () {
-            if ($this->isLocalFile()) {
-                $file = url(str_replace('public/', 'storage/', $this->location));
-            } else {
-                $file = FileService::fileAsPublicAsset($this->location);
-            }
-
-            return str_replace(url('/'), '', $file);
-        });
-    }
-
-    /**
-     * Get the images url location.
-     *
-     * @param string $value
-     *
-     * @return string
-     */
-    public function getDataUrlAttribute()
-    {
-        return $this->remember('data_url', function () {
-            if ($this->isLocalFile()) {
-                $imagePath = storage_path('app/'.$this->location);
-            } else {
-                if (Storage::disk(Config::get('quarx.storage-location', 'local'))->exists($this->location)) {
-                    $imagePath = Storage::disk(Config::get('quarx.storage-location', 'local'))->url($this->location);
-                } elseif (! is_null(config('filesystems.cloud.key'))) {
-                    $imagePath = Storage::disk('cloud')->url($this->location);
-                } else {
-                    $imagePath = app(AssetService::class)->generateImage('File Not Found');
-                }
-            }
-
-            $image = InterventionImage::make($imagePath)->resize(config('quarx.preview-image-size', 800), null, function ($constraint) {
-                $constraint->aspectRatio();
-            });
-
-            return (string) $image->encode('data-url');
-        });
+        return $this->url;
     }
 
     /**
@@ -123,7 +84,7 @@ class Image extends QuarxModel
      */
     public function setCaches()
     {
-        if ($this->url && $this->js_url && $this->data_url) {
+        if ($this->url && $this->js_url) {
             return true;
         }
 
@@ -155,7 +116,7 @@ class Image extends QuarxModel
      */
     public function forgetCache()
     {
-        foreach (['url', 'js_url', 'data_url'] as $attribute) {
+        foreach (['url', 'js_url'] as $attribute) {
             $key = $attribute.'_'.$this->location;
             Cache::forget($key);
         }
@@ -179,5 +140,21 @@ class Image extends QuarxModel
         }
 
         return false;
+    }
+
+    public function fileExists()
+    {
+        return Storage::disk(Config::get('quarx.storage-location', 'local'))->exists($this->location);
+    }
+
+    public function lostImage()
+    {
+        $imagePath = app(AssetService::class)->generateImage('File Not Found');
+
+        $image = InterventionImage::make($imagePath)->resize(config('quarx.preview-image-size', 800), null, function ($constraint) {
+            $constraint->aspectRatio();
+        });
+
+        return (string) $image->encode('data-url');
     }
 }

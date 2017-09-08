@@ -24,3 +24,10 @@ if (!function_exists('sortable')) {
         return '<a href="'.request()->url().'?'.http_build_query($newQuery).'">'.$label.' <span class="fa fa-sort"></span></a>';
     }
 }
+
+if (!function_exists('redirectToQuarxRoute')) {
+    function redirectToQuarxRoute($route, $parameters = [], $status = 302, $headers = [])
+    {
+        return redirect(route(config('quarx.backend-route-prefix', 'quarx').".$route"), $parameters, $status, $headers);
+    }
+}

@@ -144,13 +144,13 @@ class WidgetsController extends QuarxController
         if (empty($widgets)) {
             Quarx::notification('Widgets not found', 'warning');
 
-            return redirect(route(config('quarx.backend-route-prefix', 'quarx').'.widgets.index'));
+            return redirectToQuarxRoute('widgets.index');
         }
 
         $widgets->delete();
 
         Quarx::notification('Widgets deleted successfully.', 'success');
 
-        return redirect(route(config('quarx.backend-route-prefix', 'quarx').'.widgets.index'));
+        return redirectToQuarxRoute('widgets.index');
     }
 }

@@ -150,6 +150,6 @@ class LinksController extends QuarxController
 
         Quarx::notification('Link deleted successfully.', 'success');
 
-        return redirect(URL::to('quarx/menus/'.$menu.'/edit'));
+        return redirect('quarx/menus/'.$menu.'/edit');
     }
 }

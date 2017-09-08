@@ -48,10 +48,8 @@ class FileService
         $newFileName = md5(rand(1111, 9999).time());
 
         // In case we don't want that file type
-        if (!empty($fileTypes)) {
-            if (!in_array($extension, $fileTypes)) {
+        if (!empty($fileTypes) && !in_array($extension, $fileTypes)) {
                 throw new Exception('Incorrect file type', 1);
-            }
         }
 
         Storage::disk(Config::get('quarx.storage-location', 'local'))->put($directory.$newFileName.'.'.$extension, file_get_contents($fileName));

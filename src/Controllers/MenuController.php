@@ -78,16 +78,16 @@ class MenuController extends QuarxController
         try {
             $validation = ValidationService::check(Menu::$rules);
 
-            if (!$validation['errors']) {
-                $menu = $this->menuRepository->store($request->all());
-                Quarx::notification('Menu saved successfully.', 'success');
-
-                if (!$menu) {
-                    Quarx::notification('Menu could not be saved.', 'danger');
-                }
-            } else {
+            if ($validation['errors']) {
                 return $validation['redirect'];
             }
+            $menu = $this->menuRepository->store($request->all());
+            Quarx::notification('Menu saved successfully.', 'success');
+
+            if (!$menu) {
+                Quarx::notification('Menu could not be saved.', 'danger');
+            }
+
         } catch (Exception $e) {
             Quarx::notification($e->getMessage() ?: 'Menu could not be saved.', 'danger');
         }

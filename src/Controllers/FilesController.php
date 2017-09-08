@@ -86,8 +86,8 @@ class FilesController extends QuarxController
         if ($validation['errors']) {
             return $validation['redirect'];
         }
-        $file = $this->fileRepository->store($request->all());
 
+        $this->fileRepository->store($request->all());
 
         Quarx::notification('File saved successfully.', 'success');
 
@@ -107,18 +107,17 @@ class FilesController extends QuarxController
             'location' => [],
         ]);
 
-        if (!$validation['errors']) {
-            $file = $request->file('location');
-            $fileSaved = FileService::saveFile($file, 'files/');
-            $fileSaved['name'] = CryptoService::encrypt($fileSaved['name']);
-            $fileSaved['mime'] = $file->getClientMimeType();
-            $fileSaved['size'] = $file->getClientSize();
-            $response = QuarxResponseService::apiResponse('success', $fileSaved);
-        } else {
-            $response = QuarxResponseService::apiErrorResponse($validation['errors'], $validation['inputs']);
+        if ($validation['errors']) {
+            return QuarxResponseService::apiErrorResponse($validation['errors'], $validation['inputs']);
         }
 
-        return $response;
+        $file = $request->file('location');
+        $fileSaved = FileService::saveFile($file, 'files/');
+        $fileSaved['name'] = CryptoService::encrypt($fileSaved['name']);
+        $fileSaved['mime'] = $file->getClientMimeType();
+        $fileSaved['size'] = $file->getClientSize();
+
+        return QuarxResponseService::apiResponse('success', $fileSaved);
     }
 
     /**

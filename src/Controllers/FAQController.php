@@ -74,12 +74,12 @@ class FAQController extends QuarxController
     {
         $validation = ValidationService::check(FAQ::$rules);
 
-        if (!$validation['errors']) {
-            $faq = $this->faqRepository->store($request->all());
-            Quarx::notification('FAQ saved successfully.', 'success');
-        } else {
+        if ($validation['errors']) {
             return $validation['redirect'];
         }
+        $faq = $this->faqRepository->store($request->all());
+        Quarx::notification('FAQ saved successfully.', 'success');
+
 
         if (!$faq) {
             Quarx::notification('FAQ could not be saved.', 'warning');

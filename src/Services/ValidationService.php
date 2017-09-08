@@ -155,17 +155,16 @@ class ValidationService
     private static function inputsArray($jsonInput)
     {
         if ($jsonInput) {
-            $inputs = Input::json();
-        } else {
-            $inputs = Input::all();
+            return Input::json();
+        }
+        $inputs = Input::all();
 
-            // Don't send the token back
-            unset($inputs['_token']);
+        // Don't send the token back
+        unset($inputs['_token']);
 
-            foreach ($inputs as $key => $value) {
-                if (Input::file($key)) {
-                    unset($inputs[$key]);
-                }
+        foreach ($inputs as $key => $value) {
+            if (Input::file($key)) {
+                unset($inputs[$key]);
             }
         }
 

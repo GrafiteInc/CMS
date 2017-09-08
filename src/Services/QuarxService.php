@@ -70,12 +70,11 @@ class QuarxService
         $trail = '';
 
         foreach ($locations as $location) {
-            if (is_array($location)) {
-                foreach ($location as $key => $value) {
-                    $trail .= '<li><a href="'.$value.'">'.ucfirst($key).'</a></li>';
-                }
-            } else {
-                $trail .= '<li>'.ucfirst($location).'</li>';
+            if (!is_array($location)) {
+                return '<li>'.ucfirst($location).'</li>';
+            }
+            foreach ($location as $key => $value) {
+                $trail .= '<li><a href="'.$value.'">'.ucfirst($key).'</a></li>';
             }
         }
 

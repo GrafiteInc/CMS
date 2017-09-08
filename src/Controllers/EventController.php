@@ -133,7 +133,7 @@ class EventController extends QuarxController
             Quarx::notification('Event could not be saved.', 'warning');
         }
 
-        return redirect(URL::previous());
+        return redirect()->back();
     }
 
     /**

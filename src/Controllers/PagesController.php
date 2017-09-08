@@ -133,7 +133,7 @@ class PagesController extends QuarxController
             Quarx::notification('Page could not be saved.', 'warning');
         }
 
-        return redirect(URL::previous());
+        return redirect()->back();
     }
 
     /**

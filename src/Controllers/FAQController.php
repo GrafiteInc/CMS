@@ -133,7 +133,7 @@ class FAQController extends QuarxController
             Quarx::notification('FAQ could not be saved.', 'warning');
         }
 
-        return redirect(URL::previous());
+        return redirect()->back();
     }
 
     /**

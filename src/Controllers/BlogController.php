@@ -132,7 +132,7 @@ class BlogController extends QuarxController
             Quarx::notification('Blog could not be saved.', 'warning');
         }
 
-        return redirect(URL::previous());
+        return redirect()->back();
     }
 
     /**

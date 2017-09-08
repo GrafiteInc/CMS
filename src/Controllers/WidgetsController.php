@@ -127,7 +127,7 @@ class WidgetsController extends QuarxController
 
         Quarx::notification('Widgets updated successfully.', 'success');
 
-        return redirect(URL::previous());
+        return redirect()->back();
     }
 
     /**

@@ -74,12 +74,11 @@ class BlogController extends QuarxController
     {
         $validation = ValidationService::check(Blog::$rules);
 
-        if (!$validation['errors']) {
-            $blog = $this->blogRepository->store($request->all());
-            Quarx::notification('Blog saved successfully.', 'success');
-        } else {
+        if ($validation['errors']) {
             return $validation['redirect'];
         }
+        $blog = $this->blogRepository->store($request->all());
+        Quarx::notification('Blog saved successfully.', 'success');
 
         if (!$blog) {
             Quarx::notification('Blog could not be saved.', 'warning');

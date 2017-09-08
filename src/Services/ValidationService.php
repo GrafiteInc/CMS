@@ -91,18 +91,18 @@ class ValidationService
     public static function errors($format = 'array')
     {
         $errorMessage = '';
-        $errors = Session::get('errors') ?: false;
+        $errors = Session::get('errors', false);
 
         if (!$errors) {
             return false;
         }
 
-        if ($format === 'string') {
-            foreach ($errors as $error => $message) {
-                $errorMessage .= $message.'<br>';
-            }
-        } else {
-            $errorMessage = Session::get('errors');
+        if ($format !== 'string') {
+            return Session::get('errors');
+        }
+
+        foreach ($errors as $error => $message) {
+            $errorMessage .= $message.'<br>';
         }
 
         return $errorMessage;

@@ -121,16 +121,16 @@ class ImagesController extends QuarxController
             'location' => ['required'],
         ]);
 
-        if (!$validation['errors']) {
-            $file = $request->file('location');
-            $fileSaved = FileService::saveFile($file, 'public/images');
-            $fileSaved['name'] = CryptoService::encrypt($fileSaved['name']);
-            $fileSaved['mime'] = $file->getClientMimeType();
-            $fileSaved['size'] = $file->getClientSize();
-            $response = QuarxResponseService::apiResponse('success', $fileSaved);
-        } else {
-            $response = QuarxResponseService::apiErrorResponse($validation['errors'], $validation['inputs']);
+        if ($validation['errors']) {
+            return $response = QuarxResponseService::apiErrorResponse($validation['errors'], $validation['inputs']);
         }
+
+        $file = $request->file('location');
+        $fileSaved = FileService::saveFile($file, 'public/images');
+        $fileSaved['name'] = CryptoService::encrypt($fileSaved['name']);
+        $fileSaved['mime'] = $file->getClientMimeType();
+        $fileSaved['size'] = $file->getClientSize();
+        $response = QuarxResponseService::apiResponse('success', $fileSaved);
 
         return $response;
     }

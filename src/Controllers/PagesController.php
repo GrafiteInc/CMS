@@ -75,12 +75,11 @@ class PagesController extends QuarxController
     {
         $validation = ValidationService::check(Page::$rules);
 
-        if (!$validation['errors']) {
-            $pages = $this->pagesRepository->store($request->all());
-            Quarx::notification('Page saved successfully.', 'success');
-        } else {
+        if ($validation['errors']) {
             return $validation['redirect'];
         }
+        $pages = $this->pagesRepository->store($request->all());
+        Quarx::notification('Page saved successfully.', 'success');
 
         if (!$pages) {
             Quarx::notification('Page could not be saved.', 'warning');

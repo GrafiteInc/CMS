@@ -59,16 +59,16 @@ class LinksController extends QuarxController
         try {
             $validation = ValidationService::check(Link::$rules);
 
-            if (!$validation['errors']) {
-                $links = $this->linksRepository->store($request->all());
-                Quarx::notification('Link saved successfully.', 'success');
-
-                if (!$links) {
-                    Quarx::notification('Link could not be saved.', 'danger');
-                }
-            } else {
+            if ($validation['errors']) {
                 return $validation['redirect'];
             }
+            $links = $this->linksRepository->store($request->all());
+            Quarx::notification('Link saved successfully.', 'success');
+
+            if (!$links) {
+                Quarx::notification('Link could not be saved.', 'danger');
+            }
+
         } catch (Exception $e) {
             Quarx::notification($e->getMessage() ?: 'Link could not be saved.', 'danger');
         }

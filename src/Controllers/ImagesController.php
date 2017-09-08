@@ -122,7 +122,7 @@ class ImagesController extends QuarxController
         ]);
 
         if ($validation['errors']) {
-            return $response = QuarxResponseService::apiErrorResponse($validation['errors'], $validation['inputs']);
+            return QuarxResponseService::apiErrorResponse($validation['errors'], $validation['inputs']);
         }
 
         $file = $request->file('location');

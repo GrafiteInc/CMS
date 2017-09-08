@@ -71,7 +71,8 @@ class QuarxService
 
         foreach ($locations as $location) {
             if (!is_array($location)) {
-                return '<li>'.ucfirst($location).'</li>';
+                $trail .= '<li>'.ucfirst($location).'</li>';
+                continue;
             }
             foreach ($location as $key => $value) {
                 $trail .= '<li><a href="'.$value.'">'.ucfirst($key).'</a></li>';
@@ -162,15 +163,17 @@ class QuarxService
      */
     public function editBtn($type = null, $id = null)
     {
-        if (Gate::allows('quarx', Auth::user())) {
-            if (!is_null($id)) {
-                return '<a href="'.url(config('quarx.backend-route-prefix', 'quarx').'/'.$type.'/'.$id.'/edit').'" class="btn btn-xs btn-default pull-right"><span class="fa fa-pencil"></span> Edit</a>';
-            } else {
-                return '<a href="'.url(config('quarx.backend-route-prefix', 'quarx').'/'.$type).'" class="btn btn-xs btn-default pull-right"><span class="fa fa-pencil"></span> Edit</a>';
-            }
+        if (!Gate::allows('quarx', Auth::user())) {
+            return '';
         }
 
-        return '';
+        if (!is_null($id)) {
+            return '<a href="'.url(config('quarx.backend-route-prefix', 'quarx').'/'.$type.'/'.$id.'/edit').'" class="btn btn-xs btn-default pull-right"><span class="fa fa-pencil"></span> Edit</a>';
+        }
+
+        return '<a href="'.url(config('quarx.backend-route-prefix', 'quarx').'/'.$type).'" class="btn btn-xs btn-default pull-right"><span class="fa fa-pencil"></span> Edit</a>';
+
+
     }
 
     /**

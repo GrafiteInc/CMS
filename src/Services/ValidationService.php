@@ -135,14 +135,14 @@ class ValidationService
     private static function getInput($key, $jsonInput)
     {
         if ($jsonInput) {
-            $input = Input::json($key);
-        } elseif (Input::file($key)) {
-            $input = Input::file($key);
-        } else {
-            $input = Input::get($key);
+            return Input::json($key);
         }
 
-        return $input;
+        if (Input::file($key)) {
+            return Input::file($key);
+        }
+
+        return Input::get($key);
     }
 
     /**

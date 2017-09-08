@@ -74,11 +74,11 @@ class WidgetsController extends QuarxController
     {
         $validation = ValidationService::check(Widget::$rules);
 
-        if (!$validation['errors']) {
-            $widgets = $this->widgetsRepository->store($request->all());
-        } else {
+        if ($validation['errors']) {
             return $validation['redirect'];
         }
+        $widgets = $this->widgetsRepository->store($request->all());
+
 
         Quarx::notification('Widgets saved successfully.', 'success');
 

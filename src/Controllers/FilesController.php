@@ -83,11 +83,11 @@ class FilesController extends QuarxController
     {
         $validation = ValidationService::check(File::$rules);
 
-        if (!$validation['errors']) {
-            $file = $this->fileRepository->store($request->all());
-        } else {
+        if ($validation['errors']) {
             return $validation['redirect'];
         }
+        $file = $this->fileRepository->store($request->all());
+
 
         Quarx::notification('File saved successfully.', 'success');
 

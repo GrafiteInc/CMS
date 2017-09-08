@@ -82,25 +82,25 @@ class ImagesController extends QuarxController
     {
         try {
             $validation = ValidationService::check(['location' => 'required']);
-            if (!$validation['errors']) {
-                foreach ($request->input('location') as $image) {
-                    $imageSaved = $this->imagesRepository->store([
-                        'location' => $image,
-                        'is_published' => $request->input('is_published'),
-                        'tags' => $request->input('tags'),
-                    ]);
-                }
-
-                Quarx::notification('Image saved successfully.', 'success');
-
-                if (!$imageSaved) {
-                    Quarx::notification('Image was not saved.', 'danger');
-                }
-            } else {
+            if ($validation['errors']) {
                 Quarx::notification('Image could not be saved', 'danger');
-
                 return $validation['redirect'];
             }
+
+            foreach ($request->input('location') as $image) {
+                $imageSaved = $this->imagesRepository->store([
+                    'location' => $image,
+                    'is_published' => $request->input('is_published'),
+                    'tags' => $request->input('tags'),
+                ]);
+            }
+
+            Quarx::notification('Image saved successfully.', 'success');
+
+            if (!$imageSaved) {
+                Quarx::notification('Image was not saved.', 'danger');
+            }
+
         } catch (Exception $e) {
             Quarx::notification($e->getMessage() ?: 'Image could not be saved.', 'danger');
         }

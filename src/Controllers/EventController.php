@@ -74,12 +74,12 @@ class EventController extends QuarxController
     {
         $validation = ValidationService::check(Event::$rules);
 
-        if (!$validation['errors']) {
-            $event = $this->eventRepository->store($request->all());
-            Quarx::notification('Event saved successfully.', 'success');
-        } else {
+        if ($validation['errors']) {
             return $validation['redirect'];
         }
+        $event = $this->eventRepository->store($request->all());
+        Quarx::notification('Event saved successfully.', 'success');
+
 
         if (!$event) {
             Quarx::notification('Event could not be saved.', 'warning');

@@ -24,8 +24,8 @@ if (!function_exists('sortable')) {
 }
 
 if (!function_exists('redirectToQuarxRoute')) {
-    function redirectToQuarxRoute($route, $parameters = [], $status = 302, $headers = [])
+    function redirectToQuarxRoute($route, $params=[], $status = 302, $headers = [], $secure = null)
     {
-        return redirect(route(config('quarx.backend-route-prefix', 'quarx').".$route"), $parameters, $status, $headers);
+        return redirect(route(config('quarx.backend-route-prefix', 'quarx').".".$route, $params),  $status, $headers, $secure);
     }
 }

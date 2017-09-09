@@ -178,7 +178,7 @@ class FilesController extends QuarxController
             return redirectToQuarxRoute('files.index');
         }
 
-        $files = $this->fileRepository->update($files, $request->all());
+        $this->fileRepository->update($files, $request->all());
 
         Quarx::notification('File updated successfully.', 'success');
 

@@ -97,22 +97,7 @@ class AnalyticsService
     {
         $analytics = $this->model->where('created_at', '>', Carbon::now()->subDays($count));
 
-        if ($analytics->first()) {
-            $endDate = Carbon::now();
-            $startDate = Carbon::parse($analytics->first()->created_at->format('Y-m-d'));
-
-            $dateRange = $this->getDateRange($startDate, $endDate);
-
-            foreach ($dateRange as $date) {
-                $visits[$date] = $this->model->where('created_at', '>', $date.' 00:00:00')->where('created_at', '<', $date.' 23:59:59')->count();
-            }
-
-            $visitCollection = collect($visits);
-        } else {
-            $visitCollection = collect([
-                Carbon::now()->format('Y-m-d') => 0,
-            ]);
-        }
+        $visitCollection = $this->_getVisitCollection($analytics);
 
         return [
             'dates' => $visitCollection->keys()->toArray(),
@@ -129,5 +114,29 @@ class AnalyticsService
         }
 
         return $dates;
+    }
+
+    /**
+     * @param $analytics
+     * @return \Illuminate\Support\Collection
+     */
+    private function _getVisitCollection($analytics)
+    {
+        $visits = [];
+        if (!$analytics->first()) {
+            return collect([ Carbon::now()->format('Y-m-d') => 0,]);
+        }
+
+        $endDate = Carbon::now();
+        $startDate = Carbon::parse($analytics->first()->created_at->format('Y-m-d'));
+
+        $dateRange = $this->getDateRange($startDate, $endDate);
+
+        foreach ($dateRange as $date) {
+            $visits[$date] = $this->model->where('created_at', '>', $date . ' 00:00:00')->where('created_at', '<',
+                $date . ' 23:59:59')->count();
+        }
+
+        return collect($visits);
     }
 }

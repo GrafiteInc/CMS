@@ -74,18 +74,18 @@ class EventController extends QuarxController
     {
         $validation = ValidationService::check(Event::$rules);
 
-        if (!$validation['errors']) {
-            $event = $this->eventRepository->store($request->all());
-            Quarx::notification('Event saved successfully.', 'success');
-        } else {
+        if ($validation['errors']) {
             return $validation['redirect'];
         }
+        $event = $this->eventRepository->store($request->all());
+        Quarx::notification('Event saved successfully.', 'success');
+
 
         if (!$event) {
             Quarx::notification('Event could not be saved.', 'warning');
         }
 
-        return redirect(route(config('quarx.backend-route-prefix', 'quarx').'.events.edit', [$event->id]));
+        return redirectToQuarxRoute('events.edit', [$event->id]);
     }
 
     /**
@@ -102,7 +102,7 @@ class EventController extends QuarxController
         if (empty($event)) {
             Quarx::notification('Event not found', 'warning');
 
-            return redirect(route(config('quarx.backend-route-prefix', 'quarx').'.events.index'));
+            return redirectToQuarxRoute('events.index');
         }
 
         return view('quarx::modules.events.edit')->with('event', $event);
@@ -123,7 +123,7 @@ class EventController extends QuarxController
         if (empty($event)) {
             Quarx::notification('Event not found', 'warning');
 
-            return redirect(route(config('quarx.backend-route-prefix', 'quarx').'.events.index'));
+            return redirectToQuarxRoute('events.index');
         }
 
         $event = $this->eventRepository->update($event, $request->all());
@@ -133,7 +133,7 @@ class EventController extends QuarxController
             Quarx::notification('Event could not be saved.', 'warning');
         }
 
-        return redirect(URL::previous());
+        return redirect()->back();
     }
 
     /**
@@ -150,14 +150,14 @@ class EventController extends QuarxController
         if (empty($event)) {
             Quarx::notification('Event not found', 'warning');
 
-            return redirect(route(config('quarx.backend-route-prefix', 'quarx').'.events.index'));
+            return redirectToQuarxRoute('events.index');
         }
 
         $event->delete();
 
         Quarx::notification('Event deleted successfully.', 'success');
 
-        return redirect(route(config('quarx.backend-route-prefix', 'quarx').'.events.index'));
+        return redirectToQuarxRoute('events.index');
     }
 
     /**

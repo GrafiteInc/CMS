@@ -13,11 +13,12 @@ class BlogService
 
         foreach ($templates as $template) {
             $template = str_replace(base_path('resources/themes/'.Config::get('quarx.frontend-theme').'/blog/'), '', $template);
-            if (stristr($template, 'template')) {
-                $template = str_replace('-template.blade.php', '', $template);
-                if (!stristr($template, '.php')) {
-                    $availableTemplates[] = $template.'-template';
-                }
+            if (!stristr($template, 'template')) {
+                continue;
+            }
+            $template = str_replace('-template.blade.php', '', $template);
+            if (!stristr($template, '.php')) {
+                $availableTemplates[] = $template.'-template';
             }
         }
 

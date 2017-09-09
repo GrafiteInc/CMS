@@ -36,7 +36,7 @@ class QuarxFeatureController extends QuarxController
 
         Quarx::notification('Reversion was successful', 'success');
 
-        return redirect(URL::previous());
+        return redirect()->back();
     }
 
     /**
@@ -54,7 +54,7 @@ class QuarxFeatureController extends QuarxController
         if (!class_exists($modelString)) {
             Quarx::notification('Could not rollback Model not found', 'warning');
 
-            return redirect(URL::previous());
+            return redirect()->back();
         }
 
         $model = app($modelString);
@@ -65,7 +65,7 @@ class QuarxFeatureController extends QuarxController
         if (!$archive) {
             Quarx::notification('Could not rollback', 'warning');
 
-            return redirect(URL::previous());
+            return redirect()->back();
         }
         $archiveData = (array) json_decode($archive->entity_data);
 
@@ -74,7 +74,7 @@ class QuarxFeatureController extends QuarxController
 
         Quarx::notification('Rollback was successful', 'success');
 
-        return redirect(URL::previous());
+        return redirect()->back();
     }
 
     /**

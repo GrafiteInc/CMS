@@ -15,12 +15,17 @@ if (!function_exists('sortable')) {
         $newQuery['field'] = $field;
         $newQuery['dir'] = 'asc';
 
-        if (isset($query['field'])) {
-            if ($query['field'] == $field && $query['dir'] == 'asc') {
-                $newQuery['dir'] = 'desc';
-            }
+        if (isset($query['field']) && $query['field'] == $field && $query['dir'] == 'asc') {
+            $newQuery['dir'] = 'desc';
         }
 
         return '<a href="'.request()->url().'?'.http_build_query($newQuery).'">'.$label.' <span class="fa fa-sort"></span></a>';
+    }
+}
+
+if (!function_exists('redirectToQuarxRoute')) {
+    function redirectToQuarxRoute($route, $params=[], $status = 302, $headers = [], $secure = null)
+    {
+        return redirect(route(config('quarx.backend-route-prefix', 'quarx').".".$route, $params),  $status, $headers, $secure);
     }
 }

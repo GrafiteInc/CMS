@@ -74,11 +74,11 @@ class WidgetsController extends QuarxController
     {
         $validation = ValidationService::check(Widget::$rules);
 
-        if (!$validation['errors']) {
-            $widgets = $this->widgetsRepository->store($request->all());
-        } else {
+        if ($validation['errors']) {
             return $validation['redirect'];
         }
+        $widgets = $this->widgetsRepository->store($request->all());
+
 
         Quarx::notification('Widgets saved successfully.', 'success');
 
@@ -127,7 +127,7 @@ class WidgetsController extends QuarxController
 
         Quarx::notification('Widgets updated successfully.', 'success');
 
-        return redirect(URL::previous());
+        return redirect()->back();
     }
 
     /**
@@ -144,13 +144,13 @@ class WidgetsController extends QuarxController
         if (empty($widgets)) {
             Quarx::notification('Widgets not found', 'warning');
 
-            return redirect(route(config('quarx.backend-route-prefix', 'quarx').'.widgets.index'));
+            return redirectToQuarxRoute('widgets.index');
         }
 
         $widgets->delete();
 
         Quarx::notification('Widgets deleted successfully.', 'success');
 
-        return redirect(route(config('quarx.backend-route-prefix', 'quarx').'.widgets.index'));
+        return redirectToQuarxRoute('widgets.index');
     }
 }

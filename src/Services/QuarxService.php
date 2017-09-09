@@ -21,7 +21,7 @@ class QuarxService
 
     public function __construct()
     {
-        $this->imageRepo = App::make('Yab\Quarx\Repositories\ImageRepository');
+        $this->imageRepo = app('Yab\Quarx\Repositories\ImageRepository');
     }
 
     /**
@@ -70,12 +70,12 @@ class QuarxService
         $trail = '';
 
         foreach ($locations as $location) {
-            if (is_array($location)) {
-                foreach ($location as $key => $value) {
-                    $trail .= '<li><a href="'.$value.'">'.ucfirst($key).'</a></li>';
-                }
-            } else {
+            if (!is_array($location)) {
                 $trail .= '<li>'.ucfirst($location).'</li>';
+                continue;
+            }
+            foreach ($location as $key => $value) {
+                $trail .= '<li><a href="'.$value.'">'.ucfirst($key).'</a></li>';
             }
         }
 
@@ -163,15 +163,17 @@ class QuarxService
      */
     public function editBtn($type = null, $id = null)
     {
-        if (Gate::allows('quarx', Auth::user())) {
-            if (!is_null($id)) {
-                return '<a href="'.url(config('quarx.backend-route-prefix', 'quarx').'/'.$type.'/'.$id.'/edit').'" class="btn btn-xs btn-default pull-right"><span class="fa fa-pencil"></span> Edit</a>';
-            } else {
-                return '<a href="'.url(config('quarx.backend-route-prefix', 'quarx').'/'.$type).'" class="btn btn-xs btn-default pull-right"><span class="fa fa-pencil"></span> Edit</a>';
-            }
+        if (!Gate::allows('quarx', Auth::user())) {
+            return '';
         }
 
-        return '';
+        if (!is_null($id)) {
+            return '<a href="'.url(config('quarx.backend-route-prefix', 'quarx').'/'.$type.'/'.$id.'/edit').'" class="btn btn-xs btn-default pull-right"><span class="fa fa-pencil"></span> Edit</a>';
+        }
+
+        return '<a href="'.url(config('quarx.backend-route-prefix', 'quarx').'/'.$type).'" class="btn btn-xs btn-default pull-right"><span class="fa fa-pencil"></span> Edit</a>';
+
+
     }
 
     /**

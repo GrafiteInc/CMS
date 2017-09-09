@@ -78,21 +78,21 @@ class MenuController extends QuarxController
         try {
             $validation = ValidationService::check(Menu::$rules);
 
-            if (!$validation['errors']) {
-                $menu = $this->menuRepository->store($request->all());
-                Quarx::notification('Menu saved successfully.', 'success');
-
-                if (!$menu) {
-                    Quarx::notification('Menu could not be saved.', 'danger');
-                }
-            } else {
+            if ($validation['errors']) {
                 return $validation['redirect'];
             }
+            $menu = $this->menuRepository->store($request->all());
+            Quarx::notification('Menu saved successfully.', 'success');
+
+            if (!$menu) {
+                Quarx::notification('Menu could not be saved.', 'danger');
+            }
+
         } catch (Exception $e) {
             Quarx::notification($e->getMessage() ?: 'Menu could not be saved.', 'danger');
         }
 
-        return redirect(route(config('quarx.backend-route-prefix', 'quarx').'.menus.edit', [$menu->id]));
+        return redirectToQuarxRoute('menus.edit', [$menu->id]);
     }
 
     /**
@@ -109,7 +109,7 @@ class MenuController extends QuarxController
         if (empty($menu)) {
             Quarx::notification('Menu not found', 'warning');
 
-            return redirect(route(config('quarx.backend-route-prefix', 'quarx').'.menus.index'));
+            return redirectToQuarxRoute('menus.index');
         }
 
         $links = $this->linkRepository->getLinksByMenu($menu->id);
@@ -133,7 +133,7 @@ class MenuController extends QuarxController
             if (empty($menu)) {
                 Quarx::notification('Menu not found', 'warning');
 
-                return redirect(route(config('quarx.backend-route-prefix', 'quarx').'.menus.index'));
+                return redirectToQuarxRoute('menus.index');
             }
 
             $menu = $this->menuRepository->update($menu, $request->all());
@@ -146,7 +146,7 @@ class MenuController extends QuarxController
             Quarx::notification($e->getMessage() ?: 'Menu could not be updated.', 'danger');
         }
 
-        return redirect(route(config('quarx.backend-route-prefix', 'quarx').'.menus.edit', [$id]));
+        return redirectToQuarxRoute('menus.edit', [$id]);
     }
 
     /**
@@ -163,14 +163,14 @@ class MenuController extends QuarxController
         if (empty($menu)) {
             Quarx::notification('Menu not found', 'warning');
 
-            return redirect(route(config('quarx.backend-route-prefix', 'quarx').'.menus.index'));
+            return redirectToQuarxRoute('menus.index');
         }
 
         $menu->delete();
 
         Quarx::notification('Menu deleted successfully.');
 
-        return redirect(route(config('quarx.backend-route-prefix', 'quarx').'.menus.index'));
+        return redirectToQuarxRoute('menus.index');
     }
 
 

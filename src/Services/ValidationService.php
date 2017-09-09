@@ -40,11 +40,12 @@ class ValidationService
         $validationRules = $validationInputs = [];
 
         foreach ($fields as $key => $value) {
-            if (isset($fields[$key])) {
-                $inputs[$key] = self::getInput($key, $jsonInput);
-                $validationInputs[$key] = self::getInput($key, $jsonInput);
-                $validationRules[$key] = $fields[$key];
+            if (!isset($fields[$key])) {
+                continue;
             }
+            $inputs[$key] = self::getInput($key, $jsonInput);
+            $validationInputs[$key] = self::getInput($key, $jsonInput);
+            $validationRules[$key] = $fields[$key];
         }
 
         $validation = Validator::make($validationInputs, $validationRules);
@@ -91,18 +92,18 @@ class ValidationService
     public static function errors($format = 'array')
     {
         $errorMessage = '';
-        $errors = Session::get('errors') ?: false;
+        $errors = Session::get('errors', false);
 
         if (!$errors) {
             return false;
         }
 
-        if ($format === 'string') {
-            foreach ($errors as $error => $message) {
-                $errorMessage .= $message.'<br>';
-            }
-        } else {
-            $errorMessage = Session::get('errors');
+        if ($format !== 'string') {
+            return Session::get('errors');
+        }
+
+        foreach ($errors as $error => $message) {
+            $errorMessage .= $message.'<br>';
         }
 
         return $errorMessage;
@@ -115,11 +116,7 @@ class ValidationService
      */
     public static function inputs()
     {
-        $inputs = Session::get('inputs') ?: false;
-
-        if (!$inputs) {
-            return false;
-        }
+        $inputs = Session::get('inputs', false);
 
         return $inputs;
     }
@@ -135,14 +132,14 @@ class ValidationService
     private static function getInput($key, $jsonInput)
     {
         if ($jsonInput) {
-            $input = Input::json($key);
-        } elseif (Input::file($key)) {
-            $input = Input::file($key);
-        } else {
-            $input = Input::get($key);
+            return Input::json($key);
         }
 
-        return $input;
+        if (Input::file($key)) {
+            return Input::file($key);
+        }
+
+        return Input::get($key);
     }
 
     /**
@@ -155,17 +152,16 @@ class ValidationService
     private static function inputsArray($jsonInput)
     {
         if ($jsonInput) {
-            $inputs = Input::json();
-        } else {
-            $inputs = Input::all();
+            return Input::json();
+        }
+        $inputs = Input::all();
 
-            // Don't send the token back
-            unset($inputs['_token']);
+        // Don't send the token back
+        unset($inputs['_token']);
 
-            foreach ($inputs as $key => $value) {
-                if (Input::file($key)) {
-                    unset($inputs[$key]);
-                }
+        foreach ($inputs as $key => $value) {
+            if (Input::file($key)) {
+                unset($inputs[$key]);
             }
         }
 
@@ -181,7 +177,7 @@ class ValidationService
      */
     public static function value($key)
     {
-        $inputs = Session::get('inputs') ?: false;
+        $inputs = Session::get('inputs', false);
 
         if (!$inputs) {
             return '';

@@ -74,18 +74,18 @@ class FAQController extends QuarxController
     {
         $validation = ValidationService::check(FAQ::$rules);
 
-        if (!$validation['errors']) {
-            $faq = $this->faqRepository->store($request->all());
-            Quarx::notification('FAQ saved successfully.', 'success');
-        } else {
+        if ($validation['errors']) {
             return $validation['redirect'];
         }
+        $faq = $this->faqRepository->store($request->all());
+        Quarx::notification('FAQ saved successfully.', 'success');
+
 
         if (!$faq) {
             Quarx::notification('FAQ could not be saved.', 'warning');
         }
 
-        return redirect(route(config('quarx.backend-route-prefix', 'quarx').'.faqs.edit', [$faq->id]));
+        return redirectToQuarxRoute('faqs.edit', [$faq->id]);
     }
 
     /**
@@ -102,7 +102,7 @@ class FAQController extends QuarxController
         if (empty($faq)) {
             Quarx::notification('FAQ not found', 'warning');
 
-            return redirect(route(config('quarx.backend-route-prefix', 'quarx').'.faqs.index'));
+            return redirectToQuarxRoute('faqs.index');
         }
 
         return view('quarx::modules.faqs.edit')->with('faq', $faq);
@@ -123,7 +123,7 @@ class FAQController extends QuarxController
         if (empty($faq)) {
             Quarx::notification('FAQ not found', 'warning');
 
-            return redirect(route(config('quarx.backend-route-prefix', 'quarx').'.faqs.index'));
+            return redirectToQuarxRoute('faqs.index');
         }
 
         $faq = $this->faqRepository->update($faq, $request->all());
@@ -133,7 +133,7 @@ class FAQController extends QuarxController
             Quarx::notification('FAQ could not be saved.', 'warning');
         }
 
-        return redirect(URL::previous());
+        return redirect()->back();
     }
 
     /**
@@ -150,13 +150,13 @@ class FAQController extends QuarxController
         if (empty($faq)) {
             Quarx::notification('FAQ not found', 'warning');
 
-            return redirect(route(config('quarx.backend-route-prefix', 'quarx').'.faqs.index'));
+            return redirectToQuarxRoute('faqs.index');
         }
 
         $faq->delete();
 
         Quarx::notification('FAQ deleted successfully.', 'success');
 
-        return redirect(route(config('quarx.backend-route-prefix', 'quarx').'.faqs.index'));
+        return redirectToQuarxRoute('faqs.index');
     }
 }

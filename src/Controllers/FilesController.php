@@ -83,15 +83,15 @@ class FilesController extends QuarxController
     {
         $validation = ValidationService::check(File::$rules);
 
-        if (!$validation['errors']) {
-            $file = $this->fileRepository->store($request->all());
-        } else {
+        if ($validation['errors']) {
             return $validation['redirect'];
         }
 
+        $this->fileRepository->store($request->all());
+
         Quarx::notification('File saved successfully.', 'success');
 
-        return redirect(route(config('quarx.backend-route-prefix', 'quarx').'.files.index'));
+        return redirectToQuarxRoute('files.index');
     }
 
     /**
@@ -107,18 +107,17 @@ class FilesController extends QuarxController
             'location' => [],
         ]);
 
-        if (!$validation['errors']) {
-            $file = $request->file('location');
-            $fileSaved = FileService::saveFile($file, 'files/');
-            $fileSaved['name'] = CryptoService::encrypt($fileSaved['name']);
-            $fileSaved['mime'] = $file->getClientMimeType();
-            $fileSaved['size'] = $file->getClientSize();
-            $response = QuarxResponseService::apiResponse('success', $fileSaved);
-        } else {
-            $response = QuarxResponseService::apiErrorResponse($validation['errors'], $validation['inputs']);
+        if ($validation['errors']) {
+            return QuarxResponseService::apiErrorResponse($validation['errors'], $validation['inputs']);
         }
 
-        return $response;
+        $file = $request->file('location');
+        $fileSaved = FileService::saveFile($file, 'files/');
+        $fileSaved['name'] = CryptoService::encrypt($fileSaved['name']);
+        $fileSaved['mime'] = $file->getClientMimeType();
+        $fileSaved['size'] = $file->getClientSize();
+
+        return QuarxResponseService::apiResponse('success', $fileSaved);
     }
 
     /**
@@ -155,7 +154,7 @@ class FilesController extends QuarxController
         if (empty($files)) {
             Quarx::notification('File not found', 'warning');
 
-            return redirect(route(config('quarx.backend-route-prefix', 'quarx').'.files.index'));
+            return redirectToQuarxRoute('files.index');
         }
 
         return view('quarx::modules.files.edit')->with('files', $files);
@@ -176,10 +175,10 @@ class FilesController extends QuarxController
         if (empty($files)) {
             Quarx::notification('File not found', 'warning');
 
-            return redirect(route(config('quarx.backend-route-prefix', 'quarx').'.files.index'));
+            return redirectToQuarxRoute('files.index');
         }
 
-        $files = $this->fileRepository->update($files, $request->all());
+        $this->fileRepository->update($files, $request->all());
 
         Quarx::notification('File updated successfully.', 'success');
 
@@ -200,7 +199,7 @@ class FilesController extends QuarxController
         if (empty($files)) {
             Quarx::notification('File not found', 'warning');
 
-            return redirect(route(config('quarx.backend-route-prefix', 'quarx').'.files.index'));
+            return redirectToQuarxRoute('files.index');
         }
 
         Storage::delete($files->location);
@@ -208,7 +207,7 @@ class FilesController extends QuarxController
 
         Quarx::notification('File deleted successfully.', 'success');
 
-        return redirect(route(config('quarx.backend-route-prefix', 'quarx').'.files.index'));
+        return redirectToQuarxRoute('files.index');
     }
 
     /**

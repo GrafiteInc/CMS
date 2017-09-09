@@ -59,16 +59,16 @@ class LinksController extends QuarxController
         try {
             $validation = ValidationService::check(Link::$rules);
 
-            if (!$validation['errors']) {
-                $links = $this->linksRepository->store($request->all());
-                Quarx::notification('Link saved successfully.', 'success');
-
-                if (!$links) {
-                    Quarx::notification('Link could not be saved.', 'danger');
-                }
-            } else {
+            if ($validation['errors']) {
                 return $validation['redirect'];
             }
+            $links = $this->linksRepository->store($request->all());
+            Quarx::notification('Link saved successfully.', 'success');
+
+            if (!$links) {
+                Quarx::notification('Link could not be saved.', 'danger');
+            }
+
         } catch (Exception $e) {
             Quarx::notification($e->getMessage() ?: 'Link could not be saved.', 'danger');
         }
@@ -90,7 +90,7 @@ class LinksController extends QuarxController
         if (empty($links)) {
             Quarx::notification('Link not found', 'warning');
 
-            return redirect(route(config('quarx.backend-route-prefix', 'quarx').'.links.index'));
+            return redirectToQuarxRoute('links.index');
         }
 
         return view('quarx::modules.links.edit')->with('links', $links);
@@ -112,7 +112,7 @@ class LinksController extends QuarxController
             if (empty($links)) {
                 Quarx::notification('Link not found', 'warning');
 
-                return redirect(route(config('quarx.backend-route-prefix', 'quarx').'.links.index'));
+                return redirectToQuarxRoute('links.index');
             }
 
             $links = $this->linksRepository->update($links, $request->all());
@@ -125,7 +125,7 @@ class LinksController extends QuarxController
             Quarx::notification($e->getMessage() ?: 'Links could not be updated.', 'danger');
         }
 
-        return redirect(route(config('quarx.backend-route-prefix', 'quarx').'.links.edit', [$id]));
+        return redirectToQuarxRoute('links.edit', [$id]);
     }
 
     /**
@@ -143,13 +143,13 @@ class LinksController extends QuarxController
         if (empty($links)) {
             Quarx::notification('Link not found', 'warning');
 
-            return redirect(route(config('quarx.backend-route-prefix', 'quarx').'.links.index'));
+            return redirectToQuarxRoute('links.index');
         }
 
         $links->delete();
 
         Quarx::notification('Link deleted successfully.', 'success');
 
-        return redirect(URL::to('quarx/menus/'.$menu.'/edit'));
+        return redirect('quarx/menus/'.$menu.'/edit');
     }
 }

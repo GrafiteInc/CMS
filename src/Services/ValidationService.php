@@ -40,11 +40,12 @@ class ValidationService
         $validationRules = $validationInputs = [];
 
         foreach ($fields as $key => $value) {
-            if (isset($fields[$key])) {
-                $inputs[$key] = self::getInput($key, $jsonInput);
-                $validationInputs[$key] = self::getInput($key, $jsonInput);
-                $validationRules[$key] = $fields[$key];
+            if (!isset($fields[$key])) {
+                continue;
             }
+            $inputs[$key] = self::getInput($key, $jsonInput);
+            $validationInputs[$key] = self::getInput($key, $jsonInput);
+            $validationRules[$key] = $fields[$key];
         }
 
         $validation = Validator::make($validationInputs, $validationRules);
@@ -115,11 +116,7 @@ class ValidationService
      */
     public static function inputs()
     {
-        $inputs = Session::get('inputs') ?: false;
-
-        if (!$inputs) {
-            return false;
-        }
+        $inputs = Session::get('inputs', false);
 
         return $inputs;
     }
@@ -180,7 +177,7 @@ class ValidationService
      */
     public static function value($key)
     {
-        $inputs = Session::get('inputs') ?: false;
+        $inputs = Session::get('inputs', false);
 
         if (!$inputs) {
             return '';

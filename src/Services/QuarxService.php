@@ -21,7 +21,7 @@ class QuarxService
 
     public function __construct()
     {
-        $this->imageRepo = App::make('Yab\Quarx\Repositories\ImageRepository');
+        $this->imageRepo = app('Yab\Quarx\Repositories\ImageRepository');
     }
 
     /**

@@ -3,6 +3,14 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 ----
 
+## [v2.3.32] - 2017-09-15
+
+### Changed
+- Improved loading time of images drastically
+
+### Fixed
+- Refactored the images as assets
+
 ## [v2.3.31] - 2017-08-11
 
 ### Fixed

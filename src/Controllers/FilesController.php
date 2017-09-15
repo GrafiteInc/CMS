@@ -203,7 +203,7 @@ class FilesController extends QuarxController
             return redirect(route(config('quarx.backend-route-prefix', 'quarx').'.files.index'));
         }
 
-        if (is_file(storage_path($image->location))) {
+        if (is_file(storage_path($files->location))) {
             Storage::delete($files->location);
         } else {
             Storage::disk(Config::get('quarx.storage-location', 'local'))->delete($files->location);

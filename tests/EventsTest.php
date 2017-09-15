@@ -44,8 +44,10 @@ class EventsTest extends TestCase
 
     public function testStore()
     {
-        $events = factory(\Yab\Quarx\Models\Event::class)->make(['id' => 2]);
-        $response = $this->call('POST', 'quarx/events', $events['attributes']);
+        $event = factory(\Yab\Quarx\Models\Event::class)->make(['id' => 2]);
+        $event = $event->toArray();
+        unset($event['translations']);
+        $response = $this->call('POST', 'quarx/events', $event);
 
         $this->assertEquals(302, $response->getStatusCode());
     }

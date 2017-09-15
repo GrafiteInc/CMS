@@ -18,19 +18,19 @@ Simple setup uses Laracogs as the backbone of an app for you using Laravel, once
 [Subscribe](http://eepurl.com/ck7dSv)
 
 ## Requirements
-1. PHP 5.6+
+1. PHP 7+
 1. MySQL 5.6+
 2. OpenSSL
 
 ## Recommended
-1. PHP 7+
 1. MySQL 5.7+
 
 ## Compatibility Guide
 
 | Laravel Version | Package Tag | Supported |
 |-----------------|-------------|-----------|
-| 5.4.x | 2.3.x | yes |
+| 5.5.x | 2.4.x | yes |
+| 5.4.x | 2.3.x | no |
 | 5.3.x | 2.0.x - 2.2.x | no |
 | 5.1.x - 5.2.x | 1.4.x | no |
 

@@ -44,8 +44,10 @@ class PagesTest extends TestCase
 
     public function testStore()
     {
-        $pages = factory(\Yab\Quarx\Models\Page::class)->make(['id' => 2]);
-        $response = $this->call('POST', 'quarx/pages', $pages['attributes']);
+        $page = factory(\Yab\Quarx\Models\Page::class)->make(['id' => 2]);
+        $page = $page->toArray();
+        unset($page['translations']);
+        $response = $this->call('POST', 'quarx/pages', $page);
 
         $this->assertEquals(302, $response->getStatusCode());
     }

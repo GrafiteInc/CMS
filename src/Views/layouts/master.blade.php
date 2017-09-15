@@ -49,7 +49,7 @@
                 <p class="quarx-notify-comment"></p>
             </div>
             <div class="quarx-notify-closer">
-                <span class="glyphicon glyphicon-remove quarx-notify-closer-icon"></span>
+                <span class="fa fa-close quarx-notify-closer-icon"></span>
             </div>
         </div>
 

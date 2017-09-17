@@ -34,7 +34,7 @@ class Setup extends Command
      *
      * @return mixed
      */
-    public function fire()
+    public function handle()
     {
         Artisan::call('vendor:publish', [
             '--provider' => 'Yab\Quarx\QuarxProvider',
@@ -120,7 +120,7 @@ class Setup extends Command
             if (!User::where('name', 'admin')->first()) {
                 $user = User::create([
                     'name' => 'Admin',
-                    'email' => 'admin@example.org',
+                    'email' => 'admin@example.com',
                     'password' => bcrypt('admin'),
                 ]);
             }
@@ -128,7 +128,7 @@ class Setup extends Command
 
             $this->info('Finished setting up your site with Quarx!');
             $this->line('You can now login with the following username and password:');
-            $this->comment('admin@example.org');
+            $this->comment('admin@example.com');
             $this->comment('admin');
         }
 

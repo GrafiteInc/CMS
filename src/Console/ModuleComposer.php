@@ -27,7 +27,7 @@ class ModuleComposer extends Command
      *
      * @return mixed
      */
-    public function fire()
+    public function handle()
     {
         $moduleDir = base_path(config('quarx.module-directory')).'/'.ucfirst($this->argument('module'));
         if (is_dir($moduleDir)) {

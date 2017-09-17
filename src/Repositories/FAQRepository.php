@@ -84,10 +84,10 @@ class FAQRepository
      */
     public function store($input)
     {
-        $input['is_published'] = (isset($input['is_published'])) ? (bool) $input['is_published'] : 0;
-        $input['published_at'] = (isset($input['published_at']) && !empty($input['published_at'])) ? $input['published_at'] : Carbon::now(config('app.timezone'))->format('Y-m-d H:i:s');
+        $payload['is_published'] = (isset($payload['is_published'])) ? (bool) $payload['is_published'] : 0;
+        $payload['published_at'] = (isset($payload['published_at']) && !empty($payload['published_at'])) ? Carbon::parse($payload['published_at'])->format('Y-m-d H:i:s') : Carbon::now(config('app.timezone'))->format('Y-m-d H:i:s');
 
-        return FAQ::create($input);
+        return FAQ::create($payload);
     }
 
     /**
@@ -116,7 +116,7 @@ class FAQRepository
             return $this->translationRepo->createOrUpdate($FAQ->id, 'Yab\Quarx\Models\FAQ', $payload['lang'], $payload);
         } else {
             $payload['is_published'] = (isset($payload['is_published'])) ? (bool) $payload['is_published'] : 0;
-            $payload['published_at'] = (isset($payload['published_at']) && !empty($payload['published_at'])) ? $payload['published_at'] : Carbon::now(config('app.timezone'))->format('Y-m-d H:i:s');
+            $payload['published_at'] = (isset($payload['published_at']) && !empty($payload['published_at'])) ? Carbon::parse($payload['published_at'])->format('Y-m-d H:i:s') : Carbon::now(config('app.timezone'))->format('Y-m-d H:i:s');
 
             unset($payload['lang']);
 

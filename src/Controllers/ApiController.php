@@ -13,17 +13,31 @@ class ApiController extends QuarxController
 
     public function __construct(Request $request)
     {
+        parent::construct();
+
         $this->modelName = str_singular($request->segment(3));
         if (!empty($this->modelName)) {
             $this->model = app('Yab\Quarx\Models\\'.ucfirst($this->modelName));
         }
     }
 
+    /**
+     * Find an item in the API
+     *
+     * @param  int $id
+     *
+     * @return mixed
+     */
     public function find($id)
     {
         return $this->model->find($id);
     }
 
+    /**
+     * Collect all items of a resource
+     *
+     * @return Collection
+     */
     public function all()
     {
         $query = $this->model;
@@ -38,6 +52,13 @@ class ApiController extends QuarxController
             ->paginate(Config::get('quarx.pagination', 24));
     }
 
+    /**
+     * Search for the API Item
+     *
+     * @param  string $term
+     *
+     * @return array
+     */
     public function search($term)
     {
         $query = $this->model->orderBy('created_at', 'desc');

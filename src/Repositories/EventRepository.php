@@ -88,11 +88,11 @@ class EventRepository
     /**
      * Stores Event into database.
      *
-     * @param array $input
+     * @param array $payload
      *
      * @return Event
      */
-    public function store($input)
+    public function store($payload)
     {
         $payload['is_published'] = (isset($payload['is_published'])) ? (bool) $payload['is_published'] : 0;
         $payload['published_at'] = (isset($payload['published_at']) && !empty($payload['published_at'])) ? Carbon::parse($payload['published_at'])->format('Y-m-d H:i:s') : Carbon::now(config('app.timezone'))->format('Y-m-d H:i:s');

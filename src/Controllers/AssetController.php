@@ -10,6 +10,8 @@ class AssetController extends QuarxController
 {
     public function __construct(AssetService $service)
     {
+        parent::construct();
+
         $this->service = $service;
     }
 

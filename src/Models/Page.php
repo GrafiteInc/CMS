@@ -36,6 +36,10 @@ class Page extends QuarxModel
         'blocks',
     ];
 
+    protected $dates = [
+        'published_at'
+    ];
+
     public function __construct(array $attributes = [])
     {
         $keys = array_keys(request()->except('_method', '_token'));

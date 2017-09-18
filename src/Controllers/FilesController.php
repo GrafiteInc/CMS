@@ -24,6 +24,8 @@ class FilesController extends QuarxController
 
     public function __construct(FileRepository $fileRepo)
     {
+        parent::construct();
+
         $this->fileRepository = $fileRepo;
     }
 
@@ -91,7 +93,7 @@ class FilesController extends QuarxController
 
         Quarx::notification('File saved successfully.', 'success');
 
-        return redirect(route(config('quarx.backend-route-prefix', 'quarx').'.files.index'));
+        return redirect(route($this->quarxRouteBase.'.files.index'));
     }
 
     /**
@@ -155,7 +157,7 @@ class FilesController extends QuarxController
         if (empty($files)) {
             Quarx::notification('File not found', 'warning');
 
-            return redirect(route(config('quarx.backend-route-prefix', 'quarx').'.files.index'));
+            return redirect(route($this->quarxRouteBase.'.files.index'));
         }
 
         return view('quarx::modules.files.edit')->with('files', $files);
@@ -176,7 +178,7 @@ class FilesController extends QuarxController
         if (empty($files)) {
             Quarx::notification('File not found', 'warning');
 
-            return redirect(route(config('quarx.backend-route-prefix', 'quarx').'.files.index'));
+            return redirect(route($this->quarxRouteBase.'.files.index'));
         }
 
         $files = $this->fileRepository->update($files, $request->all());
@@ -200,20 +202,20 @@ class FilesController extends QuarxController
         if (empty($files)) {
             Quarx::notification('File not found', 'warning');
 
-            return redirect(route(config('quarx.backend-route-prefix', 'quarx').'.files.index'));
+            return redirect(route($this->quarxRouteBase.'.files.index'));
         }
 
         if (is_file(storage_path($files->location))) {
             Storage::delete($files->location);
         } else {
-            Storage::disk(Config::get('quarx.storage-location', 'local'))->delete($files->location);
+            Storage::disk(config('quarx.storage-location', 'local'))->delete($files->location);
         }
 
         $files->delete();
 
         Quarx::notification('File deleted successfully.', 'success');
 
-        return redirect(route(config('quarx.backend-route-prefix', 'quarx').'.files.index'));
+        return redirect(route($this->quarxRouteBase.'.files.index'));
     }
 
     /**
@@ -223,7 +225,7 @@ class FilesController extends QuarxController
      */
     public function apiList(Request $request)
     {
-        if (Config::get('quarx.api-key') != $request->header('quarx')) {
+        if (config('quarx.api-key') != $request->header('quarx')) {
             return QuarxResponseService::apiResponse('error', []);
         }
 

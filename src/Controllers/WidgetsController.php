@@ -17,6 +17,8 @@ class WidgetsController extends QuarxController
 
     public function __construct(WidgetRepository $widgetsRepo)
     {
+        parent::construct();
+
         $this->widgetsRepository = $widgetsRepo;
     }
 
@@ -82,7 +84,7 @@ class WidgetsController extends QuarxController
 
         Quarx::notification('Widgets saved successfully.', 'success');
 
-        return redirect(route(config('quarx.backend-route-prefix', 'quarx').'.widgets.edit', [$widgets->id]));
+        return redirect(route($this->quarxRouteBase.'.widgets.edit', [$widgets->id]));
     }
 
     /**
@@ -99,7 +101,7 @@ class WidgetsController extends QuarxController
         if (empty($widgets)) {
             Quarx::notification('Widgets not found', 'warning');
 
-            return redirect(route(config('quarx.backend-route-prefix', 'quarx').'.widgets.index'));
+            return redirect(route($this->quarxRouteBase.'.widgets.index'));
         }
 
         return view('quarx::modules.widgets.edit')->with('widgets', $widgets);
@@ -120,7 +122,7 @@ class WidgetsController extends QuarxController
         if (empty($widgets)) {
             Quarx::notification('Widgets not found', 'warning');
 
-            return redirect(route(config('quarx.backend-route-prefix', 'quarx').'.widgets.index'));
+            return redirect(route($this->quarxRouteBase.'.widgets.index'));
         }
 
         $widgets = $this->widgetsRepository->update($widgets, $request->all());
@@ -144,13 +146,13 @@ class WidgetsController extends QuarxController
         if (empty($widgets)) {
             Quarx::notification('Widgets not found', 'warning');
 
-            return redirect(route(config('quarx.backend-route-prefix', 'quarx').'.widgets.index'));
+            return redirect(route($this->quarxRouteBase.'.widgets.index'));
         }
 
         $widgets->delete();
 
         Quarx::notification('Widgets deleted successfully.', 'success');
 
-        return redirect(route(config('quarx.backend-route-prefix', 'quarx').'.widgets.index'));
+        return redirect(route($this->quarxRouteBase.'.widgets.index'));
     }
 }

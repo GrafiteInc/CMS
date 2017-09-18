@@ -62,8 +62,8 @@ class EventsTest extends TestCase
 
     public function testUpdate()
     {
-        $page = ['id' => 2, 'title' => 'dumber', 'start_date' => '2016-10-31', 'end_date' => '2016-10-31', 'details' => 'okie dokie'];
-        $response = $this->call('POST', 'quarx/events', $page);
+        $event = ['id' => 2, 'title' => 'dumber', 'start_date' => '2016-10-31', 'end_date' => '2016-10-31', 'details' => 'okie dokie'];
+        $response = $this->call('POST', 'quarx/events', $event);
 
         $response = $this->call('PATCH', 'quarx/events/2', [
             'title' => 'smarter',
@@ -75,8 +75,8 @@ class EventsTest extends TestCase
 
     public function testUpdateTranslation()
     {
-        $page = ['id' => 2, 'title' => 'dumber', 'start_date' => '2016-10-31', 'end_date' => '2016-10-31', 'details' => 'okie dokie'];
-        $response = $this->call('POST', 'quarx/events', $page);
+        $event = ['id' => 2, 'title' => 'dumber', 'start_date' => '2016-10-31', 'end_date' => '2016-10-31', 'details' => 'okie dokie'];
+        $response = $this->call('POST', 'quarx/events', $event);
 
         $response = $this->call('PATCH', 'quarx/events/2', [
             'title' => 'smarter',

@@ -19,6 +19,8 @@ class MenuController extends QuarxController
 
     public function __construct(MenuRepository $menuRepo, LinkRepository $linkRepo)
     {
+        parent::construct();
+
         $this->menuRepository = $menuRepo;
         $this->linkRepository = $linkRepo;
     }
@@ -92,7 +94,7 @@ class MenuController extends QuarxController
             Quarx::notification($e->getMessage() ?: 'Menu could not be saved.', 'danger');
         }
 
-        return redirect(route(config('quarx.backend-route-prefix', 'quarx').'.menus.edit', [$menu->id]));
+        return redirect(route($this->quarxRouteBase.'.menus.edit', [$menu->id]));
     }
 
     /**
@@ -109,7 +111,7 @@ class MenuController extends QuarxController
         if (empty($menu)) {
             Quarx::notification('Menu not found', 'warning');
 
-            return redirect(route(config('quarx.backend-route-prefix', 'quarx').'.menus.index'));
+            return redirect(route($this->quarxRouteBase.'.menus.index'));
         }
 
         $links = $this->linkRepository->getLinksByMenu($menu->id);
@@ -133,7 +135,7 @@ class MenuController extends QuarxController
             if (empty($menu)) {
                 Quarx::notification('Menu not found', 'warning');
 
-                return redirect(route(config('quarx.backend-route-prefix', 'quarx').'.menus.index'));
+                return redirect(route($this->quarxRouteBase.'.menus.index'));
             }
 
             $menu = $this->menuRepository->update($menu, $request->all());
@@ -146,7 +148,7 @@ class MenuController extends QuarxController
             Quarx::notification($e->getMessage() ?: 'Menu could not be updated.', 'danger');
         }
 
-        return redirect(route(config('quarx.backend-route-prefix', 'quarx').'.menus.edit', [$id]));
+        return redirect(route($this->quarxRouteBase.'.menus.edit', [$id]));
     }
 
     /**
@@ -163,14 +165,14 @@ class MenuController extends QuarxController
         if (empty($menu)) {
             Quarx::notification('Menu not found', 'warning');
 
-            return redirect(route(config('quarx.backend-route-prefix', 'quarx').'.menus.index'));
+            return redirect(route($this->quarxRouteBase.'.menus.index'));
         }
 
         $menu->delete();
 
         Quarx::notification('Menu deleted successfully.');
 
-        return redirect(route(config('quarx.backend-route-prefix', 'quarx').'.menus.index'));
+        return redirect(route($this->quarxRouteBase.'.menus.index'));
     }
 
 

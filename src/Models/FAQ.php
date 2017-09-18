@@ -29,6 +29,10 @@ class FAQ extends QuarxModel
         'published_at',
     ];
 
+    protected $dates = [
+        'published_at'
+    ];
+
     public function __construct(array $attributes = [])
     {
         $keys = array_keys(request()->except('_method', '_token'));

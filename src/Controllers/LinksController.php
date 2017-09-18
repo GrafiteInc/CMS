@@ -18,6 +18,8 @@ class LinksController extends QuarxController
 
     public function __construct(LinkRepository $linksRepo)
     {
+        parent::construct();
+
         $this->linksRepository = $linksRepo;
     }
 
@@ -73,7 +75,7 @@ class LinksController extends QuarxController
             Quarx::notification($e->getMessage() ?: 'Link could not be saved.', 'danger');
         }
 
-        return redirect(URL::to('quarx/menus/'.$request->get('menu_id').'/edit'));
+        return redirect(url('quarx/menus/'.$request->get('menu_id').'/edit'));
     }
 
     /**
@@ -90,7 +92,7 @@ class LinksController extends QuarxController
         if (empty($links)) {
             Quarx::notification('Link not found', 'warning');
 
-            return redirect(route(config('quarx.backend-route-prefix', 'quarx').'.links.index'));
+            return redirect(route($this->quarxRouteBase.'.links.index'));
         }
 
         return view('quarx::modules.links.edit')->with('links', $links);
@@ -112,7 +114,7 @@ class LinksController extends QuarxController
             if (empty($links)) {
                 Quarx::notification('Link not found', 'warning');
 
-                return redirect(route(config('quarx.backend-route-prefix', 'quarx').'.links.index'));
+                return redirect(route($this->quarxRouteBase.'.links.index'));
             }
 
             $links = $this->linksRepository->update($links, $request->all());
@@ -125,7 +127,7 @@ class LinksController extends QuarxController
             Quarx::notification($e->getMessage() ?: 'Links could not be updated.', 'danger');
         }
 
-        return redirect(route(config('quarx.backend-route-prefix', 'quarx').'.links.edit', [$id]));
+        return redirect(route($this->quarxRouteBase.'.links.edit', [$id]));
     }
 
     /**
@@ -143,13 +145,13 @@ class LinksController extends QuarxController
         if (empty($links)) {
             Quarx::notification('Link not found', 'warning');
 
-            return redirect(route(config('quarx.backend-route-prefix', 'quarx').'.links.index'));
+            return redirect(route($this->quarxRouteBase.'.links.index'));
         }
 
         $links->delete();
 
         Quarx::notification('Link deleted successfully.', 'success');
 
-        return redirect(URL::to('quarx/menus/'.$menu.'/edit'));
+        return redirect(url('quarx/menus/'.$menu.'/edit'));
     }
 }

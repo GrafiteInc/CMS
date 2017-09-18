@@ -111,13 +111,13 @@ class BlogRepository
      *
      * @return Blog
      */
-    public function store($input)
+    public function store($payload)
     {
-        $input['url'] = Quarx::convertToURL($input['url']);
-        $input['is_published'] = (isset($input['is_published'])) ? (bool) $input['is_published'] : 0;
-        $input['published_at'] = (isset($input['published_at']) && !empty($input['published_at'])) ? $input['published_at'] : Carbon::now(config('app.timezone'))->format('Y-m-d H:i:s');
+        $payload['url'] = Quarx::convertToURL($payload['url']);
+        $payload['is_published'] = (isset($payload['is_published'])) ? (bool) $payload['is_published'] : 0;
+        $payload['published_at'] = (isset($payload['published_at']) && !empty($payload['published_at'])) ? Carbon::parse($payload['published_at'])->format('Y-m-d H:i:s') : Carbon::now(config('app.timezone'))->format('Y-m-d H:i:s');
 
-        return Blog::create($input);
+        return Blog::create($payload);
     }
 
     /**
@@ -179,7 +179,7 @@ class BlogRepository
         } else {
             $payload['url'] = Quarx::convertToURL($payload['url']);
             $payload['is_published'] = (isset($payload['is_published'])) ? (bool) $payload['is_published'] : 0;
-            $payload['published_at'] = (isset($payload['published_at']) && !empty($payload['published_at'])) ? $payload['published_at'] : Carbon::now(config('app.timezone'))->format('Y-m-d H:i:s');
+            $payload['published_at'] = (isset($payload['published_at']) && !empty($payload['published_at'])) ? Carbon::parse($payload['published_at'])->format('Y-m-d H:i:s') : Carbon::now(config('app.timezone'))->format('Y-m-d H:i:s');
 
             unset($payload['lang']);
 

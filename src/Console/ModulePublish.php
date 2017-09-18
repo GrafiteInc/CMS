@@ -28,7 +28,7 @@ class ModulePublish extends Command
      *
      * @return mixed
      */
-    public function fire()
+    public function handle()
     {
         if (is_dir(base_path(Config::get('quarx.module-directory')).DIRECTORY_SEPARATOR.ucfirst($this->argument('module')).DIRECTORY_SEPARATOR.'Publishes')) {
             $fileSystem = new Filesystem();

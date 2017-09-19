@@ -83,7 +83,9 @@ class BlogRepository
 
         foreach ($blogs as $blog) {
             foreach (explode(',', $blog->tags) as $tag) {
-                array_push($tags, $tag);
+                if ($tag !== '') {
+                    array_push($tags, $tag);
+                }
             }
         }
 

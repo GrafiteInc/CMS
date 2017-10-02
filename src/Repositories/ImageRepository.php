@@ -23,17 +23,17 @@ class ImageRepository
 
     public function paginated()
     {
-        return Image::orderBy('created_at', 'desc')->paginate(Config::get('quarx.pagination', 25));
+        return Image::orderBy('created_at', 'desc')->paginate(Config::get('quarx.pagination', 24));
     }
 
     public function publishedAndPaginated()
     {
-        return Image::orderBy('created_at', 'desc')->where('is_published', 1)->paginate(Config::get('quarx.pagination', 25));
+        return Image::orderBy('created_at', 'desc')->where('is_published', 1)->paginate(Config::get('quarx.pagination', 24));
     }
 
     public function published()
     {
-        return Image::where('is_published', 1)->orderBy('created_at', 'desc')->paginate(Config::get('quarx.pagination', 25));
+        return Image::where('is_published', 1)->orderBy('created_at', 'desc')->paginate(Config::get('quarx.pagination', 24));
     }
 
     /**
@@ -101,7 +101,7 @@ class ImageRepository
             $query->orWhere($attribute, 'LIKE', '%'.$input['term'].'%');
         }
 
-        return [$query, $input['term'], $query->paginate(Config::get('quarx.pagination', 25))->render()];
+        return [$query, $input['term'], $query->paginate(Config::get('quarx.pagination', 24))->render()];
     }
 
     /**
@@ -124,7 +124,10 @@ class ImageRepository
         $input['storage_location'] = config('quarx.storage-location');
         $input['original_name'] = $savedFile['original'];
 
-        return Image::create($input);
+        $image = Image::create($input);
+        $image->setCaches();
+
+        return $image;
     }
 
     /**
@@ -154,7 +157,10 @@ class ImageRepository
         $input['storage_location'] = config('quarx.storage-location');
         $input['original_name'] = $savedFile['original'];
 
-        return Image::create($input);
+        $image = Image::create($input);
+        $image->setCaches();
+
+        return $image;
     }
 
     /**
@@ -177,10 +183,10 @@ class ImageRepository
      *
      * @return Images
      */
-    public function update($images, $input)
+    public function update($image, $input)
     {
         if (isset($input['location']) && !empty($input['location'])) {
-            $savedFile = FileService::saveFile($input['location'], 'public/images');
+            $savedFile = FileService::saveFile($input['location'], 'public/images', [], true);
 
             if (!$savedFile) {
                 Quarx::notification('Image could not be updated.', 'danger');
@@ -191,7 +197,7 @@ class ImageRepository
             $input['location'] = $savedFile['name'];
             $input['original_name'] = $savedFile['original'];
         } else {
-            $input['location'] = $images->location;
+            $input['location'] = $image->location;
         }
 
         if (!isset($input['is_published'])) {
@@ -200,6 +206,12 @@ class ImageRepository
             $input['is_published'] = 1;
         }
 
-        return $images->update($input);
+        $image->forgetCache();
+
+        $image->update($input);
+
+        $image->setCaches();
+
+        return $image;
     }
 }

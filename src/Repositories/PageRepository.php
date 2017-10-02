@@ -37,12 +37,12 @@ class PageRepository
             $model = $model->orderBy('created_at', 'desc');
         }
 
-        return $model->paginate(Config::get('quarx.pagination', 25));
+        return $model->paginate(Config::get('quarx.pagination', 24));
     }
 
     public function published()
     {
-        return Page::where('is_published', 1)->where('published_at', '<=', Carbon::now()->format('Y-m-d h:i:s'))->orderBy('created_at', 'desc')->paginate(Config::get('quarx.pagination', 25));
+        return Page::where('is_published', 1)->where('published_at', '<=', Carbon::now(config('app.timezone'))->format('Y-m-d H:i:s'))->orderBy('created_at', 'desc')->paginate(Config::get('quarx.pagination', 24));
     }
 
     public function search($input)
@@ -56,7 +56,7 @@ class PageRepository
             $query->orWhere($attribute, 'LIKE', '%'.$input['term'].'%');
         }
 
-        return [$query, $input['term'], $query->paginate(Config::get('quarx.pagination', 25))->render()];
+        return [$query, $input['term'], $query->paginate(Config::get('quarx.pagination', 24))->render()];
     }
 
     /**
@@ -78,11 +78,15 @@ class PageRepository
             }
         }
 
-        $payload['blocks'] = json_encode($blockCollection);
+        if (empty($blockCollection)) {
+            $payload['blocks'] = "{}";
+        } else {
+            $payload['blocks'] = json_encode($blockCollection);
+        }
 
         $payload['url'] = Quarx::convertToURL($payload['url']);
         $payload['is_published'] = (isset($payload['is_published'])) ? (bool) $payload['is_published'] : 0;
-        $payload['published_at'] = (isset($payload['published_at']) && !empty($payload['published_at'])) ? $payload['published_at'] : Carbon::now()->format('Y-m-d h:i:s');
+        $payload['published_at'] = (isset($payload['published_at']) && !empty($payload['published_at'])) ? Carbon::parse($payload['published_at'])->format('Y-m-d H:i:s') : Carbon::now(config('app.timezone'))->format('Y-m-d H:i:s');
 
         return Page::create($payload);
     }
@@ -110,13 +114,17 @@ class PageRepository
     {
         $page = null;
 
-        $page = Page::where('url', $url)->where('is_published', 1)->where('published_at', '<=', Carbon::now()->format('Y-m-d h:i:s'))->first();
+        $page = Page::where('url', $url)->where('is_published', 1)->where('published_at', '<=', Carbon::now(config('app.timezone'))->format('Y-m-d H:i:s'))->first();
+
+        if ($page && app()->getLocale() !== config('quarx.default-language')) {
+            $page = $this->translationRepo->findByEntityId($page->id, 'Yab\Quarx\Models\Page');
+        }
 
         if (!$page) {
             $page = $this->translationRepo->findByUrl($url, 'Yab\Quarx\Models\Page');
         }
 
-        if ($url === 'home' && config('app.locale') !== config('quarx.default-language')) {
+        if ($url === 'home' && app()->getLocale() !== config('quarx.default-language')) {
             $page = $this->translationRepo->findByUrl($url, 'Yab\Quarx\Models\Page');
         }
 
@@ -152,7 +160,7 @@ class PageRepository
         } else {
             $payload['url'] = Quarx::convertToURL($payload['url']);
             $payload['is_published'] = (isset($payload['is_published'])) ? (bool) $payload['is_published'] : 0;
-            $payload['published_at'] = (isset($payload['published_at']) && !empty($payload['published_at'])) ? $payload['published_at'] : Carbon::now()->format('Y-m-d h:i:s');
+            $payload['published_at'] = (isset($payload['published_at']) && !empty($payload['published_at'])) ? Carbon::parse($payload['published_at'])->format('Y-m-d H:i:s') : Carbon::now(config('app.timezone'))->format('Y-m-d H:i:s');
 
             unset($payload['lang']);
 
@@ -160,14 +168,25 @@ class PageRepository
         }
     }
 
-    public function parseTemplate($template, $currentBlocks)
+    /**
+     * Parse the template for blocks.
+     *
+     * @param  array $payload
+     * @param  array $currentBlocks
+     *
+     * @return array
+     */
+    public function parseTemplate($payload, $currentBlocks)
     {
         if (isset($payload['template'])) {
-            $content = file_get_contents(base_path('resources/themes/'.config('quarx.frontend-theme').'/pages/'.$template.'.blade.php'));
+            $content = file_get_contents(base_path('resources/themes/'.config('quarx.frontend-theme').'/pages/'.$payload['template'].'.blade.php'));
 
-            preg_match_all('/->block\((.*)\)/', $content, $matches);
+            preg_match_all('/->block\((.*)\)/', $content, $pageMethodMatches);
+            preg_match_all('/\@block\((.*)\)/', $content, $bladeMatches);
 
-            foreach ($matches[1] as $match) {
+            $matches = array_unique(array_merge($pageMethodMatches[1], $bladeMatches[1]));
+
+            foreach ($matches as $match) {
                 $match = str_replace('"', "", $match);
                 $match = str_replace("'", "", $match);
                 if (!isset($currentBlocks[$match])) {

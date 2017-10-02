@@ -21,6 +21,8 @@ class ImagesController extends QuarxController
 
     public function __construct(ImageRepository $imagesRepo)
     {
+        parent::construct();
+
         $this->imagesRepository = $imagesRepo;
     }
 
@@ -105,7 +107,7 @@ class ImagesController extends QuarxController
             Quarx::notification($e->getMessage() ?: 'Image could not be saved.', 'danger');
         }
 
-        return redirect(route('quarx.images.index'));
+        return redirect(route($this->quarxRouteBase.'.images.index'));
     }
 
     /**
@@ -123,7 +125,7 @@ class ImagesController extends QuarxController
 
         if (!$validation['errors']) {
             $file = $request->file('location');
-            $fileSaved = FileService::saveFile($file, 'public/images');
+            $fileSaved = FileService::saveFile($file, 'public/images', [], true);
             $fileSaved['name'] = CryptoService::encrypt($fileSaved['name']);
             $fileSaved['mime'] = $file->getClientMimeType();
             $fileSaved['size'] = $file->getClientSize();
@@ -149,7 +151,7 @@ class ImagesController extends QuarxController
         if (empty($images)) {
             Quarx::notification('Image not found', 'warning');
 
-            return redirect(route('quarx.images.index'));
+            return redirect(route($this->quarxRouteBase.'.images.index'));
         }
 
         return view('quarx::modules.images.edit')->with('images', $images);
@@ -173,7 +175,7 @@ class ImagesController extends QuarxController
             if (empty($images)) {
                 Quarx::notification('Image not found', 'warning');
 
-                return redirect(route('quarx.images.index'));
+                return redirect(route($this->quarxRouteBase.'.images.index'));
             }
 
             $images = $this->imagesRepository->update($images, $request->all());
@@ -185,7 +187,7 @@ class ImagesController extends QuarxController
             Quarx::notification($e->getMessage() ?: 'Image could not be saved.', 'danger');
         }
 
-        return redirect(route('quarx.images.edit', $id));
+        return redirect(route($this->quarxRouteBase.'.images.edit', $id));
     }
 
     /**
@@ -200,20 +202,51 @@ class ImagesController extends QuarxController
         $image = $this->imagesRepository->findImagesById($id);
 
         if (is_file(storage_path($image->location))) {
-            @Storage::delete($image->location);
+            Storage::delete($image->location);
+        } else {
+            Storage::disk(Config::get('quarx.storage-location', 'local'))->delete($image->location);
         }
 
         if (empty($image)) {
             Quarx::notification('Image not found', 'warning');
 
-            return redirect(route('quarx.images.index'));
+            return redirect(route($this->quarxRouteBase.'.images.index'));
         }
 
+        $image->forgetCache();
         $image->delete();
 
         Quarx::notification('Image deleted successfully.', 'success');
 
-        return redirect(route('quarx.images.index'));
+        return redirect(route($this->quarxRouteBase.'.images.index'));
+    }
+
+    /**
+     * Bulk image delete
+     *
+     * @param  string $ids
+     *
+     * @return Redirect
+     */
+    public function bulkDelete($ids)
+    {
+        $ids = explode('-', $ids);
+
+        foreach ($ids as $id) {
+            $image = $this->imagesRepository->findImagesById($id);
+
+            if (is_file(storage_path($image->location))) {
+                Storage::delete($image->location);
+            } else {
+                Storage::disk(Config::get('quarx.storage-location', 'local'))->delete($image->location);
+            }
+
+            $image->delete();
+        }
+
+        Quarx::notification('Bulk Image deletes completed successfully.', 'success');
+
+        return redirect(route($this->quarxRouteBase.'.images.index'));
     }
 
     /*
@@ -229,11 +262,11 @@ class ImagesController extends QuarxController
      */
     public function apiList(Request $request)
     {
-        if (Config::get('quarx.api-key') != $request->header('quarx')) {
+        if (config('quarx.api-key') != $request->header('quarx')) {
             return QuarxResponseService::apiResponse('error', []);
         }
 
-        return $this->imagesRepository->apiPrepared();
+        $images =  $this->imagesRepository->apiPrepared();
 
         return QuarxResponseService::apiResponse('success', $images);
     }

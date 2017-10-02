@@ -1,6 +1,6 @@
 <div class="row">
     <ol class="breadcrumb">
-        <li><a href="{!! url('quarx/menus') !!}">Menus</a></li>
+        <li><a href="{!! url(config('quarx.backend-route-prefix', 'quarx').'/menus') !!}">Menus</a></li>
 
             {!! Quarx::breadcrumbs($location) !!}
 

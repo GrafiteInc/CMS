@@ -3,10 +3,16 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use Config;
+use Illuminate\Foundation\Application;
+use Illuminate\Support\Facades\Cookie;
 
 class QuarxLanguage
 {
+    public function __construct(Application $app)
+    {
+        $this->app = $app;
+    }
+
     /**
      * Handle an incoming request.
      *
@@ -17,8 +23,8 @@ class QuarxLanguage
      */
     public function handle($request, Closure $next)
     {
-        if ($request->session()->has('language')) {
-            Config::set('app.locale', $request->session()->get('language'));
+        if ($request->cookie('language')) {
+            $this->app->setLocale($request->cookie('language'));
         }
 
         return $next($request);

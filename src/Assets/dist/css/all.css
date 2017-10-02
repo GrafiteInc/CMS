@@ -1356,13 +1356,14 @@ body .redactor-box-fullscreen {
 
 /*!
  * Datetimepicker for Bootstrap 3
- * version : 4.17.37
+ * version : 4.17.47
  * https://github.com/Eonasdan/bootstrap-datetimepicker/
  */
 .bootstrap-datetimepicker-widget {
   list-style: none;
 }
 .bootstrap-datetimepicker-widget.dropdown-menu {
+  display: block;
   margin: 2px 0;
   padding: 4px;
   width: 19em;
@@ -1391,7 +1392,7 @@ body .redactor-box-fullscreen {
 .bootstrap-datetimepicker-widget.dropdown-menu.bottom:before {
   border-left: 7px solid transparent;
   border-right: 7px solid transparent;
-  border-bottom: 7px solid #cccccc;
+  border-bottom: 7px solid #ccc;
   border-bottom-color: rgba(0, 0, 0, 0.2);
   top: -7px;
   left: 7px;
@@ -1406,7 +1407,7 @@ body .redactor-box-fullscreen {
 .bootstrap-datetimepicker-widget.dropdown-menu.top:before {
   border-left: 7px solid transparent;
   border-right: 7px solid transparent;
-  border-top: 7px solid #cccccc;
+  border-top: 7px solid #ccc;
   border-top-color: rgba(0, 0, 0, 0.2);
   bottom: -7px;
   left: 6px;
@@ -1666,7 +1667,7 @@ body .redactor-box-fullscreen {
 .bootstrap-datetimepicker-widget table td.active,
 .bootstrap-datetimepicker-widget table td.active:hover {
   background-color: #337ab7;
-  color: #ffffff;
+  color: #fff;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
 }
 .bootstrap-datetimepicker-widget table td.active.today:before {
@@ -1692,7 +1693,7 @@ body .redactor-box-fullscreen {
 }
 .bootstrap-datetimepicker-widget table td span.active {
   background-color: #337ab7;
-  color: #ffffff;
+  color: #fff;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
 }
 .bootstrap-datetimepicker-widget table td span.old {
@@ -1727,7 +1728,6 @@ body .redactor-box-fullscreen {
   clip: rect(0, 0, 0, 0);
   border: 0;
 }
-
 /**
  * rawCSS
  *
@@ -2044,19 +2044,18 @@ span.twitter-typeahead {
     height: auto !important;
 }
 
-.panel {
+.image-panel {
     height: 320px;
 }
 
-    .panel .thumbnail {
+    .image-panel .thumbnail {
         overflow: hidden;
         text-align: center;
-        height: 200px;
     }
 
-    .panel .img {
+    .image-panel .img {
         width: 100%;
-        height: 100%;
+        height: 200px;
         background-size: cover;
         background-position: center center;
     }
@@ -2504,5 +2503,14 @@ span.twitter-typeahead {
 .bootstrap-tagsinput .tag {
     font-size: 100% !important;
     padding: 0.6em !important;
+}
+
+.selectable {
+    cursor: pointer;
+}
+
+.selected-highlight {
+    background-color: #FEF1B5;
+    border-color: #EEC900;
 }
 /*# sourceMappingURL=all.css.map */

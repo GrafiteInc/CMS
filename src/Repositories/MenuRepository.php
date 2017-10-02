@@ -104,4 +104,17 @@ class MenuRepository
     {
         return $menu->update($input);
     }
+
+    /**
+     * Set the order
+     *
+     * @param Menu  $menu
+     * @param array $payload
+     *
+     * @return Menu
+     */
+    public function setOrder($menu, $payload)
+    {
+        return $menu->update($payload);
+    }
 }

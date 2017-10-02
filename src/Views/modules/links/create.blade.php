@@ -6,10 +6,10 @@
         <h1 class="page-header">Links</h1>
     </div>
 
-    @include('quarx::modules.links.breadcrumbs', ['location' => [['Menu' => URL::to('quarx/menus/'.request('m').'/edit')], 'links', 'create']])
+    @include('quarx::modules.links.breadcrumbs', ['location' => [['Menu' => url(config('quarx.backend-route-prefix', 'quarx').'/menus/'.request('m').'/edit')], 'links', 'create']])
 
     <div class="row">
-        {!! Form::open(['route' => 'quarx.links.store', 'class' => 'add']) !!}
+        {!! Form::open(['route' => config('quarx.backend-route-prefix', 'quarx').'.links.store', 'class' => 'add']) !!}
 
             {!! FormMaker::fromTable('links', Config::get('quarx.forms.link')) !!}
 

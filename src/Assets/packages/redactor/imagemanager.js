@@ -33,17 +33,21 @@ RedactorPlugins.imagemanager = function()
                 success: $.proxy(function(data)
                 {
                     $('#redactor-image-manager-box').html('');
-                    $.each(data, $.proxy(function(key, val)
-                    {
-                        // title
-                        var thumbtitle = '';
-                        if (typeof val.title_tag != 'undefined') thumbtitle = val.title_tag;
+                    if (data.data.length > 0) {
+                        $.each(data.data, $.proxy(function(key, val)
+                        {
+                            // title
+                            var thumbtitle = '';
+                            if (typeof val.title_tag != 'undefined') thumbtitle = val.title_tag;
 
-                        var img = $('<div class="raw25 pull-left thumbnail-box"><div class="img" style="background-image: url(\'' + val.js_url + '\')" data-img-name="'+ val.js_url +'" src="' + val.js_url + '" rel="' + val.js_url + '" title="' + thumbtitle + '"></div></div>');
-                        $('#redactor-image-manager-box').append(img);
-                        $(img).click($.proxy(this.imagemanager.insert, this));
+                            var img = $('<div class="raw25 pull-left thumbnail-box"><div class="img" style="background-image: url(\'' + val.js_url + '\')" data-img-name="'+ val.js_url +'" src="' + val.js_url + '" rel="' + val.js_url + '" title="' + thumbtitle + '"></div></div>');
+                            $('#redactor-image-manager-box').append(img);
+                            $(img).click($.proxy(this.imagemanager.insert, this));
 
-                    }, this));
+                        }, this));
+                    } else {
+                        $('#redactor-image-manager-box').append('You have not yet uploaded any images, visit the images tab to add some.');
+                    }
 
                     $("#imagemanager-filter").bind("keyup", function(){
                         $("#redactor-image-manager-box").find("img").each(function(){
@@ -60,7 +64,6 @@ RedactorPlugins.imagemanager = function()
         },
         insert: function(e)
         {
-            console.log(e.target)
             this.image.insert('<img src="' + $(e.target).attr('rel') + '" alt="' + $(e.target).attr('title') + '" title="' + $(e.target).attr('title') + '">');
         }
     };

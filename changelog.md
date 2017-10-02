@@ -3,6 +3,146 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 ----
 
+## [v2.4.3] - 2017-09-21
+
+### Changed
+- Removed logout link from basic theme
+
+### Fixed
+- Fixed issue with setup command
+- Corrected a bad route definition
+
+## [v2.4.2] - 2017-09-19
+
+### Fixed
+- Issue with blog tags
+
+## [v2.4.1] - 2017-09-18
+
+### Added
+- published_at as dates
+- enhanced the admin dashboard
+
+### Changed
+- Code clean up
+
+## [v2.4.0] - 2017-09-15
+
+### Changed
+- Now supporting Laravel 5.5
+
+## [v2.3.32] - 2017-09-15
+
+### Changed
+- Improved loading time of images drastically
+
+### Fixed
+- Refactored the images as assets
+
+## [v2.3.31] - 2017-08-11
+
+### Fixed
+- Further image improvments
+
+## [v2.3.30] - 2017-08-10
+
+### Fixed
+- Minor issues with Images
+
+## [v2.3.29] - 2017-07-10
+
+### Fixed
+- Minor issue with Quazar tests
+
+## [v2.3.28] - 2017-07-10
+
+### Added
+- New entity relations for images
+- Bulk image deleting
+
+## [v2.3.27] - 2017-07-06
+
+### Fixed
+- Fixes issue with JS which broke the image upload
+
+## [v2.3.26] - 2017-07-03
+
+### Fixed
+- Issue with blog history view
+
+## [v2.3.25] - 2017-06-22
+
+### Added
+- Sortable menus
+
+### Fixed
+- Issue with images
+
+## [v2.3.24] - 2017-06-03
+
+### Fixed
+- Corrected internal API issue
+
+## [v2.3.23] - 2017-06-03
+
+### Added
+- Backend route prefix default: quarx
+
+### Changed
+- Refactored asset caching and local detection
+
+### Fixed
+- Issue with widgets and translations
+
+## [v2.3.22] - 2017-05-31
+
+### Changed
+- Refactored the asset system
+
+### Fixed
+- Updates to the generated tests
+
+## [v2.3.21] - 2017-05-18
+
+### Fixed
+- Minor issues with images and S3
+
+## [v2.3.20] - 2017-05-15
+
+### Changed
+- Switched to admin@example.org
+
+## [v2.3.19] - 2017-05-07
+
+### Fixed
+- Fixes an issue with the 24 hour clock in Repositories
+
+## [v2.3.18] - 2017-05-04
+
+### Fixed
+- Resolved issue with inaccurate published_at regarding timezones
+
+## [v2.3.17] - 2017-05-03
+
+### Added
+- Dashboard view for admin
+- Admin dashboard link
+
+### Fixed
+- Better feedback in image/file insert
+- Menu and page block fixes
+- Fixes for windows directories
+- Language and block related fixes
+- Fillable fixes
+
+## [v2.3.16] - 2017-04-26
+
+### Added
+- Modules now can be ignored by the menu directive via config or expression
+
+### Changed
+- Allows fillables to be modified for default modules
+
 ## [v2.3.15] - 2017-04-11
 
 ### Changed

@@ -18,19 +18,19 @@ Simple setup uses Laracogs as the backbone of an app for you using Laravel, once
 [Subscribe](http://eepurl.com/ck7dSv)
 
 ## Requirements
-1. PHP 5.6+
+1. PHP 7+
 1. MySQL 5.6+
 2. OpenSSL
 
 ## Recommended
-1. PHP 7+
 1. MySQL 5.7+
 
 ## Compatibility Guide
 
 | Laravel Version | Package Tag | Supported |
 |-----------------|-------------|-----------|
-| 5.4.x | 2.3.x | yes |
+| 5.5.x | 2.4.x | yes |
+| 5.4.x | 2.3.x | no |
 | 5.3.x | 2.0.x - 2.2.x | no |
 | 5.1.x - 5.2.x | 1.4.x | no |
 
@@ -55,6 +55,8 @@ Yab\Quarx\QuarxProvider::class,
 ```bash
 php artisan vendor:publish --provider="Yab\Quarx\QuarxProvider"
 ```
+
+> Set your app's timezone config to align the Quarx datepicker UI for your setup
 
 ## Simple Setup
 
@@ -144,6 +146,19 @@ Gate::define('quarx', function ($user) {
 });
 ```
 
+### Fun Route Trick
+
+If you're looking for clean URL pages without having to have the URL preceed with `page` or `p` then you can
+add this to your routes.
+
+> Make sure you put it at the bottom of the routes or it may conflict with others.
+
+```php
+Route::get('{url}', function ($url) {
+    return app(App\Http\Controllers\Quarx\PagesController::class)->show($url);
+})->where('url', '([A-z\d-\/_.]+)?');
+```
+
 ### Roles & Permissions (simple setup only)
 
 With the roles middleware you can specify which roles are applicable separating them with pipes: `['middleware' => ['roles:admin|moderator|member']]`.
@@ -180,6 +195,32 @@ The basic Quarx API endpoints must carry the Quarx `apiToken` defined in the con
 /quarx/api/widgets
 /quarx/api/widgets/{id}
 ```
+
+## Images
+
+Images are resized on upload for a better quality response time. They follow the guidelines specified in the `config` under `quarx.max-image-size`.
+
+## S3
+
+Regarding S3 bucket usage. You will need to set the permissions accordingly to allow images to be saved to your buckets. Then you need to set your buckets to allow public viewing access.
+This is an example of such a policy.
+
+```
+{
+    "Version":"2008-10-17",
+    "Statement":[{
+        "Sid":"AllowPublicRead",
+        "Effect":"Allow",
+        "Principal": {
+            "AWS": "*"
+        },
+        "Action":["s3:GetObject"],
+        "Resource":["arn:aws:s3:::MY_BUCKET/public/images/*"]
+    }]
+}
+```
+
+Replace `MY_BUCKET` with your bucket name.
 
 ## License
 

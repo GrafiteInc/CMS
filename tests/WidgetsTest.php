@@ -44,8 +44,10 @@ class WidgetsTest extends TestCase
 
     public function testStore()
     {
-        $widgets = factory(\Yab\Quarx\Models\Widget::class)->make(['id' => 2]);
-        $response = $this->call('POST', 'quarx/widgets', $widgets['attributes']);
+        $widget = factory(\Yab\Quarx\Models\Widget::class)->make(['id' => 2]);
+        $widget = $widget->toArray();
+        unset($widget['translations']);
+        $response = $this->call('POST', 'quarx/widgets', $widget);
 
         $this->assertEquals(302, $response->getStatusCode());
     }

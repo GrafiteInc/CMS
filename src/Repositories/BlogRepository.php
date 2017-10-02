@@ -53,37 +53,39 @@ class BlogRepository
     public function publishedAndPaginated()
     {
         return Blog::orderBy('published_at', 'desc')->where('is_published', 1)
-            ->where('published_at', '<=', Carbon::now()->format('Y-m-d h:i:s'))
-            ->paginate(Config::get('quarx.pagination', 25));
+            ->where('published_at', '<=', Carbon::now(config('app.timezone'))->format('Y-m-d H:i:s'))
+            ->paginate(Config::get('quarx.pagination', 24));
     }
 
     public function published()
     {
         return Blog::where('is_published', 1)
-            ->where('published_at', '<=', Carbon::now()->format('Y-m-d h:i:s'))->orderBy('created_at', 'desc')
-            ->paginate(Config::get('quarx.pagination', 25));
+            ->where('published_at', '<=', Carbon::now(config('app.timezone'))->format('Y-m-d H:i:s'))->orderBy('created_at', 'desc')
+            ->paginate(Config::get('quarx.pagination', 24));
     }
 
     public function tags($tag)
     {
         return Blog::where('is_published', 1)
-            ->where('published_at', '<=', Carbon::now()->format('Y-m-d h:i:s'))
+            ->where('published_at', '<=', Carbon::now(config('app.timezone'))->format('Y-m-d H:i:s'))
             ->where('tags', 'LIKE', '%'.$tag.'%')->orderBy('created_at', 'desc')
-            ->paginate(Config::get('quarx.pagination', 25));
+            ->paginate(Config::get('quarx.pagination', 24));
     }
 
     public function allTags()
     {
         $tags = [];
-        if (config('app.locale') !== config('quarx.default-language', 'en')) {
-            $blogs = $this->translationRepo->getEntitiesByTypeAndLang(config('app.locale'), 'Yab\Quarx\Models\Blog');
+        if (app()->getLocale() !== config('quarx.default-language', 'en')) {
+            $blogs = $this->translationRepo->getEntitiesByTypeAndLang(app()->getLocale(), 'Yab\Quarx\Models\Blog');
         } else {
             $blogs = Blog::orderBy('published_at', 'desc')->get();
         }
 
         foreach ($blogs as $blog) {
             foreach (explode(',', $blog->tags) as $tag) {
-                array_push($tags, $tag);
+                if ($tag !== '') {
+                    array_push($tags, $tag);
+                }
             }
         }
 
@@ -101,7 +103,7 @@ class BlogRepository
             $query->orWhere($attribute, 'LIKE', '%'.$input['term'].'%');
         }
 
-        return [$query, $input['term'], $query->paginate(Config::get('quarx.pagination', 25))->render()];
+        return [$query, $input['term'], $query->paginate(Config::get('quarx.pagination', 24))->render()];
     }
 
     /**
@@ -111,13 +113,13 @@ class BlogRepository
      *
      * @return Blog
      */
-    public function store($input)
+    public function store($payload)
     {
-        $input['url'] = Quarx::convertToURL($input['url']);
-        $input['is_published'] = (isset($input['is_published'])) ? (bool) $input['is_published'] : 0;
-        $input['published_at'] = (isset($input['published_at']) && !empty($input['published_at'])) ? $input['published_at'] : Carbon::now()->format('Y-m-d h:i:s');
+        $payload['url'] = Quarx::convertToURL($payload['url']);
+        $payload['is_published'] = (isset($payload['is_published'])) ? (bool) $payload['is_published'] : 0;
+        $payload['published_at'] = (isset($payload['published_at']) && !empty($payload['published_at'])) ? Carbon::parse($payload['published_at'])->format('Y-m-d H:i:s') : Carbon::now(config('app.timezone'))->format('Y-m-d H:i:s');
 
-        return Blog::create($input);
+        return Blog::create($payload);
     }
 
     /**
@@ -143,7 +145,7 @@ class BlogRepository
     {
         $blog = null;
 
-        $blog = Blog::where('url', $url)->where('is_published', 1)->where('published_at', '<=', Carbon::now()->format('Y-m-d h:i:s'))->first();
+        $blog = Blog::where('url', $url)->where('is_published', 1)->where('published_at', '<=', Carbon::now(config('app.timezone'))->format('Y-m-d H:i:s'))->first();
 
         if (!$blog) {
             $blog = $this->translationRepo->findByUrl($url, 'Yab\Quarx\Models\Blog');
@@ -179,7 +181,7 @@ class BlogRepository
         } else {
             $payload['url'] = Quarx::convertToURL($payload['url']);
             $payload['is_published'] = (isset($payload['is_published'])) ? (bool) $payload['is_published'] : 0;
-            $payload['published_at'] = (isset($payload['published_at']) && !empty($payload['published_at'])) ? $payload['published_at'] : Carbon::now()->format('Y-m-d h:i:s');
+            $payload['published_at'] = (isset($payload['published_at']) && !empty($payload['published_at'])) ? Carbon::parse($payload['published_at'])->format('Y-m-d H:i:s') : Carbon::now(config('app.timezone'))->format('Y-m-d H:i:s');
 
             unset($payload['lang']);
 

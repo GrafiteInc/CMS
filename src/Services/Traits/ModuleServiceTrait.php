@@ -24,7 +24,7 @@ trait ModuleServiceTrait
             $assetPath = config('quarx.modules.'.$module.'.asset_path').'/'.$path;
         }
 
-        return url('quarx/asset/'.CryptoServiceFacade::url_encode($assetPath).'/'.CryptoServiceFacade::url_encode($contentType).'/?isModule=true');
+        return url(config('quarx.backend-route-prefix', 'quarx').'/asset/'.CryptoServiceFacade::url_encode($assetPath).'/'.CryptoServiceFacade::url_encode($contentType).'/?isModule=true');
     }
 
     /**
@@ -50,20 +50,38 @@ trait ModuleServiceTrait
     /**
      * Module Links.
      *
+     * @param array $ignoredModules   A list of ignored links
+     *
      * @return string
      */
-    public function moduleLinks()
+    public function moduleLinks($ignoredModules = [])
     {
         $links = '';
 
-        foreach (config('quarx.modules', []) as $module => $config) {
+        $modules = config('quarx.modules', []);
+
+        foreach ($ignoredModules as $ignoredModule) {
+            if (in_array(strtolower($ignoredModule), array_keys($modules))) {
+                unset($modules[strtolower($ignoredModule)]);
+            }
+        }
+
+        foreach ($modules as $module => $config) {
             $link = $module;
 
             if (isset($config['url'])) {
                 $link = $config['url'];
             }
 
-            $links .= '<li><a href="'.url($link).'">'.ucfirst($link).'</a></li>';
+            $displayLink = true;
+
+            if (isset($config['is_ignored_in_menu']) && $config['is_ignored_in_menu']) {
+                $displayLink = false;
+            }
+
+            if ($displayLink) {
+                $links .= '<li><a href="'.url($link).'">'.ucfirst($link).'</a></li>';
+            }
         }
 
         return $links;

@@ -17,6 +17,8 @@ class FAQController extends QuarxController
 
     public function __construct(FAQRepository $faqRepo)
     {
+        parent::construct();
+
         $this->faqRepository = $faqRepo;
     }
 
@@ -85,7 +87,7 @@ class FAQController extends QuarxController
             Quarx::notification('FAQ could not be saved.', 'warning');
         }
 
-        return redirect(route('quarx.faqs.edit', [$faq->id]));
+        return redirect(route($this->quarxRouteBase.'.faqs.edit', [$faq->id]));
     }
 
     /**
@@ -102,7 +104,7 @@ class FAQController extends QuarxController
         if (empty($faq)) {
             Quarx::notification('FAQ not found', 'warning');
 
-            return redirect(route('quarx.faqs.index'));
+            return redirect(route($this->quarxRouteBase.'.faqs.index'));
         }
 
         return view('quarx::modules.faqs.edit')->with('faq', $faq);
@@ -123,7 +125,7 @@ class FAQController extends QuarxController
         if (empty($faq)) {
             Quarx::notification('FAQ not found', 'warning');
 
-            return redirect(route('quarx.faqs.index'));
+            return redirect(route($this->quarxRouteBase.'.faqs.index'));
         }
 
         $faq = $this->faqRepository->update($faq, $request->all());
@@ -150,13 +152,13 @@ class FAQController extends QuarxController
         if (empty($faq)) {
             Quarx::notification('FAQ not found', 'warning');
 
-            return redirect(route('quarx.faqs.index'));
+            return redirect(route($this->quarxRouteBase.'.faqs.index'));
         }
 
         $faq->delete();
 
         Quarx::notification('FAQ deleted successfully.', 'success');
 
-        return redirect(route('quarx.faqs.index'));
+        return redirect(route($this->quarxRouteBase.'.faqs.index'));
     }
 }

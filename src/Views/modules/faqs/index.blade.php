@@ -21,7 +21,7 @@
     </div>
 
     <div class="row">
-        <a class="btn btn-primary pull-right" href="{!! route('quarx.faqs.create') !!}">Add New</a>
+        <a class="btn btn-primary pull-right" href="{!! route(config('quarx.backend-route-prefix', 'quarx').'.faqs.create') !!}">Add New</a>
         <div class="raw-m-hide pull-right">
             {!! Form::open(['url' => 'quarx/faqs/search']) !!}
             <input class="form-control header-input pull-right raw-margin-right-24" name="term" placeholder="Search">
@@ -47,7 +47,7 @@
 
                 @foreach($faqs as $faq)
                     <tr>
-                        <td><a href="{!! route('quarx.faqs.edit', [$faq->id]) !!}">{!! $faq->question !!}</a></td>
+                        <td><a href="{!! route(config('quarx.backend-route-prefix', 'quarx').'.faqs.edit', [$faq->id]) !!}">{!! $faq->question !!}</a></td>
                         <td class="raw-m-hide">
                             @if ($faq->is_published)
                                 <span class="fa fa-check"></span>
@@ -56,12 +56,12 @@
                             @endif
                         </td>
                         <td class="text-right">
-                            <form method="post" action="{!! url('quarx/faqs/'.$faq->id) !!}">
+                            <form method="post" action="{!! url(config('quarx.backend-route-prefix', 'quarx').'/faqs/'.$faq->id) !!}">
                                 {!! csrf_field() !!}
                                 {!! method_field('DELETE') !!}
                                 <button class="delete-btn btn btn-xs btn-danger pull-right" type="submit"><i class="fa fa-trash"></i> Delete</button>
                             </form>
-                            <a class="btn btn-xs btn-default pull-right raw-margin-right-8" href="{!! route('quarx.faqs.edit', [$faq->id]) !!}"><i class="fa fa-pencil"></i> Edit</a>
+                            <a class="btn btn-xs btn-default pull-right raw-margin-right-8" href="{!! route(config('quarx.backend-route-prefix', 'quarx').'.faqs.edit', [$faq->id]) !!}"><i class="fa fa-pencil"></i> Edit</a>
                         </td>
                     </tr>
                 @endforeach

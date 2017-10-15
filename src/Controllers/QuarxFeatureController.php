@@ -129,8 +129,6 @@ class QuarxFeatureController extends QuarxController
      */
     public function setLanguage(Request $request, $lang)
     {
-        $request->session()->put('language', $lang);
-
-        return back();
+        return back()->withCookie('language', $lang);
     }
 }

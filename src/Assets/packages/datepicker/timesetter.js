@@ -1,8 +1,12 @@
 $(document).ready(function(){
 
-    $('.timepicker').datetimepicker({ format: 'LT' });
+    $('.timepicker').datetimepicker({
+        format: 'LT',
+        timeZone: _appTimeZone
+    });
     $('.datepicker').datetimepicker({
-        format: 'YYYY-MM-DD'
+        format: 'YYYY-MM-DD',
+        timeZone: _appTimeZone
     });
 
     $('.timepicker').each(function(){

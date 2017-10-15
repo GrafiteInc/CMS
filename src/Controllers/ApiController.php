@@ -13,31 +13,52 @@ class ApiController extends QuarxController
 
     public function __construct(Request $request)
     {
+        parent::construct();
+
         $this->modelName = str_singular($request->segment(3));
         if (!empty($this->modelName)) {
             $this->model = app('Yab\Quarx\Models\\'.ucfirst($this->modelName));
         }
     }
 
+    /**
+     * Find an item in the API
+     *
+     * @param  int $id
+     *
+     * @return mixed
+     */
     public function find($id)
     {
         return $this->model->find($id);
     }
 
+    /**
+     * Collect all items of a resource
+     *
+     * @return Collection
+     */
     public function all()
     {
         $query = $this->model;
 
         if (Schema::hasColumn(str_plural($this->modelName), 'published_at')) {
             $query = $query->where('is_published', 1)
-                ->where('published_at', '<=', Carbon::now()->format('Y-m-d h:i:s'));
+                ->where('published_at', '<=', Carbon::now(config('app.timezone'))->format('Y-m-d H:i:s'));
         }
 
         return $query
             ->orderBy('created_at', 'desc')
-            ->paginate(Config::get('quarx.pagination', 25));
+            ->paginate(Config::get('quarx.pagination', 24));
     }
 
+    /**
+     * Search for the API Item
+     *
+     * @param  string $term
+     *
+     * @return array
+     */
     public function search($term)
     {
         $query = $this->model->orderBy('created_at', 'desc');
@@ -51,7 +72,7 @@ class ApiController extends QuarxController
 
         return [
             'term' => $input['term'],
-            'result' => $query->paginate(Config::get('quarx.pagination', 25)),
+            'result' => $query->paginate(Config::get('quarx.pagination', 24)),
         ];
     }
 }

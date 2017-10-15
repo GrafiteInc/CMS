@@ -57,7 +57,7 @@ class _camel_case_IntegrationTest extends TestCase
         $response = $this->actor->call('PATCH', '/_lower_casePlural_/1', $this->_lower_case_Edited->toArray());
 
         $this->assertEquals(302, $response->getStatusCode());
-        $this->seeInDatabase('_lower_casePlural_', $this->_lower_case_Edited->toArray());
+        $this->assertDatabaseHas('_lower_casePlural_', $this->_lower_case_Edited->toArray());
         $this->assertRedirectedTo('/');
     }
 

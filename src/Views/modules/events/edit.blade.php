@@ -7,17 +7,17 @@
             @if (isset($event->translationData(request('lang'))->is_published))
                 <a class="btn btn-default pull-right raw-margin-left-8" href="{!! url('events/event/'.$event->id) !!}">Live</a>
             @else
-                <a class="btn btn-default pull-right raw-margin-left-8" href="{!! url('quarx/preview/event/'.$event->id.'?lang='.request('lang')) !!}">Preview</a>
+                <a class="btn btn-default pull-right raw-margin-left-8" href="{!! url(config('quarx.backend-route-prefix', 'quarx').'/preview/event/'.$event->id.'?lang='.request('lang')) !!}">Preview</a>
             @endif
             <a class="btn btn-warning pull-right raw-margin-left-8" href="{!! Quarx::rollbackUrl($event->translation(request('lang'))) !!}">Rollback</a>
         @else
             @if ($event->is_published)
                 <a class="btn btn-default pull-right raw-margin-left-8" href="{!! url('events/event/'.$event->id) !!}">Live</a>
             @else
-                <a class="btn btn-default pull-right raw-margin-left-8" href="{!! url('quarx/preview/event/'.$event->id) !!}">Preview</a>
+                <a class="btn btn-default pull-right raw-margin-left-8" href="{!! url(config('quarx.backend-route-prefix', 'quarx').'/preview/event/'.$event->id) !!}">Preview</a>
             @endif
             <a class="btn btn-warning pull-right raw-margin-left-8" href="{!! Quarx::rollbackUrl($event) !!}">Rollback</a>
-            <a class="btn btn-default pull-right raw-margin-left-8" href="{!! url('quarx/events/'.$event->id.'/history') !!}">History</a>
+            <a class="btn btn-default pull-right raw-margin-left-8" href="{!! url(config('quarx.backend-route-prefix', 'quarx').'/events/'.$event->id.'/history') !!}">History</a>
         @endif
         <h1 class="page-header">Events</h1>
     </div>
@@ -26,15 +26,15 @@
 
     <div class="row raw-margin-bottom-24">
         <ul class="nav nav-tabs">
-            @foreach(config('quarx.languages', Quarx::config('quarx.languages')) as $short => $language)
-                <li role="presentation" @if (request('lang') == $short || is_null(request('lang')) && $short == Quarx::config('quarx.default-language'))) class="active" @endif><a href="{{ url('quarx/events/'.$event->id.'/edit?lang='.$short) }}">{{ ucfirst($language) }}</a></li>
+            @foreach(config('quarx.languages') as $short => $language)
+                <li role="presentation" @if (request('lang') == $short || is_null(request('lang')) && $short == config('quarx.default-language'))) class="active" @endif><a href="{{ url(config('quarx.backend-route-prefix', 'quarx').'/events/'.$event->id.'/edit?lang='.$short) }}">{{ ucfirst($language) }}</a></li>
             @endforeach
         </ul>
     </div>
 
     <div class="row">
         <div class="@if (config('quarx.live-preview', false)) col-md-6 @endif">
-            {!! Form::model($event, ['route' => ['quarx.events.update', $event->id], 'method' => 'patch', 'class' => 'edit']) !!}
+            {!! Form::model($event, ['route' => [config('quarx.backend-route-prefix', 'quarx').'.events.update', $event->id], 'method' => 'patch', 'class' => 'edit']) !!}
 
                 <div class="form-group">
                     <label for="Template">Template</label>
@@ -58,7 +58,7 @@
                 @endif
 
                 <div class="form-group text-right">
-                    <a href="{!! url('quarx/events') !!}" class="btn btn-default raw-left">Cancel</a>
+                    <a href="{!! url(config('quarx.backend-route-prefix', 'quarx').'/events') !!}" class="btn btn-default raw-left">Cancel</a>
                     {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
                 </div>
 
@@ -68,9 +68,9 @@
             <div class="col-md-6 hidden-sm hidden-xs">
                 <div id="wrap">
                     @if (! is_null(request('lang')) && request('lang') !== config('quarx.default-language', 'en'))
-                        <iframe id="frame" src="{!! url('quarx/preview/event/'.$event->id.'?lang='.request('lang')) !!}"></iframe>
+                        <iframe id="frame" src="{!! url(config('quarx.backend-route-prefix', 'quarx').'/preview/event/'.$event->id.'?lang='.request('lang')) !!}"></iframe>
                     @else
-                        <iframe id="frame" src="{{ url('quarx/preview/event/'.$event->id) }}"></iframe>
+                        <iframe id="frame" src="{{ url(config('quarx.backend-route-prefix', 'quarx').'/preview/event/'.$event->id) }}"></iframe>
                     @endif
                 </div>
                 <div id="frameButtons" class="raw-margin-top-16">

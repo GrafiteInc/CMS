@@ -10,4 +10,11 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 abstract class QuarxController extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+
+    protected $quarxRouteBase;
+
+    public function construct()
+    {
+        $this->quarxRouteBase = config('quarx.backend-route-prefix', 'quarx');
+    }
 }

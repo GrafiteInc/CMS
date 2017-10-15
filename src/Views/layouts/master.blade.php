@@ -36,6 +36,7 @@
             var _token = '{!! csrf_token() !!}';
             var _url = '{!! url("/") !!}';
             var _pixabayKey = '{!! config('quarx.pixabay', '') !!}';
+            var _appTimeZone = '{!! config('app.timezone', 'UTC') !!}';
 
         </script>
     </head>
@@ -48,7 +49,7 @@
                 <p class="quarx-notify-comment"></p>
             </div>
             <div class="quarx-notify-closer">
-                <span class="glyphicon glyphicon-remove quarx-notify-closer-icon"></span>
+                <span class="fa fa-close quarx-notify-closer-icon"></span>
             </div>
         </div>
 
@@ -63,6 +64,8 @@
         <script type="text/javascript">
             var _apiKey = '{!!  config("quarx.api-key") !!}';
             var _apiToken = '{!!  config("quarx.api-token") !!}';
+
+            @yield('pre_javascript')
         </script>
         <script type="text/javascript" src="{!! Quarx::asset('js/jquery.min.js', 'application/javascript') !!}"></script>
         <script type="text/javascript" src="{!! Quarx::asset('dist/js/all.js', 'application/javascript') !!}"></script>

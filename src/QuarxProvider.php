@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
+use Intervention\Image\Facades\Image;
+use Intervention\Image\ImageServiceProvider;
 use Quarx;
 use Spatie\LaravelAnalytics\LaravelAnalyticsFacade;
 use Spatie\LaravelAnalytics\LaravelAnalyticsServiceProvider;
@@ -79,8 +81,27 @@ class QuarxProvider extends ServiceProvider
             return "<?php echo Quarx::menu($expression); ?>";
         });
 
-        Blade::directive('modules', function () {
-            return '<?php echo Quarx::moduleLinks(); ?>';
+        Blade::directive('block', function ($expression) {
+            return "<?php echo \$page->block($expression); ?>";
+        });
+
+        Blade::directive('languages', function ($expression) {
+            if (count(config('quarx.languages')) > 1) {
+                $languageLinks = [];
+                foreach (config('quarx.languages') as $key => $value) {
+                    $languageLinks[] = '<a class="language-link" href="'.url(config('quarx.backend-route-prefix', 'quarx').'/language/set/'.$key).'">'.$value.'</a>';
+                }
+
+                $languageLinkString = implode($languageLinks);
+
+                return "<?php echo '$languageLinkString'; ?>";
+            }
+
+            return '';
+        });
+
+        Blade::directive('modules', function ($expression) {
+            return "<?php echo Quarx::moduleLinks($expression); ?>";
         });
 
         Blade::directive('widget', function ($expression) {
@@ -122,12 +143,14 @@ class QuarxProvider extends ServiceProvider
         $this->app->register(MinifyServiceProvider::class);
         $this->app->register(MarkdownServiceProvider::class);
         $this->app->register(LaravelAnalyticsServiceProvider::class);
+        $this->app->register(ImageServiceProvider::class);
 
         $loader = AliasLoader::getInstance();
 
         $loader->alias('Minify', MinifyFacade::class);
         $loader->alias('Markdown', Markdown::class);
         $loader->alias('LaravelAnalytics', LaravelAnalyticsFacade::class);
+        $loader->alias('Image', Image::class);
 
         /*
         |--------------------------------------------------------------------------

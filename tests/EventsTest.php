@@ -44,8 +44,10 @@ class EventsTest extends TestCase
 
     public function testStore()
     {
-        $events = factory(\Yab\Quarx\Models\Event::class)->make(['id' => 2]);
-        $response = $this->call('POST', 'quarx/events', $events['attributes']);
+        $event = factory(\Yab\Quarx\Models\Event::class)->make(['id' => 2]);
+        $event = $event->toArray();
+        unset($event['translations']);
+        $response = $this->call('POST', 'quarx/events', $event);
 
         $this->assertEquals(302, $response->getStatusCode());
     }
@@ -60,8 +62,8 @@ class EventsTest extends TestCase
 
     public function testUpdate()
     {
-        $page = ['id' => 2, 'title' => 'dumber', 'start_date' => '2016-10-31', 'end_date' => '2016-10-31', 'details' => 'okie dokie'];
-        $response = $this->call('POST', 'quarx/events', $page);
+        $event = ['id' => 2, 'title' => 'dumber', 'start_date' => '2016-10-31', 'end_date' => '2016-10-31', 'details' => 'okie dokie'];
+        $response = $this->call('POST', 'quarx/events', $event);
 
         $response = $this->call('PATCH', 'quarx/events/2', [
             'title' => 'smarter',
@@ -73,8 +75,8 @@ class EventsTest extends TestCase
 
     public function testUpdateTranslation()
     {
-        $page = ['id' => 2, 'title' => 'dumber', 'start_date' => '2016-10-31', 'end_date' => '2016-10-31', 'details' => 'okie dokie'];
-        $response = $this->call('POST', 'quarx/events', $page);
+        $event = ['id' => 2, 'title' => 'dumber', 'start_date' => '2016-10-31', 'end_date' => '2016-10-31', 'details' => 'okie dokie'];
+        $response = $this->call('POST', 'quarx/events', $event);
 
         $response = $this->call('PATCH', 'quarx/events/2', [
             'title' => 'smarter',

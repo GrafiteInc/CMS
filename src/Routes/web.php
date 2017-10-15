@@ -1,7 +1,9 @@
 <?php
 
-    Route::group(['middleware' => 'web'], function () {
-        Route::get('quarx', 'QuarxFeatureController@sendHome');
+    $routePrefix = config('quarx.backend-route-prefix', 'quarx');
+
+    Route::group(['middleware' => 'web'], function () use ($routePrefix) {
+        Route::get($routePrefix, 'QuarxFeatureController@sendHome');
 
         /*
         |--------------------------------------------------------------------------
@@ -9,7 +11,7 @@
         |--------------------------------------------------------------------------
         */
 
-        Route::get('quarx/language/set/{language}', 'QuarxFeatureController@setLanguage');
+        Route::get($routePrefix.'/language/set/{language}', 'QuarxFeatureController@setLanguage');
 
         /*
         |--------------------------------------------------------------------------
@@ -22,17 +24,31 @@
         Route::get('public-download/{encFileName}/{encRealFileName}', 'AssetController@asDownload');
 
         /*
+         * --------------------------------------------------------------------------
+         * Internal APIs
+         * --------------------------------------------------------------------------
+        */
+        Route::group(['middleware' => 'auth'], function () {
+            Route::group(['prefix' => 'quarx/api'], function () {
+                Route::get('images/list', 'ImagesController@apiList');
+                Route::post('images/store', 'ImagesController@apiStore');
+                Route::get('files/list', 'FilesController@apiList');
+            });
+
+            Route::group(['prefix' => 'quarx'], function () {
+                Route::get('images/bulk-delete/{ids}', 'ImagesController@bulkDelete');
+                Route::post('images/upload', 'ImagesController@upload');
+                Route::post('files/upload', 'FilesController@upload');
+            });
+        });
+
+        /*
         |--------------------------------------------------------------------------
         | APIs
         |--------------------------------------------------------------------------
         */
-
-        Route::group(['prefix' => 'quarx/api'], function () {
-            Route::get('images/list', 'ImagesController@apiList');
-            Route::post('images/store', 'ImagesController@apiStore');
-            Route::get('files/list', 'FilesController@apiList');
-
-            Route::group(['middleware' => ['quarx-api']], function () {
+        Route::group(['prefix' => $routePrefix.'/api'], function () use ($routePrefix) {
+            Route::group(['middleware' => ['quarx-api']], function () use ($routePrefix) {
                 Route::get('blog', 'ApiController@all');
                 Route::get('blog/{id}', 'ApiController@find');
 
@@ -62,10 +78,10 @@
         |--------------------------------------------------------------------------
         */
 
-        Route::group(['prefix' => 'quarx'], function () {
+        Route::group(['prefix' => $routePrefix], function () use ($routePrefix) {
             Route::get('asset/{path}/{contentType}', 'AssetController@asset');
 
-            Route::group(['middleware' => ['auth', 'quarx']], function () {
+            Route::group(['middleware' => ['auth', 'quarx']], function () use ($routePrefix) {
                 Route::get('dashboard', 'DashboardController@main');
                 Route::get('help', 'HelpController@main');
 
@@ -85,8 +101,9 @@
                 |--------------------------------------------------------------------------
                 */
 
-                Route::resource('menus', 'MenuController', ['as' => 'quarx']);
+                Route::resource('menus', 'MenuController', ['except' => ['show'], 'as' => $routePrefix]);
                 Route::post('menus/search', 'MenuController@search');
+                Route::put('menus/{id}/order', 'MenuController@setOrder');
 
                 /*
                 |--------------------------------------------------------------------------
@@ -94,7 +111,7 @@
                 |--------------------------------------------------------------------------
                 */
 
-                Route::resource('links', 'LinksController', ['except' => ['index', 'show'], 'as' => 'quarx']);
+                Route::resource('links', 'LinksController', ['except' => ['index', 'show'], 'as' => $routePrefix]);
                 Route::post('links/search', 'LinksController@search');
 
                 /*
@@ -103,9 +120,8 @@
                 |--------------------------------------------------------------------------
                 */
 
-                Route::resource('images', 'ImagesController', ['as' => 'quarx', 'except' => ['show']]);
+                Route::resource('images', 'ImagesController', ['as' => $routePrefix, 'except' => ['show']]);
                 Route::post('images/search', 'ImagesController@search');
-                Route::post('images/upload', 'ImagesController@upload');
 
                 /*
                 |--------------------------------------------------------------------------
@@ -113,7 +129,7 @@
                 |--------------------------------------------------------------------------
                 */
 
-                Route::resource('blog', 'BlogController', ['as' => 'quarx', 'except' => ['show']]);
+                Route::resource('blog', 'BlogController', ['as' => $routePrefix, 'except' => ['show']]);
                 Route::post('blog/search', 'BlogController@search');
                 Route::get('blog/{id}/history', 'BlogController@history');
 
@@ -123,7 +139,7 @@
                 |--------------------------------------------------------------------------
                 */
 
-                Route::resource('pages', 'PagesController', ['as' => 'quarx', 'except' => ['show']]);
+                Route::resource('pages', 'PagesController', ['as' => $routePrefix, 'except' => ['show']]);
                 Route::post('pages/search', 'PagesController@search');
                 Route::get('pages/{id}/history', 'PagesController@history');
 
@@ -133,7 +149,7 @@
                 |--------------------------------------------------------------------------
                 */
 
-                Route::resource('widgets', 'WidgetsController', ['as' => 'quarx', 'except' => ['show']]);
+                Route::resource('widgets', 'WidgetsController', ['as' => $routePrefix, 'except' => ['show']]);
                 Route::post('widgets/search', 'WidgetsController@search');
 
                 /*
@@ -142,7 +158,7 @@
                 |--------------------------------------------------------------------------
                 */
 
-                Route::resource('faqs', 'FAQController', ['as' => 'quarx', 'except' => ['show']]);
+                Route::resource('faqs', 'FAQController', ['as' => $routePrefix, 'except' => ['show']]);
                 Route::post('faqs/search', 'FAQController@search');
 
                 /*
@@ -151,7 +167,7 @@
                 |--------------------------------------------------------------------------
                 */
 
-                Route::resource('events', 'EventController', ['as' => 'quarx', 'except' => ['show']]);
+                Route::resource('events', 'EventController', ['as' => $routePrefix, 'except' => ['show']]);
                 Route::post('events/search', 'EventController@search');
                 Route::get('events/{id}/history', 'EventController@history');
 
@@ -162,10 +178,9 @@
                 */
 
                 Route::get('files/remove/{id}', 'FilesController@remove');
-                Route::post('files/upload', 'FilesController@upload');
                 Route::post('files/search', 'FilesController@search');
 
-                Route::resource('files', 'FilesController', ['as' => 'quarx', 'except' => ['show']]);
+                Route::resource('files', 'FilesController', ['as' => $routePrefix, 'except' => ['show']]);
             });
         });
     });

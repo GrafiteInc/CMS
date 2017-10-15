@@ -39,7 +39,7 @@ class QuarxService
             return base_path(__DIR__.'/../Assets/'.$path);
         }
 
-        return url('quarx/asset/'.CryptoServiceFacade::url_encode($path).'/'.CryptoServiceFacade::url_encode($contentType));
+        return url(config('quarx.backend-route-prefix', 'quarx').'/asset/'.CryptoServiceFacade::url_encode($path).'/'.CryptoServiceFacade::url_encode($contentType));
     }
 
     /**
@@ -165,9 +165,9 @@ class QuarxService
     {
         if (Gate::allows('quarx', Auth::user())) {
             if (!is_null($id)) {
-                return '<a href="'.url('quarx/'.$type.'/'.$id.'/edit').'" class="btn btn-xs btn-default pull-right"><span class="fa fa-pencil"></span> Edit</a>';
+                return '<a href="'.url(config('quarx.backend-route-prefix', 'quarx').'/'.$type.'/'.$id.'/edit').'" class="btn btn-xs btn-default pull-right"><span class="fa fa-pencil"></span> Edit</a>';
             } else {
-                return '<a href="'.url('quarx/'.$type).'" class="btn btn-xs btn-default pull-right"><span class="fa fa-pencil"></span> Edit</a>';
+                return '<a href="'.url(config('quarx.backend-route-prefix', 'quarx').'/'.$type).'" class="btn btn-xs btn-default pull-right"><span class="fa fa-pencil"></span> Edit</a>';
             }
         }
 
@@ -185,7 +185,7 @@ class QuarxService
     {
         $class = str_replace('\\', '_', get_class($object));
 
-        return url('quarx/rollback/'.$class.'/'.$object->id);
+        return url(config('quarx.backend-route-prefix', 'quarx').'/rollback/'.$class.'/'.$object->id);
     }
 
     /**

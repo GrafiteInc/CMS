@@ -10,6 +10,8 @@ class DashboardController extends QuarxController
 {
     public function __construct(AnalyticsService $service)
     {
+        parent::construct();
+
         $this->service = $service;
     }
 

@@ -9,12 +9,12 @@
     @include('quarx::modules.menus.breadcrumbs', ['location' => ['create']])
 
     <div class="row">
-        {!! Form::open(['route' => 'quarx.menus.store', 'class' => 'add']) !!}
+        {!! Form::open(['route' => config('quarx.backend-route-prefix', 'quarx').'.menus.store', 'class' => 'add']) !!}
 
             {!! FormMaker::fromTable('menus', Config::get('quarx.forms.menu')) !!}
 
             <div class="form-group text-right">
-                <a href="{!! URL::to('quarx/menus') !!}" class="btn btn-default raw-left">Cancel</a>
+                <a href="{!! url(config('quarx.backend-route-prefix', 'quarx').'/menus') !!}" class="btn btn-default raw-left">Cancel</a>
                 {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
             </div>
 

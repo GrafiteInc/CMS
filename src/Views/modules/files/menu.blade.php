@@ -1,6 +1,6 @@
 <div class="row">
     @if (isset($createBtn))
-        <a class="btn btn-primary pull-right" href="{!! route('quarx.files.create') !!}">Add New</a>
+        <a class="btn btn-primary pull-right" href="{!! route(config('quarx.backend-route-prefix', 'quarx').'.files.create') !!}">Add New</a>
     @endif
     <div class="raw-m-hide pull-right raw-m-hide">
         {!! Form::open(['url' => 'quarx/files/search']) !!}

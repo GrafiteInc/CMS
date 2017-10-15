@@ -13,10 +13,12 @@ use Yab\Quarx\Repositories\BlogRepository;
 class BlogController extends QuarxController
 {
     /** @var BlogRepository */
-    private $blogRepository;
+    protected $blogRepository;
 
     public function __construct(BlogRepository $blogRepo)
     {
+        parent::construct();
+
         $this->blogRepository = $blogRepo;
     }
 
@@ -85,7 +87,7 @@ class BlogController extends QuarxController
             Quarx::notification('Blog could not be saved.', 'warning');
         }
 
-        return redirect(route('quarx.blog.edit', [$blog->id]));
+        return redirect(route($this->quarxRouteBase.'.blog.edit', [$blog->id]));
     }
 
     /**
@@ -102,7 +104,7 @@ class BlogController extends QuarxController
         if (empty($blog)) {
             Quarx::notification('Blog not found', 'warning');
 
-            return redirect(route('quarx.blog.index'));
+            return redirect(route($this->quarxRouteBase.'.blog.index'));
         }
 
         return view('quarx::modules.blogs.edit')->with('blog', $blog);
@@ -123,7 +125,7 @@ class BlogController extends QuarxController
         if (empty($blog)) {
             Quarx::notification('Blog not found', 'warning');
 
-            return redirect(route('quarx.blog.index'));
+            return redirect(route($this->quarxRouteBase.'.blog.index'));
         }
 
         $blog = $this->blogRepository->update($blog, $request->all());
@@ -150,14 +152,14 @@ class BlogController extends QuarxController
         if (empty($blog)) {
             Quarx::notification('Blog not found', 'warning');
 
-            return redirect(route('quarx.blog.index'));
+            return redirect(route($this->quarxRouteBase.'.blog.index'));
         }
 
         $blog->delete();
 
         Quarx::notification('Blog deleted successfully.', 'success');
 
-        return redirect(route('quarx.blog.index'));
+        return redirect(route($this->quarxRouteBase.'.blog.index'));
     }
 
     /**

@@ -1,4 +1,4 @@
-@extends('quarx::layouts.blank')
+@extends('quarx-frontend::layout.master')
 
 @section('content')
 

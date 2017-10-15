@@ -36,6 +36,17 @@ class Blog extends QuarxModel
         'published_at',
     ];
 
+    protected $dates = [
+        'published_at'
+    ];
+
+    public function __construct(array $attributes = [])
+    {
+        $keys = array_keys(request()->except('_method', '_token'));
+        $this->fillable(array_values(array_unique(array_merge($this->fillable, $keys))));
+        parent::__construct($attributes);
+    }
+
     public function getEntryAttribute($value)
     {
         return new Normalizer($value);

@@ -56,7 +56,7 @@ class ImagesTest extends TestCase
                 'original' => 'what.jpg',
             ],
         ];
-        $response = $this->call('POST', 'quarx/images', $image, [], ['location' => $uploadedFile]);
+        $response = $this->call('POST', 'quarx/images', ['location' => $image['location']], [], []);
 
         $this->assertEquals(302, $response->getStatusCode());
     }

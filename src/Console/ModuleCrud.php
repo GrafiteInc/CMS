@@ -38,7 +38,7 @@ class ModuleCrud extends Command
         $this->filesystem = new Filesystem();
         $crudGenerator = new CrudGenerator();
 
-        $this->table = ucfirst(str_singular($this->argument('table')));
+        $this->table = ucfirst(str_singular(strtolower($this->argument('table'))));
 
         $moduleDirectory = base_path('quarx/modules/'.ucfirst(str_plural($this->table)));
 
@@ -64,7 +64,7 @@ class ModuleCrud extends Command
         }
 
         file_put_contents($moduleDirectory.'/config.php', "<?php \n\n\n return [ 'asset_path' => __DIR__.'/Assets', 'url' => '".strtolower(str_plural($this->table))."', ];");
-        file_put_contents($moduleDirectory.'/Views/menu.blade.php', "<li class=\"@if (Request::is('quarx/".strtolower(str_plural($this->table))."') || Request::is('quarx/".strtolower(str_plural($this->table))."/*')) active @endif\"><a href=\"{{ url('quarx/".strtolower(str_plural($this->table))."') }}\"><span class=\"fa fa-file\"></span> ".ucfirst(str_plural($this->table)).'</a></li>');
+        file_put_contents($moduleDirectory.'/Views/menu.blade.php', "<li class=\"@if (Request::is(config('quarx.backend-route-prefix', 'quarx').'/".strtolower(str_plural($this->table))."') || Request::is(config('quarx.backend-route-prefix', 'quarx').'/".strtolower(str_plural($this->table))."/*')) active @endif\"><a href=\"{{ url(config('quarx.backend-route-prefix', 'quarx').'/".strtolower(str_plural($this->table))."') }}\"><span class=\"fa fa-file\"></span> ".ucfirst(str_plural($this->table)).'</a></li>');
 
         $config = [
             'bootstrap' => false,
@@ -78,7 +78,7 @@ class ModuleCrud extends Command
             '_path_tests_' => $moduleDirectory.'/Tests',
             '_path_request_' => $moduleDirectory.'/Requests',
             '_path_routes_' => $moduleDirectory.'/Routes/web.php',
-            'routes_prefix' => "<?php \n\nRoute::group(['namespace' => 'Quarx\Modules\\".ucfirst(str_plural($this->table))."\Controllers', 'prefix' => 'quarx', 'middleware' => ['web', 'auth', 'quarx']], function () { \n\n",
+            'routes_prefix' => "<?php \n\nRoute::group(['namespace' => 'Quarx\Modules\\".ucfirst(str_plural($this->table))."\Controllers', 'prefix' => config('quarx.backend-route-prefix', 'quarx'), 'middleware' => ['web', 'auth', 'quarx']], function () { \n\n",
             'routes_suffix' => "\n\n});",
             '_app_namespace_' => app()->getInstance()->getNamespace(),
             '_namespace_services_' => 'Quarx\Modules\\'.ucfirst(str_plural($this->table)).'\Services',

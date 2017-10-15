@@ -35,7 +35,8 @@ elixir(function(mix) {
         '../packages/redactor/specialchar.js',
         '../packages/redactor/table.js',
         '../packages/redactor/video.js',
-
+        '../packages/redactor/insertIcon.js',
+        
         'modules.js',
         'dropzone-custom.js',
     ]);

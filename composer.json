@@ -46,5 +46,12 @@
         ]
     },
     "minimum-stability": "dev",
-    "prefer-stable": true
+    "prefer-stable": true,
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Yab\\Quarx\\QuarxProvider"
+            ]
+        }
+    }
 }

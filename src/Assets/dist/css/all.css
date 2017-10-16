@@ -1353,6 +1353,13 @@ body .redactor-box-fullscreen {
   font-size: 12px;
   text-transform: uppercase;
 }
+.re-btn-icon {
+  width: 45px;
+}
+.re-icon-list {
+  overflow-y: scroll;
+  max-height: 200px;
+}
 
 /*!
  * Datetimepicker for Bootstrap 3

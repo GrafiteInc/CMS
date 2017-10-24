@@ -222,6 +222,10 @@ This is an example of such a policy.
 
 Replace `MY_BUCKET` with your bucket name.
 
+#### FileSystem Config
+
+If using S3 you will need to add the following line to your filesystem config: `'visibility' => 'public',`
+
 ## License
 
 Quarx is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)

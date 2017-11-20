@@ -17,6 +17,9 @@ Simple setup uses Laracogs as the backbone of an app for you using Laravel, once
 ## Yab Newsletter
 [Subscribe](http://eepurl.com/ck7dSv)
 
+## Chat Support
+[Gitter](https://gitter.im/YABhq/Quarx)
+
 ## Requirements
 1. PHP 7+
 1. MySQL 5.6+

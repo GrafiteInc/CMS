@@ -8,7 +8,7 @@
     @include('quarx::modules.pages.breadcrumbs', ['location' => ['create']])
 
     <div class="row">
-        {!! Form::open(['route' => config('quarx.backend-route-prefix', 'quarx').'.pages.store', 'class' => 'add']) !!}
+        {!! Form::open(['route' => config('quarx.backend-route-prefix', 'quarx').'.pages.store', 'class' => 'add', 'files' => true]) !!}
 
             {!! FormMaker::fromTable('pages', Config::get('quarx.forms.page')) !!}
 

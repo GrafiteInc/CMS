@@ -33,9 +33,17 @@
         </ul>
     </div>
 
+    @if ($page->hero_image)
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <img class="thumbnail img-responsive" src="{{ $page->hero_image_url }}" alt="">
+            </div>
+        </div>
+    @endif
+
     <div class="row">
         <div class="@if (config('quarx.live-preview', false)) col-md-6 @endif">
-            {!! Form::model($page, ['route' => [config('quarx.backend-route-prefix', 'quarx').'.pages.update', $page->id], 'method' => 'patch', 'class' => 'edit']) !!}
+            {!! Form::model($page, ['route' => [config('quarx.backend-route-prefix', 'quarx').'.pages.update', $page->id], 'method' => 'patch', 'class' => 'edit', 'files' => true]) !!}
 
                 <input type="hidden" name="lang" value="{{ request('lang') }}">
 

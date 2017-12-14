@@ -8,9 +8,10 @@
 <div class="container">
 
     <div class="jumbotron">
-        <h1>Featured Page</h1>
-        <h2>{{ $page->title }}</h2>
+        <img class="thumbnail img-responsive" src="{{ $page->hero_image_url }}" alt="">
     </div>
+
+    <h2>{{ $page->title }}</h2>
 
     {!! $page->block('main') !!}
 

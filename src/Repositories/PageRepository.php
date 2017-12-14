@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Schema;
 use Quarx;
 use Yab\Quarx\Models\Page;
+use Yab\Quarx\Services\FileService;
 
 class PageRepository
 {
@@ -88,6 +89,12 @@ class PageRepository
         $payload['is_published'] = (isset($payload['is_published'])) ? (bool) $payload['is_published'] : 0;
         $payload['published_at'] = (isset($payload['published_at']) && !empty($payload['published_at'])) ? Carbon::parse($payload['published_at'])->format('Y-m-d H:i:s') : Carbon::now(config('app.timezone'))->format('Y-m-d H:i:s');
 
+        if (isset($payload['hero_image'])) {
+            $file = request()->file('hero_image');
+            $path = FileService::saveFile($file, 'public/images', [], true);
+            $payload['hero_image'] = $path['name'];
+        }
+
         return Page::create($payload);
     }
 
@@ -154,6 +161,12 @@ class PageRepository
         $blockCollection = $this->parseTemplate($payload, $blockCollection);
 
         $payload['blocks'] = json_encode($blockCollection);
+
+        if (isset($payload['hero_image'])) {
+            $file = request()->file('hero_image');
+            $path = FileService::saveFile($file, 'public/images', [], true);
+            $payload['hero_image'] = $path['name'];
+        }
 
         if (!empty($payload['lang']) && $payload['lang'] !== config('quarx.default-language', 'en')) {
             return $this->translationRepo->createOrUpdate($page->id, 'Yab\Quarx\Models\Page', $payload['lang'], $payload);

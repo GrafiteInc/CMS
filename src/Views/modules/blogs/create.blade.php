@@ -9,7 +9,7 @@
     @include('quarx::modules.blogs.breadcrumbs', ['location' => ['create']])
 
     <div class="row">
-        {!! Form::open(['route' => config('quarx.backend-route-prefix', 'quarx').'.blog.store', 'class' => 'add']) !!}
+        {!! Form::open(['route' => config('quarx.backend-route-prefix', 'quarx').'.blog.store', 'class' => 'add', 'files' => true]) !!}
 
             {!! FormMaker::fromTable('blogs', Config::get('quarx.forms.blog')) !!}
 

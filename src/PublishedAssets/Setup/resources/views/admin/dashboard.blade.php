@@ -72,7 +72,7 @@
     </div>
 
     <div class="row">
-        <div class="col-md-4 col-md-offset-2">
+        <div class="col-md-6">
             <h2 class="text-center">Server</h2>
             <table class="table table-striped raw-margin-top-48">
                 <tr>
@@ -105,7 +105,7 @@
                 </tr>
             </table>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-6">
             <h2 class="text-center">Database</h2>
             <table class="table table-striped raw-margin-top-48">
                 <tr>

@@ -2,11 +2,12 @@
 
 namespace Yab\Quarx\Repositories;
 
-use Quarx;
 use Carbon\Carbon;
-use Yab\Quarx\Models\Blog;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Schema;
+use Quarx;
+use Yab\Quarx\Models\Blog;
+use Yab\Quarx\Services\FileService;
 
 class BlogRepository
 {
@@ -119,6 +120,12 @@ class BlogRepository
         $payload['is_published'] = (isset($payload['is_published'])) ? (bool) $payload['is_published'] : 0;
         $payload['published_at'] = (isset($payload['published_at']) && !empty($payload['published_at'])) ? Carbon::parse($payload['published_at'])->format('Y-m-d H:i:s') : Carbon::now(config('app.timezone'))->format('Y-m-d H:i:s');
 
+        if (isset($payload['hero_image'])) {
+            $file = request()->file('hero_image');
+            $path = FileService::saveFile($file, 'public/images', [], true);
+            $payload['hero_image'] = $path['name'];
+        }
+
         return Blog::create($payload);
     }
 
@@ -176,6 +183,12 @@ class BlogRepository
      */
     public function update($blog, $payload)
     {
+        if (isset($payload['hero_image'])) {
+            $file = request()->file('hero_image');
+            $path = FileService::saveFile($file, 'public/images', [], true);
+            $payload['hero_image'] = $path['name'];
+        }
+
         if (!empty($payload['lang']) && $payload['lang'] !== config('quarx.default-language', 'en')) {
             return $this->translationRepo->createOrUpdate($blog->id, 'Yab\Quarx\Models\Blog', $payload['lang'], $payload);
         } else {

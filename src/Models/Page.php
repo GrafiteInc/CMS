@@ -34,6 +34,7 @@ class Page extends QuarxModel
         'template',
         'published_at',
         'blocks',
+        'hero_image',
     ];
 
     protected $dates = [
@@ -50,6 +51,11 @@ class Page extends QuarxModel
     public function getEntryAttribute($value)
     {
         return new Normalizer($value);
+    }
+
+    public function getHeroImageUrlAttribute($value)
+    {
+        return url(str_replace('public/', 'storage/', $this->hero_image));
     }
 
     public function history()

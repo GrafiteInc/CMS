@@ -145,6 +145,10 @@ return [
                 'class' => 'tags',
                 'alt_name' => 'SEO Keywords',
             ],
+            'hero_image' => [
+                'type' => 'file',
+                'alt_name' => 'Hero Image',
+            ],
             'is_published' => [
                 'type' => 'checkbox',
                 'alt_name' => 'Published',
@@ -214,6 +218,10 @@ return [
                 'type' => 'string',
                 'class' => 'tags',
                 'alt_name' => 'SEO Keywords',
+            ],
+            'hero_image' => [
+                'type' => 'file',
+                'alt_name' => 'Hero Image',
             ],
             'is_published' => [
                 'type' => 'checkbox',

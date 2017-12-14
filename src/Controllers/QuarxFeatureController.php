@@ -118,6 +118,10 @@ class QuarxFeatureController extends QuarxController
             $view = 'quarx-frontend::pages.'.$modelInstance->template;
         }
 
+        if ($entity === 'blog') {
+            $view = 'quarx-frontend::blog.'.$modelInstance->template;
+        }
+
         return view($view, $data);
     }
 

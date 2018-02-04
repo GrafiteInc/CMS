@@ -75,7 +75,7 @@ class LinksController extends QuarxController
             Quarx::notification($e->getMessage() ?: 'Link could not be saved.', 'danger');
         }
 
-        return redirect(url('quarx/menus/'.$request->get('menu_id').'/edit'));
+        return redirect(route($this->quarxRouteBase.'.menus.edit', [$request->get('menu_id')]));
     }
 
     /**
@@ -152,6 +152,6 @@ class LinksController extends QuarxController
 
         Quarx::notification('Link deleted successfully.', 'success');
 
-        return redirect(url('quarx/menus/'.$menu.'/edit'));
+        return redirect(route($this->quarxRouteBase.'.menus.edit', [$menu]));
     }
 }

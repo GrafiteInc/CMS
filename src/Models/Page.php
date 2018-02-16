@@ -38,7 +38,7 @@ class Page extends QuarxModel
     ];
 
     protected $dates = [
-        'published_at'
+        'published_at' => 'Y-m-d H:i'
     ];
 
     public function __construct(array $attributes = [])

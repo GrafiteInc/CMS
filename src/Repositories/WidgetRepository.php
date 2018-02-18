@@ -65,6 +65,8 @@ class WidgetRepository
      */
     public function store($input)
     {
+        $input['name'] = htmlentities($input['name']);
+
         return Widget::create($input);
     }
 
@@ -102,6 +104,8 @@ class WidgetRepository
      */
     public function update($widgets, $payload)
     {
+        $input['name'] = htmlentities($input['name']);
+
         if (!empty($payload['lang']) && $payload['lang'] !== config('quarx.default-language', 'en')) {
             return $this->translationRepo->createOrUpdate($widgets->id, 'Yab\Quarx\Models\Widget', $payload['lang'], $payload);
         } else {

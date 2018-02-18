@@ -128,11 +128,17 @@ class FAQController extends QuarxController
             return redirect(route($this->quarxRouteBase.'.faqs.index'));
         }
 
-        $faq = $this->faqRepository->update($faq, $request->all());
-        Quarx::notification('FAQ updated successfully.', 'success');
+        $validation = ValidationService::check(FAQ::$rules);
 
-        if (!$faq) {
-            Quarx::notification('FAQ could not be saved.', 'warning');
+        if (!$validation['errors']) {
+            $faq = $this->faqRepository->update($faq, $request->all());
+            Quarx::notification('FAQ updated successfully.', 'success');
+
+            if (!$faq) {
+                Quarx::notification('FAQ could not be saved.', 'warning');
+            }
+        } else {
+            return $validation['redirect'];
         }
 
         return redirect(URL::previous());

@@ -128,11 +128,18 @@ class BlogController extends QuarxController
             return redirect(route($this->quarxRouteBase.'.blog.index'));
         }
 
-        $blog = $this->blogRepository->update($blog, $request->all());
-        Quarx::notification('Blog updated successfully.', 'success');
+        $validation = ValidationService::check(Blog::$rules);
 
-        if (!$blog) {
-            Quarx::notification('Blog could not be saved.', 'warning');
+        if (!$validation['errors']) {
+            $blog = $this->blogRepository->update($blog, $request->all());
+
+            Quarx::notification('Blog updated successfully.', 'success');
+
+            if (! $blog) {
+                Quarx::notification('Blog could not be saved.', 'warning');
+            }
+        } else {
+            return $validation['redirect'];
         }
 
         return redirect(URL::previous());

@@ -65,6 +65,7 @@ class MenuRepository
      */
     public function store($input)
     {
+        $input['name'] = htmlentities($input['name']);
         return Menu::create($input);
     }
 
@@ -102,6 +103,7 @@ class MenuRepository
      */
     public function update($menu, $input)
     {
+        $input['name'] = htmlentities($input['name']);
         return $menu->update($input);
     }
 

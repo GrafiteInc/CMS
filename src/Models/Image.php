@@ -61,10 +61,26 @@ class Image extends QuarxModel
         if ($this->isLocalFile()) {
             return url(str_replace('public/', 'storage/', $this->location));
         } elseif ($this->fileExists()) {
-            return Storage::disk(Config::get('quarx.storage-location', 'local'))->url($this->location);
+            return $this->getS3Image();
         }
 
         return $this->lostImage();
+    }
+
+    /**
+     * Get an S3 image
+     *
+     * @return string
+     */
+    public function getS3Image()
+    {
+        $url = Storage::disk(Config::get('quarx.storage-location', 'local'))->url($this->location);
+
+        if (!is_null(config('quarx.cloudfront'))) {
+            $url = str_replace(config('filesystems.disks.s3.bucket').'.s3.'.config('filesystems.disks.s3.region').'.amazonaws.com', config('quarx.cloudfront'), $url);
+        }
+
+        return $url;
     }
 
     /**
@@ -142,11 +158,21 @@ class Image extends QuarxModel
         return false;
     }
 
+    /**
+     * Check if file exists
+     *
+     * @return  string
+     */
     public function fileExists()
     {
         return Storage::disk(Config::get('quarx.storage-location', 'local'))->exists($this->location);
     }
 
+    /**
+     * Staged image if none are found
+     *
+     * @return string
+     */
     public function lostImage()
     {
         $imagePath = app(AssetService::class)->generateImage('File Not Found');

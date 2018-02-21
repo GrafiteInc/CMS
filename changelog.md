@@ -3,6 +3,11 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 ----
 
+## [v2.4.6] - 2018-02-21
+
+### Fixed
+- Issue with payloads
+
 ## [v2.4.5] - 2018-02-21
 
 ### Added

@@ -104,7 +104,7 @@ class WidgetRepository
      */
     public function update($widgets, $payload)
     {
-        $input['name'] = htmlentities($input['name']);
+        $payload['name'] = htmlentities($payload['name']);
 
         if (!empty($payload['lang']) && $payload['lang'] !== config('quarx.default-language', 'en')) {
             return $this->translationRepo->createOrUpdate($widgets->id, 'Yab\Quarx\Models\Widget', $payload['lang'], $payload);

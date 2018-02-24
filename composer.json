@@ -20,7 +20,7 @@
         "spatie/laravel-analytics": "^1.4",
         "aws/aws-sdk-php": "^3.18",
         "league/flysystem-aws-s3-v3": "^1.0",
-        "graham-campbell/markdown": "^8.0",
+        "graham-campbell/markdown": "^9.0",
         "intervention/image": "^2.3",
         "stichoza/google-translate-php": "^3.2",
         "donatj/phpuseragentparser": "^0.5.3"

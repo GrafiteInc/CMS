@@ -1,10 +1,9 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
-class AddEntityToImages extends Migration
+class AddTagsToImages extends Migration
 {
     /**
      * Run the migrations.
@@ -12,8 +11,7 @@ class AddEntityToImages extends Migration
     public function up()
     {
         Schema::table(config('cabin.db-prefix', '').'images', function (Blueprint $table) {
-            $table->integer('entity_id')->nullable();
-            $table->string('entity_type')->nullable();
+            $table->text('tags')->nullable();
         });
     }
 
@@ -22,6 +20,8 @@ class AddEntityToImages extends Migration
      */
     public function down()
     {
-        // Dropping these columns seems to break tests
+        Schema::table(config('cabin.db-prefix', '').'images', function ($table) {
+            $table->dropColumn('tags');
+        });
     }
 }

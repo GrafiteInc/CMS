@@ -11,7 +11,7 @@ class CreateAnalyticsTable extends Migration
      */
     public function up()
     {
-        Schema::create(config('quarx.db-prefix', '').'analytics', function (Blueprint $table) {
+        Schema::create(config('cabin.db-prefix', '').'analytics', function (Blueprint $table) {
             $table->increments('id');
             $table->text('data')->nullable();
             $table->nullableTimestamps();
@@ -23,6 +23,6 @@ class CreateAnalyticsTable extends Migration
      */
     public function down()
     {
-        Schema::drop(config('quarx.db-prefix', '').'analytics');
+        Schema::drop(config('cabin.db-prefix', '').'analytics');
     }
 }

@@ -13,11 +13,11 @@ class AddHeroImages extends Migration
      */
     public function up()
     {
-        Schema::table(config('quarx.db-prefix', '').'blogs', function (Blueprint $table) {
+        Schema::table(config('cabin.db-prefix', '').'blogs', function (Blueprint $table) {
             $table->string('hero_image')->nullable();
         });
 
-        Schema::table(config('quarx.db-prefix', '').'pages', function (Blueprint $table) {
+        Schema::table(config('cabin.db-prefix', '').'pages', function (Blueprint $table) {
             $table->string('hero_image')->nullable();
         });
     }
@@ -29,11 +29,11 @@ class AddHeroImages extends Migration
      */
     public function down()
     {
-        Schema::table(config('quarx.db-prefix', '').'blogs', function ($table) {
+        Schema::table(config('cabin.db-prefix', '').'blogs', function ($table) {
             $table->dropColumn('hero_image');
         });
 
-        Schema::table(config('quarx.db-prefix', '').'pages', function ($table) {
+        Schema::table(config('cabin.db-prefix', '').'pages', function ($table) {
             $table->dropColumn('hero_image');
         });
     }

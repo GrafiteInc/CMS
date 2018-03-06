@@ -11,7 +11,7 @@ class AddOrderToMenus extends Migration
      */
     public function up()
     {
-        Schema::table(config('quarx.db-prefix', '').'menus', function (Blueprint $table) {
+        Schema::table(config('cabin.db-prefix', '').'menus', function (Blueprint $table) {
             $table->text('order')->nullable();
         });
     }
@@ -21,7 +21,7 @@ class AddOrderToMenus extends Migration
      */
     public function down()
     {
-        Schema::table(config('quarx.db-prefix', '').'menus', function ($table) {
+        Schema::table(config('cabin.db-prefix', '').'menus', function ($table) {
             $table->dropColumn('order');
         });
     }

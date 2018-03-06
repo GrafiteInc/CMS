@@ -2,13 +2,13 @@
 
 namespace _namespace_controller_;
 
-use Quarx;
+use Cabin;
 use CryptoService;
 use Illuminate\Http\Request;
 use _app_namespace_Http\Controllers\Controller;
-use Quarx\Modules\_ucCamel_casePlural_\Services\_camel_case_Service;
-use Quarx\Modules\_ucCamel_casePlural_\Requests\_camel_case_CreateRequest;
-use Quarx\Modules\_ucCamel_casePlural_\Requests\_camel_case_UpdateRequest;
+use Cabin\Modules\_ucCamel_casePlural_\Services\_camel_case_Service;
+use Cabin\Modules\_ucCamel_casePlural_\Requests\_camel_case_CreateRequest;
+use Cabin\Modules\_ucCamel_casePlural_\Requests\_camel_case_UpdateRequest;
 
 class _ucCamel_casePlural_Controller extends Controller
 {
@@ -65,12 +65,12 @@ class _ucCamel_casePlural_Controller extends Controller
         $result = $this->service->create($request->except('_token'));
 
         if ($result) {
-            Quarx::notification('Successfully created', 'success');
-            return redirect(config('quarx.backend-route-prefix', 'quarx').'/_lower_casePlural_/'.$result->id.'/edit');
+            Cabin::notification('Successfully created', 'success');
+            return redirect(config('cabin.backend-route-prefix', 'cabin').'/_lower_casePlural_/'.$result->id.'/edit');
         }
 
-        Quarx::notification('Failed to create', 'warning');
-        return redirect(config('quarx.backend-route-prefix', 'quarx').'/_lower_casePlural_');
+        Cabin::notification('Failed to create', 'warning');
+        return redirect(config('cabin.backend-route-prefix', 'cabin').'/_lower_casePlural_');
     }
 
     /**
@@ -109,11 +109,11 @@ class _ucCamel_casePlural_Controller extends Controller
         $result = $this->service->update($id, $request->except(['_token', '_method']));
 
         if ($result) {
-            Quarx::notification('Successfully updated', 'success');
+            Cabin::notification('Successfully updated', 'success');
             return back();
         }
 
-        Quarx::notification('Failed to update', 'warning');
+        Cabin::notification('Failed to update', 'warning');
         return back();
     }
 
@@ -128,11 +128,11 @@ class _ucCamel_casePlural_Controller extends Controller
         $result = $this->service->destroy($id);
 
         if ($result) {
-            Quarx::notification('Successfully deleted', 'success');
-            return redirect(config('quarx.backend-route-prefix', 'quarx').'/_lower_casePlural_');
+            Cabin::notification('Successfully deleted', 'success');
+            return redirect(config('cabin.backend-route-prefix', 'cabin').'/_lower_casePlural_');
         }
 
-        Quarx::notification('Failed to delete', 'warning');
-        return redirect(config('quarx.backend-route-prefix', 'quarx').'/_lower_casePlural_');
+        Cabin::notification('Failed to delete', 'warning');
+        return redirect(config('cabin.backend-route-prefix', 'cabin').'/_lower_casePlural_');
     }
 }

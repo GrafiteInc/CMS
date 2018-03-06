@@ -2,9 +2,9 @@
 
 namespace _namespace_model_;
 
-use Yab\Quarx\Models\QuarxModel;
+use Yab\Cabin\Models\CabinModel;
 
-class _camel_case_ extends QuarxModel
+class _camel_case_ extends CabinModel
 {
     public $table = "_lower_casePlural_";
 

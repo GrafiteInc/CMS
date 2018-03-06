@@ -1,11 +1,11 @@
 <?php
 
-namespace Yab\Quarx\Traits;
+namespace Yab\Cabin\Traits;
 
-use Yab\Quarx\Models\Translation;
-use Yab\Quarx\Services\QuarxService;
+use Yab\Cabin\Models\Translation;
+use Yab\Cabin\Services\CabinService;
 use Stichoza\GoogleTranslate\TranslateClient;
-use Yab\Quarx\Repositories\TranslationRepository;
+use Yab\Cabin\Repositories\TranslationRepository;
 
 trait Translatable
 {
@@ -72,7 +72,7 @@ trait Translatable
      */
     public function afterCreate($payload)
     {
-        if (config('quarx.auto-translate', false)) {
+        if (config('cabin.auto-translate', false)) {
             $entry = $payload->toArray();
 
             unset($entry['created_at']);
@@ -82,9 +82,9 @@ trait Translatable
             unset($entry['published_at']);
             unset($entry['id']);
 
-            foreach (config('quarx.languages') as $code => $language) {
-                if ($code != config('quarx.default-language')) {
-                    $tr = new TranslateClient(config('quarx.default-language'), $code);
+            foreach (config('cabin.languages') as $code => $language) {
+                if ($code != config('cabin.default-language')) {
+                    $tr = new TranslateClient(config('cabin.default-language'), $code);
                     $translation = [
                         'lang' => $code,
                         'template' => 'show',
@@ -104,7 +104,7 @@ trait Translatable
                     }
 
                     if (isset($translation['url'])) {
-                        $translation['url'] = app(QuarxService::class)->convertToURL($translation['url']);
+                        $translation['url'] = app(CabinService::class)->convertToURL($translation['url']);
                     }
 
                     $entityId = $payload->id;

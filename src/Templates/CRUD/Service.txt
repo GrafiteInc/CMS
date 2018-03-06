@@ -27,7 +27,7 @@ class _camel_case_Service
             $model = $model->orderBy('created_at', 'desc');
         }
 
-        return $model->paginate(config('quarx.pagination', 25));
+        return $model->paginate(config('cabin.pagination', 25));
     }
 
     public function search($payload)
@@ -41,7 +41,7 @@ class _camel_case_Service
             $query->orWhere($attribute, 'LIKE', '%'.$payload.'%');
         };
 
-        return $query->paginate(Config::get('quarx.pagination', 24));
+        return $query->paginate(Config::get('cabin.pagination', 24));
     }
 
     public function create($payload)

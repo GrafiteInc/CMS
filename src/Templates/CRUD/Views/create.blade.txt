@@ -1,4 +1,4 @@
-@extends('quarx::layouts.dashboard')
+@extends('cabin::layouts.dashboard')
 
 @section('content')
 
@@ -9,12 +9,12 @@
     @include('_lower_casePlural_::_lower_casePlural_.breadcrumbs', ['location' => ['create']])
 
      <div class="row">
-        {!! Form::open(['route' => config('quarx.backend-route-prefix', 'quarx').'._lower_casePlural_.store', '_lower_casePlural_' => true, 'class' => 'add']); !!}
+        {!! Form::open(['route' => config('cabin.backend-route-prefix', 'cabin').'._lower_casePlural_.store', '_lower_casePlural_' => true, 'class' => 'add']); !!}
 
-            {!! FormMaker::fromTable('_lower_casePlural_', Quarx::moduleConfig('_lower_casePlural_', '_lower_casePlural_')) !!}
+            {!! FormMaker::fromTable('_lower_casePlural_', Cabin::moduleConfig('_lower_casePlural_', '_lower_casePlural_')) !!}
 
             <div class="form-group text-right">
-                <a href="{!! url(config('quarx.backend-route-prefix', 'quarx').'/_lower_casePlural_') !!}" class="btn btn-default raw-left">Cancel</a>
+                <a href="{!! url(config('cabin.backend-route-prefix', 'cabin').'/_lower_casePlural_') !!}" class="btn btn-default raw-left">Cancel</a>
                 {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
             </div>
 

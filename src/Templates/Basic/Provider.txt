@@ -1,6 +1,6 @@
 <?php
 
-namespace Quarx\Modules\_camel_casePlural_;
+namespace Cabin\Modules\_camel_casePlural_;
 
 use Illuminate\Routing\Router;
 use Illuminate\Contracts\Events\Dispatcher as DispatcherContract;
@@ -28,7 +28,7 @@ class _camel_casePlural_ModuleProvider extends ServiceProvider
         $this->app->view->addNamespace('_lower_casePlural_', __DIR__.'/Views');
 
         // Configs
-        $this->app->config->set('quarx.modules._lower_casePlural_', include(__DIR__.'/config.php'));
+        $this->app->config->set('cabin.modules._lower_casePlural_', include(__DIR__.'/config.php'));
     }
 
     public function register()

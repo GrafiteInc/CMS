@@ -1,4 +1,4 @@
-@extends('quarx::layouts.dashboard')
+@extends('cabin::layouts.dashboard')
 
 @section('content')
 
@@ -6,12 +6,12 @@
         <h1 class="page-header">Links</h1>
     </div>
 
-    @include('quarx::modules.links.breadcrumbs', ['location' => [['Menu' => url(config('quarx.backend-route-prefix', 'quarx').'/menus/'.$links->menu_id.'/edit')], 'links', 'edit']])
+    @include('cabin::modules.links.breadcrumbs', ['location' => [['Menu' => url(config('cabin.backend-route-prefix', 'cabin').'/menus/'.$links->menu_id.'/edit')], 'links', 'edit']])
 
     <div class="row">
-        {!! Form::model($links, ['route' => [config('quarx.backend-route-prefix', 'quarx').'.links.update', $links->id], 'method' => 'patch', 'class' => 'edit']) !!}
+        {!! Form::model($links, ['route' => [config('cabin.backend-route-prefix', 'cabin').'.links.update', $links->id], 'method' => 'patch', 'class' => 'edit']) !!}
 
-            {!! FormMaker::fromObject($links, Config::get('quarx.forms.link')) !!}
+            {!! FormMaker::fromObject($links, Config::get('cabin.forms.link')) !!}
 
             <div class="form-group" style="display: none;">
                 <label for="Page_id">Page</label>

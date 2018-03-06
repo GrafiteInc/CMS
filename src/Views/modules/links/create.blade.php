@@ -1,4 +1,4 @@
-@extends('quarx::layouts.dashboard')
+@extends('cabin::layouts.dashboard')
 
 @section('content')
 
@@ -6,12 +6,12 @@
         <h1 class="page-header">Links</h1>
     </div>
 
-    @include('quarx::modules.links.breadcrumbs', ['location' => [['Menu' => url(config('quarx.backend-route-prefix', 'quarx').'/menus/'.request('m').'/edit')], 'links', 'create']])
+    @include('cabin::modules.links.breadcrumbs', ['location' => [['Menu' => url(config('cabin.backend-route-prefix', 'cabin').'/menus/'.request('m').'/edit')], 'links', 'create']])
 
     <div class="row">
-        {!! Form::open(['route' => config('quarx.backend-route-prefix', 'quarx').'.links.store', 'class' => 'add']) !!}
+        {!! Form::open(['route' => config('cabin.backend-route-prefix', 'cabin').'.links.store', 'class' => 'add']) !!}
 
-            {!! FormMaker::fromTable('links', Config::get('quarx.forms.link')) !!}
+            {!! FormMaker::fromTable('links', Config::get('cabin.forms.link')) !!}
 
             <div class="form-group" style="display: none;">
                 <label for="Page_id">Page</label>
@@ -36,6 +36,6 @@
 @section('javascript')
 
     @parent
-    {!! Minify::javascript(Quarx::asset('js/links-module.js', 'application/javascript')) !!}
+    {!! Minify::javascript(Cabin::asset('js/links-module.js', 'application/javascript')) !!}
 
 @stop

@@ -1,4 +1,4 @@
-@extends('quarx::layouts.dashboard')
+@extends('cabin::layouts.dashboard')
 
 @section('content')
 
@@ -41,9 +41,9 @@
     <div class="row">
         <button class="btn btn-danger pull-right raw-margin-left-8 bulk-image-delete"><span class="fa fa-trash"></span> Delete</button>
 
-        <a class="btn btn-primary pull-right" href="{!! route(config('quarx.backend-route-prefix', 'quarx').'.images.create') !!}">Add New</a>
+        <a class="btn btn-primary pull-right" href="{!! route(config('cabin.backend-route-prefix', 'cabin').'.images.create') !!}">Add New</a>
         <div class="raw-m-hide raw-m-hide pull-right">
-            {!! Form::open(['url' => 'quarx/images/search']) !!}
+            {!! Form::open(['url' => 'cabin/images/search']) !!}
             <input class="form-control header-input pull-right raw-margin-right-24" name="term" placeholder="Search">
             {!! Form::close() !!}
         </div>
@@ -62,7 +62,7 @@
                 @foreach($images as $image)
                     <div class="col-md-3 image-panel raw-margin-top-24">
                         <div class="thumbnail">
-                            <a href="{!! route(config('quarx.backend-route-prefix', 'quarx').'.images.edit', [$image->id]) !!}">
+                            <a href="{!! route(config('cabin.backend-route-prefix', 'cabin').'.images.edit', [$image->id]) !!}">
                                 <div class="img" style="background-image: url('{!! $image->url !!}')"></div>
                             </a>
                         </div>
@@ -76,12 +76,12 @@
                                     @endif
                                 </div>
                                 <div class="col-lg-6 col-md-12 col-sm-12">
-                                    <form method="post" action="{!! url(config('quarx.backend-route-prefix', 'quarx').'/images/'.$image->id) !!}">
+                                    <form method="post" action="{!! url(config('cabin.backend-route-prefix', 'cabin').'/images/'.$image->id) !!}">
                                         {!! csrf_field() !!}
                                         {!! method_field('DELETE') !!}
                                         <button class="delete-btn btn btn-xs img-alter-btn btn-danger pull-right" type="submit"><i class="fa fa-trash"></i></button>
                                     </form>
-                                    <a class="btn btn-xs btn-default pull-right img-alter-btn raw-margin-right-8" href="{!! route(config('quarx.backend-route-prefix', 'quarx').'.images.edit', [$image->id]) !!}"><i class="fa fa-pencil"></i></a>
+                                    <a class="btn btn-xs btn-default pull-right img-alter-btn raw-margin-right-8" href="{!! route(config('cabin.backend-route-prefix', 'cabin').'.images.edit', [$image->id]) !!}"><i class="fa fa-pencil"></i></a>
                                 </div>
                             </div>
                         </div>

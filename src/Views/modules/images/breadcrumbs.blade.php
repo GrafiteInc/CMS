@@ -1,8 +1,8 @@
 <div class="row">
     <ol class="breadcrumb">
-        <li><a href="{!! url(config('quarx.backend-route-prefix', 'quarx').'/images') !!}">Images</a></li>
+        <li><a href="{!! url(config('cabin.backend-route-prefix', 'cabin').'/images') !!}">Images</a></li>
 
-            {!! Quarx::breadcrumbs($location) !!}
+            {!! Cabin::breadcrumbs($location) !!}
 
         <li class="active"></li>
     </ol>

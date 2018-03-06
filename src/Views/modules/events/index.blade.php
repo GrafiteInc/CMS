@@ -1,4 +1,4 @@
-@extends('quarx::layouts.dashboard')
+@extends('cabin::layouts.dashboard')
 
 @section('content')
 
@@ -21,9 +21,9 @@
     </div>
 
     <div class="row">
-        <a class="btn btn-primary pull-right" href="{!! route(config('quarx.backend-route-prefix', 'quarx').'.events.create') !!}">Add New</a>
+        <a class="btn btn-primary pull-right" href="{!! route(config('cabin.backend-route-prefix', 'cabin').'.events.create') !!}">Add New</a>
         <div class="raw-m-hide pull-right">
-            {!! Form::open(['url' => 'quarx/events/search']) !!}
+            {!! Form::open(['url' => 'cabin/events/search']) !!}
             <input class="form-control header-input pull-right raw-margin-right-24" name="term" placeholder="Search">
             {!! Form::close() !!}
         </div>
@@ -49,7 +49,7 @@
 
                 @foreach($events as $event)
                     <tr>
-                        <td><a href="{!! route(config('quarx.backend-route-prefix', 'quarx').'.events.edit', [$event->id]) !!}">{!! $event->title !!}</a></td>
+                        <td><a href="{!! route(config('cabin.backend-route-prefix', 'cabin').'.events.edit', [$event->id]) !!}">{!! $event->title !!}</a></td>
                         <td>{!! date('M jS, Y', strtotime($event->start_date)) !!}</td>
                         <td>{!! date('M jS, Y', strtotime($event->end_date)) !!}</td>
                         <td class="raw-m-hide">
@@ -60,12 +60,12 @@
                             @endif
                         </td>
                         <td class="text-right">
-                            <form method="post" action="{!! url(config('quarx.backend-route-prefix', 'quarx').'/events/'.$event->id) !!}">
+                            <form method="post" action="{!! url(config('cabin.backend-route-prefix', 'cabin').'/events/'.$event->id) !!}">
                                 {!! csrf_field() !!}
                                 {!! method_field('DELETE') !!}
                                 <button class="delete-btn btn btn-xs btn-danger pull-right" type="submit"><i class="fa fa-trash"></i> Delete</button>
                             </form>
-                            <a class="btn btn-xs btn-default pull-right raw-margin-right-8" href="{!! route(config('quarx.backend-route-prefix', 'quarx').'.events.edit', [$event->id]) !!}"><i class="fa fa-pencil"></i> Edit</a>
+                            <a class="btn btn-xs btn-default pull-right raw-margin-right-8" href="{!! route(config('cabin.backend-route-prefix', 'cabin').'.events.edit', [$event->id]) !!}"><i class="fa fa-pencil"></i> Edit</a>
                         </td>
                     </tr>
                 @endforeach

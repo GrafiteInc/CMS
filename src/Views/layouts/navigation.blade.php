@@ -1,4 +1,4 @@
-@extends('quarx::layouts.master')
+@extends('cabin::layouts.master')
 
 @section('navigation')
 
@@ -9,7 +9,7 @@
             <span class="fa fa-close nav-close"></span>
         </button>
         <span class="navbar-brand">
-            <span class="quarx-logo"></span> {{ config('quarx.backend-title', 'Quarx') }}
+            <span class="cabin-logo"></span> {{ config('cabin.backend-title', 'Cabin') }}
         </span>
         @if (Auth::user())
         <p class="navbar-text navbar-left raw-m-hide">Signed in as {{ Auth::user()->name }}</p>

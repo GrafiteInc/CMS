@@ -1,10 +1,10 @@
 <?php
 
-namespace Yab\Quarx\Services;
+namespace Yab\Cabin\Services;
 
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Schema;
-use Yab\Quarx\Models\Analytics;
+use Yab\Cabin\Models\Analytics;
 
 class AnalyticsService
 {
@@ -26,7 +26,7 @@ class AnalyticsService
             'time' => $request->server('REQUEST_TIME', null),
         ]);
 
-        if (Schema::hasTable(config('quarx.db-prefix', '').'analytics')) {
+        if (Schema::hasTable(config('cabin.db-prefix', '').'analytics')) {
             $this->model->create([
                 'data' => $requestData,
             ]);

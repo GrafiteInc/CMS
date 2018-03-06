@@ -1,6 +1,6 @@
 <?php
 
-namespace Yab\Quarx\Services;
+namespace Yab\Cabin\Services;
 
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Input;
@@ -29,7 +29,7 @@ class ValidationService
         if (is_array($form)) {
             $fields = $form;
         } else {
-            $conditions = Quarx::config('validation.'.$form);
+            $conditions = Cabin::config('validation.'.$form);
             $fields = $conditions;
         }
 

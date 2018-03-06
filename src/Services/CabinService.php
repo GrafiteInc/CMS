@@ -1,6 +1,6 @@
 <?php
 
-namespace Yab\Quarx\Services;
+namespace Yab\Cabin\Services;
 
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
@@ -8,12 +8,12 @@ use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\URL;
-use Yab\Quarx\Facades\CryptoServiceFacade;
-use Yab\Quarx\Services\Traits\DefaultModuleServiceTrait;
-use Yab\Quarx\Services\Traits\MenuServiceTrait;
-use Yab\Quarx\Services\Traits\ModuleServiceTrait;
+use Yab\Cabin\Facades\CryptoServiceFacade;
+use Yab\Cabin\Services\Traits\DefaultModuleServiceTrait;
+use Yab\Cabin\Services\Traits\MenuServiceTrait;
+use Yab\Cabin\Services\Traits\ModuleServiceTrait;
 
-class QuarxService
+class CabinService
 {
     use MenuServiceTrait;
     use DefaultModuleServiceTrait;
@@ -21,7 +21,7 @@ class QuarxService
 
     public function __construct()
     {
-        $this->imageRepo = App::make('Yab\Quarx\Repositories\ImageRepository');
+        $this->imageRepo = App::make('Yab\Cabin\Repositories\ImageRepository');
     }
 
     /**
@@ -39,7 +39,7 @@ class QuarxService
             return base_path(__DIR__.'/../Assets/'.$path);
         }
 
-        return url(config('quarx.backend-route-prefix', 'quarx').'/asset/'.CryptoServiceFacade::url_encode($path).'/'.CryptoServiceFacade::url_encode($contentType));
+        return url(config('cabin.backend-route-prefix', 'cabin').'/asset/'.CryptoServiceFacade::url_encode($path).'/'.CryptoServiceFacade::url_encode($contentType));
     }
 
     /**
@@ -140,7 +140,7 @@ class QuarxService
     {
         $files = glob($dir.'/*');
 
-        $packageViews = Config::get('quarx.package-menus');
+        $packageViews = Config::get('cabin.package-menus');
 
         if (is_null($packageViews)) {
             $packageViews = [];
@@ -150,7 +150,7 @@ class QuarxService
             array_push($packageViews, $view);
         }
 
-        return Config::set('quarx.package-menus', $packageViews);
+        return Config::set('cabin.package-menus', $packageViews);
     }
 
     /**
@@ -158,20 +158,35 @@ class QuarxService
      *
      * @param string $type
      * @param int    $id
+     * @param string $class
      *
      * @return string
      */
-    public function editBtn($type = null, $id = null)
+    public function editBtn($type = null, $id = null, $class="btn-link")
     {
-        if (Gate::allows('quarx', Auth::user())) {
+        if (Gate::allows('cabin', Auth::user())) {
             if (!is_null($id)) {
-                return '<a href="'.url(config('quarx.backend-route-prefix', 'quarx').'/'.$type.'/'.$id.'/edit').'" class="btn btn-xs btn-default pull-right"><span class="fa fa-pencil"></span> Edit</a>';
+                return '<a href="'.url(config('cabin.backend-route-prefix', 'cabin').'/'.$type.'/'.$id.'/edit').'" class="btn btn-sm '.$class.'"><span class="fa fa-edit"></span> Edit</a>';
             } else {
-                return '<a href="'.url(config('quarx.backend-route-prefix', 'quarx').'/'.$type).'" class="btn btn-xs btn-default pull-right"><span class="fa fa-pencil"></span> Edit</a>';
+                return '<a href="'.url(config('cabin.backend-route-prefix', 'cabin').'/'.$type).'" class="btn btn-sm '.$class.'"><span class="fa fa-edit"></span> Edit</a>';
             }
         }
 
         return '';
+    }
+
+    /**
+     * Another form of the edit button
+     *
+     * @param string $type
+     * @param int    $id
+     * @param string $class
+     *
+     * @return string
+     */
+    public function editBtnSecondary($type = null, $id = null)
+    {
+        return $this->editBtn($type, $id, 'btn-secondary');
     }
 
     /**
@@ -185,7 +200,7 @@ class QuarxService
     {
         $class = str_replace('\\', '_', get_class($object));
 
-        return url(config('quarx.backend-route-prefix', 'quarx').'/rollback/'.$class.'/'.$object->id);
+        return url(config('cabin.backend-route-prefix', 'cabin').'/rollback/'.$class.'/'.$object->id);
     }
 
     /**

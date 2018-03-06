@@ -1,10 +1,10 @@
 <?php
 
-namespace Yab\Quarx\Services;
+namespace Yab\Cabin\Services;
 
 use Illuminate\Support\Facades\Response;
 
-class QuarxResponseService
+class CabinResponseService
 {
     /**
      * Generate an api response.

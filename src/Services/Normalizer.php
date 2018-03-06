@@ -1,6 +1,6 @@
 <?php
 
-namespace Yab\Quarx\Services;
+namespace Yab\Cabin\Services;
 
 class Normalizer
 {

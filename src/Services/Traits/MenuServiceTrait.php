@@ -1,26 +1,26 @@
 <?php
 
-namespace Yab\Quarx\Services\Traits;
+namespace Yab\Cabin\Services\Traits;
 
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\URL;
-use Yab\Quarx\Repositories\LinkRepository;
-use Yab\Quarx\Repositories\MenuRepository;
-use Yab\Quarx\Repositories\PageRepository;
+use Yab\Cabin\Repositories\LinkRepository;
+use Yab\Cabin\Repositories\MenuRepository;
+use Yab\Cabin\Repositories\PageRepository;
 
 trait MenuServiceTrait
 {
     /**
-     * Quarx package Menus.
+     * Cabin package Menus.
      *
      * @return string
      */
     public function packageMenus()
     {
-        $packageViews = Config::get('quarx.package-menus', []);
+        $packageViews = Config::get('cabin.package-menus', []);
 
         foreach ($packageViews as $view) {
             include $view;
@@ -58,10 +58,10 @@ trait MenuServiceTrait
             } else {
                 $page = $pageRepo->findPagesById($link->page_id);
                 if ($page && $page->is_published && $page->published_at <= Carbon::now(config('app.timezone'))) {
-                    if (config('app.locale') == config('quarx.default-language', $this->config('quarx.default-language'))) {
+                    if (config('app.locale') == config('cabin.default-language', $this->config('cabin.default-language'))) {
                         $response .= '<a href="'.URL::to('page/'.$page->url)."\">$link->name</a>";
                         $processedLinks[] = '<a href="'.URL::to('page/'.$page->url)."\">$link->name</a>";
-                    } elseif (config('app.locale') != config('quarx.default-language', $this->config('quarx.default-language'))) {
+                    } elseif (config('app.locale') != config('cabin.default-language', $this->config('cabin.default-language'))) {
                         if ($page->translation(config('app.locale'))) {
                             $response .= '<a href="'.URL::to('page/'.$page->translation(config('app.locale'))->data->url)."\">$link->name</a>";
                             $processedLinks[] = '<a href="'.URL::to('page/'.$page->translation(config('app.locale'))->data->url)."\">$link->name</a>";
@@ -77,8 +77,8 @@ trait MenuServiceTrait
             $response = view($view, ['links' => $links, 'linksAsHtml' => $response, 'processed_links' => $processedLinks]);
         }
 
-        if (Gate::allows('quarx', Auth::user())) {
-            $response .= '<a href="'.url(config('quarx.backend-route-prefix', 'quarx').'/menus/'.$menu->id.'/edit').'" style="margin-left: 8px;" class="btn btn-xs btn-default"><span class="fa fa-pencil"></span> Edit</a>';
+        if (Gate::allows('cabin', Auth::user())) {
+            $response .= '<a href="'.url(config('cabin.backend-route-prefix', 'cabin').'/menus/'.$menu->id.'/edit').'" style="margin-left: 8px;" class="btn btn-xs btn-default"><span class="fa fa-pencil"></span> Edit</a>';
         }
 
         return $response;

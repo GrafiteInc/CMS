@@ -1,9 +1,9 @@
 <?php
 
-    $routePrefix = config('quarx.backend-route-prefix', 'quarx');
+    $routePrefix = config('cabin.backend-route-prefix', 'cabin');
 
     Route::group(['middleware' => 'web'], function () use ($routePrefix) {
-        Route::get($routePrefix, 'QuarxFeatureController@sendHome');
+        Route::get($routePrefix, 'CabinFeatureController@sendHome');
 
         /*
         |--------------------------------------------------------------------------
@@ -11,7 +11,7 @@
         |--------------------------------------------------------------------------
         */
 
-        Route::get($routePrefix.'/language/set/{language}', 'QuarxFeatureController@setLanguage');
+        Route::get($routePrefix.'/language/set/{language}', 'CabinFeatureController@setLanguage');
 
         /*
         |--------------------------------------------------------------------------
@@ -29,13 +29,13 @@
          * --------------------------------------------------------------------------
         */
         Route::group(['middleware' => 'auth'], function () {
-            Route::group(['prefix' => 'quarx/api'], function () {
+            Route::group(['prefix' => 'cabin/api'], function () {
                 Route::get('images/list', 'ImagesController@apiList');
                 Route::post('images/store', 'ImagesController@apiStore');
                 Route::get('files/list', 'FilesController@apiList');
             });
 
-            Route::group(['prefix' => 'quarx'], function () {
+            Route::group(['prefix' => 'cabin'], function () {
                 Route::get('images/bulk-delete/{ids}', 'ImagesController@bulkDelete');
                 Route::post('images/upload', 'ImagesController@upload');
                 Route::post('files/upload', 'FilesController@upload');
@@ -44,44 +44,14 @@
 
         /*
         |--------------------------------------------------------------------------
-        | APIs
-        |--------------------------------------------------------------------------
-        */
-        Route::group(['prefix' => $routePrefix.'/api'], function () use ($routePrefix) {
-            Route::group(['middleware' => ['quarx-api']], function () use ($routePrefix) {
-                Route::get('blog', 'ApiController@all');
-                Route::get('blog/{id}', 'ApiController@find');
-
-                Route::get('events', 'ApiController@all');
-                Route::get('events/{id}', 'ApiController@find');
-
-                Route::get('faqs', 'ApiController@all');
-                Route::get('faqs/{id}', 'ApiController@find');
-
-                Route::get('files', 'ApiController@all');
-                Route::get('files/{id}', 'ApiController@find');
-
-                Route::get('images', 'ApiController@all');
-                Route::get('images/{id}', 'ApiController@find');
-
-                Route::get('pages', 'ApiController@all');
-                Route::get('pages/{id}', 'ApiController@find');
-
-                Route::get('widgets', 'ApiController@all');
-                Route::get('widgets/{id}', 'ApiController@find');
-            });
-        });
-
-        /*
-        |--------------------------------------------------------------------------
-        | Quarx
+        | Cabin
         |--------------------------------------------------------------------------
         */
 
         Route::group(['prefix' => $routePrefix], function () use ($routePrefix) {
             Route::get('asset/{path}/{contentType}', 'AssetController@asset');
 
-            Route::group(['middleware' => ['auth', 'quarx']], function () use ($routePrefix) {
+            Route::group(['middleware' => ['auth', 'cabin']], function () use ($routePrefix) {
                 Route::get('dashboard', 'DashboardController@main');
                 Route::get('help', 'HelpController@main');
 
@@ -91,9 +61,9 @@
                 |--------------------------------------------------------------------------
                 */
 
-                Route::get('preview/{entity}/{entityId}', 'QuarxFeatureController@preview');
-                Route::get('rollback/{entity}/{entityId}', 'QuarxFeatureController@rollback');
-                Route::get('revert/{id}', 'QuarxFeatureController@revert');
+                Route::get('preview/{entity}/{entityId}', 'CabinFeatureController@preview');
+                Route::get('rollback/{entity}/{entityId}', 'CabinFeatureController@rollback');
+                Route::get('revert/{id}', 'CabinFeatureController@revert');
 
                 /*
                 |--------------------------------------------------------------------------

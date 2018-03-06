@@ -1,6 +1,6 @@
 <?php
 
-namespace Yab\Quarx\Services;
+namespace Yab\Cabin\Services;
 
 use App;
 use Exception;
@@ -11,9 +11,9 @@ use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
-use Quarx;
+use Cabin;
 use SplFileInfo;
-use Yab\Quarx\Facades\CryptoServiceFacade;
+use Yab\Cabin\Facades\CryptoServiceFacade;
 
 class AssetService
 {
@@ -21,7 +21,7 @@ class AssetService
 
     public function __construct()
     {
-        $this->mimeTypes = require __DIR__.'/../Config/mime.php';
+        $this->mimeTypes = require __DIR__.'/../Assets/mimes.php';
     }
 
     /**
@@ -68,12 +68,12 @@ class AssetService
             return Cache::remember($encFileName.'_preview', 3600, function () use ($encFileName, $fileSystem) {
                 $fileName = CryptoServiceFacade::url_decode($encFileName);
 
-                if (Config::get('quarx.storage-location') === 'local' || Config::get('quarx.storage-location') === null) {
+                if (config('cabin.storage-location') === 'local' || config('cabin.storage-location') === null) {
                     $filePath = storage_path('app/'.$fileName);
                     $contentType = $fileSystem->mimeType($filePath);
                     $ext = '.'.strtoupper($fileSystem->extension($filePath));
                 } else {
-                    $filePath = Storage::disk(Config::get('quarx.storage-location', 'local'))->url($fileName);
+                    $filePath = Storage::disk(config('cabin.storage-location', 'local'))->url($fileName);
                     $fileTool = new SplFileInfo($filePath);
                     $ext = $fileTool->getExtension();
                     $contentType = $this->getMimeType($ext);
@@ -125,7 +125,7 @@ class AssetService
                 ]);
             });
         } catch (Exception $e) {
-            Quarx::notification('We encountered an error with that file', 'danger');
+            Cabin::notification('We encountered an error with that file', 'danger');
 
             return redirect('errors/general');
         }
@@ -147,7 +147,11 @@ class AssetService
             if (Request::get('isModule') === 'true') {
                 $filePath = $path;
             } else {
-                $filePath = __DIR__.'/../Assets/'.$path;
+                if (str_contains($path, 'dist/') || str_contains($path, 'themes/')) {
+                    $filePath = __DIR__.'/../Assets/'.$path;
+                } else {
+                    $filePath = __DIR__.'/../Assets/src/'.$path;
+                }
             }
 
             $fileName = basename($filePath);
@@ -194,7 +198,7 @@ class AssetService
         if (file_exists(storage_path('app/'.$fileName))) {
             $filePath = storage_path('app/'.$fileName);
         } else {
-            $filePath = Storage::disk(Config::get('quarx.storage-location', 'local'))->url($fileName);
+            $filePath = Storage::disk(config('cabin.storage-location', 'local'))->url($fileName);
         }
 
         return $filePath;
@@ -211,8 +215,8 @@ class AssetService
      */
     public function getFileContent($fileName, $contentType, $ext)
     {
-        if (Storage::disk(Config::get('quarx.storage-location', 'local'))->exists($fileName)) {
-            $fileContent = Storage::disk(Config::get('quarx.storage-location', 'local'))->get($fileName);
+        if (Storage::disk(config('cabin.storage-location', 'local'))->exists($fileName)) {
+            $fileContent = Storage::disk(config('cabin.storage-location', 'local'))->get($fileName);
         } elseif (!is_null(config('filesystems.cloud.key'))) {
             $fileContent = Storage::disk('cloud')->get($fileName);
         } else {
@@ -220,9 +224,9 @@ class AssetService
         }
 
         if (stristr($fileName, 'image') || stristr($contentType, 'image')) {
-            if (! is_null(config('quarx.preview-image-size'))) {
+            if (! is_null(config('cabin.preview-image-size'))) {
                 $img = Image::make($fileContent);
-                $img->resize(config('quarx.preview-image-size', 800), null, function ($constraint) {
+                $img->resize(config('cabin.preview-image-size', 800), null, function ($constraint) {
                     $constraint->aspectRatio();
                 });
 
@@ -243,10 +247,10 @@ class AssetService
     public function generateImage($ext)
     {
         $color = '#'.str_pad(dechex(mt_rand(0, 0xFFFFFF)), 6, '0', STR_PAD_LEFT);
-        $img = Image::make(__DIR__.'/../Assets/images/blank.jpg');
+        $img = Image::make(__DIR__.'/../Assets/src/images/blank.jpg');
         $img->fill($color);
         $img->text($ext, 150, 150, function ($font) {
-            $font->file(__DIR__.'/../Assets/fonts/SourceSansPro-Black.ttf');
+            $font->file(__DIR__.'/../Assets/src/fonts/SourceSansPro-Black.ttf');
             $font->size(32);
             $font->color('#ffffff');
             $font->align('center');

@@ -7,7 +7,7 @@ class EventsTest extends TestCase
         parent::setUp();
         $this->withoutMiddleware();
         $this->withoutEvents();
-        factory(\Yab\Quarx\Models\Event::class)->create();
+        factory(\Yab\Cabin\Models\Event::class)->create();
     }
 
     /*
@@ -18,20 +18,20 @@ class EventsTest extends TestCase
 
     public function testIndex()
     {
-        $response = $this->call('GET', 'quarx/events');
+        $response = $this->call('GET', 'cabin/events');
         $this->assertEquals(200, $response->getStatusCode());
         $response->assertViewHas('events');
     }
 
     public function testCreate()
     {
-        $response = $this->call('GET', 'quarx/events/create');
+        $response = $this->call('GET', 'cabin/events/create');
         $this->assertEquals(200, $response->getStatusCode());
     }
 
     public function testEdit()
     {
-        $response = $this->call('GET', 'quarx/events/1/edit');
+        $response = $this->call('GET', 'cabin/events/1/edit');
         $this->assertEquals(200, $response->getStatusCode());
         $response->assertViewHas('event');
     }
@@ -44,17 +44,17 @@ class EventsTest extends TestCase
 
     public function testStore()
     {
-        $event = factory(\Yab\Quarx\Models\Event::class)->make(['id' => 2]);
+        $event = factory(\Yab\Cabin\Models\Event::class)->make(['id' => 2]);
         $event = $event->toArray();
         unset($event['translations']);
-        $response = $this->call('POST', 'quarx/events', $event);
+        $response = $this->call('POST', 'cabin/events', $event);
 
         $this->assertEquals(302, $response->getStatusCode());
     }
 
     public function testSearch()
     {
-        $response = $this->call('POST', 'quarx/events/search', ['term' => 'wtf']);
+        $response = $this->call('POST', 'cabin/events/search', ['term' => 'wtf']);
 
         $response->assertViewHas('events');
         $this->assertEquals(200, $response->getStatusCode());
@@ -63,9 +63,9 @@ class EventsTest extends TestCase
     public function testUpdate()
     {
         $event = ['id' => 2, 'title' => 'dumber', 'start_date' => '2016-10-31', 'end_date' => '2016-10-31', 'details' => 'okie dokie'];
-        $response = $this->call('POST', 'quarx/events', $event);
+        $response = $this->call('POST', 'cabin/events', $event);
 
-        $response = $this->call('PATCH', 'quarx/events/2', [
+        $response = $this->call('PATCH', 'cabin/events/2', [
             'title' => 'smarter',
         ]);
 
@@ -76,23 +76,23 @@ class EventsTest extends TestCase
     public function testUpdateTranslation()
     {
         $event = ['id' => 2, 'title' => 'dumber', 'start_date' => '2016-10-31', 'end_date' => '2016-10-31', 'details' => 'okie dokie'];
-        $response = $this->call('POST', 'quarx/events', $event);
+        $response = $this->call('POST', 'cabin/events', $event);
 
-        $response = $this->call('PATCH', 'quarx/events/2', [
+        $response = $this->call('PATCH', 'cabin/events/2', [
             'title' => 'smarter',
             'lang' => 'fr',
         ]);
 
         $this->assertDatabaseHas('translations', [
-            'entity_type' => 'Yab\\Quarx\\Models\\Event',
+            'entity_type' => 'Yab\\Cabin\\Models\\Event',
         ]);
         $this->assertEquals(302, $response->getStatusCode());
     }
 
     public function testDelete()
     {
-        $response = $this->call('DELETE', 'quarx/events/1');
+        $response = $this->call('DELETE', 'cabin/events/1');
         $this->assertEquals(302, $response->getStatusCode());
-        $response->assertRedirect('quarx/events');
+        $response->assertRedirect('cabin/events');
     }
 }

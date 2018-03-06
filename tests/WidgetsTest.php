@@ -7,7 +7,7 @@ class WidgetsTest extends TestCase
         parent::setUp();
         $this->withoutMiddleware();
         $this->withoutEvents();
-        factory(\Yab\Quarx\Models\Widget::class)->create();
+        factory(\Yab\Cabin\Models\Widget::class)->create();
     }
 
     /*
@@ -18,20 +18,20 @@ class WidgetsTest extends TestCase
 
     public function testIndex()
     {
-        $response = $this->call('GET', 'quarx/widgets');
+        $response = $this->call('GET', 'cabin/widgets');
         $this->assertEquals(200, $response->getStatusCode());
         $response->assertViewHas('widgets');
     }
 
     public function testCreate()
     {
-        $response = $this->call('GET', 'quarx/widgets/create');
+        $response = $this->call('GET', 'cabin/widgets/create');
         $this->assertEquals(200, $response->getStatusCode());
     }
 
     public function testEdit()
     {
-        $response = $this->call('GET', 'quarx/widgets/1/edit');
+        $response = $this->call('GET', 'cabin/widgets/1/edit');
         $this->assertEquals(200, $response->getStatusCode());
         $response->assertViewHas('widgets');
     }
@@ -44,10 +44,10 @@ class WidgetsTest extends TestCase
 
     public function testStore()
     {
-        $widget = factory(\Yab\Quarx\Models\Widget::class)->make(['id' => 2]);
+        $widget = factory(\Yab\Cabin\Models\Widget::class)->make(['id' => 2]);
         $widget = $widget->toArray();
         unset($widget['translations']);
-        $response = $this->call('POST', 'quarx/widgets', $widget);
+        $response = $this->call('POST', 'cabin/widgets', $widget);
 
         $this->assertEquals(302, $response->getStatusCode());
     }
@@ -55,9 +55,9 @@ class WidgetsTest extends TestCase
     public function testUpdate()
     {
         $widget = ['id' => 2, 'name' => 'dumber', 'slug' => 'dumber'];
-        $response = $this->call('POST', 'quarx/widgets', $widget);
+        $response = $this->call('POST', 'cabin/widgets', $widget);
 
-        $response = $this->call('PATCH', 'quarx/widgets/2', [
+        $response = $this->call('PATCH', 'cabin/widgets/2', [
             'name' => 'whacky',
             'slug' => 'whacky',
         ]);
@@ -69,24 +69,24 @@ class WidgetsTest extends TestCase
     public function testUpdateTranslation()
     {
         $widget = ['id' => 2, 'name' => 'dumber', 'slug' => 'dumber'];
-        $response = $this->call('POST', 'quarx/widgets', $widget);
+        $response = $this->call('POST', 'cabin/widgets', $widget);
 
-        $response = $this->call('PATCH', 'quarx/widgets/2', [
+        $response = $this->call('PATCH', 'cabin/widgets/2', [
             'name' => 'whacky',
             'slug' => 'whacky',
             'lang' => 'fr',
         ]);
 
         $this->assertDatabaseHas('translations', [
-            'entity_type' => 'Yab\\Quarx\\Models\\Widget',
+            'entity_type' => 'Yab\\Cabin\\Models\\Widget',
         ]);
         $this->assertEquals(302, $response->getStatusCode());
     }
 
     public function testDelete()
     {
-        $response = $this->call('DELETE', 'quarx/widgets/1');
+        $response = $this->call('DELETE', 'cabin/widgets/1');
         $this->assertEquals(302, $response->getStatusCode());
-        $response->assertRedirect('quarx/widgets');
+        $response->assertRedirect('cabin/widgets');
     }
 }

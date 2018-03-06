@@ -17,7 +17,7 @@ class DashboardTest extends TestCase
 
     public function testIndex()
     {
-        $response = $this->call('GET', '/quarx/dashboard');
+        $response = $this->call('GET', '/cabin/dashboard');
         $this->assertEquals(200, $response->getStatusCode());
     }
 }

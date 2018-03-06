@@ -7,7 +7,7 @@ class PagesTest extends TestCase
         parent::setUp();
         $this->withoutMiddleware();
         $this->withoutEvents();
-        factory(\Yab\Quarx\Models\Page::class)->create();
+        factory(\Yab\Cabin\Models\Page::class)->create();
     }
 
     /*
@@ -18,20 +18,20 @@ class PagesTest extends TestCase
 
     public function testIndex()
     {
-        $response = $this->call('GET', 'quarx/pages');
+        $response = $this->call('GET', 'cabin/pages');
         $this->assertEquals(200, $response->getStatusCode());
         $response->assertViewHas('pages');
     }
 
     public function testCreate()
     {
-        $response = $this->call('GET', 'quarx/pages/create');
+        $response = $this->call('GET', 'cabin/pages/create');
         $this->assertEquals(200, $response->getStatusCode());
     }
 
     public function testEdit()
     {
-        $response = $this->call('GET', 'quarx/pages/1/edit');
+        $response = $this->call('GET', 'cabin/pages/1/edit');
         $this->assertEquals(200, $response->getStatusCode());
         $response->assertViewHas('page');
     }
@@ -44,17 +44,17 @@ class PagesTest extends TestCase
 
     public function testStore()
     {
-        $page = factory(\Yab\Quarx\Models\Page::class)->make(['id' => 2]);
+        $page = factory(\Yab\Cabin\Models\Page::class)->make(['id' => 2]);
         $page = $page->toArray();
         unset($page['translations']);
-        $response = $this->call('POST', 'quarx/pages', $page);
+        $response = $this->call('POST', 'cabin/pages', $page);
 
         $this->assertEquals(302, $response->getStatusCode());
     }
 
     public function testSearch()
     {
-        $response = $this->call('POST', 'quarx/pages/search', ['term' => 'wtf']);
+        $response = $this->call('POST', 'cabin/pages/search', ['term' => 'wtf']);
 
         $response->assertViewHas('pages');
         $this->assertEquals(200, $response->getStatusCode());
@@ -63,9 +63,9 @@ class PagesTest extends TestCase
     public function testUpdate()
     {
         $page = ['id' => 2, 'title' => 'dumber', 'url' => 'dumber', 'entry' => 'okie dokie'];
-        $response = $this->call('POST', 'quarx/pages', $page);
+        $response = $this->call('POST', 'cabin/pages', $page);
 
-        $response = $this->call('PATCH', 'quarx/pages/2', [
+        $response = $this->call('PATCH', 'cabin/pages/2', [
             'title' => 'smarter',
             'url' => 'smart',
             'blocks' => null,
@@ -78,9 +78,9 @@ class PagesTest extends TestCase
     public function testUpdateTranslation()
     {
         $page = ['id' => 2, 'title' => 'dumber', 'url' => 'dumber', 'entry' => 'okie dokie'];
-        $response = $this->call('POST', 'quarx/pages', $page);
+        $response = $this->call('POST', 'cabin/pages', $page);
 
-        $response = $this->call('PATCH', 'quarx/pages/2', [
+        $response = $this->call('PATCH', 'cabin/pages/2', [
             'title' => 'smarter',
             'url' => 'smart',
             'lang' => 'fr',
@@ -88,15 +88,15 @@ class PagesTest extends TestCase
         ]);
 
         $this->assertDatabaseHas('translations', [
-            'entity_type' => 'Yab\\Quarx\\Models\\Page',
+            'entity_type' => 'Yab\\Cabin\\Models\\Page',
         ]);
         $this->assertEquals(302, $response->getStatusCode());
     }
 
     public function testDelete()
     {
-        $response = $this->call('DELETE', 'quarx/pages/1');
+        $response = $this->call('DELETE', 'cabin/pages/1');
         $this->assertEquals(302, $response->getStatusCode());
-        $response->assertRedirect('quarx/pages');
+        $response->assertRedirect('cabin/pages');
     }
 }

@@ -7,8 +7,8 @@ class LinksTest extends TestCase
         parent::setUp();
         $this->withoutMiddleware();
         $this->withoutEvents();
-        factory(\Yab\Quarx\Models\Link::class)->create();
-        factory(\Yab\Quarx\Models\Link::class)->make(['id' => 1]);
+        factory(\Yab\Cabin\Models\Link::class)->create();
+        factory(\Yab\Cabin\Models\Link::class)->make(['id' => 1]);
     }
 
     /*
@@ -19,13 +19,13 @@ class LinksTest extends TestCase
 
     public function testCreate()
     {
-        $response = $this->call('GET', '/quarx/links/create');
+        $response = $this->call('GET', '/cabin/links/create');
         $this->assertEquals(200, $response->getStatusCode());
     }
 
     public function testEdit()
     {
-        $response = $this->call('GET', '/quarx/links/1/edit');
+        $response = $this->call('GET', '/cabin/links/1/edit');
         $this->assertEquals(200, $response->getStatusCode());
         $response->assertViewHas('links');
     }
@@ -38,16 +38,16 @@ class LinksTest extends TestCase
 
     public function testStore()
     {
-        $link = factory(\Yab\Quarx\Models\Link::class)->make(['id' => 89]);
-        $response = $this->call('POST', '/quarx/links', $link->toArray());
+        $link = factory(\Yab\Cabin\Models\Link::class)->make(['id' => 89]);
+        $response = $this->call('POST', '/cabin/links', $link->toArray());
 
         $this->assertEquals(302, $response->getStatusCode());
-        $response->assertRedirect('/quarx/menus/1/edit');
+        $response->assertRedirect('/cabin/menus/1/edit');
     }
 
     public function testUpdate()
     {
-        $response = $this->call('PATCH', '/quarx/links/1', [
+        $response = $this->call('PATCH', '/cabin/links/1', [
             'name' => 'wtf',
         ]);
 
@@ -56,7 +56,7 @@ class LinksTest extends TestCase
 
     public function testDelete()
     {
-        $response = $this->call('DELETE', '/quarx/links/1');
+        $response = $this->call('DELETE', '/cabin/links/1');
         $this->assertEquals(302, $response->getStatusCode());
     }
 }

@@ -7,7 +7,7 @@ class MenuTest extends TestCase
         parent::setUp();
         $this->withoutMiddleware();
         $this->withoutEvents();
-        factory(\Yab\Quarx\Models\Menu::class)->create();
+        factory(\Yab\Cabin\Models\Menu::class)->create();
     }
 
     /*
@@ -18,20 +18,20 @@ class MenuTest extends TestCase
 
     public function testIndex()
     {
-        $response = $this->call('GET', '/quarx/menus');
+        $response = $this->call('GET', '/cabin/menus');
         $this->assertEquals(200, $response->getStatusCode());
         $response->assertViewHas('menus');
     }
 
     public function testCreate()
     {
-        $response = $this->call('GET', '/quarx/menus/create');
+        $response = $this->call('GET', '/cabin/menus/create');
         $this->assertEquals(200, $response->getStatusCode());
     }
 
     public function testEdit()
     {
-        $response = $this->call('GET', '/quarx/menus/1/edit');
+        $response = $this->call('GET', '/cabin/menus/1/edit');
         $this->assertEquals(200, $response->getStatusCode());
         $response->assertViewHas('menu');
     }
@@ -44,15 +44,15 @@ class MenuTest extends TestCase
 
     public function testStore()
     {
-        $menu = factory(\Yab\Quarx\Models\Menu::class)->make(['id' => 2]);
-        $response = $this->call('POST', '/quarx/menus', $menu->toArray());
+        $menu = factory(\Yab\Cabin\Models\Menu::class)->make(['id' => 2]);
+        $response = $this->call('POST', '/cabin/menus', $menu->toArray());
 
         $this->assertEquals(302, $response->getStatusCode());
     }
 
     public function testSearch()
     {
-        $response = $this->call('POST', 'quarx/menus/search', ['term' => 'wtf']);
+        $response = $this->call('POST', 'cabin/menus/search', ['term' => 'wtf']);
 
         $response->assertViewHas('menus');
         $this->assertEquals(200, $response->getStatusCode());
@@ -60,7 +60,7 @@ class MenuTest extends TestCase
 
     public function testUpdate()
     {
-        $response = $this->call('PATCH', '/quarx/menus/1', [
+        $response = $this->call('PATCH', '/cabin/menus/1', [
             'name' => 'awesome',
         ]);
 
@@ -69,8 +69,8 @@ class MenuTest extends TestCase
 
     public function testDelete()
     {
-        $response = $this->call('DELETE', '/quarx/menus/1');
+        $response = $this->call('DELETE', '/cabin/menus/1');
         $this->assertEquals(302, $response->getStatusCode());
-        $response->assertRedirect('/quarx/menus');
+        $response->assertRedirect('/cabin/menus');
     }
 }

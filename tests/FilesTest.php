@@ -7,7 +7,7 @@ class FilesTest extends TestCase
         parent::setUp();
         $this->withoutMiddleware();
         $this->withoutEvents();
-        factory(\Yab\Quarx\Models\File::class)->create();
+        factory(\Yab\Cabin\Models\File::class)->create();
     }
 
     /*
@@ -18,20 +18,20 @@ class FilesTest extends TestCase
 
     public function testIndex()
     {
-        $response = $this->call('GET', 'quarx/files');
+        $response = $this->call('GET', 'cabin/files');
         $this->assertEquals(200, $response->getStatusCode());
         $response->assertViewHas('files');
     }
 
     public function testCreate()
     {
-        $response = $this->call('GET', 'quarx/files/create');
+        $response = $this->call('GET', 'cabin/files/create');
         $this->assertEquals(200, $response->getStatusCode());
     }
 
     public function testEdit()
     {
-        $response = $this->call('GET', 'quarx/files/1/edit');
+        $response = $this->call('GET', 'cabin/files/1/edit');
         $this->assertEquals(200, $response->getStatusCode());
         $response->assertViewHas('files');
     }
@@ -45,7 +45,7 @@ class FilesTest extends TestCase
     public function testStore()
     {
         $uploadedFile = new Symfony\Component\HttpFoundation\File\UploadedFile(__DIR__.'/test-file.txt', 'test-file.txt');
-        $file = factory(\Yab\Quarx\Models\File::class)->make([
+        $file = factory(\Yab\Cabin\Models\File::class)->make([
             'id' => 2,
             'location' => [
                 'file_a' => [
@@ -56,13 +56,13 @@ class FilesTest extends TestCase
                 ],
             ],
         ]);
-        $response = $this->call('POST', 'quarx/files', $file->getAttributes());
+        $response = $this->call('POST', 'cabin/files', $file->getAttributes());
         $this->assertEquals(302, $response->getStatusCode());
     }
 
     public function testSearch()
     {
-        $response = $this->call('POST', 'quarx/files/search', ['term' => 'wtf']);
+        $response = $this->call('POST', 'cabin/files/search', ['term' => 'wtf']);
 
         $response->assertViewHas('files');
         $this->assertEquals(200, $response->getStatusCode());
@@ -70,17 +70,17 @@ class FilesTest extends TestCase
 
     public function testUpdate()
     {
-        $file = (array) factory(\Yab\Quarx\Models\File::class)->make(['id' => 3, 'title' => 'dumber']);
-        $response = $this->call('PATCH', 'quarx/files/3', $file);
+        $file = (array) factory(\Yab\Cabin\Models\File::class)->make(['id' => 3, 'title' => 'dumber']);
+        $response = $this->call('PATCH', 'cabin/files/3', $file);
 
         $this->assertEquals(302, $response->getStatusCode());
-        $response->assertRedirect('/quarx/files');
+        $response->assertRedirect('/cabin/files');
     }
 
     public function testDelete()
     {
         Storage::put('test-file.txt', 'what is this');
-        $file = factory(\Yab\Quarx\Models\File::class)->make([
+        $file = factory(\Yab\Cabin\Models\File::class)->make([
             'id' => 2,
             'location' => [
                 'file_a' => [
@@ -91,10 +91,10 @@ class FilesTest extends TestCase
                 ],
             ],
         ]);
-        $this->call('POST', 'quarx/files', $file->getAttributes());
+        $this->call('POST', 'cabin/files', $file->getAttributes());
 
-        $response = $this->call('DELETE', 'quarx/files/2');
+        $response = $this->call('DELETE', 'cabin/files/2');
         $this->assertEquals(302, $response->getStatusCode());
-        $response->assertRedirect('quarx/files');
+        $response->assertRedirect('cabin/files');
     }
 }

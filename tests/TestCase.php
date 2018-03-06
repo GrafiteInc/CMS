@@ -1,7 +1,8 @@
 <?php
 
+namespace Tests;
 
-class TestCase extends Orchestra\Testbench\TestCase
+class TestCase extends \Orchestra\Testbench\TestCase
 {
     /**
      * Define environment setup.
@@ -60,7 +61,8 @@ class TestCase extends Orchestra\Testbench\TestCase
     public function setUp()
     {
         parent::setUp();
-        $this->withFactories(__DIR__.'/../src/Models/Factories');
+        $this->withFactories(__DIR__.'/factories');
+
         $this->artisan('vendor:publish', [
             '--provider' => 'Yab\Cabin\CabinProvider',
             '--force' => true,

@@ -1,5 +1,7 @@
 <?php
 
+namespace Tests;
+
 class FAQTest extends TestCase
 {
     public function setUp()

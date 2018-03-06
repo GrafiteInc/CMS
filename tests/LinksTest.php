@@ -1,5 +1,7 @@
 <?php
 
+namespace Tests;
+
 class LinksTest extends TestCase
 {
     public function setUp()

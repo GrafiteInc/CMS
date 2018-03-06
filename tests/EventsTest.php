@@ -1,5 +1,7 @@
 <?php
 
+namespace Tests;
+
 class EventsTest extends TestCase
 {
     public function setUp()

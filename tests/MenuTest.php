@@ -1,5 +1,7 @@
 <?php
 
+namespace Tests;
+
 class MenuTest extends TestCase
 {
     public function setUp()

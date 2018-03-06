@@ -1,5 +1,7 @@
 <?php
 
+namespace Tests;
+
 class WidgetsTest extends TestCase
 {
     public function setUp()

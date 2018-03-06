@@ -1,5 +1,7 @@
 <?php
 
+namespace Tests;
+
 class ImagesTest extends TestCase
 {
     public function setUp()
@@ -44,15 +46,15 @@ class ImagesTest extends TestCase
 
     public function testStore()
     {
-        $uploadedFile = new Symfony\Component\HttpFoundation\File\UploadedFile(__DIR__.'/test-pic.jpg', 'test-pic.jpg');
+        $uploadedFile = new \Symfony\Component\HttpFoundation\File\UploadedFile(__DIR__.'/fixtures/test-pic.jpg', 'test-pic.jpg');
         $image = (array) factory(\Yab\Cabin\Models\Image::class)->make(['id' => 2]);
         $image['location'] = [
             [
-                'name' => CryptoService::encrypt('test-pic.jpg'),
+                'name' => \CryptoService::encrypt('test-pic.jpg'),
                 'original' => 'what.jpg',
             ],
             [
-                'name' => CryptoService::encrypt('test-pic.jpg'),
+                'name' => \CryptoService::encrypt('test-pic.jpg'),
                 'original' => 'what.jpg',
             ],
         ];
@@ -72,15 +74,15 @@ class ImagesTest extends TestCase
 
     public function testDelete()
     {
-        $uploadedFile = new Symfony\Component\HttpFoundation\File\UploadedFile(__DIR__.'/test-pic.jpg', 'test-pic.jpg');
+        $uploadedFile = new \Symfony\Component\HttpFoundation\File\UploadedFile(__DIR__.'/fixtures/test-pic.jpg', 'test-pic.jpg');
         $image = (array) factory(\Yab\Cabin\Models\Image::class)->make(['id' => 2]);
         $image['location'] = [
             [
-                'name' => CryptoService::encrypt('files/dumb'),
+                'name' => \CryptoService::encrypt('files/dumb'),
                 'original' => 'what.jpg',
             ],
             [
-                'name' => CryptoService::encrypt('files/dumb'),
+                'name' => \CryptoService::encrypt('files/dumb'),
                 'original' => 'what.jpg',
             ],
         ];

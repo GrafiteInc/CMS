@@ -1,9 +1,11 @@
 <?php
 
+namespace Tests;
+
 use org\bovigo\vfs\vfsStream;
 use Yab\CrudMaker\Generators\CrudGenerator;
 
-class CrudSingleGeneratorTest extends TestCase
+class ModuleMakeTest extends TestCase
 {
     protected $generator;
     protected $config;

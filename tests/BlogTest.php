@@ -1,5 +1,7 @@
 <?php
 
+namespace Tests;
+
 class BlogTest extends TestCase
 {
     public function setUp()
@@ -95,7 +97,7 @@ class BlogTest extends TestCase
 
     public function testDelete()
     {
-        $response = $this->call('DELETE', 'cabin/blog/'.Crypto::encrypt(1));
+        $response = $this->call('DELETE', 'cabin/blog/'.\Crypto::encrypt(1));
         $this->assertEquals(302, $response->getStatusCode());
         $response->assertRedirect('cabin/blog');
     }

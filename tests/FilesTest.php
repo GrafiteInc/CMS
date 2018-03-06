@@ -1,5 +1,7 @@
 <?php
 
+namespace Tests;
+
 class FilesTest extends TestCase
 {
     public function setUp()
@@ -44,12 +46,12 @@ class FilesTest extends TestCase
 
     public function testStore()
     {
-        $uploadedFile = new Symfony\Component\HttpFoundation\File\UploadedFile(__DIR__.'/test-file.txt', 'test-file.txt');
+        $uploadedFile = new \Symfony\Component\HttpFoundation\File\UploadedFile(__DIR__.'/fixtures/test-file.txt', 'test-file.txt');
         $file = factory(\Yab\Cabin\Models\File::class)->make([
             'id' => 2,
             'location' => [
                 'file_a' => [
-                    'name' => CryptoService::encrypt('test-file.txt'),
+                    'name' => \CryptoService::encrypt('test-file.txt'),
                     'original' => 'test-file.txt',
                     'mime' => 'txt',
                     'size' => 24,
@@ -79,12 +81,12 @@ class FilesTest extends TestCase
 
     public function testDelete()
     {
-        Storage::put('test-file.txt', 'what is this');
+        \Storage::put('test-file.txt', 'what is this');
         $file = factory(\Yab\Cabin\Models\File::class)->make([
             'id' => 2,
             'location' => [
                 'file_a' => [
-                    'name' => CryptoService::encrypt('test-file.txt'),
+                    'name' => \CryptoService::encrypt('test-file.txt'),
                     'original' => 'test-file.txt',
                     'mime' => 'txt',
                     'size' => 24,

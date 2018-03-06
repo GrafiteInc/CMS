@@ -1,5 +1,7 @@
 <?php
 
+namespace Tests;
+
 class PagesTest extends TestCase
 {
     public function setUp()

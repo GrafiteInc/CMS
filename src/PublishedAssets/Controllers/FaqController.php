@@ -1,20 +1,19 @@
 <?php
 
-namespace App\Http\Controllers\Quarx;
+namespace App\Http\Controllers\Cabin;
 
 use App\Http\Controllers\Controller;
-use Yab\Quarx\Repositories\FAQRepository;
+use Yab\Cabin\Repositories\FAQRepository;
 
 class FaqController extends Controller
 {
-    /** @var FAQRepository */
-    private $faqRepository;
+    protected $repository;
 
-    public function __construct(FAQRepository $faqRepository)
+    public function __construct(FAQRepository $repository)
     {
-        $this->faqRepository = $faqRepository;
+        $this->repository = $repository;
 
-        if (!in_array('faqs', config('quarx.active-core-modules'))) {
+        if (!in_array('faqs', config('cabin.active-core-modules'))) {
             return redirect('/')->send();
         }
     }
@@ -28,12 +27,12 @@ class FaqController extends Controller
      */
     public function all()
     {
-        $faqs = $this->faqRepository->published();
+        $faqs = $this->repository->published();
 
         if (empty($faqs)) {
             abort(404);
         }
 
-        return view('quarx-frontend::faqs.all')->with('faqs', $faqs);
+        return view('cabin-frontend::faqs.all')->with('faqs', $faqs);
     }
 }

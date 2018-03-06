@@ -1,4 +1,4 @@
-@extends('quarx-frontend::layout.master')
+@extends('cabin-frontend::layout.master')
 
 @section('content')
 
@@ -13,6 +13,6 @@
 
 @endsection
 
-@section('quarx')
-    @edit('events')
+@section('cabin')
+    <li class="nav-text">@edit('events')</li>
 @endsection

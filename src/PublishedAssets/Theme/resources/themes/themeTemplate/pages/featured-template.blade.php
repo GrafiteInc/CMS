@@ -1,4 +1,4 @@
-@extends('quarx-frontend::layout.master')
+@extends('cabin-frontend::layout.master')
 
 @section('seoDescription') {{ $page->seo_description }} @endsection
 @section('seoKeywords') {{ $page->seo_keywords }} @endsection
@@ -8,9 +8,10 @@
 <div class="container">
 
     <div class="jumbotron">
-        <h1>Featured Page</h1>
-        <h2>{{ $page->title }}</h2>
+        <img class="thumbnail img-responsive" src="{{ $page->hero_image_url }}" alt="">
     </div>
+
+    <h2>{{ $page->title }}</h2>
 
     {!! $page->block('main') !!}
 
@@ -20,6 +21,6 @@
 
 @endsection
 
-@section('quarx')
+@section('cabin')
     @edit('pages', $page->id)
 @endsection

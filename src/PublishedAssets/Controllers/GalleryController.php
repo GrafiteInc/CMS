@@ -1,18 +1,18 @@
 <?php
 
-namespace App\Http\Controllers\Quarx;
+namespace App\Http\Controllers\Cabin;
 
 use Config;
 use App\Http\Controllers\Controller;
-use Yab\Quarx\Repositories\ImageRepository;
+use Yab\Cabin\Repositories\ImageRepository;
 
 class GalleryController extends Controller
 {
-    private $imageRepository;
+    protected $repository;
 
-    public function __construct(ImageRepository $imageRepo)
+    public function __construct(ImageRepository $repository)
     {
-        $this->imageRepository = $imageRepo;
+        $this->repository = $repository;
     }
 
     /**
@@ -22,14 +22,14 @@ class GalleryController extends Controller
      */
     public function all()
     {
-        $images = $this->imageRepository->publishedAndPaginated();
-        $tags = $this->imageRepository->allTags();
+        $images = $this->repository->publishedAndPaginated();
+        $tags = $this->repository->allTags();
 
         if (empty($images)) {
             abort(404);
         }
 
-        return view('quarx-frontend::gallery.all')
+        return view('cabin-frontend::gallery.all')
             ->with('tags', $tags)
             ->with('images', $images);
     }
@@ -43,14 +43,14 @@ class GalleryController extends Controller
      */
     public function show($tag)
     {
-        $images = $this->imageRepository->getImagesByTag($tag)->paginate(Config::get('quarx.pagination'));
-        $tags = $this->imageRepository->allTags();
+        $images = $this->repository->getImagesByTag($tag)->paginate(Config::get('cabin.pagination'));
+        $tags = $this->repository->allTags();
 
         if (empty($images)) {
             abort(404);
         }
 
-        return view('quarx-frontend::gallery.show')
+        return view('cabin-frontend::gallery.show')
             ->with('tags', $tags)
             ->with('images', $images)
             ->with('title', $tag);

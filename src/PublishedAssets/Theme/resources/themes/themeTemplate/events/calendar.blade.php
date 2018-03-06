@@ -1,10 +1,8 @@
-@extends('quarx-frontend::layout.master')
+@extends('cabin-frontend::layout.master')
 
 @section('content')
 
 <div class="container">
-
-    <h1>Calendar</h1>
 
     <div class="row">
         <div class="col-md-12">
@@ -13,10 +11,8 @@
         </div>
     </div>
 
-<div class="container">
-
 @endsection
 
-@section('quarx')
-    @edit('events')
+@section('cabin')
+    <li class="nav-text">@edit('events')</li>
 @endsection

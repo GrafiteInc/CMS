@@ -2,11 +2,11 @@
 
     /*
     |--------------------------------------------------------------------------
-    | Quarx Routes
+    | Cabin Routes
     |--------------------------------------------------------------------------
     */
 
-    Route::group(['namespace' => 'Quarx', 'middleware' => ['quarx-language', 'quarx-analytics']], function () {
+    Route::group(['namespace' => 'Cabin', 'middleware' => ['cabin-language', 'cabin-analytics']], function () {
         Route::get('', 'PagesController@home');
         Route::get('pages', 'PagesController@all');
         Route::get('page/{url}', 'PagesController@show');

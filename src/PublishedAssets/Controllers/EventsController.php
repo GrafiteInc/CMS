@@ -1,21 +1,21 @@
 <?php
 
-namespace App\Http\Controllers\Quarx;
+namespace App\Http\Controllers\Cabin;
 
 use App\Http\Controllers\Controller;
-use Yab\Quarx\Services\EventService;
-use Yab\Quarx\Repositories\EventRepository;
+use Yab\Cabin\Services\EventService;
+use Yab\Cabin\Repositories\EventRepository;
 
 class EventsController extends Controller
 {
-    private $eventsRepository;
+    protected $repository;
 
-    public function __construct(EventRepository $eventsRepo, EventService $eventService)
+    public function __construct(EventRepository $repository, EventService $service)
     {
-        $this->eventsRepository = $eventsRepo;
-        $this->eventService = $eventService;
+        $this->repository = $repository;
+        $this->service = $service;
 
-        if (!in_array('events', config('quarx.active-core-modules'))) {
+        if (!in_array('events', config('cabin.active-core-modules'))) {
             return redirect('/')->send();
         }
     }
@@ -33,14 +33,14 @@ class EventsController extends Controller
             $date = date('Y-m-d');
         }
 
-        $events = $this->eventService->calendar($date);
-        $calendar = $this->eventService->generate($date);
+        $events = $this->service->calendar($date);
+        $calendar = $this->service->generate($date);
 
         if (empty($calendar)) {
             abort(404);
         }
 
-        return view('quarx-frontend::events.calendar')
+        return view('cabin-frontend::events.calendar')
             ->with('events', $events)
             ->with('calendar', $calendar);
     }
@@ -52,13 +52,13 @@ class EventsController extends Controller
      */
     public function date($date)
     {
-        $events = $this->eventsRepository->findEventsByDate($date);
+        $events = $this->repository->findEventsByDate($date);
 
         if (empty($events)) {
             abort(404);
         }
 
-        return view('quarx-frontend::events.date')->with('events', $events);
+        return view('cabin-frontend::events.date')->with('events', $events);
     }
 
     /**
@@ -68,13 +68,13 @@ class EventsController extends Controller
      */
     public function all()
     {
-        $events = $this->eventsRepository->published();
+        $events = $this->repository->published();
 
         if (empty($events)) {
             abort(404);
         }
 
-        return view('quarx-frontend::events.all')->with('events', $events);
+        return view('cabin-frontend::events.all')->with('events', $events);
     }
 
     /**
@@ -86,12 +86,12 @@ class EventsController extends Controller
      */
     public function show($id)
     {
-        $event = $this->eventsRepository->findEventById($id);
+        $event = $this->repository->findEventById($id);
 
         if (empty($event)) {
             abort(404);
         }
 
-        return view('quarx-frontend::events.'.$event->template)->with('event', $event);
+        return view('cabin-frontend::events.'.$event->template)->with('event', $event);
     }
 }

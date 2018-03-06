@@ -22,22 +22,25 @@
 
         @theme('partials.navigation')
 
-        <div class="site-wrapper @if(Request::is('/')) homepage @endif">
+        <div class="site-wrapper @if (Request::is('/')) homepage @endif">
             <div class="container-fluid">
                 @yield('content')
             </div>
         </div>
 
         <div class="footer container-fluid navbar-fixed-bottom">
-            <p class="pull-left">&copy; {{ date('Y') }} - <a href="{{ url('pages') }}">Page Directory</a></p>
-            @can('quarx')
-                <a class="btn btn-xs btn-default pull-right" href="{{ url('quarx/dashboard') }}">Quarx</a>
-                @yield('quarx')
-            @else
-                <a class="btn btn-xs btn-default pull-right" href="{{ url('login') }}">Login</a>
-            @endcan
+            <ul class="nav">
+                <li class="nav-item">
+                    <span class="nav-text">&copy; {{ date('Y') }}</span>
+                </li>
+                @can('cabin')
+                    <li class="nav-item"><a class="btn btn-sm btn-link" href="{{ url(config('cabin.backend-route-prefix', 'cabin').'/dashboard') }}">Cabin</a></li>
+                    @yield('cabin')
+                @else
+                    <li class="nav-item"><a class="btn btn-sm btn-link" href="{{ url('login') }}">Login</a></li>
+                @endcan
+            </ul>
         </div>
-
     </body>
 
     <script type="text/javascript">

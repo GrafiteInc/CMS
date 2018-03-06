@@ -1,6 +1,6 @@
 /*
 |--------------------------------------------------------------------------
-| Quarx JS
+| Cabin JS
 |--------------------------------------------------------------------------
 */
 
@@ -15,8 +15,8 @@ var _redactorConfig = {
     paragraphize: false,
     pastePlaintext: true,
     deniedTags: ['script'],
-    imageManagerJson: _url+'/quarx/api/images/list',
-    fileManagerJson: _url+'/quarx/api/files/list',
+    imageManagerJson: _url+'/cabin/api/images/list',
+    fileManagerJson: _url+'/cabin/api/files/list',
     stockImageManagerJson: 'https://pixabay.com/api/',
     plugins: ['table','video', 'fontcolor', 'imagemanager', 'stockimagemanager', 'filemanager', 'specialchar', 'insertIcon'],
     buttons: ['html', 'formatting', 'fontcolor', 'bold', 'italic', 'underline', 'deleted', 'unorderedlist', 'orderedlist',
@@ -33,13 +33,17 @@ $(window).load(function() {
     $('textarea.redactor').redactor(_redactorConfig);
 });
 
-$(function(){
+$(function () {
+    var _initialUrlValue = $('#Url').val();
+
     function _urlPrepare (title) {
         return title.replace(/[^\w\s]/gi, '').replace(/ /g, '-').toLowerCase();
     }
 
-    $('#Title, #Name').bind('keyup', function() {
-        $('#Url').val(_urlPrepare($(this).val()));
+    $('#Title, #Name').bind('keyup', function () {
+        if (_initialUrlValue == '') {
+            $('#Url').val(_urlPrepare($(this).val()));
+        }
     });
 
     $('.timepicker').datetimepicker({

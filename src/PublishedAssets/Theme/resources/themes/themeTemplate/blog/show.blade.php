@@ -1,19 +1,22 @@
-@extends('quarx-frontend::layout.master')
+@extends('cabin-frontend::layout.master')
 
 @section('seoDescription') {{ $blog->seo_description }} @endsection
 @section('seoKeywords') {{ $blog->seo_keywords }} @endsection
 
 @section('content')
 
-<div class="container">
+    <div class="container">
 
-    <h1>{!! $blog->title !!} - <span>{!! $blog->published_at !!}</span></h1>
-    {!! $blog->entry !!}
+        <h1 class="page-header">{!! $blog->title !!} <span class="pull-right">{!! \Carbon\Carbon::parse($blog->published_at)->format('d M, Y') !!}</span></h1>
+@widget('test')
+        <div class="entry-row">
+            {!! $blog->entry !!}
+        </div>
 
-</div>
+    </div>
 
 @endsection
 
-@section('quarx')
-    @edit('blog', $blog->id)
+@section('cabin')
+    <li class="nav-text">@edit('blog', $blog->id)</li>
 @endsection

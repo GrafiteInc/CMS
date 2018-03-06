@@ -1,4 +1,4 @@
-@extends('quarx::layouts.dashboard')
+@extends('cabin::layouts.dashboard')
 
 @section('content')
 
@@ -25,7 +25,7 @@
                     Blogs
                 </div>
                 <div class="panel-body">
-                    <span class="lead">{{ app(Yab\Quarx\Models\Blog::class)->count() }}</span>
+                    <span class="lead">{{ app(Yab\Cabin\Models\Blog::class)->count() }}</span>
                 </div>
             </div>
         </div>
@@ -35,7 +35,7 @@
                     Pages
                 </div>
                 <div class="panel-body">
-                    <span class="lead">{{ app(Yab\Quarx\Models\Page::class)->count() }}</span>
+                    <span class="lead">{{ app(Yab\Cabin\Models\Page::class)->count() }}</span>
                 </div>
             </div>
         </div>
@@ -45,7 +45,7 @@
                     Widgets
                 </div>
                 <div class="panel-body">
-                    <span class="lead">{{ app(Yab\Quarx\Models\Widget::class)->count() }}</span>
+                    <span class="lead">{{ app(Yab\Cabin\Models\Widget::class)->count() }}</span>
                 </div>
             </div>
         </div>
@@ -55,7 +55,7 @@
                     Events
                 </div>
                 <div class="panel-body">
-                    <span class="lead">{{ app(Yab\Quarx\Models\Event::class)->count() }}</span>
+                    <span class="lead">{{ app(Yab\Cabin\Models\Event::class)->count() }}</span>
                 </div>
             </div>
         </div>
@@ -65,7 +65,7 @@
                     FAQs
                 </div>
                 <div class="panel-body">
-                    <span class="lead">{{ app(Yab\Quarx\Models\FAQ::class)->count() }}</span>
+                    <span class="lead">{{ app(Yab\Cabin\Models\FAQ::class)->count() }}</span>
                 </div>
             </div>
         </div>

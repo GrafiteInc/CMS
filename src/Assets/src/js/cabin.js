@@ -5,7 +5,7 @@
 |--------------------------------------------------------------------------
 */
 
-$(function() {
+$(function () {
     $(".non-form-btn").bind("click", function(e){
         e.preventDefault();
     });
@@ -53,30 +53,30 @@ $(function() {
 |--------------------------------------------------------------------------
 */
 
-function quarxNotify(message, _type) {
-    $(".quarx-notification").css("display", "block");
-    $(".quarx-notification").addClass(_type);
+function cabinNotify(message, _type) {
+    $(".cabin-notification").css("display", "block");
+    $(".cabin-notification").addClass(_type);
 
-    $(".quarx-notify-comment").html(message);
-    $(".quarx-notification").animate({
+    $(".cabin-notify-comment").html(message);
+    $(".cabin-notification").animate({
         right: "20px",
     });
 
-    $(".quarx-notify-closer-icon").click(function(){
-        $(".quarx-notification").animate({
+    $(".cabin-notify-closer-icon").click(function(){
+        $(".cabin-notification").animate({
             right: "-300px"
         },"", function(){
-            $(".quarx-notification").css("display", "none");
-            $(".quarx-notify-comment").html("");
+            $(".cabin-notification").css("display", "none");
+            $(".cabin-notify-comment").html("");
         });
     });
 
     setTimeout(function(){
-        $(".quarx-notification").animate({
+        $(".cabin-notification").animate({
             right: "-300px"
         },"", function(){
-            $(".quarx-notification").css("display", "none");
-            $(".quarx-notify-comment").html("");
+            $(".cabin-notification").css("display", "none");
+            $(".cabin-notify-comment").html("");
         });
     }, 8000);
 }
@@ -87,7 +87,7 @@ function quarxNotify(message, _type) {
 |--------------------------------------------------------------------------
 */
 
-var typeaheadMatcher = function(strs) {
+var typeaheadMatcher = function (strs) {
     return function findMatches(q, cb) {
         var matches, substringRegex;
 

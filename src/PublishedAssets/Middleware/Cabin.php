@@ -3,9 +3,9 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use Config;
+use Gate;
 
-class QuarxApi
+class Cabin
 {
     /**
      * Handle an incoming request.
@@ -17,7 +17,7 @@ class QuarxApi
      */
     public function handle($request, Closure $next)
     {
-        if (Config::get('quarx.api-token') == $request->get('token')) {
+        if (Gate::allows('cabin')) {
             return $next($request);
         }
 

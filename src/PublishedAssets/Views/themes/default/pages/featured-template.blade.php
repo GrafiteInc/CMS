@@ -1,4 +1,4 @@
-@extends('quarx-frontend::layout.master')
+@extends('cabin-frontend::layout.master')
 
 @section('seoDescription') {{ $page->seo_description }} @endsection
 @section('seoKeywords') {{ $page->seo_keywords }} @endsection
@@ -21,6 +21,6 @@
 
 @endsection
 
-@section('quarx')
+@section('cabin')
     @edit('pages', $page->id)
 @endsection

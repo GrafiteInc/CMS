@@ -1,27 +1,28 @@
-@extends('quarx-frontend::layout.master')
+@extends('cabin-frontend::layout.master')
 
 @section('content')
 
-    <div class="row">
-        <div class="col-md-4 col-md-offset-4">
+    <div class="form-small">
 
-            <h1 class="text-center">Forgot Password</h1>
+        <h2 class="text-center">Forgot Password</h2>
 
-            <form method="POST" action="/password/email">
-                {!! csrf_field() !!}
-                @include('partials.errors')
-                @include('partials.status')
-                <div class="col-md-12 pull-left">
-                    <label>Email</label>
-                    <input class="form-control" type="email" name="email" placeholder="Email Address" value="{{ old('email') }}">
-                </div>
-                <div class="col-md-12 pull-left form-group">
-                    <a class="btn btn-default pull-left" href="/login">Wait I remember!</a>
-                    <button class="btn btn-primary pull-right" type="submit" class="button">Send Password Reset Link</button>
-                </div>
-            </form>
+        <form method="POST" action="/password/email">
+            {!! csrf_field() !!}
+            @include('partials.errors')
+            @include('partials.status')
 
-        </div>
+            <div class="col-md-12 mt-3">
+                <label>Email</label>
+                <input class="form-control" type="email" name="email" placeholder="Email" value="{{ old('email') }}">
+            </div>
+            <div class="col-md-12 mt-3">
+                <button class="btn btn-primary btn-block" type="submit" class="button">Send Password Reset Link</button>
+            </div>
+            <div class="col-md-12 mt-3">
+                <a class="btn btn-link" href="/login">Wait I remember!</a>
+            </div>
+        </form>
+
     </div>
 
 @stop

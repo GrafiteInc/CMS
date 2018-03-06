@@ -1,4 +1,4 @@
-@extends('quarx-frontend::layout.master')
+@extends('cabin-frontend::layout.master')
 
 @section('seoDescription') {{ $blog->seo_description }} @endsection
 @section('seoKeywords') {{ $blog->seo_keywords }} @endsection
@@ -21,6 +21,6 @@
 
 @endsection
 
-@section('quarx')
-    @edit('blog', $blog->id)
+@section('cabin')
+    <li class="nav-text">@edit('blog', $blog->id)</li>
 @endsection

@@ -13,8 +13,8 @@ RedactorPlugins.stockimagemanager = function()
             + '<button class="btn btn-default" type="button" id="stockimagemanager-search"><span class="fa fa-search"></span></button>'
             + '</span>'
             + '</div>'
-            + '<div id="stockimagemanager-container" class="raw-block-300 quarx-row raw-margin-top-24 raw-margin-bottom-24" style="overflow: scroll;"></div>'
-            + '<div id="stockimagemanager-links" class="raw-block-20 quarx-row"><button id="stockImgPrevBtn" class="btn btn-default pull-left">Prev</button><button id="stockImgNextBtn" class="pull-right btn btn-default">Next</button></div>'
+            + '<div id="stockimagemanager-container" class="raw-block-300 cabin-row raw-margin-top-24 raw-margin-bottom-24" style="overflow: scroll;"></div>'
+            + '<div id="stockimagemanager-links" class="raw-block-20 cabin-row"><button id="stockImgPrevBtn" class="btn btn-default pull-left">Prev</button><button id="stockImgNextBtn" class="pull-right btn btn-default">Next</button></div>'
             + '<div><a href="https://pixabay.com/"><img class="raw100 raw-margin-top-24" src="https://pixabay.com/static/img/public/leaderboard_a.png" alt="Pixabay"> </a></div>'
             + '</section>';
         },
@@ -120,7 +120,7 @@ RedactorPlugins.stockimagemanager = function()
                     _token: _token,
                     location: $(e.target).attr('data-url')
                 },
-                url: _url + '/quarx/api/images/store',
+                url: _url + '/cabin/api/images/store',
                 error: function(data){
                     console.log(data)
                 },

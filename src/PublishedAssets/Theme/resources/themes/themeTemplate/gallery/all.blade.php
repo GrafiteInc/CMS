@@ -1,10 +1,10 @@
-@extends('quarx-frontend::layout.master')
+@extends('cabin-frontend::layout.master')
 
 @section('content')
 
 <div class="container">
 
-    <h1>Gallery</h1>
+    <h1 class="page-header">Gallery</h1>
 
     <div class="col-md-6">
         @foreach ($images as $image)
@@ -21,6 +21,6 @@
 
 @endsection
 
-@section('quarx')
-    @edit('images')
+@section('cabin')
+    <li class="nav-text">@edit('images')</li>
 @endsection

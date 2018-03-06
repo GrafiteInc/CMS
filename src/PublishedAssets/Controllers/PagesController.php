@@ -1,18 +1,17 @@
 <?php
 
-namespace App\Http\Controllers\Quarx;
+namespace App\Http\Controllers\Cabin;
 
 use App\Http\Controllers\Controller;
-use Yab\Quarx\Repositories\PageRepository;
+use Yab\Cabin\Repositories\PageRepository;
 
 class PagesController extends Controller
 {
-    /** @var PagesRepository */
-    private $pagesRepository;
+    protected $repository;
 
-    public function __construct(PageRepository $pagesRepo)
+    public function __construct(PageRepository $repository)
     {
-        $this->pagesRepository = $pagesRepo;
+        $this->repository = $repository;
     }
 
     /**
@@ -24,9 +23,9 @@ class PagesController extends Controller
      */
     public function home()
     {
-        $page = $this->pagesRepository->findPagesByURL('home');
+        $page = $this->repository->findPagesByURL('home');
 
-        $view = view('quarx-frontend::pages.home');
+        $view = view('cabin-frontend::pages.home');
 
         if (is_null($page)) {
             return $view;
@@ -42,13 +41,13 @@ class PagesController extends Controller
      */
     public function all()
     {
-        $pages = $this->pagesRepository->published();
+        $pages = $this->repository->published();
 
         if (empty($pages)) {
             abort(404);
         }
 
-        return view('quarx-frontend::pages.all')->with('pages', $pages);
+        return view('cabin-frontend::pages.all')->with('pages', $pages);
     }
 
     /**
@@ -60,12 +59,12 @@ class PagesController extends Controller
      */
     public function show($url)
     {
-        $page = $this->pagesRepository->findPagesByURL($url);
+        $page = $this->repository->findPagesByURL($url);
 
         if (empty($page)) {
             abort(404);
         }
 
-        return view('quarx-frontend::pages.'.$page->template)->with('page', $page);
+        return view('cabin-frontend::pages.'.$page->template)->with('page', $page);
     }
 }

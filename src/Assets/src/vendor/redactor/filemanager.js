@@ -13,7 +13,7 @@ RedactorPlugins.filemanager = function()
             + '<span class="btn btn-default"><span class="fa fa-search"></span></span>'
             + '</span>'
             + '</div>'
-            + '<div id="filemanager-container" class="raw-block-400 quarx-row raw-margin-top-24" style="overflow: scroll;">Loading your file collection...</div>'
+            + '<div id="filemanager-container" class="raw-block-400 cabin-row raw-margin-top-24" style="overflow: scroll;">Loading your file collection...</div>'
             + '</section>';
         },
         init: function()
@@ -39,7 +39,7 @@ RedactorPlugins.filemanager = function()
                 dataType: "json",
                 cache: false,
                 headers: {
-                    Quarx: _apiKey,
+                    Cabin: _apiKey,
                     Authorization: 'Bearer '+_apiToken
                 },
                 url: this.opts.fileManagerJson,

@@ -1,4 +1,4 @@
-@extends('quarx-frontend::layout.master')
+@extends('cabin-frontend::layout.master')
 
 @section('content')
 
@@ -11,18 +11,18 @@
     </div>
 
     @foreach($faqs as $faq)
-        @if (config('app.locale') !== config('quarx.default-language'))
+        @if (config('app.locale') !== config('cabin.default-language'))
             <blockquote>{!! $faq->translationData(config('app.locale'))->question !!}</blockquote>
             <div class="well">
                 {!! $faq->translationData(config('app.locale'))->answer !!}
             </div>
-            @edit('faqs', $faq->id)
+            @editBtn('faqs', $faq->id)
         @else
             <blockquote>{!! $faq->question !!}</blockquote>
             <div class="well">
                 {!! $faq->answer !!}
             </div>
-            @edit('faqs', $faq->id)
+            @editBtn('faqs', $faq->id)
         @endif
     @endforeach
 
@@ -30,6 +30,6 @@
 
 @endsection
 
-@section('quarx')
-    @edit('faqs')
+@section('cabin')
+    <li class="nav-text">@edit('faqs')</li>
 @endsection

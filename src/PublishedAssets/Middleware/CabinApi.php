@@ -3,10 +3,9 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\Cookie;
+use Config;
 
-class QuarxLanguage
+class CabinApi
 {
     /**
      * Handle an incoming request.
@@ -18,10 +17,10 @@ class QuarxLanguage
      */
     public function handle($request, Closure $next)
     {
-        if (Cookie::has('language')) {
-            Config::set('app.locale', Cookie::get('language'));
+        if (Config::get('cabin.api-token') == $request->get('token')) {
+            return $next($request);
         }
 
-        return $next($request);
+        return response('Unauthorized.', 401);
     }
 }

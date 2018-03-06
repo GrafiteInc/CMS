@@ -1,11 +1,11 @@
 <?php
 
-namespace Yab\Quarx\Middleware;
+namespace Yab\Cabin\Middleware;
 
 use Closure;
-use Yab\Quarx\Services\AnalyticsService;
+use Yab\Cabin\Services\AnalyticsService;
 
-class QuarxAnalytics
+class CabinAnalytics
 {
     /**
      * Handle an incoming request.

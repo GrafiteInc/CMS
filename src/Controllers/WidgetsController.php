@@ -1,25 +1,22 @@
 <?php
 
-namespace Yab\Quarx\Controllers;
+namespace Yab\Cabin\Controllers;
 
 use URL;
-use Quarx;
+use Cabin;
 use Illuminate\Http\Request;
-use Yab\Quarx\Models\Widget;
-use Yab\Quarx\Requests\WidgetsRequest;
-use Yab\Quarx\Services\ValidationService;
-use Yab\Quarx\Repositories\WidgetRepository;
+use Yab\Cabin\Models\Widget;
+use Yab\Cabin\Requests\WidgetsRequest;
+use Yab\Cabin\Services\ValidationService;
+use Yab\Cabin\Repositories\WidgetRepository;
 
-class WidgetsController extends QuarxController
+class WidgetsController extends CabinController
 {
-    /** @var WidgetRepository */
-    private $widgetsRepository;
-
-    public function __construct(WidgetRepository $widgetsRepo)
+    public function __construct(WidgetRepository $repository)
     {
         parent::construct();
 
-        $this->widgetsRepository = $widgetsRepo;
+        $this->repository = $repository;
     }
 
     /**
@@ -29,9 +26,9 @@ class WidgetsController extends QuarxController
      */
     public function index()
     {
-        $result = $this->widgetsRepository->paginated();
+        $result = $this->repository->paginated();
 
-        return view('quarx::modules.widgets.index')
+        return view('cabin::modules.widgets.index')
             ->with('widgets', $result)
             ->with('pagination', $result->render());
     }
@@ -47,9 +44,9 @@ class WidgetsController extends QuarxController
     {
         $input = $request->all();
 
-        $result = $this->widgetsRepository->search($input);
+        $result = $this->repository->search($input);
 
-        return view('quarx::modules.widgets.index')
+        return view('cabin::modules.widgets.index')
             ->with('widgets', $result[0]->get())
             ->with('pagination', $result[2])
             ->with('term', $result[1]);
@@ -62,7 +59,7 @@ class WidgetsController extends QuarxController
      */
     public function create()
     {
-        return view('quarx::modules.widgets.create');
+        return view('cabin::modules.widgets.create');
     }
 
     /**
@@ -77,14 +74,14 @@ class WidgetsController extends QuarxController
         $validation = ValidationService::check(Widget::$rules);
 
         if (!$validation['errors']) {
-            $widgets = $this->widgetsRepository->store($request->all());
+            $widgets = $this->repository->store($request->all());
         } else {
             return $validation['redirect'];
         }
 
-        Quarx::notification('Widgets saved successfully.', 'success');
+        Cabin::notification('Widgets saved successfully.', 'success');
 
-        return redirect(route($this->quarxRouteBase.'.widgets.edit', [$widgets->id]));
+        return redirect(route($this->routeBase.'.widgets.edit', [$widgets->id]));
     }
 
     /**
@@ -96,15 +93,15 @@ class WidgetsController extends QuarxController
      */
     public function edit($id)
     {
-        $widgets = $this->widgetsRepository->findWidgetsById($id);
+        $widgets = $this->repository->findWidgetsById($id);
 
         if (empty($widgets)) {
-            Quarx::notification('Widgets not found', 'warning');
+            Cabin::notification('Widgets not found', 'warning');
 
-            return redirect(route($this->quarxRouteBase.'.widgets.index'));
+            return redirect(route($this->routeBase.'.widgets.index'));
         }
 
-        return view('quarx::modules.widgets.edit')->with('widgets', $widgets);
+        return view('cabin::modules.widgets.edit')->with('widgets', $widgets);
     }
 
     /**
@@ -117,17 +114,17 @@ class WidgetsController extends QuarxController
      */
     public function update($id, WidgetsRequest $request)
     {
-        $widgets = $this->widgetsRepository->findWidgetsById($id);
+        $widgets = $this->repository->findWidgetsById($id);
 
         if (empty($widgets)) {
-            Quarx::notification('Widgets not found', 'warning');
+            Cabin::notification('Widgets not found', 'warning');
 
-            return redirect(route($this->quarxRouteBase.'.widgets.index'));
+            return redirect(route($this->routeBase.'.widgets.index'));
         }
 
-        $widgets = $this->widgetsRepository->update($widgets, $request->all());
+        $widgets = $this->repository->update($widgets, $request->all());
 
-        Quarx::notification('Widgets updated successfully.', 'success');
+        Cabin::notification('Widgets updated successfully.', 'success');
 
         return redirect(URL::previous());
     }
@@ -141,18 +138,18 @@ class WidgetsController extends QuarxController
      */
     public function destroy($id)
     {
-        $widgets = $this->widgetsRepository->findWidgetsById($id);
+        $widgets = $this->repository->findWidgetsById($id);
 
         if (empty($widgets)) {
-            Quarx::notification('Widgets not found', 'warning');
+            Cabin::notification('Widgets not found', 'warning');
 
-            return redirect(route($this->quarxRouteBase.'.widgets.index'));
+            return redirect(route($this->routeBase.'.widgets.index'));
         }
 
         $widgets->delete();
 
-        Quarx::notification('Widgets deleted successfully.', 'success');
+        Cabin::notification('Widgets deleted successfully.', 'success');
 
-        return redirect(route($this->quarxRouteBase.'.widgets.index'));
+        return redirect(route($this->routeBase.'.widgets.index'));
     }
 }

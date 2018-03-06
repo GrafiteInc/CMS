@@ -2,7 +2,7 @@
 
 /*
  * --------------------------------------------------------------------------
- * Quarx Config
+ * Cabin Config
  * --------------------------------------------------------------------------
 */
 
@@ -46,7 +46,7 @@ return [
      * --------------------------------------------------------------------------
     */
 
-    'frontend-namespace' => '\App\Http\Controllers\Quarx',
+    'frontend-namespace' => '\App\Http\Controllers\Cabin',
     'frontend-theme' => 'default',
 
     /*
@@ -56,7 +56,7 @@ return [
     */
 
     'load-modules' => true,
-    'module-directory' => 'quarx/modules',
+    'module-directory' => 'cabin/modules',
     'active-core-modules' => [
         'blog',
         'menus',
@@ -99,8 +99,8 @@ return [
      * --------------------------------------------------------------------------
     */
 
-    'backend-title' => 'Quarx',
-    'backend-route-prefix' => 'quarx',
+    'backend-title' => 'Cabin',
+    'backend-route-prefix' => 'cabin',
     'backend-theme' => 'united', // cosmo, cyborg, flatly, lumen, paper, sandstone, simplex, united, yeti
     'registration-available' => false,
     'pagination' => 24,
@@ -112,7 +112,7 @@ return [
     */
 
     'api-key' => env('QUARX_API_KEY', 'apis-are-cool'),
-    'api-token' => env('QUARX_API_TOKEN', 'quarx-token'),
+    'api-token' => env('QUARX_API_TOKEN', 'cabin-token'),
 
     /*
      * --------------------------------------------------------------------------

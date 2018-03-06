@@ -1,8 +1,8 @@
 <?php
 
-namespace Yab\Quarx\Repositories;
+namespace Yab\Cabin\Repositories;
 
-use Yab\Quarx\Models\Link;
+use Yab\Cabin\Models\Link;
 
 class LinkRepository
 {

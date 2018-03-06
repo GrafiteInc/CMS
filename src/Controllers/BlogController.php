@@ -1,25 +1,22 @@
 <?php
 
-namespace Yab\Quarx\Controllers;
+namespace Yab\Cabin\Controllers;
 
 use URL;
-use Quarx;
-use Yab\Quarx\Models\Blog;
+use Cabin;
+use Yab\Cabin\Models\Blog;
 use Illuminate\Http\Request;
-use Yab\Quarx\Requests\BlogRequest;
-use Yab\Quarx\Services\ValidationService;
-use Yab\Quarx\Repositories\BlogRepository;
+use Yab\Cabin\Requests\BlogRequest;
+use Yab\Cabin\Services\ValidationService;
+use Yab\Cabin\Repositories\BlogRepository;
 
-class BlogController extends QuarxController
+class BlogController extends CabinController
 {
-    /** @var BlogRepository */
-    protected $blogRepository;
-
-    public function __construct(BlogRepository $blogRepo)
+    public function __construct(BlogRepository $repository)
     {
         parent::construct();
 
-        $this->blogRepository = $blogRepo;
+        $this->repository = $repository;
     }
 
     /**
@@ -29,9 +26,9 @@ class BlogController extends QuarxController
      */
     public function index()
     {
-        $blogs = $this->blogRepository->paginated();
+        $blogs = $this->repository->paginated();
 
-        return view('quarx::modules.blogs.index')
+        return view('cabin::modules.blogs.index')
             ->with('blogs', $blogs)
             ->with('pagination', $blogs->render());
     }
@@ -47,9 +44,9 @@ class BlogController extends QuarxController
     {
         $input = $request->all();
 
-        $result = $this->blogRepository->search($input);
+        $result = $this->repository->search($input);
 
-        return view('quarx::modules.blogs.index')
+        return view('cabin::modules.blogs.index')
             ->with('blogs', $result[0]->get())
             ->with('pagination', $result[2])
             ->with('term', $result[1]);
@@ -62,7 +59,7 @@ class BlogController extends QuarxController
      */
     public function create()
     {
-        return view('quarx::modules.blogs.create');
+        return view('cabin::modules.blogs.create');
     }
 
     /**
@@ -77,17 +74,17 @@ class BlogController extends QuarxController
         $validation = ValidationService::check(Blog::$rules);
 
         if (!$validation['errors']) {
-            $blog = $this->blogRepository->store($request->all());
-            Quarx::notification('Blog saved successfully.', 'success');
+            $blog = $this->repository->store($request->all());
+            Cabin::notification('Blog saved successfully.', 'success');
         } else {
             return $validation['redirect'];
         }
 
         if (!$blog) {
-            Quarx::notification('Blog could not be saved.', 'warning');
+            Cabin::notification('Blog could not be saved.', 'warning');
         }
 
-        return redirect(route($this->quarxRouteBase.'.blog.edit', [$blog->id]));
+        return redirect(route($this->routeBase.'.blog.edit', [$blog->id]));
     }
 
     /**
@@ -99,15 +96,15 @@ class BlogController extends QuarxController
      */
     public function edit($id)
     {
-        $blog = $this->blogRepository->findBlogById($id);
+        $blog = $this->repository->findBlogById($id);
 
         if (empty($blog)) {
-            Quarx::notification('Blog not found', 'warning');
+            Cabin::notification('Blog not found', 'warning');
 
-            return redirect(route($this->quarxRouteBase.'.blog.index'));
+            return redirect(route($this->routeBase.'.blog.index'));
         }
 
-        return view('quarx::modules.blogs.edit')->with('blog', $blog);
+        return view('cabin::modules.blogs.edit')->with('blog', $blog);
     }
 
     /**
@@ -120,23 +117,23 @@ class BlogController extends QuarxController
      */
     public function update($id, BlogRequest $request)
     {
-        $blog = $this->blogRepository->findBlogById($id);
+        $blog = $this->repository->findBlogById($id);
 
         if (empty($blog)) {
-            Quarx::notification('Blog not found', 'warning');
+            Cabin::notification('Blog not found', 'warning');
 
-            return redirect(route($this->quarxRouteBase.'.blog.index'));
+            return redirect(route($this->routeBase.'.blog.index'));
         }
 
         $validation = ValidationService::check(Blog::$rules);
 
         if (!$validation['errors']) {
-            $blog = $this->blogRepository->update($blog, $request->all());
+            $blog = $this->repository->update($blog, $request->all());
 
-            Quarx::notification('Blog updated successfully.', 'success');
+            Cabin::notification('Blog updated successfully.', 'success');
 
             if (! $blog) {
-                Quarx::notification('Blog could not be saved.', 'warning');
+                Cabin::notification('Blog could not be saved.', 'warning');
             }
         } else {
             return $validation['redirect'];
@@ -154,19 +151,19 @@ class BlogController extends QuarxController
      */
     public function destroy($id)
     {
-        $blog = $this->blogRepository->findBlogById($id);
+        $blog = $this->repository->findBlogById($id);
 
         if (empty($blog)) {
-            Quarx::notification('Blog not found', 'warning');
+            Cabin::notification('Blog not found', 'warning');
 
-            return redirect(route($this->quarxRouteBase.'.blog.index'));
+            return redirect(route($this->routeBase.'.blog.index'));
         }
 
         $blog->delete();
 
-        Quarx::notification('Blog deleted successfully.', 'success');
+        Cabin::notification('Blog deleted successfully.', 'success');
 
-        return redirect(route($this->quarxRouteBase.'.blog.index'));
+        return redirect(route($this->routeBase.'.blog.index'));
     }
 
     /**
@@ -178,9 +175,9 @@ class BlogController extends QuarxController
      */
     public function history($id)
     {
-        $blog = $this->blogRepository->findBlogById($id);
+        $blog = $this->repository->findBlogById($id);
 
-        return view('quarx::modules.blogs.history')
+        return view('cabin::modules.blogs.history')
             ->with('blog', $blog);
     }
 }

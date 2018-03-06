@@ -1,6 +1,6 @@
 <?php
 
-namespace Yab\Quarx\Console;
+namespace Yab\Cabin\Console;
 
 use Artisan;
 use App\Models\Role;
@@ -20,14 +20,14 @@ class Setup extends Command
      *
      * @var string
      */
-    protected $signature = 'quarx:setup';
+    protected $signature = 'cabin:setup';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Quarx will setup your site';
+    protected $description = 'Cabin will setup your site';
 
     /**
      * Execute the console command.
@@ -37,7 +37,7 @@ class Setup extends Command
     public function handle()
     {
         Artisan::call('vendor:publish', [
-            '--provider' => 'Yab\Quarx\QuarxProvider',
+            '--provider' => 'Yab\Cabin\CabinProvider',
             '--force' => true,
         ]);
 
@@ -123,7 +123,7 @@ class Setup extends Command
             }
             $service->create($user, 'admin', 'admin', false);
 
-            $this->info('Finished setting up your site with Quarx!');
+            $this->info('Finished setting up your site with Cabin!');
             $this->line('You can now login with the following username and password:');
             $this->comment('admin@example.com');
             $this->comment('admin');
@@ -153,16 +153,16 @@ class Setup extends Command
 
         // Route setup
         $routeContents = file_get_contents(app_path('Providers/RouteServiceProvider.php'));
-        $routeContents = str_replace("->group(base_path('routes/web.php'));", "->group(function() { \n\t\t\trequire base_path('routes/web.php');\n\t\t\trequire base_path('routes/quarx.php'); });", $routeContents);
+        $routeContents = str_replace("->group(base_path('routes/web.php'));", "->group(function() { \n\t\t\trequire base_path('routes/web.php');\n\t\t\trequire base_path('routes/cabin.php'); });", $routeContents);
         file_put_contents(app_path('Providers/RouteServiceProvider.php'), $routeContents);
 
         $routeToDashboardContents = file_get_contents(base_path('routes/web.php'));
-        $routeToDashboardContents = str_replace("Route::get('/dashboard', 'PagesController@dashboard');", "Route::get('/dashboard', function(){ return Redirect::to('quarx/dashboard'); });", $routeToDashboardContents);
+        $routeToDashboardContents = str_replace("Route::get('/dashboard', 'PagesController@dashboard');", "Route::get('/dashboard', function(){ return Redirect::to('cabin/dashboard'); });", $routeToDashboardContents);
         file_put_contents(base_path('routes/web.php'), $routeToDashboardContents);
 
         // Kernel setup
         $routeContents = file_get_contents(app_path('Http/Kernel.php'));
-        $routeContents = str_replace("'auth' => \Illuminate\Auth\Middleware\Authenticate::class,", "'auth' => \Illuminate\Auth\Middleware\Authenticate::class,\n\t\t'quarx' => \App\Http\Middleware\Quarx::class,\n\t\t'quarx-api' => \App\Http\Middleware\QuarxApi::class,\n\t\t'quarx-analytics' => \Yab\Quarx\Middleware\QuarxAnalytics::class,\n\t\t'quarx-language' => \App\Http\Middleware\QuarxLanguage::class,\n\t\t'admin' => \App\Http\Middleware\Admin::class,\n\t\t'active' => \App\Http\Middleware\Active::class,", $routeContents);
+        $routeContents = str_replace("'auth' => \Illuminate\Auth\Middleware\Authenticate::class,", "'auth' => \Illuminate\Auth\Middleware\Authenticate::class,\n\t\t'cabin' => \App\Http\Middleware\Cabin::class,\n\t\t'cabin-api' => \App\Http\Middleware\CabinApi::class,\n\t\t'cabin-analytics' => \Yab\Cabin\Middleware\CabinAnalytics::class,\n\t\t'cabin-language' => \App\Http\Middleware\CabinLanguage::class,\n\t\t'admin' => \App\Http\Middleware\Admin::class,\n\t\t'active' => \App\Http\Middleware\Active::class,", $routeContents);
         file_put_contents(app_path('Http/Kernel.php'), $routeContents);
 
         $fileSystem = new Filesystem();
@@ -181,7 +181,7 @@ class Setup extends Command
 
         // AuthProviders
         $authProviderContents = file_get_contents(app_path('Providers/AuthServiceProvider.php'));
-        $authProviderContents = str_replace('$this->registerPolicies();', "\$this->registerPolicies();\n\t\t\Gate::define('quarx', function (\$user) {\n\t\t\treturn (\$user->roles->first()->name === 'admin');\n\t\t});\n\t\t\Gate::define('admin', function (\$user) {\n\t\t\treturn (\$user->roles->first()->name === 'admin');\n\t\t});", $authProviderContents);
+        $authProviderContents = str_replace('$this->registerPolicies();', "\$this->registerPolicies();\n\t\t\Gate::define('cabin', function (\$user) {\n\t\t\treturn (\$user->roles->first()->name === 'admin');\n\t\t});\n\t\t\Gate::define('admin', function (\$user) {\n\t\t\treturn (\$user->roles->first()->name === 'admin');\n\t\t});", $authProviderContents);
         file_put_contents(app_path('Providers/AuthServiceProvider.php'), $authProviderContents);
 
         // Remove the teams
@@ -302,7 +302,7 @@ public function leaveAllTeams($userId)
         file_put_contents(base_path('resources/assets/sass/app.scss'), $css);
 
         $composer = file_get_contents(base_path('composer.json'));
-        $composer = str_replace('"App\\": "app/",', '"App\\": "app/",'."\n".'"Quarx\\Modules\\": "quarx/modules/",', $composer);
+        $composer = str_replace('"App\\": "app/",', '"App\\": "app/",'."\n".'"Cabin\\Modules\\": "cabin/modules/",', $composer);
         file_put_contents(base_path('composer.json'), $composer);
     }
 

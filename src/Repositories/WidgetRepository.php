@@ -1,9 +1,9 @@
 <?php
 
-namespace Yab\Quarx\Repositories;
+namespace Yab\Cabin\Repositories;
 
 use Illuminate\Support\Facades\Schema;
-use Yab\Quarx\Models\Widget;
+use Yab\Cabin\Models\Widget;
 
 class WidgetRepository
 {
@@ -39,7 +39,7 @@ class WidgetRepository
             $model = $model->orderBy('created_at', 'desc');
         }
 
-        return $model->paginate(config('quarx.pagination', 25));
+        return $model->paginate(config('cabin.pagination', 25));
     }
 
     public function search($input)
@@ -106,8 +106,8 @@ class WidgetRepository
     {
         $payload['name'] = htmlentities($payload['name']);
 
-        if (!empty($payload['lang']) && $payload['lang'] !== config('quarx.default-language', 'en')) {
-            return $this->translationRepo->createOrUpdate($widgets->id, 'Yab\Quarx\Models\Widget', $payload['lang'], $payload);
+        if (!empty($payload['lang']) && $payload['lang'] !== config('cabin.default-language', 'en')) {
+            return $this->translationRepo->createOrUpdate($widgets->id, 'Yab\Cabin\Models\Widget', $payload['lang'], $payload);
         } else {
             unset($payload['lang']);
 

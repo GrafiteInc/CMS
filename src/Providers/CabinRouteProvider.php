@@ -1,11 +1,11 @@
 <?php
 
-namespace Yab\Quarx\Providers;
+namespace Yab\Cabin\Providers;
 
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Routing\Router;
 
-class QuarxRouteProvider extends ServiceProvider
+class CabinRouteProvider extends ServiceProvider
 {
     /**
      * This namespace is applied to the controller routes in your routes file.
@@ -14,7 +14,7 @@ class QuarxRouteProvider extends ServiceProvider
      *
      * @var string
      */
-    protected $namespace = 'Yab\Quarx\Controllers';
+    protected $namespace = 'Yab\Cabin\Controllers';
 
     /**
      * Define your route model bindings, pattern filters, etc.
@@ -35,6 +35,7 @@ class QuarxRouteProvider extends ServiceProvider
     {
         $router->group(['namespace' => $this->namespace], function ($router) {
             require __DIR__.'/../Routes/web.php';
+            require __DIR__.'/../Routes/api.php';
         });
     }
 }

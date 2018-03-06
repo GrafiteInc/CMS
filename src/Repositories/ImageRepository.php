@@ -1,12 +1,12 @@
 <?php
 
-namespace Yab\Quarx\Repositories;
+namespace Yab\Cabin\Repositories;
 
-use Quarx;
+use Cabin;
 use Config;
 use CryptoService;
-use Yab\Quarx\Models\Image;
-use Yab\Quarx\Services\FileService;
+use Yab\Cabin\Models\Image;
+use Yab\Cabin\Services\FileService;
 use Illuminate\Support\Facades\Schema;
 
 class ImageRepository
@@ -23,17 +23,17 @@ class ImageRepository
 
     public function paginated()
     {
-        return Image::orderBy('created_at', 'desc')->paginate(Config::get('quarx.pagination', 24));
+        return Image::orderBy('created_at', 'desc')->paginate(Config::get('cabin.pagination', 24));
     }
 
     public function publishedAndPaginated()
     {
-        return Image::orderBy('created_at', 'desc')->where('is_published', 1)->paginate(Config::get('quarx.pagination', 24));
+        return Image::orderBy('created_at', 'desc')->where('is_published', 1)->paginate(Config::get('cabin.pagination', 24));
     }
 
     public function published()
     {
-        return Image::where('is_published', 1)->orderBy('created_at', 'desc')->paginate(Config::get('quarx.pagination', 24));
+        return Image::where('is_published', 1)->orderBy('created_at', 'desc')->paginate(Config::get('cabin.pagination', 24));
     }
 
     /**
@@ -101,7 +101,7 @@ class ImageRepository
             $query->orWhere($attribute, 'LIKE', '%'.$input['term'].'%');
         }
 
-        return [$query, $input['term'], $query->paginate(Config::get('quarx.pagination', 24))->render()];
+        return [$query, $input['term'], $query->paginate(Config::get('cabin.pagination', 24))->render()];
     }
 
     /**
@@ -121,7 +121,7 @@ class ImageRepository
 
         $input['is_published'] = 1;
         $input['location'] = $savedFile['name'];
-        $input['storage_location'] = config('quarx.storage-location');
+        $input['storage_location'] = config('cabin.storage-location');
         $input['original_name'] = $savedFile['original'];
 
         $image = Image::create($input);
@@ -142,7 +142,7 @@ class ImageRepository
         $savedFile = $input['location'];
 
         if (!$savedFile) {
-            Quarx::notification('Image could not be saved.', 'danger');
+            Cabin::notification('Image could not be saved.', 'danger');
 
             return false;
         }
@@ -154,7 +154,7 @@ class ImageRepository
         }
 
         $input['location'] = CryptoService::decrypt($savedFile['name']);
-        $input['storage_location'] = config('quarx.storage-location');
+        $input['storage_location'] = config('cabin.storage-location');
         $input['original_name'] = $savedFile['original'];
 
         $image = Image::create($input);
@@ -189,7 +189,7 @@ class ImageRepository
             $savedFile = FileService::saveFile($input['location'], 'public/images', [], true);
 
             if (!$savedFile) {
-                Quarx::notification('Image could not be updated.', 'danger');
+                Cabin::notification('Image could not be updated.', 'danger');
 
                 return false;
             }

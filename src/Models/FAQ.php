@@ -1,10 +1,10 @@
 <?php
 
-namespace Yab\Quarx\Models;
+namespace Yab\Cabin\Models;
 
-use Yab\Quarx\Traits\Translatable;
+use Yab\Cabin\Traits\Translatable;
 
-class FAQ extends QuarxModel
+class FAQ extends CabinModel
 {
     use Translatable;
 

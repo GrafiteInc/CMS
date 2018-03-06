@@ -2,17 +2,21 @@
 
 /*
 |--------------------------------------------------------------------------
-| FAQ Factory
+| Links Factory
 |--------------------------------------------------------------------------
 */
 
-$factory->define(\Yab\Quarx\Models\FAQ::class, function (Faker\Generator $faker) {
+$factory->define(\Yab\Cabin\Models\Link::class, function (Faker\Generator $faker) {
     return [
+
         'id' => 1,
-        'question' => 'what\'s this?',
-        'answer' => 'There\'s color everywhere!',
-        'is_published' => 1,
+        'name' => 'dumb',
+        'external' => 1,
+        'page_id' => 0,
+        'menu_id' => 1,
+        'external_url' => 'http://facebook.com',
         'updated_at' => $faker->datetime(),
         'created_at' => $faker->datetime(),
+
     ];
 });

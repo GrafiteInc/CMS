@@ -6,7 +6,7 @@
 |--------------------------------------------------------------------------
 */
 
-$factory->define(\Yab\Quarx\Models\Page::class, function (Faker\Generator $faker) {
+$factory->define(\Yab\Cabin\Models\Page::class, function (Faker\Generator $faker) {
     return [
         'id' => 1,
         'title' => 'dumb',

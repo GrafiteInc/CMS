@@ -1,12 +1,12 @@
 <?php
 
-namespace Yab\Quarx\Controllers;
+namespace Yab\Cabin\Controllers;
 
 use Illuminate\Filesystem\Filesystem;
-use Yab\Quarx\Services\AssetService;
-use Yab\Quarx\Controllers\QuarxController;
+use Yab\Cabin\Services\AssetService;
+use Yab\Cabin\Controllers\CabinController;
 
-class AssetController extends QuarxController
+class AssetController extends CabinController
 {
     public function __construct(AssetService $service)
     {

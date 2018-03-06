@@ -1,8 +1,8 @@
 <?php
 
-namespace Yab\Quarx\Models;
+namespace Yab\Cabin\Models;
 
-class Translation extends QuarxModel
+class Translation extends CabinModel
 {
     public $table = 'translations';
 

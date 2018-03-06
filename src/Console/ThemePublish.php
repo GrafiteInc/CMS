@@ -1,6 +1,6 @@
 <?php
 
-namespace Yab\Quarx\Console;
+namespace Yab\Cabin\Console;
 
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
@@ -19,7 +19,7 @@ class ThemePublish extends Command
      *
      * @var string
      */
-    protected $description = 'Publish a Quarx theme\'s public assets';
+    protected $description = 'Publish a Cabin theme\'s public assets';
 
     /**
      * Execute the console command.

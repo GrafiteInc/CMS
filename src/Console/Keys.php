@@ -1,6 +1,6 @@
 <?php
 
-namespace Yab\Quarx\Console;
+namespace Yab\Cabin\Console;
 
 use Illuminate\Console\Command;
 
@@ -11,14 +11,14 @@ class Keys extends Command
      *
      * @var string
      */
-    protected $signature = 'quarx:keygen';
+    protected $signature = 'cabin:keygen';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Quarx will generate keys for the API Internal and External access';
+    protected $description = 'Cabin will generate keys for the API Internal and External access';
 
     /**
      * Execute the console command.

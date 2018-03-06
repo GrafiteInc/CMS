@@ -2,18 +2,17 @@
 
 /*
 |--------------------------------------------------------------------------
-| Menu Factory
+| FAQ Factory
 |--------------------------------------------------------------------------
 */
 
-$factory->define(\Yab\Quarx\Models\Menu::class, function (Faker\Generator $faker) {
+$factory->define(\Yab\Cabin\Models\FAQ::class, function (Faker\Generator $faker) {
     return [
-
         'id' => 1,
-        'name' => 'dumb menu',
-        'slug' => 'testerSLUG',
+        'question' => 'what\'s this?',
+        'answer' => 'There\'s color everywhere!',
+        'is_published' => 1,
         'updated_at' => $faker->datetime(),
         'created_at' => $faker->datetime(),
-
     ];
 });

@@ -1,6 +1,6 @@
 <?php
 
-namespace Yab\Quarx\Facades;
+namespace Yab\Cabin\Facades;
 
 use Illuminate\Support\Facades\Facade;
 

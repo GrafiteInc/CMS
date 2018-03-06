@@ -1,25 +1,22 @@
 <?php
 
-namespace Yab\Quarx\Controllers;
+namespace Yab\Cabin\Controllers;
 
 use URL;
-use Quarx;
-use Yab\Quarx\Models\FAQ;
+use Cabin;
+use Yab\Cabin\Models\FAQ;
 use Illuminate\Http\Request;
-use Yab\Quarx\Requests\FAQRequest;
-use Yab\Quarx\Repositories\FAQRepository;
-use Yab\Quarx\Services\ValidationService;
+use Yab\Cabin\Requests\FAQRequest;
+use Yab\Cabin\Repositories\FAQRepository;
+use Yab\Cabin\Services\ValidationService;
 
-class FAQController extends QuarxController
+class FAQController extends CabinController
 {
-    /** @var FAQRepository */
-    private $faqRepository;
-
-    public function __construct(FAQRepository $faqRepo)
+    public function __construct(FAQRepository $repository)
     {
         parent::construct();
 
-        $this->faqRepository = $faqRepo;
+        $this->repository = $repository;
     }
 
     /**
@@ -29,9 +26,9 @@ class FAQController extends QuarxController
      */
     public function index()
     {
-        $result = $this->faqRepository->paginated();
+        $result = $this->repository->paginated();
 
-        return view('quarx::modules.faqs.index')
+        return view('cabin::modules.faqs.index')
             ->with('faqs', $result)
             ->with('pagination', $result->render());
     }
@@ -47,9 +44,9 @@ class FAQController extends QuarxController
     {
         $input = $request->all();
 
-        $result = $this->faqRepository->search($input);
+        $result = $this->repository->search($input);
 
-        return view('quarx::modules.faqs.index')
+        return view('cabin::modules.faqs.index')
             ->with('faqs', $result[0]->get())
             ->with('pagination', $result[2])
             ->with('term', $result[1]);
@@ -62,7 +59,7 @@ class FAQController extends QuarxController
      */
     public function create()
     {
-        return view('quarx::modules.faqs.create');
+        return view('cabin::modules.faqs.create');
     }
 
     /**
@@ -77,17 +74,17 @@ class FAQController extends QuarxController
         $validation = ValidationService::check(FAQ::$rules);
 
         if (!$validation['errors']) {
-            $faq = $this->faqRepository->store($request->all());
-            Quarx::notification('FAQ saved successfully.', 'success');
+            $faq = $this->repository->store($request->all());
+            Cabin::notification('FAQ saved successfully.', 'success');
         } else {
             return $validation['redirect'];
         }
 
         if (!$faq) {
-            Quarx::notification('FAQ could not be saved.', 'warning');
+            Cabin::notification('FAQ could not be saved.', 'warning');
         }
 
-        return redirect(route($this->quarxRouteBase.'.faqs.edit', [$faq->id]));
+        return redirect(route($this->routeBase.'.faqs.edit', [$faq->id]));
     }
 
     /**
@@ -99,15 +96,15 @@ class FAQController extends QuarxController
      */
     public function edit($id)
     {
-        $faq = $this->faqRepository->findFAQById($id);
+        $faq = $this->repository->findFAQById($id);
 
         if (empty($faq)) {
-            Quarx::notification('FAQ not found', 'warning');
+            Cabin::notification('FAQ not found', 'warning');
 
-            return redirect(route($this->quarxRouteBase.'.faqs.index'));
+            return redirect(route($this->routeBase.'.faqs.index'));
         }
 
-        return view('quarx::modules.faqs.edit')->with('faq', $faq);
+        return view('cabin::modules.faqs.edit')->with('faq', $faq);
     }
 
     /**
@@ -120,22 +117,22 @@ class FAQController extends QuarxController
      */
     public function update($id, FAQRequest $request)
     {
-        $faq = $this->faqRepository->findFAQById($id);
+        $faq = $this->repository->findFAQById($id);
 
         if (empty($faq)) {
-            Quarx::notification('FAQ not found', 'warning');
+            Cabin::notification('FAQ not found', 'warning');
 
-            return redirect(route($this->quarxRouteBase.'.faqs.index'));
+            return redirect(route($this->routeBase.'.faqs.index'));
         }
 
         $validation = ValidationService::check(FAQ::$rules);
 
         if (!$validation['errors']) {
-            $faq = $this->faqRepository->update($faq, $request->all());
-            Quarx::notification('FAQ updated successfully.', 'success');
+            $faq = $this->repository->update($faq, $request->all());
+            Cabin::notification('FAQ updated successfully.', 'success');
 
             if (!$faq) {
-                Quarx::notification('FAQ could not be saved.', 'warning');
+                Cabin::notification('FAQ could not be saved.', 'warning');
             }
         } else {
             return $validation['redirect'];
@@ -153,18 +150,18 @@ class FAQController extends QuarxController
      */
     public function destroy($id)
     {
-        $faq = $this->faqRepository->findFAQById($id);
+        $faq = $this->repository->findFAQById($id);
 
         if (empty($faq)) {
-            Quarx::notification('FAQ not found', 'warning');
+            Cabin::notification('FAQ not found', 'warning');
 
-            return redirect(route($this->quarxRouteBase.'.faqs.index'));
+            return redirect(route($this->routeBase.'.faqs.index'));
         }
 
         $faq->delete();
 
-        Quarx::notification('FAQ deleted successfully.', 'success');
+        Cabin::notification('FAQ deleted successfully.', 'success');
 
-        return redirect(route($this->quarxRouteBase.'.faqs.index'));
+        return redirect(route($this->routeBase.'.faqs.index'));
     }
 }

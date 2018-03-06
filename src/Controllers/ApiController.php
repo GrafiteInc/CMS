@@ -1,13 +1,13 @@
 <?php
 
-namespace Yab\Quarx\Controllers;
+namespace Yab\Cabin\Controllers;
 
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Config;
 
-class ApiController extends QuarxController
+class ApiController extends CabinController
 {
     protected $model;
 
@@ -16,8 +16,8 @@ class ApiController extends QuarxController
         parent::construct();
 
         $this->modelName = str_singular($request->segment(3));
-        if (!empty($this->modelName)) {
-            $this->model = app('Yab\Quarx\Models\\'.ucfirst($this->modelName));
+        if (! empty($this->modelName)) {
+            $this->model = app('Yab\Cabin\Models\\'.ucfirst($this->modelName));
         }
     }
 
@@ -49,7 +49,7 @@ class ApiController extends QuarxController
 
         return $query
             ->orderBy('created_at', 'desc')
-            ->paginate(Config::get('quarx.pagination', 24));
+            ->paginate(Config::get('cabin.pagination', 24));
     }
 
     /**
@@ -72,7 +72,7 @@ class ApiController extends QuarxController
 
         return [
             'term' => $input['term'],
-            'result' => $query->paginate(Config::get('quarx.pagination', 24)),
+            'result' => $query->paginate(Config::get('cabin.pagination', 24)),
         ];
     }
 }

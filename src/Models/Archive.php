@@ -1,8 +1,8 @@
 <?php
 
-namespace Yab\Quarx\Models;
+namespace Yab\Cabin\Models;
 
-class Archive extends QuarxModel
+class Archive extends CabinModel
 {
     public $table = 'archives';
 

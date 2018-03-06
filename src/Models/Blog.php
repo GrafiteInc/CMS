@@ -1,11 +1,11 @@
 <?php
 
-namespace Yab\Quarx\Models;
+namespace Yab\Cabin\Models;
 
-use Yab\Quarx\Services\Normalizer;
-use Yab\Quarx\Traits\Translatable;
+use Yab\Cabin\Services\Normalizer;
+use Yab\Cabin\Traits\Translatable;
 
-class Blog extends QuarxModel
+class Blog extends CabinModel
 {
     use Translatable;
 

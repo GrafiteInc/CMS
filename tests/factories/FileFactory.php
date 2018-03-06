@@ -2,19 +2,22 @@
 
 /*
 |--------------------------------------------------------------------------
-| Images Factory
+| Files Factory
 |--------------------------------------------------------------------------
 */
 
-$factory->define(\Yab\Quarx\Models\Image::class, function (Faker\Generator $faker) {
+$factory->define(\Yab\Cabin\Models\File::class, function (Faker\Generator $faker) {
     return [
         'id' => 1,
         'location' => 'files/dumb',
-        'name' => 'dumb',
-        'original_name' => 'dumb',
-        'alt_tag' => 'dumb',
-        'title_tag' => 'dumb',
+        'name' => 'dumbFile',
+        'tags' => 'dumb, file',
+        'mime' => 'txt',
+        'size' => 24,
+        'details' => 'dumb file',
+        'user' => 1,
         'is_published' => 1,
+        'order' => 1,
         'updated_at' => $faker->datetime(),
         'created_at' => $faker->datetime(),
     ];

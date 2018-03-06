@@ -1,26 +1,23 @@
 <?php
 
-namespace Yab\Quarx\Controllers;
+namespace Yab\Cabin\Controllers;
 
-use Quarx;
+use Cabin;
 use Exception;
-use Yab\Quarx\Models\Link;
+use Yab\Cabin\Models\Link;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\URL;
-use Yab\Quarx\Requests\LinksRequest;
-use Yab\Quarx\Services\ValidationService;
-use Yab\Quarx\Repositories\LinkRepository;
+use Yab\Cabin\Requests\LinksRequest;
+use Yab\Cabin\Services\ValidationService;
+use Yab\Cabin\Repositories\LinkRepository;
 
-class LinksController extends QuarxController
+class LinksController extends CabinController
 {
-    /** @var LinkRepository */
-    private $linksRepository;
-
-    public function __construct(LinkRepository $linksRepo)
+    public function __construct(LinkRepository $repository)
     {
         parent::construct();
 
-        $this->linksRepository = $linksRepo;
+        $this->repository = $repository;
     }
 
     /**
@@ -30,9 +27,9 @@ class LinksController extends QuarxController
      */
     public function index()
     {
-        $result = $this->linksRepository->paginated();
+        $result = $this->repository->paginated();
 
-        return view('quarx::modules.links.index')
+        return view('cabin::modules.links.index')
             ->with('links', $result)
             ->with('pagination', $result->render());
     }
@@ -46,7 +43,7 @@ class LinksController extends QuarxController
     {
         $menu = $request->get('m');
 
-        return view('quarx::modules.links.create')->with('menu_id', $menu);
+        return view('cabin::modules.links.create')->with('menu_id', $menu);
     }
 
     /**
@@ -62,20 +59,20 @@ class LinksController extends QuarxController
             $validation = ValidationService::check(Link::$rules);
 
             if (!$validation['errors']) {
-                $links = $this->linksRepository->store($request->all());
-                Quarx::notification('Link saved successfully.', 'success');
+                $links = $this->repository->store($request->all());
+                Cabin::notification('Link saved successfully.', 'success');
 
                 if (!$links) {
-                    Quarx::notification('Link could not be saved.', 'danger');
+                    Cabin::notification('Link could not be saved.', 'danger');
                 }
             } else {
                 return $validation['redirect'];
             }
         } catch (Exception $e) {
-            Quarx::notification($e->getMessage() ?: 'Link could not be saved.', 'danger');
+            Cabin::notification($e->getMessage() ?: 'Link could not be saved.', 'danger');
         }
 
-        return redirect(route($this->quarxRouteBase.'.menus.edit', [$request->get('menu_id')]));
+        return redirect(route($this->routeBase.'.menus.edit', [$request->get('menu_id')]));
     }
 
     /**
@@ -87,15 +84,15 @@ class LinksController extends QuarxController
      */
     public function edit($id)
     {
-        $links = $this->linksRepository->findLinksById($id);
+        $links = $this->repository->findLinksById($id);
 
         if (empty($links)) {
-            Quarx::notification('Link not found', 'warning');
+            Cabin::notification('Link not found', 'warning');
 
-            return redirect(route($this->quarxRouteBase.'.links.index'));
+            return redirect(route($this->routeBase.'.links.index'));
         }
 
-        return view('quarx::modules.links.edit')->with('links', $links);
+        return view('cabin::modules.links.edit')->with('links', $links);
     }
 
     /**
@@ -109,25 +106,25 @@ class LinksController extends QuarxController
     public function update($id, LinksRequest $request)
     {
         try {
-            $links = $this->linksRepository->findLinksById($id);
+            $links = $this->repository->findLinksById($id);
 
             if (empty($links)) {
-                Quarx::notification('Link not found', 'warning');
+                Cabin::notification('Link not found', 'warning');
 
-                return redirect(route($this->quarxRouteBase.'.links.index'));
+                return redirect(route($this->routeBase.'.links.index'));
             }
 
-            $links = $this->linksRepository->update($links, $request->all());
-            Quarx::notification('Link updated successfully.', 'success');
+            $links = $this->repository->update($links, $request->all());
+            Cabin::notification('Link updated successfully.', 'success');
 
             if (!$links) {
-                Quarx::notification('Link could not be updated.', 'danger');
+                Cabin::notification('Link could not be updated.', 'danger');
             }
         } catch (Exception $e) {
-            Quarx::notification($e->getMessage() ?: 'Links could not be updated.', 'danger');
+            Cabin::notification($e->getMessage() ?: 'Links could not be updated.', 'danger');
         }
 
-        return redirect(route($this->quarxRouteBase.'.links.edit', [$id]));
+        return redirect(route($this->routeBase.'.links.edit', [$id]));
     }
 
     /**
@@ -139,19 +136,19 @@ class LinksController extends QuarxController
      */
     public function destroy($id)
     {
-        $links = $this->linksRepository->findLinksById($id);
+        $links = $this->repository->findLinksById($id);
         $menu = $links->menu_id;
 
         if (empty($links)) {
-            Quarx::notification('Link not found', 'warning');
+            Cabin::notification('Link not found', 'warning');
 
-            return redirect(route($this->quarxRouteBase.'.links.index'));
+            return redirect(route($this->routeBase.'.links.index'));
         }
 
         $links->delete();
 
-        Quarx::notification('Link deleted successfully.', 'success');
+        Cabin::notification('Link deleted successfully.', 'success');
 
-        return redirect(route($this->quarxRouteBase.'.menus.edit', [$menu]));
+        return redirect(route($this->routeBase.'.menus.edit', [$menu]));
     }
 }

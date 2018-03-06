@@ -1,6 +1,6 @@
 <?php
 
-namespace Yab\Quarx\Models;
+namespace Yab\Cabin\Models;
 
 use Carbon\Carbon;
 use Config;
@@ -10,9 +10,9 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
 use Intervention\Image\ImageManagerStatic as InterventionImage;
 use Storage;
-use Yab\Quarx\Services\AssetService;
+use Yab\Cabin\Services\AssetService;
 
-class Image extends QuarxModel
+class Image extends CabinModel
 {
     public $table = 'images';
 
@@ -74,10 +74,10 @@ class Image extends QuarxModel
      */
     public function getS3Image()
     {
-        $url = Storage::disk(Config::get('quarx.storage-location', 'local'))->url($this->location);
+        $url = Storage::disk(Config::get('cabin.storage-location', 'local'))->url($this->location);
 
-        if (!is_null(config('quarx.cloudfront'))) {
-            $url = str_replace(config('filesystems.disks.s3.bucket').'.s3.'.config('filesystems.disks.s3.region').'.amazonaws.com', config('quarx.cloudfront'), $url);
+        if (!is_null(config('cabin.cloudfront'))) {
+            $url = str_replace(config('filesystems.disks.s3.bucket').'.s3.'.config('filesystems.disks.s3.region').'.amazonaws.com', config('cabin.cloudfront'), $url);
         }
 
         return $url;
@@ -165,7 +165,7 @@ class Image extends QuarxModel
      */
     public function fileExists()
     {
-        return Storage::disk(Config::get('quarx.storage-location', 'local'))->exists($this->location);
+        return Storage::disk(Config::get('cabin.storage-location', 'local'))->exists($this->location);
     }
 
     /**
@@ -177,7 +177,7 @@ class Image extends QuarxModel
     {
         $imagePath = app(AssetService::class)->generateImage('File Not Found');
 
-        $image = InterventionImage::make($imagePath)->resize(config('quarx.preview-image-size', 800), null, function ($constraint) {
+        $image = InterventionImage::make($imagePath)->resize(config('cabin.preview-image-size', 800), null, function ($constraint) {
             $constraint->aspectRatio();
         });
 

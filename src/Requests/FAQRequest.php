@@ -1,10 +1,10 @@
 <?php
 
-namespace Yab\Quarx\Requests;
+namespace Yab\Cabin\Requests;
 
 use Auth;
 use Gate;
-use Yab\Quarx\Models\FAQ;
+use Yab\Cabin\Models\FAQ;
 use Illuminate\Foundation\Http\FormRequest;
 
 class FAQRequest extends FormRequest
@@ -17,7 +17,7 @@ class FAQRequest extends FormRequest
     public function authorize()
     {
         if (config('app.env') !== 'testing') {
-            return Gate::allows('quarx', Auth::user());
+            return Gate::allows('cabin', Auth::user());
         }
 
         return true;

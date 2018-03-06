@@ -2,16 +2,17 @@
 
 /*
 |--------------------------------------------------------------------------
-| Widget Factory
+| Blog Factory
 |--------------------------------------------------------------------------
 */
 
-$factory->define(\Yab\Quarx\Models\Widget::class, function (Faker\Generator $faker) {
+$factory->define(\Yab\Cabin\Models\Blog::class, function (Faker\Generator $faker) {
     return [
         'id' => 1,
-        'name' => 'test',
-        'slug' => 'tester',
-        'content' => implode(' ', $faker->paragraphs(3)),
+        'title' => 'dumb',
+        'entry' => $faker->paragraph().' '.$faker->paragraph(),
+        'is_published' => 1,
+        'url' => 'dumb',
         'updated_at' => $faker->datetime(),
         'created_at' => $faker->datetime(),
     ];

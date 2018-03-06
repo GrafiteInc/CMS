@@ -1,14 +1,14 @@
 var elixir = require('laravel-elixir');
 
 elixir.config.publicPath = 'src/Assets/dist/';
-elixir.config.assetsPath = 'src/Assets/';
+elixir.config.assetsPath = 'src/Assets/src/';
 
 elixir(function(mix) {
     mix.styles([
-        '../packages/dropzone/basic.css',
-        '../packages/dropzone/dropzone.css',
-        '../packages/redactor/redactor.css',
-        '../packages/datepicker/bootstrap-datetimepicker.css',
+        '../vendor/dropzone/basic.css',
+        '../vendor/dropzone/dropzone.css',
+        '../vendor/redactor/redactor.css',
+        '../vendor/datepicker/bootstrap-datetimepicker.css',
         'raw.min.css',
         'device.css',
         'main.css',
@@ -18,27 +18,27 @@ elixir(function(mix) {
 
     mix.scripts([
         'bootstrap.min.js',
-        'quarx.js',
+        'cabin.js',
         'forms.js',
+        'dashboard.js',
         'typeahead.bundle.js',
         'bootstrap-tagsinput.min.js',
         'sortable.min.js',
-        '../packages/dropzone/dropzone.js',
-        '../packages/datepicker/moment.js',
-        '../packages/datepicker/moment-timezone.js',
-        '../packages/datepicker/bootstrap-datetimepicker.min.js',
-        '../packages/redactor/redactor.js',
-        '../packages/redactor/filemanager.js',
-        '../packages/redactor/fontcolor.js',
-        '../packages/redactor/fontfamily.js',
-        '../packages/redactor/fontsize.js',
-        '../packages/redactor/imagemanager.js',
-        '../packages/redactor/stockimagemanager.js',
-        '../packages/redactor/specialchar.js',
-        '../packages/redactor/table.js',
-        '../packages/redactor/video.js',
-        '../packages/redactor/insertIcon.js',
-        
+        '../vendor/dropzone/dropzone.js',
+        '../vendor/datepicker/moment.js',
+        '../vendor/datepicker/moment-timezone.js',
+        '../vendor/datepicker/bootstrap-datetimepicker.min.js',
+        '../vendor/redactor/redactor.js',
+        '../vendor/redactor/filemanager.js',
+        '../vendor/redactor/fontcolor.js',
+        '../vendor/redactor/fontfamily.js',
+        '../vendor/redactor/fontsize.js',
+        '../vendor/redactor/imagemanager.js',
+        '../vendor/redactor/stockimagemanager.js',
+        '../vendor/redactor/specialchar.js',
+        '../vendor/redactor/table.js',
+        '../vendor/redactor/video.js',
+        '../vendor/redactor/insertIcon.js',
         'modules.js',
         'dropzone-custom.js',
     ]);

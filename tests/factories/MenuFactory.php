@@ -2,19 +2,16 @@
 
 /*
 |--------------------------------------------------------------------------
-| Links Factory
+| Menu Factory
 |--------------------------------------------------------------------------
 */
 
-$factory->define(\Yab\Quarx\Models\Link::class, function (Faker\Generator $faker) {
+$factory->define(\Yab\Cabin\Models\Menu::class, function (Faker\Generator $faker) {
     return [
 
         'id' => 1,
-        'name' => 'dumb',
-        'external' => 1,
-        'page_id' => 0,
-        'menu_id' => 1,
-        'external_url' => 'http://facebook.com',
+        'name' => 'dumb menu',
+        'slug' => 'testerSLUG',
         'updated_at' => $faker->datetime(),
         'created_at' => $faker->datetime(),
 

@@ -1,13 +1,13 @@
 <?php
 
-namespace Yab\Quarx\Facades;
+namespace Yab\Cabin\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
-class QuarxServiceFacade extends Facade
+class CabinServiceFacade extends Facade
 {
     protected static function getFacadeAccessor()
     {
-        return 'QuarxService';
+        return 'CabinService';
     }
 }

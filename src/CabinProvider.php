@@ -1,6 +1,6 @@
 <?php
 
-namespace Yab\Quarx;
+namespace Yab\Cabin;
 
 use Devfactory\Minify\Facades\MinifyFacade;
 use Devfactory\Minify\MinifyServiceProvider;
@@ -14,24 +14,24 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
 use Intervention\Image\ImageServiceProvider;
-use Quarx;
+use Cabin;
 use Spatie\LaravelAnalytics\LaravelAnalyticsFacade;
 use Spatie\LaravelAnalytics\LaravelAnalyticsServiceProvider;
 use Yab\Laracogs\LaracogsProvider;
-use Yab\Quarx\Console\Keys;
-use Yab\Quarx\Console\ModuleComposer;
-use Yab\Quarx\Console\ModuleCrud;
-use Yab\Quarx\Console\ModuleMake;
-use Yab\Quarx\Console\ModulePublish;
-use Yab\Quarx\Console\Setup;
-use Yab\Quarx\Console\ThemeGenerate;
-use Yab\Quarx\Console\ThemePublish;
-use Yab\Quarx\Providers\QuarxEventServiceProvider;
-use Yab\Quarx\Providers\QuarxModuleProvider;
-use Yab\Quarx\Providers\QuarxRouteProvider;
-use Yab\Quarx\Providers\QuarxServiceProvider;
+use Yab\Cabin\Console\Keys;
+use Yab\Cabin\Console\ModuleComposer;
+use Yab\Cabin\Console\ModuleCrud;
+use Yab\Cabin\Console\ModuleMake;
+use Yab\Cabin\Console\ModulePublish;
+use Yab\Cabin\Console\Setup;
+use Yab\Cabin\Console\ThemeGenerate;
+use Yab\Cabin\Console\ThemePublish;
+use Yab\Cabin\Providers\CabinEventServiceProvider;
+use Yab\Cabin\Providers\CabinModuleProvider;
+use Yab\Cabin\Providers\CabinRouteProvider;
+use Yab\Cabin\Providers\CabinServiceProvider;
 
-class QuarxProvider extends ServiceProvider
+class CabinProvider extends ServiceProvider
 {
     /**
      * Alias the services in the boot.
@@ -40,7 +40,7 @@ class QuarxProvider extends ServiceProvider
     {
         $this->publishes([
             __DIR__.'/PublishedAssets/Views/themes' => base_path('resources/themes'),
-            __DIR__.'/PublishedAssets/Controllers' => app_path('Http/Controllers/Quarx'),
+            __DIR__.'/PublishedAssets/Controllers' => app_path('Http/Controllers/Cabin'),
             __DIR__.'/PublishedAssets/Migrations' => base_path('database/migrations'),
             __DIR__.'/PublishedAssets/Middleware' => app_path('Http/Middleware'),
             __DIR__.'/PublishedAssets/Routes' => base_path('routes'),
@@ -48,17 +48,17 @@ class QuarxProvider extends ServiceProvider
         ]);
 
         $this->publishes([
-            __DIR__.'/Views' => base_path('resources/views/vendor/quarx'),
+            __DIR__.'/Views' => base_path('resources/views/vendor/cabin'),
         ], 'backend');
 
         $this->loadMigrationsFrom(__DIR__.'/Migrations');
 
-        $theme = Config::get('quarx.frontend-theme', 'default');
+        $theme = Config::get('cabin.frontend-theme', 'default');
 
-        $this->loadViewsFrom(__DIR__.'/Views', 'quarx');
+        $this->loadViewsFrom(__DIR__.'/Views', 'cabin');
 
         View::addLocation(base_path('resources/themes/'.$theme));
-        View::addNamespace('quarx-frontend', base_path('resources/themes/'.$theme));
+        View::addNamespace('cabin-frontend', base_path('resources/themes/'.$theme));
 
         /*
         |--------------------------------------------------------------------------
@@ -71,14 +71,14 @@ class QuarxProvider extends ServiceProvider
                 $expression = substr($expression, 1, -1);
             }
 
-            $theme = Config::get('quarx.frontend-theme');
-            $view = '"quarx-frontend::'.str_replace('"', '', str_replace("'", '', $expression)).'"';
+            $theme = Config::get('cabin.frontend-theme');
+            $view = '"cabin-frontend::'.str_replace('"', '', str_replace("'", '', $expression)).'"';
 
             return "<?php echo \$__env->make($view, array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>";
         });
 
         Blade::directive('menu', function ($expression) {
-            return "<?php echo Quarx::menu($expression); ?>";
+            return "<?php echo Cabin::menu($expression); ?>";
         });
 
         Blade::directive('block', function ($expression) {
@@ -86,10 +86,10 @@ class QuarxProvider extends ServiceProvider
         });
 
         Blade::directive('languages', function ($expression) {
-            if (count(config('quarx.languages')) > 1) {
+            if (count(config('cabin.languages')) > 1) {
                 $languageLinks = [];
-                foreach (config('quarx.languages') as $key => $value) {
-                    $languageLinks[] = '<a class="language-link" href="'.url(config('quarx.backend-route-prefix', 'quarx').'/language/set/'.$key).'">'.$value.'</a>';
+                foreach (config('cabin.languages') as $key => $value) {
+                    $languageLinks[] = '<a class="language-link" href="'.url(config('cabin.backend-route-prefix', 'cabin').'/language/set/'.$key).'">'.$value.'</a>';
                 }
 
                 $languageLinkString = implode($languageLinks);
@@ -101,27 +101,31 @@ class QuarxProvider extends ServiceProvider
         });
 
         Blade::directive('modules', function ($expression) {
-            return "<?php echo Quarx::moduleLinks($expression); ?>";
+            return "<?php echo Cabin::moduleLinks($expression); ?>";
         });
 
         Blade::directive('widget', function ($expression) {
-            return "<?php echo Quarx::widget($expression); ?>";
+            return "<?php echo Cabin::widget($expression); ?>";
         });
 
         Blade::directive('image', function ($expression) {
-            return "<?php echo Quarx::image($expression); ?>";
+            return "<?php echo Cabin::image($expression); ?>";
         });
 
         Blade::directive('image_link', function ($expression) {
-            return "<?php echo Quarx::imageLink($expression); ?>";
+            return "<?php echo Cabin::imageLink($expression); ?>";
         });
 
         Blade::directive('images', function ($expression) {
-            return "<?php echo Quarx::images($expression); ?>";
+            return "<?php echo Cabin::images($expression); ?>";
         });
 
         Blade::directive('edit', function ($expression) {
-            return "<?php echo Quarx::editBtn($expression); ?>";
+            return "<?php echo Cabin::editBtn($expression); ?>";
+        });
+
+        Blade::directive('editBtn', function ($expression) {
+            return "<?php echo Cabin::editBtnSecondary($expression); ?>";
         });
 
         Blade::directive('markdown', function ($expression) {
@@ -134,10 +138,10 @@ class QuarxProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->register(QuarxServiceProvider::class);
-        $this->app->register(QuarxEventServiceProvider::class);
-        $this->app->register(QuarxRouteProvider::class);
-        $this->app->register(QuarxModuleProvider::class);
+        $this->app->register(CabinServiceProvider::class);
+        $this->app->register(CabinEventServiceProvider::class);
+        $this->app->register(CabinRouteProvider::class);
+        $this->app->register(CabinModuleProvider::class);
 
         $this->app->register(LaracogsProvider::class);
         $this->app->register(MinifyServiceProvider::class);

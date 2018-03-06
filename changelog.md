@@ -106,7 +106,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [v2.3.23] - 2017-06-03
 
 ### Added
-- Backend route prefix default: quarx
+- Backend route prefix default: cabin
 
 ### Changed
 - Refactored asset caching and local detection
@@ -301,7 +301,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [v2.2.6] - 2016-12-05
 
 ### Added
-- New db-prefix option for quarx tables
+- New db-prefix option for cabin tables
 - New live preview in editor view
 
 ### Fixed

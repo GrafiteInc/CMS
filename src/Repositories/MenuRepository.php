@@ -1,9 +1,9 @@
 <?php
 
-namespace Yab\Quarx\Repositories;
+namespace Yab\Cabin\Repositories;
 
 use Illuminate\Support\Facades\Schema;
-use Yab\Quarx\Models\Menu;
+use Yab\Cabin\Models\Menu;
 
 class MenuRepository
 {
@@ -32,7 +32,7 @@ class MenuRepository
             $model = $model->orderBy('created_at', 'desc');
         }
 
-        return $model->paginate(config('quarx.pagination', 25));
+        return $model->paginate(config('cabin.pagination', 25));
     }
 
     /**

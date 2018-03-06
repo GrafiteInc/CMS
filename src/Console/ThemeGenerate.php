@@ -1,6 +1,6 @@
 <?php
 
-namespace Yab\Quarx\Console;
+namespace Yab\Cabin\Console;
 
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
@@ -19,7 +19,7 @@ class ThemeGenerate extends Command
      *
      * @var string
      */
-    protected $description = 'Generate a base Quarx theme';
+    protected $description = 'Generate a base Cabin theme';
 
     /**
      * Execute the console command.

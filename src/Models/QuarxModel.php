@@ -1,12 +1,12 @@
 <?php
 
-namespace Yab\Quarx\Models;
+namespace Yab\Cabin\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Log;
-use Yab\Quarx\Models\Link;
+use Yab\Cabin\Models\Link;
 
-class QuarxModel extends Model
+class CabinModel extends Model
 {
     /**
      * Model contructuor.
@@ -17,8 +17,8 @@ class QuarxModel extends Model
     {
         parent::__construct($attributes);
 
-        if (config('quarx.db-prefix', '')) {
-            $this->table = config('quarx.db-prefix', '').$this->table;
+        if (config('cabin.db-prefix', '')) {
+            $this->table = config('cabin.db-prefix', '').$this->table;
         }
     }
 
@@ -29,7 +29,7 @@ class QuarxModel extends Model
      */
     public function afterSaved($payload)
     {
-        if (!request()->is('quarx/revert/*') && !request()->is('quarx/rollback/*/*')) {
+        if (!request()->is('cabin/revert/*') && !request()->is('cabin/rollback/*/*')) {
             unset($payload->attributes['created_at']);
             unset($payload->attributes['updated_at']);
             unset($payload->original['created_at']);
@@ -60,12 +60,12 @@ class QuarxModel extends Model
         Translation::where('entity_id', $id)->where('entity_type', $type)->delete();
         Archive::where('entity_id', $id)->where('entity_type', $type)->delete();
 
-        Archive::where('entity_type', 'Yab\Quarx\Models\Translation')
+        Archive::where('entity_type', 'Yab\Cabin\Models\Translation')
             ->where('entity_data', 'LIKE', '%"entity_id":'.$id.'%')
             ->where('entity_data', 'LIKE', '%"entity_type":"'.$type.'"%')
             ->delete();
 
-        if ($type == 'Yab\Quarx\Models\Page') {
+        if ($type == 'Yab\Cabin\Models\Page') {
             Link::where('page_id', $id)->delete();
         }
     }

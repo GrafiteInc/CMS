@@ -1,9 +1,9 @@
 <?php
 
-namespace Yab\Quarx\Repositories;
+namespace Yab\Cabin\Repositories;
 
 use Carbon\Carbon;
-use Yab\Quarx\Models\Event;
+use Yab\Cabin\Models\Event;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Schema;
 
@@ -41,7 +41,7 @@ class EventRepository
             $model = $model->orderBy('created_at', 'desc');
         }
 
-        return $model->paginate(config('quarx.pagination', 25));
+        return $model->paginate(config('cabin.pagination', 25));
     }
 
     /**
@@ -61,7 +61,7 @@ class EventRepository
      */
     public function published()
     {
-        return Event::where('is_published', 1)->where('published_at', '<=', Carbon::now(config('app.timezone'))->format('Y-m-d H:i:s'))->orderBy('created_at', 'desc')->paginate(Config::get('quarx.pagination', 24));
+        return Event::where('is_published', 1)->where('published_at', '<=', Carbon::now(config('app.timezone'))->format('Y-m-d H:i:s'))->orderBy('created_at', 'desc')->paginate(Config::get('cabin.pagination', 24));
     }
 
     /**
@@ -82,7 +82,7 @@ class EventRepository
             $query->orWhere($attribute, 'LIKE', '%'.$input['term'].'%');
         }
 
-        return [$query, $input['term'], $query->paginate(Config::get('quarx.pagination', 24))->render()];
+        return [$query, $input['term'], $query->paginate(Config::get('cabin.pagination', 24))->render()];
     }
 
     /**
@@ -124,8 +124,8 @@ class EventRepository
     public function update($event, $payload)
     {
         $payload['title'] = htmlentities($payload['title']);
-        if (!empty($payload['lang']) && $payload['lang'] !== config('quarx.default-language', 'en')) {
-            return $this->translationRepo->createOrUpdate($event->id, 'Yab\Quarx\Models\Event', $payload['lang'], $payload);
+        if (!empty($payload['lang']) && $payload['lang'] !== config('cabin.default-language', 'en')) {
+            return $this->translationRepo->createOrUpdate($event->id, 'Yab\Cabin\Models\Event', $payload['lang'], $payload);
         } else {
             $payload['is_published'] = (isset($payload['is_published'])) ? (bool) $payload['is_published'] : 0;
             $payload['published_at'] = (isset($payload['published_at']) && !empty($payload['published_at'])) ? Carbon::parse($payload['published_at'])->format('Y-m-d H:i:s') : Carbon::now(config('app.timezone'))->format('Y-m-d H:i:s');

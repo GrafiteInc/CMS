@@ -1,26 +1,23 @@
 <?php
 
-namespace Yab\Quarx\Controllers;
+namespace Yab\Cabin\Controllers;
 
 use URL;
-use Quarx;
+use Cabin;
 use Response;
-use Yab\Quarx\Models\Page;
+use Yab\Cabin\Models\Page;
 use Illuminate\Http\Request;
-use Yab\Quarx\Requests\PagesRequest;
-use Yab\Quarx\Services\ValidationService;
-use Yab\Quarx\Repositories\PageRepository;
+use Yab\Cabin\Requests\PagesRequest;
+use Yab\Cabin\Services\ValidationService;
+use Yab\Cabin\Repositories\PageRepository;
 
-class PagesController extends QuarxController
+class PagesController extends CabinController
 {
-    /** @var PageRepository */
-    private $pagesRepository;
-
-    public function __construct(PageRepository $pagesRepo)
+    public function __construct(PageRepository $repository)
     {
         parent::construct();
 
-        $this->pagesRepository = $pagesRepo;
+        $this->repository = $repository;
     }
 
     /**
@@ -30,9 +27,9 @@ class PagesController extends QuarxController
      */
     public function index()
     {
-        $result = $this->pagesRepository->paginated();
+        $result = $this->repository->paginated();
 
-        return view('quarx::modules.pages.index')
+        return view('cabin::modules.pages.index')
             ->with('pages', $result)
             ->with('pagination', $result->render());
     }
@@ -48,9 +45,9 @@ class PagesController extends QuarxController
     {
         $input = $request->all();
 
-        $result = $this->pagesRepository->search($input);
+        $result = $this->repository->search($input);
 
-        return view('quarx::modules.pages.index')
+        return view('cabin::modules.pages.index')
             ->with('pages', $result[0]->get())
             ->with('pagination', $result[2])
             ->with('term', $result[1]);
@@ -63,7 +60,7 @@ class PagesController extends QuarxController
      */
     public function create()
     {
-        return view('quarx::modules.pages.create');
+        return view('cabin::modules.pages.create');
     }
 
     /**
@@ -78,17 +75,17 @@ class PagesController extends QuarxController
         $validation = ValidationService::check(Page::$rules);
 
         if (!$validation['errors']) {
-            $pages = $this->pagesRepository->store($request->all());
-            Quarx::notification('Page saved successfully.', 'success');
+            $pages = $this->repository->store($request->all());
+            Cabin::notification('Page saved successfully.', 'success');
         } else {
             return $validation['redirect'];
         }
 
         if (!$pages) {
-            Quarx::notification('Page could not be saved.', 'warning');
+            Cabin::notification('Page could not be saved.', 'warning');
         }
 
-        return redirect(route($this->quarxRouteBase.'.pages.edit', [$pages->id]));
+        return redirect(route($this->routeBase.'.pages.edit', [$pages->id]));
     }
 
     /**
@@ -100,15 +97,15 @@ class PagesController extends QuarxController
      */
     public function edit($id)
     {
-        $page = $this->pagesRepository->findPagesById($id);
+        $page = $this->repository->findPagesById($id);
 
         if (empty($page)) {
-            Quarx::notification('Page not found', 'warning');
+            Cabin::notification('Page not found', 'warning');
 
-            return redirect(route($this->quarxRouteBase.'.pages.index'));
+            return redirect(route($this->routeBase.'.pages.index'));
         }
 
-        return view('quarx::modules.pages.edit')->with('page', $page);
+        return view('cabin::modules.pages.edit')->with('page', $page);
     }
 
     /**
@@ -121,19 +118,19 @@ class PagesController extends QuarxController
      */
     public function update($id, PagesRequest $request)
     {
-        $pages = $this->pagesRepository->findPagesById($id);
+        $pages = $this->repository->findPagesById($id);
 
         if (empty($pages)) {
-            Quarx::notification('Page not found', 'warning');
+            Cabin::notification('Page not found', 'warning');
 
-            return redirect(route($this->quarxRouteBase.'.pages.index'));
+            return redirect(route($this->routeBase.'.pages.index'));
         }
 
-        $pages = $this->pagesRepository->update($pages, $request->all());
-        Quarx::notification('Page updated successfully.', 'success');
+        $pages = $this->repository->update($pages, $request->all());
+        Cabin::notification('Page updated successfully.', 'success');
 
         if (!$pages) {
-            Quarx::notification('Page could not be saved.', 'warning');
+            Cabin::notification('Page could not be saved.', 'warning');
         }
 
         return redirect(URL::previous());
@@ -148,19 +145,19 @@ class PagesController extends QuarxController
      */
     public function destroy($id)
     {
-        $pages = $this->pagesRepository->findPagesById($id);
+        $pages = $this->repository->findPagesById($id);
 
         if (empty($pages)) {
-            Quarx::notification('Page not found', 'warning');
+            Cabin::notification('Page not found', 'warning');
 
-            return redirect(route($this->quarxRouteBase.'.pages.index'));
+            return redirect(route($this->routeBase.'.pages.index'));
         }
 
         $pages->delete();
 
-        Quarx::notification('Page deleted successfully.', 'success');
+        Cabin::notification('Page deleted successfully.', 'success');
 
-        return redirect(route($this->quarxRouteBase.'.pages.index'));
+        return redirect(route($this->routeBase.'.pages.index'));
     }
 
     /**
@@ -172,9 +169,9 @@ class PagesController extends QuarxController
      */
     public function history($id)
     {
-        $page = $this->pagesRepository->findPagesById($id);
+        $page = $this->repository->findPagesById($id);
 
-        return view('quarx::modules.pages.history')
+        return view('cabin::modules.pages.history')
             ->with('page', $page);
     }
 }

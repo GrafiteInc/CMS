@@ -1,10 +1,10 @@
 <?php
 
-namespace Yab\Quarx\Requests;
+namespace Yab\Cabin\Requests;
 
 use Auth;
 use Gate;
-use Yab\Quarx\Models\Link;
+use Yab\Cabin\Models\Link;
 use Illuminate\Foundation\Http\FormRequest;
 
 class LinksRequest extends FormRequest
@@ -17,7 +17,7 @@ class LinksRequest extends FormRequest
     public function authorize()
     {
         if (config('app.env') !== 'testing') {
-            return Gate::allows('quarx', Auth::user());
+            return Gate::allows('cabin', Auth::user());
         }
 
         return true;

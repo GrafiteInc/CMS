@@ -1,11 +1,11 @@
 <?php
 
-namespace Yab\Quarx\Controllers;
+namespace Yab\Cabin\Controllers;
 
-class HelpController extends QuarxController
+class HelpController extends CabinController
 {
     public function main()
     {
-        return view('quarx::help');
+        return view('cabin::help');
     }
 }

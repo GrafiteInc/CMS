@@ -2,17 +2,19 @@
 
 /*
 |--------------------------------------------------------------------------
-| Blog Factory
+| Images Factory
 |--------------------------------------------------------------------------
 */
 
-$factory->define(\Yab\Quarx\Models\Blog::class, function (Faker\Generator $faker) {
+$factory->define(\Yab\Cabin\Models\Image::class, function (Faker\Generator $faker) {
     return [
         'id' => 1,
-        'title' => 'dumb',
-        'entry' => $faker->paragraph().' '.$faker->paragraph(),
+        'location' => 'files/dumb',
+        'name' => 'dumb',
+        'original_name' => 'dumb',
+        'alt_tag' => 'dumb',
+        'title_tag' => 'dumb',
         'is_published' => 1,
-        'url' => 'dumb',
         'updated_at' => $faker->datetime(),
         'created_at' => $faker->datetime(),
     ];

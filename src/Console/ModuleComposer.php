@@ -1,6 +1,6 @@
 <?php
 
-namespace Yab\Quarx\Console;
+namespace Yab\Cabin\Console;
 
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
@@ -20,7 +20,7 @@ class ModuleComposer extends Command
      *
      * @var string
      */
-    protected $description = 'Convert a Quarx module to a composer package';
+    protected $description = 'Convert a Cabin module to a composer package';
 
     /**
      * Execute the console command.
@@ -29,7 +29,7 @@ class ModuleComposer extends Command
      */
     public function handle()
     {
-        $moduleDir = base_path(config('quarx.module-directory')).'/'.ucfirst($this->argument('module'));
+        $moduleDir = base_path(config('cabin.module-directory')).'/'.ucfirst($this->argument('module'));
         if (is_dir($moduleDir)) {
             $readMeStub = file_get_contents(__DIR__.'/../Templates/Composer/readme.stub');
             $composerStub = file_get_contents(__DIR__.'/../Templates/Composer/composer.stub');
@@ -81,7 +81,7 @@ class ModuleComposer extends Command
         $contents = str_replace('{module}', strtolower($module), $contents);
         $contents = str_replace('{namespace}', $namespace, $contents);
         $contents = str_replace('{escapedNamespace}', $escapaedNamespace, $contents);
-        $contents = str_replace('Quarx\\Modules', $provider[0], $contents);
+        $contents = str_replace('Cabin\\Modules', $provider[0], $contents);
 
         $system->put($file, $contents);
     }

@@ -1,10 +1,10 @@
 <?php
 
-namespace Yab\Quarx\Requests;
+namespace Yab\Cabin\Requests;
 
 use Auth;
 use Gate;
-use Yab\Quarx\Models\Image;
+use Yab\Cabin\Models\Image;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ImagesRequest extends FormRequest
@@ -17,7 +17,7 @@ class ImagesRequest extends FormRequest
     public function authorize()
     {
         if (config('app.env') !== 'testing') {
-            return Gate::allows('quarx', Auth::user());
+            return Gate::allows('cabin', Auth::user());
         }
 
         return true;

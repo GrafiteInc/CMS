@@ -1,6 +1,6 @@
 <?php
 
-namespace Yab\Quarx\Console;
+namespace Yab\Cabin\Console;
 
 use Artisan;
 use Config;
@@ -26,7 +26,7 @@ class ModuleCrud extends Command
      *
      * @var string
      */
-    protected $description = 'Generate a CRUD module for Quarx';
+    protected $description = 'Generate a CRUD module for Cabin';
 
     /**
      * Generate a CRUD stack.
@@ -40,7 +40,7 @@ class ModuleCrud extends Command
 
         $this->table = ucfirst(str_singular(strtolower($this->argument('table'))));
 
-        $moduleDirectory = base_path('quarx/modules/'.ucfirst(str_plural($this->table)));
+        $moduleDirectory = base_path('cabin/modules/'.ucfirst(str_plural($this->table)));
 
         $this->directorySetup();
 
@@ -51,7 +51,7 @@ class ModuleCrud extends Command
             mkdir($moduleDirectory.'/Publishes/database', 0777, true);
             mkdir($moduleDirectory.'/Publishes/app/Http', 0777, true);
             mkdir($moduleDirectory.'/Publishes/routes', 0777, true);
-            mkdir($moduleDirectory.'/Publishes/app/Http/Controllers/Quarx', 0777, true);
+            mkdir($moduleDirectory.'/Publishes/app/Http/Controllers/Cabin', 0777, true);
             mkdir($moduleDirectory.'/Publishes/resources/themes/default', 0777, true);
             mkdir($moduleDirectory.'/Publishes/database/migrations', 0777, true);
             mkdir($moduleDirectory.'/Controllers', 0777, true);
@@ -64,7 +64,7 @@ class ModuleCrud extends Command
         }
 
         file_put_contents($moduleDirectory.'/config.php', "<?php \n\n\n return [ 'asset_path' => __DIR__.'/Assets', 'url' => '".strtolower(str_plural($this->table))."', ];");
-        file_put_contents($moduleDirectory.'/Views/menu.blade.php', "<li class=\"@if (Request::is(config('quarx.backend-route-prefix', 'quarx').'/".strtolower(str_plural($this->table))."') || Request::is(config('quarx.backend-route-prefix', 'quarx').'/".strtolower(str_plural($this->table))."/*')) active @endif\"><a href=\"{{ url(config('quarx.backend-route-prefix', 'quarx').'/".strtolower(str_plural($this->table))."') }}\"><span class=\"fa fa-file\"></span> ".ucfirst(str_plural($this->table)).'</a></li>');
+        file_put_contents($moduleDirectory.'/Views/menu.blade.php', "<li class=\"@if (Request::is(config('cabin.backend-route-prefix', 'cabin').'/".strtolower(str_plural($this->table))."') || Request::is(config('cabin.backend-route-prefix', 'cabin').'/".strtolower(str_plural($this->table))."/*')) active @endif\"><a href=\"{{ url(config('cabin.backend-route-prefix', 'cabin').'/".strtolower(str_plural($this->table))."') }}\"><span class=\"fa fa-file\"></span> ".ucfirst(str_plural($this->table)).'</a></li>');
 
         $config = [
             'bootstrap' => false,
@@ -78,14 +78,14 @@ class ModuleCrud extends Command
             '_path_tests_' => $moduleDirectory.'/Tests',
             '_path_request_' => $moduleDirectory.'/Requests',
             '_path_routes_' => $moduleDirectory.'/Routes/web.php',
-            'routes_prefix' => "<?php \n\nRoute::group(['namespace' => 'Quarx\Modules\\".ucfirst(str_plural($this->table))."\Controllers', 'prefix' => config('quarx.backend-route-prefix', 'quarx'), 'middleware' => ['web', 'auth', 'quarx']], function () { \n\n",
+            'routes_prefix' => "<?php \n\nRoute::group(['namespace' => 'Cabin\Modules\\".ucfirst(str_plural($this->table))."\Controllers', 'prefix' => config('cabin.backend-route-prefix', 'cabin'), 'middleware' => ['web', 'auth', 'cabin']], function () { \n\n",
             'routes_suffix' => "\n\n});",
             '_app_namespace_' => app()->getInstance()->getNamespace(),
-            '_namespace_services_' => 'Quarx\Modules\\'.ucfirst(str_plural($this->table)).'\Services',
-            '_namespace_facade_' => 'Quarx\Modules\\'.ucfirst(str_plural($this->table)).'\Facades',
-            '_namespace_model_' => 'Quarx\Modules\\'.ucfirst(str_plural($this->table)).'\Models',
-            '_namespace_controller_' => 'Quarx\Modules\\'.ucfirst(str_plural($this->table)).'\Controllers',
-            '_namespace_request_' => 'Quarx\Modules\\'.ucfirst(str_plural($this->table)).'\Requests',
+            '_namespace_services_' => 'Cabin\Modules\\'.ucfirst(str_plural($this->table)).'\Services',
+            '_namespace_facade_' => 'Cabin\Modules\\'.ucfirst(str_plural($this->table)).'\Facades',
+            '_namespace_model_' => 'Cabin\Modules\\'.ucfirst(str_plural($this->table)).'\Models',
+            '_namespace_controller_' => 'Cabin\Modules\\'.ucfirst(str_plural($this->table)).'\Controllers',
+            '_namespace_request_' => 'Cabin\Modules\\'.ucfirst(str_plural($this->table)).'\Requests',
             '_table_name_' => str_plural(strtolower($this->table)),
             '_lower_case_' => strtolower($this->table),
             '_lower_casePlural_' => str_plural(strtolower($this->table)),
@@ -100,11 +100,11 @@ class ModuleCrud extends Command
 
         $appConfig = $config;
         $appConfig['template_source'] = __DIR__.'/../Templates/AppCRUD';
-        $appConfig['_path_controller_'] = $moduleDirectory.'/Publishes/app/Http/Controllers/Quarx';
+        $appConfig['_path_controller_'] = $moduleDirectory.'/Publishes/app/Http/Controllers/Cabin';
         $appConfig['_path_views_'] = $moduleDirectory.'/Publishes/resources/themes/default';
         $appConfig['_path_routes_'] = $moduleDirectory.'/Publishes/routes/'.$config['_lower_casePlural_'].'-web.php';
-        $appConfig['_namespace_controller_'] = $config['_app_namespace_'].'Http\Controllers\Quarx';
-        $appConfig['routes_prefix'] = "<?php \n\nRoute::group(['namespace' => 'Quarx', 'middleware' => ['web']], function () {\n\n";
+        $appConfig['_namespace_controller_'] = $config['_app_namespace_'].'Http\Controllers\Cabin';
+        $appConfig['routes_prefix'] = "<?php \n\nRoute::group(['namespace' => 'Cabin', 'middleware' => ['web']], function () {\n\n";
         $appConfig['routes_suffix'] = "\n\n});";
 
         try {
@@ -154,7 +154,7 @@ class ModuleCrud extends Command
 
         Artisan::call('make:migration', [
             'name' => 'create_'.str_plural(strtolower($this->table)).'_table',
-            '--path' => 'quarx/modules/'.ucfirst(str_plural($this->table)).'/Publishes/database/migrations',
+            '--path' => 'cabin/modules/'.ucfirst(str_plural($this->table)).'/Publishes/database/migrations',
             '--table' => str_plural(strtolower($this->table)),
             '--create' => true,
         ]);
@@ -189,19 +189,19 @@ class ModuleCrud extends Command
      */
     public function directorySetup()
     {
-        if (!is_dir(base_path('quarx'))) {
-            @mkdir(base_path('quarx'));
+        if (!is_dir(base_path('cabin'))) {
+            @mkdir(base_path('cabin'));
         }
 
-        if (!is_dir(base_path('quarx/modules'))) {
-            mkdir(base_path('quarx/modules'));
+        if (!is_dir(base_path('cabin/modules'))) {
+            mkdir(base_path('cabin/modules'));
         }
     }
 
     public function setSchema()
     {
         if ($this->option('schema')) {
-            $migrationFiles = $this->filesystem->allFiles(base_path('quarx/modules/'.ucfirst(str_plural($this->table)).'/Publishes/database/migrations'));
+            $migrationFiles = $this->filesystem->allFiles(base_path('cabin/modules/'.ucfirst(str_plural($this->table)).'/Publishes/database/migrations'));
             $migrationName = 'create_'.str_plural(strtolower($this->table)).'_table';
             foreach ($migrationFiles as $file) {
                 if (stristr($file->getBasename(), $migrationName)) {

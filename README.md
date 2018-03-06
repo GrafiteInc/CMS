@@ -1,41 +1,37 @@
-# Quarx - Add a CMS to any Laravel app to gain control of: pages, blogs, galleries, events, custom modules, images and more.
+# Cabin - Add a CMS to any Laravel app to gain control of: pages, blogs, galleries, events, custom modules, images and more.
 
-[![Build Status](https://travis-ci.org/YABhq/Quarx.svg?branch=master)](https://travis-ci.org/YABhq/Quarx)
-[![Packagist](https://img.shields.io/packagist/dt/yab/quarx.svg?maxAge=2592000)](https://packagist.org/packages/yab/quarx)
-[![license](https://img.shields.io/github/license/mashape/apistatus.svg?maxAge=2592000)](https://packagist.org/packages/yab/quarx)
+[![Build Status](https://travis-ci.org/YABhq/Cabin.svg?branch=master)](https://travis-ci.org/YABhq/Cabin)
+[![Packagist](https://img.shields.io/packagist/dt/yab/cabin.svg?maxAge=2592000)](https://packagist.org/packages/yab/cabin)
+[![license](https://img.shields.io/github/license/mashape/apistatus.svg?maxAge=2592000)](https://packagist.org/packages/yab/cabin)
 
-Quarx is a full fledged CMS that can be added to any Laravel application. It provides you with full control of things like: pages, menus, links, widgets, blogs, events, faqs etc.
+Cabin is a full fledged CMS that can be added to any Laravel application. It provides you with full control of things like: pages, menus, links, widgets, blogs, events, faqs etc.
 
-Quarx comes with a module builder for all your custom CMS needs, as well as a module publishing tools. So if you decide to reuse some modules on future projects you can easily publish thier assets seamlessly. If you wish to make your Quarx module into a PHP package, then you will need to have it publish its assets to the `quarx/modules` directory.
+Cabin comes with a module builder for all your custom CMS needs, as well as a module publishing tools. So if you decide to reuse some modules on future projects you can easily publish thier assets seamlessly. If you wish to make your Cabin module into a PHP package, then you will need to have it publish its assets to the `cabin/modules` directory.
 
 ### What is simple vs complex setup?
 Simple setup uses Laracogs as the backbone of an app for you using Laravel, once the setup command has been run you will have a full CMS as an app. Complex setup is specifically for developers who want to add a CMS to their existing app.
 
 ## Documentation
-[http://quarxcms.com](http://quarxcms.com)
+[http://cabincms.com](http://cabincms.com)
 
 ## Yab Newsletter
 [Subscribe](http://eepurl.com/ck7dSv)
 
 ## Chat Support
-[Gitter](https://gitter.im/YABhq/Quarx)
+[Gitter](https://gitter.im/YABhq/Cabin)
 
 ## Requirements
 1. PHP 7+
-1. MySQL 5.6+
-2. OpenSSL
-
-## Recommended
 1. MySQL 5.7+
+2. OpenSSL
 
 ## Compatibility Guide
 
 | Laravel Version | Package Tag | Supported |
 |-----------------|-------------|-----------|
-| 5.5.x | 2.4.x | yes |
+| 5.6.x | 2.5.x | yes |
+| 5.5.x | 2.4.x | no |
 | 5.4.x | 2.3.x | no |
-| 5.3.x | 2.0.x - 2.2.x | no |
-| 5.1.x - 5.2.x | 1.4.x | no |
 
 ## Installation
 
@@ -44,37 +40,42 @@ Create a new Laravel application, and make a database somewhere and update the .
 * Run the following command:
 
 ```bash
-composer require yab/quarx
+composer require yab/cabin
 ```
 
 * Add the following to your Providers array in your config/app.php file:
 
 ```php
-Yab\Quarx\QuarxProvider::class,
+Yab\Cabin\CabinProvider::class,
 ```
 
 * Then run the vendor publish:
 
 ```bash
-php artisan vendor:publish --provider="Yab\Quarx\QuarxProvider"
+php artisan vendor:publish --provider="Yab\Cabin\CabinProvider"
 ```
 
-> Set your app's timezone config to align the Quarx datepicker UI for your setup
+> Set your app's timezone config to align the Cabin datepicker UI for your setup
+
+## Upgrade Guide from 2.4.x to 2.5.x
+
+There is no simple way around it, due to a rebranding of the package you have to check your app for anything with the name `Quarx` or `quarx` and switch it to `Cabin` and `cabin`.
+Outside of that you need to switch to Laravel 5.6.
 
 ## Simple Setup
 
 If you're looking to do a simple website with a powerful CMS, and the only people logging on to the app are the CMS managers. Then you can run the setup command.
-Quarx will install everything it needs, run its migrations and give you a login to start with. Take control of your website in seconds.
+Cabin will install everything it needs, run its migrations and give you a login to start with. Take control of your website in seconds.
 
 ```php
-php artisan quarx:setup
+php artisan cabin:setup
 ```
 
 Setup is now complete. Login, and start building your amazing new website!
 
 ## Complex Setup
 
-If you just want to add Quarx to your existing application the follow these steps:
+If you just want to add Cabin to your existing application the follow these steps:
 
 1. Update your routes provider (app/Providers/RouteServiceProvider.php) by changing the following:
 
@@ -87,7 +88,7 @@ Into:
 ```php
 ->group(function() {
     require base_path('routes/web.php');
-    require base_path('routes/quarx.php');
+    require base_path('routes/cabin.php');
 });
 ```
 
@@ -112,39 +113,39 @@ php artisan migrate
 4. Add to the Kernel Route Middleware:
 
 ```php
-'quarx' => \App\Http\Middleware\Quarx::class,
-'quarx-api' => \App\Http\Middleware\QuarxApi::class,
-'quarx-language' => \App\Http\Middleware\QuarxLanguage::class,
-'quarx-analytics' => \Yab\Quarx\Middleware\QuarxAnalytics::class,
+'cabin' => \App\Http\Middleware\Cabin::class,
+'cabin-api' => \App\Http\Middleware\CabinApi::class,
+'cabin-language' => \App\Http\Middleware\CabinLanguage::class,
+'cabin-analytics' => \Yab\Cabin\Middleware\CabinAnalytics::class,
 ```
 
 5. In order to have modules load as well please add the following to your composer file under autoload psr-4 object:
 
 ```php
-"Quarx\\": "quarx/",
+"Cabin\\": "cabin/",
 ```
 
 This should be added to the autoloader below the App itself.
 
-## Quarx Access
-Route to the administration dashboard is "/quarx/dashboard".
+## Cabin Access
+Route to the administration dashboard is "/cabin/dashboard".
 
-Quarx requires Laracogs to run (only for the FormMaker), but Quarx does not require you to use the Laracogs version of roles. But you will still need to ensure some degree of control for Quarx's access. This is done in the Quarx Middleware, using the gate and the Quarx Policy. If you opt in to the roles system provided by Laracogs, then you can replace 'quarx' with admin to handle the Quarx authorization, if not, you will need to set your own security policy for access to Quarx. To do this simply add the Quarx policy to your `app/Providers/AuthServiceProvider.php` file, and ensure that any rules you wish it to use are in within the policy method. We suggest a policy similar to below.
+Cabin requires Laracogs to run (only for the FormMaker), but Cabin does not require you to use the Laracogs version of roles. But you will still need to ensure some degree of control for Cabin's access. This is done in the Cabin Middleware, using the gate and the Cabin Policy. If you opt in to the roles system provided by Laracogs, then you can replace 'cabin' with admin to handle the Cabin authorization, if not, you will need to set your own security policy for access to Cabin. To do this simply add the Cabin policy to your `app/Providers/AuthServiceProvider.php` file, and ensure that any rules you wish it to use are in within the policy method. We suggest a policy similar to below.
 
-Possible Quarx Policy:
+Possible Cabin Policy:
 ```
-Gate::define('quarx-api', function ($user) {
+Gate::define('cabin-api', function ($user) {
     return true;
 });
 
-Gate::define('quarx', function ($user) {
+Gate::define('cabin', function ($user) {
     return (bool) $user;
 });
 ```
 
 Or Using Laracogs:
 ```
-Gate::define('quarx', function ($user) {
+Gate::define('cabin', function ($user) {
     return ($user->roles->first()->name === 'admin');
 });
 ```
@@ -158,7 +159,7 @@ add this to your routes.
 
 ```php
 Route::get('{url}', function ($url) {
-    return app(App\Http\Controllers\Quarx\PagesController::class)->show($url);
+    return app(App\Http\Controllers\Cabin\PagesController::class)->show($url);
 })->where('url', '([A-z\d-\/_.]+)?');
 ```
 
@@ -166,15 +167,15 @@ Route::get('{url}', function ($url) {
 
 With the roles middleware you can specify which roles are applicable separating them with pipes: `['middleware' => ['roles:admin|moderator|member']]`.
 
-The Quarx middleware utilizes the roles to ensure that a user is an 'admin'. But you can elaborate on this substantially, you can create multiple roles, and then set their access in your app, using the roles middleware. But, what happens when you want to allow multiple roles to access Quarx but only allow Admins to access your custom modules? You can use permissions for this. Similar to the roles middleware you can set the permissions `['middleware' => ['permissions:admin|quarx']]`. You can set custom permissions in `config/permissions.php`. This means you can set different role permissions for parts of your CMS, giving you even more control.
+The Cabin middleware utilizes the roles to ensure that a user is an 'admin'. But you can elaborate on this substantially, you can create multiple roles, and then set their access in your app, using the roles middleware. But, what happens when you want to allow multiple roles to access Cabin but only allow Admins to access your custom modules? You can use permissions for this. Similar to the roles middleware you can set the permissions `['middleware' => ['permissions:admin|cabin']]`. You can set custom permissions in `config/permissions.php`. This means you can set different role permissions for parts of your CMS, giving you even more control.
 
 ## API Endpoints
 
-Quarx comes with a collection of handy API endpoints if you wish to use them. You can define your own policies for access and customize the middleware as you see fit.
+Cabin comes with a collection of handy API endpoints if you wish to use them. You can define your own policies for access and customize the middleware as you see fit.
 
 #### Token
 
-The basic Quarx API endpoints must carry the Quarx `apiToken` defined in the config for the app. This can be provided by adding the following to any request:
+The basic Cabin API endpoints must carry the Cabin `apiToken` defined in the config for the app. This can be provided by adding the following to any request:
 
 ```
 ?token={your token}
@@ -183,25 +184,25 @@ The basic Quarx API endpoints must carry the Quarx `apiToken` defined in the con
 ** All published and public facing data will be available via the API by default.
 
 ```
-/quarx/api/blog
-/quarx/api/blog/{id}
-/quarx/api/events
-/quarx/api/events/{id}
-/quarx/api/faqs
-/quarx/api/faqs/{id}
-/quarx/api/files
-/quarx/api/files/{id}
-/quarx/api/images
-/quarx/api/images/{id}
-/quarx/api/pages
-/quarx/api/pages/{id}
-/quarx/api/widgets
-/quarx/api/widgets/{id}
+/cabin/api/blog
+/cabin/api/blog/{id}
+/cabin/api/events
+/cabin/api/events/{id}
+/cabin/api/faqs
+/cabin/api/faqs/{id}
+/cabin/api/files
+/cabin/api/files/{id}
+/cabin/api/images
+/cabin/api/images/{id}
+/cabin/api/pages
+/cabin/api/pages/{id}
+/cabin/api/widgets
+/cabin/api/widgets/{id}
 ```
 
 ## Images
 
-Images are resized on upload for a better quality response time. They follow the guidelines specified in the `config` under `quarx.max-image-size`.
+Images are resized on upload for a better quality response time. They follow the guidelines specified in the `config` under `cabin.max-image-size`.
 
 ## S3
 
@@ -231,7 +232,7 @@ If using S3 you will need to add the following line to your filesystem config: `
 
 ## License
 
-Quarx is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
+Cabin is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
 
 ### Bug Reporting and Feature Requests
 

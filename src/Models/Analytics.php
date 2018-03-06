@@ -1,8 +1,8 @@
 <?php
 
-namespace Yab\Quarx\Models;
+namespace Yab\Cabin\Models;
 
-class Analytics extends QuarxModel
+class Analytics extends CabinModel
 {
     public $table = 'analytics';
 

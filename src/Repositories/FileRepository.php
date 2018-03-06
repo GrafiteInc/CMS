@@ -1,12 +1,12 @@
 <?php
 
-namespace Yab\Quarx\Repositories;
+namespace Yab\Cabin\Repositories;
 
 use Auth;
 use Config;
 use CryptoService;
-use Yab\Quarx\Models\File;
-use Yab\Quarx\Services\FileService;
+use Yab\Cabin\Models\File;
+use Yab\Cabin\Services\FileService;
 use Illuminate\Support\Facades\Schema;
 
 class FileRepository
@@ -36,7 +36,7 @@ class FileRepository
             $model = $model->orderBy('created_at', 'desc');
         }
 
-        return $model->paginate(Config::get('quarx.pagination', 24));
+        return $model->paginate(Config::get('cabin.pagination', 24));
     }
 
     /**
@@ -57,7 +57,7 @@ class FileRepository
             $query->orWhere($attribute, 'LIKE', '%'.$input['term'].'%');
         }
 
-        return [$query, $input['term'], $query->paginate(Config::get('quarx.pagination', 24))->render()];
+        return [$query, $input['term'], $query->paginate(Config::get('cabin.pagination', 24))->render()];
     }
 
     /**

@@ -15,7 +15,7 @@
     "require": {
         "php": ">=7.0",
         "illuminate/support": "5.5.*",
-        "yab/laracogs": "^2.3",
+        "grafite/builder": "^2.3",
         "devfactory/minify": "1.0.*",
         "spatie/laravel-analytics": "^1.4",
         "aws/aws-sdk-php": "^3.18",

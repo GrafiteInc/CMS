@@ -36,10 +36,10 @@ class TestCase extends Orchestra\Testbench\TestCase
     protected function getPackageProviders($app)
     {
         return [
-            \graphite\Quarx\QuarxProvider::class,
+            \Graphite\Quarx\QuarxProvider::class,
             \Collective\Html\HtmlServiceProvider::class,
             \Collective\Html\HtmlServiceProvider::class,
-            \graphite\Laracogs\LaracogsProvider::class,
+            \Graphite\Laracogs\LaracogsProvider::class,
         ];
     }
 

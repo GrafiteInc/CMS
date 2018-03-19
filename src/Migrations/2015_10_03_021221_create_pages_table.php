@@ -10,7 +10,7 @@ class CreatePagesTable extends Migration
      */
     public function up()
     {
-        Schema::create(config('cabin.db-prefix', '').'pages', function (Blueprint $table) {
+        Schema::create(config('cms.db-prefix', '').'pages', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title');
             $table->string('url');
@@ -27,6 +27,6 @@ class CreatePagesTable extends Migration
      */
     public function down()
     {
-        Schema::drop(config('cabin.db-prefix', '').'pages');
+        Schema::drop(config('cms.db-prefix', '').'pages');
     }
 }

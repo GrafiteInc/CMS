@@ -1,9 +1,9 @@
 <?php
 
-namespace Yab\Cabin\Repositories;
+namespace Grafite\Cms\Repositories;
 
 use Carbon\Carbon;
-use Yab\Cabin\Models\Translation;
+use Grafite\Cms\Models\Translation;
 
 class TranslationRepository
 {

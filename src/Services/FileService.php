@@ -1,6 +1,6 @@
 <?php
 
-namespace Yab\Cabin\Services;
+namespace Grafite\Cms\Services;
 
 use CryptoService as CryptoServiceForFiles;
 use Exception;
@@ -55,7 +55,7 @@ class FileService
             }
         }
 
-        Storage::disk(Config::get('cabin.storage-location', 'local'))->put($directory.$newFileName.'.'.$extension, file_get_contents($fileName));
+        Storage::disk(Config::get('cms.storage-location', 'local'))->put($directory.$newFileName.'.'.$extension, file_get_contents($fileName));
 
         return [
             'original' => basename($fileName),
@@ -85,7 +85,7 @@ class FileService
             return false;
         }
 
-        if (File::size($file) > Config::get('cabin.max-file-upload-size', 6291456)) {
+        if (File::size($file) > Config::get('cms.max-file-upload-size', 6291456)) {
             throw new Exception('This file is too large', 1);
         }
 
@@ -103,14 +103,14 @@ class FileService
             }
         }
 
-        Storage::disk(Config::get('cabin.storage-location', 'local'))->put($directory.$newFileName.'.'.$extension, File::get($file));
+        Storage::disk(Config::get('cms.storage-location', 'local'))->put($directory.$newFileName.'.'.$extension, File::get($file));
 
            // Resize images only
         if ($isImage) {
-            $storage = Storage::disk(Config::get('cabin.storage-location', 'local'));
+            $storage = Storage::disk(Config::get('cms.storage-location', 'local'));
             $image = $storage->get($directory.$newFileName.'.'.$extension);
 
-            $image = InterventionImage::make($image)->resize(config('cabin.max-image-size', 800), null, function ($constraint) {
+            $image = InterventionImage::make($image)->resize(config('cms.max-image-size', 800), null, function ($constraint) {
                 $constraint->aspectRatio();
             });
 

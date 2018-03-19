@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Cabin;
+namespace App\Http\Controllers\Cms;
 
 use App\Http\Controllers\Controller;
-use Yab\Cabin\Repositories\FAQRepository;
+use Grafite\Cms\Repositories\FAQRepository;
 
 class FaqController extends Controller
 {
@@ -13,7 +13,7 @@ class FaqController extends Controller
     {
         $this->repository = $repository;
 
-        if (!in_array('faqs', config('cabin.active-core-modules'))) {
+        if (!in_array('faqs', config('cms.active-core-modules'))) {
             return redirect('/')->send();
         }
     }
@@ -33,6 +33,6 @@ class FaqController extends Controller
             abort(404);
         }
 
-        return view('cabin-frontend::faqs.all')->with('faqs', $faqs);
+        return view('cms-frontend::faqs.all')->with('faqs', $faqs);
     }
 }

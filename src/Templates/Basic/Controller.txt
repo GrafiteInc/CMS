@@ -2,11 +2,11 @@
 
 namespace _namespace_controller_;
 
-use Cabin;
+use Cms;
 use CryptoService;
 use Illuminate\Http\Request;
 use _app_namespace_Http\Controllers\Controller;
-use Cabin\Modules\_ucCamel_casePlural_\Services\_camel_case_Service;
+use Cms\Modules\_ucCamel_casePlural_\Services\_camel_case_Service;
 
 class _ucCamel_casePlural_Controller extends Controller
 {

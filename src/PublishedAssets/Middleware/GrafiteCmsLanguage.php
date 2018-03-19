@@ -3,9 +3,10 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use Gate;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Cookie;
 
-class Cabin
+class GrafiteCmsLanguage
 {
     /**
      * Handle an incoming request.
@@ -17,10 +18,10 @@ class Cabin
      */
     public function handle($request, Closure $next)
     {
-        if (Gate::allows('cabin')) {
-            return $next($request);
+        if (Cookie::has('language')) {
+            Config::set('app.locale', Cookie::get('language'));
         }
 
-        return response('Unauthorized.', 401);
+        return $next($request);
     }
 }

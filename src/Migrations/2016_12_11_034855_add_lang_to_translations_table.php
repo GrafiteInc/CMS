@@ -11,7 +11,7 @@ class AddLangToTranslationsTable extends Migration
      */
     public function up()
     {
-        Schema::table(config('cabin.db-prefix', '').'translations', function (Blueprint $table) {
+        Schema::table(config('cms.db-prefix', '').'translations', function (Blueprint $table) {
             $table->string('language')->nullable();
         });
     }
@@ -21,7 +21,7 @@ class AddLangToTranslationsTable extends Migration
      */
     public function down()
     {
-        Schema::table(config('cabin.db-prefix', '').'translations', function ($table) {
+        Schema::table(config('cms.db-prefix', '').'translations', function ($table) {
             $table->dropColumn('language');
         });
     }

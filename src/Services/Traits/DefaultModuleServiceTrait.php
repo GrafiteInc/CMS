@@ -1,11 +1,11 @@
 <?php
 
-namespace Yab\Cabin\Services\Traits;
+namespace Grafite\Cms\Services\Traits;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
-use Yab\Cabin\Repositories\WidgetRepository;
-use Yab\Cabin\Services\FileService;
+use Grafite\Cms\Repositories\WidgetRepository;
+use Grafite\Cms\Services\FileService;
 
 trait DefaultModuleServiceTrait
 {
@@ -35,11 +35,11 @@ trait DefaultModuleServiceTrait
         $widget = WidgetRepository::getWidgetBySLUG($slug);
 
         if ($widget) {
-            if (Gate::allows('cabin', Auth::user())) {
-                $widget->content .= '<a href="'.url(config('cabin.backend-route-prefix', 'cabin').'/widgets/'.$widget->id.'/edit').'" style="margin-left: 8px;" class="btn btn-sm btn-secondary"><span class="fa fa-edit"></span> Edit</a>';
+            if (Gate::allows('cms', Auth::user())) {
+                $widget->content .= '<a href="'.url(config('cms.backend-route-prefix', 'cms').'/widgets/'.$widget->id.'/edit').'" style="margin-left: 8px;" class="btn btn-sm btn-secondary"><span class="fa fa-edit"></span> Edit</a>';
             }
 
-            if (config('app.locale') !== config('cabin.default-language') && $widget->translation(config('app.locale'))) {
+            if (config('app.locale') !== config('cms.default-language') && $widget->translation(config('app.locale'))) {
                 return $widget->translationData(config('app.locale'))->content;
             } else {
                 return $widget->content;
@@ -60,7 +60,7 @@ trait DefaultModuleServiceTrait
     {
         $img = '';
 
-        if ($image = app('Yab\Cabin\Models\Image')->find($id)) {
+        if ($image = app('Grafite\Cms\Models\Image')->find($id)) {
             $img = $image->url;
         }
 
@@ -78,7 +78,7 @@ trait DefaultModuleServiceTrait
     {
         $img = '';
 
-        if ($image = app('Yab\Cabin\Models\Image')->find($id)) {
+        if ($image = app('Grafite\Cms\Models\Image')->find($id)) {
             $img = $image->url;
         }
 

@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Cabin;
+namespace App\Http\Controllers\Cms;
 
 use App\Http\Controllers\Controller;
-use Yab\Cabin\Repositories\PageRepository;
+use Grafite\Cms\Repositories\PageRepository;
 
 class PagesController extends Controller
 {
@@ -25,7 +25,7 @@ class PagesController extends Controller
     {
         $page = $this->repository->findPagesByURL('home');
 
-        $view = view('cabin-frontend::pages.home');
+        $view = view('cms-frontend::pages.home');
 
         if (is_null($page)) {
             return $view;
@@ -47,7 +47,7 @@ class PagesController extends Controller
             abort(404);
         }
 
-        return view('cabin-frontend::pages.all')->with('pages', $pages);
+        return view('cms-frontend::pages.all')->with('pages', $pages);
     }
 
     /**
@@ -65,6 +65,6 @@ class PagesController extends Controller
             abort(404);
         }
 
-        return view('cabin-frontend::pages.'.$page->template)->with('page', $page);
+        return view('cms-frontend::pages.'.$page->template)->with('page', $page);
     }
 }

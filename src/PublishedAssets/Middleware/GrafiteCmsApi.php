@@ -1,11 +1,11 @@
 <?php
 
-namespace Yab\Cabin\Middleware;
+namespace App\Http\Middleware;
 
 use Closure;
-use Yab\Cabin\Services\AnalyticsService;
+use Config;
 
-class CabinAnalytics
+class GrafiteCmsApi
 {
     /**
      * Handle an incoming request.
@@ -17,10 +17,10 @@ class CabinAnalytics
      */
     public function handle($request, Closure $next)
     {
-        if (!$request->ajax()) {
-            app(AnalyticsService::class)->log($request);
+        if (Config::get('cms.api-token') == $request->get('token')) {
+            return $next($request);
         }
 
-        return $next($request);
+        return response('Unauthorized.', 401);
     }
 }

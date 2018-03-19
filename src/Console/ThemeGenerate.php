@@ -1,6 +1,6 @@
 <?php
 
-namespace Yab\Cabin\Console;
+namespace Grafite\Cms\Console;
 
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
@@ -19,7 +19,7 @@ class ThemeGenerate extends Command
      *
      * @var string
      */
-    protected $description = 'Generate a base Cabin theme';
+    protected $description = 'Generate a base Cms theme';
 
     /**
      * Execute the console command.

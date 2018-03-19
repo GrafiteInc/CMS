@@ -1,4 +1,4 @@
-@extends('cabin::layouts.dashboard')
+@extends('cms::layouts.dashboard')
 
 @section('content')
 
@@ -6,7 +6,7 @@
         <h1 class="page-header">Images</h1>
     </div>
 
-    @include('cabin::modules.images.breadcrumbs', ['location' => ['edit']])
+    @include('cms::modules.images.breadcrumbs', ['location' => ['edit']])
 
     <div class="row">
         <div class="col-md-4 col-md-offset-4">
@@ -22,18 +22,18 @@
 @foreach(explode(',', $images->tags) as $tag) &#64;images({{ trim($tag) }})<br>@endforeach</pre>
             @if (!is_null($images->entity_id))
                 <h2 class="raw-margin-top-24 raw-margin-bottom-8">Linked Entity</h2>
-                <a href="{{ url(config('cabin.backend-route-prefix', 'cabin').'/'.$images->entity_type.'s/'.$images->entity_id.'/edit') }}">{{ ucfirst($images->entity_type) }}</a>
+                <a href="{{ url(config('cms.backend-route-prefix', 'cms').'/'.$images->entity_type.'s/'.$images->entity_id.'/edit') }}">{{ ucfirst($images->entity_type) }}</a>
             @endif
         </div>
     </div>
 
     <div class="row">
-        {!! Form::model($images, ['route' => [config('cabin.backend-route-prefix', 'cabin').'.images.update', $images->id], 'method' => 'patch', 'files' => true, 'class' => 'edit']) !!}
+        {!! Form::model($images, ['route' => [config('cms.backend-route-prefix', 'cms').'.images.update', $images->id], 'method' => 'patch', 'files' => true, 'class' => 'edit']) !!}
 
-            {!! FormMaker::fromObject($images, Config::get('cabin.forms.images-edit')) !!}
+            {!! FormMaker::fromObject($images, Config::get('cms.forms.images-edit')) !!}
 
             <div class="form-group text-right">
-                <a href="{!! url(config('cabin.backend-route-prefix', 'cabin').'/images') !!}" class="btn btn-default raw-left">Cancel</a>
+                <a href="{!! url(config('cms.backend-route-prefix', 'cms').'/images') !!}" class="btn btn-default raw-left">Cancel</a>
                 {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
             </div>
 

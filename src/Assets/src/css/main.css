@@ -15,17 +15,17 @@ html, body {
     text-align: center;
 }
 
-.cabin-footer {
+.cms-footer {
     height: 60px;
     background-color: #222;
 }
 
-.cabin-footer p, .cabin-footer a {
+.cms-footer p, .cms-footer a {
     line-height: 60px;
     color: #FFF;
 }
 
-.cabin-footer a:hover {
+.cms-footer a:hover {
     color: #FFF;
 }
 
@@ -61,7 +61,7 @@ html, body {
 |--------------------------------------------------------------------------
 */
 
-.cabin-notification {
+.cms-notification {
     width: 260px;
     min-height: 30px;
     position: fixed;
@@ -72,20 +72,20 @@ html, body {
     padding: 8px 8px 0 8px;
 }
 
-.cabin-notify {
+.cms-notify {
     float: left;
     margin-left: 10px;
     width: 200px;
 }
 
-.cabin-notify-closer {
+.cms-notify-closer {
     width: 20px;
     margin-left: 10px;
     float: left;
     line-height: 20px;
 }
 
-.cabin-notify-closer-icon {
+.cms-notify-closer-icon {
     cursor: pointer;
 }
 
@@ -189,7 +189,7 @@ span.twitter-typeahead {
     overflow: hidden;
 }
 
-.cabin-errors li {
+.cms-errors li {
     list-style: none;
 }
 
@@ -215,7 +215,7 @@ span.twitter-typeahead {
     padding: 16px 0;
 }
 
-.cabin-logo {
+.cms-logo {
     background-color: #333;
     background-size: cover;
     background-position: center center;
@@ -231,7 +231,7 @@ span.twitter-typeahead {
 
 /*
 |--------------------------------------------------------------------------
-| Cabin Styles
+| Cms Styles
 |--------------------------------------------------------------------------
 */
 

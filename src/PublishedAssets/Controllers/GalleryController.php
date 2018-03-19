@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Cabin;
+namespace App\Http\Controllers\Cms;
 
 use Config;
 use App\Http\Controllers\Controller;
-use Yab\Cabin\Repositories\ImageRepository;
+use Grafite\Cms\Repositories\ImageRepository;
 
 class GalleryController extends Controller
 {
@@ -29,7 +29,7 @@ class GalleryController extends Controller
             abort(404);
         }
 
-        return view('cabin-frontend::gallery.all')
+        return view('cms-frontend::gallery.all')
             ->with('tags', $tags)
             ->with('images', $images);
     }
@@ -43,14 +43,14 @@ class GalleryController extends Controller
      */
     public function show($tag)
     {
-        $images = $this->repository->getImagesByTag($tag)->paginate(Config::get('cabin.pagination'));
+        $images = $this->repository->getImagesByTag($tag)->paginate(Config::get('cms.pagination'));
         $tags = $this->repository->allTags();
 
         if (empty($images)) {
             abort(404);
         }
 
-        return view('cabin-frontend::gallery.show')
+        return view('cms-frontend::gallery.show')
             ->with('tags', $tags)
             ->with('images', $images)
             ->with('title', $tag);

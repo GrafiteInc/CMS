@@ -1,6 +1,6 @@
 <?php
 
-namespace Yab\Cabin\Services;
+namespace Grafite\Cms\Services;
 
 class Normalizer
 {

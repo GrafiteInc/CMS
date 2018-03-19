@@ -1,11 +1,11 @@
 <?php
 
-namespace Yab\Cabin\Requests;
+namespace Grafite\Cms\Requests;
 
 use Auth;
 use Gate;
 use Illuminate\Foundation\Http\FormRequest;
-use Yab\Cabin\Models\Blog;
+use Grafite\Cms\Models\Blog;
 
 class BlogRequest extends FormRequest
 {
@@ -17,7 +17,7 @@ class BlogRequest extends FormRequest
     public function authorize()
     {
         if (config('app.env') !== 'testing') {
-            return Gate::allows('cabin', Auth::user());
+            return Gate::allows('cms', Auth::user());
         }
 
         return true;

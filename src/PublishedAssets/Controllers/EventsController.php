@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Cabin;
+namespace App\Http\Controllers\Cms;
 
 use App\Http\Controllers\Controller;
-use Yab\Cabin\Services\EventService;
-use Yab\Cabin\Repositories\EventRepository;
+use Grafite\Cms\Services\EventService;
+use Grafite\Cms\Repositories\EventRepository;
 
 class EventsController extends Controller
 {
@@ -15,7 +15,7 @@ class EventsController extends Controller
         $this->repository = $repository;
         $this->service = $service;
 
-        if (!in_array('events', config('cabin.active-core-modules'))) {
+        if (!in_array('events', config('cms.active-core-modules'))) {
             return redirect('/')->send();
         }
     }
@@ -40,7 +40,7 @@ class EventsController extends Controller
             abort(404);
         }
 
-        return view('cabin-frontend::events.calendar')
+        return view('cms-frontend::events.calendar')
             ->with('events', $events)
             ->with('calendar', $calendar);
     }
@@ -58,7 +58,7 @@ class EventsController extends Controller
             abort(404);
         }
 
-        return view('cabin-frontend::events.date')->with('events', $events);
+        return view('cms-frontend::events.date')->with('events', $events);
     }
 
     /**
@@ -74,7 +74,7 @@ class EventsController extends Controller
             abort(404);
         }
 
-        return view('cabin-frontend::events.all')->with('events', $events);
+        return view('cms-frontend::events.all')->with('events', $events);
     }
 
     /**
@@ -92,6 +92,6 @@ class EventsController extends Controller
             abort(404);
         }
 
-        return view('cabin-frontend::events.'.$event->template)->with('event', $event);
+        return view('cms-frontend::events.'.$event->template)->with('event', $event);
     }
 }

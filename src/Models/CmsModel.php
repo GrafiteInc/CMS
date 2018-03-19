@@ -1,12 +1,12 @@
 <?php
 
-namespace Yab\Cabin\Models;
+namespace Grafite\Cms\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Log;
-use Yab\Cabin\Models\Link;
+use Grafite\Cms\Models\Link;
 
-class CabinModel extends Model
+class CmsModel extends Model
 {
     /**
      * Model contructuor.
@@ -17,8 +17,8 @@ class CabinModel extends Model
     {
         parent::__construct($attributes);
 
-        if (config('cabin.db-prefix', '')) {
-            $this->table = config('cabin.db-prefix', '').$this->table;
+        if (config('cms.db-prefix', '')) {
+            $this->table = config('cms.db-prefix', '').$this->table;
         }
     }
 
@@ -29,7 +29,7 @@ class CabinModel extends Model
      */
     public function afterSaved($payload)
     {
-        if (!request()->is('cabin/revert/*') && !request()->is('cabin/rollback/*/*')) {
+        if (!request()->is('cms/revert/*') && !request()->is('cms/rollback/*/*')) {
             unset($payload->attributes['created_at']);
             unset($payload->attributes['updated_at']);
             unset($payload->original['created_at']);
@@ -60,12 +60,12 @@ class CabinModel extends Model
         Translation::where('entity_id', $id)->where('entity_type', $type)->delete();
         Archive::where('entity_id', $id)->where('entity_type', $type)->delete();
 
-        Archive::where('entity_type', 'Yab\Cabin\Models\Translation')
+        Archive::where('entity_type', 'Grafite\Cms\Models\Translation')
             ->where('entity_data', 'LIKE', '%"entity_id":'.$id.'%')
             ->where('entity_data', 'LIKE', '%"entity_type":"'.$type.'"%')
             ->delete();
 
-        if ($type == 'Yab\Cabin\Models\Page') {
+        if ($type == 'Grafite\Cms\Models\Page') {
             Link::where('page_id', $id)->delete();
         }
     }

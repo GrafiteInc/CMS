@@ -46,13 +46,13 @@ composer require yab/cabin
 * Add the following to your Providers array in your config/app.php file:
 
 ```php
-Yab\Cabin\CabinProvider::class,
+Grafite\Cms\CabinProvider::class,
 ```
 
 * Then run the vendor publish:
 
 ```bash
-php artisan vendor:publish --provider="Yab\Cabin\CabinProvider"
+php artisan vendor:publish --provider="Grafite\Cms\CabinProvider"
 ```
 
 > Set your app's timezone config to align the Cabin datepicker UI for your setup
@@ -116,7 +116,7 @@ php artisan migrate
 'cabin' => \App\Http\Middleware\Cabin::class,
 'cabin-api' => \App\Http\Middleware\CabinApi::class,
 'cabin-language' => \App\Http\Middleware\CabinLanguage::class,
-'cabin-analytics' => \Yab\Cabin\Middleware\CabinAnalytics::class,
+'cabin-analytics' => \Grafite\Cms\Middleware\CabinAnalytics::class,
 ```
 
 5. In order to have modules load as well please add the following to your composer file under autoload psr-4 object:

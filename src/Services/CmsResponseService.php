@@ -1,10 +1,10 @@
 <?php
 
-namespace Yab\Cabin\Services;
+namespace Grafite\Cms\Services;
 
 use Illuminate\Support\Facades\Response;
 
-class CabinResponseService
+class CmsResponseService
 {
     /**
      * Generate an api response.

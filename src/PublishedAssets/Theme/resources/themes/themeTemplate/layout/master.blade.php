@@ -33,9 +33,9 @@
                 <li class="nav-item">
                     <span class="nav-text">&copy; {{ date('Y') }}</span>
                 </li>
-                @can('cabin')
-                    <li class="nav-item"><a class="btn btn-sm btn-link" href="{{ url(config('cabin.backend-route-prefix', 'cabin').'/dashboard') }}">Cabin</a></li>
-                    @yield('cabin')
+                @can('cms')
+                    <li class="nav-item"><a class="btn btn-sm btn-link" href="{{ url(config('cms.backend-route-prefix', 'cms').'/dashboard') }}">CMS</a></li>
+                    @yield('cms')
                 @else
                     <li class="nav-item"><a class="btn btn-sm btn-link" href="{{ url('login') }}">Login</a></li>
                 @endcan

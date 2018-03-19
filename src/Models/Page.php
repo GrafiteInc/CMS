@@ -1,11 +1,11 @@
 <?php
 
-namespace Yab\Cabin\Models;
+namespace Grafite\Cms\Models;
 
-use Yab\Cabin\Services\Normalizer;
-use Yab\Cabin\Traits\Translatable;
+use Grafite\Cms\Services\Normalizer;
+use Grafite\Cms\Traits\Translatable;
 
-class Page extends CabinModel
+class Page extends CmsModel
 {
     use Translatable;
 

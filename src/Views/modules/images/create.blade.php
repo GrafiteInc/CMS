@@ -1,4 +1,4 @@
-@extends('cabin::layouts.dashboard')
+@extends('cms::layouts.dashboard')
 
 @section('content')
 
@@ -6,18 +6,18 @@
         <h1 class="page-header">Images</h1>
     </div>
 
-    @include('cabin::modules.images.breadcrumbs', ['location' => ['create']])
+    @include('cms::modules.images.breadcrumbs', ['location' => ['create']])
 
     <div class="row">
-        {!! Form::open(['url' => 'cabin/images/upload', 'files' => true, 'class' => 'dropzone', 'id' => 'fileDropzone']); !!}
+        {!! Form::open(['url' => 'cms/images/upload', 'files' => true, 'class' => 'dropzone', 'id' => 'fileDropzone']); !!}
         {!! Form::close() !!}
 
-        {!! Form::open(['route' => config('cabin.backend-route-prefix', 'cabin').'.images.store', 'files' => true, 'id' => 'fileDetailsForm', 'class' => 'add']) !!}
+        {!! Form::open(['route' => config('cms.backend-route-prefix', 'cms').'.images.store', 'files' => true, 'id' => 'fileDetailsForm', 'class' => 'add']) !!}
 
-            {!! FormMaker::fromTable('files', Config::get('cabin.forms.images')) !!}
+            {!! FormMaker::fromTable('files', Config::get('cms.forms.images')) !!}
 
             <div class="form-group text-right">
-                <a href="{!! url(config('cabin.backend-route-prefix', 'cabin').'/images') !!}" class="btn btn-default raw-left">Cancel</a>
+                <a href="{!! url(config('cms.backend-route-prefix', 'cms').'/images') !!}" class="btn btn-default raw-left">Cancel</a>
                 {!! Form::submit('Save', ['class' => 'btn btn-primary', 'id' => 'saveImagesBtn']) !!}
             </div>
 

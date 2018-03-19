@@ -10,7 +10,7 @@ class CreateMenusTable extends Migration
      */
     public function up()
     {
-        Schema::create(config('cabin.db-prefix', '').'menus', function (Blueprint $table) {
+        Schema::create(config('cms.db-prefix', '').'menus', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->string('slug');
@@ -23,6 +23,6 @@ class CreateMenusTable extends Migration
      */
     public function down()
     {
-        Schema::drop(config('cabin.db-prefix', '').'menus');
+        Schema::drop(config('cms.db-prefix', '').'menus');
     }
 }

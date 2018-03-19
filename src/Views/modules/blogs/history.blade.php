@@ -1,4 +1,4 @@
-@extends('cabin::layouts.dashboard')
+@extends('cms::layouts.dashboard')
 
 @section('content')
 
@@ -6,14 +6,14 @@
         <h1 class="page-header">Blog History</h1>
     </div>
 
-    @include('cabin::modules.blogs.breadcrumbs', ['location' => [[$blog->title => url(config('cabin.backend-route-prefix', 'cabin').'/blog/'.$blog->id.'/edit')], 'history']])
+    @include('cms::modules.blogs.breadcrumbs', ['location' => [[$blog->title => url(config('cms.backend-route-prefix', 'cms').'/blog/'.$blog->id.'/edit')], 'history']])
 
     <div class="row">
         <table class="table table-striped">
         @foreach($blog->history() as $history)
             <tr>
                 <td>{{ $history->created_at->format('M jS, Y') }} ({{ $history->created_at->diffForHumans() }})</td>
-                <td class="text-right"><a class="btn btn-warning btn-link btn-xs" href="{{ url(config('cabin.backend-route-prefix', 'cabin').'revert/'.$history->id) }}">Revert</a></td>
+                <td class="text-right"><a class="btn btn-warning btn-link btn-xs" href="{{ url(config('cms.backend-route-prefix', 'cms').'revert/'.$history->id) }}">Revert</a></td>
             </tr>
         @endforeach
         </table>

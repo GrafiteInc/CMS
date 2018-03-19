@@ -60,30 +60,30 @@ $(function () {
 |--------------------------------------------------------------------------
 */
 
-function cabinNotify(message, _type) {
-    $(".cabin-notification").css("display", "block");
-    $(".cabin-notification").addClass(_type);
+function cmsNotify(message, _type) {
+    $(".cms-notification").css("display", "block");
+    $(".cms-notification").addClass(_type);
 
-    $(".cabin-notify-comment").html(message);
-    $(".cabin-notification").animate({
+    $(".cms-notify-comment").html(message);
+    $(".cms-notification").animate({
         right: "20px",
     });
 
-    $(".cabin-notify-closer-icon").click(function(){
-        $(".cabin-notification").animate({
+    $(".cms-notify-closer-icon").click(function(){
+        $(".cms-notification").animate({
             right: "-300px"
         },"", function(){
-            $(".cabin-notification").css("display", "none");
-            $(".cabin-notify-comment").html("");
+            $(".cms-notification").css("display", "none");
+            $(".cms-notify-comment").html("");
         });
     });
 
     setTimeout(function(){
-        $(".cabin-notification").animate({
+        $(".cms-notification").animate({
             right: "-300px"
         },"", function(){
-            $(".cabin-notification").css("display", "none");
-            $(".cabin-notify-comment").html("");
+            $(".cms-notification").css("display", "none");
+            $(".cms-notify-comment").html("");
         });
     }, 8000);
 }
@@ -118,7 +118,7 @@ var typeaheadMatcher = function (strs) {
 
 /*
 |--------------------------------------------------------------------------
-| Cabin JS
+| Cms JS
 |--------------------------------------------------------------------------
 */
 
@@ -133,8 +133,8 @@ var _redactorConfig = {
     paragraphize: false,
     pastePlaintext: true,
     deniedTags: ['script'],
-    imageManagerJson: _url+'/cabin/api/images/list',
-    fileManagerJson: _url+'/cabin/api/files/list',
+    imageManagerJson: _url+'/cms/api/images/list',
+    fileManagerJson: _url+'/cms/api/files/list',
     stockImageManagerJson: 'https://pixabay.com/api/',
     plugins: ['table','video', 'fontcolor', 'imagemanager', 'stockimagemanager', 'filemanager', 'specialchar', 'insertIcon'],
     buttons: ['html', 'formatting', 'fontcolor', 'bold', 'italic', 'underline', 'deleted', 'unorderedlist', 'orderedlist',
@@ -2791,9 +2791,9 @@ function _setDashboard () {
 
     /*
     This is a list of all available events you can register on a dropzone object.
-    
+
     You can register an event handler like this:
-    
+
         dropzone.on("dragEnter", function() { });
      */
 
@@ -4302,7 +4302,7 @@ function _setDashboard () {
 
 
   /*
-  
+
   Bugfix for iOS 6 and 7
   Source: http://stackoverflow.com/questions/11929099/html5-canvas-drawimage-ratio-bug-ios
   based on the work of https://github.com/stomita/ios-imagefile-megapixel
@@ -13102,7 +13102,7 @@ RedactorPlugins.filemanager = function()
             + '<span class="btn btn-default"><span class="fa fa-search"></span></span>'
             + '</span>'
             + '</div>'
-            + '<div id="filemanager-container" class="raw-block-400 cabin-row raw-margin-top-24" style="overflow: scroll;">Loading your file collection...</div>'
+            + '<div id="filemanager-container" class="raw-block-400 cms-row raw-margin-top-24" style="overflow: scroll;">Loading your file collection...</div>'
             + '</section>';
         },
         init: function()
@@ -13128,7 +13128,7 @@ RedactorPlugins.filemanager = function()
                 dataType: "json",
                 cache: false,
                 headers: {
-                    Cabin: _apiKey,
+                    Cms: _apiKey,
                     Authorization: 'Bearer '+_apiToken
                 },
                 url: this.opts.fileManagerJson,
@@ -13335,7 +13335,7 @@ RedactorPlugins.imagemanager = function()
                 dataType: "json",
                 cache: false,
                 headers: {
-                    Cabin: _apiKey,
+                    Cms: _apiKey,
                     Authorization: 'Bearer '+_apiToken
                 },
                 url: this.opts.imageManagerJson,
@@ -13392,8 +13392,8 @@ RedactorPlugins.stockimagemanager = function()
             + '<button class="btn btn-default" type="button" id="stockimagemanager-search"><span class="fa fa-search"></span></button>'
             + '</span>'
             + '</div>'
-            + '<div id="stockimagemanager-container" class="raw-block-300 cabin-row raw-margin-top-24 raw-margin-bottom-24" style="overflow: scroll;"></div>'
-            + '<div id="stockimagemanager-links" class="raw-block-20 cabin-row"><button id="stockImgPrevBtn" class="btn btn-default pull-left">Prev</button><button id="stockImgNextBtn" class="pull-right btn btn-default">Next</button></div>'
+            + '<div id="stockimagemanager-container" class="raw-block-300 cms-row raw-margin-top-24 raw-margin-bottom-24" style="overflow: scroll;"></div>'
+            + '<div id="stockimagemanager-links" class="raw-block-20 cms-row"><button id="stockImgPrevBtn" class="btn btn-default pull-left">Prev</button><button id="stockImgNextBtn" class="pull-right btn btn-default">Next</button></div>'
             + '<div><a href="https://pixabay.com/"><img class="raw100 raw-margin-top-24" src="https://pixabay.com/static/img/public/leaderboard_a.png" alt="Pixabay"> </a></div>'
             + '</section>';
         },
@@ -13499,7 +13499,7 @@ RedactorPlugins.stockimagemanager = function()
                     _token: _token,
                     location: $(e.target).attr('data-url')
                 },
-                url: _url + '/cabin/api/images/store',
+                url: _url + '/cms/api/images/store',
                 error: function(data){
                     console.log(data)
                 },
@@ -14004,7 +14004,7 @@ RedactorPlugins.video = function()
 
 	};
 };
-if (!RedactorPlugins) 
+if (!RedactorPlugins)
 var RedactorPlugins = {};
 
 RedactorPlugins.insertIcon = function ()
@@ -14130,7 +14130,7 @@ if (typeof linkList != 'undefined' && linkList != null) {
             set: function (sortable) {
                 var _order = sortable.toArray();
                 $.ajax({
-                    url: _cabinUrl + '/menus/' + _id + '/order',
+                    url: _cmsUrl + '/menus/' + _id + '/order',
                     type: 'put',
                     data: {
                         _token: _token,
@@ -14191,7 +14191,7 @@ $(function () {
 
         if (_images.length > 0) {
             $('#bulkImageDeleteModal').modal('toggle');
-            var _deleteUrl = _url + '/cabin/images/bulk-delete/' + _images.join('-')
+            var _deleteUrl = _url + '/cms/images/bulk-delete/' + _images.join('-')
             $('#bulkImageDelete').attr('href', _deleteUrl);
         }
     });
@@ -14278,7 +14278,7 @@ Dropzone.options.fileDropzone = {
             if (! file.serverData) {
                 return;
             } else {
-                $.get(_url+"/cabin/files/remove/"+file.serverData.name);
+                $.get(_url+"/cms/files/remove/"+file.serverData.name);
                 $("#file_"+file.serverData.name).remove();
             }
         });

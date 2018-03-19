@@ -10,15 +10,15 @@ class AddBlocks extends Migration
      */
     public function up()
     {
-        Schema::table(config('cabin.db-prefix', '').'pages', function (Blueprint $table) {
+        Schema::table(config('cms.db-prefix', '').'pages', function (Blueprint $table) {
             $table->text('blocks')->nullable();
         });
 
-        Schema::table(config('cabin.db-prefix', '').'blogs', function (Blueprint $table) {
+        Schema::table(config('cms.db-prefix', '').'blogs', function (Blueprint $table) {
             $table->text('blocks')->nullable();
         });
 
-        Schema::table(config('cabin.db-prefix', '').'events', function (Blueprint $table) {
+        Schema::table(config('cms.db-prefix', '').'events', function (Blueprint $table) {
             $table->text('blocks')->nullable();
         });
     }
@@ -28,15 +28,15 @@ class AddBlocks extends Migration
      */
     public function down()
     {
-        Schema::table(config('cabin.db-prefix', '').'pages', function ($table) {
+        Schema::table(config('cms.db-prefix', '').'pages', function ($table) {
             $table->dropColumn('blocks');
         });
 
-        Schema::table(config('cabin.db-prefix', '').'blogs', function ($table) {
+        Schema::table(config('cms.db-prefix', '').'blogs', function ($table) {
             $table->dropColumn('blocks');
         });
 
-        Schema::table(config('cabin.db-prefix', '').'events', function ($table) {
+        Schema::table(config('cms.db-prefix', '').'events', function ($table) {
             $table->dropColumn('blocks');
         });
     }

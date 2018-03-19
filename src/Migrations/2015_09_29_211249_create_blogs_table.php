@@ -10,7 +10,7 @@ class CreateBlogsTable extends Migration
      */
     public function up()
     {
-        Schema::create(config('cabin.db-prefix', '').'blogs', function (Blueprint $table) {
+        Schema::create(config('cms.db-prefix', '').'blogs', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title');
             $table->text('entry')->nullable();
@@ -28,6 +28,6 @@ class CreateBlogsTable extends Migration
      */
     public function down()
     {
-        Schema::drop(config('cabin.db-prefix', '').'blogs');
+        Schema::drop(config('cms.db-prefix', '').'blogs');
     }
 }

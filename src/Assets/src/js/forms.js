@@ -1,6 +1,6 @@
 /*
 |--------------------------------------------------------------------------
-| Cabin JS
+| Cms JS
 |--------------------------------------------------------------------------
 */
 
@@ -15,8 +15,8 @@ var _redactorConfig = {
     paragraphize: false,
     pastePlaintext: true,
     deniedTags: ['script'],
-    imageManagerJson: _url+'/cabin/api/images/list',
-    fileManagerJson: _url+'/cabin/api/files/list',
+    imageManagerJson: _url+'/cms/api/images/list',
+    fileManagerJson: _url+'/cms/api/files/list',
     stockImageManagerJson: 'https://pixabay.com/api/',
     plugins: ['table','video', 'fontcolor', 'imagemanager', 'stockimagemanager', 'filemanager', 'specialchar', 'insertIcon'],
     buttons: ['html', 'formatting', 'fontcolor', 'bold', 'italic', 'underline', 'deleted', 'unorderedlist', 'orderedlist',

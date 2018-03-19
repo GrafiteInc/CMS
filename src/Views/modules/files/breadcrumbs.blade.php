@@ -1,6 +1,6 @@
 <div class="row">
     <ol class="breadcrumb">
-        <li><a href="{!! url(config('cabin.backend-route-prefix', 'cabin').'/files') !!}">Files</a></li>
+        <li><a href="{!! url(config('cms.backend-route-prefix', 'cms').'/files') !!}">Files</a></li>
 
         @foreach($location as $local)
 

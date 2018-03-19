@@ -1,8 +1,8 @@
 <?php
 
-namespace Yab\Cabin\Models;
+namespace Grafite\Cms\Models;
 
-class Link extends CabinModel
+class Link extends CmsModel
 {
     public $table = 'links';
 

@@ -9,7 +9,7 @@ class FilesTest extends TestCase
         parent::setUp();
         $this->withoutMiddleware();
         $this->withoutEvents();
-        factory(\Yab\Cabin\Models\File::class)->create();
+        factory(\Grafite\Cms\Models\File::class)->create();
     }
 
     /*
@@ -20,20 +20,20 @@ class FilesTest extends TestCase
 
     public function testIndex()
     {
-        $response = $this->call('GET', 'cabin/files');
+        $response = $this->call('GET', 'cms/files');
         $this->assertEquals(200, $response->getStatusCode());
         $response->assertViewHas('files');
     }
 
     public function testCreate()
     {
-        $response = $this->call('GET', 'cabin/files/create');
+        $response = $this->call('GET', 'cms/files/create');
         $this->assertEquals(200, $response->getStatusCode());
     }
 
     public function testEdit()
     {
-        $response = $this->call('GET', 'cabin/files/1/edit');
+        $response = $this->call('GET', 'cms/files/1/edit');
         $this->assertEquals(200, $response->getStatusCode());
         $response->assertViewHas('files');
     }
@@ -47,7 +47,7 @@ class FilesTest extends TestCase
     public function testStore()
     {
         $uploadedFile = new \Symfony\Component\HttpFoundation\File\UploadedFile(__DIR__.'/fixtures/test-file.txt', 'test-file.txt');
-        $file = factory(\Yab\Cabin\Models\File::class)->make([
+        $file = factory(\Grafite\Cms\Models\File::class)->make([
             'id' => 2,
             'location' => [
                 'file_a' => [
@@ -58,13 +58,13 @@ class FilesTest extends TestCase
                 ],
             ],
         ]);
-        $response = $this->call('POST', 'cabin/files', $file->getAttributes());
+        $response = $this->call('POST', 'cms/files', $file->getAttributes());
         $this->assertEquals(302, $response->getStatusCode());
     }
 
     public function testSearch()
     {
-        $response = $this->call('POST', 'cabin/files/search', ['term' => 'wtf']);
+        $response = $this->call('POST', 'cms/files/search', ['term' => 'wtf']);
 
         $response->assertViewHas('files');
         $this->assertEquals(200, $response->getStatusCode());
@@ -72,17 +72,17 @@ class FilesTest extends TestCase
 
     public function testUpdate()
     {
-        $file = (array) factory(\Yab\Cabin\Models\File::class)->make(['id' => 3, 'title' => 'dumber']);
-        $response = $this->call('PATCH', 'cabin/files/3', $file);
+        $file = (array) factory(\Grafite\Cms\Models\File::class)->make(['id' => 3, 'title' => 'dumber']);
+        $response = $this->call('PATCH', 'cms/files/3', $file);
 
         $this->assertEquals(302, $response->getStatusCode());
-        $response->assertRedirect('/cabin/files');
+        $response->assertRedirect('/cms/files');
     }
 
     public function testDelete()
     {
         \Storage::put('test-file.txt', 'what is this');
-        $file = factory(\Yab\Cabin\Models\File::class)->make([
+        $file = factory(\Grafite\Cms\Models\File::class)->make([
             'id' => 2,
             'location' => [
                 'file_a' => [
@@ -93,10 +93,10 @@ class FilesTest extends TestCase
                 ],
             ],
         ]);
-        $this->call('POST', 'cabin/files', $file->getAttributes());
+        $this->call('POST', 'cms/files', $file->getAttributes());
 
-        $response = $this->call('DELETE', 'cabin/files/2');
+        $response = $this->call('DELETE', 'cms/files/2');
         $this->assertEquals(302, $response->getStatusCode());
-        $response->assertRedirect('cabin/files');
+        $response->assertRedirect('cms/files');
     }
 }

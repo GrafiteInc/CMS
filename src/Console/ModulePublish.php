@@ -1,6 +1,6 @@
 <?php
 
-namespace Yab\Cabin\Console;
+namespace Grafite\Cms\Console;
 
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
@@ -21,7 +21,7 @@ class ModulePublish extends Command
      *
      * @var string
      */
-    protected $description = 'Publish a Cabin module';
+    protected $description = 'Publish a Cms module';
 
     /**
      * Execute the console command.
@@ -30,14 +30,14 @@ class ModulePublish extends Command
      */
     public function handle()
     {
-        if (is_dir(base_path(Config::get('cabin.module-directory')).DIRECTORY_SEPARATOR.ucfirst($this->argument('module')).DIRECTORY_SEPARATOR.'Publishes')) {
+        if (is_dir(base_path(Config::get('cms.module-directory')).DIRECTORY_SEPARATOR.ucfirst($this->argument('module')).DIRECTORY_SEPARATOR.'Publishes')) {
             $fileSystem = new Filesystem();
 
-            $files = $fileSystem->allFiles(base_path(Config::get('cabin.module-directory')).DIRECTORY_SEPARATOR.ucfirst($this->argument('module')).DIRECTORY_SEPARATOR.'Publishes');
+            $files = $fileSystem->allFiles(base_path(Config::get('cms.module-directory')).DIRECTORY_SEPARATOR.ucfirst($this->argument('module')).DIRECTORY_SEPARATOR.'Publishes');
             $this->line("\n");
             foreach ($files as $file) {
                 if ($file->getType() == 'file') {
-                    $this->line(str_replace(base_path(Config::get('cabin.module-directory')).DIRECTORY_SEPARATOR.ucfirst($this->argument('module')).DIRECTORY_SEPARATOR.'Publishes'.DIRECTORY_SEPARATOR, '', $file));
+                    $this->line(str_replace(base_path(Config::get('cms.module-directory')).DIRECTORY_SEPARATOR.ucfirst($this->argument('module')).DIRECTORY_SEPARATOR.'Publishes'.DIRECTORY_SEPARATOR, '', $file));
                 }
             }
 
@@ -47,10 +47,10 @@ class ModulePublish extends Command
 
             if ($result) {
                 foreach ($files as $file) {
-                    $newFileName = str_replace(base_path(Config::get('cabin.module-directory').DIRECTORY_SEPARATOR.ucfirst($this->argument('module')).DIRECTORY_SEPARATOR.'Publishes'.DIRECTORY_SEPARATOR), '', $file);
+                    $newFileName = str_replace(base_path(Config::get('cms.module-directory').DIRECTORY_SEPARATOR.ucfirst($this->argument('module')).DIRECTORY_SEPARATOR.'Publishes'.DIRECTORY_SEPARATOR), '', $file);
                     if (strstr($newFileName, 'resources'.DIRECTORY_SEPARATOR.'themes'.DIRECTORY_SEPARATOR)) {
-                        $newFileName = str_replace(DIRECTORY_SEPARATOR.'default'.DIRECTORY_SEPARATOR, DIRECTORY_SEPARATOR.Config::get('cabin.frontend-theme').DIRECTORY_SEPARATOR, $newFileName);
-                        $this->line('Copying '.$newFileName.' using current Cabin theme...');
+                        $newFileName = str_replace(DIRECTORY_SEPARATOR.'default'.DIRECTORY_SEPARATOR, DIRECTORY_SEPARATOR.Config::get('cms.frontend-theme').DIRECTORY_SEPARATOR, $newFileName);
+                        $this->line('Copying '.$newFileName.' using current Cms theme...');
                     } else {
                         $this->line('Copying '.$newFileName.'...');
                     }

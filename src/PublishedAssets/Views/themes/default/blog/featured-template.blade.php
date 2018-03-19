@@ -1,4 +1,4 @@
-@extends('cabin-frontend::layout.master')
+@extends('cms-frontend::layout.master')
 
 @section('seoDescription') {{ $blog->seo_description }} @endsection
 @section('seoKeywords') {{ $blog->seo_keywords }} @endsection
@@ -21,6 +21,6 @@
 
 @endsection
 
-@section('cabin')
+@section('cms')
     <li class="nav-text">@edit('blog', $blog->id)</li>
 @endsection

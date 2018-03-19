@@ -1,17 +1,17 @@
 <?php
 
-namespace Yab\Cabin\Controllers;
+namespace Grafite\Cms\Controllers;
 
-use Cabin;
+use Cms;
 use Exception;
-use Yab\Cabin\Models\Link;
+use Grafite\Cms\Models\Link;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\URL;
-use Yab\Cabin\Requests\LinksRequest;
-use Yab\Cabin\Services\ValidationService;
-use Yab\Cabin\Repositories\LinkRepository;
+use Grafite\Cms\Requests\LinksRequest;
+use Grafite\Cms\Services\ValidationService;
+use Grafite\Cms\Repositories\LinkRepository;
 
-class LinksController extends CabinController
+class LinksController extends GrafiteCmsController
 {
     public function __construct(LinkRepository $repository)
     {
@@ -29,7 +29,7 @@ class LinksController extends CabinController
     {
         $result = $this->repository->paginated();
 
-        return view('cabin::modules.links.index')
+        return view('cms::modules.links.index')
             ->with('links', $result)
             ->with('pagination', $result->render());
     }
@@ -43,7 +43,7 @@ class LinksController extends CabinController
     {
         $menu = $request->get('m');
 
-        return view('cabin::modules.links.create')->with('menu_id', $menu);
+        return view('cms::modules.links.create')->with('menu_id', $menu);
     }
 
     /**
@@ -60,16 +60,16 @@ class LinksController extends CabinController
 
             if (!$validation['errors']) {
                 $links = $this->repository->store($request->all());
-                Cabin::notification('Link saved successfully.', 'success');
+                Cms::notification('Link saved successfully.', 'success');
 
                 if (!$links) {
-                    Cabin::notification('Link could not be saved.', 'danger');
+                    Cms::notification('Link could not be saved.', 'danger');
                 }
             } else {
                 return $validation['redirect'];
             }
         } catch (Exception $e) {
-            Cabin::notification($e->getMessage() ?: 'Link could not be saved.', 'danger');
+            Cms::notification($e->getMessage() ?: 'Link could not be saved.', 'danger');
         }
 
         return redirect(route($this->routeBase.'.menus.edit', [$request->get('menu_id')]));
@@ -87,12 +87,12 @@ class LinksController extends CabinController
         $links = $this->repository->findLinksById($id);
 
         if (empty($links)) {
-            Cabin::notification('Link not found', 'warning');
+            Cms::notification('Link not found', 'warning');
 
             return redirect(route($this->routeBase.'.links.index'));
         }
 
-        return view('cabin::modules.links.edit')->with('links', $links);
+        return view('cms::modules.links.edit')->with('links', $links);
     }
 
     /**
@@ -109,19 +109,19 @@ class LinksController extends CabinController
             $links = $this->repository->findLinksById($id);
 
             if (empty($links)) {
-                Cabin::notification('Link not found', 'warning');
+                Cms::notification('Link not found', 'warning');
 
                 return redirect(route($this->routeBase.'.links.index'));
             }
 
             $links = $this->repository->update($links, $request->all());
-            Cabin::notification('Link updated successfully.', 'success');
+            Cms::notification('Link updated successfully.', 'success');
 
             if (!$links) {
-                Cabin::notification('Link could not be updated.', 'danger');
+                Cms::notification('Link could not be updated.', 'danger');
             }
         } catch (Exception $e) {
-            Cabin::notification($e->getMessage() ?: 'Links could not be updated.', 'danger');
+            Cms::notification($e->getMessage() ?: 'Links could not be updated.', 'danger');
         }
 
         return redirect(route($this->routeBase.'.links.edit', [$id]));
@@ -140,14 +140,14 @@ class LinksController extends CabinController
         $menu = $links->menu_id;
 
         if (empty($links)) {
-            Cabin::notification('Link not found', 'warning');
+            Cms::notification('Link not found', 'warning');
 
             return redirect(route($this->routeBase.'.links.index'));
         }
 
         $links->delete();
 
-        Cabin::notification('Link deleted successfully.', 'success');
+        Cms::notification('Link deleted successfully.', 'success');
 
         return redirect(route($this->routeBase.'.menus.edit', [$menu]));
     }

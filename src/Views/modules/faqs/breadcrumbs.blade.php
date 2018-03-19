@@ -1,8 +1,8 @@
 <div class="row">
     <ol class="breadcrumb">
-        <li><a href="{!! url(config('cabin.backend-route-prefix', 'cabin').'/faqs') !!}">FAQs</a></li>
+        <li><a href="{!! url(config('cms.backend-route-prefix', 'cms').'/faqs') !!}">FAQs</a></li>
 
-            {!! Cabin::breadcrumbs($location) !!}
+            {!! Cms::breadcrumbs($location) !!}
 
         <li class="active"></li>
     </ol>

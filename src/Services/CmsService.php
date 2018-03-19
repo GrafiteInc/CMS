@@ -1,6 +1,6 @@
 <?php
 
-namespace Yab\Cabin\Services;
+namespace Grafite\Cms\Services;
 
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
@@ -8,12 +8,12 @@ use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\URL;
-use Yab\Cabin\Facades\CryptoServiceFacade;
-use Yab\Cabin\Services\Traits\DefaultModuleServiceTrait;
-use Yab\Cabin\Services\Traits\MenuServiceTrait;
-use Yab\Cabin\Services\Traits\ModuleServiceTrait;
+use Grafite\Cms\Facades\CryptoServiceFacade;
+use Grafite\Cms\Services\Traits\DefaultModuleServiceTrait;
+use Grafite\Cms\Services\Traits\MenuServiceTrait;
+use Grafite\Cms\Services\Traits\ModuleServiceTrait;
 
-class CabinService
+class CmsService
 {
     use MenuServiceTrait;
     use DefaultModuleServiceTrait;
@@ -21,7 +21,7 @@ class CabinService
 
     public function __construct()
     {
-        $this->imageRepo = App::make('Yab\Cabin\Repositories\ImageRepository');
+        $this->imageRepo = App::make('Grafite\Cms\Repositories\ImageRepository');
     }
 
     /**
@@ -39,7 +39,7 @@ class CabinService
             return base_path(__DIR__.'/../Assets/'.$path);
         }
 
-        return url(config('cabin.backend-route-prefix', 'cabin').'/asset/'.CryptoServiceFacade::url_encode($path).'/'.CryptoServiceFacade::url_encode($contentType));
+        return url(config('cms.backend-route-prefix', 'cms').'/asset/'.CryptoServiceFacade::url_encode($path).'/'.CryptoServiceFacade::url_encode($contentType));
     }
 
     /**
@@ -140,7 +140,7 @@ class CabinService
     {
         $files = glob($dir.'/*');
 
-        $packageViews = Config::get('cabin.package-menus');
+        $packageViews = Config::get('cms.package-menus');
 
         if (is_null($packageViews)) {
             $packageViews = [];
@@ -150,7 +150,7 @@ class CabinService
             array_push($packageViews, $view);
         }
 
-        return Config::set('cabin.package-menus', $packageViews);
+        return Config::set('cms.package-menus', $packageViews);
     }
 
     /**
@@ -164,11 +164,11 @@ class CabinService
      */
     public function editBtn($type = null, $id = null, $class="btn-link")
     {
-        if (Gate::allows('cabin', Auth::user())) {
+        if (Gate::allows('cms', Auth::user())) {
             if (!is_null($id)) {
-                return '<a href="'.url(config('cabin.backend-route-prefix', 'cabin').'/'.$type.'/'.$id.'/edit').'" class="btn btn-sm '.$class.'"><span class="fa fa-edit"></span> Edit</a>';
+                return '<a href="'.url(config('cms.backend-route-prefix', 'cms').'/'.$type.'/'.$id.'/edit').'" class="btn btn-sm '.$class.'"><span class="fa fa-edit"></span> Edit</a>';
             } else {
-                return '<a href="'.url(config('cabin.backend-route-prefix', 'cabin').'/'.$type).'" class="btn btn-sm '.$class.'"><span class="fa fa-edit"></span> Edit</a>';
+                return '<a href="'.url(config('cms.backend-route-prefix', 'cms').'/'.$type).'" class="btn btn-sm '.$class.'"><span class="fa fa-edit"></span> Edit</a>';
             }
         }
 
@@ -200,7 +200,7 @@ class CabinService
     {
         $class = str_replace('\\', '_', get_class($object));
 
-        return url(config('cabin.backend-route-prefix', 'cabin').'/rollback/'.$class.'/'.$object->id);
+        return url(config('cms.backend-route-prefix', 'cms').'/rollback/'.$class.'/'.$object->id);
     }
 
     /**

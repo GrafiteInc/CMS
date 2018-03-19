@@ -1,6 +1,6 @@
 <?php
 
-    $routePrefix = config('cabin.backend-route-prefix', 'cabin');
+    $routePrefix = config('cms.backend-route-prefix', 'cms');
 
     Route::group(['middleware' => 'web'], function () use ($routePrefix) {
 
@@ -10,7 +10,7 @@
         |--------------------------------------------------------------------------
         */
         Route::group(['prefix' => $routePrefix.'/api'], function () use ($routePrefix) {
-            Route::group(['middleware' => ['cabin-api']], function () use ($routePrefix) {
+            Route::group(['middleware' => ['cms-api']], function () use ($routePrefix) {
                 Route::get('blog', 'ApiController@all');
                 Route::get('blog/{id}', 'ApiController@find');
 

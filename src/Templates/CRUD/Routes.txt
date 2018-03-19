@@ -4,5 +4,5 @@
 |--------------------------------------------------------------------------
 */
 
-Route::resource('_lower_casePlural_', '_ucCamel_casePlural_Controller', [ 'except' => ['show'], 'as' => config('cabin.backend-route-prefix', 'cabin') ]);
+Route::resource('_lower_casePlural_', '_ucCamel_casePlural_Controller', [ 'except' => ['show'], 'as' => config('cms.backend-route-prefix', 'cms') ]);
 Route::post('_lower_casePlural_/search', '_ucCamel_casePlural_Controller@search');

@@ -10,7 +10,7 @@ class CreateFilesTable extends Migration
      */
     public function up()
     {
-        Schema::create(config('cabin.db-prefix', '').'files', function (Blueprint $table) {
+        Schema::create(config('cms.db-prefix', '').'files', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->string('location');
@@ -30,6 +30,6 @@ class CreateFilesTable extends Migration
      */
     public function down()
     {
-        Schema::drop(config('cabin.db-prefix', '').'files');
+        Schema::drop(config('cms.db-prefix', '').'files');
     }
 }

@@ -10,7 +10,7 @@ class AddTemplatesToBlogs extends Migration
      */
     public function up()
     {
-        Schema::table(config('cabin.db-prefix', '').'blogs', function (Blueprint $table) {
+        Schema::table(config('cms.db-prefix', '').'blogs', function (Blueprint $table) {
             $table->string('template')->default('show');
         });
     }
@@ -20,7 +20,7 @@ class AddTemplatesToBlogs extends Migration
      */
     public function down()
     {
-        Schema::table(config('cabin.db-prefix', '').'blogs', function ($table) {
+        Schema::table(config('cms.db-prefix', '').'blogs', function ($table) {
             $table->dropColumn('template');
         });
     }

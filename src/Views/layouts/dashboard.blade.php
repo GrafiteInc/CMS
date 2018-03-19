@@ -1,4 +1,4 @@
-@extends('cabin::layouts.navigation')
+@extends('cms::layouts.navigation')
 
 @section('page-content')
 
@@ -7,7 +7,7 @@
     <div class="raw100 raw-left raw-margin-top-50">
         <div class="col-sm-3 col-md-2 sidebar">
             <div class="raw100 raw-left raw-margin-bottom-90">
-                @include('cabin::dashboard.panel')
+                @include('cms::dashboard.panel')
             </div>
         </div>
 
@@ -19,14 +19,14 @@
     </div>
 
     <div class="raw100 raw-left navbar navbar-fixed-bottom">
-        <div class="raw100 raw-left cabin-footer">
-            <p class="raw-margin-left-20 pull-left">Brought to you by: <a href="https://yabhq.com">Yab Inc.</a></p>
-            <p class="raw-margin-right-20 pull-right">v. {{ Cabin::version() }}</p>
+        <div class="raw100 raw-left cms-footer">
+            <p class="raw-margin-left-20 pull-left">Brought to you by: <a href="https://grafite.ca">Grafite Inc.</a></p>
+            <p class="raw-margin-right-20 pull-right">v. {{ Cms::version() }}</p>
         </div>
     </div>
 @stop
 
 @section('javascript')
-    {!! Minify::javascript(Cabin::asset('js/dashboard.js', 'application/javascript')) !!}
-    {!! Minify::javascript(Cabin::asset('js/chart.min.js', 'application/javascript')) !!}
+    {!! Minify::javascript(Cms::asset('js/dashboard.js', 'application/javascript')) !!}
+    {!! Minify::javascript(Cms::asset('js/chart.min.js', 'application/javascript')) !!}
 @stop

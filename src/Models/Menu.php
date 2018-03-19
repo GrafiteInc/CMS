@@ -1,8 +1,8 @@
 <?php
 
-namespace Yab\Cabin\Models;
+namespace Grafite\Cms\Models;
 
-class Menu extends CabinModel
+class Menu extends CmsModel
 {
     public $table = 'menus';
 

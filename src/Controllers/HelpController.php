@@ -1,11 +1,11 @@
 <?php
 
-namespace Yab\Cabin\Controllers;
+namespace Grafite\Cms\Controllers;
 
-class HelpController extends CabinController
+class HelpController extends GrafiteCmsController
 {
     public function main()
     {
-        return view('cabin::help');
+        return view('cms::help');
     }
 }

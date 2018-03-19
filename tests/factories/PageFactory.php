@@ -6,7 +6,7 @@
 |--------------------------------------------------------------------------
 */
 
-$factory->define(\Yab\Cabin\Models\Page::class, function (Faker\Generator $faker) {
+$factory->define(\Grafite\Cms\Models\Page::class, function (Faker\Generator $faker) {
     return [
         'id' => 1,
         'title' => 'dumb',

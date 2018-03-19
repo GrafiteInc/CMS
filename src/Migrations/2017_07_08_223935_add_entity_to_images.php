@@ -11,7 +11,7 @@ class AddEntityToImages extends Migration
      */
     public function up()
     {
-        Schema::table(config('cabin.db-prefix', '').'images', function (Blueprint $table) {
+        Schema::table(config('cms.db-prefix', '').'images', function (Blueprint $table) {
             $table->integer('entity_id')->nullable();
             $table->string('entity_type')->nullable();
         });

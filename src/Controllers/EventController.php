@@ -1,16 +1,16 @@
 <?php
 
-namespace Yab\Cabin\Controllers;
+namespace Grafite\Cms\Controllers;
 
 use URL;
-use Cabin;
-use Yab\Cabin\Models\Event;
+use Cms;
+use Grafite\Cms\Models\Event;
 use Illuminate\Http\Request;
-use Yab\Cabin\Requests\EventRequest;
-use Yab\Cabin\Services\ValidationService;
-use Yab\Cabin\Repositories\EventRepository;
+use Grafite\Cms\Requests\EventRequest;
+use Grafite\Cms\Services\ValidationService;
+use Grafite\Cms\Repositories\EventRepository;
 
-class EventController extends CabinController
+class EventController extends GrafiteCmsController
 {
     public function __construct(EventRepository $repository)
     {
@@ -28,7 +28,7 @@ class EventController extends CabinController
     {
         $result = $this->repository->paginated();
 
-        return view('cabin::modules.events.index')
+        return view('cms::modules.events.index')
             ->with('events', $result)
             ->with('pagination', $result->render());
     }
@@ -46,7 +46,7 @@ class EventController extends CabinController
 
         $result = $this->repository->search($input);
 
-        return view('cabin::modules.events.index')
+        return view('cms::modules.events.index')
             ->with('events', $result[0]->get())
             ->with('pagination', $result[2])
             ->with('term', $result[1]);
@@ -59,7 +59,7 @@ class EventController extends CabinController
      */
     public function create()
     {
-        return view('cabin::modules.events.create');
+        return view('cms::modules.events.create');
     }
 
     /**
@@ -75,13 +75,13 @@ class EventController extends CabinController
 
         if (!$validation['errors']) {
             $event = $this->repository->store($request->all());
-            Cabin::notification('Event saved successfully.', 'success');
+            Cms::notification('Event saved successfully.', 'success');
         } else {
             return $validation['redirect'];
         }
 
         if (!$event) {
-            Cabin::notification('Event could not be saved.', 'warning');
+            Cms::notification('Event could not be saved.', 'warning');
         }
 
         return redirect(route($this->routeBase.'.events.edit', [$event->id]));
@@ -99,12 +99,12 @@ class EventController extends CabinController
         $event = $this->repository->findEventById($id);
 
         if (empty($event)) {
-            Cabin::notification('Event not found', 'warning');
+            Cms::notification('Event not found', 'warning');
 
             return redirect(route($this->routeBase.'.events.index'));
         }
 
-        return view('cabin::modules.events.edit')->with('event', $event);
+        return view('cms::modules.events.edit')->with('event', $event);
     }
 
     /**
@@ -120,16 +120,16 @@ class EventController extends CabinController
         $event = $this->repository->findEventById($id);
 
         if (empty($event)) {
-            Cabin::notification('Event not found', 'warning');
+            Cms::notification('Event not found', 'warning');
 
             return redirect(route($this->routeBase.'.events.index'));
         }
 
         $event = $this->repository->update($event, $request->all());
-        Cabin::notification('Event updated successfully.', 'success');
+        Cms::notification('Event updated successfully.', 'success');
 
         if (!$event) {
-            Cabin::notification('Event could not be saved.', 'warning');
+            Cms::notification('Event could not be saved.', 'warning');
         }
 
         return redirect(URL::previous());
@@ -147,14 +147,14 @@ class EventController extends CabinController
         $event = $this->repository->findEventById($id);
 
         if (empty($event)) {
-            Cabin::notification('Event not found', 'warning');
+            Cms::notification('Event not found', 'warning');
 
             return redirect(route($this->routeBase.'.events.index'));
         }
 
         $event->delete();
 
-        Cabin::notification('Event deleted successfully.', 'success');
+        Cms::notification('Event deleted successfully.', 'success');
 
         return redirect(route($this->routeBase.'.events.index'));
     }
@@ -170,7 +170,7 @@ class EventController extends CabinController
     {
         $event = $this->repository->findEventById($id);
 
-        return view('cabin::modules.events.history')
+        return view('cms::modules.events.history')
             ->with('event', $event);
     }
 }

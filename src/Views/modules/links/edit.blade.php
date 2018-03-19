@@ -1,4 +1,4 @@
-@extends('cabin::layouts.dashboard')
+@extends('cms::layouts.dashboard')
 
 @section('content')
 
@@ -6,12 +6,12 @@
         <h1 class="page-header">Links</h1>
     </div>
 
-    @include('cabin::modules.links.breadcrumbs', ['location' => [['Menu' => url(config('cabin.backend-route-prefix', 'cabin').'/menus/'.$links->menu_id.'/edit')], 'links', 'edit']])
+    @include('cms::modules.links.breadcrumbs', ['location' => [['Menu' => url(config('cms.backend-route-prefix', 'cms').'/menus/'.$links->menu_id.'/edit')], 'links', 'edit']])
 
     <div class="row">
-        {!! Form::model($links, ['route' => [config('cabin.backend-route-prefix', 'cabin').'.links.update', $links->id], 'method' => 'patch', 'class' => 'edit']) !!}
+        {!! Form::model($links, ['route' => [config('cms.backend-route-prefix', 'cms').'.links.update', $links->id], 'method' => 'patch', 'class' => 'edit']) !!}
 
-            {!! FormMaker::fromObject($links, Config::get('cabin.forms.link')) !!}
+            {!! FormMaker::fromObject($links, Config::get('cms.forms.link')) !!}
 
             <div class="form-group" style="display: none;">
                 <label for="Page_id">Page</label>

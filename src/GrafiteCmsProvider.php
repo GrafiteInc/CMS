@@ -1,6 +1,6 @@
 <?php
 
-namespace Yab\Cabin;
+namespace Grafite\Cms;
 
 use Devfactory\Minify\Facades\MinifyFacade;
 use Devfactory\Minify\MinifyServiceProvider;
@@ -14,24 +14,24 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
 use Intervention\Image\ImageServiceProvider;
-use Cabin;
+use Cms;
 use Spatie\LaravelAnalytics\LaravelAnalyticsFacade;
 use Spatie\LaravelAnalytics\LaravelAnalyticsServiceProvider;
-use Yab\Laracogs\LaracogsProvider;
-use Yab\Cabin\Console\Keys;
-use Yab\Cabin\Console\ModuleComposer;
-use Yab\Cabin\Console\ModuleCrud;
-use Yab\Cabin\Console\ModuleMake;
-use Yab\Cabin\Console\ModulePublish;
-use Yab\Cabin\Console\Setup;
-use Yab\Cabin\Console\ThemeGenerate;
-use Yab\Cabin\Console\ThemePublish;
-use Yab\Cabin\Providers\CabinEventServiceProvider;
-use Yab\Cabin\Providers\CabinModuleProvider;
-use Yab\Cabin\Providers\CabinRouteProvider;
-use Yab\Cabin\Providers\CabinServiceProvider;
+use Grafite\Builder\GrafiteBuilderProvider;
+use Grafite\Cms\Console\Keys;
+use Grafite\Cms\Console\ModuleComposer;
+use Grafite\Cms\Console\ModuleCrud;
+use Grafite\Cms\Console\ModuleMake;
+use Grafite\Cms\Console\ModulePublish;
+use Grafite\Cms\Console\Setup;
+use Grafite\Cms\Console\ThemeGenerate;
+use Grafite\Cms\Console\ThemePublish;
+use Grafite\Cms\Providers\CmsEventServiceProvider;
+use Grafite\Cms\Providers\CmsModuleProvider;
+use Grafite\Cms\Providers\CmsRouteProvider;
+use Grafite\Cms\Providers\CmsServiceProvider;
 
-class CabinProvider extends ServiceProvider
+class GrafiteCmsProvider extends ServiceProvider
 {
     /**
      * Alias the services in the boot.
@@ -40,7 +40,7 @@ class CabinProvider extends ServiceProvider
     {
         $this->publishes([
             __DIR__.'/PublishedAssets/Views/themes' => base_path('resources/themes'),
-            __DIR__.'/PublishedAssets/Controllers' => app_path('Http/Controllers/Cabin'),
+            __DIR__.'/PublishedAssets/Controllers' => app_path('Http/Controllers/Cms'),
             __DIR__.'/PublishedAssets/Migrations' => base_path('database/migrations'),
             __DIR__.'/PublishedAssets/Middleware' => app_path('Http/Middleware'),
             __DIR__.'/PublishedAssets/Routes' => base_path('routes'),
@@ -48,17 +48,17 @@ class CabinProvider extends ServiceProvider
         ]);
 
         $this->publishes([
-            __DIR__.'/Views' => base_path('resources/views/vendor/cabin'),
+            __DIR__.'/Views' => base_path('resources/views/vendor/cms'),
         ], 'backend');
 
         $this->loadMigrationsFrom(__DIR__.'/Migrations');
 
-        $theme = Config::get('cabin.frontend-theme', 'default');
+        $theme = Config::get('cms.frontend-theme', 'default');
 
-        $this->loadViewsFrom(__DIR__.'/Views', 'cabin');
+        $this->loadViewsFrom(__DIR__.'/Views', 'cms');
 
         View::addLocation(base_path('resources/themes/'.$theme));
-        View::addNamespace('cabin-frontend', base_path('resources/themes/'.$theme));
+        View::addNamespace('cms-frontend', base_path('resources/themes/'.$theme));
 
         /*
         |--------------------------------------------------------------------------
@@ -71,14 +71,14 @@ class CabinProvider extends ServiceProvider
                 $expression = substr($expression, 1, -1);
             }
 
-            $theme = Config::get('cabin.frontend-theme');
-            $view = '"cabin-frontend::'.str_replace('"', '', str_replace("'", '', $expression)).'"';
+            $theme = Config::get('cms.frontend-theme');
+            $view = '"cms-frontend::'.str_replace('"', '', str_replace("'", '', $expression)).'"';
 
             return "<?php echo \$__env->make($view, array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>";
         });
 
         Blade::directive('menu', function ($expression) {
-            return "<?php echo Cabin::menu($expression); ?>";
+            return "<?php echo Cms::menu($expression); ?>";
         });
 
         Blade::directive('block', function ($expression) {
@@ -86,10 +86,10 @@ class CabinProvider extends ServiceProvider
         });
 
         Blade::directive('languages', function ($expression) {
-            if (count(config('cabin.languages')) > 1) {
+            if (count(config('cms.languages')) > 1) {
                 $languageLinks = [];
-                foreach (config('cabin.languages') as $key => $value) {
-                    $languageLinks[] = '<a class="language-link" href="'.url(config('cabin.backend-route-prefix', 'cabin').'/language/set/'.$key).'">'.$value.'</a>';
+                foreach (config('cms.languages') as $key => $value) {
+                    $languageLinks[] = '<a class="language-link" href="'.url(config('cms.backend-route-prefix', 'cms').'/language/set/'.$key).'">'.$value.'</a>';
                 }
 
                 $languageLinkString = implode($languageLinks);
@@ -101,31 +101,31 @@ class CabinProvider extends ServiceProvider
         });
 
         Blade::directive('modules', function ($expression) {
-            return "<?php echo Cabin::moduleLinks($expression); ?>";
+            return "<?php echo Cms::moduleLinks($expression); ?>";
         });
 
         Blade::directive('widget', function ($expression) {
-            return "<?php echo Cabin::widget($expression); ?>";
+            return "<?php echo Cms::widget($expression); ?>";
         });
 
         Blade::directive('image', function ($expression) {
-            return "<?php echo Cabin::image($expression); ?>";
+            return "<?php echo Cms::image($expression); ?>";
         });
 
         Blade::directive('image_link', function ($expression) {
-            return "<?php echo Cabin::imageLink($expression); ?>";
+            return "<?php echo Cms::imageLink($expression); ?>";
         });
 
         Blade::directive('images', function ($expression) {
-            return "<?php echo Cabin::images($expression); ?>";
+            return "<?php echo Cms::images($expression); ?>";
         });
 
         Blade::directive('edit', function ($expression) {
-            return "<?php echo Cabin::editBtn($expression); ?>";
+            return "<?php echo Cms::editBtn($expression); ?>";
         });
 
         Blade::directive('editBtn', function ($expression) {
-            return "<?php echo Cabin::editBtnSecondary($expression); ?>";
+            return "<?php echo Cms::editBtnSecondary($expression); ?>";
         });
 
         Blade::directive('markdown', function ($expression) {
@@ -138,12 +138,12 @@ class CabinProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->register(CabinServiceProvider::class);
-        $this->app->register(CabinEventServiceProvider::class);
-        $this->app->register(CabinRouteProvider::class);
-        $this->app->register(CabinModuleProvider::class);
+        $this->app->register(CmsServiceProvider::class);
+        $this->app->register(CmsEventServiceProvider::class);
+        $this->app->register(CmsRouteProvider::class);
+        $this->app->register(CmsModuleProvider::class);
 
-        $this->app->register(LaracogsProvider::class);
+        $this->app->register(GrafiteBuilderProvider::class);
         $this->app->register(MinifyServiceProvider::class);
         $this->app->register(MarkdownServiceProvider::class);
         $this->app->register(LaravelAnalyticsServiceProvider::class);

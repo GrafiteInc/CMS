@@ -2,9 +2,9 @@
 
 namespace _namespace_model_;
 
-use Yab\Cabin\Models\CabinModel;
+use Grafite\Cms\Models\CmsModel;
 
-class _camel_case_ extends CabinModel
+class _camel_case_ extends CmsModel
 {
     public $table = "_lower_casePlural_";
 

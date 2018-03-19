@@ -1,6 +1,6 @@
 <?php
 
-namespace Yab\Cabin\Services;
+namespace Grafite\Cms\Services;
 
 use App;
 use Exception;
@@ -11,9 +11,9 @@ use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
-use Cabin;
+use Cms;
 use SplFileInfo;
-use Yab\Cabin\Facades\CryptoServiceFacade;
+use Grafite\Cms\Facades\CryptoServiceFacade;
 
 class AssetService
 {
@@ -68,12 +68,12 @@ class AssetService
             return Cache::remember($encFileName.'_preview', 3600, function () use ($encFileName, $fileSystem) {
                 $fileName = CryptoServiceFacade::url_decode($encFileName);
 
-                if (config('cabin.storage-location') === 'local' || config('cabin.storage-location') === null) {
+                if (config('cms.storage-location') === 'local' || config('cms.storage-location') === null) {
                     $filePath = storage_path('app/'.$fileName);
                     $contentType = $fileSystem->mimeType($filePath);
                     $ext = '.'.strtoupper($fileSystem->extension($filePath));
                 } else {
-                    $filePath = Storage::disk(config('cabin.storage-location', 'local'))->url($fileName);
+                    $filePath = Storage::disk(config('cms.storage-location', 'local'))->url($fileName);
                     $fileTool = new SplFileInfo($filePath);
                     $ext = $fileTool->getExtension();
                     $contentType = $this->getMimeType($ext);
@@ -125,7 +125,7 @@ class AssetService
                 ]);
             });
         } catch (Exception $e) {
-            Cabin::notification('We encountered an error with that file', 'danger');
+            Cms::notification('We encountered an error with that file', 'danger');
 
             return redirect('errors/general');
         }
@@ -198,7 +198,7 @@ class AssetService
         if (file_exists(storage_path('app/'.$fileName))) {
             $filePath = storage_path('app/'.$fileName);
         } else {
-            $filePath = Storage::disk(config('cabin.storage-location', 'local'))->url($fileName);
+            $filePath = Storage::disk(config('cms.storage-location', 'local'))->url($fileName);
         }
 
         return $filePath;
@@ -215,8 +215,8 @@ class AssetService
      */
     public function getFileContent($fileName, $contentType, $ext)
     {
-        if (Storage::disk(config('cabin.storage-location', 'local'))->exists($fileName)) {
-            $fileContent = Storage::disk(config('cabin.storage-location', 'local'))->get($fileName);
+        if (Storage::disk(config('cms.storage-location', 'local'))->exists($fileName)) {
+            $fileContent = Storage::disk(config('cms.storage-location', 'local'))->get($fileName);
         } elseif (!is_null(config('filesystems.cloud.key'))) {
             $fileContent = Storage::disk('cloud')->get($fileName);
         } else {
@@ -224,9 +224,9 @@ class AssetService
         }
 
         if (stristr($fileName, 'image') || stristr($contentType, 'image')) {
-            if (! is_null(config('cabin.preview-image-size'))) {
+            if (! is_null(config('cms.preview-image-size'))) {
                 $img = Image::make($fileContent);
-                $img->resize(config('cabin.preview-image-size', 800), null, function ($constraint) {
+                $img->resize(config('cms.preview-image-size', 800), null, function ($constraint) {
                     $constraint->aspectRatio();
                 });
 

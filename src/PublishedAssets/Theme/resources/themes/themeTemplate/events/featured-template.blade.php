@@ -1,4 +1,4 @@
-@extends('cabin-frontend::layout.master')
+@extends('cms-frontend::layout.master')
 
 @section('seoDescription') {{ $event->seo_description }} @endsection
 @section('seoKeywords') {{ $event->seo_keywords }} @endsection
@@ -12,7 +12,7 @@
             <h2>{{ $event->title }}</h2>
         </div>
 
-        @if (config('app.locale') !== config('cabin.default-language'))
+        @if (config('app.locale') !== config('cms.default-language'))
             <h1>{!! $event->translationData(config('app.locale'))->title !!}</h1>
             <p>{!! $event->translationData(config('app.locale'))->start_date !!} - {!! $event->translationData(config('app.locale'))->end_date !!}</p>
             {!! $event->translationData(config('app.locale'))->details !!}
@@ -26,6 +26,6 @@
 
 @endsection
 
-@section('cabin')
+@section('cms')
     <li class="nav-text">@edit('events', $event->id)</li>
 @endsection

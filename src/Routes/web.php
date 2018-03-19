@@ -1,9 +1,9 @@
 <?php
 
-    $routePrefix = config('cabin.backend-route-prefix', 'cabin');
+    $routePrefix = config('cms.backend-route-prefix', 'cms');
 
     Route::group(['middleware' => 'web'], function () use ($routePrefix) {
-        Route::get($routePrefix, 'CabinFeatureController@sendHome');
+        Route::get($routePrefix, 'GrafiteCmsFeatureController@sendHome');
 
         /*
         |--------------------------------------------------------------------------
@@ -11,7 +11,7 @@
         |--------------------------------------------------------------------------
         */
 
-        Route::get($routePrefix.'/language/set/{language}', 'CabinFeatureController@setLanguage');
+        Route::get($routePrefix.'/language/set/{language}', 'GrafiteCmsFeatureController@setLanguage');
 
         /*
         |--------------------------------------------------------------------------
@@ -29,13 +29,13 @@
          * --------------------------------------------------------------------------
         */
         Route::group(['middleware' => 'auth'], function () {
-            Route::group(['prefix' => 'cabin/api'], function () {
+            Route::group(['prefix' => 'cms/api'], function () {
                 Route::get('images/list', 'ImagesController@apiList');
                 Route::post('images/store', 'ImagesController@apiStore');
                 Route::get('files/list', 'FilesController@apiList');
             });
 
-            Route::group(['prefix' => 'cabin'], function () {
+            Route::group(['prefix' => 'cms'], function () {
                 Route::get('images/bulk-delete/{ids}', 'ImagesController@bulkDelete');
                 Route::post('images/upload', 'ImagesController@upload');
                 Route::post('files/upload', 'FilesController@upload');
@@ -44,14 +44,14 @@
 
         /*
         |--------------------------------------------------------------------------
-        | Cabin
+        | Cms
         |--------------------------------------------------------------------------
         */
 
         Route::group(['prefix' => $routePrefix], function () use ($routePrefix) {
             Route::get('asset/{path}/{contentType}', 'AssetController@asset');
 
-            Route::group(['middleware' => ['auth', 'cabin']], function () use ($routePrefix) {
+            Route::group(['middleware' => ['auth', 'cms']], function () use ($routePrefix) {
                 Route::get('dashboard', 'DashboardController@main');
                 Route::get('help', 'HelpController@main');
 
@@ -61,9 +61,9 @@
                 |--------------------------------------------------------------------------
                 */
 
-                Route::get('preview/{entity}/{entityId}', 'CabinFeatureController@preview');
-                Route::get('rollback/{entity}/{entityId}', 'CabinFeatureController@rollback');
-                Route::get('revert/{id}', 'CabinFeatureController@revert');
+                Route::get('preview/{entity}/{entityId}', 'GrafiteCmsFeatureController@preview');
+                Route::get('rollback/{entity}/{entityId}', 'GrafiteCmsFeatureController@rollback');
+                Route::get('revert/{id}', 'GrafiteCmsFeatureController@revert');
 
                 /*
                 |--------------------------------------------------------------------------

@@ -1,6 +1,6 @@
 <?php
 
-namespace Yab\Cabin\Facades;
+namespace Grafite\Cms\Facades;
 
 use Illuminate\Support\Facades\Facade;
 

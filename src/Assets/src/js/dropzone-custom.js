@@ -17,7 +17,7 @@ Dropzone.options.fileDropzone = {
             if (! file.serverData) {
                 return;
             } else {
-                $.get(_url+"/cabin/files/remove/"+file.serverData.name);
+                $.get(_url+"/cms/files/remove/"+file.serverData.name);
                 $("#file_"+file.serverData.name).remove();
             }
         });

@@ -1,6 +1,6 @@
 <div class="row">
     <ol class="breadcrumb">
-        {!! Cabin::breadcrumbs($location) !!}
+        {!! Cms::breadcrumbs($location) !!}
         <li class="active"></li>
     </ol>
 </div>

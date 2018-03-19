@@ -1,4 +1,4 @@
-@extends('cabin-frontend::layout.master')
+@extends('cms-frontend::layout.master')
 
 @section('content')
 
@@ -13,6 +13,6 @@
 
 @endsection
 
-@section('cabin')
+@section('cms')
     <li class="nav-text">@edit('events')</li>
 @endsection

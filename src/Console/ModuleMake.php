@@ -1,12 +1,12 @@
 <?php
 
-namespace Yab\Cabin\Console;
+namespace Grafite\Cms\Console;
 
 use Artisan;
 use Config;
 use Exception;
 use Illuminate\Console\Command;
-use Yab\CrudMaker\Generators\CrudGenerator;
+use Grafite\CrudMaker\Generators\CrudGenerator;
 
 class ModuleMake extends Command
 {
@@ -22,7 +22,7 @@ class ModuleMake extends Command
      *
      * @var string
      */
-    protected $description = 'Generate a module for Cabin';
+    protected $description = 'Generate a module for Cms';
 
     /**
      * Generate a CRUD stack.
@@ -35,14 +35,14 @@ class ModuleMake extends Command
 
         $name = ucfirst(str_singular($this->argument('name')));
 
-        $moduleDirectory = base_path('cabin/modules/'.ucfirst(str_plural($name)));
+        $moduleDirectory = base_path('cms/modules/'.ucfirst(str_plural($name)));
 
-        if (!is_dir(base_path('cabin'))) {
-            @mkdir(base_path('cabin'));
+        if (!is_dir(base_path('cms'))) {
+            @mkdir(base_path('cms'));
         }
 
-        if (!is_dir(base_path('cabin/modules'))) {
-            @mkdir(base_path('cabin/modules'));
+        if (!is_dir(base_path('cms/modules'))) {
+            @mkdir(base_path('cms/modules'));
         }
 
         @mkdir($moduleDirectory);
@@ -50,7 +50,7 @@ class ModuleMake extends Command
         @mkdir($moduleDirectory.'/Publishes');
         @mkdir($moduleDirectory.'/Publishes/app/Http', 0777, true);
         @mkdir($moduleDirectory.'/Publishes/routes', 0777, true);
-        @mkdir($moduleDirectory.'/Publishes/app/Http/Controllers/Cabin', 0777, true);
+        @mkdir($moduleDirectory.'/Publishes/app/Http/Controllers/Cms', 0777, true);
         @mkdir($moduleDirectory.'/Publishes/resources/themes/default', 0777, true);
         @mkdir($moduleDirectory.'/Controllers');
         @mkdir($moduleDirectory.'/Services');
@@ -59,7 +59,7 @@ class ModuleMake extends Command
         @mkdir($moduleDirectory.'/Tests');
 
         file_put_contents($moduleDirectory.'/config.php', "<?php \n\n\nreturn [\n\t'asset_path' => __DIR__.'/Assets',\n\t'url' => '".strtolower(str_plural($name))."',\n\t'is_ignored_in_menu' => false\n];");
-        file_put_contents($moduleDirectory.'/Views/menu.blade.php', "<li class=\"@if (Request::is('cabin/".strtolower(str_plural($name))."') || Request::is('cabin/".strtolower(str_plural($name))."/*')) active @endif\"><a href=\"{{ url('cabin/".strtolower(str_plural($name))."') }}\"><span class=\"fa fa-fw fa-file\"></span> ".ucfirst(str_plural($name)).'</a></li>');
+        file_put_contents($moduleDirectory.'/Views/menu.blade.php', "<li class=\"@if (Request::is('cms/".strtolower(str_plural($name))."') || Request::is('cms/".strtolower(str_plural($name))."/*')) active @endif\"><a href=\"{{ url('cms/".strtolower(str_plural($name))."') }}\"><span class=\"fa fa-fw fa-file\"></span> ".ucfirst(str_plural($name)).'</a></li>');
 
         $config = [
             'bootstrap' => false,
@@ -69,11 +69,11 @@ class ModuleMake extends Command
             '_path_views_' => $moduleDirectory.'/Views',
             '_path_tests_' => $moduleDirectory.'/Tests',
             '_path_routes_' => $moduleDirectory.'/Routes/web.php',
-            'routes_prefix' => "<?php \n\nRoute::group(['namespace' => 'Cabin\Modules\\".ucfirst(str_plural($name))."\Controllers', 'prefix' => 'cabin', 'middleware' => ['web', 'auth', 'cabin']], function () { \n\n",
+            'routes_prefix' => "<?php \n\nRoute::group(['namespace' => 'Cms\Modules\\".ucfirst(str_plural($name))."\Controllers', 'prefix' => 'cms', 'middleware' => ['web', 'auth', 'cms']], function () { \n\n",
             'routes_suffix' => "\n\n});",
             '_app_namespace_' => app()->getInstance()->getNamespace(),
-            '_namespace_services_' => 'Cabin\Modules\\'.ucfirst(str_plural($name)).'\Services',
-            '_namespace_controller_' => 'Cabin\Modules\\'.ucfirst(str_plural($name)).'\Controllers',
+            '_namespace_services_' => 'Cms\Modules\\'.ucfirst(str_plural($name)).'\Services',
+            '_namespace_controller_' => 'Cms\Modules\\'.ucfirst(str_plural($name)).'\Controllers',
             '_name_name_' => strtolower($name),
             '_lower_case_' => strtolower($name),
             '_lower_casePlural_' => str_plural(strtolower($name)),
@@ -87,11 +87,11 @@ class ModuleMake extends Command
 
         $appConfig = $config;
         $appConfig['template_source'] = __DIR__.'/../Templates/AppBasic/';
-        $appConfig['_path_controller_'] = $moduleDirectory.'/Publishes/app/Http/Controllers/Cabin';
+        $appConfig['_path_controller_'] = $moduleDirectory.'/Publishes/app/Http/Controllers/Cms';
         $appConfig['_path_views_'] = $moduleDirectory.'/Publishes/resources/themes/default';
         $appConfig['_path_routes_'] = $moduleDirectory.'/Publishes/routes/'.$config['_lower_casePlural_'].'-web.php';
-        $appConfig['_namespace_controller_'] = $config['_app_namespace_'].'Http\Controllers\Cabin';
-        $appConfig['routes_prefix'] = "<?php \n\nRoute::group(['namespace' => 'Cabin', 'middleware' => ['web']], function () {\n\n";
+        $appConfig['_namespace_controller_'] = $config['_app_namespace_'].'Http\Controllers\Cms';
+        $appConfig['routes_prefix'] = "<?php \n\nRoute::group(['namespace' => 'Cms', 'middleware' => ['web']], function () {\n\n";
         $appConfig['routes_suffix'] = "\n\n});";
 
         try {

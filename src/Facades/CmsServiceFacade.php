@@ -1,13 +1,13 @@
 <?php
 
-namespace Yab\Cabin\Facades;
+namespace Grafite\Cms\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
-class CabinServiceFacade extends Facade
+class CmsServiceFacade extends Facade
 {
     protected static function getFacadeAccessor()
     {
-        return 'CabinService';
+        return 'CmsService';
     }
 }

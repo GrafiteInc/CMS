@@ -1,10 +1,10 @@
 <?php
 
-namespace Yab\Cabin\Services;
+namespace Grafite\Cms\Services;
 
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Schema;
-use Yab\Cabin\Models\Analytics;
+use Grafite\Cms\Models\Analytics;
 
 class AnalyticsService
 {
@@ -26,7 +26,7 @@ class AnalyticsService
             'time' => $request->server('REQUEST_TIME', null),
         ]);
 
-        if (Schema::hasTable(config('cabin.db-prefix', '').'analytics')) {
+        if (Schema::hasTable(config('cms.db-prefix', '').'analytics')) {
             $this->model->create([
                 'data' => $requestData,
             ]);

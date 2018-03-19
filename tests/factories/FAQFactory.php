@@ -6,7 +6,7 @@
 |--------------------------------------------------------------------------
 */
 
-$factory->define(\Yab\Cabin\Models\FAQ::class, function (Faker\Generator $faker) {
+$factory->define(\Grafite\Cms\Models\FAQ::class, function (Faker\Generator $faker) {
     return [
         'id' => 1,
         'question' => 'what\'s this?',

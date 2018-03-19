@@ -1,1 +1,1 @@
-@extends('cabin::layouts.dashboard')
+@extends('cms::layouts.dashboard')

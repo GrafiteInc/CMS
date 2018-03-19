@@ -45,7 +45,7 @@ if (typeof linkList != 'undefined' && linkList != null) {
             set: function (sortable) {
                 var _order = sortable.toArray();
                 $.ajax({
-                    url: _cabinUrl + '/menus/' + _id + '/order',
+                    url: _cmsUrl + '/menus/' + _id + '/order',
                     type: 'put',
                     data: {
                         _token: _token,
@@ -106,7 +106,7 @@ $(function () {
 
         if (_images.length > 0) {
             $('#bulkImageDeleteModal').modal('toggle');
-            var _deleteUrl = _url + '/cabin/images/bulk-delete/' + _images.join('-')
+            var _deleteUrl = _url + '/cms/images/bulk-delete/' + _images.join('-')
             $('#bulkImageDelete').attr('href', _deleteUrl);
         }
     });

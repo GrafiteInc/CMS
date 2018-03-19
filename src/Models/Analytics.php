@@ -1,8 +1,8 @@
 <?php
 
-namespace Yab\Cabin\Models;
+namespace Grafite\Cms\Models;
 
-class Analytics extends CabinModel
+class Analytics extends CmsModel
 {
     public $table = 'analytics';
 

@@ -5,22 +5,22 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
 
-        <title>Cabin: {{ ucfirst(request()->segment(2)) }}</title>
+        <title>Cms: {{ ucfirst(request()->segment(2)) }}</title>
 
-        <link rel="icon" type="image/ico" href="{!! Cabin::asset('images/favicon.ico', 'image/ico') !!}?v2">
-        <link rel="icon" type="image/png" sizes="32x32" href="{!! Cabin::asset('images/favicon-32x32.png', 'image/png') !!}?v2">
-        <link rel="icon" type="image/png" sizes="96x96" href="{!! Cabin::asset('images/favicon-96x96.png', 'image/png') !!}?v2">
-        <link rel="icon" type="image/png" sizes="16x16" href="{!! Cabin::asset('images/favicon-16x16.png', 'image/png') !!}?v2">
+        <link rel="icon" type="image/ico" href="{!! Cms::asset('images/favicon.ico', 'image/ico') !!}?v2">
+        <link rel="icon" type="image/png" sizes="32x32" href="{!! Cms::asset('images/favicon-32x32.png', 'image/png') !!}?v2">
+        <link rel="icon" type="image/png" sizes="96x96" href="{!! Cms::asset('images/favicon-96x96.png', 'image/png') !!}?v2">
+        <link rel="icon" type="image/png" sizes="16x16" href="{!! Cms::asset('images/favicon-16x16.png', 'image/png') !!}?v2">
 
         <!-- Bootstrap -->
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
         <!-- Bootstrap Theme -->
-        <link rel="stylesheet" type="text/css" href="{!! Cabin::asset('themes/bootstrap-'.config('cabin.backend-theme', 'united').'.css', 'text/css') !!}">
+        <link rel="stylesheet" type="text/css" href="{!! Cms::asset('themes/bootstrap-'.config('cms.backend-theme', 'united').'.css', 'text/css') !!}">
 
         <!-- App style -->
-        <link rel="stylesheet" type="text/css" href="{!! Cabin::asset('dist/css/all.css', 'text/css') !!}">
+        <link rel="stylesheet" type="text/css" href="{!! Cms::asset('dist/css/all.css', 'text/css') !!}">
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -35,21 +35,21 @@
 
             var _token = '{!! csrf_token() !!}';
             var _url = '{!! url("/") !!}';
-            var _pixabayKey = '{!! config('cabin.pixabay', '') !!}';
+            var _pixabayKey = '{!! config('cms.pixabay', '') !!}';
             var _appTimeZone = '{!! config('app.timezone', 'UTC') !!}';
 
         </script>
     </head>
     <body>
 
-        @include('cabin::layouts.loading-overlay')
+        @include('cms::layouts.loading-overlay')
 
-        <div class="cabin-notification">
-            <div class="cabin-notify">
-                <p class="cabin-notify-comment"></p>
+        <div class="cms-notification">
+            <div class="cms-notify">
+                <p class="cms-notify-comment"></p>
             </div>
-            <div class="cabin-notify-closer">
-                <span class="fa fa-close cabin-notify-closer-icon"></span>
+            <div class="cms-notify-closer">
+                <span class="fa fa-close cms-notify-closer-icon"></span>
             </div>
         </div>
 
@@ -62,15 +62,15 @@
         </div>
 
         <script type="text/javascript">
-            var _apiKey = '{!!  config("cabin.api-key") !!}';
-            var _apiToken = '{!!  config("cabin.api-token") !!}';
+            var _apiKey = '{!!  config("cms.api-key") !!}';
+            var _apiToken = '{!!  config("cms.api-token") !!}';
 
             @yield('pre_javascript')
         </script>
-        <script type="text/javascript" src="{!! Cabin::asset('js/jquery.min.js', 'application/javascript') !!}"></script>
-        <script type="text/javascript" src="{!! Cabin::asset('dist/js/all.js', 'application/javascript') !!}"></script>
+        <script type="text/javascript" src="{!! Cms::asset('js/jquery.min.js', 'application/javascript') !!}"></script>
+        <script type="text/javascript" src="{!! Cms::asset('dist/js/all.js', 'application/javascript') !!}"></script>
         <script type="text/javascript">
-            @include('cabin::notifications')
+            @include('cms::notifications')
         </script>
         @yield("javascript")
     </body>

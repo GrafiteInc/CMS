@@ -1,15 +1,15 @@
 <?php
 
-namespace Yab\Cabin\Console;
+namespace Grafite\Cms\Console;
 
-use Artisan;
 use App\Models\Role;
 use App\Models\User;
 use App\Services\UserService;
+use Artisan;
+use Grafite\Builder\Traits\FileMakerTrait;
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Facades\Config;
-use Yab\Laracogs\Traits\FileMakerTrait;
 
 class Setup extends Command
 {
@@ -20,14 +20,14 @@ class Setup extends Command
      *
      * @var string
      */
-    protected $signature = 'cabin:setup';
+    protected $signature = 'grafite:cms';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Cabin will setup your site';
+    protected $description = 'Grafite CMS will setup your site with a CMS (For New Laravel Instances Only!)';
 
     /**
      * Execute the console command.
@@ -37,51 +37,51 @@ class Setup extends Command
     public function handle()
     {
         Artisan::call('vendor:publish', [
-            '--provider' => 'Yab\Cabin\CabinProvider',
+            '--provider' => 'Grafite\Cms\GrafiteCmsProvider',
             '--force' => true,
         ]);
 
         Artisan::call('vendor:publish', [
-            '--provider' => 'Yab\Laracogs\LaracogsProvider',
+            '--provider' => 'Grafite\Builder\GrafiteBuilderProvider',
             '--force' => true,
         ]);
 
         $fileSystem = new Filesystem();
 
-        $files = $fileSystem->allFiles(getcwd().'/vendor/yab/laracogs/src/Packages/Starter');
+        $files = $fileSystem->allFiles(getcwd().'/vendor/grafite/builder/src/Packages/Starter');
 
         $this->line('Copying routes...');
-        $this->copyPreparedFiles(getcwd().'/vendor/yab/laracogs/src/Packages/Starter/routes', base_path('routes'));
+        $this->copyPreparedFiles(getcwd().'/vendor/grafite/builder/src/Packages/Starter/routes', base_path('routes'));
 
         $this->line('Copying config...');
-        $this->copyPreparedFiles(getcwd().'/vendor/yab/laracogs/src/Packages/Starter/config', base_path('config'));
+        $this->copyPreparedFiles(getcwd().'/vendor/grafite/builder/src/Packages/Starter/config', base_path('config'));
 
         $this->line('Copying app/Http...');
-        $this->copyPreparedFiles(getcwd().'/vendor/yab/laracogs/src/Packages/Starter/app/Http', app_path('Http'));
+        $this->copyPreparedFiles(getcwd().'/vendor/grafite/builder/src/Packages/Starter/app/Http', app_path('Http'));
 
         $this->line('Copying app/Events...');
-        $this->copyPreparedFiles(getcwd().'/vendor/yab/laracogs/src/Packages/Starter/app/Events', app_path('Events'));
+        $this->copyPreparedFiles(getcwd().'/vendor/grafite/builder/src/Packages/Starter/app/Events', app_path('Events'));
 
         $this->line('Copying app/Listeners...');
-        $this->copyPreparedFiles(getcwd().'/vendor/yab/laracogs/src/Packages/Starter/app/Listeners', app_path('Listeners'));
+        $this->copyPreparedFiles(getcwd().'/vendor/grafite/builder/src/Packages/Starter/app/Listeners', app_path('Listeners'));
 
         $this->line('Copying app/Notifications...');
-        $this->copyPreparedFiles(getcwd().'/vendor/yab/laracogs/src/Packages/Starter/app/Notifications', app_path('Notifications'));
+        $this->copyPreparedFiles(getcwd().'/vendor/grafite/builder/src/Packages/Starter/app/Notifications', app_path('Notifications'));
 
         $this->line('Copying app/Models...');
-        $this->copyPreparedFiles(getcwd().'/vendor/yab/laracogs/src/Packages/Starter/app/Models', app_path('Models'));
+        $this->copyPreparedFiles(getcwd().'/vendor/grafite/builder/src/Packages/Starter/app/Models', app_path('Models'));
 
         $this->line('Copying app/Services...');
-        $this->copyPreparedFiles(getcwd().'/vendor/yab/laracogs/src/Packages/Starter/app/Services', app_path('Services'));
+        $this->copyPreparedFiles(getcwd().'/vendor/grafite/builder/src/Packages/Starter/app/Services', app_path('Services'));
 
         $this->line('Copying database...');
-        $this->copyPreparedFiles(getcwd().'/vendor/yab/laracogs/src/Packages/Starter/database', base_path('database'));
+        $this->copyPreparedFiles(getcwd().'/vendor/grafite/builder/src/Packages/Starter/database', base_path('database'));
 
         $this->line('Copying resources/views...');
-        $this->copyPreparedFiles(getcwd().'/vendor/yab/laracogs/src/Packages/Starter/resources/views', base_path('resources/views'));
+        $this->copyPreparedFiles(getcwd().'/vendor/grafite/builder/src/Packages/Starter/resources/views', base_path('resources/views'));
 
         $this->line('Copying tests...');
-        $this->copyPreparedFiles(getcwd().'/vendor/yab/laracogs/src/Packages/Starter/tests', base_path('tests'));
+        $this->copyPreparedFiles(getcwd().'/vendor/grafite/builder/src/Packages/Starter/tests', base_path('tests'));
 
         $this->fileManager();
 
@@ -123,7 +123,7 @@ class Setup extends Command
             }
             $service->create($user, 'admin', 'admin', false);
 
-            $this->info('Finished setting up your site with Cabin!');
+            $this->info('Finished setting up your site with Grafite CMS!');
             $this->line('You can now login with the following username and password:');
             $this->comment('admin@example.com');
             $this->comment('admin');
@@ -153,16 +153,16 @@ class Setup extends Command
 
         // Route setup
         $routeContents = file_get_contents(app_path('Providers/RouteServiceProvider.php'));
-        $routeContents = str_replace("->group(base_path('routes/web.php'));", "->group(function() { \n\t\t\trequire base_path('routes/web.php');\n\t\t\trequire base_path('routes/cabin.php'); });", $routeContents);
+        $routeContents = str_replace("->group(base_path('routes/web.php'));", "->group(function() { \n\t\t\trequire base_path('routes/web.php');\n\t\t\trequire base_path('routes/cms.php'); });", $routeContents);
         file_put_contents(app_path('Providers/RouteServiceProvider.php'), $routeContents);
 
         $routeToDashboardContents = file_get_contents(base_path('routes/web.php'));
-        $routeToDashboardContents = str_replace("Route::get('/dashboard', 'PagesController@dashboard');", "Route::get('/dashboard', function(){ return Redirect::to('cabin/dashboard'); });", $routeToDashboardContents);
+        $routeToDashboardContents = str_replace("Route::get('/dashboard', 'PagesController@dashboard');", "Route::get('/dashboard', function(){ return Redirect::to('cms/dashboard'); });", $routeToDashboardContents);
         file_put_contents(base_path('routes/web.php'), $routeToDashboardContents);
 
         // Kernel setup
         $routeContents = file_get_contents(app_path('Http/Kernel.php'));
-        $routeContents = str_replace("'auth' => \Illuminate\Auth\Middleware\Authenticate::class,", "'auth' => \Illuminate\Auth\Middleware\Authenticate::class,\n\t\t'cabin' => \App\Http\Middleware\Cabin::class,\n\t\t'cabin-api' => \App\Http\Middleware\CabinApi::class,\n\t\t'cabin-analytics' => \Yab\Cabin\Middleware\CabinAnalytics::class,\n\t\t'cabin-language' => \App\Http\Middleware\CabinLanguage::class,\n\t\t'admin' => \App\Http\Middleware\Admin::class,\n\t\t'active' => \App\Http\Middleware\Active::class,", $routeContents);
+        $routeContents = str_replace("'auth' => \Illuminate\Auth\Middleware\Authenticate::class,", "'auth' => \Illuminate\Auth\Middleware\Authenticate::class,\n\t\t'cms' => \App\Http\Middleware\GrafiteCms::class,\n\t\t'cms-api' => \App\Http\Middleware\GrafiteCmsApi::class,\n\t\t'cms-analytics' => \Grafite\Cms\Middleware\GrafiteCmsAnalytics::class,\n\t\t'cms-language' => \App\Http\Middleware\GrafiteCmsLanguage::class,\n\t\t'admin' => \App\Http\Middleware\Admin::class,\n\t\t'active' => \App\Http\Middleware\Active::class,", $routeContents);
         file_put_contents(app_path('Http/Kernel.php'), $routeContents);
 
         $fileSystem = new Filesystem();
@@ -181,7 +181,7 @@ class Setup extends Command
 
         // AuthProviders
         $authProviderContents = file_get_contents(app_path('Providers/AuthServiceProvider.php'));
-        $authProviderContents = str_replace('$this->registerPolicies();', "\$this->registerPolicies();\n\t\t\Gate::define('cabin', function (\$user) {\n\t\t\treturn (\$user->roles->first()->name === 'admin');\n\t\t});\n\t\t\Gate::define('admin', function (\$user) {\n\t\t\treturn (\$user->roles->first()->name === 'admin');\n\t\t});", $authProviderContents);
+        $authProviderContents = str_replace('$this->registerPolicies();', "\$this->registerPolicies();\n\t\t\Gate::define('cms', function (\$user) {\n\t\t\treturn (\$user->roles->first()->name === 'admin');\n\t\t});\n\t\t\Gate::define('admin', function (\$user) {\n\t\t\treturn (\$user->roles->first()->name === 'admin');\n\t\t});", $authProviderContents);
         file_put_contents(app_path('Providers/AuthServiceProvider.php'), $authProviderContents);
 
         // Remove the teams
@@ -302,7 +302,7 @@ public function leaveAllTeams($userId)
         file_put_contents(base_path('resources/assets/sass/app.scss'), $css);
 
         $composer = file_get_contents(base_path('composer.json'));
-        $composer = str_replace('"App\\": "app/",', '"App\\": "app/",'."\n".'"Cabin\\Modules\\": "cabin/modules/",', $composer);
+        $composer = str_replace('"App\\": "app/",', '"App\\": "app/",'."\n".'"Cms\\Modules\\": "cms/modules/",', $composer);
         file_put_contents(base_path('composer.json'), $composer);
     }
 

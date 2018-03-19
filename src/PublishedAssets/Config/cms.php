@@ -2,7 +2,7 @@
 
 /*
  * --------------------------------------------------------------------------
- * Cabin Config
+ * Grafite CMS Config
  * --------------------------------------------------------------------------
 */
 
@@ -46,7 +46,7 @@ return [
      * --------------------------------------------------------------------------
     */
 
-    'frontend-namespace' => '\App\Http\Controllers\Cabin',
+    'frontend-namespace' => '\App\Http\Controllers\Cms',
     'frontend-theme' => 'default',
 
     /*
@@ -56,7 +56,7 @@ return [
     */
 
     'load-modules' => true,
-    'module-directory' => 'cabin/modules',
+    'module-directory' => 'cms/modules',
     'active-core-modules' => [
         'blog',
         'menus',
@@ -99,8 +99,8 @@ return [
      * --------------------------------------------------------------------------
     */
 
-    'backend-title' => 'Cabin',
-    'backend-route-prefix' => 'cabin',
+    'backend-title' => 'Grafite CMS',
+    'backend-route-prefix' => 'cms',
     'backend-theme' => 'united', // cosmo, cyborg, flatly, lumen, paper, sandstone, simplex, united, yeti
     'registration-available' => false,
     'pagination' => 24,
@@ -111,8 +111,8 @@ return [
      * --------------------------------------------------------------------------
     */
 
-    'api-key' => env('QUARX_API_KEY', 'apis-are-cool'),
-    'api-token' => env('QUARX_API_TOKEN', 'cabin-token'),
+    'api-key' => env('CMS_API_KEY', 'apis-are-cool'),
+    'api-token' => env('CMS_API_TOKEN', 'cms-token'),
 
     /*
      * --------------------------------------------------------------------------

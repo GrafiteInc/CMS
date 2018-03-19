@@ -9,8 +9,8 @@ class LinksTest extends TestCase
         parent::setUp();
         $this->withoutMiddleware();
         $this->withoutEvents();
-        factory(\Yab\Cabin\Models\Link::class)->create();
-        factory(\Yab\Cabin\Models\Link::class)->make(['id' => 1]);
+        factory(\Grafite\Cms\Models\Link::class)->create();
+        factory(\Grafite\Cms\Models\Link::class)->make(['id' => 1]);
     }
 
     /*
@@ -21,13 +21,13 @@ class LinksTest extends TestCase
 
     public function testCreate()
     {
-        $response = $this->call('GET', '/cabin/links/create');
+        $response = $this->call('GET', '/cms/links/create');
         $this->assertEquals(200, $response->getStatusCode());
     }
 
     public function testEdit()
     {
-        $response = $this->call('GET', '/cabin/links/1/edit');
+        $response = $this->call('GET', '/cms/links/1/edit');
         $this->assertEquals(200, $response->getStatusCode());
         $response->assertViewHas('links');
     }
@@ -40,16 +40,16 @@ class LinksTest extends TestCase
 
     public function testStore()
     {
-        $link = factory(\Yab\Cabin\Models\Link::class)->make(['id' => 89]);
-        $response = $this->call('POST', '/cabin/links', $link->toArray());
+        $link = factory(\Grafite\Cms\Models\Link::class)->make(['id' => 89]);
+        $response = $this->call('POST', '/cms/links', $link->toArray());
 
         $this->assertEquals(302, $response->getStatusCode());
-        $response->assertRedirect('/cabin/menus/1/edit');
+        $response->assertRedirect('/cms/menus/1/edit');
     }
 
     public function testUpdate()
     {
-        $response = $this->call('PATCH', '/cabin/links/1', [
+        $response = $this->call('PATCH', '/cms/links/1', [
             'name' => 'wtf',
         ]);
 
@@ -58,7 +58,7 @@ class LinksTest extends TestCase
 
     public function testDelete()
     {
-        $response = $this->call('DELETE', '/cabin/links/1');
+        $response = $this->call('DELETE', '/cms/links/1');
         $this->assertEquals(302, $response->getStatusCode());
     }
 }

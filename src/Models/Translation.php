@@ -1,8 +1,8 @@
 <?php
 
-namespace Yab\Cabin\Models;
+namespace Grafite\Cms\Models;
 
-class Translation extends CabinModel
+class Translation extends CmsModel
 {
     public $table = 'translations';
 

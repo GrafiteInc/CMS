@@ -1,4 +1,4 @@
-@extends('cabin::layouts.dashboard')
+@extends('cms::layouts.dashboard')
 
 @section('content')
 
@@ -21,9 +21,9 @@
     </div>
 
     <div class="row">
-        <a class="btn btn-primary pull-right" href="{!! route(config('cabin.backend-route-prefix', 'cabin').'.faqs.create') !!}">Add New</a>
+        <a class="btn btn-primary pull-right" href="{!! route(config('cms.backend-route-prefix', 'cms').'.faqs.create') !!}">Add New</a>
         <div class="raw-m-hide pull-right">
-            {!! Form::open(['url' => 'cabin/faqs/search']) !!}
+            {!! Form::open(['url' => 'cms/faqs/search']) !!}
             <input class="form-control header-input pull-right raw-margin-right-24" name="term" placeholder="Search">
             {!! Form::close() !!}
         </div>
@@ -47,7 +47,7 @@
 
                 @foreach($faqs as $faq)
                     <tr>
-                        <td><a href="{!! route(config('cabin.backend-route-prefix', 'cabin').'.faqs.edit', [$faq->id]) !!}">{!! $faq->question !!}</a></td>
+                        <td><a href="{!! route(config('cms.backend-route-prefix', 'cms').'.faqs.edit', [$faq->id]) !!}">{!! $faq->question !!}</a></td>
                         <td class="raw-m-hide">
                             @if ($faq->is_published)
                                 <span class="fa fa-check"></span>
@@ -56,12 +56,12 @@
                             @endif
                         </td>
                         <td class="text-right">
-                            <form method="post" action="{!! url(config('cabin.backend-route-prefix', 'cabin').'/faqs/'.$faq->id) !!}">
+                            <form method="post" action="{!! url(config('cms.backend-route-prefix', 'cms').'/faqs/'.$faq->id) !!}">
                                 {!! csrf_field() !!}
                                 {!! method_field('DELETE') !!}
                                 <button class="delete-btn btn btn-xs btn-danger pull-right" type="submit"><i class="fa fa-trash"></i> Delete</button>
                             </form>
-                            <a class="btn btn-xs btn-default pull-right raw-margin-right-8" href="{!! route(config('cabin.backend-route-prefix', 'cabin').'.faqs.edit', [$faq->id]) !!}"><i class="fa fa-pencil"></i> Edit</a>
+                            <a class="btn btn-xs btn-default pull-right raw-margin-right-8" href="{!! route(config('cms.backend-route-prefix', 'cms').'.faqs.edit', [$faq->id]) !!}"><i class="fa fa-pencil"></i> Edit</a>
                         </td>
                     </tr>
                 @endforeach

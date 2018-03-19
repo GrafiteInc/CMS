@@ -1,11 +1,11 @@
 <?php
 
-namespace Yab\Cabin\Providers;
+namespace Grafite\Cms\Providers;
 
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Routing\Router;
 
-class CabinRouteProvider extends ServiceProvider
+class CmsRouteProvider extends ServiceProvider
 {
     /**
      * This namespace is applied to the controller routes in your routes file.
@@ -14,7 +14,7 @@ class CabinRouteProvider extends ServiceProvider
      *
      * @var string
      */
-    protected $namespace = 'Yab\Cabin\Controllers';
+    protected $namespace = 'Grafite\Cms\Controllers';
 
     /**
      * Define your route model bindings, pattern filters, etc.

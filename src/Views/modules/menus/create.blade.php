@@ -1,4 +1,4 @@
-@extends('cabin::layouts.dashboard')
+@extends('cms::layouts.dashboard')
 
 @section('content')
 
@@ -6,15 +6,15 @@
         <h1 class="page-header">Menus</h1>
     </div>
 
-    @include('cabin::modules.menus.breadcrumbs', ['location' => ['create']])
+    @include('cms::modules.menus.breadcrumbs', ['location' => ['create']])
 
     <div class="row">
-        {!! Form::open(['route' => config('cabin.backend-route-prefix', 'cabin').'.menus.store', 'class' => 'add']) !!}
+        {!! Form::open(['route' => config('cms.backend-route-prefix', 'cms').'.menus.store', 'class' => 'add']) !!}
 
-            {!! FormMaker::fromTable('menus', Config::get('cabin.forms.menu')) !!}
+            {!! FormMaker::fromTable('menus', Config::get('cms.forms.menu')) !!}
 
             <div class="form-group text-right">
-                <a href="{!! url(config('cabin.backend-route-prefix', 'cabin').'/menus') !!}" class="btn btn-default raw-left">Cancel</a>
+                <a href="{!! url(config('cms.backend-route-prefix', 'cms').'/menus') !!}" class="btn btn-default raw-left">Cancel</a>
                 {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
             </div>
 

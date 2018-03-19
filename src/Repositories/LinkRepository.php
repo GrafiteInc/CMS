@@ -1,8 +1,8 @@
 <?php
 
-namespace Yab\Cabin\Repositories;
+namespace Grafite\Cms\Repositories;
 
-use Yab\Cabin\Models\Link;
+use Grafite\Cms\Models\Link;
 
 class LinkRepository
 {

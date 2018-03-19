@@ -1,4 +1,4 @@
-@extends('cabin-frontend::layout.master')
+@extends('cms-frontend::layout.master')
 
 @section('seoDescription') {{ $page->seo_description }} @endsection
 @section('seoKeywords') {{ $page->seo_keywords }} @endsection
@@ -15,6 +15,6 @@
 
 @endsection
 
-@section('cabin')
+@section('cms')
     @edit('pages', $page->id)
 @endsection

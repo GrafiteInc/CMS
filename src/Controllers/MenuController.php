@@ -1,18 +1,18 @@
 <?php
 
-namespace Yab\Cabin\Controllers;
+namespace Grafite\Cms\Controllers;
 
 use Exception;
 use Illuminate\Http\Request;
-use Cabin;
-use Yab\Cabin\Models\Menu;
-use Yab\Cabin\Repositories\LinkRepository;
-use Yab\Cabin\Repositories\MenuRepository;
-use Yab\Cabin\Requests\MenuRequest;
-use Yab\Cabin\Services\CabinResponseService;
-use Yab\Cabin\Services\ValidationService;
+use Cms;
+use Grafite\Cms\Models\Menu;
+use Grafite\Cms\Repositories\LinkRepository;
+use Grafite\Cms\Repositories\MenuRepository;
+use Grafite\Cms\Requests\MenuRequest;
+use Grafite\Cms\Services\CmsResponseService;
+use Grafite\Cms\Services\ValidationService;
 
-class MenuController extends CabinController
+class MenuController extends GrafiteCmsController
 {
     protected $linkRepository;
 
@@ -33,7 +33,7 @@ class MenuController extends CabinController
     {
         $result = $this->repository->paginated();
 
-        return view('cabin::modules.menus.index')
+        return view('cms::modules.menus.index')
             ->with('menus', $result)
             ->with('pagination', $result->render());
     }
@@ -51,7 +51,7 @@ class MenuController extends CabinController
 
         $result = $this->repository->search($input);
 
-        return view('cabin::modules.menus.index')
+        return view('cms::modules.menus.index')
             ->with('menus', $result[0]->get())
             ->with('pagination', $result[2])
             ->with('term', $result[1]);
@@ -64,7 +64,7 @@ class MenuController extends CabinController
      */
     public function create()
     {
-        return view('cabin::modules.menus.create');
+        return view('cms::modules.menus.create');
     }
 
     /**
@@ -81,16 +81,16 @@ class MenuController extends CabinController
 
             if (!$validation['errors']) {
                 $menu = $this->repository->store($request->all());
-                Cabin::notification('Menu saved successfully.', 'success');
+                Cms::notification('Menu saved successfully.', 'success');
 
                 if (!$menu) {
-                    Cabin::notification('Menu could not be saved.', 'danger');
+                    Cms::notification('Menu could not be saved.', 'danger');
                 }
             } else {
                 return $validation['redirect'];
             }
         } catch (Exception $e) {
-            Cabin::notification($e->getMessage() ?: 'Menu could not be saved.', 'danger');
+            Cms::notification($e->getMessage() ?: 'Menu could not be saved.', 'danger');
         }
 
         return redirect(route($this->routeBase.'.menus.edit', [$menu->id]));
@@ -108,14 +108,14 @@ class MenuController extends CabinController
         $menu = $this->repository->findMenuById($id);
 
         if (empty($menu)) {
-            Cabin::notification('Menu not found', 'warning');
+            Cms::notification('Menu not found', 'warning');
 
             return redirect(route($this->routeBase.'.menus.index'));
         }
 
         $links = $this->linkRepository->getLinksByMenu($menu->id);
 
-        return view('cabin::modules.menus.edit')->with('menu', $menu)->with('links', $links);
+        return view('cms::modules.menus.edit')->with('menu', $menu)->with('links', $links);
     }
 
     /**
@@ -132,19 +132,19 @@ class MenuController extends CabinController
             $menu = $this->repository->findMenuById($id);
 
             if (empty($menu)) {
-                Cabin::notification('Menu not found', 'warning');
+                Cms::notification('Menu not found', 'warning');
 
                 return redirect(route($this->routeBase.'.menus.index'));
             }
 
             $menu = $this->repository->update($menu, $request->all());
-            Cabin::notification('Menu updated successfully.', 'success');
+            Cms::notification('Menu updated successfully.', 'success');
 
             if (!$menu) {
-                Cabin::notification('Menu could not be updated.', 'danger');
+                Cms::notification('Menu could not be updated.', 'danger');
             }
         } catch (Exception $e) {
-            Cabin::notification($e->getMessage() ?: 'Menu could not be updated.', 'danger');
+            Cms::notification($e->getMessage() ?: 'Menu could not be updated.', 'danger');
         }
 
         return redirect(route($this->routeBase.'.menus.edit', [$id]));
@@ -162,14 +162,14 @@ class MenuController extends CabinController
         $menu = $this->repository->findMenuById($id);
 
         if (empty($menu)) {
-            Cabin::notification('Menu not found', 'warning');
+            Cms::notification('Menu not found', 'warning');
 
             return redirect(route($this->routeBase.'.menus.index'));
         }
 
         $menu->delete();
 
-        Cabin::notification('Menu deleted successfully.');
+        Cms::notification('Menu deleted successfully.');
 
         return redirect(route($this->routeBase.'.menus.index'));
     }
@@ -191,6 +191,6 @@ class MenuController extends CabinController
         $menu = $this->repository->findMenuById($id);
         $result =  $this->repository->setOrder($menu, $request->except('_token'));
 
-        return CabinResponseService::apiResponse('success', $result);
+        return CmsResponseService::apiResponse('success', $result);
     }
 }

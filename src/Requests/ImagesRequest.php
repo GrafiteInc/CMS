@@ -1,10 +1,10 @@
 <?php
 
-namespace Yab\Cabin\Requests;
+namespace Grafite\Cms\Requests;
 
 use Auth;
 use Gate;
-use Yab\Cabin\Models\Image;
+use Grafite\Cms\Models\Image;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ImagesRequest extends FormRequest
@@ -17,7 +17,7 @@ class ImagesRequest extends FormRequest
     public function authorize()
     {
         if (config('app.env') !== 'testing') {
-            return Gate::allows('cabin', Auth::user());
+            return Gate::allows('cms', Auth::user());
         }
 
         return true;

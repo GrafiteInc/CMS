@@ -1,4 +1,4 @@
-@extends('cabin::layouts.dashboard')
+@extends('cms::layouts.dashboard')
 
 @section('content')
 
@@ -21,9 +21,9 @@
     </div>
 
     <div class="row">
-        <a class="btn btn-primary pull-right" href="{!! route(config('cabin.backend-route-prefix', 'cabin').'.widgets.create') !!}">Add New</a>
+        <a class="btn btn-primary pull-right" href="{!! route(config('cms.backend-route-prefix', 'cms').'.widgets.create') !!}">Add New</a>
         <div class="raw-m-hide pull-right">
-            {!! Form::open(['url' => 'cabin/widgets/search']) !!}
+            {!! Form::open(['url' => 'cms/widgets/search']) !!}
             <input class="form-control header-input pull-right raw-margin-right-24" name="term" placeholder="Search">
             {!! Form::close() !!}
         </div>
@@ -47,15 +47,15 @@
 
                 @foreach($widgets as $widget)
                     <tr>
-                        <td><a href="{!! route(config('cabin.backend-route-prefix', 'cabin').'.widgets.edit', [$widget->id]) !!}">{!! $widget->name !!}</a></td>
+                        <td><a href="{!! route(config('cms.backend-route-prefix', 'cms').'.widgets.edit', [$widget->id]) !!}">{!! $widget->name !!}</a></td>
                         <td class="raw-m-hide">{!! $widget->slug !!}</td>
                         <td>
-                            <form method="post" action="{!! url(config('cabin.backend-route-prefix', 'cabin').'/widgets/'.$widget->id) !!}">
+                            <form method="post" action="{!! url(config('cms.backend-route-prefix', 'cms').'/widgets/'.$widget->id) !!}">
                                 {!! csrf_field() !!}
                                 {!! method_field('DELETE') !!}
                                 <button class="delete-btn btn btn-xs btn-danger pull-right" type="submit"><i class="fa fa-trash"></i> Delete</button>
                             </form>
-                            <a class="btn btn-xs btn-default pull-right raw-margin-right-8" href="{!! route(config('cabin.backend-route-prefix', 'cabin').'.widgets.edit', [$widget->id]) !!}"><i class="fa fa-pencil"></i> Edit</a>
+                            <a class="btn btn-xs btn-default pull-right raw-margin-right-8" href="{!! route(config('cms.backend-route-prefix', 'cms').'.widgets.edit', [$widget->id]) !!}"><i class="fa fa-pencil"></i> Edit</a>
                         </td>
                     </tr>
                 @endforeach

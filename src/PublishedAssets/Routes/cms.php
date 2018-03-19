@@ -2,11 +2,11 @@
 
     /*
     |--------------------------------------------------------------------------
-    | Cabin Routes
+    | Cms Routes
     |--------------------------------------------------------------------------
     */
 
-    Route::group(['namespace' => 'Cabin', 'middleware' => ['cabin-language', 'cabin-analytics']], function () {
+    Route::group(['namespace' => 'Cms', 'middleware' => ['cms-language', 'cms-analytics']], function () {
         Route::get('', 'PagesController@home');
         Route::get('pages', 'PagesController@all');
         Route::get('page/{url}', 'PagesController@show');

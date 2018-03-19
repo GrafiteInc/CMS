@@ -1,9 +1,9 @@
 <?php
 
-namespace Yab\Cabin\Repositories;
+namespace Grafite\Cms\Repositories;
 
 use Illuminate\Support\Facades\Schema;
-use Yab\Cabin\Models\Widget;
+use Grafite\Cms\Models\Widget;
 
 class WidgetRepository
 {
@@ -39,7 +39,7 @@ class WidgetRepository
             $model = $model->orderBy('created_at', 'desc');
         }
 
-        return $model->paginate(config('cabin.pagination', 25));
+        return $model->paginate(config('cms.pagination', 25));
     }
 
     public function search($input)
@@ -106,8 +106,8 @@ class WidgetRepository
     {
         $payload['name'] = htmlentities($payload['name']);
 
-        if (!empty($payload['lang']) && $payload['lang'] !== config('cabin.default-language', 'en')) {
-            return $this->translationRepo->createOrUpdate($widgets->id, 'Yab\Cabin\Models\Widget', $payload['lang'], $payload);
+        if (!empty($payload['lang']) && $payload['lang'] !== config('cms.default-language', 'en')) {
+            return $this->translationRepo->createOrUpdate($widgets->id, 'Grafite\Cms\Models\Widget', $payload['lang'], $payload);
         } else {
             unset($payload['lang']);
 

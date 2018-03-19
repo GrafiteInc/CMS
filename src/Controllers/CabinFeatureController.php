@@ -1,14 +1,14 @@
 <?php
 
-namespace Yab\Cabin\Controllers;
+namespace Grafite\Cms\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\View;
-use Cabin;
-use Yab\Cabin\Models\Archive;
+use Cms;
+use Grafite\Cms\Models\Archive;
 
-class CabinFeatureController extends CabinController
+class GrafiteCmsFeatureController extends GrafiteCmsController
 {
     public function sendHome()
     {
@@ -34,7 +34,7 @@ class CabinFeatureController extends CabinController
         $modelInstance->fill($archiveData);
         $modelInstance->save();
 
-        Cabin::notification('Reversion was successful', 'success');
+        Cms::notification('Reversion was successful', 'success');
 
         return redirect(URL::previous());
     }
@@ -52,7 +52,7 @@ class CabinFeatureController extends CabinController
         $modelString = str_replace('_', '\\', $entity);
 
         if (!class_exists($modelString)) {
-            Cabin::notification('Could not rollback Model not found', 'warning');
+            Cms::notification('Could not rollback Model not found', 'warning');
 
             return redirect(URL::previous());
         }
@@ -63,7 +63,7 @@ class CabinFeatureController extends CabinController
         $archive = Archive::where('entity_id', $id)->where('entity_type', $modelString)->limit(1)->offset(1)->orderBy('id', 'desc')->first();
 
         if (!$archive) {
-            Cabin::notification('Could not rollback', 'warning');
+            Cms::notification('Could not rollback', 'warning');
 
             return redirect(URL::previous());
         }
@@ -72,7 +72,7 @@ class CabinFeatureController extends CabinController
         $modelInstance->fill($archiveData);
         $modelInstance->save();
 
-        Cabin::notification('Rollback was successful', 'success');
+        Cms::notification('Rollback was successful', 'success');
 
         return redirect(URL::previous());
     }
@@ -87,10 +87,10 @@ class CabinFeatureController extends CabinController
      */
     public function preview($entity, $id)
     {
-        $modelString = 'Yab\Cabin\Models\\'.ucfirst($entity);
+        $modelString = 'Grafite\Cms\Models\\'.ucfirst($entity);
 
         if (!class_exists($modelString)) {
-            $modelString = 'Yab\Cabin\Models\\'.ucfirst($entity).'s';
+            $modelString = 'Grafite\Cms\Models\\'.ucfirst($entity).'s';
         }
 
         $model = new $modelString();
@@ -100,7 +100,7 @@ class CabinFeatureController extends CabinController
             $entity => $modelInstance,
         ];
 
-        if (request('lang') != config('cabin.default-language', Cabin::config('cabin.default-language'))) {
+        if (request('lang') != config('cms.default-language', Cms::config('cms.default-language'))) {
             if ($modelInstance->translation(request('lang'))) {
                 $data = [
                     $entity => $modelInstance->translation(request('lang'))->data,
@@ -108,18 +108,18 @@ class CabinFeatureController extends CabinController
             }
         }
 
-        $view = 'cabin-frontend::'.$entity.'.show';
+        $view = 'cms-frontend::'.$entity.'.show';
 
         if (!View::exists($view)) {
-            $view = 'cabin-frontend::'.$entity.'s.show';
+            $view = 'cms-frontend::'.$entity.'s.show';
         }
 
         if ($entity === 'page') {
-            $view = 'cabin-frontend::pages.'.$modelInstance->template;
+            $view = 'cms-frontend::pages.'.$modelInstance->template;
         }
 
         if ($entity === 'blog') {
-            $view = 'cabin-frontend::blog.'.$modelInstance->template;
+            $view = 'cms-frontend::blog.'.$modelInstance->template;
         }
 
         return view($view, $data);

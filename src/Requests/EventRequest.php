@@ -1,10 +1,10 @@
 <?php
 
-namespace Yab\Cabin\Requests;
+namespace Grafite\Cms\Requests;
 
 use Auth;
 use Gate;
-use Yab\Cabin\Models\Event;
+use Grafite\Cms\Models\Event;
 use Illuminate\Foundation\Http\FormRequest;
 
 class EventRequest extends FormRequest
@@ -17,7 +17,7 @@ class EventRequest extends FormRequest
     public function authorize()
     {
         if (config('app.env') !== 'testing') {
-            return Gate::allows('cabin', Auth::user());
+            return Gate::allows('cms', Auth::user());
         }
 
         return true;

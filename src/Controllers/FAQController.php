@@ -1,16 +1,16 @@
 <?php
 
-namespace Yab\Cabin\Controllers;
+namespace Grafite\Cms\Controllers;
 
 use URL;
-use Cabin;
-use Yab\Cabin\Models\FAQ;
+use Cms;
+use Grafite\Cms\Models\FAQ;
 use Illuminate\Http\Request;
-use Yab\Cabin\Requests\FAQRequest;
-use Yab\Cabin\Repositories\FAQRepository;
-use Yab\Cabin\Services\ValidationService;
+use Grafite\Cms\Requests\FAQRequest;
+use Grafite\Cms\Repositories\FAQRepository;
+use Grafite\Cms\Services\ValidationService;
 
-class FAQController extends CabinController
+class FAQController extends GrafiteCmsController
 {
     public function __construct(FAQRepository $repository)
     {
@@ -28,7 +28,7 @@ class FAQController extends CabinController
     {
         $result = $this->repository->paginated();
 
-        return view('cabin::modules.faqs.index')
+        return view('cms::modules.faqs.index')
             ->with('faqs', $result)
             ->with('pagination', $result->render());
     }
@@ -46,7 +46,7 @@ class FAQController extends CabinController
 
         $result = $this->repository->search($input);
 
-        return view('cabin::modules.faqs.index')
+        return view('cms::modules.faqs.index')
             ->with('faqs', $result[0]->get())
             ->with('pagination', $result[2])
             ->with('term', $result[1]);
@@ -59,7 +59,7 @@ class FAQController extends CabinController
      */
     public function create()
     {
-        return view('cabin::modules.faqs.create');
+        return view('cms::modules.faqs.create');
     }
 
     /**
@@ -75,13 +75,13 @@ class FAQController extends CabinController
 
         if (!$validation['errors']) {
             $faq = $this->repository->store($request->all());
-            Cabin::notification('FAQ saved successfully.', 'success');
+            Cms::notification('FAQ saved successfully.', 'success');
         } else {
             return $validation['redirect'];
         }
 
         if (!$faq) {
-            Cabin::notification('FAQ could not be saved.', 'warning');
+            Cms::notification('FAQ could not be saved.', 'warning');
         }
 
         return redirect(route($this->routeBase.'.faqs.edit', [$faq->id]));
@@ -99,12 +99,12 @@ class FAQController extends CabinController
         $faq = $this->repository->findFAQById($id);
 
         if (empty($faq)) {
-            Cabin::notification('FAQ not found', 'warning');
+            Cms::notification('FAQ not found', 'warning');
 
             return redirect(route($this->routeBase.'.faqs.index'));
         }
 
-        return view('cabin::modules.faqs.edit')->with('faq', $faq);
+        return view('cms::modules.faqs.edit')->with('faq', $faq);
     }
 
     /**
@@ -120,7 +120,7 @@ class FAQController extends CabinController
         $faq = $this->repository->findFAQById($id);
 
         if (empty($faq)) {
-            Cabin::notification('FAQ not found', 'warning');
+            Cms::notification('FAQ not found', 'warning');
 
             return redirect(route($this->routeBase.'.faqs.index'));
         }
@@ -129,10 +129,10 @@ class FAQController extends CabinController
 
         if (!$validation['errors']) {
             $faq = $this->repository->update($faq, $request->all());
-            Cabin::notification('FAQ updated successfully.', 'success');
+            Cms::notification('FAQ updated successfully.', 'success');
 
             if (!$faq) {
-                Cabin::notification('FAQ could not be saved.', 'warning');
+                Cms::notification('FAQ could not be saved.', 'warning');
             }
         } else {
             return $validation['redirect'];
@@ -153,14 +153,14 @@ class FAQController extends CabinController
         $faq = $this->repository->findFAQById($id);
 
         if (empty($faq)) {
-            Cabin::notification('FAQ not found', 'warning');
+            Cms::notification('FAQ not found', 'warning');
 
             return redirect(route($this->routeBase.'.faqs.index'));
         }
 
         $faq->delete();
 
-        Cabin::notification('FAQ deleted successfully.', 'success');
+        Cms::notification('FAQ deleted successfully.', 'success');
 
         return redirect(route($this->routeBase.'.faqs.index'));
     }

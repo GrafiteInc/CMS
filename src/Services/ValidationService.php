@@ -1,6 +1,6 @@
 <?php
 
-namespace Yab\Cabin\Services;
+namespace Grafite\Cms\Services;
 
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Input;
@@ -29,7 +29,7 @@ class ValidationService
         if (is_array($form)) {
             $fields = $form;
         } else {
-            $conditions = Cabin::config('validation.'.$form);
+            $conditions = Cms::config('validation.'.$form);
             $fields = $conditions;
         }
 

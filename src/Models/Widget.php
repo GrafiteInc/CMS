@@ -1,10 +1,10 @@
 <?php
 
-namespace Yab\Cabin\Models;
+namespace Grafite\Cms\Models;
 
-use Yab\Cabin\Traits\Translatable;
+use Grafite\Cms\Traits\Translatable;
 
-class Widget extends CabinModel
+class Widget extends CmsModel
 {
     use Translatable;
 

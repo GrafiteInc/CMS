@@ -1,4 +1,4 @@
-@extends('cabin-frontend::layout.master')
+@extends('cms-frontend::layout.master')
 
 @section('seoDescription') A delightful collection of posts by me over the years. Feel free to browse through the past and present while I build software for the future. @endsection
 @section('seoKeywords') @endsection
@@ -14,7 +14,7 @@
             @foreach($blogs as $blog)
                 <div class="card entry-row">
                     <div class="card-header">
-                        @if (config('app.locale') !== config('cabin.default-language'))
+                        @if (config('app.locale') !== config('cms.default-language'))
                             @if ($blog->translation(config('app.locale')))
                                 <a href="{!! URL::to('blog/'.$blog->translation(config('app.locale'))->data->url) !!}">{!! $blog->translation(config('app.locale'))->data->title !!} - <span>{!! $blog->published_at !!}</span></a>
                             @endif
@@ -42,6 +42,6 @@
 
 @endsection
 
-@section('cabin')
+@section('cms')
     <li class="nav-text">@edit('blog')</li>
 @endsection

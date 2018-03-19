@@ -2,13 +2,13 @@
 
 namespace _namespace_controller_;
 
-use Cabin;
+use Cms;
 use CryptoService;
 use Illuminate\Http\Request;
 use _app_namespace_Http\Controllers\Controller;
-use Cabin\Modules\_ucCamel_casePlural_\Services\_camel_case_Service;
-use Cabin\Modules\_ucCamel_casePlural_\Requests\_camel_case_CreateRequest;
-use Cabin\Modules\_ucCamel_casePlural_\Requests\_camel_case_UpdateRequest;
+use Cms\Modules\_ucCamel_casePlural_\Services\_camel_case_Service;
+use Cms\Modules\_ucCamel_casePlural_\Requests\_camel_case_CreateRequest;
+use Cms\Modules\_ucCamel_casePlural_\Requests\_camel_case_UpdateRequest;
 
 class _ucCamel_casePlural_Controller extends Controller
 {
@@ -65,12 +65,12 @@ class _ucCamel_casePlural_Controller extends Controller
         $result = $this->service->create($request->except('_token'));
 
         if ($result) {
-            Cabin::notification('Successfully created', 'success');
-            return redirect(config('cabin.backend-route-prefix', 'cabin').'/_lower_casePlural_/'.$result->id.'/edit');
+            Cms::notification('Successfully created', 'success');
+            return redirect(config('cms.backend-route-prefix', 'cms').'/_lower_casePlural_/'.$result->id.'/edit');
         }
 
-        Cabin::notification('Failed to create', 'warning');
-        return redirect(config('cabin.backend-route-prefix', 'cabin').'/_lower_casePlural_');
+        Cms::notification('Failed to create', 'warning');
+        return redirect(config('cms.backend-route-prefix', 'cms').'/_lower_casePlural_');
     }
 
     /**
@@ -109,11 +109,11 @@ class _ucCamel_casePlural_Controller extends Controller
         $result = $this->service->update($id, $request->except(['_token', '_method']));
 
         if ($result) {
-            Cabin::notification('Successfully updated', 'success');
+            Cms::notification('Successfully updated', 'success');
             return back();
         }
 
-        Cabin::notification('Failed to update', 'warning');
+        Cms::notification('Failed to update', 'warning');
         return back();
     }
 
@@ -128,11 +128,11 @@ class _ucCamel_casePlural_Controller extends Controller
         $result = $this->service->destroy($id);
 
         if ($result) {
-            Cabin::notification('Successfully deleted', 'success');
-            return redirect(config('cabin.backend-route-prefix', 'cabin').'/_lower_casePlural_');
+            Cms::notification('Successfully deleted', 'success');
+            return redirect(config('cms.backend-route-prefix', 'cms').'/_lower_casePlural_');
         }
 
-        Cabin::notification('Failed to delete', 'warning');
-        return redirect(config('cabin.backend-route-prefix', 'cabin').'/_lower_casePlural_');
+        Cms::notification('Failed to delete', 'warning');
+        return redirect(config('cms.backend-route-prefix', 'cms').'/_lower_casePlural_');
     }
 }

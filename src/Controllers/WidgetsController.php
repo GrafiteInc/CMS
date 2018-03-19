@@ -1,16 +1,16 @@
 <?php
 
-namespace Yab\Cabin\Controllers;
+namespace Grafite\Cms\Controllers;
 
 use URL;
-use Cabin;
+use Cms;
 use Illuminate\Http\Request;
-use Yab\Cabin\Models\Widget;
-use Yab\Cabin\Requests\WidgetsRequest;
-use Yab\Cabin\Services\ValidationService;
-use Yab\Cabin\Repositories\WidgetRepository;
+use Grafite\Cms\Models\Widget;
+use Grafite\Cms\Requests\WidgetsRequest;
+use Grafite\Cms\Services\ValidationService;
+use Grafite\Cms\Repositories\WidgetRepository;
 
-class WidgetsController extends CabinController
+class WidgetsController extends GrafiteCmsController
 {
     public function __construct(WidgetRepository $repository)
     {
@@ -28,7 +28,7 @@ class WidgetsController extends CabinController
     {
         $result = $this->repository->paginated();
 
-        return view('cabin::modules.widgets.index')
+        return view('cms::modules.widgets.index')
             ->with('widgets', $result)
             ->with('pagination', $result->render());
     }
@@ -46,7 +46,7 @@ class WidgetsController extends CabinController
 
         $result = $this->repository->search($input);
 
-        return view('cabin::modules.widgets.index')
+        return view('cms::modules.widgets.index')
             ->with('widgets', $result[0]->get())
             ->with('pagination', $result[2])
             ->with('term', $result[1]);
@@ -59,7 +59,7 @@ class WidgetsController extends CabinController
      */
     public function create()
     {
-        return view('cabin::modules.widgets.create');
+        return view('cms::modules.widgets.create');
     }
 
     /**
@@ -79,7 +79,7 @@ class WidgetsController extends CabinController
             return $validation['redirect'];
         }
 
-        Cabin::notification('Widgets saved successfully.', 'success');
+        Cms::notification('Widgets saved successfully.', 'success');
 
         return redirect(route($this->routeBase.'.widgets.edit', [$widgets->id]));
     }
@@ -96,12 +96,12 @@ class WidgetsController extends CabinController
         $widgets = $this->repository->findWidgetsById($id);
 
         if (empty($widgets)) {
-            Cabin::notification('Widgets not found', 'warning');
+            Cms::notification('Widgets not found', 'warning');
 
             return redirect(route($this->routeBase.'.widgets.index'));
         }
 
-        return view('cabin::modules.widgets.edit')->with('widgets', $widgets);
+        return view('cms::modules.widgets.edit')->with('widgets', $widgets);
     }
 
     /**
@@ -117,14 +117,14 @@ class WidgetsController extends CabinController
         $widgets = $this->repository->findWidgetsById($id);
 
         if (empty($widgets)) {
-            Cabin::notification('Widgets not found', 'warning');
+            Cms::notification('Widgets not found', 'warning');
 
             return redirect(route($this->routeBase.'.widgets.index'));
         }
 
         $widgets = $this->repository->update($widgets, $request->all());
 
-        Cabin::notification('Widgets updated successfully.', 'success');
+        Cms::notification('Widgets updated successfully.', 'success');
 
         return redirect(URL::previous());
     }
@@ -141,14 +141,14 @@ class WidgetsController extends CabinController
         $widgets = $this->repository->findWidgetsById($id);
 
         if (empty($widgets)) {
-            Cabin::notification('Widgets not found', 'warning');
+            Cms::notification('Widgets not found', 'warning');
 
             return redirect(route($this->routeBase.'.widgets.index'));
         }
 
         $widgets->delete();
 
-        Cabin::notification('Widgets deleted successfully.', 'success');
+        Cms::notification('Widgets deleted successfully.', 'success');
 
         return redirect(route($this->routeBase.'.widgets.index'));
     }

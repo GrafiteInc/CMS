@@ -1,6 +1,6 @@
 <?php
 
-namespace Yab\Cabin\Console;
+namespace Grafite\Cms\Console;
 
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
@@ -19,7 +19,7 @@ class ThemePublish extends Command
      *
      * @var string
      */
-    protected $description = 'Publish a Cabin theme\'s public assets';
+    protected $description = 'Publish a Cms theme\'s public assets';
 
     /**
      * Execute the console command.

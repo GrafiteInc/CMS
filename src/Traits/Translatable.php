@@ -1,11 +1,11 @@
 <?php
 
-namespace Yab\Cabin\Traits;
+namespace Grafite\Cms\Traits;
 
-use Yab\Cabin\Models\Translation;
-use Yab\Cabin\Services\CabinService;
+use Grafite\Cms\Models\Translation;
+use Grafite\Cms\Services\CmsService;
 use Stichoza\GoogleTranslate\TranslateClient;
-use Yab\Cabin\Repositories\TranslationRepository;
+use Grafite\Cms\Repositories\TranslationRepository;
 
 trait Translatable
 {
@@ -72,7 +72,7 @@ trait Translatable
      */
     public function afterCreate($payload)
     {
-        if (config('cabin.auto-translate', false)) {
+        if (config('cms.auto-translate', false)) {
             $entry = $payload->toArray();
 
             unset($entry['created_at']);
@@ -82,9 +82,9 @@ trait Translatable
             unset($entry['published_at']);
             unset($entry['id']);
 
-            foreach (config('cabin.languages') as $code => $language) {
-                if ($code != config('cabin.default-language')) {
-                    $tr = new TranslateClient(config('cabin.default-language'), $code);
+            foreach (config('cms.languages') as $code => $language) {
+                if ($code != config('cms.default-language')) {
+                    $tr = new TranslateClient(config('cms.default-language'), $code);
                     $translation = [
                         'lang' => $code,
                         'template' => 'show',
@@ -104,7 +104,7 @@ trait Translatable
                     }
 
                     if (isset($translation['url'])) {
-                        $translation['url'] = app(CabinService::class)->convertToURL($translation['url']);
+                        $translation['url'] = app(CmsService::class)->convertToURL($translation['url']);
                     }
 
                     $entityId = $payload->id;

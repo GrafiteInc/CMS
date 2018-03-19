@@ -1,4 +1,4 @@
-@extends('cabin-frontend::layout.master')
+@extends('cms-frontend::layout.master')
 
 @section('content')
 
@@ -11,7 +11,7 @@
     </div>
 
     @foreach($faqs as $faq)
-        @if (config('app.locale') !== config('cabin.default-language'))
+        @if (config('app.locale') !== config('cms.default-language'))
             <blockquote>{!! $faq->translationData(config('app.locale'))->question !!}</blockquote>
             <div class="well">
                 {!! $faq->translationData(config('app.locale'))->answer !!}
@@ -30,6 +30,6 @@
 
 @endsection
 
-@section('cabin')
+@section('cms')
     <li class="nav-text">@edit('faqs')</li>
 @endsection

@@ -6,7 +6,7 @@
 |--------------------------------------------------------------------------
 */
 
-$factory->define(\Yab\Cabin\Models\Menu::class, function (Faker\Generator $faker) {
+$factory->define(\Grafite\Cms\Models\Menu::class, function (Faker\Generator $faker) {
     return [
 
         'id' => 1,

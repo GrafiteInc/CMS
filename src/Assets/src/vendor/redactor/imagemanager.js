@@ -26,7 +26,7 @@ RedactorPlugins.imagemanager = function()
                 dataType: "json",
                 cache: false,
                 headers: {
-                    Cabin: _apiKey,
+                    Cms: _apiKey,
                     Authorization: 'Bearer '+_apiToken
                 },
                 url: this.opts.imageManagerJson,

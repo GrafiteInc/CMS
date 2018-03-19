@@ -10,7 +10,7 @@ class CreateArchivesTable extends Migration
      */
     public function up()
     {
-        Schema::create(config('cabin.db-prefix', '').'archives', function (Blueprint $table) {
+        Schema::create(config('cms.db-prefix', '').'archives', function (Blueprint $table) {
             $table->increments('id');
             $table->string('token');
             $table->integer('entity_id');
@@ -25,6 +25,6 @@ class CreateArchivesTable extends Migration
      */
     public function down()
     {
-        Schema::drop(config('cabin.db-prefix', '').'archives');
+        Schema::drop(config('cms.db-prefix', '').'archives');
     }
 }

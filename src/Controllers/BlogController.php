@@ -1,16 +1,16 @@
 <?php
 
-namespace Yab\Cabin\Controllers;
+namespace Grafite\Cms\Controllers;
 
 use URL;
-use Cabin;
-use Yab\Cabin\Models\Blog;
+use Cms;
+use Grafite\Cms\Models\Blog;
 use Illuminate\Http\Request;
-use Yab\Cabin\Requests\BlogRequest;
-use Yab\Cabin\Services\ValidationService;
-use Yab\Cabin\Repositories\BlogRepository;
+use Grafite\Cms\Requests\BlogRequest;
+use Grafite\Cms\Services\ValidationService;
+use Grafite\Cms\Repositories\BlogRepository;
 
-class BlogController extends CabinController
+class BlogController extends GrafiteCmsController
 {
     public function __construct(BlogRepository $repository)
     {
@@ -28,7 +28,7 @@ class BlogController extends CabinController
     {
         $blogs = $this->repository->paginated();
 
-        return view('cabin::modules.blogs.index')
+        return view('cms::modules.blogs.index')
             ->with('blogs', $blogs)
             ->with('pagination', $blogs->render());
     }
@@ -46,7 +46,7 @@ class BlogController extends CabinController
 
         $result = $this->repository->search($input);
 
-        return view('cabin::modules.blogs.index')
+        return view('cms::modules.blogs.index')
             ->with('blogs', $result[0]->get())
             ->with('pagination', $result[2])
             ->with('term', $result[1]);
@@ -59,7 +59,7 @@ class BlogController extends CabinController
      */
     public function create()
     {
-        return view('cabin::modules.blogs.create');
+        return view('cms::modules.blogs.create');
     }
 
     /**
@@ -75,13 +75,13 @@ class BlogController extends CabinController
 
         if (!$validation['errors']) {
             $blog = $this->repository->store($request->all());
-            Cabin::notification('Blog saved successfully.', 'success');
+            Cms::notification('Blog saved successfully.', 'success');
         } else {
             return $validation['redirect'];
         }
 
         if (!$blog) {
-            Cabin::notification('Blog could not be saved.', 'warning');
+            Cms::notification('Blog could not be saved.', 'warning');
         }
 
         return redirect(route($this->routeBase.'.blog.edit', [$blog->id]));
@@ -99,12 +99,12 @@ class BlogController extends CabinController
         $blog = $this->repository->findBlogById($id);
 
         if (empty($blog)) {
-            Cabin::notification('Blog not found', 'warning');
+            Cms::notification('Blog not found', 'warning');
 
             return redirect(route($this->routeBase.'.blog.index'));
         }
 
-        return view('cabin::modules.blogs.edit')->with('blog', $blog);
+        return view('cms::modules.blogs.edit')->with('blog', $blog);
     }
 
     /**
@@ -120,7 +120,7 @@ class BlogController extends CabinController
         $blog = $this->repository->findBlogById($id);
 
         if (empty($blog)) {
-            Cabin::notification('Blog not found', 'warning');
+            Cms::notification('Blog not found', 'warning');
 
             return redirect(route($this->routeBase.'.blog.index'));
         }
@@ -130,10 +130,10 @@ class BlogController extends CabinController
         if (!$validation['errors']) {
             $blog = $this->repository->update($blog, $request->all());
 
-            Cabin::notification('Blog updated successfully.', 'success');
+            Cms::notification('Blog updated successfully.', 'success');
 
             if (! $blog) {
-                Cabin::notification('Blog could not be saved.', 'warning');
+                Cms::notification('Blog could not be saved.', 'warning');
             }
         } else {
             return $validation['redirect'];
@@ -154,14 +154,14 @@ class BlogController extends CabinController
         $blog = $this->repository->findBlogById($id);
 
         if (empty($blog)) {
-            Cabin::notification('Blog not found', 'warning');
+            Cms::notification('Blog not found', 'warning');
 
             return redirect(route($this->routeBase.'.blog.index'));
         }
 
         $blog->delete();
 
-        Cabin::notification('Blog deleted successfully.', 'success');
+        Cms::notification('Blog deleted successfully.', 'success');
 
         return redirect(route($this->routeBase.'.blog.index'));
     }
@@ -177,7 +177,7 @@ class BlogController extends CabinController
     {
         $blog = $this->repository->findBlogById($id);
 
-        return view('cabin::modules.blogs.history')
+        return view('cms::modules.blogs.history')
             ->with('blog', $blog);
     }
 }

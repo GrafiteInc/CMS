@@ -1,9 +1,9 @@
 <?php
 
-namespace Yab\Cabin\Repositories;
+namespace Grafite\Cms\Repositories;
 
 use Illuminate\Support\Facades\Schema;
-use Yab\Cabin\Models\Menu;
+use Grafite\Cms\Models\Menu;
 
 class MenuRepository
 {
@@ -32,7 +32,7 @@ class MenuRepository
             $model = $model->orderBy('created_at', 'desc');
         }
 
-        return $model->paginate(config('cabin.pagination', 25));
+        return $model->paginate(config('cms.pagination', 25));
     }
 
     /**

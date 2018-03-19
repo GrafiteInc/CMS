@@ -1,9 +1,9 @@
 <?php
 
-namespace Yab\Cabin\Services\Traits;
+namespace Grafite\Cms\Services\Traits;
 
 use Illuminate\Support\Facades\Config;
-use Yab\Cabin\Facades\CryptoServiceFacade;
+use Grafite\Cms\Facades\CryptoServiceFacade;
 
 trait ModuleServiceTrait
 {
@@ -18,13 +18,13 @@ trait ModuleServiceTrait
      */
     public function moduleAsset($module, $path, $contentType = 'null')
     {
-        $assetPath = base_path(Config::get('cabin.module-directory').'/'.ucfirst($module).'/Assets/'.$path);
+        $assetPath = base_path(Config::get('cms.module-directory').'/'.ucfirst($module).'/Assets/'.$path);
 
         if (!is_file($assetPath)) {
-            $assetPath = config('cabin.modules.'.$module.'.asset_path').'/'.$path;
+            $assetPath = config('cms.modules.'.$module.'.asset_path').'/'.$path;
         }
 
-        return url(config('cabin.backend-route-prefix', 'cabin').'/asset/'.CryptoServiceFacade::url_encode($assetPath).'/'.CryptoServiceFacade::url_encode($contentType).'/?isModule=true');
+        return url(config('cms.backend-route-prefix', 'cms').'/asset/'.CryptoServiceFacade::url_encode($assetPath).'/'.CryptoServiceFacade::url_encode($contentType).'/?isModule=true');
     }
 
     /**
@@ -38,10 +38,10 @@ trait ModuleServiceTrait
      */
     public function moduleConfig($module, $path)
     {
-        $configArray = @include base_path(Config::get('cabin.module-directory').'/'.ucfirst($module).'/config.php');
+        $configArray = @include base_path(Config::get('cms.module-directory').'/'.ucfirst($module).'/config.php');
 
         if (!$configArray) {
-            return config('cabin.modules.'.$module.'.'.$path);
+            return config('cms.modules.'.$module.'.'.$path);
         }
 
         return self::assignArrayByPath($configArray, $path);
@@ -58,7 +58,7 @@ trait ModuleServiceTrait
     {
         $links = '';
 
-        $modules = config('cabin.modules', []);
+        $modules = config('cms.modules', []);
 
         foreach ($ignoredModules as $ignoredModule) {
             if (in_array(strtolower($ignoredModule), array_keys($modules))) {

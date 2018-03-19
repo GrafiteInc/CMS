@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Cabin;
+namespace App\Http\Controllers\Cms;
 
 use App\Http\Controllers\Controller;
-use Yab\Cabin\Repositories\BlogRepository;
+use Grafite\Cms\Repositories\BlogRepository;
 
 class BlogController extends Controller
 {
@@ -13,7 +13,7 @@ class BlogController extends Controller
     {
         $this->repository = $repository;
 
-        if (!in_array('blog', config('cabin.active-core-modules'))) {
+        if (!in_array('blog', config('cms.active-core-modules'))) {
             return redirect('/')->send();
         }
     }
@@ -34,7 +34,7 @@ class BlogController extends Controller
             abort(404);
         }
 
-        return view('cabin-frontend::blog.all')
+        return view('cms-frontend::blog.all')
             ->with('tags', $tags)
             ->with('blogs', $blogs);
     }
@@ -55,7 +55,7 @@ class BlogController extends Controller
             abort(404);
         }
 
-        return view('cabin-frontend::blog.all')
+        return view('cms-frontend::blog.all')
             ->with('tags', $tags)
             ->with('blogs', $blogs);
     }
@@ -75,6 +75,6 @@ class BlogController extends Controller
             abort(404);
         }
 
-        return view('cabin-frontend::blog.'.$blog->template)->with('blog', $blog);
+        return view('cms-frontend::blog.'.$blog->template)->with('blog', $blog);
     }
 }

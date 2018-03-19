@@ -1,13 +1,13 @@
 <?php
 
-namespace Yab\Cabin\Repositories;
+namespace Grafite\Cms\Repositories;
 
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Schema;
-use Cabin;
-use Yab\Cabin\Models\Blog;
-use Yab\Cabin\Services\FileService;
+use Cms;
+use Grafite\Cms\Models\Blog;
+use Grafite\Cms\Services\FileService;
 
 class BlogRepository
 {
@@ -43,7 +43,7 @@ class BlogRepository
             $model = $model->orderBy('published_at', 'desc');
         }
 
-        return $model->paginate(config('cabin.pagination', 25));
+        return $model->paginate(config('cms.pagination', 25));
     }
 
     /**
@@ -55,14 +55,14 @@ class BlogRepository
     {
         return Blog::orderBy('published_at', 'desc')->where('is_published', 1)
             ->where('published_at', '<=', Carbon::now(config('app.timezone'))->format('Y-m-d H:i:s'))
-            ->paginate(Config::get('cabin.pagination', 24));
+            ->paginate(Config::get('cms.pagination', 24));
     }
 
     public function published()
     {
         return Blog::where('is_published', 1)
             ->where('published_at', '<=', Carbon::now(config('app.timezone'))->format('Y-m-d H:i:s'))->orderBy('created_at', 'desc')
-            ->paginate(Config::get('cabin.pagination', 24));
+            ->paginate(Config::get('cms.pagination', 24));
     }
 
     public function tags($tag)
@@ -70,14 +70,14 @@ class BlogRepository
         return Blog::where('is_published', 1)
             ->where('published_at', '<=', Carbon::now(config('app.timezone'))->format('Y-m-d H:i:s'))
             ->where('tags', 'LIKE', '%'.$tag.'%')->orderBy('created_at', 'desc')
-            ->paginate(Config::get('cabin.pagination', 24));
+            ->paginate(Config::get('cms.pagination', 24));
     }
 
     public function allTags()
     {
         $tags = [];
-        if (app()->getLocale() !== config('cabin.default-language', 'en')) {
-            $blogs = $this->translationRepo->getEntitiesByTypeAndLang(app()->getLocale(), 'Yab\Cabin\Models\Blog');
+        if (app()->getLocale() !== config('cms.default-language', 'en')) {
+            $blogs = $this->translationRepo->getEntitiesByTypeAndLang(app()->getLocale(), 'Grafite\Cms\Models\Blog');
         } else {
             $blogs = Blog::orderBy('published_at', 'desc')->get();
         }
@@ -104,7 +104,7 @@ class BlogRepository
             $query->orWhere($attribute, 'LIKE', '%'.$input['term'].'%');
         }
 
-        return [$query, $input['term'], $query->paginate(Config::get('cabin.pagination', 24))->render()];
+        return [$query, $input['term'], $query->paginate(Config::get('cms.pagination', 24))->render()];
     }
 
     /**
@@ -117,7 +117,7 @@ class BlogRepository
     public function store($payload)
     {
         $payload['title'] = htmlentities($payload['title']);
-        $payload['url'] = Cabin::convertToURL($payload['url']);
+        $payload['url'] = Cms::convertToURL($payload['url']);
         $payload['is_published'] = (isset($payload['is_published'])) ? (bool) $payload['is_published'] : 0;
         $payload['published_at'] = (isset($payload['published_at']) && !empty($payload['published_at'])) ? Carbon::parse($payload['published_at'])->format('Y-m-d H:i:s') : Carbon::now(config('app.timezone'))->format('Y-m-d H:i:s');
 
@@ -156,7 +156,7 @@ class BlogRepository
         $blog = Blog::where('url', $url)->where('is_published', 1)->where('published_at', '<=', Carbon::now(config('app.timezone'))->format('Y-m-d H:i:s'))->first();
 
         if (!$blog) {
-            $blog = $this->translationRepo->findByUrl($url, 'Yab\Cabin\Models\Blog');
+            $blog = $this->translationRepo->findByUrl($url, 'Grafite\Cms\Models\Blog');
         }
 
         return $blog;
@@ -192,10 +192,10 @@ class BlogRepository
             $payload['hero_image'] = $path['name'];
         }
 
-        if (!empty($payload['lang']) && $payload['lang'] !== config('cabin.default-language', 'en')) {
-            return $this->translationRepo->createOrUpdate($blog->id, 'Yab\Cabin\Models\Blog', $payload['lang'], $payload);
+        if (!empty($payload['lang']) && $payload['lang'] !== config('cms.default-language', 'en')) {
+            return $this->translationRepo->createOrUpdate($blog->id, 'Grafite\Cms\Models\Blog', $payload['lang'], $payload);
         } else {
-            $payload['url'] = Cabin::convertToURL($payload['url']);
+            $payload['url'] = Cms::convertToURL($payload['url']);
             $payload['is_published'] = (isset($payload['is_published'])) ? (bool) $payload['is_published'] : 0;
             $payload['published_at'] = (isset($payload['published_at']) && !empty($payload['published_at'])) ? Carbon::parse($payload['published_at'])->format('Y-m-d H:i:s') : Carbon::now(config('app.timezone'))->format('Y-m-d H:i:s');
 

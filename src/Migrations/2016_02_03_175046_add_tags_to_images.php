@@ -10,7 +10,7 @@ class AddTagsToImages extends Migration
      */
     public function up()
     {
-        Schema::table(config('cabin.db-prefix', '').'images', function (Blueprint $table) {
+        Schema::table(config('cms.db-prefix', '').'images', function (Blueprint $table) {
             $table->text('tags')->nullable();
         });
     }
@@ -20,7 +20,7 @@ class AddTagsToImages extends Migration
      */
     public function down()
     {
-        Schema::table(config('cabin.db-prefix', '').'images', function ($table) {
+        Schema::table(config('cms.db-prefix', '').'images', function ($table) {
             $table->dropColumn('tags');
         });
     }

@@ -1,4 +1,4 @@
-@extends('cabin::layouts.dashboard')
+@extends('cms::layouts.dashboard')
 
 @section('content')
 
@@ -6,15 +6,15 @@
         <h1 class="page-header">Events</h1>
     </div>
 
-    @include('cabin::modules.events.breadcrumbs', ['location' => ['create']])
+    @include('cms::modules.events.breadcrumbs', ['location' => ['create']])
 
     <div class="row">
-        {!! Form::open(['route' => config('cabin.backend-route-prefix', 'cabin').'.events.store', 'class' => 'add']) !!}
+        {!! Form::open(['route' => config('cms.backend-route-prefix', 'cms').'.events.store', 'class' => 'add']) !!}
 
-            {!! FormMaker::fromTable('events', Config::get('cabin.forms.event')) !!}
+            {!! FormMaker::fromTable('events', Config::get('cms.forms.event')) !!}
 
             <div class="form-group text-right">
-                <a href="{!! url(config('cabin.backend-route-prefix', 'cabin').'/events') !!}" class="btn btn-default raw-left">Cancel</a>
+                <a href="{!! url(config('cms.backend-route-prefix', 'cms').'/events') !!}" class="btn btn-default raw-left">Cancel</a>
                 {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
             </div>
 

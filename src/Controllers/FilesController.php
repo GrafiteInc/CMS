@@ -1,23 +1,23 @@
 <?php
 
-namespace Yab\Cabin\Controllers;
+namespace Grafite\Cms\Controllers;
 
-use Cabin;
+use Cms;
 use Config;
 use Storage;
 use Redirect;
 use Response;
 use Exception;
 use CryptoService;
-use Yab\Cabin\Models\File;
+use Grafite\Cms\Models\File;
 use Illuminate\Http\Request;
-use Yab\Cabin\Requests\FileRequest;
-use Yab\Cabin\Services\FileService;
-use Yab\Cabin\Services\ValidationService;
-use Yab\Cabin\Repositories\FileRepository;
-use Yab\Cabin\Services\CabinResponseService;
+use Grafite\Cms\Requests\FileRequest;
+use Grafite\Cms\Services\FileService;
+use Grafite\Cms\Services\ValidationService;
+use Grafite\Cms\Repositories\FileRepository;
+use Grafite\Cms\Services\CmsResponseService;
 
-class FilesController extends CabinController
+class FilesController extends GrafiteCmsController
 {
     public function __construct(FileRepository $repository)
     {
@@ -37,7 +37,7 @@ class FilesController extends CabinController
     {
         $result = $this->repository->paginated();
 
-        return view('cabin::modules.files.index')
+        return view('cms::modules.files.index')
             ->with('files', $result)
             ->with('pagination', $result->render());
     }
@@ -55,7 +55,7 @@ class FilesController extends CabinController
 
         $result = $this->repository->search($input);
 
-        return view('cabin::modules.files.index')
+        return view('cms::modules.files.index')
             ->with('files', $result[0]->get())
             ->with('pagination', $result[2])
             ->with('term', $result[1]);
@@ -68,7 +68,7 @@ class FilesController extends CabinController
      */
     public function create()
     {
-        return view('cabin::modules.files.create');
+        return view('cms::modules.files.create');
     }
 
     /**
@@ -88,7 +88,7 @@ class FilesController extends CabinController
             return $validation['redirect'];
         }
 
-        Cabin::notification('File saved successfully.', 'success');
+        Cms::notification('File saved successfully.', 'success');
 
         return redirect(route($this->routeBase.'.files.index'));
     }
@@ -112,9 +112,9 @@ class FilesController extends CabinController
             $fileSaved['name'] = CryptoService::encrypt($fileSaved['name']);
             $fileSaved['mime'] = $file->getClientMimeType();
             $fileSaved['size'] = $file->getClientSize();
-            $response = CabinResponseService::apiResponse('success', $fileSaved);
+            $response = CmsResponseService::apiResponse('success', $fileSaved);
         } else {
-            $response = CabinResponseService::apiErrorResponse($validation['errors'], $validation['inputs']);
+            $response = CmsResponseService::apiErrorResponse($validation['errors'], $validation['inputs']);
         }
 
         return $response;
@@ -132,9 +132,9 @@ class FilesController extends CabinController
         try {
             Storage::delete($id);
 
-            $response = CabinResponseService::apiResponse('success', 'success!');
+            $response = CmsResponseService::apiResponse('success', 'success!');
         } catch (Exception $e) {
-            $response = CabinResponseService::apiResponse('error', $e->getMessage());
+            $response = CmsResponseService::apiResponse('error', $e->getMessage());
         }
 
         return $response;
@@ -152,12 +152,12 @@ class FilesController extends CabinController
         $files = $this->repository->findFilesById($id);
 
         if (empty($files)) {
-            Cabin::notification('File not found', 'warning');
+            Cms::notification('File not found', 'warning');
 
             return redirect(route($this->routeBase.'.files.index'));
         }
 
-        return view('cabin::modules.files.edit')->with('files', $files);
+        return view('cms::modules.files.edit')->with('files', $files);
     }
 
     /**
@@ -173,14 +173,14 @@ class FilesController extends CabinController
         $files = $this->repository->findFilesById($id);
 
         if (empty($files)) {
-            Cabin::notification('File not found', 'warning');
+            Cms::notification('File not found', 'warning');
 
             return redirect(route($this->routeBase.'.files.index'));
         }
 
         $files = $this->repository->update($files, $request->all());
 
-        Cabin::notification('File updated successfully.', 'success');
+        Cms::notification('File updated successfully.', 'success');
 
         return Redirect::back();
     }
@@ -197,7 +197,7 @@ class FilesController extends CabinController
         $files = $this->repository->findFilesById($id);
 
         if (empty($files)) {
-            Cabin::notification('File not found', 'warning');
+            Cms::notification('File not found', 'warning');
 
             return redirect(route($this->routeBase.'.files.index'));
         }
@@ -205,12 +205,12 @@ class FilesController extends CabinController
         if (is_file(storage_path($files->location))) {
             Storage::delete($files->location);
         } else {
-            Storage::disk(config('cabin.storage-location', 'local'))->delete($files->location);
+            Storage::disk(config('cms.storage-location', 'local'))->delete($files->location);
         }
 
         $files->delete();
 
-        Cabin::notification('File deleted successfully.', 'success');
+        Cms::notification('File deleted successfully.', 'success');
 
         return redirect(route($this->routeBase.'.files.index'));
     }
@@ -222,12 +222,12 @@ class FilesController extends CabinController
      */
     public function apiList(Request $request)
     {
-        if (config('cabin.api-key') != $request->header('cabin')) {
-            return CabinResponseService::apiResponse('error', []);
+        if (config('cms.api-key') != $request->header('cms')) {
+            return CmsResponseService::apiResponse('error', []);
         }
 
         $files = $this->repository->apiPrepared();
 
-        return CabinResponseService::apiResponse('success', $files);
+        return CmsResponseService::apiResponse('success', $files);
     }
 }

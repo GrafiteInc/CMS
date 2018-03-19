@@ -1,20 +1,20 @@
 <?php
 
-namespace Yab\Cabin\Controllers;
+namespace Grafite\Cms\Controllers;
 
 use Config;
 use CryptoService;
 use FileService;
 use Illuminate\Http\Request;
-use Cabin;
+use Cms;
 use Storage;
-use Yab\Cabin\Models\Image;
-use Yab\Cabin\Repositories\ImageRepository;
-use Yab\Cabin\Requests\ImagesRequest;
-use Yab\Cabin\Services\CabinResponseService;
-use Yab\Cabin\Services\ValidationService;
+use Grafite\Cms\Models\Image;
+use Grafite\Cms\Repositories\ImageRepository;
+use Grafite\Cms\Requests\ImagesRequest;
+use Grafite\Cms\Services\CmsResponseService;
+use Grafite\Cms\Services\ValidationService;
 
-class ImagesController extends CabinController
+class ImagesController extends GrafiteCmsController
 {
     public function __construct(ImageRepository $repository)
     {
@@ -36,7 +36,7 @@ class ImagesController extends CabinController
 
         $result = $this->repository->paginated();
 
-        return view('cabin::modules.images.index')
+        return view('cms::modules.images.index')
             ->with('images', $result)
             ->with('pagination', $result->render());
     }
@@ -54,7 +54,7 @@ class ImagesController extends CabinController
 
         $result = $this->repository->search($input);
 
-        return view('cabin::modules.images.index')
+        return view('cms::modules.images.index')
             ->with('images', $result[0]->get())
             ->with('pagination', $result[2])
             ->with('term', $result[1]);
@@ -67,7 +67,7 @@ class ImagesController extends CabinController
      */
     public function create()
     {
-        return view('cabin::modules.images.create');
+        return view('cms::modules.images.create');
     }
 
     /**
@@ -90,18 +90,18 @@ class ImagesController extends CabinController
                     ]);
                 }
 
-                Cabin::notification('Image saved successfully.', 'success');
+                Cms::notification('Image saved successfully.', 'success');
 
                 if (!$imageSaved) {
-                    Cabin::notification('Image was not saved.', 'danger');
+                    Cms::notification('Image was not saved.', 'danger');
                 }
             } else {
-                Cabin::notification('Image could not be saved', 'danger');
+                Cms::notification('Image could not be saved', 'danger');
 
                 return $validation['redirect'];
             }
         } catch (Exception $e) {
-            Cabin::notification($e->getMessage() ?: 'Image could not be saved.', 'danger');
+            Cms::notification($e->getMessage() ?: 'Image could not be saved.', 'danger');
         }
 
         return redirect(route($this->routeBase.'.images.index'));
@@ -126,9 +126,9 @@ class ImagesController extends CabinController
             $fileSaved['name'] = CryptoService::encrypt($fileSaved['name']);
             $fileSaved['mime'] = $file->getClientMimeType();
             $fileSaved['size'] = $file->getClientSize();
-            $response = CabinResponseService::apiResponse('success', $fileSaved);
+            $response = CmsResponseService::apiResponse('success', $fileSaved);
         } else {
-            $response = CabinResponseService::apiErrorResponse($validation['errors'], $validation['inputs']);
+            $response = CmsResponseService::apiErrorResponse($validation['errors'], $validation['inputs']);
         }
 
         return $response;
@@ -146,12 +146,12 @@ class ImagesController extends CabinController
         $images = $this->repository->findImagesById($id);
 
         if (empty($images)) {
-            Cabin::notification('Image not found', 'warning');
+            Cms::notification('Image not found', 'warning');
 
             return redirect(route($this->routeBase.'.images.index'));
         }
 
-        return view('cabin::modules.images.edit')->with('images', $images);
+        return view('cms::modules.images.edit')->with('images', $images);
     }
 
     /**
@@ -167,10 +167,10 @@ class ImagesController extends CabinController
         try {
             $images = $this->repository->findImagesById($id);
 
-            Cabin::notification('Image updated successfully.', 'success');
+            Cms::notification('Image updated successfully.', 'success');
 
             if (empty($images)) {
-                Cabin::notification('Image not found', 'warning');
+                Cms::notification('Image not found', 'warning');
 
                 return redirect(route($this->routeBase.'.images.index'));
             }
@@ -178,10 +178,10 @@ class ImagesController extends CabinController
             $images = $this->repository->update($images, $request->all());
 
             if (!$images) {
-                Cabin::notification('Image could not be updated', 'danger');
+                Cms::notification('Image could not be updated', 'danger');
             }
         } catch (Exception $e) {
-            Cabin::notification($e->getMessage() ?: 'Image could not be saved.', 'danger');
+            Cms::notification($e->getMessage() ?: 'Image could not be saved.', 'danger');
         }
 
         return redirect(route($this->routeBase.'.images.edit', $id));
@@ -201,11 +201,11 @@ class ImagesController extends CabinController
         if (is_file(storage_path($image->location))) {
             Storage::delete($image->location);
         } else {
-            Storage::disk(Config::get('cabin.storage-location', 'local'))->delete($image->location);
+            Storage::disk(Config::get('cms.storage-location', 'local'))->delete($image->location);
         }
 
         if (empty($image)) {
-            Cabin::notification('Image not found', 'warning');
+            Cms::notification('Image not found', 'warning');
 
             return redirect(route($this->routeBase.'.images.index'));
         }
@@ -213,7 +213,7 @@ class ImagesController extends CabinController
         $image->forgetCache();
         $image->delete();
 
-        Cabin::notification('Image deleted successfully.', 'success');
+        Cms::notification('Image deleted successfully.', 'success');
 
         return redirect(route($this->routeBase.'.images.index'));
     }
@@ -235,13 +235,13 @@ class ImagesController extends CabinController
             if (is_file(storage_path($image->location))) {
                 Storage::delete($image->location);
             } else {
-                Storage::disk(Config::get('cabin.storage-location', 'local'))->delete($image->location);
+                Storage::disk(Config::get('cms.storage-location', 'local'))->delete($image->location);
             }
 
             $image->delete();
         }
 
-        Cabin::notification('Bulk Image deletes completed successfully.', 'success');
+        Cms::notification('Bulk Image deletes completed successfully.', 'success');
 
         return redirect(route($this->routeBase.'.images.index'));
     }
@@ -259,13 +259,13 @@ class ImagesController extends CabinController
      */
     public function apiList(Request $request)
     {
-        if (config('cabin.api-key') != $request->header('cabin')) {
-            return CabinResponseService::apiResponse('error', []);
+        if (config('cms.api-key') != $request->header('cms')) {
+            return CmsResponseService::apiResponse('error', []);
         }
 
         $images =  $this->repository->apiPrepared();
 
-        return CabinResponseService::apiResponse('success', $images);
+        return CmsResponseService::apiResponse('success', $images);
     }
 
     /**
@@ -279,6 +279,6 @@ class ImagesController extends CabinController
     {
         $image = $this->repository->apiStore($request->all());
 
-        return CabinResponseService::apiResponse('success', $image);
+        return CmsResponseService::apiResponse('success', $image);
     }
 }

@@ -1,39 +1,35 @@
 {
-    "name": "yab/cabincms",
-    "description": "Add a CMS to any Laravel apps gain control of: pages, blogs, galleries, events, custom modules, images and more.",
+    "name": "grafite/cms",
+    "description": "Add a CMS to any Laravel app/website to gain control of: pages, blogs, galleries, events, custom modules, images and more.",
     "license": "MIT",
     "authors": [
         {
             "name": "Matt Lantz",
-            "email": "matt@yabhq.com"
-        },
-        {
-            "name": "Chris Blackwell",
-            "email": "chris@yabhq.com"
+            "email": "mattlantz@gmail.com"
         }
     ],
     "require": {
         "php": ">=7.1.3",
         "illuminate/support": "5.6.*",
-        "yab/laracogs": "^2.3",
+        "grafite/builder": "^2.4",
         "devfactory/minify": "1.0.*",
         "spatie/laravel-analytics": "^1.4",
         "aws/aws-sdk-php": "^3.18",
         "league/flysystem-aws-s3-v3": "^1.0",
-        "graham-campbell/markdown": "^9.0",
+        "graham-campbell/markdown": "^10.0",
         "intervention/image": "^2.3",
         "stichoza/google-translate-php": "^3.2",
         "donatj/phpuseragentparser": "^0.5.3"
     },
     "require-dev": {
-        "phpunit/phpunit": "~6.0",
+        "phpunit/phpunit": "~7.0",
         "mockery/mockery": "^0.9.4",
-        "orchestra/testbench": "^3.5",
+        "orchestra/testbench": "^3.6",
         "mikey179/vfsStream": "^1.6"
     },
     "autoload": {
         "psr-4": {
-            "Yab\\Cabin\\": "src/"
+            "Grafite\\Cms\\": "src/"
         },
         "files": [
           "src/Helpers/blade.php",
@@ -53,7 +49,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Yab\\Cabin\\CabinProvider"
+                "Grafite\\Cms\\GrafiteCmsProvider"
             ]
         }
     }

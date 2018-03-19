@@ -1,4 +1,4 @@
-@extends('cabin::layouts.dashboard')
+@extends('cms::layouts.dashboard')
 
 @section('content')
 
@@ -6,12 +6,12 @@
         <h1 class="page-header">Links</h1>
     </div>
 
-    @include('cabin::modules.links.breadcrumbs', ['location' => [['Menu' => url(config('cabin.backend-route-prefix', 'cabin').'/menus/'.request('m').'/edit')], 'links', 'create']])
+    @include('cms::modules.links.breadcrumbs', ['location' => [['Menu' => url(config('cms.backend-route-prefix', 'cms').'/menus/'.request('m').'/edit')], 'links', 'create']])
 
     <div class="row">
-        {!! Form::open(['route' => config('cabin.backend-route-prefix', 'cabin').'.links.store', 'class' => 'add']) !!}
+        {!! Form::open(['route' => config('cms.backend-route-prefix', 'cms').'.links.store', 'class' => 'add']) !!}
 
-            {!! FormMaker::fromTable('links', Config::get('cabin.forms.link')) !!}
+            {!! FormMaker::fromTable('links', Config::get('cms.forms.link')) !!}
 
             <div class="form-group" style="display: none;">
                 <label for="Page_id">Page</label>
@@ -36,6 +36,6 @@
 @section('javascript')
 
     @parent
-    {!! Minify::javascript(Cabin::asset('js/links-module.js', 'application/javascript')) !!}
+    {!! Minify::javascript(Cms::asset('js/links-module.js', 'application/javascript')) !!}
 
 @stop

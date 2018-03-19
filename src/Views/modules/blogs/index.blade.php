@@ -1,4 +1,4 @@
-@extends('cabin::layouts.dashboard')
+@extends('cms::layouts.dashboard')
 
 @section('content')
 
@@ -21,9 +21,9 @@
     </div>
 
     <div class="row">
-        <a class="btn btn-primary pull-right" href="{!! route(config('cabin.backend-route-prefix', 'cabin').'.blog.create') !!}">Add New</a>
+        <a class="btn btn-primary pull-right" href="{!! route(config('cms.backend-route-prefix', 'cms').'.blog.create') !!}">Add New</a>
         <div class="raw-m-hide raw-m-hide pull-right">
-            {!! Form::open(['url' => config('cabin.backend-route-prefix', 'cabin').'/blog/search']) !!}
+            {!! Form::open(['url' => config('cms.backend-route-prefix', 'cms').'/blog/search']) !!}
             <input class="form-control header-input pull-right raw-margin-right-24" name="term" placeholder="Search">
             {!! Form::close() !!}
         </div>
@@ -50,16 +50,16 @@
 
                 @foreach($blogs as $blog)
                     <tr>
-                        <td><a href="{!! route(config('cabin.backend-route-prefix', 'cabin').'.blog.edit', [$blog->id]) !!}">{!! $blog->title !!}</a></td>
+                        <td><a href="{!! route(config('cms.backend-route-prefix', 'cms').'.blog.edit', [$blog->id]) !!}">{!! $blog->title !!}</a></td>
                         <td class="raw-m-hide">{!! $blog->url !!}</td>
                         <td class="raw-m-hide">@if ($blog->is_published) <span class="fa fa-check"></span> @else <span class="fa fa-close"></span> @endif </td>
                         <td class="text-right">
-                            <form method="post" action="{!! url(config('cabin.backend-route-prefix', 'cabin').'/blog/'.$blog->id) !!}">
+                            <form method="post" action="{!! url(config('cms.backend-route-prefix', 'cms').'/blog/'.$blog->id) !!}">
                                 {!! csrf_field() !!}
                                 {!! method_field('DELETE') !!}
                                 <button class="delete-btn btn btn-xs btn-danger pull-right" type="submit"><i class="fa fa-trash"></i> Delete</button>
                             </form>
-                            <a class="btn btn-xs btn-default pull-right raw-margin-right-8" href="{!! route(config('cabin.backend-route-prefix', 'cabin').'.blog.edit', [$blog->id]) !!}"><i class="fa fa-pencil"></i> Edit</a>
+                            <a class="btn btn-xs btn-default pull-right raw-margin-right-8" href="{!! route(config('cms.backend-route-prefix', 'cms').'.blog.edit', [$blog->id]) !!}"><i class="fa fa-pencil"></i> Edit</a>
                         </td>
                     </tr>
                 @endforeach

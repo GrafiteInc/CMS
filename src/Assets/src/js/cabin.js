@@ -53,30 +53,30 @@ $(function () {
 |--------------------------------------------------------------------------
 */
 
-function cabinNotify(message, _type) {
-    $(".cabin-notification").css("display", "block");
-    $(".cabin-notification").addClass(_type);
+function cmsNotify(message, _type) {
+    $(".cms-notification").css("display", "block");
+    $(".cms-notification").addClass(_type);
 
-    $(".cabin-notify-comment").html(message);
-    $(".cabin-notification").animate({
+    $(".cms-notify-comment").html(message);
+    $(".cms-notification").animate({
         right: "20px",
     });
 
-    $(".cabin-notify-closer-icon").click(function(){
-        $(".cabin-notification").animate({
+    $(".cms-notify-closer-icon").click(function(){
+        $(".cms-notification").animate({
             right: "-300px"
         },"", function(){
-            $(".cabin-notification").css("display", "none");
-            $(".cabin-notify-comment").html("");
+            $(".cms-notification").css("display", "none");
+            $(".cms-notify-comment").html("");
         });
     });
 
     setTimeout(function(){
-        $(".cabin-notification").animate({
+        $(".cms-notification").animate({
             right: "-300px"
         },"", function(){
-            $(".cabin-notification").css("display", "none");
-            $(".cabin-notify-comment").html("");
+            $(".cms-notification").css("display", "none");
+            $(".cms-notify-comment").html("");
         });
     }, 8000);
 }

@@ -1,4 +1,4 @@
-@extends('cabin::layouts.dashboard')
+@extends('cms::layouts.dashboard')
 
 @section('content')
 
@@ -6,15 +6,15 @@
         <h1 class="page-header">Blog</h1>
     </div>
 
-    @include('cabin::modules.blogs.breadcrumbs', ['location' => ['create']])
+    @include('cms::modules.blogs.breadcrumbs', ['location' => ['create']])
 
     <div class="row">
-        {!! Form::open(['route' => config('cabin.backend-route-prefix', 'cabin').'.blog.store', 'class' => 'add', 'files' => true]) !!}
+        {!! Form::open(['route' => config('cms.backend-route-prefix', 'cms').'.blog.store', 'class' => 'add', 'files' => true]) !!}
 
-            {!! FormMaker::fromTable('blogs', Config::get('cabin.forms.blog')) !!}
+            {!! FormMaker::fromTable('blogs', Config::get('cms.forms.blog')) !!}
 
             <div class="form-group text-right">
-                <a href="{!! url(config('cabin.backend-route-prefix', 'cabin').'/blog') !!}" class="btn btn-default raw-left">Cancel</a>
+                <a href="{!! url(config('cms.backend-route-prefix', 'cms').'/blog') !!}" class="btn btn-default raw-left">Cancel</a>
                 {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
             </div>
 

@@ -1,4 +1,4 @@
-@extends('cabin-frontend::layout.master')
+@extends('cms-frontend::layout.master')
 
 @section('content')
 
@@ -18,6 +18,6 @@
 
 @endsection
 
-@section('cabin')
+@section('cms')
     @edit('pages')
 @endsection

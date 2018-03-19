@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Quarx;
 
 use Config;
 use App\Http\Controllers\Controller;
-use Yab\Quarx\Repositories\ImageRepository;
+use Grafite\Quarx\Repositories\ImageRepository;
 
 class GalleryController extends Controller
 {

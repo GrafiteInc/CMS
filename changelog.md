@@ -320,7 +320,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## [v2.2.3] - 2016-11-09
 
 ### Fixed
-- Fixed a couple issues which came from the Laracogs updates
+- Fixed a couple issues which came from the Builder updates
 
 ## [v2.2.2] - 2016-11-04
 
@@ -518,7 +518,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Simple setup for fast website making
 ### Changed
 - Moved the dashboard layout around
-- Simple setup drops some of the Laracogs additions
+- Simple setup drops some of the Builder additions
 
 ## [v1.4.1] - 2016-05-31
 ### Changed

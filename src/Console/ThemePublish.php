@@ -1,6 +1,6 @@
 <?php
 
-namespace Yab\Quarx\Console;
+namespace Grafite\Quarx\Console;
 
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;

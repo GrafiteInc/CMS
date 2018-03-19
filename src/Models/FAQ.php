@@ -1,8 +1,8 @@
 <?php
 
-namespace Yab\Quarx\Models;
+namespace Grafite\Quarx\Models;
 
-use Yab\Quarx\Traits\Translatable;
+use Grafite\Quarx\Traits\Translatable;
 
 class FAQ extends QuarxModel
 {

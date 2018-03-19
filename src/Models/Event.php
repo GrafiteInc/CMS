@@ -1,9 +1,9 @@
 <?php
 
-namespace Yab\Quarx\Models;
+namespace Grafite\Quarx\Models;
 
-use Yab\Quarx\Services\Normalizer;
-use Yab\Quarx\Traits\Translatable;
+use Grafite\Quarx\Services\Normalizer;
+use Grafite\Quarx\Traits\Translatable;
 
 class Event extends QuarxModel
 {

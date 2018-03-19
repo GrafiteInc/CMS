@@ -7,8 +7,8 @@ class LinksTest extends TestCase
         parent::setUp();
         $this->withoutMiddleware();
         $this->withoutEvents();
-        factory(\Yab\Quarx\Models\Link::class)->create();
-        factory(\Yab\Quarx\Models\Link::class)->make(['id' => 1]);
+        factory(\Grafite\Quarx\Models\Link::class)->create();
+        factory(\Grafite\Quarx\Models\Link::class)->make(['id' => 1]);
     }
 
     /*
@@ -38,7 +38,7 @@ class LinksTest extends TestCase
 
     public function testStore()
     {
-        $link = factory(\Yab\Quarx\Models\Link::class)->make(['id' => 89]);
+        $link = factory(\Grafite\Quarx\Models\Link::class)->make(['id' => 89]);
         $response = $this->call('POST', '/quarx/links', $link->toArray());
 
         $this->assertEquals(302, $response->getStatusCode());

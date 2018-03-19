@@ -1,9 +1,9 @@
 <?php
 
-namespace Yab\Quarx\Repositories;
+namespace Grafite\Quarx\Repositories;
 
 use Illuminate\Support\Facades\Schema;
-use Yab\Quarx\Models\Menu;
+use Grafite\Quarx\Models\Menu;
 
 class MenuRepository
 {

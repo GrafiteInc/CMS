@@ -1,6 +1,6 @@
 <?php
 
-namespace Yab\Quarx\Models;
+namespace Grafite\Quarx\Models;
 
 class Menu extends QuarxModel
 {

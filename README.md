@@ -1,24 +1,24 @@
 # Quarx - Add a CMS to any Laravel app to gain control of: pages, blogs, galleries, events, custom modules, images and more.
 
-[![Build Status](https://travis-ci.org/YABhq/Quarx.svg?branch=master)](https://travis-ci.org/YABhq/Quarx)
-[![Packagist](https://img.shields.io/packagist/dt/yab/quarx.svg?maxAge=2592000)](https://packagist.org/packages/yab/quarx)
-[![license](https://img.shields.io/github/license/mashape/apistatus.svg?maxAge=2592000)](https://packagist.org/packages/yab/quarx)
+[![Build Status](https://travis-ci.org/Grafitehq/Quarx.svg?branch=master)](https://travis-ci.org/Grafitehq/Quarx)
+[![Packagist](https://img.shields.io/packagist/dt/Grafite/quarx.svg?maxAge=2592000)](https://packagist.org/packages/Grafite/quarx)
+[![license](https://img.shields.io/github/license/mashape/apistatus.svg?maxAge=2592000)](https://packagist.org/packages/Grafite/quarx)
 
 Quarx is a full fledged CMS that can be added to any Laravel application. It provides you with full control of things like: pages, menus, links, widgets, blogs, events, faqs etc.
 
 Quarx comes with a module builder for all your custom CMS needs, as well as a module publishing tools. So if you decide to reuse some modules on future projects you can easily publish thier assets seamlessly. If you wish to make your Quarx module into a PHP package, then you will need to have it publish its assets to the `quarx/modules` directory.
 
 ### What is simple vs complex setup?
-Simple setup uses Laracogs as the backbone of an app for you using Laravel, once the setup command has been run you will have a full CMS as an app. Complex setup is specifically for developers who want to add a CMS to their existing app.
+Simple setup uses Builder as the backbone of an app for you using Laravel, once the setup command has been run you will have a full CMS as an app. Complex setup is specifically for developers who want to add a CMS to their existing app.
 
 ## Documentation
 [http://quarxcms.com](http://quarxcms.com)
 
-## Yab Newsletter
+## Grafite Newsletter
 [Subscribe](http://eepurl.com/ck7dSv)
 
 ## Chat Support
-[Gitter](https://gitter.im/YABhq/Quarx)
+[Gitter](https://gitter.im/Grafitehq/Quarx)
 
 ## Requirements
 1. PHP 7+
@@ -44,19 +44,19 @@ Create a new Laravel application, and make a database somewhere and update the .
 * Run the following command:
 
 ```bash
-composer require yab/quarx
+composer require Grafite/quarx
 ```
 
 * Add the following to your Providers array in your config/app.php file:
 
 ```php
-Yab\Quarx\QuarxProvider::class,
+Grafite\Quarx\QuarxProvider::class,
 ```
 
 * Then run the vendor publish:
 
 ```bash
-php artisan vendor:publish --provider="Yab\Quarx\QuarxProvider"
+php artisan vendor:publish --provider="Grafite\Quarx\QuarxProvider"
 ```
 
 > Set your app's timezone config to align the Quarx datepicker UI for your setup
@@ -115,7 +115,7 @@ php artisan migrate
 'quarx' => \App\Http\Middleware\Quarx::class,
 'quarx-api' => \App\Http\Middleware\QuarxApi::class,
 'quarx-language' => \App\Http\Middleware\QuarxLanguage::class,
-'quarx-analytics' => \Yab\Quarx\Middleware\QuarxAnalytics::class,
+'quarx-analytics' => \Grafite\Quarx\Middleware\QuarxAnalytics::class,
 ```
 
 5. In order to have modules load as well please add the following to your composer file under autoload psr-4 object:
@@ -129,7 +129,7 @@ This should be added to the autoloader below the App itself.
 ## Quarx Access
 Route to the administration dashboard is "/quarx/dashboard".
 
-Quarx requires Laracogs to run (only for the FormMaker), but Quarx does not require you to use the Laracogs version of roles. But you will still need to ensure some degree of control for Quarx's access. This is done in the Quarx Middleware, using the gate and the Quarx Policy. If you opt in to the roles system provided by Laracogs, then you can replace 'quarx' with admin to handle the Quarx authorization, if not, you will need to set your own security policy for access to Quarx. To do this simply add the Quarx policy to your `app/Providers/AuthServiceProvider.php` file, and ensure that any rules you wish it to use are in within the policy method. We suggest a policy similar to below.
+Quarx requires Builder to run (only for the FormMaker), but Quarx does not require you to use the Builder version of roles. But you will still need to ensure some degree of control for Quarx's access. This is done in the Quarx Middleware, using the gate and the Quarx Policy. If you opt in to the roles system provided by Builder, then you can replace 'quarx' with admin to handle the Quarx authorization, if not, you will need to set your own security policy for access to Quarx. To do this simply add the Quarx policy to your `app/Providers/AuthServiceProvider.php` file, and ensure that any rules you wish it to use are in within the policy method. We suggest a policy similar to below.
 
 Possible Quarx Policy:
 ```
@@ -142,7 +142,7 @@ Gate::define('quarx', function ($user) {
 });
 ```
 
-Or Using Laracogs:
+Or Using Builder:
 ```
 Gate::define('quarx', function ($user) {
     return ($user->roles->first()->name === 'admin');

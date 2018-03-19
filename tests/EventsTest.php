@@ -7,7 +7,7 @@ class EventsTest extends TestCase
         parent::setUp();
         $this->withoutMiddleware();
         $this->withoutEvents();
-        factory(\Yab\Quarx\Models\Event::class)->create();
+        factory(\Grafite\Quarx\Models\Event::class)->create();
     }
 
     /*
@@ -44,7 +44,7 @@ class EventsTest extends TestCase
 
     public function testStore()
     {
-        $event = factory(\Yab\Quarx\Models\Event::class)->make(['id' => 2]);
+        $event = factory(\Grafite\Quarx\Models\Event::class)->make(['id' => 2]);
         $event = $event->toArray();
         unset($event['translations']);
         $response = $this->call('POST', 'quarx/events', $event);
@@ -84,7 +84,7 @@ class EventsTest extends TestCase
         ]);
 
         $this->assertDatabaseHas('translations', [
-            'entity_type' => 'Yab\\Quarx\\Models\\Event',
+            'entity_type' => 'Grafite\\Quarx\\Models\\Event',
         ]);
         $this->assertEquals(302, $response->getStatusCode());
     }

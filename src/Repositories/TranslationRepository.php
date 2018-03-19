@@ -1,9 +1,9 @@
 <?php
 
-namespace Yab\Quarx\Repositories;
+namespace Grafite\Quarx\Repositories;
 
 use Carbon\Carbon;
-use Yab\Quarx\Models\Translation;
+use Grafite\Quarx\Models\Translation;
 
 class TranslationRepository
 {

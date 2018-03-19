@@ -6,7 +6,7 @@
 |--------------------------------------------------------------------------
 */
 
-$factory->define(\Yab\Quarx\Models\Widget::class, function (Faker\Generator $faker) {
+$factory->define(\Grafite\Quarx\Models\Widget::class, function (Faker\Generator $faker) {
     return [
         'id' => 1,
         'name' => 'test',

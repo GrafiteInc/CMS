@@ -1,6 +1,6 @@
 <?php
 
-namespace Yab\Quarx\Providers;
+namespace Grafite\Quarx\Providers;
 
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Routing\Router;
@@ -14,7 +14,7 @@ class QuarxRouteProvider extends ServiceProvider
      *
      * @var string
      */
-    protected $namespace = 'Yab\Quarx\Controllers';
+    protected $namespace = 'Grafite\Quarx\Controllers';
 
     /**
      * Define your route model bindings, pattern filters, etc.

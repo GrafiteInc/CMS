@@ -1,6 +1,6 @@
 <?php
 
-namespace Yab\Quarx\Controllers;
+namespace Grafite\Quarx\Controllers;
 
 use Quarx;
 use Config;
@@ -9,13 +9,13 @@ use Redirect;
 use Response;
 use Exception;
 use CryptoService;
-use Yab\Quarx\Models\File;
+use Grafite\Quarx\Models\File;
 use Illuminate\Http\Request;
-use Yab\Quarx\Requests\FileRequest;
-use Yab\Quarx\Services\FileService;
-use Yab\Quarx\Services\ValidationService;
-use Yab\Quarx\Repositories\FileRepository;
-use Yab\Quarx\Services\QuarxResponseService;
+use Grafite\Quarx\Requests\FileRequest;
+use Grafite\Quarx\Services\FileService;
+use Grafite\Quarx\Services\ValidationService;
+use Grafite\Quarx\Repositories\FileRepository;
+use Grafite\Quarx\Services\QuarxResponseService;
 
 class FilesController extends QuarxController
 {

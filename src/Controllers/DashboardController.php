@@ -1,10 +1,10 @@
 <?php
 
-namespace Yab\Quarx\Controllers;
+namespace Grafite\Quarx\Controllers;
 
 use Illuminate\Support\Facades\Schema;
 use Spatie\LaravelAnalytics\LaravelAnalyticsFacade as LaravelAnalytics;
-use Yab\Quarx\Services\AnalyticsService;
+use Grafite\Quarx\Services\AnalyticsService;
 
 class DashboardController extends QuarxController
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Yab\Quarx\Controllers;
+namespace Grafite\Quarx\Controllers;
 
 use Config;
 use CryptoService;
@@ -8,11 +8,11 @@ use FileService;
 use Illuminate\Http\Request;
 use Quarx;
 use Storage;
-use Yab\Quarx\Models\Image;
-use Yab\Quarx\Repositories\ImageRepository;
-use Yab\Quarx\Requests\ImagesRequest;
-use Yab\Quarx\Services\QuarxResponseService;
-use Yab\Quarx\Services\ValidationService;
+use Grafite\Quarx\Models\Image;
+use Grafite\Quarx\Repositories\ImageRepository;
+use Grafite\Quarx\Requests\ImagesRequest;
+use Grafite\Quarx\Services\QuarxResponseService;
+use Grafite\Quarx\Services\ValidationService;
 
 class ImagesController extends QuarxController
 {

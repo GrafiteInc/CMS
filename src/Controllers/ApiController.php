@@ -1,6 +1,6 @@
 <?php
 
-namespace Yab\Quarx\Controllers;
+namespace Grafite\Quarx\Controllers;
 
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -17,7 +17,7 @@ class ApiController extends QuarxController
 
         $this->modelName = str_singular($request->segment(3));
         if (!empty($this->modelName)) {
-            $this->model = app('Yab\Quarx\Models\\'.ucfirst($this->modelName));
+            $this->model = app('Grafite\Quarx\Models\\'.ucfirst($this->modelName));
         }
     }
 

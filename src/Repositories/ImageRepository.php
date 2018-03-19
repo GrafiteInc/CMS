@@ -1,12 +1,12 @@
 <?php
 
-namespace Yab\Quarx\Repositories;
+namespace Grafite\Quarx\Repositories;
 
 use Quarx;
 use Config;
 use CryptoService;
-use Yab\Quarx\Models\Image;
-use Yab\Quarx\Services\FileService;
+use Grafite\Quarx\Models\Image;
+use Grafite\Quarx\Services\FileService;
 use Illuminate\Support\Facades\Schema;
 
 class ImageRepository

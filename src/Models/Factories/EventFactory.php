@@ -6,7 +6,7 @@
 |--------------------------------------------------------------------------
 */
 
-$factory->define(\Yab\Quarx\Models\Event::class, function (Faker\Generator $faker) {
+$factory->define(\Grafite\Quarx\Models\Event::class, function (Faker\Generator $faker) {
     return [
         'id' => 1,
         'start_date' => '2016-10-31',

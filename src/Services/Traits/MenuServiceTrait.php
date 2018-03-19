@@ -1,15 +1,15 @@
 <?php
 
-namespace Yab\Quarx\Services\Traits;
+namespace Grafite\Quarx\Services\Traits;
 
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\URL;
-use Yab\Quarx\Repositories\LinkRepository;
-use Yab\Quarx\Repositories\MenuRepository;
-use Yab\Quarx\Repositories\PageRepository;
+use Grafite\Quarx\Repositories\LinkRepository;
+use Grafite\Quarx\Repositories\MenuRepository;
+use Grafite\Quarx\Repositories\PageRepository;
 
 trait MenuServiceTrait
 {

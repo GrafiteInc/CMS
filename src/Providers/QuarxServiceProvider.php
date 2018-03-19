@@ -1,16 +1,16 @@
 <?php
 
-namespace Yab\Quarx\Providers;
+namespace Grafite\Quarx\Providers;
 
 use App;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\ServiceProvider;
-use Yab\Quarx\Services\BlogService;
-use Yab\Quarx\Services\CryptoService;
-use Yab\Quarx\Services\EventService;
-use Yab\Quarx\Services\ModuleService;
-use Yab\Quarx\Services\PageService;
-use Yab\Quarx\Services\QuarxService;
+use Grafite\Quarx\Services\BlogService;
+use Grafite\Quarx\Services\CryptoService;
+use Grafite\Quarx\Services\EventService;
+use Grafite\Quarx\Services\ModuleService;
+use Grafite\Quarx\Services\PageService;
+use Grafite\Quarx\Services\QuarxService;
 
 class QuarxServiceProvider extends ServiceProvider
 {
@@ -21,13 +21,13 @@ class QuarxServiceProvider extends ServiceProvider
     {
         $loader = AliasLoader::getInstance();
 
-        $loader->alias('Quarx', \Yab\Quarx\Facades\QuarxServiceFacade::class);
-        $loader->alias('PageService', \Yab\Quarx\Facades\PageServiceFacade::class);
-        $loader->alias('EventService', \Yab\Quarx\Facades\EventServiceFacade::class);
-        $loader->alias('CryptoService', \Yab\Quarx\Facades\CryptoServiceFacade::class);
-        $loader->alias('ModuleService', \Yab\Quarx\Facades\ModuleServiceFacade::class);
-        $loader->alias('BlogService', \Yab\Quarx\Facades\BlogServiceFacade::class);
-        $loader->alias('FileService', \Yab\Quarx\Services\FileService::class);
+        $loader->alias('Quarx', \Grafite\Quarx\Facades\QuarxServiceFacade::class);
+        $loader->alias('PageService', \Grafite\Quarx\Facades\PageServiceFacade::class);
+        $loader->alias('EventService', \Grafite\Quarx\Facades\EventServiceFacade::class);
+        $loader->alias('CryptoService', \Grafite\Quarx\Facades\CryptoServiceFacade::class);
+        $loader->alias('ModuleService', \Grafite\Quarx\Facades\ModuleServiceFacade::class);
+        $loader->alias('BlogService', \Grafite\Quarx\Facades\BlogServiceFacade::class);
+        $loader->alias('FileService', \Grafite\Quarx\Services\FileService::class);
 
         $this->app->bind('QuarxService', function ($app) {
             return new QuarxService();

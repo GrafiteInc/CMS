@@ -2,7 +2,7 @@
 
 namespace _namespace_model_;
 
-use Yab\Quarx\Models\QuarxModel;
+use Grafite\Quarx\Models\QuarxModel;
 
 class _camel_case_ extends QuarxModel
 {

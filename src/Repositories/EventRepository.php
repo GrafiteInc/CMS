@@ -1,9 +1,9 @@
 <?php
 
-namespace Yab\Quarx\Repositories;
+namespace Grafite\Quarx\Repositories;
 
 use Carbon\Carbon;
-use Yab\Quarx\Models\Event;
+use Grafite\Quarx\Models\Event;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Schema;
 
@@ -125,7 +125,7 @@ class EventRepository
     {
         $payload['title'] = htmlentities($payload['title']);
         if (!empty($payload['lang']) && $payload['lang'] !== config('quarx.default-language', 'en')) {
-            return $this->translationRepo->createOrUpdate($event->id, 'Yab\Quarx\Models\Event', $payload['lang'], $payload);
+            return $this->translationRepo->createOrUpdate($event->id, 'Grafite\Quarx\Models\Event', $payload['lang'], $payload);
         } else {
             $payload['is_published'] = (isset($payload['is_published'])) ? (bool) $payload['is_published'] : 0;
             $payload['published_at'] = (isset($payload['published_at']) && !empty($payload['published_at'])) ? Carbon::parse($payload['published_at'])->format('Y-m-d H:i:s') : Carbon::now(config('app.timezone'))->format('Y-m-d H:i:s');

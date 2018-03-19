@@ -1,15 +1,15 @@
 <?php
 
-namespace Yab\Quarx\Controllers;
+namespace graphite\Quarx\Controllers;
 
 use URL;
 use Quarx;
 use Response;
-use Yab\Quarx\Models\Page;
+use graphite\Quarx\Models\Page;
 use Illuminate\Http\Request;
-use Yab\Quarx\Requests\PagesRequest;
-use Yab\Quarx\Services\ValidationService;
-use Yab\Quarx\Repositories\PageRepository;
+use graphite\Quarx\Requests\PagesRequest;
+use graphite\Quarx\Services\ValidationService;
+use graphite\Quarx\Repositories\PageRepository;
 
 class PagesController extends QuarxController
 {

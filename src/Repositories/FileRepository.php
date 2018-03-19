@@ -1,12 +1,12 @@
 <?php
 
-namespace Yab\Quarx\Repositories;
+namespace graphite\Quarx\Repositories;
 
 use Auth;
 use Config;
 use CryptoService;
-use Yab\Quarx\Models\File;
-use Yab\Quarx\Services\FileService;
+use graphite\Quarx\Models\File;
+use graphite\Quarx\Services\FileService;
 use Illuminate\Support\Facades\Schema;
 
 class FileRepository

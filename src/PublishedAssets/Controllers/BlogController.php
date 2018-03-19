@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Quarx;
 
 use App\Http\Controllers\Controller;
-use Yab\Quarx\Repositories\BlogRepository;
+use graphite\Quarx\Repositories\BlogRepository;
 
 class BlogController extends Controller
 {

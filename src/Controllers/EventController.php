@@ -1,14 +1,14 @@
 <?php
 
-namespace Yab\Quarx\Controllers;
+namespace graphite\Quarx\Controllers;
 
 use URL;
 use Quarx;
-use Yab\Quarx\Models\Event;
+use graphite\Quarx\Models\Event;
 use Illuminate\Http\Request;
-use Yab\Quarx\Requests\EventRequest;
-use Yab\Quarx\Services\ValidationService;
-use Yab\Quarx\Repositories\EventRepository;
+use graphite\Quarx\Requests\EventRequest;
+use graphite\Quarx\Services\ValidationService;
+use graphite\Quarx\Repositories\EventRepository;
 
 class EventController extends QuarxController
 {

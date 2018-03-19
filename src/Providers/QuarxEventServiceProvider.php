@@ -1,6 +1,6 @@
 <?php
 
-namespace Yab\Quarx\Providers;
+namespace graphite\Quarx\Providers;
 
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
@@ -12,58 +12,58 @@ class QuarxEventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'eloquent.saved: Yab\Quarx\Models\Blog' => [
-            'Yab\Quarx\Models\Blog@afterSaved',
+        'eloquent.saved: graphite\Quarx\Models\Blog' => [
+            'graphite\Quarx\Models\Blog@afterSaved',
         ],
-        'eloquent.saved: Yab\Quarx\Models\Page' => [
-            'Yab\Quarx\Models\Page@afterSaved',
+        'eloquent.saved: graphite\Quarx\Models\Page' => [
+            'graphite\Quarx\Models\Page@afterSaved',
         ],
-        'eloquent.saved: Yab\Quarx\Models\Event' => [
-            'Yab\Quarx\Models\Event@afterSaved',
+        'eloquent.saved: graphite\Quarx\Models\Event' => [
+            'graphite\Quarx\Models\Event@afterSaved',
         ],
-        'eloquent.saved: Yab\Quarx\Models\FAQ' => [
-            'Yab\Quarx\Models\FAQ@afterSaved',
+        'eloquent.saved: graphite\Quarx\Models\FAQ' => [
+            'graphite\Quarx\Models\FAQ@afterSaved',
         ],
-        'eloquent.saved: Yab\Quarx\Models\Translation' => [
-            'Yab\Quarx\Models\Translation@afterSaved',
+        'eloquent.saved: graphite\Quarx\Models\Translation' => [
+            'graphite\Quarx\Models\Translation@afterSaved',
         ],
-        'eloquent.saved: Yab\Quarx\Models\Widget' => [
-            'Yab\Quarx\Models\Widget@afterSaved',
-        ],
-
-        'eloquent.created: Yab\Quarx\Models\Blog' => [
-            'Yab\Quarx\Models\Blog@afterCreate',
-        ],
-        'eloquent.created: Yab\Quarx\Models\Page' => [
-            'Yab\Quarx\Models\Page@afterCreate',
-        ],
-        'eloquent.created: Yab\Quarx\Models\Event' => [
-            'Yab\Quarx\Models\Event@afterCreate',
-        ],
-        'eloquent.created: Yab\Quarx\Models\FAQ' => [
-            'Yab\Quarx\Models\Event@afterCreate',
-        ],
-        'eloquent.created: Yab\Quarx\Models\Widget' => [
-            'Yab\Quarx\Models\Widget@afterCreate',
+        'eloquent.saved: graphite\Quarx\Models\Widget' => [
+            'graphite\Quarx\Models\Widget@afterSaved',
         ],
 
-        'eloquent.deleting: Yab\Quarx\Models\Blog' => [
-            'Yab\Quarx\Models\Blog@beingDeleted',
+        'eloquent.created: graphite\Quarx\Models\Blog' => [
+            'graphite\Quarx\Models\Blog@afterCreate',
         ],
-        'eloquent.deleting: Yab\Quarx\Models\Page' => [
-            'Yab\Quarx\Models\Page@beingDeleted',
+        'eloquent.created: graphite\Quarx\Models\Page' => [
+            'graphite\Quarx\Models\Page@afterCreate',
         ],
-        'eloquent.deleting: Yab\Quarx\Models\Event' => [
-            'Yab\Quarx\Models\Event@beingDeleted',
+        'eloquent.created: graphite\Quarx\Models\Event' => [
+            'graphite\Quarx\Models\Event@afterCreate',
         ],
-        'eloquent.deleting: Yab\Quarx\Models\FAQ' => [
-            'Yab\Quarx\Models\FAQ@beingDeleted',
+        'eloquent.created: graphite\Quarx\Models\FAQ' => [
+            'graphite\Quarx\Models\Event@afterCreate',
         ],
-        'eloquent.deleting: Yab\Quarx\Models\Translation' => [
-            'Yab\Quarx\Models\Translation@beingDeleted',
+        'eloquent.created: graphite\Quarx\Models\Widget' => [
+            'graphite\Quarx\Models\Widget@afterCreate',
         ],
-        'eloquent.deleting: Yab\Quarx\Models\Widget' => [
-            'Yab\Quarx\Models\Widget@beingDeleted',
+
+        'eloquent.deleting: graphite\Quarx\Models\Blog' => [
+            'graphite\Quarx\Models\Blog@beingDeleted',
+        ],
+        'eloquent.deleting: graphite\Quarx\Models\Page' => [
+            'graphite\Quarx\Models\Page@beingDeleted',
+        ],
+        'eloquent.deleting: graphite\Quarx\Models\Event' => [
+            'graphite\Quarx\Models\Event@beingDeleted',
+        ],
+        'eloquent.deleting: graphite\Quarx\Models\FAQ' => [
+            'graphite\Quarx\Models\FAQ@beingDeleted',
+        ],
+        'eloquent.deleting: graphite\Quarx\Models\Translation' => [
+            'graphite\Quarx\Models\Translation@beingDeleted',
+        ],
+        'eloquent.deleting: graphite\Quarx\Models\Widget' => [
+            'graphite\Quarx\Models\Widget@beingDeleted',
         ],
     ];
 

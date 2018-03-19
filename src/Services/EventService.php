@@ -1,11 +1,11 @@
 <?php
 
-namespace Yab\Quarx\Services;
+namespace graphite\Quarx\Services;
 
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\URL;
-use Yab\Quarx\Repositories\EventRepository;
+use graphite\Quarx\Repositories\EventRepository;
 
 class EventService
 {

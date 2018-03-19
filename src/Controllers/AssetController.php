@@ -1,10 +1,10 @@
 <?php
 
-namespace Yab\Quarx\Controllers;
+namespace graphite\Quarx\Controllers;
 
 use Illuminate\Filesystem\Filesystem;
-use Yab\Quarx\Services\AssetService;
-use Yab\Quarx\Controllers\QuarxController;
+use graphite\Quarx\Services\AssetService;
+use graphite\Quarx\Controllers\QuarxController;
 
 class AssetController extends QuarxController
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Yab\Quarx\Services;
+namespace graphite\Quarx\Services;
 
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
@@ -8,10 +8,10 @@ use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\URL;
-use Yab\Quarx\Facades\CryptoServiceFacade;
-use Yab\Quarx\Services\Traits\DefaultModuleServiceTrait;
-use Yab\Quarx\Services\Traits\MenuServiceTrait;
-use Yab\Quarx\Services\Traits\ModuleServiceTrait;
+use graphite\Quarx\Facades\CryptoServiceFacade;
+use graphite\Quarx\Services\Traits\DefaultModuleServiceTrait;
+use graphite\Quarx\Services\Traits\MenuServiceTrait;
+use graphite\Quarx\Services\Traits\ModuleServiceTrait;
 
 class QuarxService
 {
@@ -21,7 +21,7 @@ class QuarxService
 
     public function __construct()
     {
-        $this->imageRepo = App::make('Yab\Quarx\Repositories\ImageRepository');
+        $this->imageRepo = App::make('graphite\Quarx\Repositories\ImageRepository');
     }
 
     /**

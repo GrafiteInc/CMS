@@ -36,10 +36,10 @@ class TestCase extends Orchestra\Testbench\TestCase
     protected function getPackageProviders($app)
     {
         return [
-            \Yab\Quarx\QuarxProvider::class,
+            \graphite\Quarx\QuarxProvider::class,
             \Collective\Html\HtmlServiceProvider::class,
             \Collective\Html\HtmlServiceProvider::class,
-            \Yab\Laracogs\LaracogsProvider::class,
+            \graphite\Laracogs\LaracogsProvider::class,
         ];
     }
 
@@ -48,9 +48,9 @@ class TestCase extends Orchestra\Testbench\TestCase
         return [
             'Form' => \Collective\Html\FormFacade::class,
             'HTML' => \Collective\Html\HtmlFacade::class,
-            'FormMaker' => \Yab\Laracogs\Facades\FormMaker::class,
-            'InputMaker' => \Yab\Laracogs\Facades\InputMaker::class,
-            'Crypto' => \Yab\Laracogs\Utilities\Crypto::class,
+            'FormMaker' => \graphite\Laracogs\Facades\FormMaker::class,
+            'InputMaker' => \graphite\Laracogs\Facades\InputMaker::class,
+            'Crypto' => \graphite\Laracogs\Utilities\Crypto::class,
         ];
     }
 
@@ -62,7 +62,7 @@ class TestCase extends Orchestra\Testbench\TestCase
         parent::setUp();
         $this->withFactories(__DIR__.'/../src/Models/Factories');
         $this->artisan('vendor:publish', [
-            '--provider' => 'Yab\Quarx\QuarxProvider',
+            '--provider' => 'graphite\Quarx\QuarxProvider',
             '--force' => true,
         ]);
         $this->artisan('migrate', [

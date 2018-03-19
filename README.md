@@ -1,8 +1,8 @@
 # Quarx - Add a CMS to any Laravel app to gain control of: pages, blogs, galleries, events, custom modules, images and more.
 
-[![Build Status](https://travis-ci.org/YABhq/Quarx.svg?branch=master)](https://travis-ci.org/YABhq/Quarx)
-[![Packagist](https://img.shields.io/packagist/dt/yab/quarx.svg?maxAge=2592000)](https://packagist.org/packages/yab/quarx)
-[![license](https://img.shields.io/github/license/mashape/apistatus.svg?maxAge=2592000)](https://packagist.org/packages/yab/quarx)
+[![Build Status](https://travis-ci.org/graphitehq/Quarx.svg?branch=master)](https://travis-ci.org/graphitehq/Quarx)
+[![Packagist](https://img.shields.io/packagist/dt/graphite/quarx.svg?maxAge=2592000)](https://packagist.org/packages/graphite/quarx)
+[![license](https://img.shields.io/github/license/mashape/apistatus.svg?maxAge=2592000)](https://packagist.org/packages/graphite/quarx)
 
 Quarx is a full fledged CMS that can be added to any Laravel application. It provides you with full control of things like: pages, menus, links, widgets, blogs, events, faqs etc.
 
@@ -14,11 +14,11 @@ Simple setup uses Laracogs as the backbone of an app for you using Laravel, once
 ## Documentation
 [http://quarxcms.com](http://quarxcms.com)
 
-## Yab Newsletter
+## graphite Newsletter
 [Subscribe](http://eepurl.com/ck7dSv)
 
 ## Chat Support
-[Gitter](https://gitter.im/YABhq/Quarx)
+[Gitter](https://gitter.im/graphitehq/Quarx)
 
 ## Requirements
 1. PHP 7+
@@ -44,19 +44,19 @@ Create a new Laravel application, and make a database somewhere and update the .
 * Run the following command:
 
 ```bash
-composer require yab/quarx
+composer require graphite/quarx
 ```
 
 * Add the following to your Providers array in your config/app.php file:
 
 ```php
-Yab\Quarx\QuarxProvider::class,
+Graphite\Quarx\QuarxProvider::class,
 ```
 
 * Then run the vendor publish:
 
 ```bash
-php artisan vendor:publish --provider="Yab\Quarx\QuarxProvider"
+php artisan vendor:publish --provider="Graphite\Quarx\QuarxProvider"
 ```
 
 > Set your app's timezone config to align the Quarx datepicker UI for your setup
@@ -115,7 +115,7 @@ php artisan migrate
 'quarx' => \App\Http\Middleware\Quarx::class,
 'quarx-api' => \App\Http\Middleware\QuarxApi::class,
 'quarx-language' => \App\Http\Middleware\QuarxLanguage::class,
-'quarx-analytics' => \Yab\Quarx\Middleware\QuarxAnalytics::class,
+'quarx-analytics' => \Graphite\Quarx\Middleware\QuarxAnalytics::class,
 ```
 
 5. In order to have modules load as well please add the following to your composer file under autoload psr-4 object:

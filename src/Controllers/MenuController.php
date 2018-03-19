@@ -1,16 +1,16 @@
 <?php
 
-namespace Yab\Quarx\Controllers;
+namespace graphite\Quarx\Controllers;
 
 use Exception;
 use Illuminate\Http\Request;
 use Quarx;
-use Yab\Quarx\Models\Menu;
-use Yab\Quarx\Repositories\LinkRepository;
-use Yab\Quarx\Repositories\MenuRepository;
-use Yab\Quarx\Requests\MenuRequest;
-use Yab\Quarx\Services\QuarxResponseService;
-use Yab\Quarx\Services\ValidationService;
+use graphite\Quarx\Models\Menu;
+use graphite\Quarx\Repositories\LinkRepository;
+use graphite\Quarx\Repositories\MenuRepository;
+use graphite\Quarx\Requests\MenuRequest;
+use graphite\Quarx\Services\QuarxResponseService;
+use graphite\Quarx\Services\ValidationService;
 
 class MenuController extends QuarxController
 {

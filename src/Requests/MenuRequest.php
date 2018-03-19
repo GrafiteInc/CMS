@@ -1,10 +1,10 @@
 <?php
 
-namespace Yab\Quarx\Requests;
+namespace graphite\Quarx\Requests;
 
 use Auth;
 use Gate;
-use Yab\Quarx\Models\Menu;
+use graphite\Quarx\Models\Menu;
 use Illuminate\Foundation\Http\FormRequest;
 
 class MenuRequest extends FormRequest

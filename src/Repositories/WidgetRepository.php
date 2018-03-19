@@ -1,9 +1,9 @@
 <?php
 
-namespace Yab\Quarx\Repositories;
+namespace graphite\Quarx\Repositories;
 
 use Illuminate\Support\Facades\Schema;
-use Yab\Quarx\Models\Widget;
+use graphite\Quarx\Models\Widget;
 
 class WidgetRepository
 {
@@ -107,7 +107,7 @@ class WidgetRepository
         $payload['name'] = htmlentities($payload['name']);
 
         if (!empty($payload['lang']) && $payload['lang'] !== config('quarx.default-language', 'en')) {
-            return $this->translationRepo->createOrUpdate($widgets->id, 'Yab\Quarx\Models\Widget', $payload['lang'], $payload);
+            return $this->translationRepo->createOrUpdate($widgets->id, 'graphite\Quarx\Models\Widget', $payload['lang'], $payload);
         } else {
             unset($payload['lang']);
 

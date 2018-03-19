@@ -1,6 +1,6 @@
 <?php
 
-namespace Yab\Quarx\Services;
+namespace graphite\Quarx\Services;
 
 use Illuminate\Support\Facades\Response;
 

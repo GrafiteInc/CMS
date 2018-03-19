@@ -1,13 +1,13 @@
 <?php
 
-namespace Yab\Quarx\Repositories;
+namespace graphite\Quarx\Repositories;
 
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Schema;
 use Quarx;
-use Yab\Quarx\Models\Page;
-use Yab\Quarx\Services\FileService;
+use graphite\Quarx\Models\Page;
+use graphite\Quarx\Services\FileService;
 
 class PageRepository
 {
@@ -125,15 +125,15 @@ class PageRepository
         $page = Page::where('url', $url)->where('is_published', 1)->where('published_at', '<=', Carbon::now(config('app.timezone'))->format('Y-m-d H:i:s'))->first();
 
         if ($page && app()->getLocale() !== config('quarx.default-language')) {
-            $page = $this->translationRepo->findByEntityId($page->id, 'Yab\Quarx\Models\Page');
+            $page = $this->translationRepo->findByEntityId($page->id, 'graphite\Quarx\Models\Page');
         }
 
         if (!$page) {
-            $page = $this->translationRepo->findByUrl($url, 'Yab\Quarx\Models\Page');
+            $page = $this->translationRepo->findByUrl($url, 'graphite\Quarx\Models\Page');
         }
 
         if ($url === 'home' && app()->getLocale() !== config('quarx.default-language')) {
-            $page = $this->translationRepo->findByUrl($url, 'Yab\Quarx\Models\Page');
+            $page = $this->translationRepo->findByUrl($url, 'graphite\Quarx\Models\Page');
         }
 
         return $page;
@@ -172,7 +172,7 @@ class PageRepository
         $payload['title'] = htmlentities($payload['title']);
 
         if (!empty($payload['lang']) && $payload['lang'] !== config('quarx.default-language', 'en')) {
-            return $this->translationRepo->createOrUpdate($page->id, 'Yab\Quarx\Models\Page', $payload['lang'], $payload);
+            return $this->translationRepo->createOrUpdate($page->id, 'graphite\Quarx\Models\Page', $payload['lang'], $payload);
         } else {
             $payload['url'] = Quarx::convertToURL($payload['url']);
             $payload['is_published'] = (isset($payload['is_published'])) ? (bool) $payload['is_published'] : 0;

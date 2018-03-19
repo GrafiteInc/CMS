@@ -7,7 +7,7 @@ class ImagesTest extends TestCase
         parent::setUp();
         $this->withoutMiddleware();
         $this->withoutEvents();
-        factory(\Yab\Quarx\Models\Image::class)->create();
+        factory(\graphite\Quarx\Models\Image::class)->create();
     }
 
     /*
@@ -45,7 +45,7 @@ class ImagesTest extends TestCase
     public function testStore()
     {
         $uploadedFile = new Symfony\Component\HttpFoundation\File\UploadedFile(__DIR__.'/test-pic.jpg', 'test-pic.jpg');
-        $image = (array) factory(\Yab\Quarx\Models\Image::class)->make(['id' => 2]);
+        $image = (array) factory(\graphite\Quarx\Models\Image::class)->make(['id' => 2]);
         $image['location'] = [
             [
                 'name' => CryptoService::encrypt('test-pic.jpg'),
@@ -63,7 +63,7 @@ class ImagesTest extends TestCase
 
     public function testUpdate()
     {
-        $image = (array) factory(\Yab\Quarx\Models\Image::class)->make(['id' => 3, 'title' => 'dumber']);
+        $image = (array) factory(\graphite\Quarx\Models\Image::class)->make(['id' => 3, 'title' => 'dumber']);
         $response = $this->call('PATCH', 'quarx/images/3', $image);
 
         $this->assertEquals(302, $response->getStatusCode());
@@ -73,7 +73,7 @@ class ImagesTest extends TestCase
     public function testDelete()
     {
         $uploadedFile = new Symfony\Component\HttpFoundation\File\UploadedFile(__DIR__.'/test-pic.jpg', 'test-pic.jpg');
-        $image = (array) factory(\Yab\Quarx\Models\Image::class)->make(['id' => 2]);
+        $image = (array) factory(\graphite\Quarx\Models\Image::class)->make(['id' => 2]);
         $image['location'] = [
             [
                 'name' => CryptoService::encrypt('files/dumb'),

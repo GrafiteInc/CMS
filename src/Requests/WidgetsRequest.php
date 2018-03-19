@@ -1,10 +1,10 @@
 <?php
 
-namespace Yab\Quarx\Requests;
+namespace graphite\Quarx\Requests;
 
 use Auth;
 use Gate;
-use Yab\Quarx\Models\Widget;
+use graphite\Quarx\Models\Widget;
 use Illuminate\Foundation\Http\FormRequest;
 
 class WidgetsRequest extends FormRequest

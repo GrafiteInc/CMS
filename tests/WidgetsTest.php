@@ -7,7 +7,7 @@ class WidgetsTest extends TestCase
         parent::setUp();
         $this->withoutMiddleware();
         $this->withoutEvents();
-        factory(\Yab\Quarx\Models\Widget::class)->create();
+        factory(\graphite\Quarx\Models\Widget::class)->create();
     }
 
     /*
@@ -44,7 +44,7 @@ class WidgetsTest extends TestCase
 
     public function testStore()
     {
-        $widget = factory(\Yab\Quarx\Models\Widget::class)->make(['id' => 2]);
+        $widget = factory(\graphite\Quarx\Models\Widget::class)->make(['id' => 2]);
         $widget = $widget->toArray();
         unset($widget['translations']);
         $response = $this->call('POST', 'quarx/widgets', $widget);
@@ -78,7 +78,7 @@ class WidgetsTest extends TestCase
         ]);
 
         $this->assertDatabaseHas('translations', [
-            'entity_type' => 'Yab\\Quarx\\Models\\Widget',
+            'entity_type' => 'graphite\\Quarx\\Models\\Widget',
         ]);
         $this->assertEquals(302, $response->getStatusCode());
     }

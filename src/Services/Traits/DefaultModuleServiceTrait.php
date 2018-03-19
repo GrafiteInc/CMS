@@ -1,11 +1,11 @@
 <?php
 
-namespace Yab\Quarx\Services\Traits;
+namespace graphite\Quarx\Services\Traits;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
-use Yab\Quarx\Repositories\WidgetRepository;
-use Yab\Quarx\Services\FileService;
+use graphite\Quarx\Repositories\WidgetRepository;
+use graphite\Quarx\Services\FileService;
 
 trait DefaultModuleServiceTrait
 {
@@ -60,7 +60,7 @@ trait DefaultModuleServiceTrait
     {
         $img = '';
 
-        if ($image = app('Yab\Quarx\Models\Image')->find($id)) {
+        if ($image = app('graphite\Quarx\Models\Image')->find($id)) {
             $img = $image->url;
         }
 
@@ -78,7 +78,7 @@ trait DefaultModuleServiceTrait
     {
         $img = '';
 
-        if ($image = app('Yab\Quarx\Models\Image')->find($id)) {
+        if ($image = app('graphite\Quarx\Models\Image')->find($id)) {
             $img = $image->url;
         }
 

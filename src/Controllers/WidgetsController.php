@@ -1,14 +1,14 @@
 <?php
 
-namespace Yab\Quarx\Controllers;
+namespace graphite\Quarx\Controllers;
 
 use URL;
 use Quarx;
 use Illuminate\Http\Request;
-use Yab\Quarx\Models\Widget;
-use Yab\Quarx\Requests\WidgetsRequest;
-use Yab\Quarx\Services\ValidationService;
-use Yab\Quarx\Repositories\WidgetRepository;
+use graphite\Quarx\Models\Widget;
+use graphite\Quarx\Requests\WidgetsRequest;
+use graphite\Quarx\Services\ValidationService;
+use graphite\Quarx\Repositories\WidgetRepository;
 
 class WidgetsController extends QuarxController
 {

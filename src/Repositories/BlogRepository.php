@@ -1,13 +1,13 @@
 <?php
 
-namespace Yab\Quarx\Repositories;
+namespace graphite\Quarx\Repositories;
 
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Schema;
 use Quarx;
-use Yab\Quarx\Models\Blog;
-use Yab\Quarx\Services\FileService;
+use graphite\Quarx\Models\Blog;
+use graphite\Quarx\Services\FileService;
 
 class BlogRepository
 {
@@ -77,7 +77,7 @@ class BlogRepository
     {
         $tags = [];
         if (app()->getLocale() !== config('quarx.default-language', 'en')) {
-            $blogs = $this->translationRepo->getEntitiesByTypeAndLang(app()->getLocale(), 'Yab\Quarx\Models\Blog');
+            $blogs = $this->translationRepo->getEntitiesByTypeAndLang(app()->getLocale(), 'graphite\Quarx\Models\Blog');
         } else {
             $blogs = Blog::orderBy('published_at', 'desc')->get();
         }
@@ -156,7 +156,7 @@ class BlogRepository
         $blog = Blog::where('url', $url)->where('is_published', 1)->where('published_at', '<=', Carbon::now(config('app.timezone'))->format('Y-m-d H:i:s'))->first();
 
         if (!$blog) {
-            $blog = $this->translationRepo->findByUrl($url, 'Yab\Quarx\Models\Blog');
+            $blog = $this->translationRepo->findByUrl($url, 'graphite\Quarx\Models\Blog');
         }
 
         return $blog;
@@ -193,7 +193,7 @@ class BlogRepository
         }
 
         if (!empty($payload['lang']) && $payload['lang'] !== config('quarx.default-language', 'en')) {
-            return $this->translationRepo->createOrUpdate($blog->id, 'Yab\Quarx\Models\Blog', $payload['lang'], $payload);
+            return $this->translationRepo->createOrUpdate($blog->id, 'graphite\Quarx\Models\Blog', $payload['lang'], $payload);
         } else {
             $payload['url'] = Quarx::convertToURL($payload['url']);
             $payload['is_published'] = (isset($payload['is_published'])) ? (bool) $payload['is_published'] : 0;

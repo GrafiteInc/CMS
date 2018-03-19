@@ -1,6 +1,6 @@
 <?php
 
-namespace Yab\Quarx\Console;
+namespace graphite\Quarx\Console;
 
 use Artisan;
 use App\Models\Role;
@@ -9,7 +9,7 @@ use App\Services\UserService;
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Facades\Config;
-use Yab\Laracogs\Traits\FileMakerTrait;
+use graphite\Laracogs\Traits\FileMakerTrait;
 
 class Setup extends Command
 {
@@ -37,51 +37,51 @@ class Setup extends Command
     public function handle()
     {
         Artisan::call('vendor:publish', [
-            '--provider' => 'Yab\Quarx\QuarxProvider',
+            '--provider' => 'Graphite\Quarx\QuarxProvider',
             '--force' => true,
         ]);
 
         Artisan::call('vendor:publish', [
-            '--provider' => 'Yab\Laracogs\LaracogsProvider',
+            '--provider' => 'Graphite\Builder\GraphiteBuilderProvider',
             '--force' => true,
         ]);
 
         $fileSystem = new Filesystem();
 
-        $files = $fileSystem->allFiles(getcwd().'/vendor/yab/laracogs/src/Packages/Starter');
+        $files = $fileSystem->allFiles(getcwd().'/vendor/graphite/laracogs/src/Packages/Starter');
 
         $this->line('Copying routes...');
-        $this->copyPreparedFiles(getcwd().'/vendor/yab/laracogs/src/Packages/Starter/routes', base_path('routes'));
+        $this->copyPreparedFiles(getcwd().'/vendor/graphite/laracogs/src/Packages/Starter/routes', base_path('routes'));
 
         $this->line('Copying config...');
-        $this->copyPreparedFiles(getcwd().'/vendor/yab/laracogs/src/Packages/Starter/config', base_path('config'));
+        $this->copyPreparedFiles(getcwd().'/vendor/graphite/laracogs/src/Packages/Starter/config', base_path('config'));
 
         $this->line('Copying app/Http...');
-        $this->copyPreparedFiles(getcwd().'/vendor/yab/laracogs/src/Packages/Starter/app/Http', app_path('Http'));
+        $this->copyPreparedFiles(getcwd().'/vendor/graphite/laracogs/src/Packages/Starter/app/Http', app_path('Http'));
 
         $this->line('Copying app/Events...');
-        $this->copyPreparedFiles(getcwd().'/vendor/yab/laracogs/src/Packages/Starter/app/Events', app_path('Events'));
+        $this->copyPreparedFiles(getcwd().'/vendor/graphite/laracogs/src/Packages/Starter/app/Events', app_path('Events'));
 
         $this->line('Copying app/Listeners...');
-        $this->copyPreparedFiles(getcwd().'/vendor/yab/laracogs/src/Packages/Starter/app/Listeners', app_path('Listeners'));
+        $this->copyPreparedFiles(getcwd().'/vendor/graphite/laracogs/src/Packages/Starter/app/Listeners', app_path('Listeners'));
 
         $this->line('Copying app/Notifications...');
-        $this->copyPreparedFiles(getcwd().'/vendor/yab/laracogs/src/Packages/Starter/app/Notifications', app_path('Notifications'));
+        $this->copyPreparedFiles(getcwd().'/vendor/graphite/laracogs/src/Packages/Starter/app/Notifications', app_path('Notifications'));
 
         $this->line('Copying app/Models...');
-        $this->copyPreparedFiles(getcwd().'/vendor/yab/laracogs/src/Packages/Starter/app/Models', app_path('Models'));
+        $this->copyPreparedFiles(getcwd().'/vendor/graphite/laracogs/src/Packages/Starter/app/Models', app_path('Models'));
 
         $this->line('Copying app/Services...');
-        $this->copyPreparedFiles(getcwd().'/vendor/yab/laracogs/src/Packages/Starter/app/Services', app_path('Services'));
+        $this->copyPreparedFiles(getcwd().'/vendor/graphite/laracogs/src/Packages/Starter/app/Services', app_path('Services'));
 
         $this->line('Copying database...');
-        $this->copyPreparedFiles(getcwd().'/vendor/yab/laracogs/src/Packages/Starter/database', base_path('database'));
+        $this->copyPreparedFiles(getcwd().'/vendor/graphite/laracogs/src/Packages/Starter/database', base_path('database'));
 
         $this->line('Copying resources/views...');
-        $this->copyPreparedFiles(getcwd().'/vendor/yab/laracogs/src/Packages/Starter/resources/views', base_path('resources/views'));
+        $this->copyPreparedFiles(getcwd().'/vendor/graphite/laracogs/src/Packages/Starter/resources/views', base_path('resources/views'));
 
         $this->line('Copying tests...');
-        $this->copyPreparedFiles(getcwd().'/vendor/yab/laracogs/src/Packages/Starter/tests', base_path('tests'));
+        $this->copyPreparedFiles(getcwd().'/vendor/graphite/laracogs/src/Packages/Starter/tests', base_path('tests'));
 
         $this->fileManager();
 
@@ -162,7 +162,7 @@ class Setup extends Command
 
         // Kernel setup
         $routeContents = file_get_contents(app_path('Http/Kernel.php'));
-        $routeContents = str_replace("'auth' => \Illuminate\Auth\Middleware\Authenticate::class,", "'auth' => \Illuminate\Auth\Middleware\Authenticate::class,\n\t\t'quarx' => \App\Http\Middleware\Quarx::class,\n\t\t'quarx-api' => \App\Http\Middleware\QuarxApi::class,\n\t\t'quarx-analytics' => \Yab\Quarx\Middleware\QuarxAnalytics::class,\n\t\t'quarx-language' => \App\Http\Middleware\QuarxLanguage::class,\n\t\t'admin' => \App\Http\Middleware\Admin::class,\n\t\t'active' => \App\Http\Middleware\Active::class,", $routeContents);
+        $routeContents = str_replace("'auth' => \Illuminate\Auth\Middleware\Authenticate::class,", "'auth' => \Illuminate\Auth\Middleware\Authenticate::class,\n\t\t'quarx' => \App\Http\Middleware\Quarx::class,\n\t\t'quarx-api' => \App\Http\Middleware\QuarxApi::class,\n\t\t'quarx-analytics' => \graphite\Quarx\Middleware\QuarxAnalytics::class,\n\t\t'quarx-language' => \App\Http\Middleware\QuarxLanguage::class,\n\t\t'admin' => \App\Http\Middleware\Admin::class,\n\t\t'active' => \App\Http\Middleware\Active::class,", $routeContents);
         file_put_contents(app_path('Http/Kernel.php'), $routeContents);
 
         $fileSystem = new Filesystem();

@@ -1,8 +1,8 @@
 <?php
 
-namespace Yab\Quarx\Models;
+namespace graphite\Quarx\Models;
 
-use Yab\Quarx\Traits\Translatable;
+use graphite\Quarx\Traits\Translatable;
 
 class Widget extends QuarxModel
 {

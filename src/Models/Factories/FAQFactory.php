@@ -6,7 +6,7 @@
 |--------------------------------------------------------------------------
 */
 
-$factory->define(\Yab\Quarx\Models\FAQ::class, function (Faker\Generator $faker) {
+$factory->define(\graphite\Quarx\Models\FAQ::class, function (Faker\Generator $faker) {
     return [
         'id' => 1,
         'question' => 'what\'s this?',

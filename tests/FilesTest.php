@@ -7,7 +7,7 @@ class FilesTest extends TestCase
         parent::setUp();
         $this->withoutMiddleware();
         $this->withoutEvents();
-        factory(\Yab\Quarx\Models\File::class)->create();
+        factory(\graphite\Quarx\Models\File::class)->create();
     }
 
     /*
@@ -45,7 +45,7 @@ class FilesTest extends TestCase
     public function testStore()
     {
         $uploadedFile = new Symfony\Component\HttpFoundation\File\UploadedFile(__DIR__.'/test-file.txt', 'test-file.txt');
-        $file = factory(\Yab\Quarx\Models\File::class)->make([
+        $file = factory(\graphite\Quarx\Models\File::class)->make([
             'id' => 2,
             'location' => [
                 'file_a' => [
@@ -70,7 +70,7 @@ class FilesTest extends TestCase
 
     public function testUpdate()
     {
-        $file = (array) factory(\Yab\Quarx\Models\File::class)->make(['id' => 3, 'title' => 'dumber']);
+        $file = (array) factory(\graphite\Quarx\Models\File::class)->make(['id' => 3, 'title' => 'dumber']);
         $response = $this->call('PATCH', 'quarx/files/3', $file);
 
         $this->assertEquals(302, $response->getStatusCode());
@@ -80,7 +80,7 @@ class FilesTest extends TestCase
     public function testDelete()
     {
         Storage::put('test-file.txt', 'what is this');
-        $file = factory(\Yab\Quarx\Models\File::class)->make([
+        $file = factory(\graphite\Quarx\Models\File::class)->make([
             'id' => 2,
             'location' => [
                 'file_a' => [

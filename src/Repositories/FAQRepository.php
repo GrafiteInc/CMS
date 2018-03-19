@@ -1,11 +1,11 @@
 <?php
 
-namespace Yab\Quarx\Repositories;
+namespace graphite\Quarx\Repositories;
 
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Schema;
-use Yab\Quarx\Models\FAQ;
+use graphite\Quarx\Models\FAQ;
 
 class FAQRepository
 {
@@ -116,7 +116,7 @@ class FAQRepository
         $payload['question'] = htmlentities($payload['question']);
 
         if (!empty($payload['lang']) && $payload['lang'] !== config('quarx.default-language', 'en')) {
-            return $this->translationRepo->createOrUpdate($FAQ->id, 'Yab\Quarx\Models\FAQ', $payload['lang'], $payload);
+            return $this->translationRepo->createOrUpdate($FAQ->id, 'graphite\Quarx\Models\FAQ', $payload['lang'], $payload);
         } else {
             $payload['is_published'] = (isset($payload['is_published'])) ? (bool) $payload['is_published'] : 0;
             $payload['published_at'] = (isset($payload['published_at']) && !empty($payload['published_at'])) ? Carbon::parse($payload['published_at'])->format('Y-m-d H:i:s') : Carbon::now(config('app.timezone'))->format('Y-m-d H:i:s');

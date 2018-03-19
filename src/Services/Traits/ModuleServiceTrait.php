@@ -1,9 +1,9 @@
 <?php
 
-namespace Yab\Quarx\Services\Traits;
+namespace graphite\Quarx\Services\Traits;
 
 use Illuminate\Support\Facades\Config;
-use Yab\Quarx\Facades\CryptoServiceFacade;
+use graphite\Quarx\Facades\CryptoServiceFacade;
 
 trait ModuleServiceTrait
 {

@@ -1,12 +1,12 @@
 <?php
 
-namespace Yab\Quarx\Controllers;
+namespace graphite\Quarx\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\View;
 use Quarx;
-use Yab\Quarx\Models\Archive;
+use graphite\Quarx\Models\Archive;
 
 class QuarxFeatureController extends QuarxController
 {
@@ -87,10 +87,10 @@ class QuarxFeatureController extends QuarxController
      */
     public function preview($entity, $id)
     {
-        $modelString = 'Yab\Quarx\Models\\'.ucfirst($entity);
+        $modelString = 'graphite\Quarx\Models\\'.ucfirst($entity);
 
         if (!class_exists($modelString)) {
-            $modelString = 'Yab\Quarx\Models\\'.ucfirst($entity).'s';
+            $modelString = 'graphite\Quarx\Models\\'.ucfirst($entity).'s';
         }
 
         $model = new $modelString();

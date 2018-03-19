@@ -7,7 +7,7 @@ class MenuTest extends TestCase
         parent::setUp();
         $this->withoutMiddleware();
         $this->withoutEvents();
-        factory(\Yab\Quarx\Models\Menu::class)->create();
+        factory(\graphite\Quarx\Models\Menu::class)->create();
     }
 
     /*
@@ -44,7 +44,7 @@ class MenuTest extends TestCase
 
     public function testStore()
     {
-        $menu = factory(\Yab\Quarx\Models\Menu::class)->make(['id' => 2]);
+        $menu = factory(\graphite\Quarx\Models\Menu::class)->make(['id' => 2]);
         $response = $this->call('POST', '/quarx/menus', $menu->toArray());
 
         $this->assertEquals(302, $response->getStatusCode());

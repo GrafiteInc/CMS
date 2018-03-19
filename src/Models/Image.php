@@ -1,6 +1,6 @@
 <?php
 
-namespace Yab\Quarx\Models;
+namespace graphite\Quarx\Models;
 
 use Carbon\Carbon;
 use Config;
@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
 use Intervention\Image\ImageManagerStatic as InterventionImage;
 use Storage;
-use Yab\Quarx\Services\AssetService;
+use graphite\Quarx\Services\AssetService;
 
 class Image extends QuarxModel
 {

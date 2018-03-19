@@ -1,10 +1,10 @@
 <?php
 
-namespace Yab\Quarx\Services;
+namespace graphite\Quarx\Services;
 
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Schema;
-use Yab\Quarx\Models\Analytics;
+use graphite\Quarx\Models\Analytics;
 
 class AnalyticsService
 {

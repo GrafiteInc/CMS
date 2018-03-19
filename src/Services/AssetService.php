@@ -1,6 +1,6 @@
 <?php
 
-namespace Yab\Quarx\Services;
+namespace graphite\Quarx\Services;
 
 use App;
 use Exception;
@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 use Quarx;
 use SplFileInfo;
-use Yab\Quarx\Facades\CryptoServiceFacade;
+use graphite\Quarx\Facades\CryptoServiceFacade;
 
 class AssetService
 {

@@ -1,12 +1,12 @@
 <?php
 
-namespace Yab\Quarx\Console;
+namespace graphite\Quarx\Console;
 
 use Artisan;
 use Config;
 use Exception;
 use Illuminate\Console\Command;
-use Yab\CrudMaker\Generators\CrudGenerator;
+use graphite\CrudMaker\Generators\CrudGenerator;
 
 class ModuleMake extends Command
 {

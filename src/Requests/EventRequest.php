@@ -1,10 +1,10 @@
 <?php
 
-namespace Yab\Quarx\Requests;
+namespace graphite\Quarx\Requests;
 
 use Auth;
 use Gate;
-use Yab\Quarx\Models\Event;
+use graphite\Quarx\Models\Event;
 use Illuminate\Foundation\Http\FormRequest;
 
 class EventRequest extends FormRequest

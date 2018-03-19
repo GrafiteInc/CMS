@@ -1,6 +1,6 @@
 <?php
 
-namespace Yab\Quarx\Controllers;
+namespace graphite\Quarx\Controllers;
 
 class HelpController extends QuarxController
 {

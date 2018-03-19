@@ -1,6 +1,6 @@
 <?php
 
-namespace Yab\Quarx\Providers;
+namespace graphite\Quarx\Providers;
 
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\ServiceProvider;

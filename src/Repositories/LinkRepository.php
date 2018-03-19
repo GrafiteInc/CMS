@@ -1,8 +1,8 @@
 <?php
 
-namespace Yab\Quarx\Repositories;
+namespace graphite\Quarx\Repositories;
 
-use Yab\Quarx\Models\Link;
+use graphite\Quarx\Models\Link;
 
 class LinkRepository
 {

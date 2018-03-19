@@ -1,9 +1,9 @@
 <?php
 
-namespace Yab\Quarx\Middleware;
+namespace graphite\Quarx\Middleware;
 
 use Closure;
-use Yab\Quarx\Services\AnalyticsService;
+use graphite\Quarx\Services\AnalyticsService;
 
 class QuarxAnalytics
 {

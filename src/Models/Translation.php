@@ -1,6 +1,6 @@
 <?php
 
-namespace Yab\Quarx\Models;
+namespace graphite\Quarx\Models;
 
 class Translation extends QuarxModel
 {

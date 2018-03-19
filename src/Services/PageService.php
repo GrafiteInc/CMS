@@ -1,9 +1,9 @@
 <?php
 
-namespace Yab\Quarx\Services;
+namespace graphite\Quarx\Services;
 
 use Illuminate\Support\Facades\Config;
-use Yab\Quarx\Repositories\PageRepository;
+use graphite\Quarx\Repositories\PageRepository;
 
 class PageService
 {

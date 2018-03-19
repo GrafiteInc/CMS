@@ -1,14 +1,14 @@
 <?php
 
-namespace Yab\Quarx\Controllers;
+namespace graphite\Quarx\Controllers;
 
 use URL;
 use Quarx;
-use Yab\Quarx\Models\FAQ;
+use graphite\Quarx\Models\FAQ;
 use Illuminate\Http\Request;
-use Yab\Quarx\Requests\FAQRequest;
-use Yab\Quarx\Repositories\FAQRepository;
-use Yab\Quarx\Services\ValidationService;
+use graphite\Quarx\Requests\FAQRequest;
+use graphite\Quarx\Repositories\FAQRepository;
+use graphite\Quarx\Services\ValidationService;
 
 class FAQController extends QuarxController
 {

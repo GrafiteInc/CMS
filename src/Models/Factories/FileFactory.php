@@ -6,7 +6,7 @@
 |--------------------------------------------------------------------------
 */
 
-$factory->define(\Yab\Quarx\Models\File::class, function (Faker\Generator $faker) {
+$factory->define(\graphite\Quarx\Models\File::class, function (Faker\Generator $faker) {
     return [
         'id' => 1,
         'location' => 'files/dumb',

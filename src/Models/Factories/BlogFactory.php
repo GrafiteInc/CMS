@@ -6,7 +6,7 @@
 |--------------------------------------------------------------------------
 */
 
-$factory->define(\Yab\Quarx\Models\Blog::class, function (Faker\Generator $faker) {
+$factory->define(\graphite\Quarx\Models\Blog::class, function (Faker\Generator $faker) {
     return [
         'id' => 1,
         'title' => 'dumb',

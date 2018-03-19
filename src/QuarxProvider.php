@@ -139,7 +139,7 @@ class QuarxProvider extends ServiceProvider
         $this->app->register(QuarxRouteProvider::class);
         $this->app->register(QuarxModuleProvider::class);
 
-        $this->app->register(LaracogsProvider::class);
+        $this->app->register(BuilderProvider::class);
         $this->app->register(MinifyServiceProvider::class);
         $this->app->register(MarkdownServiceProvider::class);
         $this->app->register(LaravelAnalyticsServiceProvider::class);

@@ -39,7 +39,7 @@ class TestCase extends Orchestra\Testbench\TestCase
             \Graphite\Quarx\QuarxProvider::class,
             \Collective\Html\HtmlServiceProvider::class,
             \Collective\Html\HtmlServiceProvider::class,
-            \Graphite\Laracogs\LaracogsProvider::class,
+            \Graphite\Builder\GraphiteBuilderProvider::class,
         ];
     }
 
@@ -48,9 +48,9 @@ class TestCase extends Orchestra\Testbench\TestCase
         return [
             'Form' => \Collective\Html\FormFacade::class,
             'HTML' => \Collective\Html\HtmlFacade::class,
-            'FormMaker' => \graphite\Laracogs\Facades\FormMaker::class,
-            'InputMaker' => \graphite\Laracogs\Facades\InputMaker::class,
-            'Crypto' => \graphite\Laracogs\Utilities\Crypto::class,
+            'FormMaker' => \Graphite\Builder\Facades\FormMaker::class,
+            'InputMaker' => \Graphite\Builder\Facades\InputMaker::class,
+            'Crypto' => \Graphite\Builder\Utilities\Crypto::class,
         ];
     }
 

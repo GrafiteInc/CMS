@@ -9,7 +9,7 @@ Quarx is a full fledged CMS that can be added to any Laravel application. It pro
 Quarx comes with a module builder for all your custom CMS needs, as well as a module publishing tools. So if you decide to reuse some modules on future projects you can easily publish thier assets seamlessly. If you wish to make your Quarx module into a PHP package, then you will need to have it publish its assets to the `quarx/modules` directory.
 
 ### What is simple vs complex setup?
-Simple setup uses Laracogs as the backbone of an app for you using Laravel, once the setup command has been run you will have a full CMS as an app. Complex setup is specifically for developers who want to add a CMS to their existing app.
+Simple setup uses Builder as the backbone of an app for you using Laravel, once the setup command has been run you will have a full CMS as an app. Complex setup is specifically for developers who want to add a CMS to their existing app.
 
 ## Documentation
 [http://quarxcms.com](http://quarxcms.com)
@@ -129,7 +129,7 @@ This should be added to the autoloader below the App itself.
 ## Quarx Access
 Route to the administration dashboard is "/quarx/dashboard".
 
-Quarx requires Laracogs to run (only for the FormMaker), but Quarx does not require you to use the Laracogs version of roles. But you will still need to ensure some degree of control for Quarx's access. This is done in the Quarx Middleware, using the gate and the Quarx Policy. If you opt in to the roles system provided by Laracogs, then you can replace 'quarx' with admin to handle the Quarx authorization, if not, you will need to set your own security policy for access to Quarx. To do this simply add the Quarx policy to your `app/Providers/AuthServiceProvider.php` file, and ensure that any rules you wish it to use are in within the policy method. We suggest a policy similar to below.
+Quarx requires Builder to run (only for the FormMaker), but Quarx does not require you to use the Builder version of roles. But you will still need to ensure some degree of control for Quarx's access. This is done in the Quarx Middleware, using the gate and the Quarx Policy. If you opt in to the roles system provided by Builder, then you can replace 'quarx' with admin to handle the Quarx authorization, if not, you will need to set your own security policy for access to Quarx. To do this simply add the Quarx policy to your `app/Providers/AuthServiceProvider.php` file, and ensure that any rules you wish it to use are in within the policy method. We suggest a policy similar to below.
 
 Possible Quarx Policy:
 ```
@@ -142,7 +142,7 @@ Gate::define('quarx', function ($user) {
 });
 ```
 
-Or Using Laracogs:
+Or Using Builder:
 ```
 Gate::define('quarx', function ($user) {
     return ($user->roles->first()->name === 'admin');

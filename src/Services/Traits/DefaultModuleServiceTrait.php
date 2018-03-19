@@ -1,11 +1,11 @@
 <?php
 
-namespace graphite\Quarx\Services\Traits;
+namespace Grafite\Quarx\Services\Traits;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
-use graphite\Quarx\Repositories\WidgetRepository;
-use graphite\Quarx\Services\FileService;
+use Grafite\Quarx\Repositories\WidgetRepository;
+use Grafite\Quarx\Services\FileService;
 
 trait DefaultModuleServiceTrait
 {
@@ -60,7 +60,7 @@ trait DefaultModuleServiceTrait
     {
         $img = '';
 
-        if ($image = app('graphite\Quarx\Models\Image')->find($id)) {
+        if ($image = app('Grafite\Quarx\Models\Image')->find($id)) {
             $img = $image->url;
         }
 
@@ -78,7 +78,7 @@ trait DefaultModuleServiceTrait
     {
         $img = '';
 
-        if ($image = app('graphite\Quarx\Models\Image')->find($id)) {
+        if ($image = app('Grafite\Quarx\Models\Image')->find($id)) {
             $img = $image->url;
         }
 

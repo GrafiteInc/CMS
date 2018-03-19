@@ -6,7 +6,7 @@
 |--------------------------------------------------------------------------
 */
 
-$factory->define(\graphite\Quarx\Models\Image::class, function (Faker\Generator $faker) {
+$factory->define(\Grafite\Quarx\Models\Image::class, function (Faker\Generator $faker) {
     return [
         'id' => 1,
         'location' => 'files/dumb',

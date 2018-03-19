@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Quarx;
 
 use App\Http\Controllers\Controller;
-use graphite\Quarx\Services\EventService;
-use graphite\Quarx\Repositories\EventRepository;
+use Grafite\Quarx\Services\EventService;
+use Grafite\Quarx\Repositories\EventRepository;
 
 class EventsController extends Controller
 {

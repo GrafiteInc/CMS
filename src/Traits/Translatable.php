@@ -1,11 +1,11 @@
 <?php
 
-namespace graphite\Quarx\Traits;
+namespace Grafite\Quarx\Traits;
 
-use graphite\Quarx\Models\Translation;
-use graphite\Quarx\Services\QuarxService;
+use Grafite\Quarx\Models\Translation;
+use Grafite\Quarx\Services\QuarxService;
 use Stichoza\GoogleTranslate\TranslateClient;
-use graphite\Quarx\Repositories\TranslationRepository;
+use Grafite\Quarx\Repositories\TranslationRepository;
 
 trait Translatable
 {

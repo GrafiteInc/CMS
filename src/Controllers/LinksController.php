@@ -1,15 +1,15 @@
 <?php
 
-namespace graphite\Quarx\Controllers;
+namespace Grafite\Quarx\Controllers;
 
 use Quarx;
 use Exception;
-use graphite\Quarx\Models\Link;
+use Grafite\Quarx\Models\Link;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\URL;
-use graphite\Quarx\Requests\LinksRequest;
-use graphite\Quarx\Services\ValidationService;
-use graphite\Quarx\Repositories\LinkRepository;
+use Grafite\Quarx\Requests\LinksRequest;
+use Grafite\Quarx\Services\ValidationService;
+use Grafite\Quarx\Repositories\LinkRepository;
 
 class LinksController extends QuarxController
 {

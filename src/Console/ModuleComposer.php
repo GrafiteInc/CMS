@@ -1,6 +1,6 @@
 <?php
 
-namespace graphite\Quarx\Console;
+namespace Grafite\Quarx\Console;
 
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;

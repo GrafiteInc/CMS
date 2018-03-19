@@ -7,7 +7,7 @@ class BlogTest extends TestCase
         parent::setUp();
         $this->withoutMiddleware();
         $this->withoutEvents();
-        factory(\graphite\Quarx\Models\Blog::class)->create();
+        factory(\Grafite\Quarx\Models\Blog::class)->create();
     }
 
     /*
@@ -32,7 +32,7 @@ class BlogTest extends TestCase
 
     public function testEdit()
     {
-        factory(\graphite\Quarx\Models\Blog::class)->create(['id' => 4]);
+        factory(\Grafite\Quarx\Models\Blog::class)->create(['id' => 4]);
         $response = $this->call('GET', 'quarx/blog/4/edit');
         $this->assertEquals(200, $response->getStatusCode());
         $response->assertViewHas('blog');
@@ -88,7 +88,7 @@ class BlogTest extends TestCase
         ]);
 
         $this->assertDatabaseHas('translations', [
-            'entity_type' => 'graphite\\Quarx\\Models\\Blog',
+            'entity_type' => 'Grafite\\Quarx\\Models\\Blog',
         ]);
         $this->assertEquals(302, $response->getStatusCode());
     }

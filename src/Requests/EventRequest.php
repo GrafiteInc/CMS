@@ -1,10 +1,10 @@
 <?php
 
-namespace graphite\Quarx\Requests;
+namespace Grafite\Quarx\Requests;
 
 use Auth;
 use Gate;
-use graphite\Quarx\Models\Event;
+use Grafite\Quarx\Models\Event;
 use Illuminate\Foundation\Http\FormRequest;
 
 class EventRequest extends FormRequest

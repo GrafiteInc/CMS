@@ -1,9 +1,9 @@
 <?php
 
-namespace graphite\Quarx\Services\Traits;
+namespace Grafite\Quarx\Services\Traits;
 
 use Illuminate\Support\Facades\Config;
-use graphite\Quarx\Facades\CryptoServiceFacade;
+use Grafite\Quarx\Facades\CryptoServiceFacade;
 
 trait ModuleServiceTrait
 {

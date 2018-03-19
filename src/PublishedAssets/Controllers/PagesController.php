@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Quarx;
 
 use App\Http\Controllers\Controller;
-use graphite\Quarx\Repositories\PageRepository;
+use Grafite\Quarx\Repositories\PageRepository;
 
 class PagesController extends Controller
 {

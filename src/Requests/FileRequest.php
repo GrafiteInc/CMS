@@ -1,6 +1,6 @@
 <?php
 
-namespace graphite\Quarx\Requests;
+namespace Grafite\Quarx\Requests;
 
 use Auth;
 use Gate;

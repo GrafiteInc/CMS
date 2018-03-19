@@ -1,6 +1,6 @@
 <?php
 
-namespace graphite\Quarx\Services;
+namespace Grafite\Quarx\Services;
 
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Input;

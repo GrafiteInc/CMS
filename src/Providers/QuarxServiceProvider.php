@@ -1,16 +1,16 @@
 <?php
 
-namespace graphite\Quarx\Providers;
+namespace Grafite\Quarx\Providers;
 
 use App;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\ServiceProvider;
-use graphite\Quarx\Services\BlogService;
-use graphite\Quarx\Services\CryptoService;
-use graphite\Quarx\Services\EventService;
-use graphite\Quarx\Services\ModuleService;
-use graphite\Quarx\Services\PageService;
-use graphite\Quarx\Services\QuarxService;
+use Grafite\Quarx\Services\BlogService;
+use Grafite\Quarx\Services\CryptoService;
+use Grafite\Quarx\Services\EventService;
+use Grafite\Quarx\Services\ModuleService;
+use Grafite\Quarx\Services\PageService;
+use Grafite\Quarx\Services\QuarxService;
 
 class QuarxServiceProvider extends ServiceProvider
 {
@@ -21,13 +21,13 @@ class QuarxServiceProvider extends ServiceProvider
     {
         $loader = AliasLoader::getInstance();
 
-        $loader->alias('Quarx', \graphite\Quarx\Facades\QuarxServiceFacade::class);
-        $loader->alias('PageService', \graphite\Quarx\Facades\PageServiceFacade::class);
-        $loader->alias('EventService', \graphite\Quarx\Facades\EventServiceFacade::class);
-        $loader->alias('CryptoService', \graphite\Quarx\Facades\CryptoServiceFacade::class);
-        $loader->alias('ModuleService', \graphite\Quarx\Facades\ModuleServiceFacade::class);
-        $loader->alias('BlogService', \graphite\Quarx\Facades\BlogServiceFacade::class);
-        $loader->alias('FileService', \graphite\Quarx\Services\FileService::class);
+        $loader->alias('Quarx', \Grafite\Quarx\Facades\QuarxServiceFacade::class);
+        $loader->alias('PageService', \Grafite\Quarx\Facades\PageServiceFacade::class);
+        $loader->alias('EventService', \Grafite\Quarx\Facades\EventServiceFacade::class);
+        $loader->alias('CryptoService', \Grafite\Quarx\Facades\CryptoServiceFacade::class);
+        $loader->alias('ModuleService', \Grafite\Quarx\Facades\ModuleServiceFacade::class);
+        $loader->alias('BlogService', \Grafite\Quarx\Facades\BlogServiceFacade::class);
+        $loader->alias('FileService', \Grafite\Quarx\Services\FileService::class);
 
         $this->app->bind('QuarxService', function ($app) {
             return new QuarxService();

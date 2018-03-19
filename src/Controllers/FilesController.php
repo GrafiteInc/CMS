@@ -1,6 +1,6 @@
 <?php
 
-namespace graphite\Quarx\Controllers;
+namespace Grafite\Quarx\Controllers;
 
 use Quarx;
 use Config;
@@ -9,13 +9,13 @@ use Redirect;
 use Response;
 use Exception;
 use CryptoService;
-use graphite\Quarx\Models\File;
+use Grafite\Quarx\Models\File;
 use Illuminate\Http\Request;
-use graphite\Quarx\Requests\FileRequest;
-use graphite\Quarx\Services\FileService;
-use graphite\Quarx\Services\ValidationService;
-use graphite\Quarx\Repositories\FileRepository;
-use graphite\Quarx\Services\QuarxResponseService;
+use Grafite\Quarx\Requests\FileRequest;
+use Grafite\Quarx\Services\FileService;
+use Grafite\Quarx\Services\ValidationService;
+use Grafite\Quarx\Repositories\FileRepository;
+use Grafite\Quarx\Services\QuarxResponseService;
 
 class FilesController extends QuarxController
 {

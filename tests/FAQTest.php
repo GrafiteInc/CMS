@@ -7,7 +7,7 @@ class FAQTest extends TestCase
         parent::setUp();
         $this->withoutMiddleware();
         $this->withoutEvents();
-        factory(\graphite\Quarx\Models\FAQ::class)->create();
+        factory(\Grafite\Quarx\Models\FAQ::class)->create();
     }
 
     /*
@@ -84,7 +84,7 @@ class FAQTest extends TestCase
         ]);
 
         $this->assertDatabaseHas('translations', [
-            'entity_type' => 'graphite\\Quarx\\Models\\FAQ',
+            'entity_type' => 'Grafite\\Quarx\\Models\\FAQ',
         ]);
         $this->assertEquals(302, $response->getStatusCode());
     }

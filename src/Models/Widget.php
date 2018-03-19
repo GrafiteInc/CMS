@@ -1,8 +1,8 @@
 <?php
 
-namespace graphite\Quarx\Models;
+namespace Grafite\Quarx\Models;
 
-use graphite\Quarx\Traits\Translatable;
+use Grafite\Quarx\Traits\Translatable;
 
 class Widget extends QuarxModel
 {

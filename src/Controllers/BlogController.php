@@ -1,14 +1,14 @@
 <?php
 
-namespace graphite\Quarx\Controllers;
+namespace Grafite\Quarx\Controllers;
 
 use URL;
 use Quarx;
-use graphite\Quarx\Models\Blog;
+use Grafite\Quarx\Models\Blog;
 use Illuminate\Http\Request;
-use graphite\Quarx\Requests\BlogRequest;
-use graphite\Quarx\Services\ValidationService;
-use graphite\Quarx\Repositories\BlogRepository;
+use Grafite\Quarx\Requests\BlogRequest;
+use Grafite\Quarx\Services\ValidationService;
+use Grafite\Quarx\Repositories\BlogRepository;
 
 class BlogController extends QuarxController
 {

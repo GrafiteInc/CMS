@@ -1,6 +1,6 @@
 <?php
 
-namespace Graphite\Quarx;
+namespace Grafite\Quarx;
 
 use Devfactory\Minify\Facades\MinifyFacade;
 use Devfactory\Minify\MinifyServiceProvider;
@@ -17,19 +17,19 @@ use Intervention\Image\ImageServiceProvider;
 use Quarx;
 use Spatie\LaravelAnalytics\LaravelAnalyticsFacade;
 use Spatie\LaravelAnalytics\LaravelAnalyticsServiceProvider;
-use Graphite\Builder\GraphiteBuilderProvider;
-use Graphite\Quarx\Console\Keys;
-use Graphite\Quarx\Console\ModuleComposer;
-use Graphite\Quarx\Console\ModuleCrud;
-use Graphite\Quarx\Console\ModuleMake;
-use Graphite\Quarx\Console\ModulePublish;
-use Graphite\Quarx\Console\Setup;
-use Graphite\Quarx\Console\ThemeGenerate;
-use Graphite\Quarx\Console\ThemePublish;
-use Graphite\Quarx\Providers\QuarxEventServiceProvider;
-use Graphite\Quarx\Providers\QuarxModuleProvider;
-use Graphite\Quarx\Providers\QuarxRouteProvider;
-use Graphite\Quarx\Providers\QuarxServiceProvider;
+use Grafite\Builder\GrafiteBuilderProvider;
+use Grafite\Quarx\Console\Keys;
+use Grafite\Quarx\Console\ModuleComposer;
+use Grafite\Quarx\Console\ModuleCrud;
+use Grafite\Quarx\Console\ModuleMake;
+use Grafite\Quarx\Console\ModulePublish;
+use Grafite\Quarx\Console\Setup;
+use Grafite\Quarx\Console\ThemeGenerate;
+use Grafite\Quarx\Console\ThemePublish;
+use Grafite\Quarx\Providers\QuarxEventServiceProvider;
+use Grafite\Quarx\Providers\QuarxModuleProvider;
+use Grafite\Quarx\Providers\QuarxRouteProvider;
+use Grafite\Quarx\Providers\QuarxServiceProvider;
 
 class QuarxProvider extends ServiceProvider
 {

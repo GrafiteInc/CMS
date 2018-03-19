@@ -1,6 +1,6 @@
 <?php
 
-namespace graphite\Quarx\Controllers;
+namespace Grafite\Quarx\Controllers;
 
 class HelpController extends QuarxController
 {

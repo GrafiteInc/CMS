@@ -1,10 +1,10 @@
 <?php
 
-namespace graphite\Quarx\Services;
+namespace Grafite\Quarx\Services;
 
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Schema;
-use graphite\Quarx\Models\Analytics;
+use Grafite\Quarx\Models\Analytics;
 
 class AnalyticsService
 {

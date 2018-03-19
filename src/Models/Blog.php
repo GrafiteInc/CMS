@@ -1,9 +1,9 @@
 <?php
 
-namespace graphite\Quarx\Models;
+namespace Grafite\Quarx\Models;
 
-use graphite\Quarx\Services\Normalizer;
-use graphite\Quarx\Traits\Translatable;
+use Grafite\Quarx\Services\Normalizer;
+use Grafite\Quarx\Traits\Translatable;
 
 class Blog extends QuarxModel
 {

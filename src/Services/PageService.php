@@ -1,9 +1,9 @@
 <?php
 
-namespace graphite\Quarx\Services;
+namespace Grafite\Quarx\Services;
 
 use Illuminate\Support\Facades\Config;
-use graphite\Quarx\Repositories\PageRepository;
+use Grafite\Quarx\Repositories\PageRepository;
 
 class PageService
 {

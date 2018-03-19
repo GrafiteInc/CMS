@@ -1,10 +1,10 @@
 <?php
 
-namespace graphite\Quarx\Requests;
+namespace Grafite\Quarx\Requests;
 
 use Auth;
 use Gate;
-use graphite\Quarx\Models\Image;
+use Grafite\Quarx\Models\Image;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ImagesRequest extends FormRequest

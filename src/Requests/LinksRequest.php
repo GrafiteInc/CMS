@@ -1,10 +1,10 @@
 <?php
 
-namespace graphite\Quarx\Requests;
+namespace Grafite\Quarx\Requests;
 
 use Auth;
 use Gate;
-use graphite\Quarx\Models\Link;
+use Grafite\Quarx\Models\Link;
 use Illuminate\Foundation\Http\FormRequest;
 
 class LinksRequest extends FormRequest

@@ -20,7 +20,7 @@
 
     <div class="raw100 raw-left navbar navbar-fixed-bottom">
         <div class="raw100 raw-left quarx-footer">
-            <p class="raw-margin-left-20 pull-left">Brought to you by: <a href="https://graphitehq.com">graphite Inc.</a></p>
+            <p class="raw-margin-left-20 pull-left">Brought to you by: <a href="https://Grafitehq.com">Grafite Inc.</a></p>
             <p class="raw-margin-right-20 pull-right">v. {{ Quarx::version() }}</p>
         </div>
     </div>

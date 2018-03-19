@@ -1,15 +1,15 @@
 {
-    "name": "graphite/quarx",
+    "name": "Grafite/quarx",
     "description": "Add a CMS to any Laravel apps gain control of: pages, blogs, galleries, events, custom modules, images and more.",
     "license": "MIT",
     "authors": [
         {
             "name": "Matt Lantz",
-            "email": "matt@graphitehq.com"
+            "email": "matt@Grafitehq.com"
         },
         {
             "name": "Chris Blackwell",
-            "email": "chris@graphitehq.com"
+            "email": "chris@Grafitehq.com"
         }
     ],
     "require": {
@@ -33,7 +33,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Graphite\\Quarx\\": "src/"
+            "Grafite\\Quarx\\": "src/"
         },
         "files": [
           "src/Helpers/blade.php",
@@ -50,7 +50,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Graphite\\Quarx\\QuarxProvider"
+                "Grafite\\Quarx\\QuarxProvider"
             ]
         }
     }

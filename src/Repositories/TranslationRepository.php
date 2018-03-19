@@ -1,9 +1,9 @@
 <?php
 
-namespace graphite\Quarx\Repositories;
+namespace Grafite\Quarx\Repositories;
 
 use Carbon\Carbon;
-use graphite\Quarx\Models\Translation;
+use Grafite\Quarx\Models\Translation;
 
 class TranslationRepository
 {

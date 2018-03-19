@@ -25,7 +25,7 @@
                     Blogs
                 </div>
                 <div class="panel-body">
-                    <span class="lead">{{ app(graphite\Quarx\Models\Blog::class)->count() }}</span>
+                    <span class="lead">{{ app(Grafite\Quarx\Models\Blog::class)->count() }}</span>
                 </div>
             </div>
         </div>
@@ -35,7 +35,7 @@
                     Pages
                 </div>
                 <div class="panel-body">
-                    <span class="lead">{{ app(graphite\Quarx\Models\Page::class)->count() }}</span>
+                    <span class="lead">{{ app(Grafite\Quarx\Models\Page::class)->count() }}</span>
                 </div>
             </div>
         </div>
@@ -45,7 +45,7 @@
                     Widgets
                 </div>
                 <div class="panel-body">
-                    <span class="lead">{{ app(graphite\Quarx\Models\Widget::class)->count() }}</span>
+                    <span class="lead">{{ app(Grafite\Quarx\Models\Widget::class)->count() }}</span>
                 </div>
             </div>
         </div>
@@ -55,7 +55,7 @@
                     Events
                 </div>
                 <div class="panel-body">
-                    <span class="lead">{{ app(graphite\Quarx\Models\Event::class)->count() }}</span>
+                    <span class="lead">{{ app(Grafite\Quarx\Models\Event::class)->count() }}</span>
                 </div>
             </div>
         </div>
@@ -65,7 +65,7 @@
                     FAQs
                 </div>
                 <div class="panel-body">
-                    <span class="lead">{{ app(graphite\Quarx\Models\FAQ::class)->count() }}</span>
+                    <span class="lead">{{ app(Grafite\Quarx\Models\FAQ::class)->count() }}</span>
                 </div>
             </div>
         </div>

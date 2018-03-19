@@ -1,8 +1,8 @@
 <?php
 
-namespace graphite\Quarx\Repositories;
+namespace Grafite\Quarx\Repositories;
 
-use graphite\Quarx\Models\Link;
+use Grafite\Quarx\Models\Link;
 
 class LinkRepository
 {

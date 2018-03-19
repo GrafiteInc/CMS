@@ -1,10 +1,10 @@
 <?php
 
-namespace graphite\Quarx\Models;
+namespace Grafite\Quarx\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Log;
-use graphite\Quarx\Models\Link;
+use Grafite\Quarx\Models\Link;
 
 class QuarxModel extends Model
 {
@@ -60,12 +60,12 @@ class QuarxModel extends Model
         Translation::where('entity_id', $id)->where('entity_type', $type)->delete();
         Archive::where('entity_id', $id)->where('entity_type', $type)->delete();
 
-        Archive::where('entity_type', 'graphite\Quarx\Models\Translation')
+        Archive::where('entity_type', 'Grafite\Quarx\Models\Translation')
             ->where('entity_data', 'LIKE', '%"entity_id":'.$id.'%')
             ->where('entity_data', 'LIKE', '%"entity_type":"'.$type.'"%')
             ->delete();
 
-        if ($type == 'graphite\Quarx\Models\Page') {
+        if ($type == 'Grafite\Quarx\Models\Page') {
             Link::where('page_id', $id)->delete();
         }
     }

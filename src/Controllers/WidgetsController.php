@@ -1,14 +1,14 @@
 <?php
 
-namespace graphite\Quarx\Controllers;
+namespace Grafite\Quarx\Controllers;
 
 use URL;
 use Quarx;
 use Illuminate\Http\Request;
-use graphite\Quarx\Models\Widget;
-use graphite\Quarx\Requests\WidgetsRequest;
-use graphite\Quarx\Services\ValidationService;
-use graphite\Quarx\Repositories\WidgetRepository;
+use Grafite\Quarx\Models\Widget;
+use Grafite\Quarx\Requests\WidgetsRequest;
+use Grafite\Quarx\Services\ValidationService;
+use Grafite\Quarx\Repositories\WidgetRepository;
 
 class WidgetsController extends QuarxController
 {

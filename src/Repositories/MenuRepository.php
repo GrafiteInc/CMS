@@ -1,9 +1,9 @@
 <?php
 
-namespace graphite\Quarx\Repositories;
+namespace Grafite\Quarx\Repositories;
 
 use Illuminate\Support\Facades\Schema;
-use graphite\Quarx\Models\Menu;
+use Grafite\Quarx\Models\Menu;
 
 class MenuRepository
 {

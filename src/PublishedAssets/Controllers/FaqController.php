@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Quarx;
 
 use App\Http\Controllers\Controller;
-use graphite\Quarx\Repositories\FAQRepository;
+use Grafite\Quarx\Repositories\FAQRepository;
 
 class FaqController extends Controller
 {

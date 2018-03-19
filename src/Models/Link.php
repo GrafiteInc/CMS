@@ -1,6 +1,6 @@
 <?php
 
-namespace graphite\Quarx\Models;
+namespace Grafite\Quarx\Models;
 
 class Link extends QuarxModel
 {

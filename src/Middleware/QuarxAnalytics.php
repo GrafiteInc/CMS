@@ -1,9 +1,9 @@
 <?php
 
-namespace graphite\Quarx\Middleware;
+namespace Grafite\Quarx\Middleware;
 
 use Closure;
-use graphite\Quarx\Services\AnalyticsService;
+use Grafite\Quarx\Services\AnalyticsService;
 
 class QuarxAnalytics
 {

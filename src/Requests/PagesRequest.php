@@ -1,10 +1,10 @@
 <?php
 
-namespace graphite\Quarx\Requests;
+namespace Grafite\Quarx\Requests;
 
 use Auth;
 use Gate;
-use graphite\Quarx\Models\Page;
+use Grafite\Quarx\Models\Page;
 use Illuminate\Foundation\Http\FormRequest;
 
 class PagesRequest extends FormRequest

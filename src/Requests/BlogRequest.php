@@ -1,11 +1,11 @@
 <?php
 
-namespace graphite\Quarx\Requests;
+namespace Grafite\Quarx\Requests;
 
 use Auth;
 use Gate;
 use Illuminate\Foundation\Http\FormRequest;
-use graphite\Quarx\Models\Blog;
+use Grafite\Quarx\Models\Blog;
 
 class BlogRequest extends FormRequest
 {

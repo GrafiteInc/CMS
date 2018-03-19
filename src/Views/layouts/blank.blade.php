@@ -14,7 +14,7 @@
 
     <div class="raw100 raw-left navbar navbar-fixed-bottom">
         <div class="raw100 raw-left quarx-footer">
-            <p class="raw-margin-left-20">Brought to you by: <a href="https://graphitehq.com">graphite Inc.</a></p>
+            <p class="raw-margin-left-20">Brought to you by: <a href="https://Grafitehq.com">Grafite Inc.</a></p>
         </div>
     </div>
 @stop

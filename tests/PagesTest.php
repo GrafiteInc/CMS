@@ -7,7 +7,7 @@ class PagesTest extends TestCase
         parent::setUp();
         $this->withoutMiddleware();
         $this->withoutEvents();
-        factory(\graphite\Quarx\Models\Page::class)->create();
+        factory(\Grafite\Quarx\Models\Page::class)->create();
     }
 
     /*
@@ -44,7 +44,7 @@ class PagesTest extends TestCase
 
     public function testStore()
     {
-        $page = factory(\graphite\Quarx\Models\Page::class)->make(['id' => 2]);
+        $page = factory(\Grafite\Quarx\Models\Page::class)->make(['id' => 2]);
         $page = $page->toArray();
         unset($page['translations']);
         $response = $this->call('POST', 'quarx/pages', $page);
@@ -88,7 +88,7 @@ class PagesTest extends TestCase
         ]);
 
         $this->assertDatabaseHas('translations', [
-            'entity_type' => 'graphite\\Quarx\\Models\\Page',
+            'entity_type' => 'Grafite\\Quarx\\Models\\Page',
         ]);
         $this->assertEquals(302, $response->getStatusCode());
     }

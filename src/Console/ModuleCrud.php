@@ -1,13 +1,13 @@
 <?php
 
-namespace graphite\Quarx\Console;
+namespace Grafite\Quarx\Console;
 
 use Artisan;
 use Config;
 use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
-use graphite\CrudMaker\Generators\CrudGenerator;
+use Grafite\CrudMaker\Generators\CrudGenerator;
 
 class ModuleCrud extends Command
 {

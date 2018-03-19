@@ -1,12 +1,12 @@
 <?php
 
-namespace graphite\Quarx\Repositories;
+namespace Grafite\Quarx\Repositories;
 
 use Auth;
 use Config;
 use CryptoService;
-use graphite\Quarx\Models\File;
-use graphite\Quarx\Services\FileService;
+use Grafite\Quarx\Models\File;
+use Grafite\Quarx\Services\FileService;
 use Illuminate\Support\Facades\Schema;
 
 class FileRepository

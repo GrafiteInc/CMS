@@ -8,8 +8,6 @@
     @endif
 
     @if (Session::has("errors"))
-        @foreach ($errors->all() as $error)
-            cmsNotify("{{ $error }}", "alert-danger");
-        @endforeach
+        cmsNotify("{!! collect($errors->all())->implode('<br>') !!}", "alert-danger");
     @endif
 </script>

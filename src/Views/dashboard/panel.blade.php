@@ -36,7 +36,7 @@
 
 @if (in_array('widgets', Config::get('cms.active-core-modules', Cms::defaultModules())))
     <li class="nav-item @if (Request::is(config('cms.backend-route-prefix', 'cms').'/widgets') || Request::is(config('cms.backend-route-prefix', 'cms').'/widgets/*')) active @endif">
-        <a class="nav-link" href="{!! url(config('cms.backend-route-prefix', 'cms').'/widgets') !!}"><span class="fa fa-fw fa-cogs"></span> Widgets</a>
+        <a class="nav-link" href="{!! url(config('cms.backend-route-prefix', 'cms').'/widgets') !!}"><span class="fa fa-fw fa-cog"></span> Widgets</a>
     </li>
 @endif
 

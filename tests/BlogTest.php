@@ -90,7 +90,7 @@ class BlogTest extends TestCase
         ]);
 
         $this->assertDatabaseHas('translations', [
-            'entity_type' => 'Yab\\Cabin\\Models\\Blog',
+            'entity_type' => 'Grafite\\Cms\\Models\\Blog',
         ]);
         $this->assertEquals(302, $response->getStatusCode());
     }

@@ -90,7 +90,7 @@ class PagesTest extends TestCase
         ]);
 
         $this->assertDatabaseHas('translations', [
-            'entity_type' => 'Yab\\Cabin\\Models\\Page',
+            'entity_type' => 'Grafite\\Cms\\Models\\Page',
         ]);
         $this->assertEquals(302, $response->getStatusCode());
     }

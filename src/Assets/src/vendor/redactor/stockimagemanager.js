@@ -14,7 +14,7 @@ RedactorPlugins.stockimagemanager = function()
             + '</span>'
             + '</div>'
             + '<div id="stockimagemanager-container" class="raw-block-300 cms-row raw-margin-top-24 raw-margin-bottom-24" style="overflow: scroll;"></div>'
-            + '<div id="stockimagemanager-links" class="raw-block-20 cms-row"><button id="stockImgPrevBtn" class="btn btn-default pull-left">Prev</button><button id="stockImgNextBtn" class="pull-right btn btn-default">Next</button></div>'
+            + '<div id="stockimagemanager-links" class="raw-block-20 cms-row"><button id="stockImgPrevBtn" class="btn btn-default float-left">Prev</button><button id="stockImgNextBtn" class="pull-right btn btn-default">Next</button></div>'
             + '<div><a href="https://pixabay.com/"><img class="raw100 raw-margin-top-24" src="https://pixabay.com/static/img/public/leaderboard_a.png" alt="Pixabay"> </a></div>'
             + '</section>';
         },
@@ -73,7 +73,7 @@ RedactorPlugins.stockimagemanager = function()
                     $('#stockimagemanager-container').html("");
                     $.each((data.hits), $.proxy(function(key, val)
                     {
-                        var img = $('<div class="raw25 pull-left thumbnail-box"><img class="img-responsive" data-img-name="'+ val.previewURL +'" data-url="' + val.webformatURL + '" src="' + val.previewURL + '" rel="' + val.previewURL + '" style="cursor: pointer;" /></div>');
+                        var img = $('<div class="raw25 float-left thumbnail-box"><img class="img-responsive" data-img-name="'+ val.previewURL +'" data-url="' + val.webformatURL + '" src="' + val.previewURL + '" rel="' + val.previewURL + '" style="cursor: pointer;" /></div>');
                         $('#stockimagemanager-container').append(img);
                         $(img).click($.proxy(this.stockimagemanager.insert, this));
                     }, this));

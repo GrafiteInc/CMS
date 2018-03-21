@@ -80,7 +80,7 @@ class WidgetsTest extends TestCase
         ]);
 
         $this->assertDatabaseHas('translations', [
-            'entity_type' => 'Yab\\Cabin\\Models\\Widget',
+            'entity_type' => 'Grafite\\Cms\\Models\\Widget',
         ]);
         $this->assertEquals(302, $response->getStatusCode());
     }

@@ -9,21 +9,23 @@ elixir(function(mix) {
         '../vendor/dropzone/dropzone.css',
         '../vendor/redactor/redactor.css',
         '../vendor/datepicker/bootstrap-datetimepicker.css',
-        'raw.min.css',
-        'device.css',
-        'main.css',
-        'loaders.css',
-        'modules.css',
-    ]);
+        '../vendor/raw.min.css'
+    ], 'src/Assets/dist/css/vendor.css');
+
+    mix.sass('cms.scss');
 
     mix.scripts([
-        'bootstrap.min.js',
-        'cabin.js',
+        'cms.js',
         'forms.js',
         'dashboard.js',
-        'typeahead.bundle.js',
-        'bootstrap-tagsinput.min.js',
-        'sortable.min.js',
+        'modules.js',
+        'dropzone-custom.js',
+    ], 'src/Assets/dist/js/cms.js');
+
+    mix.scripts([
+        'vendor/typeahead.bundle.js',
+        'vendor/bootstrap-tagsinput.min.js',
+        'vendor/sortable.min.js',
         '../vendor/dropzone/dropzone.js',
         '../vendor/datepicker/moment.js',
         '../vendor/datepicker/moment-timezone.js',
@@ -39,7 +41,5 @@ elixir(function(mix) {
         '../vendor/redactor/table.js',
         '../vendor/redactor/video.js',
         '../vendor/redactor/insertIcon.js',
-        'modules.js',
-        'dropzone-custom.js',
-    ]);
+    ], 'src/Assets/dist/js/vendor.js');
 });

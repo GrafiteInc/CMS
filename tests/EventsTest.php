@@ -86,7 +86,7 @@ class EventsTest extends TestCase
         ]);
 
         $this->assertDatabaseHas('translations', [
-            'entity_type' => 'Yab\\Cabin\\Models\\Event',
+            'entity_type' => 'Grafite\\Cms\\Models\\Event',
         ]);
         $this->assertEquals(302, $response->getStatusCode());
     }

@@ -1,10 +1,8 @@
 @extends('cms::layouts.dashboard')
 
-@section('content')
-    <div class="row">
-        <h1 class="page-header">Pages</h1>
-    </div>
+@section('content') Pages @stop
 
+@section('content')
     @include('cms::modules.pages.breadcrumbs', ['location' => ['create']])
 
     <div class="row">

@@ -72,10 +72,10 @@ class CmsService
         foreach ($locations as $location) {
             if (is_array($location)) {
                 foreach ($location as $key => $value) {
-                    $trail .= '<li><a href="'.$value.'">'.ucfirst($key).'</a></li>';
+                    $trail .= '<li class="breadcrumb-item"><a href="'.$value.'">'.ucfirst($key).'</a></li>';
                 }
             } else {
-                $trail .= '<li>'.ucfirst($location).'</li>';
+                $trail .= '<li class="breadcrumb-item">'.ucfirst($location).'</li>';
             }
         }
 

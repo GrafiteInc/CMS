@@ -1,29 +1,26 @@
-@extends('cms::layouts.navigation')
+@extends('cms::layouts.master')
 
-@section('page-content')
+@section('app-content')
 
-    <div class="overlay"></div>
+    @include('cms::layouts.notifications')
 
-    <div class="raw100 raw-left raw-margin-top-50">
-        <div class="col-sm-3 col-md-2 sidebar">
-            <div class="raw100 raw-left raw-margin-bottom-90">
+    <nav id="sidebar" class="sidebar">
+        <div class="sidebar-sticky">
+            <ul class="nav flex-column">
                 @include('cms::dashboard.panel')
-            </div>
+            </ul>
         </div>
+    </nav>
 
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-            <div class="col-md-12">
-                @yield('content')
-            </div>
-        </div>
-    </div>
+    <main class="ml-sm-auto pt-3 px-4 main">
+        @yield('content')
+    </main>
 
-    <div class="raw100 raw-left navbar navbar-fixed-bottom">
-        <div class="raw100 raw-left cms-footer">
-            <p class="raw-margin-left-20 pull-left">Brought to you by: <a href="https://grafite.ca">Grafite Inc.</a></p>
-            <p class="raw-margin-right-20 pull-right">v. {{ Cms::version() }}</p>
+    <footer class="footer bg-light">
+        <div class="container-fluid">
+            <span class="text-muted">Brought to you by Grafite Inc.</span>
         </div>
-    </div>
+    </footer>
 @stop
 
 @section('javascript')

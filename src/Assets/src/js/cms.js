@@ -6,11 +6,11 @@
 */
 
 $(function () {
-    $(".non-form-btn").bind("click", function(e){
+    $(".non-form-btn").bind("click", function (e) {
         e.preventDefault();
     });
 
-    $(".delete-btn").bind("click", function(e){
+    $(".delete-btn").bind("click", function (e) {
         e.preventDefault();
         $('#deleteModal').modal('toggle');
         var _parentForm = $(this).parent('form');
@@ -19,7 +19,7 @@ $(function () {
         });
     });
 
-    $(".delete-link-btn").bind("click", function(e){
+    $(".delete-link-btn").bind("click", function (e) {
         e.preventDefault();
         $('#deleteLinkModal').modal('toggle');
         var _parentForm = $(this).parent('form');
@@ -28,7 +28,7 @@ $(function () {
         });
     });
 
-    $(".delete-btn-confirm").bind("click", function(e){
+    $(".delete-btn-confirm").bind("click", function (e) {
         e.preventDefault();
     });
 
@@ -39,12 +39,6 @@ $(function () {
     $('a.slow-link').click(function(){
         $('.loading-overlay').show();
     });
-
-    $(window).resize(function(){
-        _setDashboard();
-    });
-
-    _setDashboard();
 });
 
 /*
@@ -62,7 +56,7 @@ function cmsNotify(message, _type) {
         right: "20px",
     });
 
-    $(".cms-notify-closer-icon").click(function(){
+    $(".cms-notify-closer").click(function(){
         $(".cms-notification").animate({
             right: "-300px"
         },"", function(){

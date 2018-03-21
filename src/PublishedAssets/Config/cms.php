@@ -101,7 +101,7 @@ return [
 
     'backend-title' => 'Grafite CMS',
     'backend-route-prefix' => 'cms',
-    'backend-theme' => 'united', // cosmo, cyborg, flatly, lumen, paper, sandstone, simplex, united, yeti
+    'backend-theme' => 'standard', // dark, standard
     'registration-available' => false,
     'pagination' => 24,
 
@@ -122,15 +122,17 @@ return [
 
     'forms' => [
         'blog' => [
-            'title' => [
-                'type' => 'string',
-            ],
-            'url' => [
-                'type' => 'string',
-            ],
-            'tags' => [
-                'type' => 'string',
-                'class' => 'tags',
+            [
+                'title' => [
+                    'type' => 'string',
+                ],
+                'url' => [
+                    'type' => 'string',
+                ],
+                'tags' => [
+                    'type' => 'string',
+                    'class' => 'tags',
+                ],
             ],
             'entry' => [
                 'type' => 'text',

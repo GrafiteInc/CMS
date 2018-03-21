@@ -3,7 +3,7 @@
 namespace Tests;
 
 use org\bovigo\vfs\vfsStream;
-use Yab\CrudMaker\Generators\CrudGenerator;
+use Grafite\CrudMaker\Generators\CrudGenerator;
 
 class ModuleMakeTest extends TestCase
 {

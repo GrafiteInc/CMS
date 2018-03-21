@@ -1,4 +1,4 @@
-if (!RedactorPlugins) 
+if (!RedactorPlugins)
 var RedactorPlugins = {};
 
 RedactorPlugins.insertIcon = function ()
@@ -24,7 +24,7 @@ return {
     {
         var button = this.button.add('insertIcon', 'Insert Icon');
 
-        this.button.setAwesome('insertIcon', 'fa-smile-o');
+        this.button.setAwesome('insertIcon', 'fa-smile');
         this.button.addCallback(button, this.insertIcon.show);
     },
     show: function ()

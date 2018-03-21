@@ -4,38 +4,21 @@
 |--------------------------------------------------------------------------
 */
 
-function _setDashboard () {
-    if ($(window).width() < 768) {
-        $('.sidebar').css({
-            left: '-300px',
-        });
+$(document).ready(function () {
+    $('.alert').delay(7000).fadeOut();
 
-        $('.sidebar-menu-btn .nav-open').unbind().bind('click', function(){
-            $('.overlay').fadeIn();
-            $('.sidebar').animate({
-                left: 0
-            }, 'fast');
-            $('.sidebar-menu-btn .nav-open').hide();
-            $('.sidebar-menu-btn .nav-close').show();
-        });
-        $('.sidebar-menu-btn .nav-close').unbind().bind('click', function(){
-            $('.overlay').fadeOut();
-            $('.sidebar').animate({
-                left: '-'+$(window).width()+'px',
-            }, 'fast');
-            $('.sidebar-menu-btn .nav-close').hide();
-            $('.sidebar-menu-btn .nav-open').show();
-        });
-        $('.overlay').unbind().bind('click', function(){
-            $('.overlay').fadeOut();
-            $('.sidebar').animate({
-                left: '-'+$(window).width()+'px',
-            }, 'fast');
-        });
-    } else {
-        $('.sidebar-menu-btn').remove();
-        $('.sidebar').css({
-            left: 0
-        });
+    // toggle sidebar when button clicked
+    $('.sidebar-toggle').on('click', function () {
+        $('.sidebar').toggleClass('toggled');
+    });
+
+    // auto-expand submenu if an item is active
+    var active = $('.sidebar .active');
+
+    if (active.length && active.parent('.collapse').length) {
+        var parent = active.parent('.collapse');
+
+        parent.prev('a').attr('aria-expanded', true);
+        parent.addClass('show');
     }
-}
+});

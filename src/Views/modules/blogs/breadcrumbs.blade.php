@@ -1,9 +1,7 @@
-<div class="row">
+<nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-        <li><a href="{!! url(config('cms.backend-route-prefix', 'cms').'/blog') !!}">Blog</a></li>
-
+        <li class="breadcrumb-item"><a href="{!! cms()->url('blog') !!}">Blog</a></li>
             {!! Cms::breadcrumbs($location) !!}
-
         <li class="active"></li>
     </ol>
-</div>
+</nav>

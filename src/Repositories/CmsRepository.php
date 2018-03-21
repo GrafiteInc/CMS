@@ -5,7 +5,7 @@ namespace Grafite\Cms\Repositories;
 use Grafite\Cms\Repositories\TranslationRepository;
 use Illuminate\Support\Facades\Schema;
 
-class GrafiteRepository
+class CmsRepository
 {
     public $translationRepo;
 
@@ -29,7 +29,7 @@ class GrafiteRepository
     }
 
     /**
-     * Returns all paginated EventS.
+     * Returns all paginated items.
      *
      * @return \Illuminate\Database\Eloquent\Collection|static[]
      */
@@ -44,6 +44,19 @@ class GrafiteRepository
         }
 
         return $model->paginate(config('cms.pagination', 25));
+    }
+
+    /**
+     * Returns all published items.
+     *
+     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     */
+    public function published()
+    {
+        return $this->model->where('is_published', 1)
+            ->where('published_at', '<=', Carbon::now(config('app.timezone'))->format('Y-m-d H:i:s'))
+            ->orderBy('created_at', 'desc')
+            ->paginate(Config::get('cms.pagination', 24));
     }
 
     /**

@@ -2,109 +2,50 @@
 
 namespace Grafite\Cms\Repositories;
 
-use Illuminate\Support\Facades\Schema;
 use Grafite\Cms\Models\Menu;
+use Grafite\Cms\Repositories\CmsRepository;
+use Illuminate\Support\Facades\Schema;
 
-class MenuRepository
+class MenuRepository extends CmsRepository
 {
-    /**
-     * Returns all Menus.
-     *
-     * @return \Illuminate\Database\Eloquent\Collection|static[]
-     */
-    public function all()
+    public $model;
+
+    public $table;
+
+    public function __construct(Menu $model)
     {
-        return Menu::orderBy('created_at', 'desc')->get();
-    }
+        $this->model = $model;
 
-    /**
-     * Returns all paginated Menus.
-     *
-     * @return \Illuminate\Database\Eloquent\Collection|static[]
-     */
-    public function paginated()
-    {
-        $model = app(Menu::class);
-
-        if (isset(request()->dir) && isset(request()->field)) {
-            $model = $model->orderBy(request()->field, request()->dir);
-        } else {
-            $model = $model->orderBy('created_at', 'desc');
-        }
-
-        return $model->paginate(config('cms.pagination', 25));
-    }
-
-    /**
-     * Search Menu.
-     *
-     * @param string $input
-     *
-     * @return Menu
-     */
-    public function search($input)
-    {
-        $query = Menu::orderBy('created_at', 'desc');
-        $query->where('id', 'LIKE', '%'.$input['term'].'%');
-
-        $columns = Schema::getColumnListing('menus');
-
-        foreach ($columns as $attribute) {
-            $query->orWhere($attribute, 'LIKE', '%'.$input['term'].'%');
-        }
-
-        return [$query, $input['term'], $query->paginate(25)->render()];
+        $this->table = 'menus';
     }
 
     /**
      * Stores Menu into database.
      *
-     * @param array $input
+     * @param array $payload
      *
      * @return Menu
      */
-    public function store($input)
+    public function store($payload)
     {
-        $input['name'] = htmlentities($input['name']);
-        return Menu::create($input);
-    }
+        $payload['name'] = htmlentities($payload['name']);
 
-    /**
-     * Find Menu by given id.
-     *
-     * @param int $id
-     *
-     * @return \Illuminate\Support\Collection|null|static|Menu
-     */
-    public function findMenuById($id)
-    {
-        return Menu::find($id);
-    }
-
-    /**
-     * Find Menu by given slug.
-     *
-     * @param int $id
-     *
-     * @return \Illuminate\Support\Collection|null|static|Menu
-     */
-    public static function getMenuBySLUG($id)
-    {
-        return Menu::where('slug', $id)->get();
+        return $this->model->create($payload);
     }
 
     /**
      * Updates Menu into database.
      *
      * @param Menu  $menu
-     * @param array $input
+     * @param array $payload
      *
      * @return Menu
      */
-    public function update($menu, $input)
+    public function update($menu, $payload)
     {
-        $input['name'] = htmlentities($input['name']);
-        return $menu->update($input);
+        $payload['name'] = htmlentities($payload['name']);
+
+        return $menu->update($payload);
     }
 
     /**

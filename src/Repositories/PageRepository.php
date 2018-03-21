@@ -3,61 +3,24 @@
 namespace Grafite\Cms\Repositories;
 
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\Schema;
 use Cms;
 use Grafite\Cms\Models\Page;
+use Grafite\Cms\Repositories\CmsRepository;
 use Grafite\Cms\Services\FileService;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Schema;
 
-class PageRepository
+class PageRepository extends CmsRepository
 {
-    public $translationRepo;
+    public $model;
 
-    public function __construct()
+    public $table;
+
+    public function __construct(Page $model)
     {
-        $this->translationRepo = app(TranslationRepository::class);
-    }
+        $this->model = $model;
 
-    /**
-     * Returns all Pages.
-     *
-     * @return \Illuminate\Database\Eloquent\Collection|static[]
-     */
-    public function all()
-    {
-        return Page::all();
-    }
-
-    public function paginated()
-    {
-        $model = app(Page::class);
-
-        if (isset(request()->dir) && isset(request()->field)) {
-            $model = $model->orderBy(request()->field, request()->dir);
-        } else {
-            $model = $model->orderBy('created_at', 'desc');
-        }
-
-        return $model->paginate(Config::get('cms.pagination', 24));
-    }
-
-    public function published()
-    {
-        return Page::where('is_published', 1)->where('published_at', '<=', Carbon::now(config('app.timezone'))->format('Y-m-d H:i:s'))->orderBy('created_at', 'desc')->paginate(Config::get('cms.pagination', 24));
-    }
-
-    public function search($input)
-    {
-        $query = Page::orderBy('created_at', 'desc');
-        $query->where('id', 'LIKE', '%'.$input['term'].'%');
-
-        $columns = Schema::getColumnListing('pages');
-
-        foreach ($columns as $attribute) {
-            $query->orWhere($attribute, 'LIKE', '%'.$input['term'].'%');
-        }
-
-        return [$query, $input['term'], $query->paginate(Config::get('cms.pagination', 24))->render()];
+        $this->table = 'pages';
     }
 
     /**
@@ -96,19 +59,7 @@ class PageRepository
             $payload['hero_image'] = $path['name'];
         }
 
-        return Page::create($payload);
-    }
-
-    /**
-     * Find Pages by given id.
-     *
-     * @param int $id
-     *
-     * @return \Illuminate\Support\Collection|null|static|Pages
-     */
-    public function findPagesById($id)
-    {
-        return Page::find($id);
+        return $this->model->create($payload);
     }
 
     /**
@@ -122,7 +73,7 @@ class PageRepository
     {
         $page = null;
 
-        $page = Page::where('url', $url)->where('is_published', 1)->where('published_at', '<=', Carbon::now(config('app.timezone'))->format('Y-m-d H:i:s'))->first();
+        $page = $this->model->where('url', $url)->where('is_published', 1)->where('published_at', '<=', Carbon::now(config('app.timezone'))->format('Y-m-d H:i:s'))->first();
 
         if ($page && app()->getLocale() !== config('cms.default-language')) {
             $page = $this->translationRepo->findByEntityId($page->id, 'Grafite\Cms\Models\Page');

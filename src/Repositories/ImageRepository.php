@@ -9,31 +9,24 @@ use Grafite\Cms\Models\Image;
 use Grafite\Cms\Services\FileService;
 use Illuminate\Support\Facades\Schema;
 
-class ImageRepository
+class ImageRepository extends CmsRepository
 {
-    /**
-     * Returns all Images.
-     *
-     * @return \Illuminate\Database\Eloquent\Collection|static[]
-     */
-    public function all()
-    {
-        return Image::orderBy('created_at', 'desc')->all();
-    }
+    public $model;
 
-    public function paginated()
-    {
-        return Image::orderBy('created_at', 'desc')->paginate(Config::get('cms.pagination', 24));
-    }
+    public $table;
 
-    public function publishedAndPaginated()
+    public function __construct(Image $model)
     {
-        return Image::orderBy('created_at', 'desc')->where('is_published', 1)->paginate(Config::get('cms.pagination', 24));
+        $this->model = $model;
+
+        $this->table = 'images';
     }
 
     public function published()
     {
-        return Image::where('is_published', 1)->orderBy('created_at', 'desc')->paginate(Config::get('cms.pagination', 24));
+        return $this->model->where('is_published', 1)
+            ->orderBy('created_at', 'desc')
+            ->paginate(Config::get('cms.pagination', 24));
     }
 
     /**
@@ -43,7 +36,7 @@ class ImageRepository
      */
     public function apiPrepared()
     {
-        return Image::orderBy('created_at', 'desc')->where('is_published', 1)->get();
+        return $this->model->orderBy('created_at', 'desc')->where('is_published', 1)->get();
     }
 
     /**
@@ -53,7 +46,7 @@ class ImageRepository
      */
     public function getImagesByTag($tag = null)
     {
-        $images = Image::orderBy('created_at', 'desc')->where('is_published', 1);
+        $images = $this->model->orderBy('created_at', 'desc')->where('is_published', 1);
 
         if (!is_null($tag)) {
             $images->where('tags', 'LIKE', '%'.$tag.'%');
@@ -70,7 +63,7 @@ class ImageRepository
     public function allTags()
     {
         $tags = [];
-        $images = Image::orderBy('created_at', 'desc')->where('is_published', 1)->get();
+        $images = $this->model->orderBy('created_at', 'desc')->where('is_published', 1)->get();
 
         foreach ($images as $image) {
             foreach (explode(',', $image->tags) as $tag) {
@@ -81,27 +74,6 @@ class ImageRepository
         }
 
         return array_unique($tags);
-    }
-
-    /**
-     * Search the images.
-     *
-     * @param string $input
-     *
-     * @return Collection
-     */
-    public function search($input)
-    {
-        $query = Image::orderBy('created_at', 'desc');
-        $query->where('id', 'LIKE', '%'.$input['term'].'%');
-
-        $columns = Schema::getColumnListing('images');
-
-        foreach ($columns as $attribute) {
-            $query->orWhere($attribute, 'LIKE', '%'.$input['term'].'%');
-        }
-
-        return [$query, $input['term'], $query->paginate(Config::get('cms.pagination', 24))->render()];
     }
 
     /**
@@ -124,7 +96,7 @@ class ImageRepository
         $input['storage_location'] = config('cms.storage-location');
         $input['original_name'] = $savedFile['original'];
 
-        $image = Image::create($input);
+        $image = $this->model->create($input);
         $image->setCaches();
 
         return $image;
@@ -157,26 +129,14 @@ class ImageRepository
         $input['storage_location'] = config('cms.storage-location');
         $input['original_name'] = $savedFile['original'];
 
-        $image = Image::create($input);
+        $image = $this->model->create($input);
         $image->setCaches();
 
         return $image;
     }
 
     /**
-     * Find Images by given id.
-     *
-     * @param int $id
-     *
-     * @return \Illuminate\Support\Collection|null|static|Images
-     */
-    public function findImagesById($id)
-    {
-        return Image::find($id);
-    }
-
-    /**
-     * Updates Images into database.
+     * Updates Images
      *
      * @param Images $images
      * @param array  $input

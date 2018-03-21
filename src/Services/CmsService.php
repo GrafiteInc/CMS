@@ -2,26 +2,26 @@
 
 namespace Grafite\Cms\Services;
 
-use Illuminate\Support\Facades\App;
+use Grafite\Cms\Facades\CryptoServiceFacade;
+use Grafite\Cms\Repositories\ImageRepository;
+use Grafite\Cms\Services\Traits\DefaultModuleServiceTrait;
+use Grafite\Cms\Services\Traits\MenuServiceTrait;
+use Grafite\Cms\Services\Traits\ModuleServiceTrait;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\URL;
-use Grafite\Cms\Facades\CryptoServiceFacade;
-use Grafite\Cms\Services\Traits\DefaultModuleServiceTrait;
-use Grafite\Cms\Services\Traits\MenuServiceTrait;
-use Grafite\Cms\Services\Traits\ModuleServiceTrait;
 
 class CmsService
 {
-    use MenuServiceTrait;
-    use DefaultModuleServiceTrait;
-    use ModuleServiceTrait;
+    use MenuServiceTrait,
+        DefaultModuleServiceTrait,
+        ModuleServiceTrait;
 
     public function __construct()
     {
-        $this->imageRepo = App::make('Grafite\Cms\Repositories\ImageRepository');
+        $this->imageRepo = app(ImageRepository::class);
     }
 
     /**
@@ -173,6 +173,32 @@ class CmsService
         }
 
         return '';
+    }
+
+    /**
+     * Grafite CMS url generator - handles custom cms url
+     *
+     * @param  string $string
+     *
+     * @return string
+     */
+    public function url($string)
+    {
+        $url = str_replace('.', '/', $string);
+
+        return url(config('cms.backend-route-prefix', 'cms').'/'.$url);
+    }
+
+    /**
+     * Grafite CMS route generator
+     *
+     * @param  string $string
+     *
+     * @return string
+     */
+    public function route($string)
+    {
+        return config('cms.backend-route-prefix', 'cms').'.'.$string;
     }
 
     /**

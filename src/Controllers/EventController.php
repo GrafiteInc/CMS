@@ -96,7 +96,7 @@ class EventController extends GrafiteCmsController
      */
     public function edit($id)
     {
-        $event = $this->repository->findEventById($id);
+        $event = $this->repository->find($id);
 
         if (empty($event)) {
             Cms::notification('Event not found', 'warning');
@@ -117,7 +117,7 @@ class EventController extends GrafiteCmsController
      */
     public function update($id, EventRequest $request)
     {
-        $event = $this->repository->findEventById($id);
+        $event = $this->repository->find($id);
 
         if (empty($event)) {
             Cms::notification('Event not found', 'warning');
@@ -144,7 +144,7 @@ class EventController extends GrafiteCmsController
      */
     public function destroy($id)
     {
-        $event = $this->repository->findEventById($id);
+        $event = $this->repository->find($id);
 
         if (empty($event)) {
             Cms::notification('Event not found', 'warning');
@@ -168,7 +168,7 @@ class EventController extends GrafiteCmsController
      */
     public function history($id)
     {
-        $event = $this->repository->findEventById($id);
+        $event = $this->repository->find($id);
 
         return view('cms::modules.events.history')
             ->with('event', $event);

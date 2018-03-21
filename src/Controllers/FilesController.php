@@ -149,7 +149,7 @@ class FilesController extends GrafiteCmsController
      */
     public function edit($id)
     {
-        $files = $this->repository->findFilesById($id);
+        $files = $this->repository->find($id);
 
         if (empty($files)) {
             Cms::notification('File not found', 'warning');
@@ -170,7 +170,7 @@ class FilesController extends GrafiteCmsController
      */
     public function update($id, FileRequest $request)
     {
-        $files = $this->repository->findFilesById($id);
+        $files = $this->repository->find($id);
 
         if (empty($files)) {
             Cms::notification('File not found', 'warning');
@@ -194,7 +194,7 @@ class FilesController extends GrafiteCmsController
      */
     public function destroy($id)
     {
-        $files = $this->repository->findFilesById($id);
+        $files = $this->repository->find($id);
 
         if (empty($files)) {
             Cms::notification('File not found', 'warning');

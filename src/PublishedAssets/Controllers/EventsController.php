@@ -86,7 +86,7 @@ class EventsController extends Controller
      */
     public function show($id)
     {
-        $event = $this->repository->findEventById($id);
+        $event = $this->repository->find($id);
 
         if (empty($event)) {
             abort(404);

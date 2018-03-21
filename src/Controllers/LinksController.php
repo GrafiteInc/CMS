@@ -84,7 +84,7 @@ class LinksController extends GrafiteCmsController
      */
     public function edit($id)
     {
-        $links = $this->repository->findLinksById($id);
+        $links = $this->repository->find($id);
 
         if (empty($links)) {
             Cms::notification('Link not found', 'warning');
@@ -106,7 +106,7 @@ class LinksController extends GrafiteCmsController
     public function update($id, LinksRequest $request)
     {
         try {
-            $links = $this->repository->findLinksById($id);
+            $links = $this->repository->find($id);
 
             if (empty($links)) {
                 Cms::notification('Link not found', 'warning');
@@ -136,7 +136,7 @@ class LinksController extends GrafiteCmsController
      */
     public function destroy($id)
     {
-        $links = $this->repository->findLinksById($id);
+        $links = $this->repository->find($id);
         $menu = $links->menu_id;
 
         if (empty($links)) {

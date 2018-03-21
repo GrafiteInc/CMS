@@ -6,58 +6,21 @@ use Auth;
 use Config;
 use CryptoService;
 use Grafite\Cms\Models\File;
+use Grafite\Cms\Repositories\CmsRepository;
 use Grafite\Cms\Services\FileService;
 use Illuminate\Support\Facades\Schema;
 
-class FileRepository
+class FileRepository extends CmsRepository
 {
-    /**
-     * Returns all Files.
-     *
-     * @return \Illuminate\Database\Eloquent\Collection|static[]
-     */
-    public function all()
+    public $model;
+
+    public $table;
+
+    public function __construct(File $model)
     {
-        return File::orderBy('created_at', 'desc')->all();
-    }
+        $this->model = $model;
 
-    /**
-     * Paginated Files.
-     *
-     * @return \Illuminate\Database\Eloquent\Collection|static[]
-     */
-    public function paginated()
-    {
-        $model = app(File::class);
-
-        if (isset(request()->dir) && isset(request()->field)) {
-            $model = $model->orderBy(request()->field, request()->dir);
-        } else {
-            $model = $model->orderBy('created_at', 'desc');
-        }
-
-        return $model->paginate(Config::get('cms.pagination', 24));
-    }
-
-    /**
-     * Search for files.
-     *
-     * @param string $input
-     *
-     * @return array
-     */
-    public function search($input)
-    {
-        $query = File::orderBy('created_at', 'desc');
-        $query->where('id', 'LIKE', '%'.$input['term'].'%');
-
-        $columns = Schema::getColumnListing('files');
-
-        foreach ($columns as $attribute) {
-            $query->orWhere($attribute, 'LIKE', '%'.$input['term'].'%');
-        }
-
-        return [$query, $input['term'], $query->paginate(Config::get('cms.pagination', 24))->render()];
+        $this->table = 'files';
     }
 
     /**
@@ -67,65 +30,58 @@ class FileRepository
      *
      * @return Files
      */
-    public function store($input)
+    public function store($payload)
     {
         $result = false;
 
-        foreach ($input['location'] as $_file) {
-            $fileInput = $input;
-            $fileInput['name'] = $_file['original'];
-            $fileInput['location'] = CryptoService::decrypt($_file['name']);
-            $fileInput['mime'] = $_file['mime'];
-            $fileInput['size'] = $_file['size'];
-            $fileInput['order'] = 0;
-            $fileInput['user'] = (isset($input['user'])) ? $input['user'] : Auth::id();
-            $fileInput['is_published'] = (isset($input['is_published'])) ? (bool) $input['is_published'] : 0;
-            $result = File::create($fileInput);
+        foreach ($payload['location'] as $file) {
+            $filePayload = $payload;
+            $filePayload['name'] = $file['original'];
+            $filePayload['location'] = CryptoService::decrypt($file['name']);
+            $filePayload['mime'] = $file['mime'];
+            $filePayload['size'] = $file['size'];
+            $filePayload['order'] = 0;
+            $filePayload['user'] = (isset($payload['user'])) ? $payload['user'] : Auth::id();
+            $filePayload['is_published'] = (isset($payload['is_published'])) ? (bool) $payload['is_published'] : 0;
+            $result = $this->model->create($filePayload);
         }
 
         return $result;
     }
 
     /**
-     * Find Files by given id.
-     *
-     * @param int $id
-     *
-     * @return \Illuminate\Support\Collection|null|static|Files
-     */
-    public function findFilesById($id)
-    {
-        return File::find($id);
-    }
-
-    /**
      * Updates Files into database.
      *
      * @param Files $files
-     * @param array $input
+     * @param array $payload
      *
      * @return Files
      */
-    public function update($files, $input)
+    public function update($files, $payload)
     {
-        if (isset($input['location'])) {
-            $savedFile = FileService::saveFile($input['location'], 'files/');
-            $_file = $input['location'];
+        if (isset($payload['location'])) {
+            $savedFile = FileService::saveFile($payload['location'], 'files/');
+            $_file = $payload['location'];
 
-            $fileInput = $input;
-            $fileInput['name'] = $savedFile['original'];
-            $fileInput['location'] = $savedFile['name'];
-            $fileInput['mime'] = $_file->getClientMimeType();
-            $fileInput['size'] = $_file->getClientSize();
+            $filePayload = $payload;
+            $filePayload['name'] = $savedFile['original'];
+            $filePayload['location'] = $savedFile['name'];
+            $filePayload['mime'] = $_file->getClientMimeType();
+            $filePayload['size'] = $_file->getClientSize();
         } else {
-            $fileInput = $input;
+            $filePayload = $payload;
         }
 
-        $fileInput['is_published'] = (isset($input['is_published'])) ? (bool) $input['is_published'] : 0;
+        $filePayload['is_published'] = (isset($payload['is_published'])) ? (bool) $payload['is_published'] : 0;
 
-        return $files->update($fileInput);
+        return $files->update($filePayload);
     }
 
+    /**
+     * Files output for API calls
+     *
+     * @return array
+     */
     public function apiPrepared()
     {
         $files = File::orderBy('created_at', 'desc')->where('is_published', 1)->get();

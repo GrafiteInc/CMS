@@ -143,7 +143,7 @@ class ImagesController extends GrafiteCmsController
      */
     public function edit($id)
     {
-        $images = $this->repository->findImagesById($id);
+        $images = $this->repository->find($id);
 
         if (empty($images)) {
             Cms::notification('Image not found', 'warning');
@@ -165,7 +165,7 @@ class ImagesController extends GrafiteCmsController
     public function update($id, ImagesRequest $request)
     {
         try {
-            $images = $this->repository->findImagesById($id);
+            $images = $this->repository->find($id);
 
             Cms::notification('Image updated successfully.', 'success');
 
@@ -196,7 +196,7 @@ class ImagesController extends GrafiteCmsController
      */
     public function destroy($id)
     {
-        $image = $this->repository->findImagesById($id);
+        $image = $this->repository->find($id);
 
         if (is_file(storage_path($image->location))) {
             Storage::delete($image->location);
@@ -230,7 +230,7 @@ class ImagesController extends GrafiteCmsController
         $ids = explode('-', $ids);
 
         foreach ($ids as $id) {
-            $image = $this->repository->findImagesById($id);
+            $image = $this->repository->find($id);
 
             if (is_file(storage_path($image->location))) {
                 Storage::delete($image->location);

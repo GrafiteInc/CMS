@@ -97,7 +97,7 @@ class PagesController extends GrafiteCmsController
      */
     public function edit($id)
     {
-        $page = $this->repository->findPagesById($id);
+        $page = $this->repository->find($id);
 
         if (empty($page)) {
             Cms::notification('Page not found', 'warning');
@@ -118,7 +118,7 @@ class PagesController extends GrafiteCmsController
      */
     public function update($id, PagesRequest $request)
     {
-        $pages = $this->repository->findPagesById($id);
+        $pages = $this->repository->find($id);
 
         if (empty($pages)) {
             Cms::notification('Page not found', 'warning');
@@ -145,7 +145,7 @@ class PagesController extends GrafiteCmsController
      */
     public function destroy($id)
     {
-        $pages = $this->repository->findPagesById($id);
+        $pages = $this->repository->find($id);
 
         if (empty($pages)) {
             Cms::notification('Page not found', 'warning');
@@ -169,7 +169,7 @@ class PagesController extends GrafiteCmsController
      */
     public function history($id)
     {
-        $page = $this->repository->findPagesById($id);
+        $page = $this->repository->find($id);
 
         return view('cms::modules.pages.history')
             ->with('page', $page);

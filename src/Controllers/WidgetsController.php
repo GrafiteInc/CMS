@@ -93,7 +93,7 @@ class WidgetsController extends GrafiteCmsController
      */
     public function edit($id)
     {
-        $widgets = $this->repository->findWidgetsById($id);
+        $widgets = $this->repository->find($id);
 
         if (empty($widgets)) {
             Cms::notification('Widgets not found', 'warning');
@@ -114,7 +114,7 @@ class WidgetsController extends GrafiteCmsController
      */
     public function update($id, WidgetsRequest $request)
     {
-        $widgets = $this->repository->findWidgetsById($id);
+        $widgets = $this->repository->find($id);
 
         if (empty($widgets)) {
             Cms::notification('Widgets not found', 'warning');
@@ -138,7 +138,7 @@ class WidgetsController extends GrafiteCmsController
      */
     public function destroy($id)
     {
-        $widgets = $this->repository->findWidgetsById($id);
+        $widgets = $this->repository->find($id);
 
         if (empty($widgets)) {
             Cms::notification('Widgets not found', 'warning');

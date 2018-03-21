@@ -1,24 +1,24 @@
 @extends('cms::layouts.dashboard')
 
-@section('content')
+@section('pageTitle') Blog @stop
 
-    <div class="row">
-        <h1 class="page-header">Blog</h1>
-    </div>
+@section('content')
 
     @include('cms::modules.blogs.breadcrumbs', ['location' => ['create']])
 
     <div class="row">
-        {!! Form::open(['route' => config('cms.backend-route-prefix', 'cms').'.blog.store', 'class' => 'add', 'files' => true]) !!}
+        <div class="col-md-12">
+            {!! Form::open(['route' => cms()->route('blog.store'), 'class' => 'add', 'files' => true]) !!}
 
-            {!! FormMaker::fromTable('blogs', Config::get('cms.forms.blog')) !!}
+                {!! FormMaker::fromTable('blogs', Config::get('cms.forms.blog')) !!}
 
-            <div class="form-group text-right">
-                <a href="{!! url(config('cms.backend-route-prefix', 'cms').'/blog') !!}" class="btn btn-default raw-left">Cancel</a>
-                {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
-            </div>
+                <div class="form-group text-right">
+                    <a href="{!! cms()->url('blog') !!}" class="btn btn-secondary float-left">Cancel</a>
+                    {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
+                </div>
 
-        {!! Form::close() !!}
+            {!! Form::close() !!}
+        </div>
     </div>
 
 @endsection

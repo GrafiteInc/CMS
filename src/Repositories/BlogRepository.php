@@ -5,12 +5,12 @@ namespace Grafite\Cms\Repositories;
 use Carbon\Carbon;
 use Cms;
 use Grafite\Cms\Models\Blog;
-use Grafite\Cms\Repositories\GrafiteRepository;
+use Grafite\Cms\Repositories\CmsRepository;
 use Grafite\Cms\Services\FileService;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Schema;
 
-class BlogRepository extends GrafiteRepository
+class BlogRepository extends CmsRepository
 {
     public $model;
 

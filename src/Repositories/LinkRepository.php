@@ -3,47 +3,37 @@
 namespace Grafite\Cms\Repositories;
 
 use Grafite\Cms\Models\Link;
+use Grafite\Cms\Repositories\CmsRepository;
 
-class LinkRepository
+class LinkRepository extends CmsRepository
 {
-    /**
-     * Returns all Links.
-     *
-     * @return \Illuminate\Database\Eloquent\Collection|static[]
-     */
-    public function all()
+    public $model;
+
+    public $table;
+
+    public function __construct(Link $model)
     {
-        return Link::orderBy('created_at', 'desc')->get();
+        $this->model = $model;
+
+        $this->table = 'links';
     }
 
     /**
      * Stores Links into database.
      *
-     * @param array $input
+     * @param array $payload
      *
      * @return Links
      */
-    public function store($input)
+    public function store($payload)
     {
-        $input['external'] = isset($input['external']) ? $input['external'] : 0;
+        $payload['external'] = isset($payload['external']) ? $payload['external'] : 0;
 
-        if (!isset($input['page_id'])) {
-            $input['page_id'] = 0;
+        if (!isset($payload['page_id'])) {
+            $payload['page_id'] = 0;
         }
 
-        return Link::create($input);
-    }
-
-    /**
-     * Find Links by given id.
-     *
-     * @param int $id
-     *
-     * @return \Illuminate\Support\Collection|null|static|Links
-     */
-    public function findLinksById($id)
-    {
-        return Link::find($id);
+        return $this->model->create($payload);
     }
 
     /**
@@ -53,35 +43,23 @@ class LinkRepository
      *
      * @return \Illuminate\Support\Collection|null|static|Links
      */
-    public static function getLinksByMenuID($id)
-    {
-        return Link::where('menu_id', $id)->get();
-    }
-
-    /**
-     * Find Links by given id.
-     *
-     * @param int $id
-     *
-     * @return \Illuminate\Support\Collection|null|static|Links
-     */
     public function getLinksByMenu($id)
     {
-        return Link::where('menu_id', $id)->get();
+        return $this->model->where('menu_id', $id)->get();
     }
 
     /**
      * Updates Links into database.
      *
      * @param Links $links
-     * @param array $input
+     * @param array $payload
      *
      * @return Links
      */
-    public function update($links, $input)
+    public function update($link, $payload)
     {
-        $input['external'] = isset($input['external']) ? $input['external'] : 0;
+        $payload['external'] = isset($payload['external']) ? $payload['external'] : 0;
 
-        return $links->update($input);
+        return $link->update($payload);
     }
 }

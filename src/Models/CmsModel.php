@@ -23,6 +23,20 @@ class CmsModel extends Model
     }
 
     /**
+     * Get a model as a translatable object
+     *
+     * @return Object
+     */
+    public function asObject()
+    {
+        if (! is_null(request('lang')) && request('lang') !== config('cms.default-language', 'en')) {
+            return $this->translationData(request('lang'));
+        }
+
+        return $this;
+    }
+
+    /**
      * After the item is saved to the database.
      *
      * @param object $payload

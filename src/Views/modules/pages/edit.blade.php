@@ -9,7 +9,7 @@
             @include('cms::modules.pages.breadcrumbs', ['location' => ['edit']])
         </div>
         <div class="col-md-6">
-            <div class="btn-toolbar  float-right">
+            <div class="btn-toolbar float-right">
                 @if (! is_null(request('lang')) && request('lang') !== config('cms.default-language', 'en') && $page->translationData(request('lang')))
                     @if (isset($page->translationData(request('lang'))->is_published))
                         <a class="btn btn-outline-primary ml-1" href="{!! url('page/'.$page->translationData(request('lang'))->url) !!}">Live</a>
@@ -33,18 +33,10 @@
     <div class="row mb-4">
         <div class="col-md-12">
             <ul class="nav nav-tabs">
-                @include('cms::layouts.tabs', [ 'module' => 'pages' ])
+                @include('cms::layouts.tabs', [ 'module' => 'pages', 'item' => $page ])
             </ul>
         </div>
     </div>
-
-    @if ($page->hero_image)
-        <div class="row">
-            <div class="col-md-6 offset-md-3 mb-4">
-                <img class="thumbnail img-responsive" src="{{ $page->hero_image_url }}" alt="">
-            </div>
-        </div>
-    @endif
 
     <div class="row">
         <div class="@if (config('cms.live-preview', false)) col-md-6 @else col-md-12 @endif">
@@ -67,8 +59,23 @@
                     </select>
                 </div>
 
-                {!! FormMaker::setColumns(2)->fromObject($page->asObject(), Config::get('cms.forms.page.content')) !!}
-                {!! FormMaker::setColumns(2)->fromObject($page->asObject(), Config::get('cms.forms.page.seo')) !!}
+                <div class="row">
+                    <div class="col-md-6">
+                        {!! FormMaker::setColumns(1)->fromObject($page->asObject(), Config::get('cms.forms.page.content')) !!}
+                    </div>
+                    <div class="col-md-6">
+                        @if ($page->hero_image)
+                            <img class="img-thumbnail img-fluid" src="{{ $page->hero_image_url }}" alt="">
+                        @endif
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12 mt-4">
+                        {!! FormMaker::setColumns(2)->fromObject($page->asObject(), Config::get('cms.forms.page.seo')) !!}
+                    </div>
+                </div>
+
                 {!! FormMaker::setColumns(2)->fromObject($page->asObject(), Config::get('cms.forms.page.publish')) !!}
 
                 @include('cms::modules.pages.blocks', ['page' => $page->asObject()])

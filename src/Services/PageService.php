@@ -44,7 +44,7 @@ class PageService
 
     public function pageName($id)
     {
-        $page = $this->repo->findPagesById($id);
+        $page = $this->repo->find($id);
 
         return $page->title;
     }

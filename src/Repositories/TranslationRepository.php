@@ -12,6 +12,16 @@ class TranslationRepository
         $this->model = $translation;
     }
 
+    /**
+     * Create or Update an entry
+     *
+     * @param  integer $entityId
+     * @param  string $entityType
+     * @param  string $lang
+     * @param  array $payload
+     *
+     * @return boolean
+     */
     public function createOrUpdate($entityId, $entityType, $lang, $payload)
     {
         $translation = $this->model->firstOrCreate([
@@ -28,6 +38,14 @@ class TranslationRepository
         return $translation->save();
     }
 
+    /**
+     * Find by URL
+     *
+     * @param  string $url
+     * @param  string $type
+     *
+     * @return Object|null
+     */
     public function findByUrl($url, $type)
     {
         $item = $this->model->where('entity_type', $type)->where('entity_data', 'LIKE', '%"url":"'.$url.'"%')->first();
@@ -39,6 +57,14 @@ class TranslationRepository
         return null;
     }
 
+    /**
+     * Find an entity by its Id
+     *
+     * @param  integer $entityId
+     * @param  string $entityType
+     *
+     * @return Object|null
+     */
     public function findByEntityId($entityId, $entityType)
     {
         $item = $this->model->where('entity_type', $entityType)->where('entity_id', $entityId)->first();
@@ -50,6 +76,14 @@ class TranslationRepository
         return null;
     }
 
+    /**
+     * Get entities by type and language
+     *
+     * @param  string $lang
+     * @param  string $type
+     *
+     * @return Illuminate\Support\Collection
+     */
     public function getEntitiesByTypeAndLang($lang, $type)
     {
         $entities = collect();

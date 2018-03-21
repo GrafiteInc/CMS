@@ -105,7 +105,7 @@ class MenuController extends GrafiteCmsController
      */
     public function edit($id)
     {
-        $menu = $this->repository->findMenuById($id);
+        $menu = $this->repository->find($id);
 
         if (empty($menu)) {
             Cms::notification('Menu not found', 'warning');
@@ -129,7 +129,7 @@ class MenuController extends GrafiteCmsController
     public function update($id, MenuRequest $request)
     {
         try {
-            $menu = $this->repository->findMenuById($id);
+            $menu = $this->repository->find($id);
 
             if (empty($menu)) {
                 Cms::notification('Menu not found', 'warning');
@@ -159,7 +159,7 @@ class MenuController extends GrafiteCmsController
      */
     public function destroy($id)
     {
-        $menu = $this->repository->findMenuById($id);
+        $menu = $this->repository->find($id);
 
         if (empty($menu)) {
             Cms::notification('Menu not found', 'warning');
@@ -188,7 +188,7 @@ class MenuController extends GrafiteCmsController
      */
     public function setOrder($id, Request $request)
     {
-        $menu = $this->repository->findMenuById($id);
+        $menu = $this->repository->find($id);
         $result =  $this->repository->setOrder($menu, $request->except('_token'));
 
         return CmsResponseService::apiResponse('success', $result);

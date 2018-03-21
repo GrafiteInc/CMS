@@ -73,13 +73,4 @@ class Page extends CmsModel
 
         return $blocks;
     }
-
-    public function asObject()
-    {
-        if (! is_null(request('lang')) && request('lang') !== config('cms.default-language', 'en')) {
-            return $this->translationData(request('lang'));
-        }
-
-        return $this;
-    }
 }

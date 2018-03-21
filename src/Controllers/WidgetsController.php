@@ -2,11 +2,10 @@
 
 namespace Grafite\Cms\Controllers;
 
-use URL;
 use Cms;
 use Illuminate\Http\Request;
 use Grafite\Cms\Models\Widget;
-use Grafite\Cms\Requests\WidgetsRequest;
+use Grafite\Cms\Requests\WidgetRequest;
 use Grafite\Cms\Services\ValidationService;
 use Grafite\Cms\Repositories\WidgetRepository;
 
@@ -65,13 +64,13 @@ class WidgetsController extends GrafiteCmsController
     /**
      * Store a newly created Widgets in storage.
      *
-     * @param WidgetsRequest $request
+     * @param WidgetRequest $request
      *
      * @return Response
      */
     public function store(Request $request)
     {
-        $validation = ValidationService::check(Widget::$rules);
+        $validation = app(ValidationService::class)->check(Widget::$rules);
 
         if (!$validation['errors']) {
             $widgets = $this->repository->store($request->all());
@@ -108,11 +107,11 @@ class WidgetsController extends GrafiteCmsController
      * Update the specified Widgets in storage.
      *
      * @param int            $id
-     * @param WidgetsRequest $request
+     * @param WidgetRequest $request
      *
      * @return Response
      */
-    public function update($id, WidgetsRequest $request)
+    public function update($id, WidgetRequest $request)
     {
         $widgets = $this->repository->find($id);
 
@@ -126,7 +125,7 @@ class WidgetsController extends GrafiteCmsController
 
         Cms::notification('Widgets updated successfully.', 'success');
 
-        return redirect(URL::previous());
+        return redirect(url()->previous());
     }
 
     /**

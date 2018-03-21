@@ -5,19 +5,20 @@ namespace Grafite\Cms\Repositories;
 use Carbon\Carbon;
 use Grafite\Cms\Models\Event;
 use Grafite\Cms\Repositories\CmsRepository;
-use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\Schema;
+use Grafite\Cms\Repositories\TranslationRepository;
 
 class EventRepository extends CmsRepository
 {
     public $model;
 
+    public $translationRepo;
+
     public $table;
 
-    public function __construct(Event $model)
+    public function __construct(Event $model, TranslationRepository $translationRepo)
     {
         $this->model = $model;
-
+        $this->translationRepo = $translationRepo;
         $this->table = 'events';
     }
 

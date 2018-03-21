@@ -2,9 +2,7 @@
 
 namespace Grafite\Cms\Controllers;
 
-use URL;
 use Cms;
-use Response;
 use Grafite\Cms\Models\Page;
 use Illuminate\Http\Request;
 use Grafite\Cms\Requests\PagesRequest;
@@ -72,7 +70,7 @@ class PagesController extends GrafiteCmsController
      */
     public function store(Request $request)
     {
-        $validation = ValidationService::check(Page::$rules);
+        $validation = app(ValidationService::class)->check(Page::$rules);
 
         if (!$validation['errors']) {
             $pages = $this->repository->store($request->all());
@@ -133,7 +131,7 @@ class PagesController extends GrafiteCmsController
             Cms::notification('Page could not be saved.', 'warning');
         }
 
-        return redirect(URL::previous());
+        return redirect(url()->previous());
     }
 
     /**

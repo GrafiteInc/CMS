@@ -56,7 +56,7 @@ class LinksController extends GrafiteCmsController
     public function store(LinksRequest $request)
     {
         try {
-            $validation = ValidationService::check(Link::$rules);
+            $validation = app(ValidationService::class)->check(Link::$rules);
 
             if (!$validation['errors']) {
                 $links = $this->repository->store($request->all());

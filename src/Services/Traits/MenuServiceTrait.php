@@ -37,7 +37,7 @@ trait MenuServiceTrait
     public function menu($slug, $view = null)
     {
         $pageRepository = app(PageRepository::class);
-        $menu = MenuRepository::getBySlug($slug)->first();
+        $menu = app(MenuRepository::class)->getBySlug($slug);
 
         if (!$menu) {
             return '';

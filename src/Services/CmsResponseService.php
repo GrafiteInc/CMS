@@ -14,7 +14,7 @@ class CmsResponseService
      *
      * @return Response
      */
-    public static function apiResponse($type, $message, $code = 200)
+    public function apiResponse($type, $message, $code = 200)
     {
         return Response::json(['status' => $type, 'data' => $message], $code);
     }
@@ -27,7 +27,7 @@ class CmsResponseService
      *
      * @return Response
      */
-    public static function apiErrorResponse($errors, $inputs)
+    public function apiErrorResponse($errors, $inputs)
     {
         $message = [];
         foreach ($inputs as $key => $value) {

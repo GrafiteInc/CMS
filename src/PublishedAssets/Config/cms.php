@@ -122,17 +122,15 @@ return [
 
     'forms' => [
         'blog' => [
-            [
-                'title' => [
-                    'type' => 'string',
-                ],
-                'url' => [
-                    'type' => 'string',
-                ],
-                'tags' => [
-                    'type' => 'string',
-                    'class' => 'tags',
-                ],
+            'title' => [
+                'type' => 'string',
+            ],
+            'url' => [
+                'type' => 'string',
+            ],
+            'tags' => [
+                'type' => 'string',
+                'class' => 'tags',
             ],
             'entry' => [
                 'type' => 'text',

@@ -4,19 +4,21 @@ namespace Grafite\Cms\Repositories;
 
 use Grafite\Cms\Models\Widget;
 use Grafite\Cms\Repositories\CmsRepository;
-use Illuminate\Support\Facades\Schema;
+use Grafite\Cms\Repositories\TranslationRepository;
 
 class WidgetRepository extends CmsRepository
 {
     public $model;
 
+    public $translationRepo;
+
     public $table;
 
-    public function __construct(Widget $model)
+    public function __construct(Widget $model, TranslationRepository $translationRepo)
     {
         $this->model = $model;
-
-        $this->table = 'wdigets';
+        $this->translationRepo = $translationRepo;
+        $this->table = 'widgets';
     }
 
     /**

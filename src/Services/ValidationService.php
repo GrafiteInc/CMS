@@ -20,7 +20,7 @@ class ValidationService
      *
      * @return array
      */
-    public static function check($form, $jsonInput = false)
+    public function check($form, $jsonInput = false)
     {
         $result = [];
         $errors = [];
@@ -41,8 +41,8 @@ class ValidationService
 
         foreach ($fields as $key => $value) {
             if (isset($fields[$key])) {
-                $inputs[$key] = self::getInput($key, $jsonInput);
-                $validationInputs[$key] = self::getInput($key, $jsonInput);
+                $inputs[$key] = $this->getInput($key, $jsonInput);
+                $validationInputs[$key] = $this->getInput($key, $jsonInput);
                 $validationRules[$key] = $fields[$key];
             }
         }
@@ -54,7 +54,7 @@ class ValidationService
         }
 
         if (!$jsonInput) {
-            $result['redirect'] = Redirect::back()->with('errors', $errors)->with('inputs', self::inputsArray($jsonInput));
+            $result['redirect'] = Redirect::back()->with('errors', $errors)->with('inputs', $this->inputsArray($jsonInput));
         }
 
         if (!empty($errors)) {
@@ -63,7 +63,7 @@ class ValidationService
             $result['errors'] = false;
         }
 
-        $result['inputs'] = self::inputsArray($jsonInput);
+        $result['inputs'] = $this->inputsArray($jsonInput);
 
         return $result;
     }
@@ -76,9 +76,9 @@ class ValidationService
      *
      * @return mixed
      */
-    public static function jsonCheck($form, $module = null)
+    public function jsonCheck($form, $module = null)
     {
-        return self::check($form, $module, true);
+        return $this->check($form, $module, true);
     }
 
     /**
@@ -88,7 +88,7 @@ class ValidationService
      *
      * @return mixed
      */
-    public static function errors($format = 'array')
+    public function errors($format = 'array')
     {
         $errorMessage = '';
         $errors = Session::get('errors') ?: false;
@@ -113,7 +113,7 @@ class ValidationService
      *
      * @return mixed
      */
-    public static function inputs()
+    public function inputs()
     {
         $inputs = Session::get('inputs') ?: false;
 
@@ -132,7 +132,7 @@ class ValidationService
      *
      * @return mixed
      */
-    private static function getInput($key, $jsonInput)
+    private function getInput($key, $jsonInput)
     {
         if ($jsonInput) {
             $input = Input::json($key);
@@ -152,7 +152,7 @@ class ValidationService
      *
      * @return array
      */
-    private static function inputsArray($jsonInput)
+    private function inputsArray($jsonInput)
     {
         if ($jsonInput) {
             $inputs = Input::json();
@@ -179,7 +179,7 @@ class ValidationService
      *
      * @return string
      */
-    public static function value($key)
+    public function value($key)
     {
         $inputs = Session::get('inputs') ?: false;
 

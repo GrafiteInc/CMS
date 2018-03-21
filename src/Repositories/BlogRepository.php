@@ -6,19 +6,21 @@ use Carbon\Carbon;
 use Cms;
 use Grafite\Cms\Models\Blog;
 use Grafite\Cms\Repositories\CmsRepository;
+use Grafite\Cms\Repositories\TranslationRepository;
 use Grafite\Cms\Services\FileService;
-use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\Schema;
 
 class BlogRepository extends CmsRepository
 {
     public $model;
 
+    public $translationRepo;
+
     public $table;
 
-    public function __construct(Blog $model)
+    public function __construct(Blog $model, TranslationRepository $translationRepo)
     {
         $this->model = $model;
+        $this->translationRepo = $translationRepo;
         $this->table = 'blogs';
     }
 
@@ -46,7 +48,7 @@ class BlogRepository extends CmsRepository
         return $this->model->where('is_published', 1)
             ->where('published_at', '<=', Carbon::now(config('app.timezone'))->format('Y-m-d H:i:s'))
             ->where('tags', 'LIKE', '%'.$tag.'%')->orderBy('created_at', 'desc')
-            ->paginate(Config::get('cms.pagination', 24));
+            ->paginate(config('cms.pagination', 24));
     }
 
     /**
@@ -91,11 +93,11 @@ class BlogRepository extends CmsRepository
 
         if (isset($payload['hero_image'])) {
             $file = request()->file('hero_image');
-            $path = FileService::saveFile($file, 'public/images', [], true);
+            $path = app(FileService::class)->saveFile($file, 'public/images', [], true);
             $payload['hero_image'] = $path['name'];
         }
 
-        return Blog::create($payload);
+        return $this->model->create($payload);
     }
 
     /**
@@ -109,7 +111,7 @@ class BlogRepository extends CmsRepository
     {
         $blog = null;
 
-        $blog = Blog::where('url', $url)->where('is_published', 1)->where('published_at', '<=', Carbon::now(config('app.timezone'))->format('Y-m-d H:i:s'))->first();
+        $blog = $this->model->where('url', $url)->where('is_published', 1)->where('published_at', '<=', Carbon::now(config('app.timezone'))->format('Y-m-d H:i:s'))->first();
 
         if (!$blog) {
             $blog = $this->translationRepo->findByUrl($url, 'Grafite\Cms\Models\Blog');
@@ -127,7 +129,7 @@ class BlogRepository extends CmsRepository
      */
     public function findBlogsByTag($tag)
     {
-        return Blog::where('tags', 'LIKE', "%$tag%")->where('is_published', 1)->get();
+        return $this->model->where('tags', 'LIKE', "%$tag%")->where('is_published', 1)->get();
     }
 
     /**
@@ -144,7 +146,7 @@ class BlogRepository extends CmsRepository
 
         if (isset($payload['hero_image'])) {
             $file = request()->file('hero_image');
-            $path = FileService::saveFile($file, 'public/images', [], true);
+            $path = app(FileService::class)->saveFile($file, 'public/images', [], true);
             $payload['hero_image'] = $path['name'];
         }
 

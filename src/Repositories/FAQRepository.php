@@ -5,8 +5,6 @@ namespace Grafite\Cms\Repositories;
 use Carbon\Carbon;
 use Grafite\Cms\Models\FAQ;
 use Grafite\Cms\Repositories\CmsRepository;
-use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\Schema;
 
 class FAQRepository extends CmsRepository
 {

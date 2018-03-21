@@ -32,7 +32,7 @@ trait DefaultModuleServiceTrait
      */
     public function widget($slug)
     {
-        $widget = WidgetRepository::getBySlug($slug);
+        $widget = app(WidgetRepository::class)->getBySlug($slug);
 
         if ($widget) {
             if (Gate::allows('cms', Auth::user())) {

@@ -8,13 +8,14 @@
     z-index: 100; /* Behind the navbar */
     padding: 0;
     transition: all 0.3s;
+    z-index: 1001;
 }
 
 .sidebar-sticky {
     position: -webkit-sticky;
     position: sticky;
     top: 60px;
-    height: calc(100vh - 103px);
+    height: calc(100vh - 180px);
     overflow-x: hidden;
     overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
 }
@@ -57,7 +58,7 @@
     display: none;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
     .sidebar-toggle {
         display: inline-block;
     }

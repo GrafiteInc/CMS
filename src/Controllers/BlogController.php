@@ -71,7 +71,7 @@ class BlogController extends GrafiteCmsController
      */
     public function store(Request $request)
     {
-        $validation = ValidationService::check(Blog::$rules);
+        $validation = app(ValidationService::class)->check(Blog::$rules);
 
         if (!$validation['errors']) {
             $blog = $this->repository->store($request->all());
@@ -125,7 +125,7 @@ class BlogController extends GrafiteCmsController
             return redirect(route($this->routeBase.'.blog.index'));
         }
 
-        $validation = ValidationService::check(Blog::$rules);
+        $validation = app(ValidationService::class)->check(Blog::$rules);
 
         if (!$validation['errors']) {
             $blog = $this->repository->update($blog, $request->all());

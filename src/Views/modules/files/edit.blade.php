@@ -9,7 +9,7 @@
     @include('cms::modules.files.breadcrumbs', ['location' => ['edit']])
 
     <div class="row raw-margin-bottom-48 raw-margin-top-48 text-center">
-        <a class="btn btn-default" href="{!! FileService::fileAsDownload($files->name, $files->location) !!}"><span class="fa fa-download"></span> Download: {!! $files->name !!}</a>
+        <a class="btn btn-default" href="{!! Cms::fileAsDownload($files->name, $files->location) !!}"><span class="fa fa-download"></span> Download: {!! $files->name !!}</a>
     </div>
 
     <div class="row">

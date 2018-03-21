@@ -6,20 +6,21 @@ use Carbon\Carbon;
 use Cms;
 use Grafite\Cms\Models\Page;
 use Grafite\Cms\Repositories\CmsRepository;
+use Grafite\Cms\Repositories\TranslationRepository;
 use Grafite\Cms\Services\FileService;
-use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\Schema;
 
 class PageRepository extends CmsRepository
 {
     public $model;
 
+    public $translationRepo;
+
     public $table;
 
-    public function __construct(Page $model)
+    public function __construct(Page $model, TranslationRepository $translationRepo)
     {
         $this->model = $model;
-
+        $this->translationRepo = $translationRepo;
         $this->table = 'pages';
     }
 
@@ -55,7 +56,7 @@ class PageRepository extends CmsRepository
 
         if (isset($payload['hero_image'])) {
             $file = request()->file('hero_image');
-            $path = FileService::saveFile($file, 'public/images', [], true);
+            $path = app(FileService::class)->saveFile($file, 'public/images', [], true);
             $payload['hero_image'] = $path['name'];
         }
 
@@ -116,7 +117,7 @@ class PageRepository extends CmsRepository
 
         if (isset($payload['hero_image'])) {
             $file = request()->file('hero_image');
-            $path = FileService::saveFile($file, 'public/images', [], true);
+            $path = app(FileService::class)->saveFile($file, 'public/images', [], true);
             $payload['hero_image'] = $path['name'];
         }
 

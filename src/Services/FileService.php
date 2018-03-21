@@ -19,7 +19,7 @@ class FileService
      *
      * @return string
      */
-    public static function getFileClass($file)
+    public function getFileClass($file)
     {
         $sections = explode(DIRECTORY_SEPARATOR, $file);
         $fileName = $sections[count($sections) - 1];
@@ -37,7 +37,7 @@ class FileService
      *
      * @return array
      */
-    public static function saveClone($fileName, $directory = '', $fileTypes = [])
+    public function saveClone($fileName, $directory = '', $fileTypes = [])
     {
         $fileInfo = pathinfo($fileName);
 
@@ -71,7 +71,7 @@ class FileService
      *
      * @return array
      */
-    public static function saveFile($fileName, $directory = '', $fileTypes = [], $isImage = false)
+    public function saveFile($fileName, $directory = '', $fileTypes = [], $isImage = false)
     {
         if (is_object($fileName)) {
             $file = $fileName;
@@ -133,7 +133,7 @@ class FileService
      *
      * @return string
      */
-    public static function fileAsPublicAsset($fileName)
+    public function fileAsPublicAsset($fileName)
     {
         return '/public-asset/'.CryptoServiceForFiles::url_encode($fileName);
     }
@@ -146,7 +146,7 @@ class FileService
      *
      * @return string
      */
-    public static function fileAsDownload($fileName, $realFileName)
+    public function fileAsDownload($fileName, $realFileName)
     {
         return '/public-download/'.CryptoServiceForFiles::url_encode($fileName).'/'.CryptoServiceForFiles::url_encode($realFileName);
     }
@@ -158,7 +158,7 @@ class FileService
      *
      * @return string
      */
-    public static function filePreview($fileName)
+    public function filePreview($fileName)
     {
         return '/public-preview/'.CryptoServiceForFiles::url_encode($fileName);
     }

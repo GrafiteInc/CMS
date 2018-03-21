@@ -80,7 +80,7 @@ class ImagesController extends GrafiteCmsController
     public function store(Request $request)
     {
         try {
-            $validation = ValidationService::check(['location' => 'required']);
+            $validation = app(ValidationService::class)->check(['location' => 'required']);
             if (!$validation['errors']) {
                 foreach ($request->input('location') as $image) {
                     $imageSaved = $this->repository->store([
@@ -116,7 +116,7 @@ class ImagesController extends GrafiteCmsController
      */
     public function upload(Request $request)
     {
-        $validation = ValidationService::check([
+        $validation = app(ValidationService::class)->check([
             'location' => ['required'],
         ]);
 

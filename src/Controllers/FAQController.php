@@ -71,7 +71,7 @@ class FAQController extends GrafiteCmsController
      */
     public function store(Request $request)
     {
-        $validation = ValidationService::check(FAQ::$rules);
+        $validation = app(ValidationService::class)->check(FAQ::$rules);
 
         if (!$validation['errors']) {
             $faq = $this->repository->store($request->all());
@@ -96,7 +96,7 @@ class FAQController extends GrafiteCmsController
      */
     public function edit($id)
     {
-        $faq = $this->repository->findFAQById($id);
+        $faq = $this->repository->find($id);
 
         if (empty($faq)) {
             Cms::notification('FAQ not found', 'warning');
@@ -117,7 +117,7 @@ class FAQController extends GrafiteCmsController
      */
     public function update($id, FAQRequest $request)
     {
-        $faq = $this->repository->findFAQById($id);
+        $faq = $this->repository->find($id);
 
         if (empty($faq)) {
             Cms::notification('FAQ not found', 'warning');
@@ -125,7 +125,7 @@ class FAQController extends GrafiteCmsController
             return redirect(route($this->routeBase.'.faqs.index'));
         }
 
-        $validation = ValidationService::check(FAQ::$rules);
+        $validation = app(ValidationService::class)->check(FAQ::$rules);
 
         if (!$validation['errors']) {
             $faq = $this->repository->update($faq, $request->all());
@@ -150,7 +150,7 @@ class FAQController extends GrafiteCmsController
      */
     public function destroy($id)
     {
-        $faq = $this->repository->findFAQById($id);
+        $faq = $this->repository->find($id);
 
         if (empty($faq)) {
             Cms::notification('FAQ not found', 'warning');

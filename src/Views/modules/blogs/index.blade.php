@@ -22,20 +22,18 @@
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-md-12">
-            <nav class="navbar navbar-light justify-content-between">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="btn btn-primary" href="{!! route(config('cms.backend-route-prefix', 'cms').'.blog.create') !!}">Add New</a>
-                    </li>
-                </ul>
-                {!! Form::open(['url' => 'cms/blog/search', 'class' => 'form-inline']) !!}
-                    <input class="form-control mr-sm-2" name="term" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                {!! Form::close() !!}
-            </nav>
-        </div>
+    <div class="col-md-12">
+        <nav class="navbar px-0 navbar-light justify-content-between">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="btn btn-primary" href="{!! route(config('cms.backend-route-prefix', 'cms').'.blog.create') !!}">Add New</a>
+                </li>
+            </ul>
+            {!! Form::open(['url' => 'cms/blog/search', 'class' => 'form-inline mt-2']) !!}
+                <input class="form-control mr-sm-2" name="term" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            {!! Form::close() !!}
+        </nav>
     </div>
 
     <div class="col-md-12">
@@ -52,16 +50,16 @@
                     <table class="table table-striped">
                         <thead>
                             <th>{!! sortable('Title', 'title') !!}</th>
-                            <th>{!! sortable('Url', 'url') !!}</th>
-                            <th>{!! sortable('Published', 'is_published') !!}</th>
+                            <th class="m-hidden">{!! sortable('Url', 'url') !!}</th>
+                            <th class="m-hidden">{!! sortable('Published', 'is_published') !!}</th>
                             <th width="170px" class="text-right">Actions</th>
                         </thead>
                         <tbody>
                             @foreach($blogs as $blog)
                                 <tr>
                                     <td><a href="{!! route(config('cms.backend-route-prefix', 'cms').'.blog.edit', [$blog->id]) !!}">{!! $blog->title !!}</a></td>
-                                    <td class="hidden-sm">{!! $blog->url !!}</td>
-                                    <td class="hidden-sm">
+                                    <td class="m-hidden">{!! $blog->url !!}</td>
+                                    <td class="m-hidden">
                                         @if ($blog->is_published)
                                             <span class="fa fa-check"></span>
                                         @else

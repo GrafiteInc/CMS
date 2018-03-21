@@ -67,6 +67,7 @@ class GrafiteCmsFeatureController extends GrafiteCmsController
 
             return redirect(URL::previous());
         }
+
         $archiveData = (array) json_decode($archive->entity_data);
 
         $modelInstance->fill($archiveData);

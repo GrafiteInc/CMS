@@ -48,7 +48,7 @@
                 @foreach($files as $file)
                     <tr>
                         <td>
-                            <a href="{!! FileService::fileAsDownload($file->name, $file->location) !!}"><span class="fa fa-download"></span></a>
+                            <a href="{!! Cms::fileAsDownload($file->name, $file->location) !!}"><span class="fa fa-download"></span></a>
                             <a href="{!! route(config('cms.backend-route-prefix', 'cms').'.files.edit', [$file->id]) !!}">{!! $file->name !!}</a>
                         </td>
                         <td class="raw-m-hide">@if ($file->is_published) <span class="fa fa-check"></span> @else <span class="fa fa-close"></span> @endif</td>

@@ -71,7 +71,7 @@ class EventController extends GrafiteCmsController
      */
     public function store(Request $request)
     {
-        $validation = ValidationService::check(Event::$rules);
+        $validation = app(ValidationService::class)->check(Event::$rules);
 
         if (!$validation['errors']) {
             $event = $this->repository->store($request->all());

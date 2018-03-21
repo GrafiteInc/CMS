@@ -86,7 +86,7 @@ class FAQTest extends TestCase
         ]);
 
         $this->assertDatabaseHas('translations', [
-            'entity_type' => 'Grafite\\Cms\\Models\\FAQ',
+            'entity_type' => 'Grafite\\Cms\\Models\\Faq',
         ]);
         $this->assertEquals(302, $response->getStatusCode());
     }

@@ -77,7 +77,7 @@ class MenuController extends GrafiteCmsController
     public function store(Request $request)
     {
         try {
-            $validation = ValidationService::check(Menu::$rules);
+            $validation = app(ValidationService::class)->check(Menu::$rules);
 
             if (!$validation['errors']) {
                 $menu = $this->repository->store($request->all());

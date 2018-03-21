@@ -12,7 +12,7 @@
         </div>
     </nav>
 
-    <main class="ml-sm-auto pt-3 px-4 main">
+    <main class="ml-sm-auto pt-2 px-2 main">
         @yield('content')
     </main>
 

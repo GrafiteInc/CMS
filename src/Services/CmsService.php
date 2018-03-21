@@ -43,6 +43,19 @@ class CmsService
     }
 
     /**
+     * Get a file download response
+     *
+     * @param  string $fileName
+     * @param  string $realFileName
+     *
+     * @return Response
+     */
+    public function fileAsDownload($fileName, $realFileName)
+    {
+        return app(FileService::class)->fileAsDownload($fileName, $realFileName);
+    }
+
+    /**
      * Generates a notification for the app.
      *
      * @param string $string Notification string

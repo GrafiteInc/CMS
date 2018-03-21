@@ -317,3 +317,18 @@ pre {
     background-color: #222;
     color: #eee;
 }
+
+@media (max-width: 1024px) {
+    .t-hidden {
+        display: none;
+    }
+}
+
+@media (max-width: 576px) {
+    .m-hidden {
+        display: none;
+    }
+    .main {
+
+    }
+}

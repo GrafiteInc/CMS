@@ -2,7 +2,9 @@
 
 namespace Grafite\Cms\Repositories;
 
+use Carbon\Carbon;
 use Grafite\Cms\Repositories\TranslationRepository;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Schema;
 
 class CmsRepository
@@ -25,7 +27,7 @@ class CmsRepository
      */
     public function all()
     {
-        return $this->model->orderBy('created_at', 'desc')->all();
+        return $this->model->orderBy('created_at', 'desc')->get()->all();
     }
 
     /**
@@ -62,34 +64,34 @@ class CmsRepository
     /**
      * Search the columns of a given table
      *
-     * @param  array $input
+     * @param  array $payload
      *
      * @return array
      */
-    public function search($input)
+    public function search($payload)
     {
         $query = $this->model->orderBy('created_at', 'desc');
-        $query->where('id', 'LIKE', '%'.$input['term'].'%');
+        $query->where('id', 'LIKE', '%'.$payload['term'].'%');
 
         $columns = Schema::getColumnListing($this->table);
 
         foreach ($columns as $attribute) {
-            $query->orWhere($attribute, 'LIKE', '%'.$input['term'].'%');
+            $query->orWhere($attribute, 'LIKE', '%'.$payload['term'].'%');
         }
 
-        return [$query, $input['term'], $query->paginate(25)->render()];
+        return [$query, $payload['term'], $query->paginate(25)->render()];
     }
 
     /**
      * Stores Widgets into database.
      *
-     * @param array $input
+     * @param array $payload
      *
      * @return Widgets
      */
-    public function store($input)
+    public function store($payload)
     {
-        return $this->model->create($input);
+        return $this->model->create($payload);
     }
 
     /**
@@ -111,7 +113,7 @@ class CmsRepository
      *
      * @return \Illuminate\Support\Collection|null|static|Model
      */
-    public static function getBySlug($slug)
+    public function getBySlug($slug)
     {
         return $this->model->where('slug', $slug)->first();
     }

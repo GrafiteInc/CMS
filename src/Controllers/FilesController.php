@@ -19,11 +19,17 @@ use Grafite\Cms\Services\CmsResponseService;
 
 class FilesController extends GrafiteCmsController
 {
-    public function __construct(FileRepository $repository)
-    {
+    public function __construct(
+        FileRepository $repository,
+        FileService $fileService,
+        ValidationService $validationService,
+        CmsResponseService $cmsResponseService
+    ) {
         parent::construct();
-
         $this->repository = $repository;
+        $this->fileService = $fileService;
+        $this->validation = $validationService;
+        $this->responseService = $cmsResponseService;
     }
 
     /**
@@ -80,7 +86,7 @@ class FilesController extends GrafiteCmsController
      */
     public function store(Request $request)
     {
-        $validation = ValidationService::check(File::$rules);
+        $validation = $this->validation->check(File::$rules);
 
         if (!$validation['errors']) {
             $file = $this->repository->store($request->all());
@@ -102,19 +108,19 @@ class FilesController extends GrafiteCmsController
      */
     public function upload(Request $request)
     {
-        $validation = ValidationService::check([
+        $validation = $this->validation->check([
             'location' => [],
         ]);
 
         if (!$validation['errors']) {
             $file = $request->file('location');
-            $fileSaved = FileService::saveFile($file, 'files/');
+            $fileSaved = $this->fileService->saveFile($file, 'files/');
             $fileSaved['name'] = CryptoService::encrypt($fileSaved['name']);
             $fileSaved['mime'] = $file->getClientMimeType();
             $fileSaved['size'] = $file->getClientSize();
-            $response = CmsResponseService::apiResponse('success', $fileSaved);
+            $response = $this->responseService->apiResponse('success', $fileSaved);
         } else {
-            $response = CmsResponseService::apiErrorResponse($validation['errors'], $validation['inputs']);
+            $response = $this->responseService->apiErrorResponse($validation['errors'], $validation['inputs']);
         }
 
         return $response;
@@ -131,10 +137,9 @@ class FilesController extends GrafiteCmsController
     {
         try {
             Storage::delete($id);
-
-            $response = CmsResponseService::apiResponse('success', 'success!');
+            $response = $this->responseService->apiResponse('success', 'success!');
         } catch (Exception $e) {
-            $response = CmsResponseService::apiResponse('error', $e->getMessage());
+            $response = $this->responseService->apiResponse('error', $e->getMessage());
         }
 
         return $response;
@@ -223,11 +228,11 @@ class FilesController extends GrafiteCmsController
     public function apiList(Request $request)
     {
         if (config('cms.api-key') != $request->header('cms')) {
-            return CmsResponseService::apiResponse('error', []);
+            return $this->responseService->apiResponse('error', []);
         }
 
         $files = $this->repository->apiPrepared();
 
-        return CmsResponseService::apiResponse('success', $files);
+        return $this->responseService->apiResponse('success', $files);
     }
 }

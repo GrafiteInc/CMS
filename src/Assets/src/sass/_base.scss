@@ -270,8 +270,9 @@ span.twitter-typeahead {
     max-height: 300px;
 }
 
-.panel-help {
+.card-help {
     height: auto !important;
+    margin-bottom: 24px;
 }
 
 .image-panel {
@@ -311,6 +312,8 @@ span.twitter-typeahead {
     padding-top: 20px;
 }
 
-.form-check-input {
-
+pre {
+    padding: 8px;
+    background-color: #222;
+    color: #eee;
 }

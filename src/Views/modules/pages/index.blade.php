@@ -43,12 +43,13 @@
     <div class="col-md-12">
         <div class="row">
             <div class="col-md-12">
-                @if (isset($term))
-                    <div class="well text-center">Searched for "{!! $term !!}".</div>
-                @endif
-
-                @if($pages->count() === 0)
-                    <div class="well text-center">No pages found.</div>
+                @if ($pages->count() === 0)
+                    <div class="card card-dark text-center mt-4">
+                        @if (request('term'))
+                            <div class="card-header">Searched for "{!! $term !!}"</div>
+                        @endif
+                        <div class="card-body">No pages found.</div>
+                    </div>
                 @else
                     <table class="table table-striped">
                         <thead>
@@ -58,30 +59,29 @@
                             <th width="170px" class="text-right">Actions</th>
                         </thead>
                         <tbody>
-
-                        @foreach($pages as $page)
-                            <tr>
-                                <td><a href="{!! route(config('cms.backend-route-prefix', 'cms').'.pages.edit', [$page->id]) !!}">{!! $page->title !!}</a></td>
-                                <td class="hidden-sm hidden-xs">{!! $page->url !!}</td>
-                                <td class="hidden-sm hidden-xs">
-                                    @if ($page->is_published)
-                                        <span class="fa fa-check"></span>
-                                    @else
-                                        <span class="fa fa-close"></span>
-                                    @endif
-                                </td>
-                                <td class="text-right">
-                                    <div class="btn-toolbar justify-content-between">
-                                        <a class="btn btn-sm btn-outline-primary mr-2" href="{!! route(config('cms.backend-route-prefix', 'cms').'.pages.edit', [$page->id]) !!}"><i class="fa fa-edit"></i> Edit</a>
-                                        <form method="post" action="{!! url(config('cms.backend-route-prefix', 'cms').'/pages/'.$page->id) !!}">
-                                            {!! csrf_field() !!}
-                                            {!! method_field('DELETE') !!}
-                                            <button class="delete-btn btn btn-sm btn-danger" type="submit"><i class="fa fa-trash"></i> Delete</button>
-                                        </form>
-                                    </div>
-                                </td>
-                            </tr>
-                        @endforeach
+                            @foreach($pages as $page)
+                                <tr>
+                                    <td><a href="{!! route(config('cms.backend-route-prefix', 'cms').'.pages.edit', [$page->id]) !!}">{!! $page->title !!}</a></td>
+                                    <td class="hidden-sm hidden-xs">{!! $page->url !!}</td>
+                                    <td class="hidden-sm hidden-xs">
+                                        @if ($page->is_published)
+                                            <span class="fa fa-check"></span>
+                                        @else
+                                            <span class="fa fa-close"></span>
+                                        @endif
+                                    </td>
+                                    <td class="text-right">
+                                        <div class="btn-toolbar justify-content-between">
+                                            <a class="btn btn-sm btn-outline-primary mr-2" href="{!! route(config('cms.backend-route-prefix', 'cms').'.pages.edit', [$page->id]) !!}"><i class="fa fa-edit"></i> Edit</a>
+                                            <form method="post" action="{!! url(config('cms.backend-route-prefix', 'cms').'/pages/'.$page->id) !!}">
+                                                {!! csrf_field() !!}
+                                                {!! method_field('DELETE') !!}
+                                                <button class="delete-btn btn btn-sm btn-danger" type="submit"><i class="fa fa-trash"></i> Delete</button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 @endif

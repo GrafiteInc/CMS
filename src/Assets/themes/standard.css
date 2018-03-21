@@ -73,6 +73,7 @@ html {
 
 .sidebar-header {
     background-color: #444;
+    color: #ccc;
 }
 
 .sidebar-sticky .active {

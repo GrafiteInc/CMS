@@ -9195,6 +9195,7 @@ a.text-dark:hover, a.text-dark:focus {
 
 .sidebar-header {
     background-color: #444;
+    color: #ccc;
 }
 
 .sidebar-sticky .active {

@@ -1,11 +1,11 @@
 @extends('cms::layouts.dashboard')
 
+@section('pageTitle') Dashboard @stop
+
 @section('content')
 
     <div class="row">
         <div class="col-md-12">
-            <h1 class="page-header">Dashboard</h1>
-
             <div class="row">
                 <canvas id="dashboardChart" class="raw100"></canvas>
             </div>

@@ -11,7 +11,7 @@ use Grafite\Cms\Services\FileService;
 
 class PageRepository
 {
-    protected $translationRepo;
+    public $translationRepo;
 
     public function __construct()
     {

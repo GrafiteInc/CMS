@@ -3,47 +3,23 @@
 namespace Grafite\Cms\Repositories;
 
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\Schema;
 use Cms;
 use Grafite\Cms\Models\Blog;
+use Grafite\Cms\Repositories\GrafiteRepository;
 use Grafite\Cms\Services\FileService;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Schema;
 
-class BlogRepository
+class BlogRepository extends GrafiteRepository
 {
-    protected $translationRepo;
+    public $model;
 
-    public function __construct()
+    public $table;
+
+    public function __construct(Blog $model)
     {
-        $this->translationRepo = app(TranslationRepository::class);
-    }
-
-    /**
-     * Returns all Blogs.
-     *
-     * @return \Illuminate\Database\Eloquent\Collection|static[]
-     */
-    public function all()
-    {
-        return Blog::orderBy('published_at', 'desc')->all();
-    }
-
-    /**
-     * Returns all paginated EventS.
-     *
-     * @return \Illuminate\Database\Eloquent\Collection|static[]
-     */
-    public function paginated()
-    {
-        $model = app(Blog::class);
-
-        if (isset(request()->dir) && isset(request()->field)) {
-            $model = $model->orderBy(request()->field, request()->dir);
-        } else {
-            $model = $model->orderBy('published_at', 'desc');
-        }
-
-        return $model->paginate(config('cms.pagination', 25));
+        $this->model = $model;
+        $this->table = 'blogs';
     }
 
     /**
@@ -53,33 +29,39 @@ class BlogRepository
      */
     public function publishedAndPaginated()
     {
-        return Blog::orderBy('published_at', 'desc')->where('is_published', 1)
+        return $this->model->orderBy('published_at', 'desc')->where('is_published', 1)
             ->where('published_at', '<=', Carbon::now(config('app.timezone'))->format('Y-m-d H:i:s'))
-            ->paginate(Config::get('cms.pagination', 24));
+            ->paginate(config('cms.pagination', 24));
     }
 
     public function published()
     {
-        return Blog::where('is_published', 1)
+        return $this->model->where('is_published', 1)
             ->where('published_at', '<=', Carbon::now(config('app.timezone'))->format('Y-m-d H:i:s'))->orderBy('created_at', 'desc')
-            ->paginate(Config::get('cms.pagination', 24));
+            ->paginate(config('cms.pagination', 24));
     }
 
     public function tags($tag)
     {
-        return Blog::where('is_published', 1)
+        return $this->model->where('is_published', 1)
             ->where('published_at', '<=', Carbon::now(config('app.timezone'))->format('Y-m-d H:i:s'))
             ->where('tags', 'LIKE', '%'.$tag.'%')->orderBy('created_at', 'desc')
             ->paginate(Config::get('cms.pagination', 24));
     }
 
+    /**
+     * Gets all tags of an entry
+     *
+     * @return Illuminate\Support\Collection
+     */
     public function allTags()
     {
         $tags = [];
+
         if (app()->getLocale() !== config('cms.default-language', 'en')) {
             $blogs = $this->translationRepo->getEntitiesByTypeAndLang(app()->getLocale(), 'Grafite\Cms\Models\Blog');
         } else {
-            $blogs = Blog::orderBy('published_at', 'desc')->get();
+            $blogs = $this->model->orderBy('published_at', 'desc')->get();
         }
 
         foreach ($blogs as $blog) {
@@ -90,21 +72,7 @@ class BlogRepository
             }
         }
 
-        return array_unique($tags);
-    }
-
-    public function search($input)
-    {
-        $query = Blog::orderBy('published_at', 'desc');
-        $query->where('id', 'LIKE', '%'.$input['term'].'%');
-
-        $columns = Schema::getColumnListing('blogs');
-
-        foreach ($columns as $attribute) {
-            $query->orWhere($attribute, 'LIKE', '%'.$input['term'].'%');
-        }
-
-        return [$query, $input['term'], $query->paginate(Config::get('cms.pagination', 24))->render()];
+        return collect(array_unique($tags));
     }
 
     /**
@@ -128,18 +96,6 @@ class BlogRepository
         }
 
         return Blog::create($payload);
-    }
-
-    /**
-     * Find Blog by given id.
-     *
-     * @param int $id
-     *
-     * @return \Illuminate\Support\Collection|null|static|Blog
-     */
-    public function findBlogById($id)
-    {
-        return Blog::find($id);
     }
 
     /**

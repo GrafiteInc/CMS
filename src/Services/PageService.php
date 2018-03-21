@@ -9,13 +9,13 @@ class PageService
 {
     public function __construct()
     {
-        $this->pageRepo = new PageRepository();
+        $this->repo = app(PageRepository::class);
     }
 
     public function getPagesAsOptions()
     {
         $pages = [];
-        $publishedPages = $this->pageRepo->all();
+        $publishedPages = $this->repo->all();
 
         foreach ($publishedPages as $page) {
             $pages[$page->title] = $page->id;
@@ -44,7 +44,7 @@ class PageService
 
     public function pageName($id)
     {
-        $page = $this->pageRepo->findPagesById($id);
+        $page = $this->repo->findPagesById($id);
 
         return $page->title;
     }

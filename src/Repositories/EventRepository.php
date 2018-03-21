@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Schema;
 
 class EventRepository
 {
-    protected $translationRepo;
+    public $translationRepo;
 
     public function __construct()
     {

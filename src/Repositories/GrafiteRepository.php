@@ -2,16 +2,20 @@
 
 namespace Grafite\Cms\Repositories;
 
+use Grafite\Cms\Repositories\TranslationRepository;
 use Illuminate\Support\Facades\Schema;
-use Grafite\Cms\Models\Widget;
 
-class WidgetRepository
+class GrafiteRepository
 {
     public $translationRepo;
 
-    public function __construct()
+    public $model;
+
+    public $table;
+
+    public function __construct(TranslationRepository $translationRepo)
     {
-        $this->translationRepo = app(TranslationRepository::class);
+        $this->translationRepo = $translationRepo;
     }
 
     /**
@@ -21,7 +25,7 @@ class WidgetRepository
      */
     public function all()
     {
-        return Widget::orderBy('created_at', 'desc')->all();
+        return $this->model->orderBy('created_at', 'desc')->all();
     }
 
     /**
@@ -31,7 +35,7 @@ class WidgetRepository
      */
     public function paginated()
     {
-        $model = app(Widget::class);
+        $model = $this->model;
 
         if (isset(request()->dir) && isset(request()->field)) {
             $model = $model->orderBy(request()->field, request()->dir);
@@ -42,12 +46,19 @@ class WidgetRepository
         return $model->paginate(config('cms.pagination', 25));
     }
 
+    /**
+     * Search the columns of a given table
+     *
+     * @param  array $input
+     *
+     * @return array
+     */
     public function search($input)
     {
-        $query = Widget::orderBy('created_at', 'desc');
+        $query = $this->model->orderBy('created_at', 'desc');
         $query->where('id', 'LIKE', '%'.$input['term'].'%');
 
-        $columns = Schema::getColumnListing('widgets');
+        $columns = Schema::getColumnListing($this->table);
 
         foreach ($columns as $attribute) {
             $query->orWhere($attribute, 'LIKE', '%'.$input['term'].'%');
@@ -65,9 +76,7 @@ class WidgetRepository
      */
     public function store($input)
     {
-        $input['name'] = htmlentities($input['name']);
-
-        return Widget::create($input);
+        return $this->model->create($input);
     }
 
     /**
@@ -77,41 +86,33 @@ class WidgetRepository
      *
      * @return \Illuminate\Support\Collection|null|static|Widgets
      */
-    public function findWidgetsById($id)
+    public function find($id)
     {
-        return Widget::find($id);
+        return $this->model->find($id);
     }
 
     /**
-     * Find Widgets by given slug.
+     * Find items by slug.
      *
      * @param int $slug
      *
-     * @return \Illuminate\Support\Collection|null|static|Widgets
+     * @return \Illuminate\Support\Collection|null|static|Model
      */
-    public static function getWidgetBySLUG($slug)
+    public static function getBySlug($slug)
     {
-        return Widget::where('slug', $slug)->first();
+        return $this->model->where('slug', $slug)->first();
     }
 
     /**
-     * Updates Widgets into database.
+     * Updates items into database.
      *
-     * @param Widgets $widgets
-     * @param array   $input
+     * @param Model $model
+     * @param array $payload
      *
-     * @return Widgets
+     * @return Model
      */
-    public function update($widgets, $payload)
+    public function update($model, $payload)
     {
-        $payload['name'] = htmlentities($payload['name']);
-
-        if (!empty($payload['lang']) && $payload['lang'] !== config('cms.default-language', 'en')) {
-            return $this->translationRepo->createOrUpdate($widgets->id, 'Grafite\Cms\Models\Widget', $payload['lang'], $payload);
-        } else {
-            unset($payload['lang']);
-
-            return $widgets->update($payload);
-        }
+        return $model->update($payload);
     }
 }

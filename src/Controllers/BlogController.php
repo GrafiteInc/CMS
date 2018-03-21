@@ -96,7 +96,7 @@ class BlogController extends GrafiteCmsController
      */
     public function edit($id)
     {
-        $blog = $this->repository->findBlogById($id);
+        $blog = $this->repository->find($id);
 
         if (empty($blog)) {
             Cms::notification('Blog not found', 'warning');
@@ -117,7 +117,7 @@ class BlogController extends GrafiteCmsController
      */
     public function update($id, BlogRequest $request)
     {
-        $blog = $this->repository->findBlogById($id);
+        $blog = $this->repository->find($id);
 
         if (empty($blog)) {
             Cms::notification('Blog not found', 'warning');
@@ -151,7 +151,7 @@ class BlogController extends GrafiteCmsController
      */
     public function destroy($id)
     {
-        $blog = $this->repository->findBlogById($id);
+        $blog = $this->repository->find($id);
 
         if (empty($blog)) {
             Cms::notification('Blog not found', 'warning');
@@ -175,7 +175,7 @@ class BlogController extends GrafiteCmsController
      */
     public function history($id)
     {
-        $blog = $this->repository->findBlogById($id);
+        $blog = $this->repository->find($id);
 
         return view('cms::modules.blogs.history')
             ->with('blog', $blog);

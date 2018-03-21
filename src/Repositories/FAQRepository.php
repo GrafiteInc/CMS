@@ -9,7 +9,7 @@ use Grafite\Cms\Models\FAQ;
 
 class FAQRepository
 {
-    protected $translationRepo;
+    public $translationRepo;
 
     public function __construct()
     {

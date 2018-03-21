@@ -2,7 +2,6 @@
 
 namespace Grafite\Cms\Controllers;
 
-use URL;
 use Cms;
 use Grafite\Cms\Models\Blog;
 use Illuminate\Http\Request;
@@ -139,7 +138,7 @@ class BlogController extends GrafiteCmsController
             return $validation['redirect'];
         }
 
-        return redirect(URL::previous());
+        return back();
     }
 
     /**

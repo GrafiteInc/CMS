@@ -322,6 +322,10 @@ pre {
   color: #eee;
 }
 
+.tag {
+  background-color: purple;
+}
+
 @media (max-width: 1024px) {
   .t-hidden {
     display: none;
@@ -346,6 +350,10 @@ pre {
 .bootstrap-tagsinput .tag {
   font-size: 100% !important;
   padding: 0.6em !important;
+  background-color: purple;
+  border-radius: 2px;
+  margin-right: 3px;
+  color: #FFF;
 }
 
 .selectable {
@@ -374,7 +382,7 @@ pre {
   position: -webkit-sticky;
   position: sticky;
   top: 60px;
-  height: calc(100vh - 180px);
+  height: calc(100vh - 100px);
   overflow-x: hidden;
   overflow-y: auto;
   /* Scrollable contents if viewport is shorter than content. */
@@ -447,6 +455,7 @@ pre {
   }
   .sidebar-sticky {
     margin-top: 94px;
+    height: calc(100vh - 180px);
   }
 }
 

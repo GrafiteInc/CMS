@@ -15,7 +15,7 @@
     position: -webkit-sticky;
     position: sticky;
     top: 60px;
-    height: calc(100vh - 180px);
+    height: calc(100vh - 100px);
     overflow-x: hidden;
     overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
 }
@@ -85,5 +85,6 @@
     }
     .sidebar-sticky {
         margin-top: 94px;
+        height: calc(100vh - 180px);
     }
 }

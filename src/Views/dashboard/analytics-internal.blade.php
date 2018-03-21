@@ -4,66 +4,64 @@
 
 @section('content')
 
-    <div class="row">
-        <div class="col-md-12">
-            <div class="row">
-                <canvas id="dashboardChart" class="raw100"></canvas>
-            </div>
-            <div class="row raw-margin-top-24">
-                <div class="col-md-4">
-                    <p class="lead">Top Browsers</p>
-                    <table class="table table-striped">
-                        <thead>
-                            <th>Browser</th>
-                            <th class="text-right">Views</th>
-                        </thead>
-                        <tbody>
-                            @foreach($topBrowsers as $browser => $views)
-                            <tr>
-                                <td>{{ $browser }}</td>
-                                <td class="text-right">{{ $views }}</td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-                <div class="col-md-4">
-                    <p class="lead">Most Visited Pages</p>
-                    <table class="table table-striped">
-                        <thead>
-                            <th>URL</th>
-                            <th class="text-right">Views</th>
-                        </thead>
-                        <tbody>
-                            @foreach($topPages as $url => $views)
-                            <tr>
-                                <td>{{ str_limit($url, 30) }}</td>
-                                <td class="text-right">{{ $views }}</td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-                <div class="col-md-4">
-                    <p class="lead">Top Referers</p>
-                    <table class="table table-striped">
-                        <thead>
-                            <th>URL</th>
-                            <th class="text-right">Views</th>
-                        </thead>
-                        <tbody>
-                            @foreach($topReferers as $url => $views)
-                            <tr>
-                                <td>{{ str_limit($url, 40) }}</td>
-                                <td class="text-right">{{ $views }}</td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
+    <div class="col-md-12">
+        <div class="row">
+            <canvas id="dashboardChart" class="raw100"></canvas>
         </div>
+        <div class="row raw-margin-top-24">
+            <div class="col-md-4">
+                <p class="lead">Top Browsers</p>
+                <table class="table table-striped">
+                    <thead>
+                        <th>Browser</th>
+                        <th class="text-right">Views</th>
+                    </thead>
+                    <tbody>
+                        @foreach($topBrowsers as $browser => $views)
+                        <tr>
+                            <td>{{ $browser }}</td>
+                            <td class="text-right">{{ $views }}</td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-4">
+                <p class="lead">Most Visited Pages</p>
+                <table class="table table-striped">
+                    <thead>
+                        <th>URL</th>
+                        <th class="text-right">Views</th>
+                    </thead>
+                    <tbody>
+                        @foreach($topPages as $url => $views)
+                        <tr>
+                            <td>{{ str_limit($url, 30) }}</td>
+                            <td class="text-right">{{ $views }}</td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-4">
+                <p class="lead">Top Referers</p>
+                <table class="table table-striped">
+                    <thead>
+                        <th>URL</th>
+                        <th class="text-right">Views</th>
+                    </thead>
+                    <tbody>
+                        @foreach($topReferers as $url => $views)
+                        <tr>
+                            <td>{{ str_limit($url, 40) }}</td>
+                            <td class="text-right">{{ $views }}</td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
     </div>
 
 @stop

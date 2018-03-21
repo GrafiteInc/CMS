@@ -64,21 +64,24 @@ html {
 }
 
 .sidebar {
-  background-color: #333;
+  background-color: #7b8a8b;
 }
 
 .sidebar .nav-item .nav-link {
-  color: #EEE;
+  color: #fff;
+}
+
+.sidebar-sticky .active .nav-link {
+  color: #343a40;
 }
 
 .sidebar-header {
-    background-color: #444;
-    color: #ccc;
+    background-color: #343a40;
+    color: #fff;
 }
 
 .sidebar-sticky .active {
-    background-color: #222;
-    color: #FFF;
+    background-color: #fff;
 }
 
 article, aside, dialog, figcaption, figure, footer, header, hgroup, main, nav, section {

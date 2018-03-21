@@ -16,6 +16,7 @@ class FAQ extends CmsModel
 
     public static $rules = [
         'question' => 'required',
+        'answer' => 'required',
     ];
 
     protected $appends = [

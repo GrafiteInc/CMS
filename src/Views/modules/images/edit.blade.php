@@ -15,10 +15,10 @@
             </div>
             <div class="col-md-6">
                 <h2 class="raw-margin-top-0 raw-margin-bottom-24">Blade Tags</h2>
-<pre><br>&#64;image({{ $images->id }})
+<pre>&#64;image({{ $images->id }})
 &#64;image_link({{ $images->id }})
 @foreach(explode(',', $images->tags) as $key => $tag)
-&#64;images({{ trim($tag) }})<br>
+&#64;images({{ trim($tag) }})
 @endforeach
 </pre>
                 @if (!is_null($images->entity_id))

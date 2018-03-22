@@ -1,14 +1,14 @@
 @extends('cms::layouts.dashboard')
 
+@section('pageTitle') Links @stop
+
 @section('content')
 
-    <div class="row">
-        <h1 class="page-header">Links</h1>
+    <div class="col-md-12 mt-2">
+        @include('cms::modules.links.breadcrumbs', ['location' => [['Menu' => url(config('cms.backend-route-prefix', 'cms').'/menus/'.request('m').'/edit')], 'links', 'create']])
     </div>
 
-    @include('cms::modules.links.breadcrumbs', ['location' => [['Menu' => url(config('cms.backend-route-prefix', 'cms').'/menus/'.request('m').'/edit')], 'links', 'create']])
-
-    <div class="row">
+    <div class="col-md-12">
         {!! Form::open(['route' => config('cms.backend-route-prefix', 'cms').'.links.store', 'class' => 'add']) !!}
 
             {!! FormMaker::fromTable('links', Config::get('cms.forms.link')) !!}
@@ -25,7 +25,7 @@
             <input type="hidden" name="menu_id" value="{{ request('m') }}">
 
             <div class="form-group text-right">
-                <a href="{!! URL::previous() !!}" class="btn btn-default raw-left">Cancel</a>
+                <a href="{!! url()->previous() !!}" class="btn btn-secondary raw-left">Cancel</a>
                 {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
             </div>
 

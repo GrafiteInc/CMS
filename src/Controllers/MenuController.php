@@ -189,8 +189,8 @@ class MenuController extends GrafiteCmsController
     public function setOrder($id, Request $request)
     {
         $menu = $this->repository->find($id);
-        $result =  $this->repository->setOrder($menu, $request->except('_token'));
+        $result = $this->repository->setOrder($menu, $request->except('_token'));
 
-        return CmsResponseService::apiResponse('success', $result);
+        return app(CmsResponseService::class)->apiResponse('success', $result);
     }
 }

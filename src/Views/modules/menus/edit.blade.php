@@ -1,32 +1,34 @@
 @extends('cms::layouts.dashboard')
 
+@section('pageTitle') Menus @stop
+
 @section('content')
 
-    <div class="row">
-        <h1 class="page-header">Menus</h1>
+    <div class="col-md-12 mt-2">
+        @include('cms::modules.menus.breadcrumbs', ['location' => ['edit']])
     </div>
 
-    @include('cms::modules.menus.breadcrumbs', ['location' => ['edit']])
-
-    <div class="row">
+    <div class="col-md-12">
         {!! Form::model($menu, ['route' => [config('cms.backend-route-prefix', 'cms').'.menus.update', $menu->id], 'method' => 'patch', 'class' => 'edit']) !!}
 
             {!! FormMaker::fromObject($menu, Config::get('cms.forms.menu')) !!}
 
             <div class="form-group text-right">
-                <a href="{!! url(config('cms.backend-route-prefix', 'cms').'/menus') !!}" class="btn btn-default raw-left">Cancel</a>
+                <a href="{!! url(config('cms.backend-route-prefix', 'cms').'/menus') !!}" class="btn btn-secondary float-left">Cancel</a>
                 {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
             </div>
 
         {!! Form::close() !!}
     </div>
 
-    <div class="row raw-margin-top-24">
-        <div class="col-12">
-            <a class="btn btn-info pull-right" href="{!! url(config('cms.backend-route-prefix', 'cms').'/links/create?m='.$menu->id) !!}">Add Link</a>
-            <h1>Links <span class="small fa fa-info-circle" data-toggle="tooltip" title="Drag and drop to sort"></span></h1>
-            @include('cms::modules.links.index')
-        </div>
+    <div class="col-md-12">
+        <hr class="mt-4 mb-4">
+    </div>
+
+    <div class="col-md-12">
+        <a class="btn btn-outline-primary float-right" href="{!! url(config('cms.backend-route-prefix', 'cms').'/links/create?m='.$menu->id) !!}">Add Link</a>
+        <h5 class="pt-2">Links <small>(Drag and drop to sort)</small></h5>
+        @include('cms::modules.links.index')
     </div>
 
 @endsection

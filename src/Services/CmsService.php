@@ -19,9 +19,12 @@ class CmsService
         DefaultModuleServiceTrait,
         ModuleServiceTrait;
 
+    public $backendRoute;
+
     public function __construct()
     {
         $this->imageRepo = app(ImageRepository::class);
+        $this->backendRoute = config('cms.backend-route-prefix', 'cms');
     }
 
     /**
@@ -39,7 +42,7 @@ class CmsService
             return base_path(__DIR__.'/../Assets/'.$path);
         }
 
-        return url(config('cms.backend-route-prefix', 'cms').'/asset/'.CryptoServiceFacade::url_encode($path).'/'.CryptoServiceFacade::url_encode($contentType));
+        return url($this->backendRoute.'/asset/'.CryptoServiceFacade::url_encode($path).'/'.CryptoServiceFacade::url_encode($contentType));
     }
 
     /**
@@ -193,9 +196,9 @@ class CmsService
     {
         if (Gate::allows('cms', Auth::user())) {
             if (!is_null($id)) {
-                return '<a href="'.url(config('cms.backend-route-prefix', 'cms').'/'.$type.'/'.$id.'/edit').'" class="btn btn-sm '.$class.'"><span class="fa fa-edit"></span> Edit</a>';
+                return '<a href="'.url($this->backendRoute.'/'.$type.'/'.$id.'/edit').'" class="btn btn-sm '.$class.'"><span class="fa fa-edit"></span> Edit</a>';
             } else {
-                return '<a href="'.url(config('cms.backend-route-prefix', 'cms').'/'.$type).'" class="btn btn-sm '.$class.'"><span class="fa fa-edit"></span> Edit</a>';
+                return '<a href="'.url($this->backendRoute.'/'.$type).'" class="btn btn-sm '.$class.'"><span class="fa fa-edit"></span> Edit</a>';
             }
         }
 
@@ -213,7 +216,7 @@ class CmsService
     {
         $url = str_replace('.', '/', $string);
 
-        return url(config('cms.backend-route-prefix', 'cms').'/'.$url);
+        return url($this->backendRoute.'/'.$url);
     }
 
     /**
@@ -225,7 +228,7 @@ class CmsService
      */
     public function route($string)
     {
-        return config('cms.backend-route-prefix', 'cms').'.'.$string;
+        return $this->backendRoute.'.'.$string;
     }
 
     /**
@@ -253,7 +256,7 @@ class CmsService
     {
         $class = str_replace('\\', '_', get_class($object));
 
-        return url(config('cms.backend-route-prefix', 'cms').'/rollback/'.$class.'/'.$object->id);
+        return url($this->backendRoute.'/rollback/'.$class.'/'.$object->id);
     }
 
     /**

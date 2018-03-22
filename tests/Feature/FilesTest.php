@@ -1,6 +1,8 @@
 <?php
 
-namespace Tests;
+namespace Tests\Feature;
+
+use Tests\TestCase;
 
 class FilesTest extends TestCase
 {
@@ -46,7 +48,7 @@ class FilesTest extends TestCase
 
     public function testStore()
     {
-        $uploadedFile = new \Symfony\Component\HttpFoundation\File\UploadedFile(__DIR__.'/fixtures/test-file.txt', 'test-file.txt');
+        $uploadedFile = new \Symfony\Component\HttpFoundation\File\UploadedFile(__DIR__.'/../fixtures/test-file.txt', 'test-file.txt');
         $file = factory(\Grafite\Cms\Models\File::class)->make([
             'id' => 2,
             'location' => [

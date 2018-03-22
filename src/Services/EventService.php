@@ -3,11 +3,12 @@
 namespace Grafite\Cms\Services;
 
 use Carbon\Carbon;
+use Grafite\Cms\Repositories\EventRepository;
+use Grafite\Cms\Services\BaseService;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\URL;
-use Grafite\Cms\Repositories\EventRepository;
 
-class EventService
+class EventService extends BaseService
 {
     public function __construct(EventRepository $eventRepo)
     {
@@ -16,6 +17,13 @@ class EventService
         $this->date = null;
     }
 
+    /**
+     * Generate a calendar
+     *
+     * @param  string $date
+     *
+     * @return Grafite\Cms\Services\EventService
+     */
     public function generate($date = null)
     {
         $this->date = $date;
@@ -43,6 +51,13 @@ class EventService
         return $this;
     }
 
+    /**
+     * Get a calendar by date
+     *
+     * @param  string $date
+     *
+     * @return array
+     */
     public function calendar($date)
     {
         $events = $this->eventRepository->all();
@@ -67,6 +82,13 @@ class EventService
         return $eventsByDate;
     }
 
+    /**
+     * Get a calendar as html
+     *
+     * @param  array $config
+     *
+     * @return string
+     */
     public function asHtml($config)
     {
         $class = $config['class'];
@@ -103,16 +125,16 @@ class EventService
                         foreach ($content as $item) {
                             if (config('app.locale') !== config('cms.default-language')) {
                                 if ($item->translationData(config('app.locale'))) {
-                                    $itemString .= '<a href="'.URL::to('events/event/'.$item->id).'">'.$item->translationData(config('app.locale'))->title.'</a><br>';
+                                    $itemString .= '<a href="'.url('events/event/'.$item->id).'">'.$item->translationData(config('app.locale'))->title.'</a><br>';
                                 }
                             } else {
-                                $itemString .= '<a href="'.URL::to('events/event/'.$item->id).'">'.$item->title.'</a><br>';
+                                $itemString .= '<a href="'.url('events/event/'.$item->id).'">'.$item->title.'</a><br>';
                             }
                         }
                         $content = $itemString;
                     }
 
-                    $output .= '<td><span class="date"><a href="'.URL::to('events/date/'.$week[$dayAsNumber]->format('Y-m-d')).'">'.$week[$dayAsNumber]->toFormattedDateString().'</a></span><span class="content">'.$content.'</span></td>';
+                    $output .= '<td><span class="date"><a href="'.url('events/date/'.$week[$dayAsNumber]->format('Y-m-d')).'">'.$week[$dayAsNumber]->toFormattedDateString().'</a></span><span class="content">'.$content.'</span></td>';
                 } else {
                     $output .= '<td>&nbsp;</td>';
                 }
@@ -124,6 +146,13 @@ class EventService
         return $output;
     }
 
+    /**
+     * Generate HTML links
+     *
+     * @param  string $class
+     *
+     * @return string
+     */
     public function links($class = null)
     {
         if (is_null($class)) {
@@ -135,27 +164,19 @@ class EventService
         $nextMonth = Carbon::create($dateArray[0], $dateArray[1], $dateArray[2])->addMonth()->toDateString();
 
         $links = '';
-        $links .= '<a class="previous '.$class.'" href="'.URL::to('events/'.$previousMonth).'">Previous Month</a>';
-        $links .= '<a class="next '.$class.'" href="'.URL::to('events/'.$nextMonth).'">Next Month</a>';
+        $links .= '<a class="previous '.$class.'" href="'.url('events/'.$previousMonth).'">Previous Month</a>';
+        $links .= '<a class="next '.$class.'" href="'.url('events/'.$nextMonth).'">Next Month</a>';
 
         return $links;
     }
 
+    /**
+     * Get templates as options
+     *
+     * @return array
+     */
     public function getTemplatesAsOptions()
     {
-        $availableTemplates = ['show'];
-        $templates = glob(base_path('resources/themes/'.Config::get('cms.frontend-theme').'/events/*'));
-
-        foreach ($templates as $template) {
-            $template = str_replace(base_path('resources/themes/'.Config::get('cms.frontend-theme').'/events/'), '', $template);
-            if (stristr($template, 'template')) {
-                $template = str_replace('-template.blade.php', '', $template);
-                if (!stristr($template, '.php')) {
-                    $availableTemplates[] = $template.'-template';
-                }
-            }
-        }
-
-        return $availableTemplates;
+        return $this->getTemplatesAsOptionsArray('events');
     }
 }

@@ -20,14 +20,14 @@ class Setup extends Command
      *
      * @var string
      */
-    protected $signature = 'grafite:cms';
+    protected $signature = 'grafite:cms-setup';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Grafite CMS will setup your site with a CMS (For New Laravel Instances Only!)';
+    protected $description = 'Grafite CMS will setup your site with a CMS (Only for use on New Laravel Applications!)';
 
     /**
      * Execute the console command.

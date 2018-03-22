@@ -27,7 +27,7 @@ class BlogController extends Controller
      */
     public function all()
     {
-        $blogs = $this->repository->publishedAndPaginated();
+        $blogs = $this->repository->published();
         $tags = $this->repository->allTags();
 
         if (empty($blogs)) {

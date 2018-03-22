@@ -1,7 +1,8 @@
 <?php
 
-namespace Tests;
+namespace Tests\Console;
 
+use Tests\TestCase;
 use org\bovigo\vfs\vfsStream;
 use Grafite\CrudMaker\Generators\CrudGenerator;
 
@@ -17,7 +18,7 @@ class ModuleMakeTest extends TestCase
             'framework' => 'Laravel',
             'bootstrap' => false,
             'semantic' => false,
-            'template_source' => __DIR__.'/../src/Templates/CRUD',
+            'template_source' => __DIR__.'/../../src/Templates/CRUD',
             '_sectionPrefix_' => '',
             '_sectionTablePrefix_' => '',
             '_sectionRoutePrefix_' => '',

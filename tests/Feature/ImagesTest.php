@@ -1,6 +1,8 @@
 <?php
 
-namespace Tests;
+namespace Tests\Feature;
+
+use Tests\TestCase;
 
 class ImagesTest extends TestCase
 {
@@ -46,7 +48,7 @@ class ImagesTest extends TestCase
 
     public function testStore()
     {
-        $uploadedFile = new \Symfony\Component\HttpFoundation\File\UploadedFile(__DIR__.'/fixtures/test-pic.jpg', 'test-pic.jpg');
+        $uploadedFile = new \Symfony\Component\HttpFoundation\File\UploadedFile(__DIR__.'/../fixtures/test-pic.jpg', 'test-pic.jpg');
         $image = (array) factory(\Grafite\Cms\Models\Image::class)->make(['id' => 2]);
         $image['location'] = [
             [
@@ -74,7 +76,7 @@ class ImagesTest extends TestCase
 
     public function testDelete()
     {
-        $uploadedFile = new \Symfony\Component\HttpFoundation\File\UploadedFile(__DIR__.'/fixtures/test-pic.jpg', 'test-pic.jpg');
+        $uploadedFile = new \Symfony\Component\HttpFoundation\File\UploadedFile(__DIR__.'/../fixtures/test-pic.jpg', 'test-pic.jpg');
         $image = (array) factory(\Grafite\Cms\Models\Image::class)->make(['id' => 2]);
         $image['location'] = [
             [

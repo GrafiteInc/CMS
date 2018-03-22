@@ -2,25 +2,18 @@
 
 namespace Grafite\Cms\Services;
 
+use Grafite\Cms\Services\BaseService;
 use Illuminate\Support\Facades\Config;
 
-class BlogService
+class BlogService extends BaseService
 {
+    /**
+     * Get templates as options
+     *
+     * @return array
+     */
     public function getTemplatesAsOptions()
     {
-        $availableTemplates = ['show'];
-        $templates = glob(base_path('resources/themes/'.Config::get('cms.frontend-theme').'/blog/*'));
-
-        foreach ($templates as $template) {
-            $template = str_replace(base_path('resources/themes/'.Config::get('cms.frontend-theme').'/blog/'), '', $template);
-            if (stristr($template, 'template')) {
-                $template = str_replace('-template.blade.php', '', $template);
-                if (!stristr($template, '.php')) {
-                    $availableTemplates[] = $template.'-template';
-                }
-            }
-        }
-
-        return $availableTemplates;
+        return $this->getTemplatesAsOptionsArray('blog');
     }
 }

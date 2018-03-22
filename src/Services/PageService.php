@@ -2,16 +2,22 @@
 
 namespace Grafite\Cms\Services;
 
-use Illuminate\Support\Facades\Config;
 use Grafite\Cms\Repositories\PageRepository;
+use Grafite\Cms\Services\BaseService;
+use Illuminate\Support\Facades\Config;
 
-class PageService
+class PageService extends BaseService
 {
     public function __construct()
     {
         $this->repo = app(PageRepository::class);
     }
 
+    /**
+     * Get pages as options
+     *
+     * @return array
+     */
     public function getPagesAsOptions()
     {
         $pages = [];
@@ -24,24 +30,23 @@ class PageService
         return $pages;
     }
 
+    /**
+     * Get templates as options
+     *
+     * @return array
+     */
     public function getTemplatesAsOptions()
     {
-        $availableTemplates = ['show'];
-        $templates = glob(base_path('resources/themes/'.Config::get('cms.frontend-theme').'/pages/*'));
-
-        foreach ($templates as $template) {
-            $template = str_replace(base_path('resources/themes/'.Config::get('cms.frontend-theme').'/pages/'), '', $template);
-            if (stristr($template, 'template')) {
-                $template = str_replace('-template.blade.php', '', $template);
-                if (!stristr($template, '.php')) {
-                    $availableTemplates[] = $template.'-template';
-                }
-            }
-        }
-
-        return $availableTemplates;
+        return $this->getTemplatesAsOptionsArray('pages');
     }
 
+    /**
+     * Get a page name by ID
+     *
+     * @param  int $id
+     *
+     * @return string
+     */
     public function pageName($id)
     {
         $page = $this->repo->find($id);

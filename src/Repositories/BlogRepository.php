@@ -29,13 +29,6 @@ class BlogRepository extends CmsRepository
      *
      * @return \Illuminate\Database\Eloquent\Collection|static[]
      */
-    public function publishedAndPaginated()
-    {
-        return $this->model->orderBy('published_at', 'desc')->where('is_published', 1)
-            ->where('published_at', '<=', Carbon::now(config('app.timezone'))->format('Y-m-d H:i:s'))
-            ->paginate(config('cms.pagination', 24));
-    }
-
     public function published()
     {
         return $this->model->where('is_published', 1)
@@ -43,6 +36,13 @@ class BlogRepository extends CmsRepository
             ->paginate(config('cms.pagination', 24));
     }
 
+    /**
+     * Blog tags, with similar name
+     *
+     * @param  string $tag
+     *
+     * @return Illuminate\Support\Collection
+     */
     public function tags($tag)
     {
         return $this->model->where('is_published', 1)

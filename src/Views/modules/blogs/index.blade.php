@@ -22,7 +22,7 @@
         </div>
     </div>
 
-    @include('cms::layouts.module-header', [ 'module' => 'blogs' ])
+    @include('cms::layouts.module-header', [ 'module' => 'blog' ])
 
     <div class="col-md-12">
         <div class="row">
@@ -51,7 +51,7 @@
                                         @if ($blog->is_published)
                                             <span class="fa fa-check"></span>
                                         @else
-                                            <span class="fa fa-close"></span>
+                                            <span class="fa fa-times"></span>
                                         @endif
                                     </td>
                                     <td class="text-right">

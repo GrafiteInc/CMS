@@ -1,21 +1,21 @@
 @extends('cms::layouts.dashboard')
 
+@section('pageTitle') Files @stop
+
 @section('content')
 
-    <div class="row">
-        <h1 class="page-header">Files</h1>
+    <div class="col-md-12 mt-2">
+        @include('cms::modules.files.breadcrumbs', ['location' => ['edit']])
     </div>
 
-    @include('cms::modules.files.breadcrumbs', ['location' => ['edit']])
-
-    <div class="row raw-margin-bottom-48 raw-margin-top-48 text-center">
+    <div class="col-md-12 raw-margin-bottom-48 raw-margin-top-48 text-center">
         <a class="btn btn-secondary" href="{!! Cms::fileAsDownload($files->name, $files->location) !!}"><span class="fa fa-download"></span> Download: {!! $files->name !!}</a>
     </div>
 
-    <div class="row">
+    <div class="col-md-12">
         {!! Form::model($files, ['route' => [config('cms.backend-route-prefix', 'cms').'.files.update', $files->id], 'files' => true, 'method' => 'patch', 'class' => 'edit']) !!}
 
-            {!! FormMaker::fromObject($files, Config::get('cms.forms.file-edit')) !!}
+            {!! FormMaker::setColumns(2)->fromObject($files, Config::get('cms.forms.file-edit')) !!}
 
             <div class="form-group text-right">
                 <a href="{!! url(config('cms.backend-route-prefix', 'cms').'/files') !!}" class="btn btn-secondary raw-left">Cancel</a>

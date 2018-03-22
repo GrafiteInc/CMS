@@ -54,7 +54,7 @@
                                     @if ($event->is_published)
                                         <span class="fa fa-check"></span>
                                     @else
-                                        <span class="fa fa-close"></span>
+                                        <span class="fa fa-times"></span>
                                     @endif
                                 </td>
                                 <td class="text-right">

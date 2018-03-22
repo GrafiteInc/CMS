@@ -1,12 +1,9 @@
-<div class="row">
+<nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-        <li><a href="{!! url(config('cms.backend-route-prefix', 'cms').'/files') !!}">Files</a></li>
-
+        <li class="breadcrumb-item"><a href="{!! url(config('cms.backend-route-prefix', 'cms').'/files') !!}">Files</a></li>
         @foreach($location as $local)
-
-            <li>{!! ucfirst($local) !!}</li>
-
+            <li class="breadcrumb-item">{!! ucfirst($local) !!}</li>
         @endforeach
         <li class="active"></li>
     </ol>
-</div>
+</nav>

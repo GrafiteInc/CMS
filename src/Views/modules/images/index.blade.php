@@ -80,7 +80,7 @@
                                             @if ($image->is_published)
                                                 <span clas="pull-left"><span class="pull-left fa fa-check"></span> Published</span>
                                             @else
-                                                <span clas="pull-left"><span class="pull-left fa fa-close"></span> Published</span>
+                                                <span clas="pull-left"><span class="pull-left fa fa-times"></span> Published</span>
                                             @endif
                                         </div>
                                         <div class="col-lg-6 col-md-12 col-sm-12">

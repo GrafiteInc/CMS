@@ -1,14 +1,14 @@
 @extends('cms::layouts.dashboard')
 
+@section('pageTitle') Images @stop
+
 @section('content')
 
-    <div class="row">
-        <h1 class="page-header">Images</h1>
+    <div class="col-md-12 mt-2">
+        @include('cms::modules.images.breadcrumbs', ['location' => ['create']])
     </div>
 
-    @include('cms::modules.images.breadcrumbs', ['location' => ['create']])
-
-    <div class="row">
+    <div class="col-md-12 mt-2">
         {!! Form::open(['url' => 'cms/images/upload', 'files' => true, 'class' => 'dropzone', 'id' => 'fileDropzone']); !!}
         {!! Form::close() !!}
 
@@ -17,7 +17,7 @@
             {!! FormMaker::fromTable('files', Config::get('cms.forms.images')) !!}
 
             <div class="form-group text-right">
-                <a href="{!! url(config('cms.backend-route-prefix', 'cms').'/images') !!}" class="btn btn-secondary raw-left">Cancel</a>
+                <a href="{!! url(config('cms.backend-route-prefix', 'cms').'/images') !!}" class="btn btn-secondary float-left">Cancel</a>
                 {!! Form::submit('Save', ['class' => 'btn btn-primary', 'id' => 'saveImagesBtn']) !!}
             </div>
 

@@ -46,7 +46,7 @@
                             ]]) !!}
                         </div>
                     @else
-                        {!! FormMaker::fromObject($widget, Config::get('cms.forms.widget')) !!}
+                        {!! FormMaker::fromObject($widget, config('cms.forms.widget')) !!}
                     @endif
 
                     <div class="form-group text-right">

@@ -47,7 +47,7 @@
                             <tr>
                                 <td>
                                     <a href="{!! Cms::fileAsDownload($file->name, $file->location) !!}"><span class="fa fa-download"></span></a>
-                                    <a href="{!! route(config('cms.backend-route-prefix', 'cms').'.files.edit', [$file->id]) !!}">{!! $file->name !!}</a>
+                                    <a href="{!! route(cms()->route('files.edit'), [$file->id]) !!}">{!! $file->name !!}</a>
                                 </td>
                                 <td class="raw-m-hide">
                                     @if ($file->is_published)
@@ -58,8 +58,8 @@
                                 </td>
                                 <td class="text-right">
                                     <div class="btn-toolbar justify-content-between">
-                                        <a class="btn btn-sm btn-outline-primary ml-2" href="{!! route(config('cms.backend-route-prefix', 'cms').'.files.edit', [$file->id]) !!}"><i class="fa fa-edit"></i> Edit</a>
-                                        <form method="post" action="{!! url(config('cms.backend-route-prefix', 'cms').'/files/'.$file->id) !!}">
+                                        <a class="btn btn-sm btn-outline-primary ml-2" href="{!! route(cms()->route('files.edit'), [$file->id]) !!}"><i class="fa fa-edit"></i> Edit</a>
+                                        <form method="post" action="{!! cms()->url('files/'.$file->id) !!}">
                                             {!! csrf_field() !!}
                                             {!! method_field('DELETE') !!}
                                             <button class="delete-btn btn btn-sm btn-danger" type="submit"><i class="fa fa-trash"></i> Delete</button>

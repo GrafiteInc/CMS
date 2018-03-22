@@ -15,17 +15,17 @@
                         @if (isset($event->translationData(request('lang'))->is_published))
                             <a class="btn btn-success ml-1" href="{!! url('events/event/'.$event->id) !!}">Live</a>
                         @else
-                            <a class="btn btn-success ml-1" href="{!! url(config('cms.backend-route-prefix', 'cms').'/preview/event/'.$event->id.'?lang='.request('lang')) !!}">Preview</a>
+                            <a class="btn btn-success ml-1" href="{!! cms()->url('preview/event/'.$event->id.'?lang='.request('lang')) !!}">Preview</a>
                         @endif
                         <a class="btn btn-warning ml-1" href="{!! Cms::rollbackUrl($event->translation(request('lang'))) !!}">Rollback</a>
                     @else
                         @if ($event->is_published)
                             <a class="btn btn-success ml-1" href="{!! url('events/event/'.$event->id) !!}">Live</a>
                         @else
-                            <a class="btn btn-secondary ml-1" href="{!! url(config('cms.backend-route-prefix', 'cms').'/preview/event/'.$event->id) !!}">Preview</a>
+                            <a class="btn btn-secondary ml-1" href="{!! cms()->url('preview/event/'.$event->id) !!}">Preview</a>
                         @endif
                         <a class="btn btn-warning ml-1" href="{!! Cms::rollbackUrl($event) !!}">Rollback</a>
-                        <a class="btn btn-outline-secondary ml-1" href="{!! url(config('cms.backend-route-prefix', 'cms').'/events/'.$event->id.'/history') !!}">History</a>
+                        <a class="btn btn-outline-secondary ml-1" href="{!! cms()->url('events/'.$event->id.'/history') !!}">History</a>
                     @endif
                 </div>
             </div>
@@ -43,7 +43,7 @@
 
         <div class="row">
             <div class="@if (config('cms.live-preview', false)) col-md-6 @else col-md-12 @endif">
-                {!! Form::model($event, ['route' => [config('cms.backend-route-prefix', 'cms').'.events.update', $event->id], 'method' => 'patch', 'class' => 'edit']) !!}
+                {!! Form::model($event, ['route' => [cms()->route('events.update'), $event->id], 'method' => 'patch', 'class' => 'edit']) !!}
 
                     <div class="form-group">
                         <label for="Template">Template</label>
@@ -60,13 +60,13 @@
 
                     <input type="hidden" name="lang" value="{{ request('lang') }}">
 
-                    {!! FormMaker::setColumns(2)->fromObject($event->asObject(), Config::get('cms.forms.event.identity')) !!}
-                    {!! FormMaker::setColumns(1)->fromObject($event->asObject(), Config::get('cms.forms.event.content')) !!}
-                    {!! FormMaker::setColumns(2)->fromObject($event->asObject(), Config::get('cms.forms.event.seo')) !!}
-                    {!! FormMaker::setColumns(2)->fromObject($event->asObject(), Config::get('cms.forms.event.publish')) !!}
+                    {!! FormMaker::setColumns(2)->fromObject($event->asObject(), config('cms.forms.event.identity')) !!}
+                    {!! FormMaker::setColumns(1)->fromObject($event->asObject(), config('cms.forms.event.content')) !!}
+                    {!! FormMaker::setColumns(2)->fromObject($event->asObject(), config('cms.forms.event.seo')) !!}
+                    {!! FormMaker::setColumns(2)->fromObject($event->asObject(), config('cms.forms.event.publish')) !!}
 
                     <div class="form-group text-right">
-                        <a href="{!! url(config('cms.backend-route-prefix', 'cms').'/events') !!}" class="btn btn-secondary float-left">Cancel</a>
+                        <a href="{!! cms()->url('events') !!}" class="btn btn-secondary float-left">Cancel</a>
                         {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
                     </div>
 
@@ -76,9 +76,9 @@
                 <div class="col-md-6 hidden-sm hidden-xs">
                     <div id="wrap">
                         @if (! cms()->isDefaultLanguage())
-                            <iframe id="frame" src="{!! url(config('cms.backend-route-prefix', 'cms').'/preview/event/'.$event->id.'?lang='.request('lang')) !!}"></iframe>
+                            <iframe id="frame" src="{!! cms()->url('preview/event/'.$event->id.'?lang='.request('lang')) !!}"></iframe>
                         @else
-                            <iframe id="frame" src="{{ url(config('cms.backend-route-prefix', 'cms').'/preview/event/'.$event->id) }}"></iframe>
+                            <iframe id="frame" src="{{ cms()->url('preview/event/'.$event->id) }}"></iframe>
                         @endif
                     </div>
                     <div id="frameButtons" class="raw-margin-top-16">

@@ -47,7 +47,7 @@
 
                         @foreach($events as $event)
                             <tr>
-                                <td><a href="{!! route(config('cms.backend-route-prefix', 'cms').'.events.edit', [$event->id]) !!}">{!! $event->title !!}</a></td>
+                                <td><a href="{!! route(cms()->route('events.edit'), [$event->id]) !!}">{!! $event->title !!}</a></td>
                                 <td class="m-hidden">{!! date('M jS, Y', strtotime($event->start_date)) !!}</td>
                                 <td class="m-hidden">{!! date('M jS, Y', strtotime($event->end_date)) !!}</td>
                                 <td class="m-hidden">
@@ -59,8 +59,8 @@
                                 </td>
                                 <td class="text-right">
                                     <div class="btn-toolbar justify-content-between">
-                                        <a class="btn btn-sm btn-outline-primary mr-2" href="{!! route(config('cms.backend-route-prefix', 'cms').'.events.edit', [$event->id]) !!}"><i class="fa fa-edit"></i> Edit</a>
-                                        <form method="post" action="{!! url(config('cms.backend-route-prefix', 'cms').'/events/'.$event->id) !!}">
+                                        <a class="btn btn-sm btn-outline-primary mr-2" href="{!! route(cms()->route('events.edit'), [$event->id]) !!}"><i class="fa fa-edit"></i> Edit</a>
+                                        <form method="post" action="{!! cms()->url('events/'.$event->id) !!}">
                                             {!! csrf_field() !!}
                                             {!! method_field('DELETE') !!}
                                             <button class="delete-btn btn btn-sm btn-danger" type="submit"><i class="fa fa-trash"></i> Delete</button>

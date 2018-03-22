@@ -45,7 +45,7 @@
                             @foreach($faqs as $faq)
                                 <tr>
                                     <td>
-                                        <a href="{!! route(config('cms.backend-route-prefix', 'cms').'.faqs.edit', [$faq->id]) !!}">{!! $faq->question !!}</a>
+                                        <a href="{!! route(cms()->route('faqs.edit'), [$faq->id]) !!}">{!! $faq->question !!}</a>
                                     </td>
                                     <td class="m-hidden">
                                         @if ($faq->is_published)
@@ -56,8 +56,8 @@
                                     </td>
                                     <td class="text-right">
                                         <div class="btn-toolbar justify-content-between">
-                                            <a class="btn btn-sm btn-outline-primary mr-2" href="{!! route(config('cms.backend-route-prefix', 'cms').'.faqs.edit', [$faq->id]) !!}"><i class="fa fa-pencil"></i> Edit</a>
-                                            <form method="post" action="{!! url(config('cms.backend-route-prefix', 'cms').'/faqs/'.$faq->id) !!}">
+                                            <a class="btn btn-sm btn-outline-primary mr-2" href="{!! route(cms()->route('faqs.edit'), [$faq->id]) !!}"><i class="fa fa-pencil"></i> Edit</a>
+                                            <form method="post" action="{!! cms()->url('faqs/'.$faq->id) !!}">
                                                 {!! csrf_field() !!}
                                                 {!! method_field('DELETE') !!}
                                                 <button class="delete-btn btn btn-sm btn-danger pull-right" type="submit"><i class="fa fa-trash"></i> Delete</button>

@@ -2,6 +2,8 @@
 
 namespace Grafite\Cms\Models;
 
+use Grafite\Cms\Models\CmsModel;
+
 class Archive extends CmsModel
 {
     public $table = 'archives';

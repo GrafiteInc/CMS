@@ -6,11 +6,12 @@ use Carbon\Carbon;
 use Config;
 use Exception;
 use FileService;
+use Grafite\Cms\Models\CmsModel;
+use Grafite\Cms\Services\AssetService;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
 use Intervention\Image\ImageManagerStatic as InterventionImage;
 use Storage;
-use Grafite\Cms\Services\AssetService;
 
 class Image extends CmsModel
 {

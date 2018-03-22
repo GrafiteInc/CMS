@@ -2,6 +2,8 @@
 
 namespace Grafite\Cms\Models;
 
+use Grafite\Cms\Models\CmsModel;
+
 class Link extends CmsModel
 {
     public $table = 'links';

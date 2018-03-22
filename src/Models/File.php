@@ -2,6 +2,8 @@
 
 namespace Grafite\Cms\Models;
 
+use Grafite\Cms\Models\CmsModel;
+
 class File extends CmsModel
 {
     public $table = 'files';

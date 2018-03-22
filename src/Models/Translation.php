@@ -2,6 +2,8 @@
 
 namespace Grafite\Cms\Models;
 
+use Grafite\Cms\Models\CmsModel;
+
 class Translation extends CmsModel
 {
     public $table = 'translations';

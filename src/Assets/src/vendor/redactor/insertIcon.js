@@ -24,7 +24,7 @@ return {
     {
         var button = this.button.add('insertIcon', 'Insert Icon');
 
-        this.button.setAwesome('insertIcon', 'fa-smile');
+        this.button.setAwesome('insertIcon', 'fa-smile-o');
         this.button.addCallback(button, this.insertIcon.show);
     },
     show: function ()

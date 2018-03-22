@@ -1,6 +1,6 @@
 @extends('cms::layouts.dashboard')
 
-@section('pageTitle') Widget @stop
+@section('pageTitle') Widgets @stop
 
 @section('content')
 

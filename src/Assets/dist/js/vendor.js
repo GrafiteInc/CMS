@@ -13366,7 +13366,7 @@ RedactorPlugins.specialchar = function()
 
             var button = this.button.add('specialchar', 'Special Characters');
 
-            this.button.setAwesome('specialchar', 'fa-keyboard');
+            this.button.setAwesome('specialchar', 'fa-keyboard-o');
             this.button.addDropdown(button, dropdown);
         },
         callbackFunc: function(buttonName)
@@ -13802,7 +13802,7 @@ return {
     {
         var button = this.button.add('insertIcon', 'Insert Icon');
 
-        this.button.setAwesome('insertIcon', 'fa-smile');
+        this.button.setAwesome('insertIcon', 'fa-smile-o');
         this.button.addCallback(button, this.insertIcon.show);
     },
     show: function ()

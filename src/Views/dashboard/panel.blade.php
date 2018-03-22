@@ -3,7 +3,7 @@
 </li>
 
 <li class="nav-item @if (Request::is(cms()->backendRoute.'/dashboard')) active @endif">
-    <a class="nav-link" href="{!! url(cms()->backendRoute.'/dashboard') !!}"><span class="fa fa-fw fa-chart-line"></span> Dashboard</a>
+    <a class="nav-link" href="{!! url(cms()->backendRoute.'/dashboard') !!}"><span class="fa fa-fw fa-line-chart"></span> Dashboard</a>
 </li>
 
 <li class="nav-item @if (Request::is(cms()->backendRoute.'/help')) active @endif">
@@ -42,13 +42,13 @@
 
 @if (in_array('blog', Config::get('cms.active-core-modules', Cms::defaultModules())))
     <li class="nav-item @if (Request::is(cms()->backendRoute.'/blog') || Request::is(cms()->backendRoute.'/blog/*')) active @endif">
-        <a class="nav-link" href="{!! url(cms()->backendRoute.'/blog') !!}"><span class="fa fa-fw fa-pencil-alt"></span> Blog</a>
+        <a class="nav-link" href="{!! url(cms()->backendRoute.'/blog') !!}"><span class="fa fa-fw fa-pencil"></span> Blog</a>
     </li>
 @endif
 
 @if (in_array('pages', Config::get('cms.active-core-modules', Cms::defaultModules())))
     <li class="nav-item @if (Request::is(cms()->backendRoute.'/pages') || Request::is(cms()->backendRoute.'/pages/*')) active @endif">
-        <a class="nav-link" href="{!! url(cms()->backendRoute.'/pages') !!}"><span class="fa fa-fw fa-file-alt"></span> Pages</a>
+        <a class="nav-link" href="{!! url(cms()->backendRoute.'/pages') !!}"><span class="fa fa-fw fa-file-text"></span> Pages</a>
     </li>
 @endif
 
@@ -74,7 +74,7 @@
 
 @if (Route::get('admin/dashboard'))
     <li class="nav-item @if (Request::is('admin/dashboard') || Request::is('admin/dashboard/*')) active @endif">
-        <a class="nav-link" href="{!! url('admin/dashboard') !!}"><span class="fa fa-fw fa-tachometer-alt"></span> Dashboard</a>
+        <a class="nav-link" href="{!! url('admin/dashboard') !!}"><span class="fa fa-fw fa-tachometer"></span> Dashboard</a>
     </li>
 @endif
 @if (Route::get('admin/users'))

@@ -11,8 +11,9 @@
         <link rel="icon" type="image/png" sizes="32x32" href="{!! Cms::asset('images/favicon-32.png', 'image/png') !!}?v3">
         <link rel="icon" type="image/png" sizes="96x96" href="{!! Cms::asset('images/favicon-96.png', 'image/png') !!}?v3">
 
-        <!-- Bootstrap -->
+        <!-- Bootstrap and Font-Awesome -->
         <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
         <!-- Theme -->
         <link rel="stylesheet" type="text/css" href="{!! Cms::asset('themes/'.config('cms.backend-theme', 'standard').'.css', 'text/css') !!}">
@@ -52,7 +53,6 @@
             @yield('pre_javascript')
         </script>
         <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
-        <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
         <script src="{!! Cms::asset('dist/js/vendor.js', 'application/javascript') !!}"></script>
         <script src="{!! Cms::asset('dist/js/cms.js', 'application/javascript') !!}"></script>

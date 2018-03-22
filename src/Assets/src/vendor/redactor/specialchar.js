@@ -80,7 +80,7 @@ RedactorPlugins.specialchar = function()
 
             var button = this.button.add('specialchar', 'Special Characters');
 
-            this.button.setAwesome('specialchar', 'fa-keyboard');
+            this.button.setAwesome('specialchar', 'fa-keyboard-o');
             this.button.addDropdown(button, dropdown);
         },
         callbackFunc: function(buttonName)

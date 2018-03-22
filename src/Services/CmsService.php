@@ -56,6 +56,20 @@ class CmsService
     }
 
     /**
+     * Check if default CMS language
+     *
+     * @return bool
+     */
+    public function isDefaultLanguage()
+    {
+        if (! is_null(request('lang')) && request('lang') !== config('cms.default-language', 'en')) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
      * Generates a notification for the app.
      *
      * @param string $string Notification string

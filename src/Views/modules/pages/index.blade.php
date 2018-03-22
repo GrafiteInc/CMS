@@ -24,19 +24,7 @@
         </div>
     </div>
 
-    <div class="col-md-12">
-        <nav class="navbar px-0 navbar-light justify-content-between">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="btn btn-primary" href="{!! route(config('cms.backend-route-prefix', 'cms').'.pages.create') !!}">Add New</a>
-                </li>
-            </ul>
-            {!! Form::open(['url' => 'cms/pages/search', 'class' => 'form-inline mt-2']) !!}
-                <input class="form-control mr-sm-2" name="term" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            {!! Form::close() !!}
-        </nav>
-    </div>
+    @include('cms::layouts.module-header', [ 'module' => 'pages' ])
 
     <div class="col-md-12">
         <div class="row">

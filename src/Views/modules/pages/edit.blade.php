@@ -11,18 +11,18 @@
             </div>
             <div class="col-md-6">
                 <div class="btn-toolbar float-right mt-2">
-                    @if (! is_null(request('lang')) && request('lang') !== config('cms.default-language', 'en') && $page->translationData(request('lang')))
+                    @if (! cms()->isDefaultLanguage() && $page->translationData(request('lang')))
                         @if (isset($page->translationData(request('lang'))->is_published))
                             <a class="btn btn-primary ml-1" href="{!! url('page/'.$page->translationData(request('lang'))->url) !!}">Live</a>
                         @else
-                            <a class="btn btn-outline-secondary ml-1" href="{!! url(config('cms.backend-route-prefix', 'cms').'/preview/page/'.$page->id.'?lang='.request('lang')) !!}">Preview</a>
+                            <a class="btn btn-outline-success ml-1" href="{!! url(config('cms.backend-route-prefix', 'cms').'/preview/page/'.$page->id.'?lang='.request('lang')) !!}">Preview</a>
                         @endif
                          <a class="btn btn-warning ml-1" href="{!! Cms::rollbackUrl($page->translation(request('lang'))) !!}">Rollback</a>
                     @else
                         @if ($page->is_published)
                             <a class="btn btn-primary ml-1" href="{!! url('page/'.$page->url) !!}">Live</a>
                         @else
-                            <a class="btn btn-outline-secondary ml-1" href="{!! url(config('cms.backend-route-prefix', 'cms').'/preview/page/'.$page->id) !!}">Preview</a>
+                            <a class="btn btn-outline-success ml-1" href="{!! url(config('cms.backend-route-prefix', 'cms').'/preview/page/'.$page->id) !!}">Preview</a>
                         @endif
                         <a class="btn btn-warning ml-1" href="{!! Cms::rollbackUrl($page) !!}">Rollback</a>
                         <a class="btn btn-outline-secondary ml-1" href="{!! url(config('cms.backend-route-prefix', 'cms').'/pages/'.$page->id.'/history') !!}">History</a>
@@ -53,7 +53,7 @@
                         <label for="Template">Template</label>
                         <select class="form-control" id="Template" name="template">
                             @foreach (PageService::getTemplatesAsOptions() as $template)
-                                @if (! is_null(request('lang')) && request('lang') !== config('cms.default-language', 'en') && $page->translationData(request('lang')))
+                                @if (! cms()->isDefaultLanguage() && $page->translationData(request('lang')))
                                     <option @if($template === $page->translationData(request('lang'))->template) selected  @endif value="{!! $template !!}">{!! ucfirst(str_replace('-template', '', $template)) !!}</option>
                                 @else
                                     <option @if($template === $page->template) selected  @endif value="{!! $template !!}">{!! ucfirst(str_replace('-template', '', $template)) !!}</option>
@@ -93,7 +93,7 @@
             @if (config('cms.live-preview', false))
                 <div class="col-md-6 hidden-sm hidden-xs">
                     <div id="wrap">
-                        @if (! is_null(request('lang')) && request('lang') !== config('cms.default-language', 'en'))
+                        @if (! cms()->isDefaultLanguage())
                             <iframe id="frame" src="{!! url(config('cms.backend-route-prefix', 'cms').'/preview/page/'.$page->id.'?lang='.request('lang')) !!}"></iframe>
                         @else
                             <iframe id="frame" src="{{ url(config('cms.backend-route-prefix', 'cms').'/preview/page/'.$page->id) }}"></iframe>

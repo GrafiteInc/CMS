@@ -11,21 +11,21 @@
             </div>
             <div class="col-md-6">
                 <div class="btn-toolbar float-right mt-2">
-                    @if (! is_null(request('lang')) && request('lang') !== config('cms.default-language', 'en') && $blog->translationData(request('lang')))
+                    @if (! cms()->isDefaultLanguage() && $blog->translationData(request('lang')))
                         @if (isset($blog->translationData(request('lang'))->is_published))
-                            <a class="btn btn-success pull-right ml-1" href="{!! url('blog/'.$blog->translationData(request('lang'))->url) !!}">Live</a>
+                            <a class="btn btn-success ml-1" href="{!! url('blog/'.$blog->translationData(request('lang'))->url) !!}">Live</a>
                         @else
-                            <a class="btn btn-outline-secondary pull-right ml-1" href="{!! url(config('cms.backend-route-prefix', 'cms').'/preview/blog/'.$blog->id.'?lang='.request('lang')) !!}">Preview</a>
+                            <a class="btn btn-outline-success ml-1" href="{!! url(config('cms.backend-route-prefix', 'cms').'/preview/blog/'.$blog->id.'?lang='.request('lang')) !!}">Preview</a>
                         @endif
-                        <a class="btn btn-warning pull-right ml-1" href="{!! Cms::rollbackUrl($blog->translation(request('lang'))) !!}">Rollback</a>
+                        <a class="btn btn-warning ml-1" href="{!! Cms::rollbackUrl($blog->translation(request('lang'))) !!}">Rollback</a>
                     @else
                         @if ($blog->is_published)
-                            <a class="btn btn-success pull-right ml-1" href="{!! url('blog/'.$blog->url) !!}">Live</a>
+                            <a class="btn btn-success ml-1" href="{!! url('blog/'.$blog->url) !!}">Live</a>
                         @else
-                            <a class="btn btn-outline-secondary pull-right ml-1" href="{!! url(config('cms.backend-route-prefix', 'cms').'/preview/blog/'.$blog->id) !!}">Preview</a>
+                            <a class="btn btn-outline-success ml-1" href="{!! url(config('cms.backend-route-prefix', 'cms').'/preview/blog/'.$blog->id) !!}">Preview</a>
                         @endif
-                        <a class="btn btn-warning pull-right ml-1" href="{!! Cms::rollbackUrl($blog) !!}">Rollback</a>
-                        <a class="btn btn-outline-secondary pull-right ml-1" href="{!! url(config('cms.backend-route-prefix', 'cms').'/blog/'.$blog->id.'/history') !!}">History</a>
+                        <a class="btn btn-warning ml-1" href="{!! Cms::rollbackUrl($blog) !!}">Rollback</a>
+                        <a class="btn btn-outline-secondary ml-1" href="{!! url(config('cms.backend-route-prefix', 'cms').'/blog/'.$blog->id.'/history') !!}">History</a>
                     @endif
                 </div>
             </div>
@@ -41,25 +41,19 @@
             </div>
         </div>
 
-        @if ($blog->hero_image)
-            <div class="row">
-                <div class="col-md-6 col-md-offset-3">
-                    <img class="thumbnail img-responsive" src="{{ $blog->hero_image_url }}" alt="">
-                </div>
-            </div>
-        @endif
-
         <div class="row">
             <div class="@if (config('cms.live-preview', false)) col-md-6 @else col-md-12 @endif">
                 {!! Form::model($blog, ['route' => [config('cms.backend-route-prefix', 'cms').'.blog.update', $blog->id], 'method' => 'patch', 'class' => 'edit', 'files' => true]) !!}
 
                     <input type="hidden" name="lang" value="{{ request('lang') }}">
 
+                    {!! FormMaker::setColumns(3)->fromObject($blog->asObject(), Config::get('cms.forms.blog.identity')) !!}
+
                     <div class="form-group">
                         <label for="Template">Template</label>
                         <select class="form-control" id="Template" name="template">
                             @foreach (BlogService::getTemplatesAsOptions() as $template)
-                                @if (! is_null(request('lang')) && request('lang') !== config('cms.default-language', 'en') && $blog->translationData(request('lang')))
+                                @if (! cms()->isDefaultLanguage() && $blog->translationData(request('lang')))
                                     <option @if($template === $blog->translationData(request('lang'))->template) selected  @endif value="{!! $template !!}">{!! ucfirst(str_replace('-template', '', $template)) !!}</option>
                                 @else
                                     <option @if($template === $blog->template) selected  @endif value="{!! $template !!}">{!! ucfirst(str_replace('-template', '', $template)) !!}</option>
@@ -68,10 +62,26 @@
                         </select>
                     </div>
 
-                    {!! FormMaker::fromObject($blog->asObject(), Config::get('cms.forms.blog')) !!}
+                    <div class="row">
+                        <div class="col-md-6">
+                            {!! FormMaker::setColumns(1)->fromObject($blog->asObject(), Config::get('cms.forms.blog.content')) !!}
+                        </div>
+                        <div class="col-md-6">
+                            @if ($blog->hero_image)
+                                <img class="img-thumbnail img-fluid" src="{{ $blog->hero_image_url }}" alt="">
+                            @endif
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12 mt-4">
+                            {!! FormMaker::setColumns(2)->fromObject($blog->asObject(), Config::get('cms.forms.blog.seo')) !!}
+                        </div>
+                    </div>
+                    {!! FormMaker::setColumns(2)->fromObject($blog->asObject(), Config::get('cms.forms.blog.publish')) !!}
 
                     <div class="form-group text-right">
-                        <a href="{!! url(config('cms.backend-route-prefix', 'cms').'/blog') !!}" class="btn btn-default raw-left">Cancel</a>
+                        <a href="{!! url(config('cms.backend-route-prefix', 'cms').'/blog') !!}" class="btn btn-secondary raw-left">Cancel</a>
                         {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
                     </div>
 
@@ -80,8 +90,8 @@
             @if (config('cms.live-preview', false))
                 <div class="col-md-6 hidden-sm hidden-xs">
                     <div id="wrap">
-                        @if (! is_null(request('lang')) && request('lang') !== config('cms.default-language', 'en'))
-                            <iframe id="frame" src="{!! url(config('cms.backend-route-prefix', 'cms').'/preview/blog/'.$blog->id.'?lang='.request('lang')) !!}"></iframe>
+                        @if (! cms()->isDefaultLanguage())
+                            <iframe id="frame" src="{{ cms()->url('preview/blog/'.$blog->id.'?lang='.request('lang')) }}"></iframe>
                         @else
                             <iframe id="frame" src="{{ url(config('cms.backend-route-prefix', 'cms').'/preview/blog/'.$blog->id) }}"></iframe>
                         @endif

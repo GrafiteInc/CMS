@@ -1,69 +1,71 @@
 @extends('cms::layouts.dashboard')
 
+@section('pageTitle') Widgets @stop
+
 @section('content')
 
     <div class="modal fade" id="deleteModal" tabindex="-3" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     <h4 class="modal-title" id="deleteModalLabel">Delete Widgets</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 </div>
                 <div class="modal-body">
                     <p>Are you sure want to delete this widget?</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <a id="deleteBtn" type="button" class="btn btn-warning" href="#">Confirm Delete</a>
+                    <a id="deleteBtn" class="btn btn-danger" href="#">Confirm Delete</a>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="row">
-        <a class="btn btn-primary pull-right" href="{!! route(config('cms.backend-route-prefix', 'cms').'.widgets.create') !!}">Add New</a>
-        <div class="raw-m-hide pull-right">
-            {!! Form::open(['url' => 'cms/widgets/search']) !!}
-            <input class="form-control header-input pull-right raw-margin-right-24" name="term" placeholder="Search">
-            {!! Form::close() !!}
+    @include('cms::layouts.module-header', [ 'module' => 'widgets' ])
+
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-12">
+                @if ($widgets->count() === 0)
+                    <div class="card card-dark text-center mt-4">
+                        @if (request('term'))
+                            <div class="card-header">Searched for "{!! $term !!}"</div>
+                        @endif
+                        <div class="card-body">No widgets found.</div>
+                    </div>
+                @else
+                    <table class="table table-striped">
+                        <thead>
+                            <th>{!! sortable('Name', 'name') !!}</th>
+                            <th>{!! sortable('Slug', 'slug') !!}</th>
+                            <th width="170px" class="text-right">Actions</th>
+                        </thead>
+                        <tbody>
+                            @foreach($widgets as $widget)
+                                <tr>
+                                    <td>
+                                        <a href="{!! route(config('cms.backend-route-prefix', 'cms').'.widgets.edit', [$widget->id]) !!}">{!! $widget->name !!}</a>
+                                    </td>
+                                    <td>{!! $widget->slug !!}</td>
+                                    <td class="text-right">
+                                        <div class="btn-toolbar justify-content-between">
+                                            <a class="btn btn-sm btn-outline-primary mr-2" href="{!! route(config('cms.backend-route-prefix', 'cms').'.widgets.edit', [$widget->id]) !!}"><i class="fa fa-edit"></i> Edit</a>
+                                            <form method="post" action="{!! url(config('cms.backend-route-prefix', 'cms').'/widgets/'.$widget->id) !!}">
+                                                {!! csrf_field() !!}
+                                                {!! method_field('DELETE') !!}
+                                                <button class="delete-btn btn btn-sm btn-danger" type="submit"><i class="fa fa-trash"></i> Delete</button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                @endif
+            </div>
         </div>
-        <h1 class="page-header">Widgets</h1>
     </div>
-
-    <div class="row">
-        @if (isset($term))
-        <div class="well text-center">Searched for "{!! $term !!}".</div>
-        @endif
-        @if($widgets->count() === 0)
-            <div class="well text-center">No widgets found.</div>
-        @else
-            <table class="table table-striped">
-                <thead>
-                    <th>{!! sortable('Name', 'name') !!}</th>
-                    <th>{!! sortable('Slug', 'slug') !!}</th>
-                    <th width="200px" class="text-right">Actions</th>
-                </thead>
-                <tbody>
-
-                @foreach($widgets as $widget)
-                    <tr>
-                        <td><a href="{!! route(config('cms.backend-route-prefix', 'cms').'.widgets.edit', [$widget->id]) !!}">{!! $widget->name !!}</a></td>
-                        <td class="raw-m-hide">{!! $widget->slug !!}</td>
-                        <td>
-                            <form method="post" action="{!! url(config('cms.backend-route-prefix', 'cms').'/widgets/'.$widget->id) !!}">
-                                {!! csrf_field() !!}
-                                {!! method_field('DELETE') !!}
-                                <button class="delete-btn btn btn-xs btn-danger pull-right" type="submit"><i class="fa fa-trash"></i> Delete</button>
-                            </form>
-                            <a class="btn btn-xs btn-default pull-right raw-margin-right-8" href="{!! route(config('cms.backend-route-prefix', 'cms').'.widgets.edit', [$widget->id]) !!}"><i class="fa fa-pencil"></i> Edit</a>
-                        </td>
-                    </tr>
-                @endforeach
-                </tbody>
-            </table>
-        @endif
-    </div>
-
     <div class="text-center">
         {!! $pagination !!}
     </div>

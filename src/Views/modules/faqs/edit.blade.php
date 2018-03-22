@@ -1,50 +1,57 @@
 @extends('cms::layouts.dashboard')
 
+@section('pageTitle') FAQs @stop
+
 @section('content')
 
-    <div class="row">
-        @if (! is_null(request('lang')) && request('lang') !== config('cms.default-language', 'en') && $faq->translationData(request('lang')))
-            @if (isset($faq->translationData(request('lang'))->is_published))
-                <a class="btn btn-default pull-right raw-margin-left-8" href="{!! url('faqs') !!}">Live</a>
-            @endif
-            <a class="btn btn-warning pull-right raw-margin-left-8" href="{!! Cms::rollbackUrl($faq->translation(request('lang')))!!}">Rollback</a>
-        @else
-            @if ($faq->is_published)
-                <a class="btn btn-default pull-right raw-margin-left-8" href="{!! url('faqs') !!}">Live</a>
-            @endif
-            <a class="btn btn-warning pull-right raw-margin-left-8" href="{!! Cms::rollbackUrl($faq) !!}">Rollback</a>
-        @endif
-
-        <h1 class="page-header">FAQs</h1>
-    </div>
-
-    @include('cms::modules.faqs.breadcrumbs', ['location' => ['edit']])
-
-    <div class="row raw-margin-bottom-24">
-        <ul class="nav nav-tabs">
-            @foreach(config('cms.languages') as $short => $language)
-                <li role="presentation" @if (request('lang') == $short || is_null(request('lang')) && $short == config('cms.default-language'))) class="active" @endif><a href="{{ url(config('cms.backend-route-prefix', 'cms').'/faqs/'.$faq->id.'/edit?lang='.$short) }}">{{ ucfirst($language) }}</a></li>
-            @endforeach
-        </ul>
-    </div>
-
-    <div class="row">
-        {!! Form::model($faq, ['route' => [config('cms.backend-route-prefix', 'cms').'.faqs.update', $faq->id], 'method' => 'patch', 'class' => 'edit']) !!}
-
-            <input type="hidden" name="lang" value="{{ request('lang') }}">
-
-            @if (! is_null(request('lang')) && request('lang') !== config('cms.default-language', 'en'))
-                {!! FormMaker::fromObject($faq->translationData(request('lang')), Config::get('cms.forms.faqs')) !!}
-            @else
-                {!! FormMaker::fromObject($faq, Config::get('cms.forms.faqs')) !!}
-            @endif
-
-            <div class="form-group text-right">
-                <a href="{!! url(config('cms.backend-route-prefix', 'cms').'/faqs') !!}" class="btn btn-default raw-left">Cancel</a>
-                {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-6 mt-2">
+                @include('cms::modules.faqs.breadcrumbs', ['location' => ['edit']])
             </div>
+            <div class="col-md-6">
+                <div class="btn-toolbar float-right mt-2">
+                    @if (! cms()->isDefaultLanguage() && $faq->translationData(request('lang')))
+                        @if (isset($faq->translationData(request('lang'))->is_published))
+                            <a class="btn btn-success pull-right ml-1" href="{!! url('faqs') !!}">Live</a>
+                        @endif
+                        <a class="btn btn-warning pull-right ml-1" href="{!! Cms::rollbackUrl($faq->translation(request('lang')))!!}">Rollback</a>
+                    @else
+                        @if ($faq->is_published)
+                            <a class="btn btn-success pull-right ml-1" href="{!! url('faqs') !!}">Live</a>
+                        @endif
+                        <a class="btn btn-warning pull-right ml-1" href="{!! Cms::rollbackUrl($faq) !!}">Rollback</a>
+                    @endif
+                </div>
+            </div>
+        </div>
+    </div>
 
-        {!! Form::close() !!}
+    <div class="col-md-12">
+        <div class="row mb-4">
+            <div class="col-md-12">
+                <ul class="nav nav-tabs">
+                    @include('cms::layouts.tabs', [ 'module' => 'faqs', 'item' => $faq ])
+                </ul>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                {!! Form::model($faq, ['route' => [config('cms.backend-route-prefix', 'cms').'.faqs.update', $faq->id], 'method' => 'patch', 'class' => 'edit']) !!}
+
+                    <input type="hidden" name="lang" value="{{ request('lang') }}">
+
+                    {!! FormMaker::fromObject($faq->asObject(), Config::get('cms.forms.faqs')) !!}
+
+                    <div class="form-group text-right">
+                        <a href="{!! url(config('cms.backend-route-prefix', 'cms').'/faqs') !!}" class="btn btn-secondary float-left">Cancel</a>
+                        {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
+                    </div>
+
+                {!! Form::close() !!}
+            </div>
+        </div>
     </div>
 
 @endsection

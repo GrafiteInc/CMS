@@ -92,15 +92,15 @@ class WidgetsController extends GrafiteCmsController
      */
     public function edit($id)
     {
-        $widgets = $this->repository->find($id);
+        $widget = $this->repository->find($id);
 
-        if (empty($widgets)) {
+        if (empty($widget)) {
             Cms::notification('Widgets not found', 'warning');
 
             return redirect(route($this->routeBase.'.widgets.index'));
         }
 
-        return view('cms::modules.widgets.edit')->with('widgets', $widgets);
+        return view('cms::modules.widgets.edit')->with('widget', $widget);
     }
 
     /**

@@ -15,7 +15,7 @@
                     <p>Are you sure want to delete this menu?</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <a id="deleteBtn" class="btn btn-danger" href="#">Confirm Delete</a>
                 </div>
             </div>
@@ -48,7 +48,7 @@
                                     <td>{!! $menu->slug !!}</td>
                                     <td class="text-right">
                                          <div class="btn-toolbar justify-content-between">
-                                            <a class="btn btn-sm btn-default mr-2" href="{!! route(config('cms.backend-route-prefix', 'cms').'.menus.edit', [$menu->id]) !!}"><i class="fa fa-edit"></i> Edit</a>
+                                            <a class="btn btn-sm btn-secondary mr-2" href="{!! route(config('cms.backend-route-prefix', 'cms').'.menus.edit', [$menu->id]) !!}"><i class="fa fa-edit"></i> Edit</a>
                                             <form method="post" action="{!! url(config('cms.backend-route-prefix', 'cms').'/menus/'.$menu->id) !!}">
                                                 {!! csrf_field() !!}
                                                 {!! method_field('DELETE') !!}

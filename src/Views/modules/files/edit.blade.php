@@ -9,7 +9,7 @@
     @include('cms::modules.files.breadcrumbs', ['location' => ['edit']])
 
     <div class="row raw-margin-bottom-48 raw-margin-top-48 text-center">
-        <a class="btn btn-default" href="{!! Cms::fileAsDownload($files->name, $files->location) !!}"><span class="fa fa-download"></span> Download: {!! $files->name !!}</a>
+        <a class="btn btn-secondary" href="{!! Cms::fileAsDownload($files->name, $files->location) !!}"><span class="fa fa-download"></span> Download: {!! $files->name !!}</a>
     </div>
 
     <div class="row">
@@ -18,7 +18,7 @@
             {!! FormMaker::fromObject($files, Config::get('cms.forms.file-edit')) !!}
 
             <div class="form-group text-right">
-                <a href="{!! url(config('cms.backend-route-prefix', 'cms').'/files') !!}" class="btn btn-default raw-left">Cancel</a>
+                <a href="{!! url(config('cms.backend-route-prefix', 'cms').'/files') !!}" class="btn btn-secondary raw-left">Cancel</a>
                 {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
             </div>
 

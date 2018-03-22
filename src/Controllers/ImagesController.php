@@ -122,13 +122,13 @@ class ImagesController extends GrafiteCmsController
 
         if (!$validation['errors']) {
             $file = $request->file('location');
-            $fileSaved = FileService::saveFile($file, 'public/images', [], true);
+            $fileSaved = app(FileService::class)->saveFile($file, 'public/images', [], true);
             $fileSaved['name'] = CryptoService::encrypt($fileSaved['name']);
             $fileSaved['mime'] = $file->getClientMimeType();
             $fileSaved['size'] = $file->getClientSize();
-            $response = CmsResponseService::apiResponse('success', $fileSaved);
+            $response = app(CmsResponseService::class)->apiResponse('success', $fileSaved);
         } else {
-            $response = CmsResponseService::apiErrorResponse($validation['errors'], $validation['inputs']);
+            $response = app(CmsResponseService::class)->apiErrorResponse($validation['errors'], $validation['inputs']);
         }
 
         return $response;
@@ -260,12 +260,12 @@ class ImagesController extends GrafiteCmsController
     public function apiList(Request $request)
     {
         if (config('cms.api-key') != $request->header('cms')) {
-            return CmsResponseService::apiResponse('error', []);
+            return app(CmsResponseService::class)->apiResponse('error', []);
         }
 
         $images =  $this->repository->apiPrepared();
 
-        return CmsResponseService::apiResponse('success', $images);
+        return app(CmsResponseService::class)->apiResponse('success', $images);
     }
 
     /**
@@ -279,6 +279,6 @@ class ImagesController extends GrafiteCmsController
     {
         $image = $this->repository->apiStore($request->all());
 
-        return CmsResponseService::apiResponse('success', $image);
+        return app(CmsResponseService::class)->apiResponse('success', $image);
     }
 }

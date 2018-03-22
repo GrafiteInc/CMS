@@ -15,7 +15,7 @@
                     <p>Are you sure want to delete this widget?</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <a id="deleteBtn" class="btn btn-danger" href="#">Confirm Delete</a>
                 </div>
             </div>

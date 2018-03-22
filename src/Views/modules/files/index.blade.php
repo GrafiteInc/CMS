@@ -13,7 +13,7 @@
                     <p>Are you sure want to delete this file?</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <a id="deleteBtn" type="button" class="btn btn-warning" href="#">Confirm Delete</a>
                 </div>
             </div>
@@ -58,7 +58,7 @@
                                 {!! method_field('DELETE') !!}
                                 <button class="delete-btn btn btn-xs btn-danger pull-right" type="submit"><i class="fa fa-trash"></i> Delete</button>
                             </form>
-                            <a class="btn btn-xs btn-default pull-right raw-margin-right-8" href="{!! route(config('cms.backend-route-prefix', 'cms').'.files.edit', [$file->id]) !!}"><i class="fa fa-pencil"></i> Edit</a>
+                            <a class="btn btn-xs btn-secondary pull-right raw-margin-right-8" href="{!! route(config('cms.backend-route-prefix', 'cms').'.files.edit', [$file->id]) !!}"><i class="fa fa-pencil"></i> Edit</a>
                         </td>
                     </tr>
                 @endforeach

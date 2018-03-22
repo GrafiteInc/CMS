@@ -18,7 +18,7 @@
             {!! FormMaker::fromTable('files', Config::get('cms.forms.files')) !!}
 
             <div class="form-group text-right">
-                <a href="{!! url(config('cms.backend-route-prefix', 'cms').'/files') !!}" class="btn btn-default raw-left">Cancel</a>
+                <a href="{!! url(config('cms.backend-route-prefix', 'cms').'/files') !!}" class="btn btn-secondary raw-left">Cancel</a>
                 {!! Form::submit('Save', ['class' => 'btn btn-primary', 'id' => 'saveFilesBtn']) !!}
             </div>
 

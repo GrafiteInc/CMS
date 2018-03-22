@@ -22,7 +22,7 @@ class GalleryController extends Controller
      */
     public function all()
     {
-        $images = $this->repository->publishedAndPaginated();
+        $images = $this->repository->published();
         $tags = $this->repository->allTags();
 
         if (empty($images)) {

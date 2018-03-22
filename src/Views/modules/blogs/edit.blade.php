@@ -97,8 +97,8 @@
                         @endif
                     </div>
                     <div id="frameButtons" class="raw-margin-top-16">
-                        <button class="btn btn-default preview-toggle" data-platform="desktop">Desktop</button>
-                        <button class="btn btn-default preview-toggle" data-platform="mobile">Mobile</button>
+                        <button class="btn btn-secondary preview-toggle" data-platform="desktop">Desktop</button>
+                        <button class="btn btn-secondary preview-toggle" data-platform="mobile">Mobile</button>
                     </div>
                 </div>
             @endif

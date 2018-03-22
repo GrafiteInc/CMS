@@ -1,20 +1,22 @@
 @extends('cms::layouts.dashboard')
 
+@section('pageTitle') Images @stop
+
 @section('content')
 
     <div class="modal fade" id="deleteModal" tabindex="-3" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     <h4 class="modal-title" id="deleteModalLabel">Delete Images</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 </div>
                 <div class="modal-body">
                     <p>Are you sure want to delete this image?</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <a id="deleteBtn" type="button" class="btn btn-warning" href="#">Confirm Delete</a>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <a id="deleteBtn" class="btn btn-danger" href="#">Confirm Delete</a>
                 </div>
             </div>
         </div>
@@ -24,71 +26,81 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     <h4 class="modal-title" id="deleteModalLabel">Bulk Image Delete</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 </div>
                 <div class="modal-body">
                     <p>Are you sure want to delete these images?</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <a id="bulkImageDelete" type="button" class="btn btn-warning" href="#">Confirm Delete</a>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <a id="bulkImageDelete" class="btn btn-danger" href="#">Confirm Delete</a>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="row">
-        <button class="btn btn-danger pull-right raw-margin-left-8 bulk-image-delete"><span class="fa fa-trash"></span> Delete</button>
-
-        <a class="btn btn-primary pull-right" href="{!! route(config('cms.backend-route-prefix', 'cms').'.images.create') !!}">Add New</a>
-        <div class="raw-m-hide raw-m-hide pull-right">
-            {!! Form::open(['url' => 'cms/images/search']) !!}
-            <input class="form-control header-input pull-right raw-margin-right-24" name="term" placeholder="Search">
+    <div class="col-md-12">
+        <nav class="navbar px-0 navbar-light justify-content-between">
+            <div class="navbar-nav navbar-expand-md mr-auto justify-content-between">
+                <a class="d-inline nav-item btn btn-primary mr-1 mt-2" href="{!! route(config('cms.backend-route-prefix', 'cms').'.images.create') !!}">Add New</a>
+                <button class="d-inline nav-item btn btn-danger bulk-image-delete mt-2"><span class="fa fa-trash"></span> Delete</button>
+            </div>
+            {!! Form::open(['url' => config('cms.backend-route-prefix', 'cms').'/images/search', 'class' => 'form-inline mt-2']) !!}
+                <input class="form-control mr-sm-2" name="term" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
             {!! Form::close() !!}
-        </div>
-        <h1 class="page-header">Images</h1>
+        </nav>
     </div>
 
-    <div class="row">
-        @if (isset($term))
-        <div class="well text-center">Searched for "{!! $term !!}".</div>
-        @endif
-
-        @if ($images->isEmpty())
-            <div class="well text-center">No images found.</div>
-        @else
-            <div class="row">
-                @foreach($images as $image)
-                    <div class="col-md-3 image-panel raw-margin-top-24">
-                        <div class="thumbnail">
-                            <a href="{!! route(config('cms.backend-route-prefix', 'cms').'.images.edit', [$image->id]) !!}">
-                                <div class="img" style="background-image: url('{!! $image->url !!}')"></div>
-                            </a>
-                        </div>
-                        <div data-id="{{ $image->id }}" class="well pull-down overflow-hidden selectable">
-                            <div class="row">
-                                <div class="col-lg-6 col-md-12 col-sm-12">
-                                    @if ($image->is_published)
-                                        <span clas="pull-left"><span class="pull-left fa fa-check"></span> Published</span>
-                                    @else
-                                        <span clas="pull-left"><span class="pull-left fa fa-close"></span> Published</span>
-                                    @endif
-                                </div>
-                                <div class="col-lg-6 col-md-12 col-sm-12">
-                                    <form method="post" action="{!! url(config('cms.backend-route-prefix', 'cms').'/images/'.$image->id) !!}">
-                                        {!! csrf_field() !!}
-                                        {!! method_field('DELETE') !!}
-                                        <button class="delete-btn btn btn-xs img-alter-btn btn-danger pull-right" type="submit"><i class="fa fa-trash"></i></button>
-                                    </form>
-                                    <a class="btn btn-xs btn-default pull-right img-alter-btn raw-margin-right-8" href="{!! route(config('cms.backend-route-prefix', 'cms').'.images.edit', [$image->id]) !!}"><i class="fa fa-pencil"></i></a>
-                                </div>
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row">
+                    @if ($images->count() === 0)
+                        <div class="col-md-12">
+                            <div class="card card-dark text-center mt-4">
+                                @if (request('term'))
+                                    <div class="card-header">Searched for "{!! $term !!}"</div>
+                                @endif
+                                <div class="card-body">No images found.</div>
                             </div>
                         </div>
-                    </div>
-                @endforeach
+                    @else
+                        @foreach($images as $image)
+                            <div class="col-md-4 col-xl-3 image-panel raw-margin-top-24">
+                                <div class="thumbnail">
+                                    <a href="{!! route(config('cms.backend-route-prefix', 'cms').'.images.edit', [$image->id]) !!}">
+                                        <div class="img" style="background-image: url('{!! $image->url !!}')"></div>
+                                    </a>
+                                </div>
+                                <div data-id="{{ $image->id }}" class="well pull-down overflow-hidden selectable">
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-12 col-sm-12">
+                                            @if ($image->is_published)
+                                                <span clas="pull-left"><span class="pull-left fa fa-check"></span> Published</span>
+                                            @else
+                                                <span clas="pull-left"><span class="pull-left fa fa-close"></span> Published</span>
+                                            @endif
+                                        </div>
+                                        <div class="col-lg-6 col-md-12 col-sm-12">
+                                            <div class="btn-toolbar float-right">
+                                                <a class="btn btn-sm btn-secondary img-alter-btn mr-2" href="{!! route(config('cms.backend-route-prefix', 'cms').'.images.edit', [$image->id]) !!}"><i class="fa fa-edit"></i></a>
+                                                <form method="post" action="{!! url(config('cms.backend-route-prefix', 'cms').'/images/'.$image->id) !!}">
+                                                    {!! csrf_field() !!}
+                                                    {!! method_field('DELETE') !!}
+                                                    <button class="delete-btn btn btn-sm img-alter-btn btn-danger" type="submit"><i class="fa fa-trash"></i></button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    @endif
+                </div>
             </div>
-        @endif
+        </div>
     </div>
 
     <div class="text-center">

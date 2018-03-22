@@ -33,7 +33,7 @@
             {!! FormMaker::fromObject($images, Config::get('cms.forms.images-edit')) !!}
 
             <div class="form-group text-right">
-                <a href="{!! url(config('cms.backend-route-prefix', 'cms').'/images') !!}" class="btn btn-default raw-left">Cancel</a>
+                <a href="{!! url(config('cms.backend-route-prefix', 'cms').'/images') !!}" class="btn btn-secondary raw-left">Cancel</a>
                 {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
             </div>
 

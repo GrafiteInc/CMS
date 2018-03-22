@@ -5,13 +5,13 @@
 @section('content')
 
     <div class="col-md-12 mt-2">
-        @include('cms::modules.links.breadcrumbs', ['location' => [['Menu' => url(config('cms.backend-route-prefix', 'cms').'/menus/'.request('m').'/edit')], 'links', 'create']])
+        @include('cms::modules.links.breadcrumbs', ['location' => [['Menu' => cms()->url('menus/'.request('m').'/edit')], 'links', 'create']])
     </div>
 
     <div class="col-md-12">
-        {!! Form::open(['route' => config('cms.backend-route-prefix', 'cms').'.links.store', 'class' => 'add']) !!}
+        {!! Form::open(['route' => cms()->route('links.store'), 'class' => 'add']) !!}
 
-            {!! FormMaker::fromTable('links', Config::get('cms.forms.link')) !!}
+            {!! FormMaker::fromTable('links', config('cms.forms.link')) !!}
 
             <div class="form-group" style="display: none;">
                 <label for="Page_id">Page</label>

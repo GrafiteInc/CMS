@@ -45,13 +45,13 @@
                             @foreach($widgets as $widget)
                                 <tr>
                                     <td>
-                                        <a href="{!! route(config('cms.backend-route-prefix', 'cms').'.widgets.edit', [$widget->id]) !!}">{!! $widget->name !!}</a>
+                                        <a href="{!! route(cms()->route('widgets.edit'), [$widget->id]) !!}">{!! $widget->name !!}</a>
                                     </td>
                                     <td>{!! $widget->slug !!}</td>
                                     <td class="text-right">
                                         <div class="btn-toolbar justify-content-between">
-                                            <a class="btn btn-sm btn-outline-primary mr-2" href="{!! route(config('cms.backend-route-prefix', 'cms').'.widgets.edit', [$widget->id]) !!}"><i class="fa fa-edit"></i> Edit</a>
-                                            <form method="post" action="{!! url(config('cms.backend-route-prefix', 'cms').'/widgets/'.$widget->id) !!}">
+                                            <a class="btn btn-sm btn-outline-primary mr-2" href="{!! route(cms()->route('widgets.edit'), [$widget->id]) !!}"><i class="fa fa-edit"></i> Edit</a>
+                                            <form method="post" action="{!! cms()->url('widgets/'.$widget->id) !!}">
                                                 {!! csrf_field() !!}
                                                 {!! method_field('DELETE') !!}
                                                 <button class="delete-btn btn btn-sm btn-danger" type="submit"><i class="fa fa-trash"></i> Delete</button>

@@ -44,12 +44,12 @@
                         <tbody>
                             @foreach($menus as $menu)
                                 <tr>
-                                    <td><a href="{!! route(config('cms.backend-route-prefix', 'cms').'.menus.edit', [$menu->id]) !!}">{!! $menu->name !!}</a></td>
+                                    <td><a href="{!! route(cms()->route('menus.edit'), [$menu->id]) !!}">{!! $menu->name !!}</a></td>
                                     <td>{!! $menu->slug !!}</td>
                                     <td class="text-right">
                                          <div class="btn-toolbar justify-content-between">
-                                            <a class="btn btn-sm btn-secondary mr-2" href="{!! route(config('cms.backend-route-prefix', 'cms').'.menus.edit', [$menu->id]) !!}"><i class="fa fa-edit"></i> Edit</a>
-                                            <form method="post" action="{!! url(config('cms.backend-route-prefix', 'cms').'/menus/'.$menu->id) !!}">
+                                            <a class="btn btn-sm btn-secondary mr-2" href="{!! route(cms()->route('menus.edit'), [$menu->id]) !!}"><i class="fa fa-edit"></i> Edit</a>
+                                            <form method="post" action="{!! cms()->url('menus/'.$menu->id) !!}">
                                                 {!! csrf_field() !!}
                                                 {!! method_field('DELETE') !!}
                                                 <button class="delete-btn btn btn-sm btn-danger" type="submit"><i class="fa fa-trash"></i> Delete</button>

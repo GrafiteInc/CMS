@@ -18,7 +18,7 @@
 
     <footer class="footer bg-light">
         <div class="container-fluid">
-            <span class="text-muted">Brought to you by Grafite Inc.</span>
+            <span class="text-muted">Brought to you by <a href="https://grafite.ca">Grafite Inc</a>.</span>
         </div>
     </footer>
 @stop

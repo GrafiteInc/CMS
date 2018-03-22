@@ -119,6 +119,18 @@ class CmsRepository
     }
 
     /**
+     * Find items by url.
+     *
+     * @param int $url
+     *
+     * @return \Illuminate\Support\Collection|null|static|Model
+     */
+    public function getByUrl($url)
+    {
+        return $this->model->where('url', $url)->first();
+    }
+
+    /**
      * Updates items into database.
      *
      * @param Model $model

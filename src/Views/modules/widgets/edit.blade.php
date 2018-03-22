@@ -32,7 +32,7 @@
 
         <div class="row">
             <div class="col-md-12">
-                {!! Form::model($widget, ['route' => [config('cms.backend-route-prefix', 'cms').'.widgets.update', $widget->id], 'method' => 'patch', 'class' => 'edit']) !!}
+                {!! Form::model($widget, ['route' => [cms()->route('widgets.update'), $widget->id], 'method' => 'patch', 'class' => 'edit']) !!}
 
                     <input type="hidden" name="lang" value="{{ request('lang') }}">
 
@@ -50,7 +50,7 @@
                     @endif
 
                     <div class="form-group text-right">
-                        <a href="{!! url(config('cms.backend-route-prefix', 'cms').'/widgets') !!}" class="btn btn-secondary float-left">Cancel</a>
+                        <a href="{!! cms()->url('widgets') !!}" class="btn btn-secondary float-left">Cancel</a>
                         {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
                     </div>
 

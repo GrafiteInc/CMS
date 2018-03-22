@@ -9,12 +9,12 @@
     </div>
 
     <div class="col-md-12">
-        {!! Form::open(['route' => config('cms.backend-route-prefix', 'cms').'.widgets.store', 'class' => 'add']) !!}
+        {!! Form::open(['route' => cms()->route('widgets.store'), 'class' => 'add']) !!}
 
-            {!! FormMaker::fromTable('widgets', Config::get('cms.forms.widget')) !!}
+            {!! FormMaker::fromTable('widgets', config('cms.forms.widget')) !!}
 
             <div class="form-group text-right">
-                <a href="{!! url(config('cms.backend-route-prefix', 'cms').'/widgets') !!}" class="btn btn-secondary raw-left">Cancel</a>
+                <a href="{!! cms()->url('widgets') !!}" class="btn btn-secondary raw-left">Cancel</a>
                 {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
             </div>
 

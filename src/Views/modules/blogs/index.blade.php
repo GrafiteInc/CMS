@@ -45,7 +45,8 @@
                         <tbody>
                             @foreach($blogs as $blog)
                                 <tr>
-                                    <td><a href="{!! route(config('cms.backend-route-prefix', 'cms').'.blog.edit', [$blog->id]) !!}">{!! $blog->title !!}</a></td>
+
+                                    <td><a href="{!! route(cms()->route('blog.edit'), [$blog->id]) !!}">{!! $blog->title !!}</a></td>
                                     <td class="m-hidden">{!! $blog->url !!}</td>
                                     <td class="m-hidden">
                                         @if ($blog->is_published)
@@ -56,8 +57,8 @@
                                     </td>
                                     <td class="text-right">
                                         <div class="btn-toolbar justify-content-between">
-                                            <a class="btn btn-sm btn-outline-primary mr-2" href="{!! route(config('cms.backend-route-prefix', 'cms').'.blog.edit', [$blog->id]) !!}"><i class="fa fa-edit"></i> Edit</a>
-                                            <form method="post" action="{!! url(config('cms.backend-route-prefix', 'cms').'/blog/'.$blog->id) !!}">
+                                            <a class="btn btn-sm btn-outline-primary mr-2" href="{!! route(cms()->route('blog.edit'), [$blog->id]) !!}"><i class="fa fa-edit"></i> Edit</a>
+                                            <form method="post" action="{!! cms()->url('blog/'.$blog->id) !!}">
                                                 {!! csrf_field() !!}
                                                 {!! method_field('DELETE') !!}
                                                 <button class="delete-btn btn btn-sm btn-danger" type="submit"><i class="fa fa-trash"></i> Delete</button>

@@ -34,7 +34,7 @@
                 <tr data-id="{{ $link->id }}">
                     <td>
                         <i class="fa fa-bars mr-4"></i>
-                        <a href="{!! route(config('cms.backend-route-prefix', 'cms').'.links.edit', [$link->id]) !!}">{!! $link->name !!}</a>
+                        <a href="{!! route(cms()->route('links.edit'), [$link->id]) !!}">{!! $link->name !!}</a>
                     </td>
                     @if ($link->external)
                     <td class="m-hidden">{!! $link->external_url !!}</td>
@@ -43,8 +43,8 @@
                     @endif
                     <td>
                         <div class="btn-toolbar justify-content-between">
-                            <a class="btn btn-sm btn-outline-primary mr-2" href="{!! route(config('cms.backend-route-prefix', 'cms').'.links.edit', [$link->id]) !!}"><i class="fa fa-edit"></i> Edit</a>
-                            <form method="post" action="{!! url(config('cms.backend-route-prefix', 'cms').'/links/'.$link->id) !!}">
+                            <a class="btn btn-sm btn-outline-primary mr-2" href="{!! route(cms()->route('links.edit'), [$link->id]) !!}"><i class="fa fa-edit"></i> Edit</a>
+                            <form method="post" action="{!! cms()->url('links/'.$link->id) !!}">
                                 {!! csrf_field() !!}
                                 {!! method_field('DELETE') !!}
                                 <button class="delete-link-btn btn btn-sm btn-danger" type="submit"><i class="fa fa-trash"></i> Delete</button>

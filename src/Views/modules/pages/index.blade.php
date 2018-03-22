@@ -47,7 +47,7 @@
                         <tbody>
                             @foreach($pages as $page)
                                 <tr>
-                                    <td><a href="{!! route(config('cms.backend-route-prefix', 'cms').'.pages.edit', [$page->id]) !!}">{!! $page->title !!}</a></td>
+                                    <td><a href="{!! route(cms()->route('pages.edit'), [$page->id]) !!}">{!! $page->title !!}</a></td>
                                     <td class="m-hidden">{!! $page->url !!}</td>
                                     <td class="m-hidden">
                                         @if ($page->is_published)
@@ -58,8 +58,8 @@
                                     </td>
                                     <td class="text-right">
                                         <div class="btn-toolbar justify-content-between">
-                                            <a class="btn btn-sm btn-outline-primary mr-2" href="{!! route(config('cms.backend-route-prefix', 'cms').'.pages.edit', [$page->id]) !!}"><i class="fa fa-edit"></i> Edit</a>
-                                            <form method="post" action="{!! url(config('cms.backend-route-prefix', 'cms').'/pages/'.$page->id) !!}">
+                                            <a class="btn btn-sm btn-outline-primary mr-2" href="{!! route(cms()->route('pages.edit'), [$page->id]) !!}"><i class="fa fa-edit"></i> Edit</a>
+                                            <form method="post" action="{!! cms()->url('pages/'.$page->id) !!}">
                                                 {!! csrf_field() !!}
                                                 {!! method_field('DELETE') !!}
                                                 <button class="delete-btn btn btn-sm btn-danger" type="submit"><i class="fa fa-trash"></i> Delete</button>

@@ -43,10 +43,10 @@
     <div class="col-md-12">
         <nav class="navbar px-0 navbar-light justify-content-between">
             <div class="navbar-nav navbar-expand-md mr-auto justify-content-between">
-                <a class="d-inline nav-item btn btn-primary mr-1 mt-2" href="{!! route(config('cms.backend-route-prefix', 'cms').'.images.create') !!}">Add New</a>
+                <a class="d-inline nav-item btn btn-primary mr-1 mt-2" href="{!! route(cms()->route('images.create')) !!}">Add New</a>
                 <button class="d-inline nav-item btn btn-danger bulk-image-delete mt-2"><span class="fa fa-trash"></span> Delete</button>
             </div>
-            {!! Form::open(['url' => config('cms.backend-route-prefix', 'cms').'/images/search', 'class' => 'form-inline mt-2']) !!}
+            {!! Form::open(['url' => cms()->url('images/search'), 'class' => 'form-inline mt-2']) !!}
                 <input class="form-control mr-sm-2" name="term" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
             {!! Form::close() !!}
@@ -70,7 +70,7 @@
                         @foreach($images as $image)
                             <div class="col-md-4 col-xl-3 image-panel raw-margin-top-24">
                                 <div class="thumbnail">
-                                    <a href="{!! route(config('cms.backend-route-prefix', 'cms').'.images.edit', [$image->id]) !!}">
+                                    <a href="{!! route(cms()->route('images.edit'), [$image->id]) !!}">
                                         <div class="img" style="background-image: url('{!! $image->url !!}')"></div>
                                     </a>
                                 </div>
@@ -85,8 +85,8 @@
                                         </div>
                                         <div class="col-lg-6 col-md-12 col-sm-12">
                                             <div class="btn-toolbar float-right">
-                                                <a class="btn btn-sm btn-secondary img-alter-btn mr-2" href="{!! route(config('cms.backend-route-prefix', 'cms').'.images.edit', [$image->id]) !!}"><i class="fa fa-edit"></i></a>
-                                                <form method="post" action="{!! url(config('cms.backend-route-prefix', 'cms').'/images/'.$image->id) !!}">
+                                                <a class="btn btn-sm btn-secondary img-alter-btn mr-2" href="{!! route(cms()->route('images.edit'), [$image->id]) !!}"><i class="fa fa-edit"></i></a>
+                                                <form method="post" action="{!! cms()->url('images/'.$image->id) !!}">
                                                     {!! csrf_field() !!}
                                                     {!! method_field('DELETE') !!}
                                                     <button class="delete-btn btn btn-sm img-alter-btn btn-danger" type="submit"><i class="fa fa-trash"></i></button>

@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
 
-        <title>CMS: {{ ucfirst(request()->segment(2)) }}</title>
+        <title>{{ config('cms.backend-title') }}: {{ ucfirst(request()->segment(2)) }}</title>
 
         <link rel="icon" type="image/ico" href="{!! Cms::asset('images/favicon.ico', 'image/ico') !!}?v3">
         <link rel="icon" type="image/png" sizes="32x32" href="{!! Cms::asset('images/favicon-32.png', 'image/png') !!}?v3">
@@ -35,6 +35,8 @@
             var _url = '{!! url("/") !!}';
             var _pixabayKey = '{!! config('cms.pixabay', '') !!}';
             var _appTimeZone = '{!! config('app.timezone', 'UTC') !!}';
+            var _apiKey = '{!! config("cms.api-key") !!}';
+            var _apiToken = '{!! config("cms.api-token") !!}';
         </script>
     </head>
     <body>
@@ -47,8 +49,6 @@
         </div>
 
         <script>
-            var _apiKey = '{!!  config("cms.api-key") !!}';
-            var _apiToken = '{!!  config("cms.api-token") !!}';
             @yield('pre_javascript')
         </script>
         <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
@@ -57,7 +57,6 @@
         <script src="{!! Cms::asset('dist/js/vendor.js', 'application/javascript') !!}"></script>
         <script src="{!! Cms::asset('dist/js/cms.js', 'application/javascript') !!}"></script>
         @include('cms::notifications')
-
         @yield("javascript")
     </body>
 </html>

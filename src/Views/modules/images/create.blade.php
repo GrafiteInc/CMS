@@ -9,15 +9,15 @@
     </div>
 
     <div class="col-md-12 mt-2">
-        {!! Form::open(['url' => 'cms/images/upload', 'files' => true, 'class' => 'dropzone', 'id' => 'fileDropzone']); !!}
+        {!! Form::open(['url' => cms()->url('images/upload'), 'files' => true, 'class' => 'dropzone', 'id' => 'fileDropzone']); !!}
         {!! Form::close() !!}
 
-        {!! Form::open(['route' => config('cms.backend-route-prefix', 'cms').'.images.store', 'files' => true, 'id' => 'fileDetailsForm', 'class' => 'add']) !!}
+        {!! Form::open(['route' => cms()->route('images.store'), 'files' => true, 'id' => 'fileDetailsForm', 'class' => 'add']) !!}
 
-            {!! FormMaker::fromTable('files', Config::get('cms.forms.images')) !!}
+            {!! FormMaker::fromTable('files', config('cms.forms.images')) !!}
 
             <div class="form-group text-right">
-                <a href="{!! url(config('cms.backend-route-prefix', 'cms').'/images') !!}" class="btn btn-secondary float-left">Cancel</a>
+                <a href="{!! cms()->url('images') !!}" class="btn btn-secondary float-left">Cancel</a>
                 {!! Form::submit('Save', ['class' => 'btn btn-primary', 'id' => 'saveImagesBtn']) !!}
             </div>
 

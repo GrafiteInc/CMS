@@ -13,12 +13,12 @@
     </div>
 
     <div class="col-md-12">
-        {!! Form::model($files, ['route' => [config('cms.backend-route-prefix', 'cms').'.files.update', $files->id], 'files' => true, 'method' => 'patch', 'class' => 'edit']) !!}
+        {!! Form::model($files, ['route' => [cms()->route('files.update'), $files->id], 'files' => true, 'method' => 'patch', 'class' => 'edit']) !!}
 
-            {!! FormMaker::setColumns(2)->fromObject($files, Config::get('cms.forms.file-edit')) !!}
+            {!! FormMaker::setColumns(2)->fromObject($files, config('cms.forms.file-edit')) !!}
 
             <div class="form-group text-right">
-                <a href="{!! url(config('cms.backend-route-prefix', 'cms').'/files') !!}" class="btn btn-secondary raw-left">Cancel</a>
+                <a href="{!! cms()->url('files') !!}" class="btn btn-secondary raw-left">Cancel</a>
                 {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
             </div>
 

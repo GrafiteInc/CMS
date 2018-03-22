@@ -9,12 +9,12 @@
     </div>
 
     <div class="col-md-12">
-        {!! Form::model($menu, ['route' => [config('cms.backend-route-prefix', 'cms').'.menus.update', $menu->id], 'method' => 'patch', 'class' => 'edit']) !!}
+        {!! Form::model($menu, ['route' => [cms()->route('menus.update'), $menu->id], 'method' => 'patch', 'class' => 'edit']) !!}
 
-            {!! FormMaker::fromObject($menu, Config::get('cms.forms.menu')) !!}
+            {!! FormMaker::fromObject($menu, config('cms.forms.menu')) !!}
 
             <div class="form-group text-right">
-                <a href="{!! url(config('cms.backend-route-prefix', 'cms').'/menus') !!}" class="btn btn-secondary float-left">Cancel</a>
+                <a href="{!! cms()->url('menus') !!}" class="btn btn-secondary float-left">Cancel</a>
                 {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
             </div>
 
@@ -26,7 +26,7 @@
     </div>
 
     <div class="col-md-12">
-        <a class="btn btn-outline-primary float-right" href="{!! url(config('cms.backend-route-prefix', 'cms').'/links/create?m='.$menu->id) !!}">Add Link</a>
+        <a class="btn btn-outline-primary float-right" href="{!! cms()->url('links/create?m='.$menu->id) !!}">Add Link</a>
         <h5 class="pt-2">Links <small>(Drag and drop to sort)</small></h5>
         @include('cms::modules.links.index')
     </div>
@@ -38,6 +38,6 @@
     @parent
     var _linkOrder = @if (!is_null($menu->order)) {!! $menu->order !!} @else [] @endif;
     var _id = {{ $menu->id }};
-    var _cmsUrl = _url + "/{{ config('cms.backend-route-prefix') }}"
+    var _cmsUrl = _url + "/{{ config('cms.backend-route-prefix') }}";
 
 @stop

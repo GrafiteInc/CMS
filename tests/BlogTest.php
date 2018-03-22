@@ -36,7 +36,6 @@ class BlogTest extends TestCase
     {
         factory(\Grafite\Cms\Models\Blog::class)->create(['id' => 4]);
         $response = $this->call('GET', 'cms/blog/4/edit');
-        dd($response->content());
         $this->assertEquals(200, $response->getStatusCode());
         $response->assertViewHas('blog');
         $response->assertSee('Title');

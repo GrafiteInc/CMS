@@ -35,7 +35,7 @@ class WidgetsTest extends TestCase
     {
         $response = $this->call('GET', 'cms/widgets/1/edit');
         $this->assertEquals(200, $response->getStatusCode());
-        $response->assertViewHas('widgets');
+        $response->assertViewHas('widget');
     }
 
     /*

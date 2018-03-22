@@ -7,7 +7,7 @@ use Gate;
 use Grafite\Cms\Models\Widget;
 use Illuminate\Foundation\Http\FormRequest;
 
-class WidgetsRequest extends FormRequest
+class WidgetRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

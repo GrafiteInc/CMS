@@ -10,12 +10,14 @@ class FAQRepository extends CmsRepository
 {
     public $model;
 
+    public $translationRepo;
+
     public $table;
 
-    public function __construct(FAQ $model)
+    public function __construct(FAQ $model, TranslationRepository $translationRepo)
     {
         $this->model = $model;
-
+        $this->translationRepo = $translationRepo;
         $this->table = 'faqs';
     }
 

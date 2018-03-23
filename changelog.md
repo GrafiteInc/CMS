@@ -3,6 +3,14 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 ----
 
+## [v3.0.0] - 2018-03-23
+
+### Changed
+- Bootstrap upgrade
+- Overhaul of codebase
+- General Improvements
+- Laravel 5.6 compatibility upgrade
+
 ## [v2.4.6] - 2018-02-21
 
 ### Fixed

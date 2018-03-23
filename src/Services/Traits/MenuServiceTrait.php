@@ -77,7 +77,7 @@ trait MenuServiceTrait
         }
 
         if (Gate::allows('cms', Auth::user())) {
-            $response .= '<a href="'.url(config('cms.backend-route-prefix', 'cms').'/menus/'.$menu->id.'/edit').'" style="margin-left: 8px;" class="btn btn-xs btn-default"><span class="fa fa-pencil"></span> Edit</a>';
+            $response .= '<a href="'.url(config('cms.backend-route-prefix', 'cms').'/menus/'.$menu->id.'/edit').'" class="btn btn-sm ml-2 btn-outline-secondary"><span class="fa fa-edit"></span> Edit</a>';
         }
 
         return $response;

@@ -222,7 +222,6 @@ return [
     '.jpeg' => 'image/jpeg',
     '.jpeg' => 'image/pjpeg',
     '.jpg' => 'image/jpeg',
-    '.jpg' => 'image/pjpeg',
     '.jps' => 'image/x-jps',
     '.js' => 'application/x-javascript',
     '.jut' => 'image/jutvision',

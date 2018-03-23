@@ -71,7 +71,7 @@ class AssetService
                 if (config('cms.storage-location') === 'local' || config('cms.storage-location') === null) {
                     $filePath = storage_path('app/'.$fileName);
                     $contentType = $fileSystem->mimeType($filePath);
-                    $ext = '.'.strtoupper($fileSystem->extension($filePath));
+                    $ext = strtoupper($fileSystem->extension($filePath));
                 } else {
                     $filePath = Storage::disk(config('cms.storage-location', 'local'))->url($fileName);
                     $fileTool = new SplFileInfo($filePath);

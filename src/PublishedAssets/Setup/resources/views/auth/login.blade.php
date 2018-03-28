@@ -28,9 +28,11 @@
                 </div>
             </div>
 
-            <div class="col-md-12 mt-3">
-                <a class="btn raw100 btn-info" href="/register">Register</a>
-            </div>
+            @if (config('cms.registration-available'))
+                <div class="col-md-12 mt-3">
+                    <a class="btn raw100 btn-info btn-block" href="/register">Register</a>
+                </div>
+            @endif
         </form>
 
     </div>

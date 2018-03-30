@@ -19,8 +19,7 @@ class FileRepository extends CmsRepository
     public function __construct(File $model)
     {
         $this->model = $model;
-
-        $this->table = 'files';
+        $this->table = config('cms.db-prefix').'.files';
     }
 
     /**

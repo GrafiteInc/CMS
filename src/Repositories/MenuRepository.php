@@ -15,8 +15,7 @@ class MenuRepository extends CmsRepository
     public function __construct(Menu $model)
     {
         $this->model = $model;
-
-        $this->table = 'menus';
+        $this->table = config('cms.db-prefix').'.menus';
     }
 
     /**

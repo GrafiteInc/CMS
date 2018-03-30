@@ -21,7 +21,7 @@ class PageRepository extends CmsRepository
     {
         $this->model = $model;
         $this->translationRepo = $translationRepo;
-        $this->table = 'pages';
+        $this->table = config('cms.db-prefix').'.pages';
     }
 
     /**

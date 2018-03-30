@@ -15,7 +15,10 @@ class ApiController extends GrafiteCmsController
     {
         parent::construct();
 
-        $this->modelName = str_singular($request->segment(3));
+        $url = $request->segment(3) ?? 'page';
+
+        $this->modelName = str_singular($url);
+
         if (! empty($this->modelName)) {
             $this->model = app('Grafite\Cms\Models\\'.ucfirst($this->modelName));
         }

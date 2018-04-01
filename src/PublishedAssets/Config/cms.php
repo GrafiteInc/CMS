@@ -83,6 +83,18 @@ return [
 
     /*
      * --------------------------------------------------------------------------
+     * Site Mapped Modules
+     * --------------------------------------------------------------------------
+    */
+
+    'site-mapped-modules' => [
+        'blog' => 'Grafite\Cms\Repositories\BlogRepository',
+        'page' => 'Grafite\Cms\Repositories\PageRepository',
+        'events' => 'Grafite\Cms\Repositories\EventRepository',
+    ],
+
+    /*
+     * --------------------------------------------------------------------------
      * Languages
      * --------------------------------------------------------------------------
     */

@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\URL;
+use ReflectionException;
 
 class CmsService
 {
@@ -276,5 +277,42 @@ class CmsService
         $until = strpos($matches, '-');
 
         return str_replace(']', '', substr($matches, 5, $until - 5));
+    }
+
+    /**
+     * Collect items for a site map
+     *
+     * @return array
+     */
+    public function collectSiteMapItems()
+    {
+        $itemCollection = [];
+        $modules = config('site-mapped-modules', [
+            'blog' => 'Grafite\Cms\Repositories\BlogRepository',
+            'page' => 'Grafite\Cms\Repositories\PageRepository',
+            'events' => 'Grafite\Cms\Repositories\EventRepository',
+        ]);
+
+        foreach ($modules as $module => $repository) {
+            try {
+                $items = collect([]);
+
+                if (method_exists($repository, 'arePublic')) {
+                    $items = app($repository)->arePublic();
+                }
+
+                foreach ($items as $item) {
+                    $itemCollection[] = [
+                        'url' => url($module.'/'.$item->url),
+                        'updated_at' => $item->updated_at->format('Y-m-d'),
+                    ];
+                }
+            } catch (ReflectionException $e) {
+                // It just means we couldn't find
+                // the Repository class
+            }
+        }
+
+        return collect($itemCollection);
     }
 }

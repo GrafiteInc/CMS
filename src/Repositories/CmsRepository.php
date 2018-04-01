@@ -4,7 +4,6 @@ namespace Grafite\Cms\Repositories;
 
 use Carbon\Carbon;
 use Grafite\Cms\Repositories\TranslationRepository;
-use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Schema;
 
 class CmsRepository
@@ -58,7 +57,27 @@ class CmsRepository
         return $this->model->where('is_published', 1)
             ->where('published_at', '<=', Carbon::now(config('app.timezone'))->format('Y-m-d H:i:s'))
             ->orderBy('created_at', 'desc')
-            ->paginate(Config::get('cms.pagination', 24));
+            ->paginate(config('cms.pagination', 24));
+    }
+
+    /**
+     * Returns all public items
+     *
+     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     */
+    public function arePublic()
+    {
+        if (Schema::hasColumn($this->model->getTable(), 'is_published')) {
+            $query = $this->model->where('is_published', 1);
+
+            if (Schema::hasColumn($this->model->getTable(), 'published_at')) {
+                $query->where('published_at', '<=', Carbon::now(config('app.timezone'))->format('Y-m-d H:i:s'));
+            }
+
+            return $query->orderBy('created_at', 'desc')->get();
+        }
+
+        return $this->model->orderBy('created_at', 'desc')->get();
     }
 
     /**

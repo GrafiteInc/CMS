@@ -64,7 +64,7 @@ class AnalyticsService
         return $browsers;
     }
 
-    public function convertDataToItems($data, $key, $conversions = [])
+    public function convertDataToItems($data, $key, $conversions = [], $limit = 15)
     {
         if (!isset($conversions['unknown'])) {
             $conversions['unknown'] = 0;
@@ -90,7 +90,7 @@ class AnalyticsService
             }
         }
 
-        return $conversions;
+        return array_slice($conversions, 0, $limit);
     }
 
     public function getDays($count)

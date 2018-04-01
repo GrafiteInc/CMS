@@ -45,8 +45,8 @@
     </div>
     <div class="blocks col-md-12">
         <div class="row">
-            @if (!is_null($page))
-                @foreach ($page->blocks as $slug => $block)
+            @if (!is_null($item))
+                @foreach ($item->blocks as $slug => $block)
                     <div id="block_container_{{ $slug }}" class="col-md-6">
                         <div class="form-group">
                             <h4>

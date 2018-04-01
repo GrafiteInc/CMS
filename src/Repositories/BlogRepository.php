@@ -86,6 +86,8 @@ class BlogRepository extends CmsRepository
      */
     public function store($payload)
     {
+        $payload = $this->parseBlocks($payload, 'blog');
+
         $payload['title'] = htmlentities($payload['title']);
         $payload['url'] = Cms::convertToURL($payload['url']);
         $payload['is_published'] = (isset($payload['is_published'])) ? (bool) $payload['is_published'] : 0;
@@ -142,6 +144,8 @@ class BlogRepository extends CmsRepository
      */
     public function update($blog, $payload)
     {
+        $payload = $this->parseBlocks($payload, 'blog');
+
         $payload['title'] = htmlentities($payload['title']);
 
         if (isset($payload['hero_image'])) {

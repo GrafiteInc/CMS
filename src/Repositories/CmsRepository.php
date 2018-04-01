@@ -142,4 +142,65 @@ class CmsRepository
     {
         return $model->update($payload);
     }
+
+    /**
+     * Convert block payloads into json
+     *
+     * @param  array $payload
+     * @param  string $module
+     *
+     * @return array
+     */
+    public function parseBlocks($payload, $module)
+    {
+        $blockCollection = [];
+
+        foreach ($payload as $key => $value) {
+            if (stristr($key, 'block_')) {
+                $blockName = str_replace('block_', '', $key);
+                $blockCollection[$blockName] = $value;
+                unset($payload[$key]);
+            }
+        }
+
+        $blockCollection = $this->parseTemplate($payload, $blockCollection, $module);
+
+        if (empty($blockCollection)) {
+            $payload['blocks'] = "{}";
+        } else {
+            $payload['blocks'] = json_encode($blockCollection);
+        }
+
+        return $payload;
+    }
+
+    /**
+     * Parse the template for blocks.
+     *
+     * @param  array $payload
+     * @param  array $currentBlocks
+     *
+     * @return array
+     */
+    public function parseTemplate($payload, $currentBlocks, $module)
+    {
+        if (isset($payload['template'])) {
+            $content = file_get_contents(base_path('resources/themes/'.config('cms.frontend-theme').'/'.$module.'/'.$payload['template'].'.blade.php'));
+
+            preg_match_all('/->block\((.*)\)/', $content, $pageMethodMatches);
+            preg_match_all('/\@block\((.*)\)/', $content, $bladeMatches);
+
+            $matches = array_unique(array_merge($pageMethodMatches[1], $bladeMatches[1]));
+
+            foreach ($matches as $match) {
+                $match = str_replace('"', "", $match);
+                $match = str_replace("'", "", $match);
+                if (!isset($currentBlocks[$match])) {
+                    $currentBlocks[$match] = '';
+                }
+            }
+        }
+
+        return $currentBlocks;
+    }
 }

@@ -81,7 +81,7 @@
 
                     {!! FormMaker::setColumns(2)->fromObject($page->asObject(), config('cms.forms.page.publish')) !!}
 
-                    @include('cms::modules.pages.blocks', ['page' => $page->asObject()])
+                    @include('cms::modules.blocks', ['item' => $page->asObject()])
 
                     <div class="form-group text-right">
                         <a href="{!! cms()->url('pages') !!}" class="btn btn-secondary raw-left">Cancel</a>

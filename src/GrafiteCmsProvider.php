@@ -41,7 +41,6 @@ class GrafiteCmsProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/PublishedAssets/Views/themes' => base_path('resources/themes'),
             __DIR__.'/PublishedAssets/Controllers' => app_path('Http/Controllers/Cms'),
-            __DIR__.'/PublishedAssets/Migrations' => base_path('database/migrations'),
             __DIR__.'/PublishedAssets/Middleware' => app_path('Http/Middleware'),
             __DIR__.'/PublishedAssets/Routes' => base_path('routes'),
             __DIR__.'/PublishedAssets/Config' => base_path('config'),

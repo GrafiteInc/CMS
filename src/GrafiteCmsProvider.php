@@ -52,7 +52,7 @@ class GrafiteCmsProvider extends ServiceProvider
 
         $this->loadMigrationsFrom(__DIR__.'/Migrations');
 
-        $theme = Config::get('cms.frontend-theme', 'default');
+        $theme = config('cms.frontend-theme', 'default');
 
         $this->loadViewsFrom(__DIR__.'/Views', 'cms');
 
@@ -70,7 +70,7 @@ class GrafiteCmsProvider extends ServiceProvider
                 $expression = substr($expression, 1, -1);
             }
 
-            $theme = Config::get('cms.frontend-theme');
+            $theme = config('cms.frontend-theme');
             $view = '"cms-frontend::'.str_replace('"', '', str_replace("'", '', $expression)).'"';
 
             return "<?php echo \$__env->make($view, array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>";
@@ -81,7 +81,8 @@ class GrafiteCmsProvider extends ServiceProvider
         });
 
         Blade::directive('block', function ($expression) {
-            return "<?php echo \$page->block($expression); ?>";
+            $module = Cms::getModule();
+            return "<?php echo optional(\$".$module.")->block($expression); ?>";
         });
 
         Blade::directive('languages', function ($expression) {

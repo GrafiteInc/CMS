@@ -8,6 +8,27 @@ use Grafite\Cms\Facades\CryptoServiceFacade;
 trait ModuleServiceTrait
 {
     /**
+     * Determine the module based on URL
+     *
+     * @return string
+     */
+    public function getModule()
+    {
+        $module = request()->segment(1);
+
+        $defaultModules = config('cms.active-core-modules');
+        $extraModules = array_keys(config('cms.modules'));
+
+        $modules = array_merge($defaultModules, $extraModules);
+
+        if (in_array($module, $modules)) {
+            return str_singular($module);
+        }
+
+        return 'page';
+    }
+
+    /**
      * Module Assets.
      *
      * @param string $module      Module name

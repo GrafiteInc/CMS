@@ -15,8 +15,10 @@ use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
 use Intervention\Image\ImageServiceProvider;
 use Cms;
-use Spatie\LaravelAnalytics\LaravelAnalyticsFacade;
-use Spatie\LaravelAnalytics\LaravelAnalyticsServiceProvider;
+//use Spatie\LaravelAnalytics\LaravelAnalyticsFacade;
+use Spatie\Analytics\AnalyticsFacade;
+//use Spatie\LaravelAnalytics\LaravelAnalyticsServiceProvider;
+use Spatie\Analytics\AnalyticsServiceProvider
 use Grafite\Builder\GrafiteBuilderProvider;
 use Grafite\Cms\Console\Keys;
 use Grafite\Cms\Console\ModuleComposer;
@@ -146,14 +148,15 @@ class GrafiteCmsProvider extends ServiceProvider
         $this->app->register(GrafiteBuilderProvider::class);
         $this->app->register(MinifyServiceProvider::class);
         $this->app->register(MarkdownServiceProvider::class);
-        $this->app->register(LaravelAnalyticsServiceProvider::class);
+        $this->app->register(AnalyticsServiceProvider::class);
         $this->app->register(ImageServiceProvider::class);
 
         $loader = AliasLoader::getInstance();
 
         $loader->alias('Minify', MinifyFacade::class);
         $loader->alias('Markdown', Markdown::class);
-        $loader->alias('LaravelAnalytics', LaravelAnalyticsFacade::class);
+        $loader->alias('LaravelAnalytics', AnalyticsFacade::class);
+		$loader->alias('Analytics', AnalyticsFacade::class);
         $loader->alias('Image', Image::class);
 
         /*

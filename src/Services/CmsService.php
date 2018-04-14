@@ -74,6 +74,31 @@ class CmsService
     }
 
     /**
+     * Links for each supported language
+     *
+     * @param  string $linkClass
+     * @param  string $itemClass
+     *
+     * @return string
+     */
+    public function languageLinks($linkClass = 'nav-link', $itemClass = 'nav-item')
+    {
+        if (count(config('cms.languages')) > 1) {
+            $languageLinks = [];
+            foreach (config('cms.languages') as $key => $value) {
+                $url = url(config('cms.backend-route-prefix', 'cms').'/language/set/'.$key);
+                $languageLinks[] = '<li class="'.$itemClass.'"><a class="language-link '.$linkClass.'" href="'.$url.'">'.ucfirst($value).'</a></li>';
+            }
+
+            $languageLinkString = implode($languageLinks);
+
+            return $languageLinkString;
+        }
+
+        return '';
+    }
+
+    /**
      * Generates a notification for the app.
      *
      * @param string $string Notification string

@@ -86,18 +86,7 @@ class GrafiteCmsProvider extends ServiceProvider
         });
 
         Blade::directive('languages', function ($expression) {
-            if (count(config('cms.languages')) > 1) {
-                $languageLinks = [];
-                foreach (config('cms.languages') as $key => $value) {
-                    $languageLinks[] = '<a class="language-link" href="'.url(config('cms.backend-route-prefix', 'cms').'/language/set/'.$key).'">'.$value.'</a>';
-                }
-
-                $languageLinkString = implode($languageLinks);
-
-                return "<?php echo '$languageLinkString'; ?>";
-            }
-
-            return '';
+            return "<?php echo Cms::languageLinks($expression); ?>";
         });
 
         Blade::directive('modules', function ($expression) {

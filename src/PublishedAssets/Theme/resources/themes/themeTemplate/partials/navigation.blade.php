@@ -11,6 +11,7 @@
             <li class="nav-item"><a class="nav-link" href="{{ url('faqs') }}">FAQs</a></li>
             <li class="nav-item"><a class="nav-link" href="{{ url('gallery') }}">Gallery</a></li>
             @modules()
+            @languages()
         </ul>
         <ul class="navbar-nav px-3">
             <li class="nav-item text-nowrap">

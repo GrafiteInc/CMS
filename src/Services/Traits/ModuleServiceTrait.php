@@ -75,7 +75,7 @@ trait ModuleServiceTrait
      *
      * @return string
      */
-    public function moduleLinks($ignoredModules = [])
+    public function moduleLinks($ignoredModules = [], $linkClass = 'nav-link', $listClass = 'nav-item')
     {
         $links = '';
 
@@ -101,7 +101,7 @@ trait ModuleServiceTrait
             }
 
             if ($displayLink) {
-                $links .= '<li><a href="'.url($link).'">'.ucfirst($link).'</a></li>';
+                $links .= '<li class="'.$listClass.'"><a class="'.$linkClass.'" href="'.url($link).'">'.ucfirst($link).'</a></li>';
             }
         }
 

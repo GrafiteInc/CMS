@@ -59,7 +59,7 @@ class FileRepository extends CmsRepository
     public function update($files, $payload)
     {
         if (isset($payload['location'])) {
-            $savedFile = FileService::saveFile($payload['location'], 'files/');
+            $savedFile = app(FileService::class)->saveFile($payload['location'], 'files/');
             $_file = $payload['location'];
 
             $filePayload = $payload;

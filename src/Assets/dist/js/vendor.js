@@ -13854,5 +13854,3 @@ return {
     }
 };
 };
-
-//# sourceMappingURL=vendor.js.map

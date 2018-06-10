@@ -69,7 +69,7 @@ class BlogController extends Controller
      */
     public function show($url)
     {
-        $blog = $this->repository->getByUrl($url);
+        $blog = $this->repository->findBlogsByURL($url);
 
         if (empty($blog)) {
             abort(404);

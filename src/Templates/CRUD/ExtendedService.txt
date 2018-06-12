@@ -1,0 +1,35 @@
+<?php
+
+namespace _namespace_services_;
+
+use _namespace_model_\_camel_case_;
+use _namespace_services_\BaseService;
+
+class _camel_case_Service extends BaseService
+{
+    /**
+     * Service Model
+     *
+     * @var Model
+     */
+    public $model;
+
+    /**
+     * Pagination
+     *
+     * @var integer
+     */
+    public $pagination;
+
+    /**
+     * Service Constructor
+     *
+     * @param _camel_case_ $_lower_case_
+     */
+    public function __construct(_camel_case_ $_lower_case_)
+    {
+        $this->model = $_lower_case_;
+        $this->pagination = 25;
+        $this->table = '_table_name_';
+    }
+}

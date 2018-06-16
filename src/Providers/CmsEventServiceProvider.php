@@ -46,6 +46,9 @@ class CmsEventServiceProvider extends ServiceProvider
         'eloquent.created: Grafite\Cms\Models\Widget' => [
             'Grafite\Cms\Models\Widget@afterCreate',
         ],
+        'eloquent.created: Grafite\Cms\Models\Link' => [
+            'Grafite\Cms\Models\Link@afterCreate',
+        ],
 
         'eloquent.deleting: Grafite\Cms\Models\Blog' => [
             'Grafite\Cms\Models\Blog@beingDeleted',

@@ -3,9 +3,12 @@
 namespace Grafite\Cms\Models;
 
 use Grafite\Cms\Models\CmsModel;
+use Grafite\Cms\Traits\Translatable;
 
 class Link extends CmsModel
 {
+    use Translatable;
+
     public $table = 'links';
 
     public $primaryKey = 'id';

@@ -9,9 +9,21 @@
     </div>
 
     <div class="col-md-12">
+        <div class="row mb-4">
+            <div class="col-md-12">
+                <ul class="nav nav-tabs">
+                    @include('cms::layouts.tabs', [ 'module' => 'links', 'item' => $links ])
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-12">
         {!! Form::model($links, ['route' => [cms()->route('links.update'), $links->id], 'method' => 'patch', 'class' => 'edit']) !!}
 
-            {!! FormMaker::fromObject($links, config('cms.forms.link')) !!}
+            <input type="hidden" name="lang" value="{{ request('lang') }}">
+
+            {!! FormMaker::fromObject($links->asObject(), config('cms.forms.link')) !!}
 
             <div class="form-group" style="display: none;">
                 <label for="Page_id">Page</label>

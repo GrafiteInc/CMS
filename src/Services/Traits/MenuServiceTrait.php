@@ -52,18 +52,21 @@ trait MenuServiceTrait
         $processedLinks = [];
         foreach ($links as $key => $link) {
             if ($link->external) {
-                $response .= "<a href=\"$link->external_url\">$link->name</a>";
-                $processedLinks[] = "<a href=\"$link->external_url\">$link->name</a>";
+                if (config('app.locale') != config('cms.default-language', $this->config('cms.default-language'))) {
+                    $processedLinks[] = "<a href=\"$link->external_url\">".$link->translationData(config('app.locale'))->name."</a>";
+                } else {
+                    $processedLinks[] = "<a href=\"$link->external_url\">$link->name</a>";
+                }
             } else {
                 $page = $pageRepository->find($link->page_id);
+                // if the page is published
                 if ($page && $page->is_published && $page->published_at <= Carbon::now(config('app.timezone'))) {
-                    if (config('app.locale') == config('cms.default-language', $this->config('cms.default-language'))) {
-                        $response .= '<a href="'.url('page/'.$page->url)."\">$link->name</a>";
+                    if (config('app.locale') === config('cms.default-language', $this->config('cms.default-language'))) {
                         $processedLinks[] = '<a href="'.url('page/'.$page->url)."\">$link->name</a>";
                     } elseif (config('app.locale') != config('cms.default-language', $this->config('cms.default-language'))) {
+                        // if the page has a translation
                         if ($page->translation(config('app.locale'))) {
-                            $response .= '<a href="'.url('page/'.$page->translation(config('app.locale'))->data->url)."\">$link->name</a>";
-                            $processedLinks[] = '<a href="'.url('page/'.$page->translation(config('app.locale'))->data->url)."\">$link->name</a>";
+                            $processedLinks[] = '<a href="'.url('page/'.$page->translation(config('app.locale'))->data->url)."\">".$link->translationData(config('app.locale'))->name."</a>";
                         }
                     }
                 } else {
@@ -77,6 +80,7 @@ trait MenuServiceTrait
         }
 
         if (Gate::allows('cms', Auth::user())) {
+            $response = implode($processedLinks);
             $response .= '<a href="'.url(config('cms.backend-route-prefix', 'cms').'/menus/'.$menu->id.'/edit').'" class="btn btn-sm ml-2 btn-outline-secondary"><span class="fa fa-edit"></span> Edit</a>';
         }
 

@@ -13,7 +13,7 @@ const { mix } = require('laravel-mix');
 
 mix.config.publicPath = 'src/Assets/dist/';
 
-mix.sass('src/Assets/src/sass/cms.scss', 'cms.scss');
+mix.sass('src/Assets/src/sass/cms.scss', 'css');
 
 mix.scripts([
     'src/Assets/src/js/vendor/typeahead.bundle.js',

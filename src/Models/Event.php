@@ -5,8 +5,16 @@ namespace Grafite\Cms\Models;
 use Grafite\Cms\Models\CmsModel;
 use Grafite\Cms\Services\Normalizer;
 use Grafite\Cms\Traits\Translatable;
+use Illuminate\Support\Facades\Config;
 
-class Event extends CmsModel
+// Load dynamically from config the right basis class
+$cmsModel = Config::get('cms.models.event') ?? CmsModel::class;
+if (! is_a($cmsModel, CmsModel::class, true)) {
+    throw InvalidConfiguration::modelIsNotValid($cmsModel);
+}
+class_alias($cmsModel, 'Grafite\Cms\Models\CmsBaseEventModel');
+
+class Event extends CmsBaseEventModel
 {
     use Translatable;
 

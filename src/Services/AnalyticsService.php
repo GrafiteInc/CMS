@@ -5,6 +5,8 @@ namespace Grafite\Cms\Services;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Schema;
 use Grafite\Cms\Models\Analytics;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Log;
 
 class AnalyticsService
 {
@@ -15,22 +17,36 @@ class AnalyticsService
 
     public function log($request)
     {
-        $requestData = json_encode([
-            'referer' => $request->server('HTTP_REFERER', null),
-            'user_agent' => $request->server('HTTP_USER_AGENT', null),
-            'host' => $request->server('HTTP_HOST', null),
-            'remote_addr' => $request->server('REMOTE_ADDR', null),
-            'uri' => $request->server('REQUEST_URI', null),
-            'method' => $request->server('REQUEST_METHOD', null),
-            'query' => $request->server('QUERY_STRING', null),
-            'time' => $request->server('REQUEST_TIME', null),
-        ]);
+        $tableExists = Cache::rememberForever('CmsAnalyticsTableExist', function() {
+            // Clear cache with Cache::flush(); e.g. via console
+            if (Schema::hasTable(config('cms.db-prefix', '').'analytics')) {
+                return true;
+            }
+            else{
+                // Add Exception or at least Log?
+                Log::error('Schema '.config('cms.db-prefix', '').'analytics missing. CMS AnalyticsService not active.');
+                return false;
+            }
+        });
 
-        if (Schema::hasTable(config('cms.db-prefix', '').'analytics')) {
+        if ($tableExists) {
+
+            $requestData = json_encode([
+                'referer'       => $request->server('HTTP_REFERER', null),
+                'user_agent'    => $request->server('HTTP_USER_AGENT', null),
+                'host'          => $request->server('HTTP_HOST', null),
+                'remote_addr'   => $request->server('REMOTE_ADDR', null),
+                'uri'           => $request->server('REQUEST_URI', null),
+                'method'        => $request->server('REQUEST_METHOD', null),
+                'query'         => $request->server('QUERY_STRING', null),
+                'time'          => $request->server('REQUEST_TIME', null),
+            ]);
+
             $this->model->create([
                 'data' => $requestData,
             ]);
         }
+
     }
 
     public function topReferers($count)

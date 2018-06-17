@@ -5,8 +5,16 @@ namespace Grafite\Cms\Models;
 use Grafite\Cms\Models\CmsModel;
 use Grafite\Cms\Services\Normalizer;
 use Grafite\Cms\Traits\Translatable;
+use Illuminate\Support\Facades\Config;
 
-class Blog extends CmsModel
+// Load dynamically from config the right basis class
+$cmsModel = Config::get('cms.models.blog') ?? CmsModel::class;
+if (! is_a($cmsModel, CmsModel::class, true)) {
+    throw InvalidConfiguration::modelIsNotValid($cmsModel);
+}
+class_alias($cmsModel, 'Grafite\Cms\Models\CmsBaseBlogModel');
+
+class Blog extends CmsBaseBlogModel
 {
     use Translatable;
 

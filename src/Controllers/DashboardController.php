@@ -3,7 +3,7 @@
 namespace Grafite\Cms\Controllers;
 
 use Illuminate\Support\Facades\Schema;
-use Spatie\LaravelAnalytics\LaravelAnalyticsFacade as LaravelAnalytics;
+use Spatie\Analytics\AnalyticsFacade as LaravelAnalytics;
 use Grafite\Cms\Services\AnalyticsService;
 
 class DashboardController extends GrafiteCmsController

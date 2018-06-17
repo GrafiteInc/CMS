@@ -3,8 +3,16 @@
 namespace Grafite\Cms\Models;
 
 use Grafite\Cms\Models\CmsModel;
+use Illuminate\Support\Facades\Config;
 
-class Menu extends CmsModel
+// Load dynamically from config the right basis class
+$cmsModel = Config::get('cms.models.menu') ?? CmsModel::class;
+if (! is_a($cmsModel, CmsModel::class, true)) {
+    throw InvalidConfiguration::modelIsNotValid($cmsModel);
+}
+class_alias($cmsModel, 'Grafite\Cms\Models\CmsBaseMenuModel');
+
+class Menu extends CmsBaseMenuModel
 {
     public $table = 'menus';
 

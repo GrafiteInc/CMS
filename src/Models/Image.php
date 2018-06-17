@@ -13,12 +13,12 @@ use Illuminate\Support\Facades\Log;
 use Intervention\Image\ImageManagerStatic as InterventionImage;
 use Storage;
 
-// Reads config and if given extend the provided class per module or by CMS Base.
+// Load dynamically from config the right basis class
 $cmsModel = config('cms.models.menu') ?? CmsModel::class;
 if (! is_a($cmsModel, CmsModel::class, true)) {
     throw InvalidConfiguration::modelIsNotValid($cmsModel);
 }
-class_alias(get_class($cmsModel), 'CmsBaseModel');
+class_alias($cmsModel, 'Grafite\Cms\Models\CmsBaseModel');
 
 class Image extends CmsBaseModel
 {

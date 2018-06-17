@@ -7,13 +7,13 @@ use Grafite\Cms\Services\Normalizer;
 use Grafite\Cms\Traits\Translatable;
 
 // Load dynamically from config the right basis class
-$cmsModel = config('cms.models.menu') ?? CmsModel::class;
+$cmsModel = config('cms.models.page') ?? CmsModel::class;
 if (! is_a($cmsModel, CmsModel::class, true)) {
     throw InvalidConfiguration::modelIsNotValid($cmsModel);
 }
-class_alias($cmsModel, 'Grafite\Cms\Models\CmsBaseModel');
+class_alias($cmsModel, 'Grafite\Cms\Models\CmsBasePageModel');
 
-class Page extends CmsBaseModel
+class Page extends CmsBasePageModel
 {
     use Translatable;
 

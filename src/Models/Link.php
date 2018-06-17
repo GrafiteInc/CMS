@@ -5,13 +5,13 @@ namespace Grafite\Cms\Models;
 use Grafite\Cms\Models\CmsModel;
 
 // Load dynamically from config the right basis class
-$cmsModel = config('cms.models.menu') ?? CmsModel::class;
+$cmsModel = config('cms.models.link') ?? CmsModel::class;
 if (! is_a($cmsModel, CmsModel::class, true)) {
     throw InvalidConfiguration::modelIsNotValid($cmsModel);
 }
-class_alias($cmsModel, 'Grafite\Cms\Models\CmsBaseModel');
+class_alias($cmsModel, 'Grafite\Cms\Models\CmsBaseLinkModel');
 
-class Link extends CmsBaseModel
+class Link extends CmsBaseLinkModel
 {
     public $table = 'links';
 

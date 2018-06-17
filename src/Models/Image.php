@@ -14,13 +14,13 @@ use Intervention\Image\ImageManagerStatic as InterventionImage;
 use Storage;
 
 // Load dynamically from config the right basis class
-$cmsModel = config('cms.models.menu') ?? CmsModel::class;
+$cmsModel = config('cms.models.image') ?? CmsModel::class;
 if (! is_a($cmsModel, CmsModel::class, true)) {
     throw InvalidConfiguration::modelIsNotValid($cmsModel);
 }
-class_alias($cmsModel, 'Grafite\Cms\Models\CmsBaseModel');
+class_alias($cmsModel, 'Grafite\Cms\Models\CmsBaseImageModel');
 
-class Image extends CmsBaseModel
+class Image extends CmsBaseImageModel
 {
     public $table = 'images';
 

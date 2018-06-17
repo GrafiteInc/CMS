@@ -6,13 +6,13 @@ use Grafite\Cms\Models\CmsModel;
 use Grafite\Cms\Traits\Translatable;
 
 // Load dynamically from config the right basis class
-$cmsModel = config('cms.models.menu') ?? CmsModel::class;
+$cmsModel = config('cms.models.faq') ?? CmsModel::class;
 if (! is_a($cmsModel, CmsModel::class, true)) {
     throw InvalidConfiguration::modelIsNotValid($cmsModel);
 }
-class_alias($cmsModel, 'Grafite\Cms\Models\CmsBaseModel');
+class_alias($cmsModel, 'Grafite\Cms\Models\CmsBaseFaqModel');
 
-class FAQ extends CmsBaseModel
+class FAQ extends CmsBaseFaqModel
 {
     use Translatable;
 

@@ -6,7 +6,15 @@ use Grafite\Cms\Models\CmsModel;
 use Grafite\Cms\Services\Normalizer;
 use Grafite\Cms\Traits\Translatable;
 
-class Page extends CmsModel
+// Reads config and if given extend the provided class per module or by CMS Base.
+$cmsModel = config('cms.models.menu') ?? CmsModel::class;
+if (! is_a($cmsModel, CmsModel::class, true)) {
+    throw InvalidConfiguration::modelIsNotValid($cmsModel);
+}
+class_alias($cmsModel, 'Grafite\Cms\Models\CmsBaseModel');
+
+
+class Page extends Grafite\Cms\Models\CmsBaseModel
 {
     use Translatable;
 

@@ -406,5 +406,32 @@ return [
                 ],
             ],
         ],
+
+
     ],
+
+    /*
+      * --------------------------------------------------------------------------
+      * Models
+      * --------------------------------------------------------------------------
+      * By default the models extend CmsModel. Here you can defined
+      * on which alternative classes the model should base.
+      * The only requirement is that it should be or extend
+      * the Grafite\Cms\Models\CmsModel model.
+     */
+    'models' => [
+        'analytics'         => Grafite\Cms\Models\CmsModel::class,
+        'archive'           => Grafite\Cms\Models\CmsModel::class,
+        'blog'              => Grafite\Cms\Models\CmsModel::class,
+        'event'             => Grafite\Cms\Models\CmsModel::class,
+        'faq'               => Grafite\Cms\Models\CmsModel::class,
+        'file'              => Grafite\Cms\Models\CmsModel::class,
+        'image'             => Grafite\Cms\Models\CmsModel::class,
+        'link'              => Grafite\Cms\Models\CmsModel::class,
+        'menu'              => Grafite\Cms\Models\CmsModel::class,
+        'page'              => Grafite\Cms\Models\CmsModel::class,
+        'translation'       => Grafite\Cms\Models\CmsModel::class,
+        'widget'            => Grafite\Cms\Models\CmsModel::class,
+    ],
+
 ];

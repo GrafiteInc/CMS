@@ -80,6 +80,8 @@
                     </div>
                     {!! FormMaker::setColumns(2)->fromObject($blog->asObject(), config('cms.forms.blog.publish')) !!}
 
+                    @include('cms::modules.blocks', ['item' => $blog->asObject()])
+
                     <div class="form-group text-right">
                         <a href="{!! cms()->url('blog') !!}" class="btn btn-secondary raw-left">Cancel</a>
                         {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}

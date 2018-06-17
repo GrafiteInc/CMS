@@ -59,12 +59,7 @@
                 <div class="row">
                     @if ($images->count() === 0)
                         <div class="col-md-12">
-                            <div class="card card-dark text-center mt-4">
-                                @if (request('term'))
-                                    <div class="card-header">Searched for "{!! $term !!}"</div>
-                                @endif
-                                <div class="card-body">No images found.</div>
-                            </div>
+                            @include('cms::layouts.module-search', [ 'module' => 'images' ])
                         </div>
                     @else
                         @foreach($images as $image)

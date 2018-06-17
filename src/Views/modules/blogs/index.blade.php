@@ -28,12 +28,7 @@
         <div class="row">
             <div class="col-md-12">
                 @if ($blogs->count() === 0)
-                    <div class="card card-dark text-center mt-4">
-                        @if (request('term'))
-                            <div class="card-header">Searched for "{!! $term !!}"</div>
-                        @endif
-                        <div class="card-body">No blogs found.</div>
-                    </div>
+                    @include('cms::layouts.module-search', [ 'module' => 'blogs' ])
                 @else
                     <table class="table table-striped">
                         <thead>

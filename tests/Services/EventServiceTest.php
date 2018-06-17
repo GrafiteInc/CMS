@@ -50,6 +50,6 @@ class EventServiceTest extends TestCase
     {
         $result = $this->service->generate('2018-03-22')->links('none');
 
-        $this->assertEquals('<a class="previous none" href="http://localhost/events/2018-02-22">Previous Month</a><a class="next none" href="http://localhost/events/2018-04-22">Next Month</a>', $result);
+        $this->assertEquals('<div class="row calendar-links"><div class="col-12"><a class="previous none" href="http://localhost/events/2018-02-22">Previous Month</a><a class="next none" href="http://localhost/events/2018-04-22">Next Month</a></div></div>', $result);
     }
 }

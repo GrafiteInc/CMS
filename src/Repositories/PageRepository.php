@@ -21,7 +21,7 @@ class PageRepository extends CmsRepository
     {
         $this->model = $model;
         $this->translationRepo = $translationRepo;
-        $this->table = 'pages';
+        $this->table = config('cms.db-prefix').'.pages';
     }
 
     /**
@@ -33,21 +33,7 @@ class PageRepository extends CmsRepository
      */
     public function store($payload)
     {
-        $blockCollection = [];
-
-        foreach ($payload as $key => $value) {
-            if (stristr($key, 'block_')) {
-                $blockName = str_replace('block_', '', $key);
-                $blockCollection[$blockName] = $value;
-                unset($payload[$key]);
-            }
-        }
-
-        if (empty($blockCollection)) {
-            $payload['blocks'] = "{}";
-        } else {
-            $payload['blocks'] = json_encode($blockCollection);
-        }
+        $payload = $this->parseBlocks($payload, 'pages');
 
         $payload['title'] = htmlentities($payload['title']);
         $payload['url'] = Cms::convertToURL($payload['url']);
@@ -101,19 +87,7 @@ class PageRepository extends CmsRepository
      */
     public function update($page, $payload)
     {
-        $blockCollection = [];
-
-        foreach ($payload as $key => $value) {
-            if (stristr($key, 'block_')) {
-                $blockName = str_replace('block_', '', $key);
-                $blockCollection[$blockName] = $value;
-                unset($payload[$key]);
-            }
-        }
-
-        $blockCollection = $this->parseTemplate($payload, $blockCollection);
-
-        $payload['blocks'] = json_encode($blockCollection);
+        $payload = $this->parseBlocks($payload, 'pages');
 
         if (isset($payload['hero_image'])) {
             $file = request()->file('hero_image');
@@ -134,35 +108,5 @@ class PageRepository extends CmsRepository
 
             return $page->update($payload);
         }
-    }
-
-    /**
-     * Parse the template for blocks.
-     *
-     * @param  array $payload
-     * @param  array $currentBlocks
-     *
-     * @return array
-     */
-    public function parseTemplate($payload, $currentBlocks)
-    {
-        if (isset($payload['template'])) {
-            $content = file_get_contents(base_path('resources/themes/'.config('cms.frontend-theme').'/pages/'.$payload['template'].'.blade.php'));
-
-            preg_match_all('/->block\((.*)\)/', $content, $pageMethodMatches);
-            preg_match_all('/\@block\((.*)\)/', $content, $bladeMatches);
-
-            $matches = array_unique(array_merge($pageMethodMatches[1], $bladeMatches[1]));
-
-            foreach ($matches as $match) {
-                $match = str_replace('"', "", $match);
-                $match = str_replace("'", "", $match);
-                if (!isset($currentBlocks[$match])) {
-                    $currentBlocks[$match] = '';
-                }
-            }
-        }
-
-        return $currentBlocks;
     }
 }

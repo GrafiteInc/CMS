@@ -41,7 +41,6 @@ class GrafiteCmsProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/PublishedAssets/Views/themes' => base_path('resources/themes'),
             __DIR__.'/PublishedAssets/Controllers' => app_path('Http/Controllers/Cms'),
-            __DIR__.'/PublishedAssets/Migrations' => base_path('database/migrations'),
             __DIR__.'/PublishedAssets/Middleware' => app_path('Http/Middleware'),
             __DIR__.'/PublishedAssets/Routes' => base_path('routes'),
             __DIR__.'/PublishedAssets/Config' => base_path('config'),
@@ -53,7 +52,7 @@ class GrafiteCmsProvider extends ServiceProvider
 
         $this->loadMigrationsFrom(__DIR__.'/Migrations');
 
-        $theme = Config::get('cms.frontend-theme', 'default');
+        $theme = config('cms.frontend-theme', 'default');
 
         $this->loadViewsFrom(__DIR__.'/Views', 'cms');
 
@@ -71,7 +70,7 @@ class GrafiteCmsProvider extends ServiceProvider
                 $expression = substr($expression, 1, -1);
             }
 
-            $theme = Config::get('cms.frontend-theme');
+            $theme = config('cms.frontend-theme');
             $view = '"cms-frontend::'.str_replace('"', '', str_replace("'", '', $expression)).'"';
 
             return "<?php echo \$__env->make($view, array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>";
@@ -82,22 +81,12 @@ class GrafiteCmsProvider extends ServiceProvider
         });
 
         Blade::directive('block', function ($expression) {
-            return "<?php echo \$page->block($expression); ?>";
+            $module = Cms::getModule();
+            return "<?php echo optional(\$".$module.")->block($expression); ?>";
         });
 
         Blade::directive('languages', function ($expression) {
-            if (count(config('cms.languages')) > 1) {
-                $languageLinks = [];
-                foreach (config('cms.languages') as $key => $value) {
-                    $languageLinks[] = '<a class="language-link" href="'.url(config('cms.backend-route-prefix', 'cms').'/language/set/'.$key).'">'.$value.'</a>';
-                }
-
-                $languageLinkString = implode($languageLinks);
-
-                return "<?php echo '$languageLinkString'; ?>";
-            }
-
-            return '';
+            return "<?php echo Cms::languageLinks($expression); ?>";
         });
 
         Blade::directive('modules', function ($expression) {

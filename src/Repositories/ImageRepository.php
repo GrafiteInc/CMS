@@ -18,8 +18,7 @@ class ImageRepository extends CmsRepository
     public function __construct(Image $model)
     {
         $this->model = $model;
-
-        $this->table = 'images';
+        $this->table = config('cms.db-prefix').'.images';
     }
 
     public function published()
@@ -85,7 +84,7 @@ class ImageRepository extends CmsRepository
      */
     public function apiStore($input)
     {
-        $savedFile = FileService::saveClone($input['location'], 'public/images');
+        $savedFile = app(FileService::class)->saveClone($input['location'], 'public/images');
 
         if (!$savedFile) {
             return false;
@@ -146,7 +145,7 @@ class ImageRepository extends CmsRepository
     public function update($image, $input)
     {
         if (isset($input['location']) && !empty($input['location'])) {
-            $savedFile = FileService::saveFile($input['location'], 'public/images', [], true);
+            $savedFile = app(FileService::class)->saveFile($input['location'], 'public/images', [], true);
 
             if (!$savedFile) {
                 Cms::notification('Image could not be updated.', 'danger');

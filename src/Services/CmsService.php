@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\URL;
+use ReflectionException;
 
 class CmsService
 {
@@ -70,6 +71,31 @@ class CmsService
         }
 
         return true;
+    }
+
+    /**
+     * Links for each supported language
+     *
+     * @param  string $linkClass
+     * @param  string $itemClass
+     *
+     * @return string
+     */
+    public function languageLinks($linkClass = 'nav-link', $itemClass = 'nav-item')
+    {
+        if (count(config('cms.languages')) > 1) {
+            $languageLinks = [];
+            foreach (config('cms.languages') as $key => $value) {
+                $url = url(config('cms.backend-route-prefix', 'cms').'/language/set/'.$key);
+                $languageLinks[] = '<li class="'.$itemClass.'"><a class="language-link '.$linkClass.'" href="'.$url.'">'.ucfirst($value).'</a></li>';
+            }
+
+            $languageLinkString = implode($languageLinks);
+
+            return $languageLinkString;
+        }
+
+        return '';
     }
 
     /**
@@ -276,5 +302,42 @@ class CmsService
         $until = strpos($matches, '-');
 
         return str_replace(']', '', substr($matches, 5, $until - 5));
+    }
+
+    /**
+     * Collect items for a site map
+     *
+     * @return array
+     */
+    public function collectSiteMapItems()
+    {
+        $itemCollection = [];
+        $modules = config('site-mapped-modules', [
+            'blog' => 'Grafite\Cms\Repositories\BlogRepository',
+            'page' => 'Grafite\Cms\Repositories\PageRepository',
+            'events' => 'Grafite\Cms\Repositories\EventRepository',
+        ]);
+
+        foreach ($modules as $module => $repository) {
+            try {
+                $items = collect([]);
+
+                if (method_exists($repository, 'arePublic')) {
+                    $items = app($repository)->arePublic();
+                }
+
+                foreach ($items as $item) {
+                    $itemCollection[] = [
+                        'url' => url($module.'/'.$item->url),
+                        'updated_at' => $item->updated_at->format('Y-m-d'),
+                    ];
+                }
+            } catch (ReflectionException $e) {
+                // It just means we couldn't find
+                // the Repository class
+            }
+        }
+
+        return collect($itemCollection);
     }
 }

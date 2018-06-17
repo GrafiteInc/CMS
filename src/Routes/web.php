@@ -4,6 +4,8 @@
 
     Route::group(['middleware' => 'web'], function () use ($routePrefix) {
         Route::get($routePrefix, 'GrafiteCmsFeatureController@sendHome');
+        Route::get('{module}/rss', 'RssController@index');
+        Route::get('site-map', 'SiteMapController@index');
 
         /*
         |--------------------------------------------------------------------------

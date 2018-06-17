@@ -7,6 +7,8 @@ use Grafite\Cms\Models\Translation;
 
 class TranslationRepository
 {
+    public $model;
+
     public function __construct(Translation $translation)
     {
         $this->model = $translation;

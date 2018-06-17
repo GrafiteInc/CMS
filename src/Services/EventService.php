@@ -163,9 +163,10 @@ class EventService extends BaseService
         $previousMonth = Carbon::create($dateArray[0], $dateArray[1], $dateArray[2])->subMonth()->toDateString();
         $nextMonth = Carbon::create($dateArray[0], $dateArray[1], $dateArray[2])->addMonth()->toDateString();
 
-        $links = '';
+        $links = '<div class="row calendar-links"><div class="col-12">';
         $links .= '<a class="previous '.$class.'" href="'.url('events/'.$previousMonth).'">Previous Month</a>';
         $links .= '<a class="next '.$class.'" href="'.url('events/'.$nextMonth).'">Next Month</a>';
+        $links .= '</div></div>';
 
         return $links;
     }

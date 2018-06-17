@@ -36,6 +36,7 @@ class Blog extends CmsModel
         'template',
         'published_at',
         'hero_image',
+        'blocks',
     ];
 
     protected $dates = [
@@ -62,5 +63,16 @@ class Blog extends CmsModel
     public function history()
     {
         return Archive::where('entity_type', get_class($this))->where('entity_id', $this->id)->get();
+    }
+
+    public function getBlocksAttribute($value)
+    {
+        $blocks = json_decode($value, true);
+
+        if (is_null($blocks)) {
+            $blocks = [];
+        }
+
+        return $blocks;
     }
 }

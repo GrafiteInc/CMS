@@ -3,6 +3,27 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 ----
 
+## [v3.1.1] - 2018-04-19
+
+### Fixed
+- Issue with file and image saving
+- Improved language switching links
+
+## [v3.1.0] - 2018-04-12
+
+### Added
+- RSS feed
+- Module Block support
+- Site Map
+- Block directive support for Blogs
+
+### Fixed
+- Routes
+- Success Messages
+- Table CMS prefixes
+- Link validation
+- Module searches
+
 ## [v3.0.1] - 2018-03-23
 
 ### Fixed

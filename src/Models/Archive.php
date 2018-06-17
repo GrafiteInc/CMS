@@ -3,9 +3,10 @@
 namespace Grafite\Cms\Models;
 
 use Grafite\Cms\Models\CmsModel;
+use Illuminate\Support\Facades\Config;
 
 // Load dynamically from config the right basis class
-$cmsModel = config('cms.models.archive') ?? CmsModel::class;
+$cmsModel = Config::get('cms.models.archive') ?? CmsModel::class;
 if (! is_a($cmsModel, CmsModel::class, true)) {
     throw InvalidConfiguration::modelIsNotValid($cmsModel);
 }

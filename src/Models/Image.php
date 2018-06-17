@@ -14,7 +14,7 @@ use Intervention\Image\ImageManagerStatic as InterventionImage;
 use Storage;
 
 // Load dynamically from config the right basis class
-$cmsModel = config('cms.models.image') ?? CmsModel::class;
+$cmsModel = Config::get('cms.models.image') ?? CmsModel::class;
 if (! is_a($cmsModel, CmsModel::class, true)) {
     throw InvalidConfiguration::modelIsNotValid($cmsModel);
 }

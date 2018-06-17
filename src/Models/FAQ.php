@@ -4,9 +4,10 @@ namespace Grafite\Cms\Models;
 
 use Grafite\Cms\Models\CmsModel;
 use Grafite\Cms\Traits\Translatable;
+use Illuminate\Support\Facades\Config;
 
 // Load dynamically from config the right basis class
-$cmsModel = config('cms.models.faq') ?? CmsModel::class;
+$cmsModel = Config::get('cms.models.faq') ?? CmsModel::class;
 if (! is_a($cmsModel, CmsModel::class, true)) {
     throw InvalidConfiguration::modelIsNotValid($cmsModel);
 }

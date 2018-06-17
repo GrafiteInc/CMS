@@ -11,9 +11,9 @@ $cmsModel = config('cms.models.menu') ?? CmsModel::class;
 if (! is_a($cmsModel, CmsModel::class, true)) {
     throw InvalidConfiguration::modelIsNotValid($cmsModel);
 }
-class_alias($cmsModel, 'Grafite\Cms\Models\CmsBaseModel');
+class_alias(get_class($cmsModel), 'CmsBaseModel');
 
-class Event extends Grafite\Cms\Models\CmsBaseModel
+class Event extends CmsBaseModel
 {
     use Translatable;
 

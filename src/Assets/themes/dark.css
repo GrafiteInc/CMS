@@ -9203,11 +9203,24 @@ a.text-dark:hover, a.text-dark:focus {
     color: #FFF;
 }
 
-.form-control, .redactor-editor {
+.form-control, .form-control:focus {
   background-color: #111 !important;
+  color: #eee;
+}
+
+.redactor-editor, .redactor-editor:focus {
+  background-color: #111 !important;
+  color: #eee;
+}
+
+.redactor-editor *, .redactor-editor:focus * {
   color: #eee;
 }
 
 .selectable {
   color: #111;
+}
+
+.nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link {
+  border-bottom-color: #222;
 }

@@ -43,3 +43,11 @@ mix.scripts([
     'src/Assets/src/js/modules.js',
     'src/Assets/src/js/dropzone-custom.js',
 ], 'src/Assets/dist/js/cms.js');
+
+mix.styles([
+    'src/Assets/src/vendor/dropzone/basic.css',
+    'src/Assets/src/vendor/dropzone/dropzone.css',
+    'src/Assets/src/vendor/datepicker/bootstrap-datetimepicker.css',
+    'src/Assets/src/vendor/raw.min.css',
+    'src/Assets/src/vendor/redactor/redactor.css'
+], 'src/Assets/dist/css/vendor.css');

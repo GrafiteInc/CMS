@@ -3,6 +3,12 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 ----
 
+## [v3.1.3] - 2018-06-18
+
+### Fixed
+- Minor issues with dark theme
+- Test fixes
+
 ## [v3.1.2] - 2018-06-18
 
 ### Added

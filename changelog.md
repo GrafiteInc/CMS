@@ -3,6 +3,16 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 ----
 
+## [v3.1.2] - 2018-06-18
+
+### Added
+- Translatable menu links
+- New theme symlink command
+
+### Fixed
+- Side panel spacing
+- Translation improvements
+
 ## [v3.1.1] - 2018-04-19
 
 ### Fixed

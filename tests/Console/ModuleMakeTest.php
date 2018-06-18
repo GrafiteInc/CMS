@@ -13,6 +13,7 @@ class ModuleMakeTest extends TestCase
 
     public function setUp()
     {
+        parent::setUp();
         $this->generator = new CrudGenerator();
         $this->config = [
             'framework' => 'Laravel',

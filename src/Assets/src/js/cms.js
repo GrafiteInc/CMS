@@ -74,6 +74,7 @@ $(function () {
 
 function cmsNotify(message, _type) {
     $(".cms-notification").css("display", "block");
+    $(".cms-notification").attr('class', 'cms-notification');
     $(".cms-notification").addClass(_type);
 
     $(".cms-notify-comment").html(message);

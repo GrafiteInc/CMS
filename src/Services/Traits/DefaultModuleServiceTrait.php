@@ -9,6 +9,8 @@ use Grafite\Cms\Services\FileService;
 
 trait DefaultModuleServiceTrait
 {
+    public $imageRepo;
+
     public function defaultModules()
     {
         return [

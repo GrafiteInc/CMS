@@ -7,7 +7,7 @@ class CryptoService
     /**
      * Length of the hash to be returned.
      *
-     * @var interger
+     * @var integer
      */
     protected $length;
 

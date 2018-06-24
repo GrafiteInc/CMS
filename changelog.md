@@ -3,6 +3,14 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 ----
 
+## [v3.1.4] - 2018-06-24
+
+### Changed
+- Minor code cleanup
+
+### Fixed
+- Issue with notifications
+
 ## [v3.1.3] - 2018-06-18
 
 ### Fixed

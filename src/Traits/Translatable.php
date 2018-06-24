@@ -84,17 +84,17 @@ trait Translatable
 
             foreach (config('cms.languages') as $code => $language) {
                 if ($code != config('cms.default-language')) {
-                    $tr = new TranslateClient(config('cms.default-language'), $code);
+                    $translateClient = new TranslateClient(config('cms.default-language'), $code);
                     $translation = [
                         'lang' => $code,
                         'template' => 'show',
                     ];
 
                     foreach ($entry as $key => $value) {
+                        $translation[$key] = $value;
+
                         if (!empty($value)) {
-                            $translation[$key] = json_decode(json_encode($tr->translate(strip_tags($value))));
-                        } else {
-                            $translation[$key] = $value;
+                            $translation[$key] = json_decode(json_encode($translateClient->translate(strip_tags($value))));
                         }
                     }
 

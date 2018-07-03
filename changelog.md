@@ -3,6 +3,15 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 ----
 
+## [v3.1.5] - 2018-07-03
+
+### Changed
+- Added optional class to menu blade directive
+
+### Fixed
+- Issue with menus
+- Issue with BaseService files
+
 ## [v3.1.4] - 2018-06-24
 
 ### Changed

@@ -34,7 +34,7 @@ trait MenuServiceTrait
      *
      * @return string
      */
-    public function menu($slug, $view = null)
+    public function menu($slug, $view = null, $class = '')
     {
         $pageRepository = app(PageRepository::class);
         $menu = app(MenuRepository::class)->getBySlug($slug);
@@ -53,20 +53,20 @@ trait MenuServiceTrait
         foreach ($links as $key => $link) {
             if ($link->external) {
                 if (config('app.locale') != config('cms.default-language', $this->config('cms.default-language'))) {
-                    $processedLinks[] = "<a href=\"$link->external_url\">".$link->translationData(config('app.locale'))->name."</a>";
+                    $processedLinks[] = '<a class="'.$class.'" href="'.$link->external_url.'">'.$link->translationData(config('app.locale'))->name.'</a>';
                 } else {
-                    $processedLinks[] = "<a href=\"$link->external_url\">$link->name</a>";
+                    $processedLinks[] = '<a class="'.$class.'" href="'.$link->external_url.'">'.$link->name.'</a>';
                 }
             } else {
                 $page = $pageRepository->find($link->page_id);
                 // if the page is published
                 if ($page && $page->is_published && $page->published_at <= Carbon::now(config('app.timezone'))) {
                     if (config('app.locale') === config('cms.default-language', $this->config('cms.default-language'))) {
-                        $processedLinks[] = '<a href="'.url('page/'.$page->url)."\">$link->name</a>";
+                        $processedLinks[] = '<a class="'.$class.'" href="'.url('page/'.$page->url)."\">$link->name</a>";
                     } elseif (config('app.locale') != config('cms.default-language', $this->config('cms.default-language'))) {
                         // if the page has a translation
                         if ($page->translation(config('app.locale'))) {
-                            $processedLinks[] = '<a href="'.url('page/'.$page->translation(config('app.locale'))->data->url)."\">".$link->translationData(config('app.locale'))->name."</a>";
+                            $processedLinks[] = '<a class="'.$class.'" href="'.url('page/'.$page->translation(config('app.locale'))->data->url)."\">".$link->translationData(config('app.locale'))->name."</a>";
                         }
                     }
                 } else {
@@ -76,11 +76,13 @@ trait MenuServiceTrait
         }
 
         if (!is_null($view)) {
-            $response = view($view, ['links' => $links, 'linksAsHtml' => $response, 'processed_links' => $processedLinks]);
+            $response = view($view, ['links' => $links, 'processed_links' => $processedLinks]);
         }
 
         if (Gate::allows('cms', Auth::user())) {
-            $response = implode($processedLinks);
+            if (is_null($view)) {
+                $response = implode(',', $processedLinks);
+            }
             $response .= '<a href="'.url(config('cms.backend-route-prefix', 'cms').'/menus/'.$menu->id.'/edit').'" class="btn btn-sm ml-2 btn-outline-secondary"><span class="fa fa-edit"></span> Edit</a>';
         }
 

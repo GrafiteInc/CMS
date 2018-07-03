@@ -63,5 +63,4 @@ class _camel_case_Service
     {
         return $this->model->destroy($id);
     }
-
 }

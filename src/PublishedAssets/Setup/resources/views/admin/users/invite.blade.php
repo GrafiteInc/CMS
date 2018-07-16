@@ -4,7 +4,7 @@
 
 @section('content')
 
-    <form class="form" method="POST" action="/admin/users/invite">
+    <form class="form" method="POST" action="{{ url('/admin/users/invite') }}">
         {!! csrf_field() !!}
 
         <div class="col-md-12">

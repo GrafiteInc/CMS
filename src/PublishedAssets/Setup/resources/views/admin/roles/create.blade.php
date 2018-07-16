@@ -5,7 +5,7 @@
 @section('content')
 
     <div class="col-md-12">
-        <form method="POST" action="/admin/roles">
+        <form method="POST" action="{{ url('/admin/roles') }}">
             {!! csrf_field() !!}
 
             <div class="form-group">

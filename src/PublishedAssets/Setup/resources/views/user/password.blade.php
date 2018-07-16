@@ -6,7 +6,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <form method="POST" action="/user/password">
+                <form method="POST" action="{{ url('/user/password') }}">
                     {!! csrf_field() !!}
 
                     <div>

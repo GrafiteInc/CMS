@@ -6,11 +6,11 @@
 
     <div class="col-md-12 mt-4">
         @if (! Session::get('original_user'))
-            <a class="btn btn-outline-primary float-right" href="/admin/users/switch/{{ $user->id }}">Login as this User</a>
+            <a class="btn btn-outline-primary float-right" href="{{ url('/admin/users/switch/'. $user->id) }}">Login as this User</a>
         @endif
     </div>
     <div class="col-md-12 mt-4">
-        <form method="POST" action="/admin/users/{{ $user->id }}">
+        <form method="POST" action="{{ url('/admin/users/'. $user->id) }}">
             <input name="_method" type="hidden" value="PATCH">
             {!! csrf_field() !!}
 

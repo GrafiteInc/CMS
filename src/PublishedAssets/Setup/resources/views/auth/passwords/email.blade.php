@@ -6,7 +6,7 @@
 
         <h2 class="text-center">Forgot Password</h2>
 
-        <form method="POST" action="/password/email">
+        <form method="POST" action="{{ url('/password/email') }}">
             {!! csrf_field() !!}
             @include('partials.errors')
             @include('partials.status')
@@ -19,7 +19,7 @@
                 <button class="btn btn-primary btn-block" type="submit" class="button">Send Password Reset Link</button>
             </div>
             <div class="col-md-12 mt-3">
-                <a class="btn btn-link" href="/login">Wait I remember!</a>
+                <a class="btn btn-link" href="{{ url('/login') }}">Wait I remember!</a>
             </div>
         </form>
 

@@ -5,7 +5,7 @@
     <div class="form-small">
         <h2 class="text-center">Register</h2>
 
-        <form method="POST" action="/register">
+        <form method="POST" action="{{ url('/register') }}">
             {!! csrf_field() !!}
 
             <div class="col-md-12 mt-3">
@@ -27,7 +27,7 @@
             <div class="col-md-12 mt-3">
                 <div class="btn-toolbar justify-content-between">
                     <button class="btn btn-primary" type="submit">Register</button>
-                    <a class="btn btn-link" href="/login">Login</a>
+                    <a class="btn btn-link" href="{{ url('/login') }}">Login</a>
                 </div>
             </div>
         </form>

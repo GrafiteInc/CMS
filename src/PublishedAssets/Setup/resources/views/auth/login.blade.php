@@ -6,7 +6,7 @@
 
         <h2 class="text-center">Please sign in</h2>
 
-        <form method="POST" action="/login">
+        <form method="POST" action="{{ url('/login') }}">
             {!! csrf_field() !!}
             <div class="col-md-12 mt-3">
                 <label>Email</label>
@@ -24,13 +24,13 @@
             <div class="col-md-12 mt-3">
                 <div class="btn-toolbar justify-content-between">
                     <button class="btn btn-primary" type="submit">Login</button>
-                    <a class="btn btn-link" href="/password/reset">Forgot Password</a>
+                    <a class="btn btn-link" href="{{ url('/password/reset') }}">Forgot Password</a>
                 </div>
             </div>
 
             @if (config('cms.registration-available'))
                 <div class="col-md-12 mt-3">
-                    <a class="btn raw100 btn-info btn-block" href="/register">Register</a>
+                    <a class="btn raw100 btn-info btn-block" href="{{ url('/register') }}">Register</a>
                 </div>
             @endif
         </form>

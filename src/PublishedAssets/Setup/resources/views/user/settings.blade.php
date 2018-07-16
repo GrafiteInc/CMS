@@ -6,7 +6,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <form method="POST" action="/user/settings">
+                <form method="POST" action="{{ url('/user/settings') }}">
                     {!! csrf_field() !!}
 
                     <div>

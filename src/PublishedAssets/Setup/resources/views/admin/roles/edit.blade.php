@@ -5,7 +5,7 @@
 @section('content')
 
     <div class="col-md-12">
-        <form method="POST" action="/admin/roles/{{ $role->id }}">
+        <form method="POST" action="{{ url('/admin/roles/'. $role->id) }}">
             <input name="_method" type="hidden" value="PATCH">
             {!! csrf_field() !!}
 

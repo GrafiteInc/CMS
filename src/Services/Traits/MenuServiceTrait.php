@@ -53,7 +53,7 @@ trait MenuServiceTrait
         foreach ($links as $key => $link) {
             if ($link->external) {
                 if (config('app.locale') != config('cms.default-language', $this->config('cms.default-language'))) {
-                    $processedLinks[] = '<a class="'.$class.'" href="'.$link->external_url.'">'.$link->translationData(config('app.locale'))->name.'</a>';
+                    $processedLinks[] = '<a class="'.$class.'" href="'.$link->external_url.'">'.$link->translation(config('app.locale'))->name.'</a>';
                 } else {
                     $processedLinks[] = '<a class="'.$class.'" href="'.$link->external_url.'">'.$link->name.'</a>';
                 }
@@ -66,7 +66,7 @@ trait MenuServiceTrait
                     } elseif (config('app.locale') != config('cms.default-language', $this->config('cms.default-language'))) {
                         // if the page has a translation
                         if ($page->translation(config('app.locale'))) {
-                            $processedLinks[] = '<a class="'.$class.'" href="'.url('page/'.$page->translation(config('app.locale'))->data->url)."\">".$link->translationData(config('app.locale'))->name."</a>";
+                            $processedLinks[] = '<a class="'.$class.'" href="'.url('page/'.$page->translation(config('app.locale'))->data->url).'">'.$link->translation(config('app.locale'))->name.'</a>';
                         }
                     }
                 } else {

@@ -18,10 +18,16 @@ trait Translatable
      */
     public function translation($lang)
     {
-        return Translation::where('entity_id', $this->id)
+        $result = Translation::where('entity_id', $this->id)
             ->where('entity_type', get_class($this))
             ->where('language', $lang)
             ->first();
+
+        if ($result) {
+            return $result;
+        }
+
+        return $this;
     }
 
     /**

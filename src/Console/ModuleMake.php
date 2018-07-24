@@ -59,7 +59,7 @@ class ModuleMake extends Command
         @mkdir($moduleDirectory.'/Tests');
 
         file_put_contents($moduleDirectory.'/config.php', "<?php \n\n\nreturn [\n\t'asset_path' => __DIR__.'/Assets',\n\t'url' => '".strtolower(str_plural($name))."',\n\t'is_ignored_in_menu' => false\n];");
-        file_put_contents($moduleDirectory.'/Views/menu.blade.php', "<li class=\"@if (Request::is('cms/".strtolower(str_plural($name))."') || Request::is('cms/".strtolower(str_plural($name))."/*')) active @endif\"><a href=\"{{ url('cms/".strtolower(str_plural($name))."') }}\"><span class=\"fa fa-fw fa-file\"></span> ".ucfirst(str_plural($name)).'</a></li>');
+        file_put_contents($moduleDirectory.'/Views/menu.blade.php', "<li class=\"nav-item @if (Request::is('cms/".strtolower(str_plural($name))."') || Request::is('cms/".strtolower(str_plural($name))."/*')) active @endif\"><a class=\"nav-link\" href=\"{{ url('cms/".strtolower(str_plural($name))."') }}\"><span class=\"fa fa-fw fa-file\"></span> ".ucfirst(str_plural($name)).'</a></li>');
 
         $config = [
             'bootstrap' => false,

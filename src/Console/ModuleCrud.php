@@ -64,7 +64,7 @@ class ModuleCrud extends Command
         }
 
         file_put_contents($moduleDirectory.'/config.php', "<?php \n\n\n return [ 'asset_path' => __DIR__.'/Assets', 'url' => '".strtolower(str_plural($this->table))."', ];");
-        file_put_contents($moduleDirectory.'/Views/menu.blade.php', "<li class=\"@if (Request::is(config('cms.backend-route-prefix', 'cms').'/".strtolower(str_plural($this->table))."') || Request::is(config('cms.backend-route-prefix', 'cms').'/".strtolower(str_plural($this->table))."/*')) active @endif\"><a href=\"{{ url(config('cms.backend-route-prefix', 'cms').'/".strtolower(str_plural($this->table))."') }}\"><span class=\"fa fa-file\"></span> ".ucfirst(str_plural($this->table)).'</a></li>');
+        file_put_contents($moduleDirectory.'/Views/menu.blade.php', "<li class=\"nav-item @if (Request::is(config('cms.backend-route-prefix', 'cms').'/".strtolower(str_plural($this->table))."') || Request::is(config('cms.backend-route-prefix', 'cms').'/".strtolower(str_plural($this->table))."/*')) active @endif\"><a class=\"nav-link\" href=\"{{ url(config('cms.backend-route-prefix', 'cms').'/".strtolower(str_plural($this->table))."') }}\"><span class=\"fa fa-file\"></span> ".ucfirst(str_plural($this->table)).'</a></li>');
 
         $config = [
             'bootstrap' => false,

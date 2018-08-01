@@ -3,6 +3,16 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 ----
 
+## [v3.1.6] - 2018-08-01
+
+### Changed
+- Improved the urls of published files
+
+### Fixed
+- Issue with CMS modules
+- Issues with translations
+- Issue with notifications
+
 ## [v3.1.5] - 2018-07-03
 
 ### Changed

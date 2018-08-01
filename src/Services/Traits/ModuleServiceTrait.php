@@ -17,7 +17,7 @@ trait ModuleServiceTrait
         $module = request()->segment(1);
 
         $defaultModules = config('cms.active-core-modules');
-        $extraModules = array_keys(config('cms.modules'));
+        $extraModules = array_keys(config('cms.modules', []));
 
         $modules = array_merge($defaultModules, $extraModules);
 

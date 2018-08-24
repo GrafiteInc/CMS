@@ -11,7 +11,7 @@
     <div class="col-md-12">
         {!! Form::open(['route' => cms()->route('events.store'), 'class' => 'add']) !!}
 
-            {!! FormMaker::setColumns(2)->fromTable('events', config('cms.forms.event.identity')) !!}
+            {!! FormMaker::setColumns(3)->fromTable('events', config('cms.forms.event.identity')) !!}
             {!! FormMaker::setColumns(1)->fromTable('events', config('cms.forms.event.content')) !!}
             {!! FormMaker::setColumns(2)->fromTable('events', config('cms.forms.event.seo')) !!}
             {!! FormMaker::setColumns(2)->fromTable('events', config('cms.forms.event.publish')) !!}

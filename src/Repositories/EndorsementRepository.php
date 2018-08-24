@@ -2,11 +2,11 @@
 
 namespace Grafite\Cms\Repositories;
 
-use Grafite\Cms\Models\Widget;
+use Grafite\Cms\Models\Endorsement;
 use Grafite\Cms\Repositories\CmsRepository;
 use Grafite\Cms\Repositories\TranslationRepository;
 
-class WidgetRepository extends CmsRepository
+class EndorsementRepository extends CmsRepository
 {
     public $model;
 
@@ -14,41 +14,41 @@ class WidgetRepository extends CmsRepository
 
     public $table;
 
-    public function __construct(Widget $model, TranslationRepository $translationRepo)
+    public function __construct(Endorsement $model, TranslationRepository $translationRepo)
     {
         $this->model = $model;
         $this->translationRepo = $translationRepo;
-        $this->table = config('cms.db-prefix').'widgets';
+        $this->table = config('cms.db-prefix').'endorsements';
     }
 
     /**
-     * Stores Widgets into database.
+     * Stores Endorsements into database.
      *
      * @param array $payload
      *
-     * @return Widgets
+     * @return Endorsements
      */
     public function store($payload)
     {
-        $payload['name'] = htmlentities($payload['name']);
+        $payload['slug'] = str_slug($payload['slug']);
 
         return $this->model->create($payload);
     }
 
     /**
-     * Updates Widget in the database
+     * Updates Endorsement in the database
      *
-     * @param Widgets $widget
+     * @param Endorsements $widget
      * @param array $payload
      *
-     * @return Widgets
+     * @return Endorsements
      */
     public function update($widget, $payload)
     {
-        $payload['name'] = htmlentities($payload['name']);
+        $payload['slug'] = str_slug($payload['slug']);
 
         if (!empty($payload['lang']) && $payload['lang'] !== config('cms.default-language', 'en')) {
-            return $this->translationRepo->createOrUpdate($widget->id, 'Grafite\Cms\Models\Widget', $payload['lang'], $payload);
+            return $this->translationRepo->createOrUpdate($widget->id, 'Grafite\Cms\Models\Endorsement', $payload['lang'], $payload);
         } else {
             unset($payload['lang']);
 

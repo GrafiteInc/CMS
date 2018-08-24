@@ -27,6 +27,8 @@ trait Translatable
             return $result;
         }
 
+        $this->data = $this;
+
         return $this;
     }
 

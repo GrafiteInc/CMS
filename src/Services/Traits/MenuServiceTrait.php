@@ -74,7 +74,6 @@ trait MenuServiceTrait
                 }
             }
         }
-
         if (!is_null($view)) {
             $response = view($view, ['links' => $links, 'processed_links' => $processedLinks]);
         }

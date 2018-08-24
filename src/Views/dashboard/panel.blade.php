@@ -34,6 +34,12 @@
     </li>
 @endif
 
+@if (in_array('endorsements', Config::get('cms.active-core-modules', Cms::defaultModules())))
+    <li class="nav-item @if (Request::is(cms()->backendRoute.'/endorsements') || Request::is(cms()->backendRoute.'/endorsements/*')) active @endif">
+        <a class="nav-link" href="{!! url(cms()->backendRoute.'/endorsements') !!}"><span class="fa fa-fw fa-clock-o"></span> Endorsements</a>
+    </li>
+@endif
+
 @if (in_array('widgets', Config::get('cms.active-core-modules', Cms::defaultModules())))
     <li class="nav-item @if (Request::is(cms()->backendRoute.'/widgets') || Request::is(cms()->backendRoute.'/widgets/*')) active @endif">
         <a class="nav-link" href="{!! url(cms()->backendRoute.'/widgets') !!}"><span class="fa fa-fw fa-cog"></span> Widgets</a>

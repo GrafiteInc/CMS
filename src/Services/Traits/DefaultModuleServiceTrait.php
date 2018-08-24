@@ -2,10 +2,11 @@
 
 namespace Grafite\Cms\Services\Traits;
 
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Gate;
+use Grafite\Cms\Repositories\EndorsementRepository;
 use Grafite\Cms\Repositories\WidgetRepository;
 use Grafite\Cms\Services\FileService;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 trait DefaultModuleServiceTrait
 {
@@ -21,6 +22,7 @@ trait DefaultModuleServiceTrait
             'pages',
             'widgets',
             'events',
+            'endorsements',
             'faqs',
         ];
     }
@@ -45,6 +47,34 @@ trait DefaultModuleServiceTrait
                 return $widget->translationData(config('app.locale'))->content;
             } else {
                 return $widget->content;
+            }
+        }
+
+        return '';
+    }
+
+    /**
+     * Get an endorsement.
+     *
+     * @param string $slug
+     *
+     * @return endorsement
+     */
+    public function endorsement($slug)
+    {
+        $endorsement = app(EndorsementRepository::class)->getBySlug($slug);
+
+        if ($endorsement) {
+            if (Gate::allows('cms', Auth::user())) {
+                $endorsement->details .= '<a href="'.url(config('cms.backend-route-prefix', 'cms').'/endorsements/'.$endorsement->id.'/edit').'" style="margin-left: 8px;" class="btn btn-xs btn-default"><span class="fa fa-pencil"></span> Edit</a>';
+            }
+
+            if ($endorsement->is_published) {
+                if (config('app.locale') !== config('cms.default-language') && $endorsement->translation(config('app.locale'))) {
+                    return $endorsement->translationData(config('app.locale'))->details;
+                } else {
+                    return $endorsement->details;
+                }
             }
         }
 

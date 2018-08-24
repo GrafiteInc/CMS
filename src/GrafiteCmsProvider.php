@@ -98,6 +98,10 @@ class GrafiteCmsProvider extends ServiceProvider
             return "<?php echo Cms::widget($expression); ?>";
         });
 
+        Blade::directive('endorsement', function ($expression) {
+            return "<?php echo Cms::endorsement($expression); ?>";
+        });
+
         Blade::directive('image', function ($expression) {
             return "<?php echo Cms::image($expression); ?>";
         });

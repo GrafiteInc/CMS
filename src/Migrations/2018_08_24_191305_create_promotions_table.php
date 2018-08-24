@@ -18,7 +18,7 @@ class CreatePromotionsTable extends Migration
             $table->dateTime('published_at')->nullable();
             $table->dateTime('finished_at')->nullable();
             $table->string('slug');
-            $table->text('details');
+            $table->text('details')->nullable();
             $table->nullableTimestamps();
         });
     }

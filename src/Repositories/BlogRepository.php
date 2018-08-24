@@ -21,7 +21,7 @@ class BlogRepository extends CmsRepository
     {
         $this->model = $model;
         $this->translationRepo = $translationRepo;
-        $this->table = config('cms.db-prefix').'.blogs';
+        $this->table = config('cms.db-prefix').'blogs';
     }
 
     /**

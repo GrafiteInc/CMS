@@ -18,7 +18,7 @@ class LinkRepository extends CmsRepository
     public function __construct(Link $model, TranslationRepository $translationRepo)
     {
         $this->model = $model;
-        $this->table = config('cms.db-prefix').'.links';
+        $this->table = config('cms.db-prefix').'links';
         $this->translationRepo = $translationRepo;
     }
 

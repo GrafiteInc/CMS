@@ -18,7 +18,7 @@ class FAQRepository extends CmsRepository
     {
         $this->model = $model;
         $this->translationRepo = $translationRepo;
-        $this->table = config('cms.db-prefix').'.faqs';
+        $this->table = config('cms.db-prefix').'faqs';
     }
 
     /**

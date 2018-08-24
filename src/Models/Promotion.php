@@ -7,11 +7,11 @@ use Grafite\Cms\Services\Normalizer;
 use Grafite\Cms\Traits\Translatable;
 use Illuminate\Support\Carbon;
 
-class Endorsement extends CmsModel
+class Promotion extends CmsModel
 {
     use Translatable;
 
-    public $table = 'endorsements';
+    public $table = 'promotions';
 
     public $primaryKey = 'id';
 

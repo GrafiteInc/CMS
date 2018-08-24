@@ -126,12 +126,12 @@
 
                 /*
                 |--------------------------------------------------------------------------
-                | Endorsements
+                | Promotions
                 |--------------------------------------------------------------------------
                 */
 
-                Route::resource('endorsements', 'EndorsementsController', ['as' => $routePrefix, 'except' => ['show']]);
-                Route::post('endorsements/search', 'EndorsementsController@search');
+                Route::resource('promotions', 'PromotionsController', ['as' => $routePrefix, 'except' => ['show']]);
+                Route::post('promotions/search', 'PromotionsController@search');
 
                 /*
                 |--------------------------------------------------------------------------

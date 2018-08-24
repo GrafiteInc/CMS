@@ -2,7 +2,7 @@
 
 namespace Grafite\Cms\Services\Traits;
 
-use Grafite\Cms\Repositories\EndorsementRepository;
+use Grafite\Cms\Repositories\PromotionRepository;
 use Grafite\Cms\Repositories\WidgetRepository;
 use Grafite\Cms\Services\FileService;
 use Illuminate\Support\Facades\Auth;
@@ -22,7 +22,7 @@ trait DefaultModuleServiceTrait
             'pages',
             'widgets',
             'events',
-            'endorsements',
+            'promotions',
             'faqs',
         ];
     }
@@ -54,26 +54,26 @@ trait DefaultModuleServiceTrait
     }
 
     /**
-     * Get an endorsement.
+     * Get an promotion.
      *
      * @param string $slug
      *
-     * @return endorsement
+     * @return promotion
      */
-    public function endorsement($slug)
+    public function promotion($slug)
     {
-        $endorsement = app(EndorsementRepository::class)->getBySlug($slug);
+        $promotion = app(PromotionRepository::class)->getBySlug($slug);
 
-        if ($endorsement) {
+        if ($promotion) {
             if (Gate::allows('cms', Auth::user())) {
-                $endorsement->details .= '<a href="'.url(config('cms.backend-route-prefix', 'cms').'/endorsements/'.$endorsement->id.'/edit').'" style="margin-left: 8px;" class="btn btn-xs btn-default"><span class="fa fa-pencil"></span> Edit</a>';
+                $promotion->details .= '<a href="'.url(config('cms.backend-route-prefix', 'cms').'/promotions/'.$promotion->id.'/edit').'" style="margin-left: 8px;" class="btn btn-xs btn-default"><span class="fa fa-pencil"></span> Edit</a>';
             }
 
-            if ($endorsement->is_published) {
-                if (config('app.locale') !== config('cms.default-language') && $endorsement->translation(config('app.locale'))) {
-                    return $endorsement->translationData(config('app.locale'))->details;
+            if ($promotion->is_published) {
+                if (config('app.locale') !== config('cms.default-language') && $promotion->translation(config('app.locale'))) {
+                    return $promotion->translationData(config('app.locale'))->details;
                 } else {
-                    return $endorsement->details;
+                    return $promotion->details;
                 }
             }
         }

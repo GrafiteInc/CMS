@@ -2,11 +2,11 @@
 
 namespace Grafite\Cms\Repositories;
 
-use Grafite\Cms\Models\Endorsement;
+use Grafite\Cms\Models\Promotion;
 use Grafite\Cms\Repositories\CmsRepository;
 use Grafite\Cms\Repositories\TranslationRepository;
 
-class EndorsementRepository extends CmsRepository
+class PromotionRepository extends CmsRepository
 {
     public $model;
 
@@ -14,19 +14,19 @@ class EndorsementRepository extends CmsRepository
 
     public $table;
 
-    public function __construct(Endorsement $model, TranslationRepository $translationRepo)
+    public function __construct(Promotion $model, TranslationRepository $translationRepo)
     {
         $this->model = $model;
         $this->translationRepo = $translationRepo;
-        $this->table = config('cms.db-prefix').'endorsements';
+        $this->table = config('cms.db-prefix').'promotions';
     }
 
     /**
-     * Stores Endorsements into database.
+     * Stores Promotions into database.
      *
      * @param array $payload
      *
-     * @return Endorsements
+     * @return Promotions
      */
     public function store($payload)
     {
@@ -36,19 +36,19 @@ class EndorsementRepository extends CmsRepository
     }
 
     /**
-     * Updates Endorsement in the database
+     * Updates Promotion in the database
      *
-     * @param Endorsements $widget
+     * @param Promotions $widget
      * @param array $payload
      *
-     * @return Endorsements
+     * @return Promotions
      */
     public function update($widget, $payload)
     {
         $payload['slug'] = str_slug($payload['slug']);
 
         if (!empty($payload['lang']) && $payload['lang'] !== config('cms.default-language', 'en')) {
-            return $this->translationRepo->createOrUpdate($widget->id, 'Grafite\Cms\Models\Endorsement', $payload['lang'], $payload);
+            return $this->translationRepo->createOrUpdate($widget->id, 'Grafite\Cms\Models\Promotion', $payload['lang'], $payload);
         } else {
             unset($payload['lang']);
 

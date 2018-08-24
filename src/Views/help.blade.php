@@ -47,8 +47,8 @@
 /cms/api/blog/{id}
 /cms/api/events
 /cms/api/events/{id}
-/cms/api/endorsements
-/cms/api/endorsements/{id}
+/cms/api/promotions
+/cms/api/promotions/{id}
 /cms/api/faqs
 /cms/api/faqs/{id}
 /cms/api/files
@@ -133,7 +133,7 @@
                         <pre>&#64;menu('slug') // menu rendering</pre>
                         <pre>&#64;modules() // module url links</pre>
                         <pre>&#64;widget('slug') // widget contents</pre>
-                        <pre>&#64;endorsement('slug') // endorsement contents</pre>
+                        <pre>&#64;promotion('slug') // promotion contents</pre>
                         <pre>&#64;image('id', 'class') // an image HTML tag</pre>
                         <pre>&#64;image_link('id') // an image url</pre>
                         <pre>&#64;images('tag') // images</pre>

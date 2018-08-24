@@ -64,7 +64,7 @@ return [
         'images',
         'pages',
         'widgets',
-        'endorsements',
+        'promotions',
         'events',
         'faqs',
     ],
@@ -413,7 +413,7 @@ return [
                 ],
             ],
         ],
-        'endorsement' => [
+        'promotion' => [
             'identity' => [
                 'slug' => [
                     'type' => 'string',

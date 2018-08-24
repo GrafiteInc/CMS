@@ -4,10 +4,10 @@ namespace Grafite\Cms\Requests;
 
 use Auth;
 use Gate;
-use Grafite\Cms\Models\Endorsement;
+use Grafite\Cms\Models\Promotion;
 use Illuminate\Foundation\Http\FormRequest;
 
-class EndorsementRequest extends FormRequest
+class PromotionRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -30,6 +30,6 @@ class EndorsementRequest extends FormRequest
      */
     public function rules()
     {
-        return Endorsement::$rules;
+        return Promotion::$rules;
     }
 }

@@ -1,6 +1,6 @@
 @extends('cms::layouts.dashboard')
 
-@section('pageTitle') Endorsements @stop
+@section('pageTitle') Promotions @stop
 
 @section('content')
 
@@ -12,7 +12,7 @@
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 </div>
                 <div class="modal-body">
-                    <p>Are you sure want to delete this endorsement?</p>
+                    <p>Are you sure want to delete this promotion?</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -22,13 +22,13 @@
         </div>
     </div>
 
-    @include('cms::layouts.module-header', [ 'module' => 'endorsements' ])
+    @include('cms::layouts.module-header', [ 'module' => 'promotions' ])
 
     <div class="col-md-12">
         <div class="row">
             <div class="col-md-12">
-                @if ($endorsements->count() === 0)
-                    @include('cms::layouts.module-search', [ 'module' => 'endorsements' ])
+                @if ($promotions->count() === 0)
+                    @include('cms::layouts.module-search', [ 'module' => 'promotions' ])
                 @else
                     <table class="table table-striped">
                         <thead>
@@ -40,13 +40,13 @@
                         </thead>
                         <tbody>
 
-                        @foreach($endorsements as $endorsement)
+                        @foreach($promotions as $promotion)
                             <tr>
-                                <td><a href="{!! route(cms()->route('endorsements.edit'), [$endorsement->id]) !!}">{!! $endorsement->slug !!}</a></td>
-                                <td class="m-hidden">{!! date('M jS, Y', strtotime($endorsement->published_at)) !!}</td>
-                                <td class="m-hidden">{!! date('M jS, Y', strtotime($endorsement->finished_at)) !!}</td>
+                                <td><a href="{!! route(cms()->route('promotions.edit'), [$promotion->id]) !!}">{!! $promotion->slug !!}</a></td>
+                                <td class="m-hidden">{!! date('M jS, Y', strtotime($promotion->published_at)) !!}</td>
+                                <td class="m-hidden">{!! date('M jS, Y', strtotime($promotion->finished_at)) !!}</td>
                                 <td class="m-hidden">
-                                    @if ($endorsement->is_published)
+                                    @if ($promotion->is_published)
                                         <span class="fa fa-check"></span>
                                     @else
                                         <span class="fa fa-times"></span>
@@ -54,8 +54,8 @@
                                 </td>
                                 <td class="text-right">
                                     <div class="btn-toolbar justify-content-between">
-                                        <a class="btn btn-sm btn-outline-primary mr-2" href="{!! route(cms()->route('endorsements.edit'), [$endorsement->id]) !!}"><i class="fa fa-edit"></i> Edit</a>
-                                        <form method="post" action="{!! cms()->url('endorsements/'.$endorsement->id) !!}">
+                                        <a class="btn btn-sm btn-outline-primary mr-2" href="{!! route(cms()->route('promotions.edit'), [$promotion->id]) !!}"><i class="fa fa-edit"></i> Edit</a>
+                                        <form method="post" action="{!! cms()->url('promotions/'.$promotion->id) !!}">
                                             {!! csrf_field() !!}
                                             {!! method_field('DELETE') !!}
                                             <button class="delete-btn btn btn-sm btn-danger" type="submit"><i class="fa fa-trash"></i> Delete</button>

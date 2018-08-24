@@ -34,9 +34,9 @@
     </li>
 @endif
 
-@if (in_array('endorsements', Config::get('cms.active-core-modules', Cms::defaultModules())))
-    <li class="nav-item @if (Request::is(cms()->backendRoute.'/endorsements') || Request::is(cms()->backendRoute.'/endorsements/*')) active @endif">
-        <a class="nav-link" href="{!! url(cms()->backendRoute.'/endorsements') !!}"><span class="fa fa-fw fa-clock-o"></span> Endorsements</a>
+@if (in_array('promotions', Config::get('cms.active-core-modules', Cms::defaultModules())))
+    <li class="nav-item @if (Request::is(cms()->backendRoute.'/promotions') || Request::is(cms()->backendRoute.'/promotions/*')) active @endif">
+        <a class="nav-link" href="{!! url(cms()->backendRoute.'/promotions') !!}"><span class="fa fa-fw fa-clock-o"></span> Promotions</a>
     </li>
 @endif
 

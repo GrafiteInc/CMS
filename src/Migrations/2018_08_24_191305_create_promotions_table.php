@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateEndorsementsTable extends Migration
+class CreatePromotionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateEndorsementsTable extends Migration
      */
     public function up()
     {
-        Schema::create('endorsements', function (Blueprint $table) {
+        Schema::create('promotions', function (Blueprint $table) {
             $table->increments('id');
             $table->dateTime('published_at')->nullable();
             $table->dateTime('finished_at')->nullable();
@@ -30,6 +30,6 @@ class CreateEndorsementsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('endorsements');
+        Schema::dropIfExists('promotions');
     }
 }

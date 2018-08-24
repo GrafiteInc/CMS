@@ -17,7 +17,7 @@
         "aws/aws-sdk-php": "^3.18",
         "league/flysystem-aws-s3-v3": "^1.0",
         "graham-campbell/markdown": "^10.0",
-        "intervention/image": "^2.3",
+        "intervention/image": "^2.4",
         "stichoza/google-translate-php": "^3.2",
         "donatj/phpuseragentparser": "^0.5.3"
     },

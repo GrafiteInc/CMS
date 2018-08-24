@@ -246,20 +246,10 @@ class AssetService
      */
     public function generateImage($ext)
     {
-        $color = '#'.str_pad(dechex(mt_rand(0, 0xFFFFFF)), 6, '0', STR_PAD_LEFT);
-        $img = Image::make(__DIR__.'/../Assets/src/images/blank.jpg');
-        $img->fill($color);
-        $img->text($ext, 150, 150, function ($font) {
-            $font->file(__DIR__.'/../Assets/src/fonts/SourceSansPro-Black.ttf');
-            $font->size(32);
-            $font->color('#ffffff');
-            $font->align('center');
-            $font->valign('center');
-            $font->angle(45);
-        });
+        if ($ext == 'File Not Found') {
+            return __DIR__.'/../Assets/src/images/blank-file-not-found.jpg';
+        }
 
-        $img->save(storage_path(md5($ext).'.jpg'));
-
-        return storage_path(md5($ext).'.jpg');
+        return __DIR__.'/../Assets/src/images/blank-file.jpg';
     }
 }

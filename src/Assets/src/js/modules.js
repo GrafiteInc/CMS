@@ -85,6 +85,8 @@ function confirmDelete (url) {
 */
 
 $(function () {
+    $('.bulk-image-delete').hide();
+
     $('#saveImagesBtn').click(function(e){
         e.preventDefault();
         Dropzone.forElement('.dropzone').processQueue();
@@ -95,6 +97,12 @@ $(function () {
             $(this).addClass('selected-highlight');
         } else {
             $(this).removeClass('selected-highlight');
+        }
+
+        if ($('.selected-highlight').length > 0) {
+            $('.bulk-image-delete').show();
+        } else {
+            $('.bulk-image-delete').hide();
         }
     });
 

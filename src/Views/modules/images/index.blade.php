@@ -43,8 +43,8 @@
     <div class="col-md-12">
         <nav class="navbar px-0 navbar-light justify-content-between">
             <div class="navbar-nav navbar-expand-md mr-auto justify-content-between">
-                <a class="d-inline nav-item btn btn-primary mr-1 mt-2" href="{!! route(cms()->route('images.create')) !!}">Add New</a>
-                <button class="d-inline nav-item btn btn-danger bulk-image-delete mt-2"><span class="fa fa-trash"></span> Delete</button>
+                <a class="nav-item btn btn-primary mr-1 mt-2" href="{!! route(cms()->route('images.create')) !!}">Add New</a>
+                <button class="nav-item btn btn-danger bulk-image-delete mt-2"><span class="fa fa-trash"></span> Bulk Delete</button>
             </div>
             {!! Form::open(['url' => cms()->url('images/search'), 'class' => 'form-inline mt-2']) !!}
                 <input class="form-control mr-sm-2" name="term" type="search" placeholder="Search" aria-label="Search">

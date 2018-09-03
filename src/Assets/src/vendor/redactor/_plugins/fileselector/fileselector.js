@@ -1,6 +1,6 @@
 (function($R)
 {
-    $R.add('plugin', 'imageselector', {
+    $R.add('plugin', 'fileselector', {
         init: function(app)
         {
             // define app
@@ -15,34 +15,34 @@
         },
         start: function () {
             var buttonData = {
-                title: 'Insert Image',
-                api: 'plugin.imageselector.open'
+                title: 'Insert File',
+                api: 'plugin.fileselector.open'
             };
-            var button = this.toolbar.addButton('imageselector', buttonData);
-            button.setIcon('<i class="fa fa-image"></i>');
+            var button = this.toolbar.addButton('fileselector', buttonData);
+            button.setIcon('<i class="fa fa-archive"></i>');
         },
         modals: {
-            'imageselector': '<section id="redactor-modal-imageselector">'
-            + '<div class="input-group">'
-            + '<input id="imageselector-filter" type="textbox" placeholder="Search" class="form-control">'
-            + '<span class="input-group-btn">'
-            + '<span class="btn btn-default"><span class="fa fa-search"></span></span>'
-            + '</span>'
-            + '</div>'
-            + '<div id="imageselector-container" class="raw-block-400 cms-row raw-margin-top-24" style="overflow: scroll;">Loading your image collection...</div>'
-            + '</section>'
+            'fileselector': '<section id="redactor-modal-fileselector">'
+                + '<div class="input-group">'
+                + '<input id="fileselector-filter" type="textbox" placeholder="Search" class="form-control">'
+                + '<span class="input-group-btn">'
+                + '<span class="btn btn-default"><span class="fa fa-search"></span></span>'
+                + '</span>'
+                + '</div>'
+                + '<div id="fileselector-container" class="raw-block-400 cms-row raw-margin-top-24" style="overflow: scroll;">Loading your file collection...</div>'
+                + '</section>'
         },
         open: function () {
             var options = {
-                title: 'Image Selector',
+                title: 'File Selector',
                 width: '600px',
-                name: 'imageselector'
+                name: 'fileselector'
             };
 
             this.app.api('module.modal.build', options);
         },
         onmodal: {
-            imageselector: {
+            fileselector: {
                 opened: function($modal, $form)
                 {
                     this.load();
@@ -58,48 +58,41 @@
                     Cms: _apiKey,
                     Authorization: 'Bearer '+_apiToken
                 },
-                url: this.opts.imageManagerJson,
+                url: this.opts.fileManagerJson,
                 error: function(data){
                     console.log(data)
                 },
                 success: $.proxy(function(data)
                 {
-                    $('#imageselector-container').html('');
+                    $('#fileselector-container').html('');
 
                     if (data.data.length > 0) {
                         $.each((data.data), $.proxy(function(key, val)
                         {
-                            var thumbtitle = '';
-
-                            if (typeof val.title_tag != 'undefined' && val.title_tag != null) {
-                                thumbtitle = val.title_tag;
-                            }
-
-                            var img = $('<div class="raw25 float-left thumbnail-box"><div class="img" style="background-image: url(\'' + val.js_url + '\')" data-img-name="'+ val.js_url +'" src="' + val.js_url + '" rel="' + val.js_url + '" title="' + thumbtitle + '"></div></div>');
-                            $('#imageselector-container').append(img);
-                            $(img).click($.proxy(this.insert, this));
+                            var file = $('<div class="list-row raw-left raw100"><div class="raw100 raw-left"><p><span class="fa fa-download"></span> <a class="file-link" href="#" data-url="/public-download/'+val.file_identifier +'">' + val.file_name + '</a></p></div>');
+                            $('#fileselector-container').append(file);
+                            $(file).click($.proxy(this.insert, this));
                         }, this));
                     } else {
-                        $('#imageselector-container').append('You have not yet uploaded any images, visit the images tab to add some.');
+                        $('#fileselector-container').append('You have not yet uploaded any files, visit the files tab to add some.');
                     }
 
-                    $("#imageselector-filter").bind("keyup", function(){
-                        $("#imageselector-container").find(".file-link").each(function(){
-                            if ($(this).html().indexOf($("#imageselector-filter").val()) < 0) {
+                    $("#fileselector-filter").bind("keyup", function(){
+                        $("#fileselector-container").find(".file-link").each(function(){
+                            if ($(this).html().indexOf($("#fileselector-filter").val()) < 0) {
                                 $(this).parent().parent().parent().hide();
                             } else {
                                 $(this).parent().parent().parent().show();
                             }
                         });
                     })
-
                 }, this)
             });
         },
         insert: function(e)
         {
             e.preventDefault();
-            this.insertion.insertHtml('<img src="' + $(e.target).attr('rel') + '" alt="' + $(e.target).attr('title') + '" title="' + $(e.target).attr('title') + '">');
+            this.insertion.insertHtml('<a href="' + $(e.target).attr('data-url') + '">'+ $(e.target).html() +'</a>', false);
             this.app.api('module.modal.close');
         },
     });

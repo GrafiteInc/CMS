@@ -134,9 +134,6 @@
                 type: 'POST',
                 dataType: "json",
                 cache: false,
-                headers: {
-                    ApiKey: 'tOJRcQXeCesSMprwbtU5'
-                },
                 data: {
                     _token: _token,
                     location: $(e.target).attr('data-url')

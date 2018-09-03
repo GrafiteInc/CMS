@@ -29,7 +29,6 @@ var _redactorConfig = {
         'stockimagemanager',
         'fileselector',
         'imageselector',
-        // 'inserticon',
     ]
 };
 

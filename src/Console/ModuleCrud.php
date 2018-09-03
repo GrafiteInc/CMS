@@ -60,6 +60,8 @@ class ModuleCrud extends Command
             mkdir($moduleDirectory.'/Routes', 0777, true);
             mkdir($moduleDirectory.'/Views', 0777, true);
             mkdir($moduleDirectory.'/Tests', 0777, true);
+            mkdir($moduleDirectory.'/Tests/Feature', 0777, true);
+            mkdir($moduleDirectory.'/Tests/Unit', 0777, true);
         }
 
         file_put_contents($moduleDirectory.'/config.php', "<?php \n\n\n return [ 'asset_path' => __DIR__.'/Assets', 'url' => '".strtolower(str_plural($this->table))."', ];");

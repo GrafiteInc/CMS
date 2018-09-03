@@ -5,22 +5,29 @@
 */
 
 var _redactorConfig = {
-    toolbar: true,
+    toolbarFixedTopOffset: 60,
     visual: true,
     minHeight: 175,
     convertVideoLinks: true,
-    imageUpload: true,
-    buttonSource: true,
-    replaceDivs: false,
-    paragraphize: false,
+    imageUpload: false,
     pastePlaintext: true,
+    imagePosition: true,
+    imageResizable: true,
     deniedTags: ['script'],
     imageManagerJson: _url+'/cms/api/images/list',
     fileManagerJson: _url+'/cms/api/files/list',
     stockImageManagerJson: 'https://pixabay.com/api/',
-    plugins: ['table','video', 'fontcolor', 'imagemanager', 'stockimagemanager', 'filemanager', 'specialchar', 'insertIcon'],
-    buttons: ['html', 'formatting', 'fontcolor', 'bold', 'italic', 'underline', 'deleted', 'unorderedlist', 'orderedlist',
-          'outdent', 'indent', 'image', 'filemanager', 'stockimagemanager', 'video', 'link', 'alignment', 'horizontalrule', 'insertIcon'], // + 'underline'
+    formatting: ['p', 'blockquote', 'pre', 'h1', 'h2', 'h3', 'h4', 'h5'],
+    plugins: [
+        'table',
+        'fontcolor',
+        'alignment',
+        'specialchars',
+        'video',
+        'stockimagemanager',
+        'fileselector',
+        'imageselector',
+    ]
 };
 
 $(window).load(function() {

@@ -44,19 +44,21 @@
                     All requests should have the following added to the url: <code>?token={config.cms.apiToken}</code>
                     <br><br>
                     <pre>/cms/api/blog
-    /cms/api/blog/{id}
-    /cms/api/events
-    /cms/api/events/{id}
-    /cms/api/faqs
-    /cms/api/faqs/{id}
-    /cms/api/files
-    /cms/api/files/{id}
-    /cms/api/images
-    /cms/api/images/{id}
-    /cms/api/pages
-    /cms/api/pages/{id}
-    /cms/api/widgets
-    /cms/api/widgets/{id}</pre>
+/cms/api/blog/{id}
+/cms/api/events
+/cms/api/events/{id}
+/cms/api/promotions
+/cms/api/promotions/{id}
+/cms/api/faqs
+/cms/api/faqs/{id}
+/cms/api/files
+/cms/api/files/{id}
+/cms/api/images
+/cms/api/images/{id}
+/cms/api/pages
+/cms/api/pages/{id}
+/cms/api/widgets
+/cms/api/widgets/{id}</pre>
                     </div>
                 </div>
 
@@ -131,6 +133,7 @@
                         <pre>&#64;menu('slug') // menu rendering</pre>
                         <pre>&#64;modules() // module url links</pre>
                         <pre>&#64;widget('slug') // widget contents</pre>
+                        <pre>&#64;promotion('slug') // promotion contents</pre>
                         <pre>&#64;image('id', 'class') // an image HTML tag</pre>
                         <pre>&#64;image_link('id') // an image url</pre>
                         <pre>&#64;images('tag') // images</pre>

@@ -17,7 +17,7 @@ class CmsModel extends Model
     {
         parent::__construct($attributes);
 
-        if (config('cms.db-prefix', '')) {
+        if (!empty(config('cms.db-prefix', ''))) {
             $this->table = config('cms.db-prefix', '').$this->table;
         }
     }

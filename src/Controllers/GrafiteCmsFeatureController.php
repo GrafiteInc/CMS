@@ -101,10 +101,10 @@ class GrafiteCmsFeatureController extends GrafiteCmsController
             $entity => $modelInstance,
         ];
 
-        if (request('lang') != config('cms.default-language', Cms::config('cms.default-language'))) {
-            if ($modelInstance->translation(request('lang'))) {
+        if (config('app.locale') != config('cms.default-language', Cms::config('cms.default-language'))) {
+            if ($modelInstance->translation(config('app.locale'))) {
                 $data = [
-                    $entity => $modelInstance->translation(request('lang'))->data,
+                    $entity => $modelInstance->translation(config('app.locale'))->data,
                 ];
             }
         }

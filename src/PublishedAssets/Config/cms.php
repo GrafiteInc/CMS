@@ -64,6 +64,7 @@ return [
         'images',
         'pages',
         'widgets',
+        'promotions',
         'events',
         'faqs',
     ],
@@ -191,6 +192,7 @@ return [
                     'type' => 'string',
                     'class' => 'datetimepicker',
                     'alt_name' => 'Publish Date',
+                    'custom' => 'autocomplete="off"',
                     'after' => '<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>',
                 ],
             ],
@@ -273,6 +275,7 @@ return [
                     'type' => 'string',
                     'class' => 'datetimepicker',
                     'alt_name' => 'Publish Date',
+                    'custom' => 'autocomplete="off"',
                     'after' => '<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>',
                 ],
             ],
@@ -307,6 +310,7 @@ return [
                 'type' => 'string',
                 'class' => 'datetimepicker',
                 'alt_name' => 'Publish Date',
+                'custom' => 'autocomplete="off"',
                 'after' => '<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>',
             ],
         ],
@@ -369,10 +373,12 @@ return [
                 'start_date' => [
                     'type' => 'string',
                     'class' => 'datepicker',
+                    'custom' => 'autocomplete="off"',
                 ],
                 'end_date' => [
                     'type' => 'string',
                     'class' => 'datepicker',
+                    'custom' => 'autocomplete="off"',
                 ],
             ],
             'content' => [
@@ -402,7 +408,36 @@ return [
                     'type' => 'string',
                     'class' => 'datetimepicker',
                     'alt_name' => 'Publish Date',
+                    'custom' => 'autocomplete="off"',
                     'after' => '<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>',
+                ],
+            ],
+        ],
+        'promotion' => [
+            'identity' => [
+                'slug' => [
+                    'type' => 'string',
+                ],
+                'published_at' => [
+                    'type' => 'string',
+                    'class' => 'datetimepicker',
+                    'custom' => 'autocomplete="off"',
+                    'alt_name' => 'Publish Date',
+                    'after' => '<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>',
+                ],
+                'finished_at' => [
+                    'type' => 'string',
+                    'class' => 'datetimepicker',
+                    'custom' => 'autocomplete="off"',
+                    'alt_name' => 'Finish Date',
+                    'after' => '<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>',
+                ],
+            ],
+            'content' => [
+                'details' => [
+                    'type' => 'text',
+                    'class' => 'redactor',
+                    'alt_name' => 'Details',
                 ],
             ],
         ],

@@ -29,8 +29,6 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
 use Intervention\Image\ImageServiceProvider;
-use Spatie\LaravelAnalytics\LaravelAnalyticsFacade;
-use Spatie\LaravelAnalytics\LaravelAnalyticsServiceProvider;
 
 class GrafiteCmsProvider extends ServiceProvider
 {
@@ -98,6 +96,10 @@ class GrafiteCmsProvider extends ServiceProvider
             return "<?php echo Cms::widget($expression); ?>";
         });
 
+        Blade::directive('promotion', function ($expression) {
+            return "<?php echo Cms::promotion($expression); ?>";
+        });
+
         Blade::directive('image', function ($expression) {
             return "<?php echo Cms::image($expression); ?>";
         });
@@ -136,14 +138,12 @@ class GrafiteCmsProvider extends ServiceProvider
         $this->app->register(GrafiteBuilderProvider::class);
         $this->app->register(MinifyServiceProvider::class);
         $this->app->register(MarkdownServiceProvider::class);
-        $this->app->register(LaravelAnalyticsServiceProvider::class);
         $this->app->register(ImageServiceProvider::class);
 
         $loader = AliasLoader::getInstance();
 
         $loader->alias('Minify', MinifyFacade::class);
         $loader->alias('Markdown', Markdown::class);
-        $loader->alias('LaravelAnalytics', LaravelAnalyticsFacade::class);
         $loader->alias('Image', Image::class);
 
         /*

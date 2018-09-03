@@ -11,15 +11,15 @@
 
         <div class="row raw-margin-top-24">
             <div class="col-md-4">
-                <p class="lead">Keywords</p>
+                <p class="lead">Browsers</p>
                 <table class="table table-striped">
                     <thead>
-                        <th>Keyword</th>
+                        <th>Browser</th>
                         <th>Sessions</th>
                     </thead>
-                    @foreach (LaravelAnalytics::getTopKeywords(365, 10) as $word)
+                    @foreach (Analytics::fetchTopBrowsers($period, 10) as $word)
                         <tr>
-                            <td>{{ $word['keyword'] }}</td>
+                            <td>{{ $word['browser'] }}</td>
                             <td>{{ $word['sessions'] }}</td>
                         </tr>
                     @endforeach
@@ -32,7 +32,7 @@
                         <th>URL</th>
                         <th>Views</th>
                     </thead>
-                    @foreach (LaravelAnalytics::getMostVisitedPages(365, 10) as $browser)
+                    @foreach (Analytics::fetchMostVisitedPages($period, 10) as $browser)
                         <tr>
                             <td>{{ str_limit($browser['url'], 30) }}</td>
                             <td>{{ $browser['pageViews'] }}</td>
@@ -47,7 +47,7 @@
                         <th>URL</th>
                         <th>Views</th>
                     </thead>
-                    @foreach (LaravelAnalytics::getTopReferrers(365, 10) as $referers)
+                    @foreach (Analytics::fetchTopReferrers($period, 10) as $referers)
                         <tr>
                             <td>{{ str_limit($referers['url'], 30) }}</td>
                             <td>{{ $referers['pageViews'] }}</td>

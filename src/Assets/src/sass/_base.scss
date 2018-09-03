@@ -135,7 +135,7 @@ body {
     position: fixed;
     z-index: 10000;
     right: -300px;
-    top: 84px;
+    top: 124px;
     display: none;
     padding: 8px 8px 0 8px;
     border-radius: 4px;
@@ -241,7 +241,7 @@ span.twitter-typeahead {
     overflow: hidden;
 }
 
-.quarx-errors li {
+.cms-errors li {
     list-style: none;
 }
 
@@ -265,6 +265,10 @@ span.twitter-typeahead {
 | CMS Styles
 |--------------------------------------------------------------------------
 */
+
+.bulk-image-delete {
+    display: none;
+}
 
 .image-listing {
     max-height: 300px;

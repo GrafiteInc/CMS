@@ -40,7 +40,7 @@ class ModuleCrud extends Command
 
         $this->table = ucfirst(str_singular(strtolower($this->argument('table'))));
 
-        $moduleDirectory = base_path('cms/modules/'.ucfirst(str_plural($this->table)));
+        $moduleDirectory = base_path('cms/Modules/'.ucfirst(str_plural($this->table)));
 
         $this->directorySetup();
 
@@ -56,15 +56,16 @@ class ModuleCrud extends Command
             mkdir($moduleDirectory.'/Publishes/database/migrations', 0777, true);
             mkdir($moduleDirectory.'/Controllers', 0777, true);
             mkdir($moduleDirectory.'/Services', 0777, true);
-            mkdir($moduleDirectory.'/Repositories', 0777, true);
             mkdir($moduleDirectory.'/Models', 0777, true);
             mkdir($moduleDirectory.'/Routes', 0777, true);
             mkdir($moduleDirectory.'/Views', 0777, true);
             mkdir($moduleDirectory.'/Tests', 0777, true);
+            mkdir($moduleDirectory.'/Tests/Feature', 0777, true);
+            mkdir($moduleDirectory.'/Tests/Unit', 0777, true);
         }
 
         file_put_contents($moduleDirectory.'/config.php', "<?php \n\n\n return [ 'asset_path' => __DIR__.'/Assets', 'url' => '".strtolower(str_plural($this->table))."', ];");
-        file_put_contents($moduleDirectory.'/Views/menu.blade.php', "<li class=\"nav-item @if (Request::is(config('cms.backend-route-prefix', 'cms').'/".strtolower(str_plural($this->table))."') || Request::is(config('cms.backend-route-prefix', 'cms').'/".strtolower(str_plural($this->table))."/*')) active @endif\"><a class=\"nav-link\" href=\"{{ url(config('cms.backend-route-prefix', 'cms').'/".strtolower(str_plural($this->table))."') }}\"><span class=\"fa fa-file\"></span> ".ucfirst(str_plural($this->table)).'</a></li>');
+        file_put_contents($moduleDirectory.'/Views/menu.blade.php', "<li class=\"nav-item @if (Request::is(config('cms.backend-route-prefix', 'cms').'/".strtolower(str_plural($this->table))."') || Request::is(config('cms.backend-route-prefix', 'cms').'/".strtolower(str_plural($this->table))."/*')) active @endif\"><a class=\"nav-link\" href=\"{{ url(config('cms.backend-route-prefix', 'cms').'/".strtolower(str_plural($this->table))."') }}\"><span class=\"fa fa-fw fa-file\"></span> ".ucfirst(str_plural($this->table)).'</a></li>');
 
         $config = [
             'bootstrap' => false,
@@ -154,7 +155,7 @@ class ModuleCrud extends Command
 
         Artisan::call('make:migration', [
             'name' => 'create_'.str_plural(strtolower($this->table)).'_table',
-            '--path' => 'cms/modules/'.ucfirst(str_plural($this->table)).'/Publishes/database/migrations',
+            '--path' => 'cms/Modules/'.ucfirst(str_plural($this->table)).'/Publishes/database/migrations',
             '--table' => str_plural(strtolower($this->table)),
             '--create' => true,
         ]);
@@ -193,15 +194,15 @@ class ModuleCrud extends Command
             @mkdir(base_path('cms'));
         }
 
-        if (!is_dir(base_path('cms/modules'))) {
-            mkdir(base_path('cms/modules'));
+        if (!is_dir(base_path('cms/Modules'))) {
+            mkdir(base_path('cms/Modules'));
         }
     }
 
     public function setSchema()
     {
         if ($this->option('schema')) {
-            $migrationFiles = $this->filesystem->allFiles(base_path('cms/modules/'.ucfirst(str_plural($this->table)).'/Publishes/database/migrations'));
+            $migrationFiles = $this->filesystem->allFiles(base_path('cms/Modules/'.ucfirst(str_plural($this->table)).'/Publishes/database/migrations'));
             $migrationName = 'create_'.str_plural(strtolower($this->table)).'_table';
             foreach ($migrationFiles as $file) {
                 if (stristr($file->getBasename(), $migrationName)) {

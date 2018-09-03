@@ -2,10 +2,11 @@
 
 namespace Grafite\Cms\Services\Traits;
 
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Gate;
+use Grafite\Cms\Repositories\PromotionRepository;
 use Grafite\Cms\Repositories\WidgetRepository;
 use Grafite\Cms\Services\FileService;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 trait DefaultModuleServiceTrait
 {
@@ -21,6 +22,7 @@ trait DefaultModuleServiceTrait
             'pages',
             'widgets',
             'events',
+            'promotions',
             'faqs',
         ];
     }
@@ -45,6 +47,34 @@ trait DefaultModuleServiceTrait
                 return $widget->translationData(config('app.locale'))->content;
             } else {
                 return $widget->content;
+            }
+        }
+
+        return '';
+    }
+
+    /**
+     * Get an promotion.
+     *
+     * @param string $slug
+     *
+     * @return promotion
+     */
+    public function promotion($slug)
+    {
+        $promotion = app(PromotionRepository::class)->getBySlug($slug);
+
+        if ($promotion) {
+            if (Gate::allows('cms', Auth::user())) {
+                $promotion->details .= '<a href="'.url(config('cms.backend-route-prefix', 'cms').'/promotions/'.$promotion->id.'/edit').'" style="margin-left: 8px;" class="btn btn-xs btn-default"><span class="fa fa-pencil"></span> Edit</a>';
+            }
+
+            if ($promotion->is_published) {
+                if (config('app.locale') !== config('cms.default-language') && $promotion->translation(config('app.locale'))) {
+                    return $promotion->translationData(config('app.locale'))->details;
+                } else {
+                    return $promotion->details;
+                }
             }
         }
 

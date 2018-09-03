@@ -19,7 +19,7 @@ class EventRepository extends CmsRepository
     {
         $this->model = $model;
         $this->translationRepo = $translationRepo;
-        $this->table = config('cms.db-prefix').'.events';
+        $this->table = config('cms.db-prefix').'events';
     }
 
     /**

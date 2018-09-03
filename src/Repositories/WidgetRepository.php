@@ -18,7 +18,7 @@ class WidgetRepository extends CmsRepository
     {
         $this->model = $model;
         $this->translationRepo = $translationRepo;
-        $this->table = config('cms.db-prefix').'.widgets';
+        $this->table = config('cms.db-prefix').'widgets';
     }
 
     /**

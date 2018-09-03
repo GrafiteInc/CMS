@@ -18,7 +18,7 @@ class ImageRepository extends CmsRepository
     public function __construct(Image $model)
     {
         $this->model = $model;
-        $this->table = config('cms.db-prefix').'.images';
+        $this->table = config('cms.db-prefix').'images';
     }
 
     public function published()

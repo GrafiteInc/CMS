@@ -3,6 +3,23 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 ----
 
+## [v3.1.7] - 2018-09-03
+
+### Added
+- New Promotions component
+- All new Redactor 3 integration
+- Google Analytics support upgrade
+
+### Changed
+- Improved API component
+- Improved module templates
+- Link page connection improvements
+
+### Fixed
+- Issues with languages
+- Issues with UI
+- Issues with images
+
 ## [v3.1.6] - 2018-08-01
 
 ### Changed

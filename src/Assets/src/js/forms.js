@@ -10,9 +10,6 @@ var _redactorConfig = {
     minHeight: 175,
     convertVideoLinks: true,
     imageUpload: false,
-    buttonSource: true,
-    replaceDivs: false,
-    paragraphize: false,
     pastePlaintext: true,
     imagePosition: true,
     imageResizable: true,
@@ -20,6 +17,7 @@ var _redactorConfig = {
     imageManagerJson: _url+'/cms/api/images/list',
     fileManagerJson: _url+'/cms/api/files/list',
     stockImageManagerJson: 'https://pixabay.com/api/',
+    formatting: ['p', 'blockquote', 'pre', 'h1', 'h2', 'h3', 'h4', 'h5'],
     plugins: [
         'table',
         'fontcolor',

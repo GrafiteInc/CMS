@@ -1,74 +1,75 @@
 @extends('cms::layouts.dashboard')
 
+@section('pageTitle') _camel_casePlural_ @stop
+
 @section('content')
 
     <div class="modal fade" id="deleteModal" tabindex="-3" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     <h4 class="modal-title" id="deleteModalLabel">Delete _camel_case_</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 </div>
                 <div class="modal-body">
-                    <p>Are you sure want to delete this _camel_case_?</p>
+                    <p>Are you sure want to delete this _lower_case_?</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <a id="deleteBtn" type="button" class="btn btn-warning" href="#">Confirm Delete</a>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <a id="deleteBtn" class="btn btn-danger" href="#">Confirm Delete</a>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="row">
-        <a class="btn btn-primary pull-right" href="{!! route(config('cms.backend-route-prefix', 'cms').'._lower_casePlural_.create') !!}">Add New</a>
-        <div class="pull-right raw-margin-right-24">
-            {!! Form::open(['url' => config('cms.backend-route-prefix', 'cms').'/_lower_casePlural_/search']) !!}
-            <input class="form-control form-inline pull-right" name="search" placeholder="Search">
-            {!! Form::close() !!}
-        </div>
-        <h1 class="page-header">_camel_casePlural_</h1>
-    </div>
 
-    @if (isset($term))
-    <div class="row">
-        <div class="well text-center">You searched for "{{ $term }}"</div>
-    </div>
-    @endif
+    @include('cms::layouts.module-header', [ 'module' => '_lower_casePlural_' ])
 
-    <div class="row">
-        @if ($_lower_casePlural_->isEmpty())
-            <div class="well text-center">No _lower_casePlural_ found.</div>
-        @else
-            <table class="table table-striped">
-                <thead>
-                    <th>Name</th>
-                    <th width="200px" class="text-right">Actions</th>
-                </thead>
-                <tbody>
-
-                @foreach($_lower_casePlural_ as $_lower_case_)
-                    <tr>
-                        <td>
-                            <a href="{!! route(config('cms.backend-route-prefix', 'cms').'._lower_casePlural_.edit', [$_lower_case_->id]) !!}">{!! $_lower_case_->name !!}</a>
-                        </td>
-                        <td class="text-right">
-                            <form method="post" action="{!! url('_sectionPrefix__lower_casePlural_/'.$_lower_case_->id) !!}">
-                                {!! csrf_field() !!}
-                                {!! method_field('DELETE') !!}
-                                <button class="delete-btn btn btn-xs btn-danger pull-right" type="submit"><i class="fa fa-trash"></i> Delete</button>
-                            </form>
-                            <a class="btn btn-xs btn-default raw-margin-right-8 pull-right" href="{!! route(config('cms.backend-route-prefix', 'cms').'._lower_casePlural_.edit', [$_lower_case_->id]) !!}"><i class="fa fa-pencil"></i> Edit</a>
-                        </td>
-                    </tr>
-                @endforeach
-                </tbody>
-            </table>
+    <div class="col-md-12">
+        @if (isset($term))
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="well text-center">You searched for "{{ $term }}"</div>
+                </div>
+            </div>
         @endif
-    </div>
 
-    <div class="text-center">
-        {!! $pagination !!}
+        <div class="row">
+            <div class="col-md-12">
+                @if ($_lower_casePlural_->isEmpty())
+                    <div class="well text-center">No _lower_casePlural_ found.</div>
+                @else
+                    <table class="table table-striped">
+                        <thead>
+                            <th>Name</th>
+                            <th width="200px" class="text-right">Actions</th>
+                        </thead>
+                        <tbody>
+
+                        @foreach($_lower_casePlural_ as $_lower_case_)
+                            <tr>
+                                <td>
+                                    <a href="{!! route(config('cms.backend-route-prefix', 'cms').'._lower_casePlural_.edit', [$_lower_case_->id]) !!}">{!! $_lower_case_->name !!}</a>
+                                </td>
+                                <td class="text-right">
+                                    <form method="post" action="{!! url(config('cms.backend-route-prefix', 'cms').'/_lower_casePlural_/'.$_lower_case_->id) !!}">
+                                        {!! csrf_field() !!}
+                                        {!! method_field('DELETE') !!}
+                                        <button class="delete-btn btn btn-sm btn-danger pull-right" type="submit"><i class="fa fa-trash"></i> Delete</button>
+                                    </form>
+                                    <a class="btn btn-sm btn-outline-primary raw-margin-right-8 pull-right" href="{!! route(config('cms.backend-route-prefix', 'cms').'._lower_casePlural_.edit', [$_lower_case_->id]) !!}"><i class="fa fa-pencil"></i> Edit</a>
+                                </td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                @endif
+            </div>
+
+            <div class="text-center">
+                {!! $pagination !!}
+            </div>
+        </div>
     </div>
 
 @endsection

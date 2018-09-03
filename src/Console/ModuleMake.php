@@ -35,14 +35,14 @@ class ModuleMake extends Command
 
         $name = ucfirst(str_singular($this->argument('name')));
 
-        $moduleDirectory = base_path('cms/modules/'.ucfirst(str_plural($name)));
+        $moduleDirectory = base_path('cms/Modules/'.ucfirst(str_plural($name)));
 
         if (!is_dir(base_path('cms'))) {
             @mkdir(base_path('cms'));
         }
 
-        if (!is_dir(base_path('cms/modules'))) {
-            @mkdir(base_path('cms/modules'));
+        if (!is_dir(base_path('cms/Modules'))) {
+            @mkdir(base_path('cms/Modules'));
         }
 
         @mkdir($moduleDirectory);

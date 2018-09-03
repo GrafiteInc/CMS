@@ -1,28 +1,36 @@
 @extends('cms::layouts.dashboard')
 
+@section('pageTitle') _camel_casePlural_ @stop
+
 @section('content')
 
-    <div class="row">
-        <a class="btn btn-primary pull-right" href="{!! route(config('cms.backend-route-prefix', 'cms').'._lower_casePlural_.create') !!}">Add New</a>
-        <a class="btn btn-warning pull-right raw-margin-right-8" href="{!! Cms::rollbackUrl($_lower_case_) !!}">Rollback</a>
-        <h1 class="page-header">_camel_casePlural_</h1>
+    <div class="col-md-12 mt-2">
+        <div class="row">
+            <div class="col-md-6">
+                @include('_lower_casePlural_::_lower_casePlural_.breadcrumbs', ['location' => ['edit']])
+            </div>
+            <div class="col-md-6">
+                <a class="btn btn-primary pull-right" href="{!! route(config('cms.backend-route-prefix', 'cms').'._lower_casePlural_.create') !!}">Add New</a>
+                <a class="btn btn-warning pull-right raw-margin-right-8" href="{!! Cms::rollbackUrl($_lower_case_) !!}">Rollback</a>
+            </div>
+        </div>
     </div>
 
-    @include('_lower_casePlural_::_lower_casePlural_.breadcrumbs', ['location' => ['edit']])
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-12 mt-2">
+                {!! Form::model($_lower_case_, ['route' => [config('cms.backend-route-prefix', 'cms').'._lower_casePlural_.update', $_lower_case_->id], 'method' => 'patch', 'class' => 'edit']) !!}
 
-    <div class="row">
-        {!! Form::model($_lower_case_, ['route' => [config('cms.backend-route-prefix', 'cms').'._lower_casePlural_.update', $_lower_case_->id], 'method' => 'patch', 'class' => 'edit']) !!}
+                    {!! FormMaker::fromObject($_lower_case_, FormMaker::getTableColumns('_lower_casePlural_')) !!}
 
-            {!! FormMaker::fromObject($_lower_case_, FormMaker::getTableColumns('_lower_casePlural_')) !!}
+                    <div class="form-group text-right">
+                        <a href="{!! url(config('cms.backend-route-prefix', 'cms').'/_lower_casePlural_') !!}" class="btn btn-default raw-left">Cancel</a>
+                        {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
+                    </div>
 
-            <div class="form-group text-right">
-                <a href="{!! url(config('cms.backend-route-prefix', 'cms').'/_lower_casePlural_') !!}" class="btn btn-default raw-left">Cancel</a>
-                {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
+                {!! Form::close() !!}
             </div>
-
-        {!! Form::close() !!}
+        </div>
     </div>
 
 @endsection
-
-

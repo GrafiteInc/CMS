@@ -2,7 +2,7 @@
 
 namespace _namespace_services_;
 
-use Config;
+use Illuminate\Support\Facades\Schema;
 use _namespace_model_\_camel_case_;
 
 class _camel_case_Service
@@ -41,7 +41,7 @@ class _camel_case_Service
             $query->orWhere($attribute, 'LIKE', '%'.$payload.'%');
         };
 
-        return $query->paginate(Config::get('cms.pagination', 24));
+        return $query->paginate(config('cms.pagination', 24));
     }
 
     public function create($payload)

@@ -1,24 +1,28 @@
 @extends('cms::layouts.dashboard')
 
+@section('pageTitle') _camel_casePlural_ @stop
+
 @section('content')
 
-    <div class="row">
-        <h1 class="page-header">_camel_casePlural_</h1>
+    <div class="col-md-12 mt-2">
+        @include('_lower_casePlural_::_lower_casePlural_.breadcrumbs', ['location' => ['create']])
     </div>
 
-    @include('_lower_casePlural_::_lower_casePlural_.breadcrumbs', ['location' => ['create']])
+    <div class="col-md-12">
+         <div class="row">
+            <div class="col-md-12 mt-2">
+                {!! Form::open(['route' => config('cms.backend-route-prefix', 'cms').'._lower_casePlural_.store', '_lower_casePlural_' => true, 'class' => 'add']); !!}
 
-     <div class="row">
-        {!! Form::open(['route' => config('cms.backend-route-prefix', 'cms').'._lower_casePlural_.store', '_lower_casePlural_' => true, 'class' => 'add']); !!}
+                    {!! FormMaker::fromTable('_lower_casePlural_', Cms::moduleConfig('_lower_casePlural_', '_lower_casePlural_')) !!}
 
-            {!! FormMaker::fromTable('_lower_casePlural_', Cms::moduleConfig('_lower_casePlural_', '_lower_casePlural_')) !!}
+                    <div class="form-group text-right">
+                        <a href="{!! url(config('cms.backend-route-prefix', 'cms').'/_lower_casePlural_') !!}" class="btn btn-default raw-left">Cancel</a>
+                        {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
+                    </div>
 
-            <div class="form-group text-right">
-                <a href="{!! url(config('cms.backend-route-prefix', 'cms').'/_lower_casePlural_') !!}" class="btn btn-default raw-left">Cancel</a>
-                {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
+                {!! Form::close() !!}
             </div>
-
-        {!! Form::close() !!}
+        </div>
     </div>
 
 @endsection

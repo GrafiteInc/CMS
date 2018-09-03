@@ -13,7 +13,6 @@
         "illuminate/support": "5.6.*",
         "grafite/builder": "^2.4",
         "devfactory/minify": "1.0.*",
-        "spatie/laravel-analytics": "^1.4",
         "aws/aws-sdk-php": "^3.18",
         "league/flysystem-aws-s3-v3": "^1.0",
         "graham-campbell/markdown": "^10.0",

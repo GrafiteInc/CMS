@@ -3,6 +3,12 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 ----
 
+## [v3.1.8] - 2018-09-05
+
+### Fixed
+- Issue with file and image uploads
+-  and bulk photo delete
+
 ## [v3.1.7] - 2018-09-03
 
 ### Added

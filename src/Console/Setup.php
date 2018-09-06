@@ -299,9 +299,9 @@ public function leaveAllTeams($userId)
         $seed = str_replace('$this->call(TeamTableSeeder::class);', '', $seed);
         file_put_contents(base_path('database/seeds/DatabaseSeeder.php'), $seed);
 
-        $css = file_get_contents(base_path('resources/assets/sass/app.scss'));
+        $css = file_get_contents(base_path('resources/sass/app.scss'));
         $css = str_replace('@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";', '@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";'."\n".'@import "resources/themes/default/assets/sass/_theme.scss";', $css);
-        file_put_contents(base_path('resources/assets/sass/app.scss'), $css);
+        file_put_contents(base_path('resources/sass/app.scss'), $css);
 
         $composer = file_get_contents(base_path('composer.json'));
         $composer = str_replace('"App\\": "app/",', '"App\\": "app/",'."\n".'"Cms\\Modules\\": "cms/Modules/",', $composer);

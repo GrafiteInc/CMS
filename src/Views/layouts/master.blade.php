@@ -34,6 +34,7 @@
         <script type="text/javascript">
             var _token = '{!! csrf_token() !!}';
             var _url = '{!! url("/") !!}';
+            var _cms = '{!! cms()->url('/') !!}';
             var _pixabayKey = '{!! config('cms.pixabay', '') !!}';
             var _appTimeZone = '{!! config('app.timezone', 'UTC') !!}';
             var _apiKey = '{!! config("cms.api-key") !!}';

@@ -114,7 +114,7 @@ $(function () {
 
         if (_images.length > 0) {
             $('#bulkImageDeleteModal').modal('toggle');
-            var _deleteUrl = _url + '/cms/images/bulk-delete/' + _images.join('-')
+            var _deleteUrl = _cmsUrl +'/images/bulk-delete/' + _images.join('-')
             $('#bulkImageDelete').attr('href', _deleteUrl);
         }
     });

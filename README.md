@@ -32,12 +32,17 @@ Please consult the documentation here: [https://docs.grafite.ca/cms](https://doc
 ## Compatibility and Support
 | Laravel Version | Package Tag | Supported |
 |-----------------|-------------|-----------|
-| 5.6.x | 3.0.x | yes |
+| 5.6.x | 3.0.x - 3.1.x | yes |
 | 5.5.x | 2.4.x | no |
 | 5.4.x | 2.3.x | no |
 
 ## License
 Grafite CMS is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
+
+## Redactor License
+Grafite has an OEM licence for the use of Redactor in the Grafite CMS package.
+You are fully welcome to use Grafite CMS package and incorporate it into any apps you build, you are permitted to offer those apps as SaaS or other products.
+However, you are not entitle to strip out parts of Redactor and resell them, please see this [license](https://imperavi.com/redactor/license/) for more information
 
 ### Bug Reporting and Feature Requests
 Please add as many details as possible regarding submission of issues and feature requests

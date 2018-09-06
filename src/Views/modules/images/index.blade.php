@@ -103,3 +103,10 @@
     </div>
 
 @endsection
+
+@section('pre_javascript')
+
+    @parent
+    var _cmsUrl = "{{ cms()->url('/') }}";
+
+@stop

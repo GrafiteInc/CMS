@@ -3,6 +3,14 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 ----
 
+## [v3.1.9] - 2018-09-06
+
+### Changed
+- Added info on Redactor to readme
+
+### Fixed
+- Issue with file and image upload
+
 ## [v3.1.8] - 2018-09-05
 
 ### Fixed

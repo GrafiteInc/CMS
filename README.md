@@ -32,7 +32,8 @@ Please consult the documentation here: [https://docs.grafite.ca/cms](https://doc
 ## Compatibility and Support
 | Laravel Version | Package Tag | Supported |
 |-----------------|-------------|-----------|
-| 5.6.x | 3.0.x - 3.1.x | yes |
+| 5.7.x | 3.2.x | yes |
+| 5.6.x | 3.0.x - 3.1.x | no |
 | 5.5.x | 2.4.x | no |
 | 5.4.x | 2.3.x | no |
 

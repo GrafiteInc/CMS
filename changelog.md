@@ -3,6 +3,11 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 ----
 
+## [v3.2.0] - 2018-09-06
+
+### Changed
+- Laravel 5.7 support
+
 ## [v3.1.9] - 2018-09-06
 
 ### Changed

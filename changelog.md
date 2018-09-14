@@ -3,6 +3,11 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 ----
 
+## [v3.2.1] - 2018-09-14
+
+### Fixed
+- Issue with middleware not being added via simple setup
+
 ## [v3.2.0] - 2018-09-06
 
 ### Changed

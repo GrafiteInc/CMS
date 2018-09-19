@@ -13,14 +13,16 @@ class CreatePromotionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('promotions', function (Blueprint $table) {
-            $table->increments('id');
-            $table->dateTime('published_at')->nullable();
-            $table->dateTime('finished_at')->nullable();
-            $table->string('slug');
-            $table->text('details')->nullable();
-            $table->nullableTimestamps();
-        });
+        if (in_array('promotions', config('cms.active-core-modules'))) {
+            Schema::create('promotions', function (Blueprint $table) {
+                $table->increments('id');
+                $table->dateTime('published_at')->nullable();
+                $table->dateTime('finished_at')->nullable();
+                $table->string('slug');
+                $table->text('details')->nullable();
+                $table->nullableTimestamps();
+            });
+        }
     }
 
     /**
@@ -30,6 +32,8 @@ class CreatePromotionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('promotions');
+        if (in_array('promotions', config('cms.active-core-modules'))) {
+            Schema::dropIfExists('promotions');
+        }
     }
 }

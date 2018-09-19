@@ -10,19 +10,21 @@ class CreateFilesTable extends Migration
      */
     public function up()
     {
-        Schema::create(config('cms.db-prefix', '').'files', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('name');
-            $table->string('location');
-            $table->integer('user');
-            $table->string('tags')->nullable();
-            $table->text('details')->nullable();
-            $table->string('mime');
-            $table->string('size');
-            $table->boolean('is_published')->default(0);
-            $table->integer('order');
-            $table->nullableTimestamps();
-        });
+        if (in_array('files', config('cms.active-core-modules'))) {
+            Schema::create(config('cms.db-prefix', '').'files', function (Blueprint $table) {
+                $table->increments('id');
+                $table->string('name');
+                $table->string('location');
+                $table->integer('user');
+                $table->string('tags')->nullable();
+                $table->text('details')->nullable();
+                $table->string('mime');
+                $table->string('size');
+                $table->boolean('is_published')->default(0);
+                $table->integer('order');
+                $table->nullableTimestamps();
+            });
+        }
     }
 
     /**
@@ -30,6 +32,8 @@ class CreateFilesTable extends Migration
      */
     public function down()
     {
-        Schema::drop(config('cms.db-prefix', '').'files');
+        if (in_array('files', config('cms.active-core-modules'))) {
+            Schema::drop(config('cms.db-prefix', '').'files');
+        }
     }
 }

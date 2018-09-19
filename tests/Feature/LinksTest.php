@@ -11,7 +11,10 @@ class LinksTest extends TestCase
         parent::setUp();
         $this->withoutMiddleware();
         $this->withoutEvents();
-        factory(\Grafite\Cms\Models\Link::class)->create();
+        $menu = factory(\Grafite\Cms\Models\Menu::class)->create();
+        factory(\Grafite\Cms\Models\Link::class)->create([
+            'menu_id' => $menu->id,
+        ]);
         factory(\Grafite\Cms\Models\Link::class)->make(['id' => 1]);
     }
 

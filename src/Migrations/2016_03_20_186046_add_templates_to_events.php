@@ -10,9 +10,11 @@ class AddTemplatesToEvents extends Migration
      */
     public function up()
     {
-        Schema::table(config('cms.db-prefix', '').'events', function (Blueprint $table) {
-            $table->string('template')->default('show');
-        });
+        if (in_array('events', config('cms.active-core-modules'))) {
+            Schema::table(config('cms.db-prefix', '').'events', function (Blueprint $table) {
+                $table->string('template')->default('show');
+            });
+        }
     }
 
     /**
@@ -20,8 +22,10 @@ class AddTemplatesToEvents extends Migration
      */
     public function down()
     {
-        Schema::table(config('cms.db-prefix', '').'events', function ($table) {
-            $table->dropColumn('template');
-        });
+        if (in_array('events', config('cms.active-core-modules'))) {
+            Schema::table(config('cms.db-prefix', '').'events', function ($table) {
+                $table->dropColumn('template');
+            });
+        }
     }
 }

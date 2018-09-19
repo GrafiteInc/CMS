@@ -37,7 +37,12 @@ class Setup extends Command
     public function handle()
     {
         Artisan::call('vendor:publish', [
-            '--provider' => 'Grafite\Cms\GrafiteCmsProvider',
+            '--tag' => 'cms',
+            '--force' => true,
+        ]);
+
+        Artisan::call('vendor:publish', [
+            '--tag' => 'cms-modules',
             '--force' => true,
         ]);
 

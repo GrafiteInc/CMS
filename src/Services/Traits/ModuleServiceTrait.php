@@ -68,6 +68,24 @@ trait ModuleServiceTrait
         return self::assignArrayByPath($configArray, $path);
     }
 
+    public function coreModuleLinks($linkClass = 'nav-link', $listClass = 'nav-item')
+    {
+        $links = '';
+
+        $modules = config('cms.active-core-modules', []);
+
+        foreach ($modules as $module) {
+            if (in_array($module, ['blog', 'events', 'faqs', 'images'])) {
+                if ($module == 'images') {
+                    $module = 'gallery';
+                }
+                $links .= '<li class="'.$listClass.'"><a class="'.$linkClass.'" href="'.url($module).'">'.ucfirst($module).'</a></li>';
+            }
+        }
+
+        return $links;
+    }
+
     /**
      * Module Links.
      *

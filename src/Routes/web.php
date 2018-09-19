@@ -74,9 +74,11 @@
                 |--------------------------------------------------------------------------
                 */
 
-                Route::resource('menus', 'MenuController', ['except' => ['show'], 'as' => $routePrefix]);
-                Route::post('menus/search', 'MenuController@search');
-                Route::put('menus/{id}/order', 'MenuController@setOrder');
+                if (in_array('menus', config('cms.active-core-modules'))) {
+                    Route::resource('menus', 'MenuController', ['except' => ['show'], 'as' => $routePrefix]);
+                    Route::post('menus/search', 'MenuController@search');
+                    Route::put('menus/{id}/order', 'MenuController@setOrder');
+                }
 
                 /*
                 |--------------------------------------------------------------------------
@@ -84,8 +86,10 @@
                 |--------------------------------------------------------------------------
                 */
 
-                Route::resource('links', 'LinksController', ['except' => ['index', 'show'], 'as' => $routePrefix]);
-                Route::post('links/search', 'LinksController@search');
+                if (in_array('menus', config('cms.active-core-modules'))) {
+                    Route::resource('links', 'LinksController', ['except' => ['index', 'show'], 'as' => $routePrefix]);
+                    Route::post('links/search', 'LinksController@search');
+                }
 
                 /*
                 |--------------------------------------------------------------------------
@@ -93,8 +97,10 @@
                 |--------------------------------------------------------------------------
                 */
 
-                Route::resource('images', 'ImagesController', ['as' => $routePrefix, 'except' => ['show']]);
-                Route::post('images/search', 'ImagesController@search');
+                if (in_array('images', config('cms.active-core-modules'))) {
+                    Route::resource('images', 'ImagesController', ['as' => $routePrefix, 'except' => ['show']]);
+                    Route::post('images/search', 'ImagesController@search');
+                }
 
                 /*
                 |--------------------------------------------------------------------------
@@ -102,9 +108,11 @@
                 |--------------------------------------------------------------------------
                 */
 
-                Route::resource('blog', 'BlogController', ['as' => $routePrefix, 'except' => ['show']]);
-                Route::post('blog/search', 'BlogController@search');
-                Route::get('blog/{id}/history', 'BlogController@history');
+                if (in_array('blog', config('cms.active-core-modules'))) {
+                    Route::resource('blog', 'BlogController', ['as' => $routePrefix, 'except' => ['show']]);
+                    Route::post('blog/search', 'BlogController@search');
+                    Route::get('blog/{id}/history', 'BlogController@history');
+                }
 
                 /*
                 |--------------------------------------------------------------------------
@@ -112,9 +120,11 @@
                 |--------------------------------------------------------------------------
                 */
 
-                Route::resource('pages', 'PagesController', ['as' => $routePrefix, 'except' => ['show']]);
-                Route::post('pages/search', 'PagesController@search');
-                Route::get('pages/{id}/history', 'PagesController@history');
+                if (in_array('pages', config('cms.active-core-modules'))) {
+                    Route::resource('pages', 'PagesController', ['as' => $routePrefix, 'except' => ['show']]);
+                    Route::post('pages/search', 'PagesController@search');
+                    Route::get('pages/{id}/history', 'PagesController@history');
+                }
 
                 /*
                 |--------------------------------------------------------------------------
@@ -131,8 +141,10 @@
                 |--------------------------------------------------------------------------
                 */
 
-                Route::resource('promotions', 'PromotionsController', ['as' => $routePrefix, 'except' => ['show']]);
-                Route::post('promotions/search', 'PromotionsController@search');
+                if (in_array('promotions', config('cms.active-core-modules'))) {
+                    Route::resource('promotions', 'PromotionsController', ['as' => $routePrefix, 'except' => ['show']]);
+                    Route::post('promotions/search', 'PromotionsController@search');
+                }
 
                 /*
                 |--------------------------------------------------------------------------
@@ -140,8 +152,10 @@
                 |--------------------------------------------------------------------------
                 */
 
-                Route::resource('faqs', 'FAQController', ['as' => $routePrefix, 'except' => ['show']]);
-                Route::post('faqs/search', 'FAQController@search');
+                if (in_array('faqs', config('cms.active-core-modules'))) {
+                    Route::resource('faqs', 'FAQController', ['as' => $routePrefix, 'except' => ['show']]);
+                    Route::post('faqs/search', 'FAQController@search');
+                }
 
                 /*
                 |--------------------------------------------------------------------------
@@ -149,9 +163,11 @@
                 |--------------------------------------------------------------------------
                 */
 
-                Route::resource('events', 'EventController', ['as' => $routePrefix, 'except' => ['show']]);
-                Route::post('events/search', 'EventController@search');
-                Route::get('events/{id}/history', 'EventController@history');
+                if (in_array('events', config('cms.active-core-modules'))) {
+                    Route::resource('events', 'EventController', ['as' => $routePrefix, 'except' => ['show']]);
+                    Route::post('events/search', 'EventController@search');
+                    Route::get('events/{id}/history', 'EventController@history');
+                }
 
                 /*
                 |--------------------------------------------------------------------------
@@ -159,10 +175,11 @@
                 |--------------------------------------------------------------------------
                 */
 
-                Route::get('files/remove/{id}', 'FilesController@remove');
-                Route::post('files/search', 'FilesController@search');
-
-                Route::resource('files', 'FilesController', ['as' => $routePrefix, 'except' => ['show']]);
+                if (in_array('files', config('cms.active-core-modules'))) {
+                    Route::get('files/remove/{id}', 'FilesController@remove');
+                    Route::post('files/search', 'FilesController@search');
+                    Route::resource('files', 'FilesController', ['as' => $routePrefix, 'except' => ['show']]);
+                }
             });
         });
     });

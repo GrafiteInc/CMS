@@ -10,16 +10,18 @@ class CreatePagesTable extends Migration
      */
     public function up()
     {
-        Schema::create(config('cms.db-prefix', '').'pages', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('title');
-            $table->string('url');
-            $table->text('entry')->nullable();
-            $table->string('seo_description')->nullable();
-            $table->string('seo_keywords')->nullable();
-            $table->boolean('is_published')->default(0);
-            $table->nullableTimestamps();
-        });
+        if (in_array('pages', config('cms.active-core-modules'))) {
+            Schema::create(config('cms.db-prefix', '').'pages', function (Blueprint $table) {
+                $table->increments('id');
+                $table->string('title');
+                $table->string('url');
+                $table->text('entry')->nullable();
+                $table->string('seo_description')->nullable();
+                $table->string('seo_keywords')->nullable();
+                $table->boolean('is_published')->default(0);
+                $table->nullableTimestamps();
+            });
+        }
     }
 
     /**
@@ -27,6 +29,8 @@ class CreatePagesTable extends Migration
      */
     public function down()
     {
-        Schema::drop(config('cms.db-prefix', '').'pages');
+        if (in_array('pages', config('cms.active-core-modules'))) {
+            Schema::drop(config('cms.db-prefix', '').'pages');
+        }
     }
 }

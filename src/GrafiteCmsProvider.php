@@ -38,16 +38,44 @@ class GrafiteCmsProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__.'/PublishedAssets/Views/themes' => base_path('resources/themes'),
-            __DIR__.'/PublishedAssets/Controllers' => app_path('Http/Controllers/Cms'),
             __DIR__.'/PublishedAssets/Middleware' => app_path('Http/Middleware'),
             __DIR__.'/PublishedAssets/Routes' => base_path('routes'),
             __DIR__.'/PublishedAssets/Config' => base_path('config'),
-        ]);
+        ], 'cms');
+
+        $this->publishes([
+             __DIR__.'/PublishedAssets/Views/themes' => base_path('resources/themes'),
+            __DIR__.'/PublishedAssets/Controllers' => app_path('Http/Controllers/Cms'),
+        ], 'cms-modules');
+
+        $this->publishes([
+            __DIR__.'/PublishedAssets/Views/themes/default/blog' => base_path('resources/themes/default/blog'),
+            __DIR__.'/PublishedAssets/Controllers/BlogController.php' => app_path('Http/Controllers/Cms/BlogController.php'),
+        ], 'cms-blog');
+
+        $this->publishes([
+            __DIR__.'/PublishedAssets/Views/themes/default/gallery' => base_path('resources/themes/default/gallery'),
+            __DIR__.'/PublishedAssets/Controllers/GalleryController.php' => app_path('Http/Controllers/Cms/GalleryController.php'),
+        ], 'cms-gallery');
+
+        $this->publishes([
+            __DIR__.'/PublishedAssets/Views/themes/default/events' => base_path('resources/themes/default/events'),
+            __DIR__.'/PublishedAssets/Controllers/EventController.php' => app_path('Http/Controllers/Cms/EventController.php'),
+        ], 'cms-events');
+
+        $this->publishes([
+            __DIR__.'/PublishedAssets/Views/themes/default/faqs' => base_path('resources/themes/default/faqs'),
+            __DIR__.'/PublishedAssets/Controllers/FaqController.php' => app_path('Http/Controllers/Cms/FaqController.php'),
+        ], 'cms-faqs');
+
+        $this->publishes([
+            __DIR__.'/PublishedAssets/Views/themes/default/pages' => base_path('resources/themes/default/pages'),
+            __DIR__.'/PublishedAssets/Controllers/PagesController.php' => app_path('Http/Controllers/Cms/PagesController.php'),
+        ], 'cms-pages');
 
         $this->publishes([
             __DIR__.'/Views' => base_path('resources/views/vendor/cms'),
-        ], 'backend');
+        ], 'cms-admin');
 
         $this->loadMigrationsFrom(__DIR__.'/Migrations');
 
@@ -90,6 +118,10 @@ class GrafiteCmsProvider extends ServiceProvider
 
         Blade::directive('modules', function ($expression) {
             return "<?php echo Cms::moduleLinks($expression); ?>";
+        });
+
+        Blade::directive('core_modules', function ($expression) {
+            return "<?php echo Cms::coreModuleLinks($expression); ?>";
         });
 
         Blade::directive('widget', function ($expression) {

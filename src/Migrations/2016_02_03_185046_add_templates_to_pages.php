@@ -10,9 +10,11 @@ class AddTemplatesToPages extends Migration
      */
     public function up()
     {
-        Schema::table(config('cms.db-prefix', '').'pages', function (Blueprint $table) {
-            $table->string('template')->default('show');
-        });
+        if (in_array('pages', config('cms.active-core-modules'))) {
+            Schema::table(config('cms.db-prefix', '').'pages', function (Blueprint $table) {
+                $table->string('template')->default('show');
+            });
+        }
     }
 
     /**
@@ -20,8 +22,10 @@ class AddTemplatesToPages extends Migration
      */
     public function down()
     {
-        Schema::table(config('cms.db-prefix', '').'pages', function ($table) {
-            $table->dropColumn('template');
-        });
+        if (in_array('pages', config('cms.active-core-modules'))) {
+            Schema::table(config('cms.db-prefix', '').'pages', function ($table) {
+                $table->dropColumn('template');
+            });
+        }
     }
 }

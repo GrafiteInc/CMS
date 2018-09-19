@@ -10,15 +10,17 @@ class CreateLinksTable extends Migration
      */
     public function up()
     {
-        Schema::create(config('cms.db-prefix', '').'links', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('name');
-            $table->boolean('external')->default(0);
-            $table->integer('page_id');
-            $table->integer('menu_id');
-            $table->string('external_url')->nullable();
-            $table->nullableTimestamps();
-        });
+        if (in_array('menus', config('cms.active-core-modules'))) {
+            Schema::create(config('cms.db-prefix', '').'links', function (Blueprint $table) {
+                $table->increments('id');
+                $table->string('name');
+                $table->boolean('external')->default(0);
+                $table->integer('page_id');
+                $table->integer('menu_id');
+                $table->string('external_url')->nullable();
+                $table->nullableTimestamps();
+            });
+        }
     }
 
     /**
@@ -26,6 +28,8 @@ class CreateLinksTable extends Migration
      */
     public function down()
     {
-        Schema::drop(config('cms.db-prefix', '').'links');
+        if (in_array('menus', config('cms.active-core-modules'))) {
+            Schema::drop(config('cms.db-prefix', '').'links');
+        }
     }
 }

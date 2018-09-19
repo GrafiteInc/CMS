@@ -6,10 +6,7 @@
         <ul class="navbar-nav mr-auto">
             <li class="nav-item"><a class="nav-link" href="{{ url('/') }}">Home</a></li>
             @menu('main', 'cms-frontend::partials.main-menu')
-            <li class="nav-item"><a class="nav-link" href="{{ url('blog') }}">Blog</a></li>
-            <li class="nav-item"><a class="nav-link" href="{{ url('events') }}">Events</a></li>
-            <li class="nav-item"><a class="nav-link" href="{{ url('faqs') }}">FAQs</a></li>
-            <li class="nav-item"><a class="nav-link" href="{{ url('gallery') }}">Gallery</a></li>
+            @core_modules()
             @modules()
             @languages()
         </ul>

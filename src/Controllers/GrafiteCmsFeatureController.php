@@ -2,11 +2,12 @@
 
 namespace Grafite\Cms\Controllers;
 
+use Cms;
+use Grafite\Cms\Models\Archive;
+use Grafite\Cms\Services\FileService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\View;
-use Cms;
-use Grafite\Cms\Models\Archive;
 
 class GrafiteCmsFeatureController extends GrafiteCmsController
 {
@@ -135,5 +136,29 @@ class GrafiteCmsFeatureController extends GrafiteCmsController
     public function setLanguage(Request $request, $lang)
     {
         return back()->withCookie('language', $lang);
+    }
+
+    /**
+     * Delete the hero image
+     *
+     * @param  string $entity
+     * @param  int $id
+     *
+     * @return Response
+     */
+    public function deleteHero($entity, $id)
+    {
+        $entity = app('Grafite\Cms\Models\\'.ucfirst($entity))->find($id);
+
+        if (app(FileService::class)->delete($entity->hero_image)) {
+            $entity->update([
+                'hero_image' => null,
+            ]);
+            Cms::notification('Hero image deleted.', 'success');
+            return back();
+        }
+
+        Cms::notification('Hero image could not be deleted', 'error');
+        return back();
     }
 }

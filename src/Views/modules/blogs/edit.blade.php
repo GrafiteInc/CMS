@@ -69,6 +69,11 @@
                         <div class="col-md-6">
                             @if ($blog->hero_image)
                                 <img class="img-thumbnail img-fluid" src="{{ $blog->hero_image_url }}" alt="">
+                                <div class="btn-toolbar mt-2" role="toolbar">
+                                    <a href="{{ cms()->url('hero-images/delete/blog/'.$blog->id) }}" class="btn btn-outline-danger">
+                                        <span class="fa fa-fw fa-trash"></span> Delete Image
+                                    </a>
+                                </div>
                             @endif
                         </div>
                     </div>

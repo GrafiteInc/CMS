@@ -149,6 +149,7 @@ class BlogRepository extends CmsRepository
         $payload['title'] = htmlentities($payload['title']);
 
         if (isset($payload['hero_image'])) {
+            app(FileService::class)->delete($blog->hero_image);
             $file = request()->file('hero_image');
             $path = app(FileService::class)->saveFile($file, 'public/images', [], true);
             $payload['hero_image'] = $path['name'];

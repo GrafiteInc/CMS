@@ -29,4 +29,13 @@ class Menu extends CmsModel
         $this->fillable(array_values(array_unique(array_merge($this->fillable, $keys))));
         parent::__construct($attributes);
     }
+
+    public function getOrderAttribute($value)
+    {
+        if (is_null($value)) {
+            return '[]';
+        }
+
+        return $value;
+    }
 }

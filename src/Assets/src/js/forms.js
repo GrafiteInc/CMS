@@ -18,6 +18,12 @@ var _redactorConfig = {
     fileManagerJson: _url+'/cms/api/files/list',
     stockImageManagerJson: 'https://pixabay.com/api/',
     formatting: ['p', 'blockquote', 'pre', 'h1', 'h2', 'h3', 'h4', 'h5'],
+    buttonsAddAfter: {
+        after: 'deleted',
+        buttons: [
+            'underline'
+        ]
+    },
     plugins: [
         'table',
         'fontcolor',

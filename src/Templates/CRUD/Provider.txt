@@ -30,6 +30,9 @@ class _camel_casePlural_ModuleProvider extends ServiceProvider
         // View namespace
         $this->app->view->addNamespace('_lower_casePlural_', __DIR__.'/Views');
 
+        // Migrations
+        $this->loadMigrationsFrom(__DIR__.'/Migrations');
+
         // Configs
         $this->app->config->set('cms.modules._lower_casePlural_', include(__DIR__.'/config.php'));
     }

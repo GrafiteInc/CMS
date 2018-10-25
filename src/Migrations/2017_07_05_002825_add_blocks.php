@@ -10,23 +10,17 @@ class AddBlocks extends Migration
      */
     public function up()
     {
-        if (in_array('pages', config('cms.active-core-modules'))) {
-            Schema::table(config('cms.db-prefix', '').'pages', function (Blueprint $table) {
-                $table->text('blocks')->nullable();
-            });
-        }
+        Schema::table(config('cms.db-prefix', '').'pages', function (Blueprint $table) {
+            $table->text('blocks')->nullable();
+        });
 
-        if (in_array('blog', config('cms.active-core-modules'))) {
-            Schema::table(config('cms.db-prefix', '').'blogs', function (Blueprint $table) {
-                $table->text('blocks')->nullable();
-            });
-        }
+        Schema::table(config('cms.db-prefix', '').'blogs', function (Blueprint $table) {
+            $table->text('blocks')->nullable();
+        });
 
-        if (in_array('events', config('cms.active-core-modules'))) {
-            Schema::table(config('cms.db-prefix', '').'events', function (Blueprint $table) {
-                $table->text('blocks')->nullable();
-            });
-        }
+        Schema::table(config('cms.db-prefix', '').'events', function (Blueprint $table) {
+            $table->text('blocks')->nullable();
+        });
     }
 
     /**
@@ -34,22 +28,16 @@ class AddBlocks extends Migration
      */
     public function down()
     {
-        if (in_array('pages', config('cms.active-core-modules'))) {
-            Schema::table(config('cms.db-prefix', '').'pages', function ($table) {
-                $table->dropColumn('blocks');
-            });
-        }
+        Schema::table(config('cms.db-prefix', '').'pages', function ($table) {
+            $table->dropColumn('blocks');
+        });
 
-        if (in_array('blog', config('cms.active-core-modules'))) {
-            Schema::table(config('cms.db-prefix', '').'blogs', function ($table) {
-                $table->dropColumn('blocks');
-            });
-        }
+        Schema::table(config('cms.db-prefix', '').'blogs', function ($table) {
+            $table->dropColumn('blocks');
+        });
 
-        if (in_array('events', config('cms.active-core-modules'))) {
-            Schema::table(config('cms.db-prefix', '').'events', function ($table) {
-                $table->dropColumn('blocks');
-            });
-        }
+        Schema::table(config('cms.db-prefix', '').'events', function ($table) {
+            $table->dropColumn('blocks');
+        });
     }
 }

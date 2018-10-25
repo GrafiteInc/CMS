@@ -10,14 +10,12 @@ class CreateMenusTable extends Migration
      */
     public function up()
     {
-        if (in_array('menus', config('cms.active-core-modules'))) {
-            Schema::create(config('cms.db-prefix', '').'menus', function (Blueprint $table) {
-                $table->increments('id');
-                $table->string('name');
-                $table->string('slug');
-                $table->nullableTimestamps();
-            });
-        }
+        Schema::create(config('cms.db-prefix', '').'menus', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name');
+            $table->string('slug');
+            $table->nullableTimestamps();
+        });
     }
 
     /**
@@ -25,8 +23,6 @@ class CreateMenusTable extends Migration
      */
     public function down()
     {
-        if (in_array('menus', config('cms.active-core-modules'))) {
-            Schema::drop(config('cms.db-prefix', '').'menus');
-        }
+        Schema::drop(config('cms.db-prefix', '').'menus');
     }
 }

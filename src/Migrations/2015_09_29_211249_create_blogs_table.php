@@ -10,19 +10,17 @@ class CreateBlogsTable extends Migration
      */
     public function up()
     {
-        if (in_array('blog', config('cms.active-core-modules'))) {
-            Schema::create(config('cms.db-prefix', '').'blogs', function (Blueprint $table) {
-                $table->increments('id');
-                $table->string('title');
-                $table->text('entry')->nullable();
-                $table->string('tags')->nullable();
-                $table->boolean('is_published')->default(0);
-                $table->string('seo_description')->nullable();
-                $table->string('seo_keywords')->nullable();
-                $table->string('url');
-                $table->nullableTimestamps();
-            });
-        }
+        Schema::create(config('cms.db-prefix', '').'blogs', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('title');
+            $table->text('entry')->nullable();
+            $table->string('tags')->nullable();
+            $table->boolean('is_published')->default(0);
+            $table->string('seo_description')->nullable();
+            $table->string('seo_keywords')->nullable();
+            $table->string('url');
+            $table->nullableTimestamps();
+        });
     }
 
     /**
@@ -30,8 +28,6 @@ class CreateBlogsTable extends Migration
      */
     public function down()
     {
-        if (in_array('blog', config('cms.active-core-modules'))) {
-            Schema::drop(config('cms.db-prefix', '').'blogs');
-        }
+        Schema::drop(config('cms.db-prefix', '').'blogs');
     }
 }

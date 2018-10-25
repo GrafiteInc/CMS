@@ -10,19 +10,17 @@ class CreateImagesTable extends Migration
      */
     public function up()
     {
-        if (in_array('images', config('cms.active-core-modules'))) {
-            Schema::create(config('cms.db-prefix', '').'images', function (Blueprint $table) {
-                $table->increments('id');
-                $table->string('location');
-                $table->string('name')->nullable();
-                $table->string('original_name');
-                $table->string('storage_location')->default('local');
-                $table->string('alt_tag')->nullable();
-                $table->string('title_tag')->nullable();
-                $table->boolean('is_published')->default(0);
-                $table->nullableTimestamps();
-            });
-        }
+        Schema::create(config('cms.db-prefix', '').'images', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('location');
+            $table->string('name')->nullable();
+            $table->string('original_name');
+            $table->string('storage_location')->default('local');
+            $table->string('alt_tag')->nullable();
+            $table->string('title_tag')->nullable();
+            $table->boolean('is_published')->default(0);
+            $table->nullableTimestamps();
+        });
     }
 
     /**
@@ -30,8 +28,6 @@ class CreateImagesTable extends Migration
      */
     public function down()
     {
-        if (in_array('images', config('cms.active-core-modules'))) {
-            Schema::drop(config('cms.db-prefix', '').'images');
-        }
+        Schema::drop(config('cms.db-prefix', '').'images');
     }
 }

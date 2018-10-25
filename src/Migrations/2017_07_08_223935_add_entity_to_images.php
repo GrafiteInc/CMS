@@ -11,12 +11,10 @@ class AddEntityToImages extends Migration
      */
     public function up()
     {
-        if (in_array('images', config('cms.active-core-modules'))) {
-            Schema::table(config('cms.db-prefix', '').'images', function (Blueprint $table) {
-                $table->integer('entity_id')->nullable();
-                $table->string('entity_type')->nullable();
-            });
-        }
+        Schema::table(config('cms.db-prefix', '').'images', function (Blueprint $table) {
+            $table->integer('entity_id')->nullable();
+            $table->string('entity_type')->nullable();
+        });
     }
 
     /**

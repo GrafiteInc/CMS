@@ -10,11 +10,9 @@ class AddTagsToImages extends Migration
      */
     public function up()
     {
-        if (in_array('images', config('cms.active-core-modules'))) {
-            Schema::table(config('cms.db-prefix', '').'images', function (Blueprint $table) {
-                $table->text('tags')->nullable();
-            });
-        }
+        Schema::table(config('cms.db-prefix', '').'images', function (Blueprint $table) {
+            $table->text('tags')->nullable();
+        });
     }
 
     /**
@@ -22,10 +20,8 @@ class AddTagsToImages extends Migration
      */
     public function down()
     {
-        if (in_array('images', config('cms.active-core-modules'))) {
-            Schema::table(config('cms.db-prefix', '').'images', function ($table) {
-                $table->dropColumn('tags');
-            });
-        }
+        Schema::table(config('cms.db-prefix', '').'images', function ($table) {
+            $table->dropColumn('tags');
+        });
     }
 }

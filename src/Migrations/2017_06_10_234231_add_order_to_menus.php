@@ -11,11 +11,9 @@ class AddOrderToMenus extends Migration
      */
     public function up()
     {
-        if (in_array('menus', config('cms.active-core-modules'))) {
-            Schema::table(config('cms.db-prefix', '').'menus', function (Blueprint $table) {
-                $table->text('order')->nullable();
-            });
-        }
+        Schema::table(config('cms.db-prefix', '').'menus', function (Blueprint $table) {
+            $table->text('order')->nullable();
+        });
     }
 
     /**
@@ -23,10 +21,8 @@ class AddOrderToMenus extends Migration
      */
     public function down()
     {
-        if (in_array('menus', config('cms.active-core-modules'))) {
-            Schema::table(config('cms.db-prefix', '').'menus', function ($table) {
-                $table->dropColumn('order');
-            });
-        }
+        Schema::table(config('cms.db-prefix', '').'menus', function ($table) {
+            $table->dropColumn('order');
+        });
     }
 }

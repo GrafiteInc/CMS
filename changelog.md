@@ -3,6 +3,19 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 ----
 
+## [v3.2.2] - 2018-10-25
+
+### Added
+- Ability to delete hero images
+
+### Changed
+- Module migrations
+
+### Fixed
+- Npm security aduit
+- Mobile UI fixes
+- Menu and link fixes
+
 ## [v3.2.1] - 2018-09-14
 
 ### Fixed

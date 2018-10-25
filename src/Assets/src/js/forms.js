@@ -5,7 +5,7 @@
 */
 
 var _redactorConfig = {
-    toolbarFixedTopOffset: 60,
+    toolbarFixedTopOffset: ($(window).width() < 376) ? 30 : 50,
     visual: true,
     minHeight: 175,
     convertVideoLinks: true,

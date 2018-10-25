@@ -10,7 +10,7 @@
                 @include('cms::modules.widgets.breadcrumbs', ['location' => ['edit']])
             </div>
             <div class="col-md-6">
-                 <div class="btn-toolbar float-right mt-2">
+                 <div class="btn-toolbar float-right mt-2 mb-4">
                     @if (! cms()->isDefaultLanguage() && $widget->translationData(request('lang')))
                         <a class="btn btn-warning ml-1" href="{!! Cms::rollbackUrl($widget->translation(request('lang'))) !!}">Rollback</a>
                     @elseif (is_null(request('lang')))

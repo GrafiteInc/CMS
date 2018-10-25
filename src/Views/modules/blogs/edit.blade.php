@@ -10,7 +10,7 @@
                 @include('cms::modules.blogs.breadcrumbs', ['location' => ['edit']])
             </div>
             <div class="col-md-6">
-                <div class="btn-toolbar float-right mt-2">
+                <div class="btn-toolbar float-right mt-2 mb-4">
                     @if (! cms()->isDefaultLanguage() && $blog->translationData(request('lang')))
                         @if (isset($blog->translationData(request('lang'))->is_published))
                             <a class="btn btn-success ml-1" href="{!! url('blog/'.$blog->translationData(request('lang'))->url) !!}">Live</a>

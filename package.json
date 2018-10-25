@@ -9,7 +9,7 @@
     },
     "devDependencies": {
         "axios": "^0.18",
-        "bootstrap": "^4.0.0",
+        "bootstrap": ">=4.1.2",
         "cross-env": "^5.1",
         "jquery": "^3.2",
         "laravel-mix": "^2.1.14",

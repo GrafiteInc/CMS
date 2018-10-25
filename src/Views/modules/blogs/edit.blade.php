@@ -10,7 +10,7 @@
                 @include('cms::modules.blogs.breadcrumbs', ['location' => ['edit']])
             </div>
             <div class="col-md-6">
-                <div class="btn-toolbar float-right mt-2">
+                <div class="btn-toolbar float-right mt-2 mb-4">
                     @if (! cms()->isDefaultLanguage() && $blog->translationData(request('lang')))
                         @if (isset($blog->translationData(request('lang'))->is_published))
                             <a class="btn btn-success ml-1" href="{!! url('blog/'.$blog->translationData(request('lang'))->url) !!}">Live</a>
@@ -69,6 +69,11 @@
                         <div class="col-md-6">
                             @if ($blog->hero_image)
                                 <img class="img-thumbnail img-fluid" src="{{ $blog->hero_image_url }}" alt="">
+                                <div class="btn-toolbar mt-2" role="toolbar">
+                                    <a href="{{ cms()->url('hero-images/delete/blog/'.$blog->id) }}" class="btn btn-outline-danger">
+                                        <span class="fa fa-fw fa-trash"></span> Delete Image
+                                    </a>
+                                </div>
                             @endif
                         </div>
                     </div>

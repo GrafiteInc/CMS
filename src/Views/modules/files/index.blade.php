@@ -33,7 +33,7 @@
                     <table class="table table-striped">
                         <thead>
                             <th>{!! sortable('Name', 'name') !!}</th>
-                            <th>{!! sortable('Is Published', 'is_published') !!}</th>
+                            <th class="m-hidden">{!! sortable('Is Published', 'is_published') !!}</th>
                             <th width="170px" class="text-right">Actions</th>
                         </thead>
                         <tbody>
@@ -44,7 +44,7 @@
                                     <a href="{!! Cms::fileAsDownload($file->name, $file->location) !!}"><span class="fa fa-download"></span></a>
                                     <a href="{!! route(cms()->route('files.edit'), [$file->id]) !!}">{!! $file->name !!}</a>
                                 </td>
-                                <td class="raw-m-hide">
+                                <td class="m-hidden">
                                     @if ($file->is_published)
                                         <span class="fa fa-check"></span>
                                     @else

@@ -45,7 +45,15 @@ class LinkRepository extends CmsRepository
             throw new Exception("Your link was not connected to anything, and could not be made", 1);
         }
 
-        return $this->model->create($payload);
+        $link = $this->model->create($payload);
+
+        $order = json_decode($link->menu->order);
+        array_push($order, $link->id);
+        $link->menu->update([
+            'order' => json_encode($order),
+        ]);
+
+        return $link;
     }
 
     /**

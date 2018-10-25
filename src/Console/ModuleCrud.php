@@ -53,7 +53,7 @@ class ModuleCrud extends Command
             mkdir($moduleDirectory.'/Publishes/routes', 0777, true);
             mkdir($moduleDirectory.'/Publishes/app/Http/Controllers/Cms', 0777, true);
             mkdir($moduleDirectory.'/Publishes/resources/themes/default', 0777, true);
-            mkdir($moduleDirectory.'/Publishes/database/migrations', 0777, true);
+            mkdir($moduleDirectory.'/Migrations', 0777, true);
             mkdir($moduleDirectory.'/Controllers', 0777, true);
             mkdir($moduleDirectory.'/Services', 0777, true);
             mkdir($moduleDirectory.'/Models', 0777, true);
@@ -155,7 +155,7 @@ class ModuleCrud extends Command
 
         Artisan::call('make:migration', [
             'name' => 'create_'.str_plural(strtolower($this->table)).'_table',
-            '--path' => 'cms/Modules/'.ucfirst(str_plural($this->table)).'/Publishes/database/migrations',
+            '--path' => 'cms/Modules/'.ucfirst(str_plural($this->table)).'/Migrations',
             '--table' => str_plural(strtolower($this->table)),
             '--create' => true,
         ]);
@@ -202,7 +202,7 @@ class ModuleCrud extends Command
     public function setSchema()
     {
         if ($this->option('schema')) {
-            $migrationFiles = $this->filesystem->allFiles(base_path('cms/Modules/'.ucfirst(str_plural($this->table)).'/Publishes/database/migrations'));
+            $migrationFiles = $this->filesystem->allFiles(base_path('cms/Modules/'.ucfirst(str_plural($this->table)).'/Migrations'));
             $migrationName = 'create_'.str_plural(strtolower($this->table)).'_table';
             foreach ($migrationFiles as $file) {
                 if (stristr($file->getBasename(), $migrationName)) {

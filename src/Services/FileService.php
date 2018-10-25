@@ -63,6 +63,15 @@ class FileService
         ];
     }
 
+    public function delete($path)
+    {
+        if (is_file(storage_path($path))) {
+            return Storage::delete($path);
+        } else {
+            return Storage::disk(config('cms.storage-location', 'local'))->delete($path);
+        }
+    }
+
     /**
      * Saves File.
      *

@@ -136,19 +136,27 @@ class LinksController extends GrafiteCmsController
      */
     public function destroy($id)
     {
-        $links = $this->repository->find($id);
-        $menu = $links->menu_id;
+        $link = $this->repository->find($id);
+        $menu = $link->menu_id;
 
-        if (empty($links)) {
+        if (empty($link)) {
             Cms::notification('Link not found', 'warning');
 
-            return redirect(route($this->routeBase.'.links.index'));
+            return redirect(route($this->routeBase.'.menus.index'));
         }
 
-        $links->delete();
+        $order = json_decode($link->menu->order);
+        $key = array_search($id, $order);
+        unset($order[$key]);
+
+        $link->menu->update([
+            'order' => json_encode(array_values($order)),
+        ]);
+
+        $link->delete();
 
         Cms::notification('Link deleted successfully.', 'success');
 
-        return redirect(route($this->routeBase.'.menus.edit', [$menu]));
+        return redirect(route($this->routeBase.'.menus.edit', [$link->menu_id]));
     }
 }

@@ -71,14 +71,14 @@
                                 </div>
                                 <div data-id="{{ $image->id }}" class="well pull-down overflow-hidden selectable">
                                     <div class="row">
-                                        <div class="col-lg-6 col-md-12 col-sm-12">
+                                        <div class="col-6">
                                             @if ($image->is_published)
                                                 <span clas="pull-left"><span class="pull-left fa fa-check"></span> Published</span>
                                             @else
                                                 <span clas="pull-left"><span class="pull-left fa fa-times"></span> Published</span>
                                             @endif
                                         </div>
-                                        <div class="col-lg-6 col-md-12 col-sm-12">
+                                        <div class="col-6">
                                             <div class="btn-toolbar float-right">
                                                 <a class="btn btn-sm btn-secondary img-alter-btn mr-2" href="{!! route(cms()->route('images.edit'), [$image->id]) !!}"><i class="fa fa-edit"></i></a>
                                                 <form method="post" action="{!! cms()->url('images/'.$image->id) !!}">

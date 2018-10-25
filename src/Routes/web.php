@@ -6,6 +6,7 @@
         Route::get($routePrefix, 'GrafiteCmsFeatureController@sendHome');
         Route::get('{module}/rss', 'RssController@index');
         Route::get('site-map', 'SiteMapController@index');
+        Route::get($routePrefix.'/hero-images/delete/{entity}/{entity_id}', 'GrafiteCmsFeatureController@deleteHero');
 
         /*
         |--------------------------------------------------------------------------

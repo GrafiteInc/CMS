@@ -24,7 +24,7 @@ trait Translatable
             ->first();
 
         if ($result) {
-            return $result;
+            return $result->data;
         }
 
         $this->data = $this;

@@ -5,6 +5,7 @@ namespace Grafite\Cms\Controllers;
 use Cms;
 use Grafite\Cms\Models\Blog;
 use Illuminate\Http\Request;
+use Grafite\Cms\Forms\BlogForm;
 use Grafite\Cms\Requests\BlogRequest;
 use Grafite\Cms\Services\ValidationService;
 use Grafite\Cms\Repositories\BlogRepository;
@@ -58,7 +59,9 @@ class BlogController extends GrafiteCmsController
      */
     public function create()
     {
-        return view('cms::modules.blogs.create');
+        $form = app(BlogForm::class)->create();
+
+        return view('cms::modules.blogs.create', compact('form'));
     }
 
     /**
@@ -97,13 +100,21 @@ class BlogController extends GrafiteCmsController
     {
         $blog = $this->repository->find($id);
 
+        if (request('lang')) {
+            $blog = $blog->translation(request('lang'));
+        }
+
+        $form = app(BlogForm::class)->edit($blog);
+
         if (empty($blog)) {
             Cms::notification('Blog not found', 'warning');
 
             return redirect(route($this->routeBase.'.blog.index'));
         }
 
-        return view('cms::modules.blogs.edit')->with('blog', $blog);
+        return view('cms::modules.blogs.edit')
+            ->with('form', $form)
+            ->with('blog', $blog);
     }
 
     /**

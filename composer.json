@@ -10,9 +10,8 @@
     ],
     "require": {
         "php": ">=7.1.3",
-        "illuminate/support": "5.7.*",
-        "grafite/builder": "^2.5",
-        "devfactory/minify": "1.0.*",
+        "illuminate/support": "5.8.*|6.0.*",
+        "grafite/formmaker": "^2.1",
         "aws/aws-sdk-php": "^3.18",
         "league/flysystem-aws-s3-v3": "^1.0",
         "graham-campbell/markdown": "^10.0",

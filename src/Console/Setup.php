@@ -130,7 +130,7 @@ class Setup extends Command
         }
 
         $this->info('Please add to your app.scss:');
-        $this->comment("@import '../../themes/default/assets/sass/_theme.scss';");
+        $this->comment("@import '../themes/default/assets/sass/_theme.scss';");
         $this->info('Please run:');
         $this->comment('npm install');
         $this->info('and:');

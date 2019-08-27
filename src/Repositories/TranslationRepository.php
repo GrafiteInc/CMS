@@ -4,6 +4,7 @@ namespace Grafite\Cms\Repositories;
 
 use Carbon\Carbon;
 use Grafite\Cms\Models\Translation;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class TranslationRepository
 {
@@ -41,6 +42,29 @@ class TranslationRepository
     }
 
     /**
+     * Get all published entries
+     *
+     * @param  string $type
+     *
+     * @return \Grafite\Cms\Models\Translation
+     */
+    public function publishedItems($type)
+    {
+        $published = collect([]);
+
+        $items = $this->model->where('entity_type', $type)
+            ->where('entity_data->is_published', 'on')
+            ->where('entity_data->published_at', '<=', Carbon::now(config('app.timezone'))->format('Y-m-d H:i:s'))
+            ->get();
+
+        foreach ($items as $item) {
+            $published->push($item->data);
+        }
+
+        return new LengthAwarePaginator($published, $published->count(), 24, request('page', 1), []);
+    }
+
+    /**
      * Find by URL
      *
      * @param  string $url
@@ -50,7 +74,7 @@ class TranslationRepository
      */
     public function findByUrl($url, $type)
     {
-        $item = $this->model->where('entity_type', $type)->where('entity_data', 'LIKE', '%"url":"'.$url.'"%')->first();
+        $item = $this->model->where('entity_type', $type)->where('entity_data->url', $url)->first();
 
         if ($item && ($item->data->is_published == 1 || $item->data->is_published == 'on') && $item->data->published_at <= Carbon::now(config('app.timezone'))->format('Y-m-d H:i:s')) {
             return $item->data;
@@ -89,7 +113,7 @@ class TranslationRepository
     public function getEntitiesByTypeAndLang($lang, $type)
     {
         $entities = collect();
-        $collection = $this->model->where('entity_type', $type)->where('entity_data', 'LIKE', '%"lang":"'.$lang.'"%')->get();
+        $collection = $this->model->where('entity_type', $type)->where('entity_data->lang', $lang)->get();
 
         foreach ($collection as $item) {
             $instance = app($item->type)->attributes = $item->data;

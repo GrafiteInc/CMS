@@ -31,6 +31,10 @@ class BlogRepository extends CmsRepository
      */
     public function published()
     {
+        if (! cms()->defaultLanguageRequest()) {
+            return $this->translationRepo->publishedItems('Grafite\Cms\Models\Blog');
+        }
+
         return $this->model->where('is_published', 1)
             ->where('published_at', '<=', Carbon::now(config('app.timezone'))->format('Y-m-d H:i:s'))->orderBy('created_at', 'desc')
             ->paginate(config('cms.pagination', 24));
@@ -45,6 +49,7 @@ class BlogRepository extends CmsRepository
      */
     public function tags($tag)
     {
+        // TODO: languages
         return $this->model->where('is_published', 1)
             ->where('published_at', '<=', Carbon::now(config('app.timezone'))->format('Y-m-d H:i:s'))
             ->where('tags', 'LIKE', '%'.$tag.'%')->orderBy('created_at', 'desc')
@@ -60,7 +65,7 @@ class BlogRepository extends CmsRepository
     {
         $tags = [];
 
-        if (app()->getLocale() !== config('cms.default-language', 'en')) {
+        if (!cms()->defaultLanguageRequest()) {
             $blogs = $this->translationRepo->getEntitiesByTypeAndLang(app()->getLocale(), 'Grafite\Cms\Models\Blog');
         } else {
             $blogs = $this->model->orderBy('published_at', 'desc')->get();
@@ -131,6 +136,7 @@ class BlogRepository extends CmsRepository
      */
     public function findBlogsByTag($tag)
     {
+        // TODO: languages
         return $this->model->where('tags', 'LIKE', "%$tag%")->where('is_published', 1)->get();
     }
 
@@ -148,6 +154,7 @@ class BlogRepository extends CmsRepository
 
         $payload['title'] = htmlentities($payload['title']);
 
+        // TODO - duhhhh fix this
         if (isset($payload['hero_image'])) {
             app(FileService::class)->delete($blog->hero_image);
             $file = request()->file('hero_image');

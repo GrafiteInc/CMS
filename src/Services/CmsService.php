@@ -74,6 +74,16 @@ class CmsService
     }
 
     /**
+     * Check if the request is the default language
+     *
+     * @return bool
+     */
+    public function defaultLanguageRequest()
+    {
+        return app()->getLocale() === config('cms.default-language', 'en');
+    }
+
+    /**
      * Links for each supported language
      *
      * @param  string $linkClass

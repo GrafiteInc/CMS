@@ -13,7 +13,9 @@
     </nav>
 
     <main class="ml-sm-auto pt-2 px-2 main">
-        @yield('content')
+        <div class="container">
+            @yield('content')
+        </div>
     </main>
 
     <footer class="footer bg-light">
@@ -24,6 +26,6 @@
 @stop
 
 @section('javascript')
-    {!! Minify::javascript(Cms::asset('js/dashboard.js', 'application/javascript')) !!}
-    {!! Minify::javascript(Cms::asset('js/chart.min.js', 'application/javascript')) !!}
+    {!! Cms::asset('js/dashboard.js', 'application/javascript') !!}
+    {!! Cms::asset('js/chart.min.js', 'application/javascript') !!}
 @stop

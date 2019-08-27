@@ -76,5 +76,5 @@
         var options = {};
     </script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.bundle.js"></script>
-    {!! Minify::javascript(Cms::asset('js/dashboard-chart.js')) !!}
+    {!! Cms::asset('js/dashboard-chart.js') !!}
 @stop

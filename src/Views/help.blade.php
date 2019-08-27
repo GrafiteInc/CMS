@@ -7,14 +7,14 @@
     <div class="col-md-12 mt-4">
         <div class="row">
             <div class="col-md-12">
-                <div class="card card-dark card-help">
+                <div class="card card-dark card-help shadow-sm">
                     <div class="card-header"><b>Resource History aka. Rollback and Revert</b></div>
                     <div class="card-body">
                         With many of the Grafite CMS modules you can perform a Rollback or Revert to an earlier moment in history. In pages for example if you click Rollback, you will go back to the most recently saved version of the post. However, you can only go back once, or rather undo, it does not keep digging through history. If you would like to go further back, visit the pages History and you will find different edits, you can revert to any of these with just a single click.
                     </div>
                 </div>
 
-                <div class="card card-dark card-help">
+                <div class="card card-dark card-help shadow-sm">
                     <div class="card-header"><b>Published Assets</b></div>
                     <div class="card-body">
                         Grafite CMS publishes views and controllers within your application. This allows you to control everything you want. You will find the controllers in: <code>app/Http/Controllers/Cms</code> and the views in: <code>resources/themes</code>. There is also the cms config which is added to your app's config directory.
@@ -27,14 +27,14 @@
                     </div>
                 </div>
 
-                <div class="card card-dark card-help">
+                <div class="card card-dark card-help shadow-sm">
                     <div class="card-header"><b>Multilingual</b></div>
                     <div class="card-body">
                         CMS is fully multilingual all you need to do is set the languages in your <code>config/cms.php</code> file and then in your app just set the <code>locale</code> and poof! you have multi-language support.
                     </div>
                 </div>
 
-                <div class="card card-dark card-help">
+                <div class="card card-dark card-help shadow-sm">
                     <div class="card-header"><b>API Endpoints</b></div>
                     <div class="card-body">
                     Grafite CMS comes with a very basic API. It provides access to all published public facing data. You can define details in your CMS API middleware.
@@ -62,7 +62,7 @@
                     </div>
                 </div>
 
-                <div class="card card-dark card-help">
+                <div class="card card-dark card-help shadow-sm">
                     <div class="card-header"><b>Console Commands</b></div>
                     <div class="card-body">
                         Grafite CMS comes with a few console commands to handle things like module building and publishing
@@ -75,7 +75,7 @@
                     </div>
                 </div>
 
-                <div class="card card-dark card-help">
+                <div class="card card-dark card-help shadow-sm">
                     <div class="card-header"><b>Modules: Generate</b></div>
                     <div class="card-body">
                         The commmand for generating custom modules for the Grafite CMS is:
@@ -89,7 +89,7 @@
                     </div>
                 </div>
 
-                <div class="card card-dark card-help">
+                <div class="card card-dark card-help shadow-sm">
                     <div class="card-header"><b>Modules: Composer and Publish</b></div>
                     <div class="card-body">
                         Grafite CMS lets you create a composer package from a module. So if you want to can offer them to others rather easily.
@@ -102,7 +102,7 @@
                     </div>
                 </div>
 
-                <div class="card card-dark card-help">
+                <div class="card card-dark card-help shadow-sm">
                     <div class="card-header"><b>Front-End Code: Helpers</b></div>
                     <div class="card-body">
                         Grafite CMS automatically builds you a sample of the controllers, and views for your application's pages, blog, faqs, etc. You can run the following services as method calls or use the blade directives listed below:
@@ -117,14 +117,14 @@
                     </div>
                 </div>
 
-                <div class="card card-dark card-help">
+                <div class="card card-dark card-help shadow-sm">
                     <div class="card-header"><b>Front-End Code: Custom Templates</b></div>
                     <div class="card-body">
                         By default the homepage has its own template but you can add any by following these details: To create custom templates for different purposes simply make a view in the <code>resources/themes/{theme}/{module}</code> directory that looks similar to: <code>xxxx-template.blade.php</code>. This means you still have full control of blade templating but your pages can easily swap out views.
                     </div>
                 </div>
 
-                <div class="card card-dark card-help">
+                <div class="card card-dark card-help shadow-sm">
                     <div class="card-header"><b>Front-End Code: Blade Components</b></div>
                     <div class="card-body">
                         By default the Grafite CMS has the default theme. You can override this in the <code>config/cms.php</code> file. The theme has the namespace of: <code>cms-frontend::</code>, and has some <b>Blade</b> directives such as:

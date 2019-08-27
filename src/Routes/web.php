@@ -55,7 +55,7 @@
             Route::get('asset/{path}/{contentType}', 'AssetController@asset');
 
             Route::group(['middleware' => ['auth', 'cms']], function () use ($routePrefix) {
-                Route::get('dashboard', 'DashboardController@main');
+                Route::get('dashboard', 'DashboardController@main')->name('cms.dashboard');
                 Route::get('help', 'HelpController@main');
 
                 /*

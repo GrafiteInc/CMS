@@ -85,7 +85,7 @@ class GrafiteCmsFeatureController extends GrafiteCmsController
      * @param string $entity
      * @param int    $id
      *
-     * @return Response
+     * @return \Illuminate\Http\Response
      */
     public function preview($entity, $id)
     {
@@ -102,10 +102,10 @@ class GrafiteCmsFeatureController extends GrafiteCmsController
             $entity => $modelInstance,
         ];
 
-        if (config('app.locale') != config('cms.default-language', Cms::config('cms.default-language'))) {
-            if ($modelInstance->translation(config('app.locale'))) {
+        if (request('lang') != config('cms.default-language', Cms::config('cms.default-language'))) {
+            if ($modelInstance->translation(request('lang'))) {
                 $data = [
-                    $entity => $modelInstance->translation(config('app.locale'))->data,
+                    $entity => $modelInstance->translation(request('lang')),
                 ];
             }
         }
@@ -135,7 +135,7 @@ class GrafiteCmsFeatureController extends GrafiteCmsController
      */
     public function setLanguage(Request $request, $lang)
     {
-        return back()->withCookie('language', $lang);
+        return back()->withCookie(cookie('language', $lang, 90));
     }
 
     /**

@@ -56,7 +56,7 @@ return [
     */
 
     'load-modules' => true,
-    'module-directory' => 'cms/modules',
+    'module-directory' => 'cms/Modules',
     'active-core-modules' => [
         'blog',
         'menus',

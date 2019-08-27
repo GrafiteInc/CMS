@@ -74,8 +74,18 @@ trait MenuServiceTrait
                 }
             }
         }
+
+        if (config('app.locale') !== config('cms.default-language', $this->config('cms.default-language'))) {
+            $properLinks = [];
+            foreach ($links as $link) {
+                $properLinks[] = $link->translation(config('app.locale'))->data;
+            }
+        } else {
+            $properLinks = $links;
+        }
+
         if (!is_null($view)) {
-            $response = view($view, ['links' => $links, 'processed_links' => $processedLinks]);
+            $response = view($view, ['links' => $properLinks, 'processed_links' => $processedLinks]);
         }
 
         if (Gate::allows('cms', Auth::user())) {

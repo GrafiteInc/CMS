@@ -3,39 +3,45 @@
 namespace Grafite\Cms;
 
 use Cms;
-use Devfactory\Minify\Facades\MinifyFacade;
-use Devfactory\Minify\MinifyServiceProvider;
-use Grafite\Builder\GrafiteBuilderProvider;
+use Illuminate\Support\Str;
 use Grafite\Cms\Console\Keys;
-use Grafite\Cms\Console\ModuleComposer;
+use Grafite\Cms\Console\Setup;
+use Illuminate\Routing\Router;
+use Grafite\Cms\Console\ThemeLink;
 use Grafite\Cms\Console\ModuleCrud;
 use Grafite\Cms\Console\ModuleMake;
-use Grafite\Cms\Console\ModulePublish;
-use Grafite\Cms\Console\Setup;
-use Grafite\Cms\Console\ThemeGenerate;
-use Grafite\Cms\Console\ThemeLink;
+use Illuminate\Support\Facades\View;
 use Grafite\Cms\Console\ThemePublish;
-use Grafite\Cms\Providers\CmsEventServiceProvider;
-use Grafite\Cms\Providers\CmsModuleProvider;
+use Illuminate\Support\Facades\Blade;
+use Intervention\Image\Facades\Image;
+use Grafite\Cms\Console\ModulePublish;
+use Grafite\Cms\Console\ThemeGenerate;
+use Illuminate\Foundation\AliasLoader;
+use Illuminate\Support\Facades\Config;
+use Grafite\Cms\Console\ModuleComposer;
+use Illuminate\Support\ServiceProvider;
+use Devfactory\Minify\Facades\MinifyFacade;
+use Grafite\Builder\GrafiteBuilderProvider;
 use Grafite\Cms\Providers\CmsRouteProvider;
+use Devfactory\Minify\MinifyServiceProvider;
+use Grafite\Cms\Providers\CmsModuleProvider;
+use Illuminate\View\Compilers\BladeCompiler;
+use Intervention\Image\ImageServiceProvider;
+use Grafite\Cms\Middleware\GrafiteCms;
 use Grafite\Cms\Providers\CmsServiceProvider;
 use GrahamCampbell\Markdown\Facades\Markdown;
+use Grafite\Cms\Middleware\GrafiteCmsAnalytics;
+use Grafite\Cms\Middleware\GrafiteCmsApi;
+use Grafite\Cms\Providers\CmsEventServiceProvider;
 use GrahamCampbell\Markdown\MarkdownServiceProvider;
-use Illuminate\Foundation\AliasLoader;
-use Illuminate\Support\Facades\Blade;
-use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\View;
-use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Str;
-use Intervention\Image\Facades\Image;
-use Intervention\Image\ImageServiceProvider;
+use Grafite\Cms\Middleware\GrafiteCmsLanguage;
 
 class GrafiteCmsProvider extends ServiceProvider
 {
     /**
      * Alias the services in the boot.
      */
-    public function boot()
+    public function boot(Router $router)
     {
         $this->publishes([
             __DIR__.'/PublishedAssets/Views/themes' => base_path('resources/themes'),
@@ -51,12 +57,16 @@ class GrafiteCmsProvider extends ServiceProvider
 
         $this->loadMigrationsFrom(__DIR__.'/Migrations');
 
-        $theme = config('cms.frontend-theme', 'default');
-
         $this->loadViewsFrom(__DIR__.'/Views', 'cms');
 
-        View::addLocation(base_path('resources/themes/'.$theme));
-        View::addNamespace('cms-frontend', base_path('resources/themes/'.$theme));
+        $theme = config('cms.frontend-theme', 'default');
+
+        $this->loadViewsFrom(base_path('resources/themes/'.$theme), 'cms-frontend');
+
+        $router->aliasMiddleware('cms', GrafiteCms::class);
+        $router->aliasMiddleware('cms-api', GrafiteCmsApi::class);
+        $router->aliasMiddleware('cms-language', GrafiteCmsLanguage::class);
+        $router->aliasMiddleware('cms-analytics', GrafiteCmsAnalytics::class);
 
         /*
         |--------------------------------------------------------------------------
@@ -69,7 +79,6 @@ class GrafiteCmsProvider extends ServiceProvider
                 $expression = substr($expression, 1, -1);
             }
 
-            $theme = config('cms.frontend-theme');
             $view = '"cms-frontend::'.str_replace('"', '', str_replace("'", '', $expression)).'"';
 
             return "<?php echo \$__env->make($view, array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>";
@@ -135,8 +144,8 @@ class GrafiteCmsProvider extends ServiceProvider
         $this->app->register(CmsRouteProvider::class);
         $this->app->register(CmsModuleProvider::class);
 
-        $this->app->register(GrafiteBuilderProvider::class);
-        $this->app->register(MinifyServiceProvider::class);
+        // $this->app->register(GrafiteBuilderProvider::class);
+        // $this->app->register(MinifyServiceProvider::class);
         $this->app->register(MarkdownServiceProvider::class);
         $this->app->register(ImageServiceProvider::class);
 
@@ -160,7 +169,7 @@ class GrafiteCmsProvider extends ServiceProvider
             ModuleMake::class,
             ModuleComposer::class,
             ModuleCrud::class,
-            Setup::class,
+            // Setup::class,
             Keys::class,
         ]);
     }

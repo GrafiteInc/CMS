@@ -112,16 +112,29 @@ class BlogRepository extends CmsRepository
      *
      * @param string $url
      *
-     * @return \Illuminate\Support\Collection|null|static|Pages
+     * @return \Grafite\Cms\Models\Blog
      */
     public function findBlogsByURL($url)
     {
         $blog = null;
 
-        $blog = $this->model->where('url', $url)->where('is_published', 1)->where('published_at', '<=', Carbon::now(config('app.timezone'))->format('Y-m-d H:i:s'))->first();
+        $blog = $this->model->where('url', $url)
+            ->where('is_published', 1)
+            ->where('published_at', '<=', Carbon::now(config('app.timezone'))->format('Y-m-d H:i:s'))
+            ->first();
 
-        if (!$blog) {
+        if (! $blog) {
             $blog = $this->translationRepo->findByUrl($url, 'Grafite\Cms\Models\Blog');
+        }
+
+        // There is a blog entry and its not the default lang
+        if (cms()->defaultLanguageRequest() && $blog) {
+            $blog = $this->model->where('id', $blog->id)->first();
+        }
+
+        // If not the default language lets allow the toggle
+        if (! cms()->defaultLanguageRequest() && $blog) {
+            $blog = $blog->translation(app()->getLocale());
         }
 
         return $blog;

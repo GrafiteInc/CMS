@@ -76,7 +76,10 @@ class TranslationRepository
     {
         $item = $this->model->where('entity_type', $type)->where('entity_data->url', $url)->first();
 
-        if ($item && ($item->data->is_published == 1 || $item->data->is_published == 'on') && $item->data->published_at <= Carbon::now(config('app.timezone'))->format('Y-m-d H:i:s')) {
+        if ($item &&
+            ($item->data->is_published == 1 || $item->data->is_published == 'on') &&
+            $item->data->published_at <= Carbon::now(config('app.timezone'))->format('Y-m-d H:i:s')
+        ) {
             return $item->data;
         }
 

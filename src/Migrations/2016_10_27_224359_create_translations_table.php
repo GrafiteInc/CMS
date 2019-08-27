@@ -15,7 +15,7 @@ class CreateTranslationsTable extends Migration
             $table->increments('id');
             $table->integer('entity_id');
             $table->string('entity_type');
-            $table->text('entity_data')->nullable();
+            $table->json('entity_data')->nullable();
             $table->nullableTimestamps();
         });
     }

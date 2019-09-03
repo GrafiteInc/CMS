@@ -3,6 +3,7 @@
 namespace Grafite\Cms\Forms;
 
 use Grafite\Cms\Models\Blog;
+use Grafite\Cms\Forms\Fields\Tags;
 use Grafite\FormMaker\Fields\File;
 use Grafite\FormMaker\Fields\Text;
 use Grafite\FormMaker\Fields\Hidden;
@@ -11,8 +12,6 @@ use Grafite\Cms\Services\BlogService;
 use Grafite\FormMaker\Fields\Checkbox;
 use Grafite\FormMaker\Fields\TextArea;
 use Grafite\FormMaker\Forms\ModelForm;
-use Grafite\FormMaker\Fields\DatetimeLocal;
-use Grafite\FormMaker\Fields\CheckboxInline;
 
 class BlogForm extends ModelForm
 {
@@ -38,9 +37,7 @@ class BlogForm extends ModelForm
                 'required' => true,
                 'label' => 'Slug'
             ]),
-            Text::make('tags', [
-                'class' => 'form-control tags'
-            ]),
+            Tags::make('tags'),
             Select::make('template', [
                 'options' => $this->templateSelect()
             ]),

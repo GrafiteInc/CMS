@@ -30,8 +30,6 @@ class BlogController extends Controller
         $blogs = $this->repository->published();
         $tags = $this->repository->allTags();
 
-        // dd($blogs[0]);
-
         if (empty($blogs)) {
             abort(404);
         }

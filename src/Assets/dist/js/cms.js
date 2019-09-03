@@ -206,7 +206,7 @@ $(function () {
         timeZone: _appTimeZone
     });
 
-    $('.tags').tagsinput();
+    // $('.tags').tagsinput();
 });
 
 

@@ -13,7 +13,7 @@ Grafite CMS is a full fledged CMS that can be added to any Laravel application. 
 Grafite CMS comes with a module builder for all your custom CMS needs, as well as a module publishing tools. So if you decide to reuse some modules on future projects you can easily publish thier assets seamlessly. If you wish to make your Grafite CMS module into a PHP package, then you will need to have it publish its assets to the `cms/modules` directory.
 
 ### What is simple vs complex setup?
-Simple setup uses Grifite Builder as the backbone of an app for you using Laravel, once the setup command has been run you will have a full CMS as an app. Complex setup is specifically for developers who want to add a CMS to their existing app.
+Simple setup uses Grafite Builder as the backbone of an app for you using Laravel, once the setup command has been run you will have a full CMS as an app. Complex setup is specifically for developers who want to add a CMS to their existing app.
 
 ##### Author(s):
 * [Matt Lantz](https://github.com/mlantz) ([@mattylantz](http://twitter.com/mattylantz), mattlantz at gmail dot com)
@@ -32,7 +32,9 @@ Please consult the documentation here: [https://docs.grafite.ca/cms](https://doc
 ## Compatibility and Support
 | Laravel Version | Package Tag | Supported |
 |-----------------|-------------|-----------|
-| 5.6.x | 3.0.x | yes |
+| 5.8.x | 3.3.x | no |
+| 5.7.x | 3.2.x | no |
+| 5.6.x | 3.0.x | no |
 | 5.5.x | 2.4.x | no |
 | 5.4.x | 2.3.x | no |
 

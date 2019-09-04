@@ -8,7 +8,7 @@ use Tests\TestCase;
 
 class EventServiceTest extends TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 

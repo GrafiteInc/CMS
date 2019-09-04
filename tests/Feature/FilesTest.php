@@ -6,7 +6,7 @@ use Tests\TestCase;
 
 class FilesTest extends TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         $this->withoutMiddleware();

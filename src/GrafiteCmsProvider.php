@@ -5,13 +5,11 @@ namespace Grafite\Cms;
 use Cms;
 use Devfactory\Minify\Facades\MinifyFacade;
 use Devfactory\Minify\MinifyServiceProvider;
-use Grafite\Builder\GrafiteBuilderProvider;
 use Grafite\Cms\Console\Keys;
 use Grafite\Cms\Console\ModuleComposer;
 use Grafite\Cms\Console\ModuleCrud;
 use Grafite\Cms\Console\ModuleMake;
 use Grafite\Cms\Console\ModulePublish;
-use Grafite\Cms\Console\Setup;
 use Grafite\Cms\Console\ThemeGenerate;
 use Grafite\Cms\Console\ThemeLink;
 use Grafite\Cms\Console\ThemePublish;
@@ -23,7 +21,6 @@ use GrahamCampbell\Markdown\Facades\Markdown;
 use GrahamCampbell\Markdown\MarkdownServiceProvider;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\Facades\Blade;
-use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
@@ -135,7 +132,6 @@ class GrafiteCmsProvider extends ServiceProvider
         $this->app->register(CmsRouteProvider::class);
         $this->app->register(CmsModuleProvider::class);
 
-        $this->app->register(GrafiteBuilderProvider::class);
         $this->app->register(MinifyServiceProvider::class);
         $this->app->register(MarkdownServiceProvider::class);
         $this->app->register(ImageServiceProvider::class);
@@ -160,7 +156,6 @@ class GrafiteCmsProvider extends ServiceProvider
             ModuleMake::class,
             ModuleComposer::class,
             ModuleCrud::class,
-            Setup::class,
             Keys::class,
         ]);
     }

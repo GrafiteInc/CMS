@@ -7,7 +7,7 @@ use Grafite\Cms\Services\Normalizer;
 
 class NormalizerTest extends TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 

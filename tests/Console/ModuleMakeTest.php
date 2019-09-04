@@ -11,7 +11,7 @@ class ModuleMakeTest extends TestCase
     protected $generator;
     protected $config;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         $this->generator = new CrudGenerator();

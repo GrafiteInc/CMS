@@ -3,10 +3,11 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
+use Grafite\Cms\Services\CryptoService;
 
 class BlogTest extends TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         $this->withoutMiddleware();
@@ -99,7 +100,7 @@ class BlogTest extends TestCase
 
     public function testDelete()
     {
-        $response = $this->call('DELETE', 'cms/blog/'.\Crypto::encrypt(1));
+        $response = $this->call('DELETE', 'cms/blog/'.app(CryptoService::class)->encrypt(1));
         $this->assertEquals(302, $response->getStatusCode());
         $response->assertRedirect('cms/blog');
     }

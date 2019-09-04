@@ -39,25 +39,14 @@ class TestCase extends \Orchestra\Testbench\TestCase
         return [
             \Grafite\Cms\GrafiteCmsProvider::class,
             \Collective\Html\HtmlServiceProvider::class,
-            \Collective\Html\HtmlServiceProvider::class,
-            \Grafite\Builder\GrafiteBuilderProvider::class,
-        ];
-    }
-
-    protected function getPackageAliases($app)
-    {
-        return [
-            'Form' => \Collective\Html\FormFacade::class,
-            'HTML' => \Collective\Html\HtmlFacade::class,
-            'FormMaker' => \Grafite\Builder\Facades\FormMaker::class,
-            'InputMaker' => \Grafite\Builder\Facades\InputMaker::class
+            \Grafite\FormMaker\FormMakerProvider::class,
         ];
     }
 
     /**
      * Setup the test environment.
      */
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         $this->withFactories(__DIR__.'/factories');

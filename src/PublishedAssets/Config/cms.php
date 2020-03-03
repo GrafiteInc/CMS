@@ -117,6 +117,7 @@ return [
 
     'storage-location' => 'local', // s3, local
     'max-file-upload-size' => 6291456, // 6MB
+    'max-image-size' => 800, // width - auto height
     'preview-image-size' => 800, // width - auto height
     'cloudfront' => null, // do not include http
 
